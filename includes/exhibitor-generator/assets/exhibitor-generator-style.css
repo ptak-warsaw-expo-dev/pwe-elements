@@ -1,0 +1,571 @@
+.gfield_visibility_hidden{
+    display: none;
+}
+
+.exhibitor-generator {
+    display: flex;
+    justify-content: center;
+}
+
+.exhibitor-generator__wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 500px;
+}
+
+.exhibitor-generator__left {
+    width: 40%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px 0 0 20px;
+}
+
+#pweExhibitorVisitorGenerator:has(.exhibitor-generator[data-group="gr1"]) .exhibitor-generator__left {
+    background-image: url(/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/badgevipmockup-gr1.jpg);
+}
+
+#pweExhibitorVisitorGenerator:has(.exhibitor-generator[data-group="gr2"] ) .exhibitor-generator__left {
+    background-image: url(/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/badgevip.jpg);
+}
+
+#pweExhibitorVisitorGenerator:has(.exhibitor-generator[data-group="gr3"] ) .exhibitor-generator__left {
+    background-image: url(/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/badgevip.jpg);
+}
+
+#pweExhibitorVisitorGenerator:has(.exhibitor-generator[data-group="gr3"] ) .exhibitor-generator__left.badgevip {
+    background-image: url(/doc/badgevip.webp);
+}
+
+.pwe-exhibitor-worker-generator .exhibitor-generator__left {
+    background-image: url(/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/badgevipmockup-wys.webp);
+}
+
+.exhibitor-generator__left h3 {
+    display: none;
+}
+
+.exhibitor-generator__right {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #EBEBEB;
+    border-radius: 0 20px 20px 0;
+}
+
+.exhibitor-generator__right-title {
+    text-align: center;
+}
+
+.exhibitor-generator__right-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* max-width: 400px; */
+    width: 90%;
+}
+
+.exhibitor-generator__right h3 {
+    text-align: center;
+    color: #b79663 !important;
+    font-weight: 800;
+    font-size: 28px;
+    padding: 0 10px;
+}
+
+.exhibitor-generator__right-icons{
+    width: inherit !important;
+}
+.exhibitor-generator__right-icons h5 {
+    text-align: center;
+}
+
+.exhibitor-generator__right-icons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+.exhibitor-generator__right-icon {
+    flex: 1;
+    max-width: 110px;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 36px;
+}
+
+.exhibitor-generator__right-icon img {
+    height: 50px;
+    object-fit: contain;
+}
+
+.exhibitor-generator__right-icon p {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: inherit;
+    text-align: center;
+    color: #886843;
+}
+
+.exhibitor-generator__right-form {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.exhibitor-generator__right-form li.gfield,
+.exhibitor-generator__right-form .gform_fields {
+    padding-right: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+}
+
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Gość"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Guest"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Firma"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="PEŁNA NAZWA TWOJEJ FIRMY"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Inviting"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="E-mail"]) .ginput_container,
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="E-MAIL OF THE INVITED PERSON"]) .ginput_container {
+    position: relative;
+    height: 35px;
+    background-color: #D2D2D2 !important;
+    border-radius: 15px !important;
+    overflow: hidden;
+}
+
+.exhibitor-generator__right-form .gfield input[placeholder^="Gość"],
+.exhibitor-generator__right-form .gfield input[placeholder^="Guest"],
+.exhibitor-generator__right-form .gfield input[placeholder^="Firma"],
+.exhibitor-generator__right-form .gfield input[placeholder^="PEŁNA NAZWA TWOJEJ FIRMY"],
+.exhibitor-generator__right-form .gfield input[placeholder^="Inviting"],
+.exhibitor-generator__right-form .gfield input[placeholder^="E-mail"],
+.exhibitor-generator__right-form .gfield input[placeholder^="E-MAIL OF THE INVITED PERSON"] {
+    position: absolute;
+    margin: 0;
+    left: 0;
+    top: 0;
+    left: 45px;
+    border: 0;
+    background-color: #D2D2D2 !important;
+    border-radius: 15px !important;
+    font-weight: 700;
+    color: #555555;
+}
+
+.exhibitor_stand label,
+.input_logo label{
+    font-weight: 700 !important;
+}
+
+.exhibitor_stand input,
+.input_logo input{
+    border-radius: 15px !important;
+    border: 1px solid black;
+}
+
+#exhibitors_selector{
+    background-image:
+        url("/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/box.png"),
+        url("/wp-content/plugins/pwe-media/media/arrow-down.png");
+    background-repeat: no-repeat, no-repeat;
+    background-position: 8px center, right 10px center;
+    background-size: 30px 25px, 20px,20px;
+
+    border-radius: 15px !important;
+    margin-bottom: 18px;
+    padding-left: 60px;
+    font-weight: 700;
+    color: #555555;
+    background-color: #D2D2D2 !important;
+}
+
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Gość"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Guest"]) {
+    --icon-url: url("/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/name.png");
+}
+
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Firma"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="PEŁNA"]),
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="Inviting"]),
+#exhibitors_selector {
+    --icon-url: url("/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/box.png");
+}
+
+.exhibitor-generator__right-form .gfield:has(input[placeholder^="E-mail"]) {
+    --icon-url: url("/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/email.png");
+}
+
+.exhibitor-generator__right-form .gfield .ginput_container:before {
+    content: "";
+    left: 8px;
+    top: 5px;
+    width: 30px;
+    height: 25px;
+    position: absolute;
+    background-image: var(--icon-url);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.exhibitor-generator__right-form input:-webkit-autofill,
+.exhibitor-generator__right-form input:-webkit-autofill:hover,
+.exhibitor-generator__right-form input:-webkit-autofill:focus{
+    -webkit-text-fill-color: black !important;
+    -webkit-box-shadow: 0 0 0px 40rem #D2D2D2 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.exhibitor-generator__right-form .gform_footer input[type="submit"],
+.btn-gold {
+    background: #b79663 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+    margin-top: 9px !important;
+    margin-bottom: 9px !important;
+    padding: 8px 20px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    min-width: 200px !important;
+    border-radius: 15px !important;
+}
+
+.form_sublabel_below{
+    gap:20px !important;
+}
+
+.gform_footer.top_label{
+    justify-content: space-around;
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+}
+#pweExhibitorVisitorGenerator:has(.exhibitor-generator[data-group="gr1"])  {
+    width: 100%;
+}
+@media(max-width: 960px) {
+    .exhibitor-generator__wrapper {
+        flex-direction: column;
+    }
+
+    .exhibitor-generator__right {
+        display: flex;
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .exhibitor-generator__right-wrapper {
+        padding: 18px;
+    }
+
+    .exhibitor-generator__right h3 {
+        display: none;
+    }
+
+    .pwe-exhibitor-visitor-generator .exhibitor-generator__left,
+    .pwe-exhibitor-worker-generator .exhibitor-generator__left {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        background-image: url(/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/gen-bg.jpg)
+    }
+
+    .exhibitor-generator__left h3 {
+        display: block;
+        margin: 0;
+        text-align: center;
+        padding: 46px 18px;
+        font-weight: 800;
+        font-size: 28px;
+    }
+}
+
+
+@media(max-width: 640px) {
+    .exhibitor-generator__right-form .gform_footer {
+        margin: 0 !important;
+    }
+
+    .exhibitor-generator__right-form input[type="submit"] {
+        width: auto !important;
+
+    }
+}
+
+@media(max-width: 450px) {
+    .exhibitor-generator__left h3 {
+        font-size: 18px !important;
+    }
+
+    .exhibitor-generator__right-form input[type="text"],
+    .exhibitor-generator__right-form input[type="email"] {
+        font-size: 14px !important;
+    }
+
+    .exhibitor-generator__right-icons-wrapper {
+        padding: 0;
+    }
+
+    .exhibitor-generator__right-icon img {
+        height: 40px;
+    }
+
+    .exhibitor-generator__right-icon p {
+        font-size: 12px;
+    }
+}
+
+
+
+/* Modal */
+@media (max-width: 961px) {
+    .tabela-masowa {
+        display: none;
+    }
+}
+
+.modal__element {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: unset;
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+.modal__element .inner {
+    position: relative;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 1rem;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: none !important;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+    height: auto;
+    min-width: 900px;
+    text-align: center;
+    justify-items: center;
+}
+
+.modal__element .blocked {
+    pointer-events: none;
+}
+
+.tabela-masowa {
+    width: unset !important;
+}
+
+.modal__element input{
+    text-align: center;
+    margin: 18px auto 0 auto;
+}
+
+.modal__element input[type="text"]{
+    width: 50%;
+}
+
+.modal__element input[type="text"],
+.modal__element select,
+#exhibitors_selector__modal {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#exhibitors_selector__modal {
+    width: 80% !important;
+    max-width: 900px !important;
+    min-width: 500px !important;
+}
+.modal__element .file-selector label {
+    text-align: left;
+}
+
+.modal__element table {
+    text-align: center;
+    width: 90%;
+}
+
+.modal__element p {
+    text-align: center;
+    margin: 0;
+}
+
+.modal__element table th {
+    width: 50%;
+}
+
+.modal__element table td {
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    padding: 0;
+}
+
+.modal__element .mass-send-name:empty {
+    background-image: url(/wp-content/plugins/pwe-media/media/generator-wystawcow/generator-imiona.webp);
+}
+
+.modal__element .mass-send-email:empty {
+    background-image: url(/wp-content/plugins/pwe-media/media/generator-wystawcow/geneartor-emaile.webp);
+}
+
+.modal__element tr table {
+    text-align: center;
+    width: 100%;
+    margin-top: 0;
+}
+
+.modal__element table input {
+    margin-top: 0 !important;
+}
+
+.modal__element .error-color {
+    color: red;
+}
+
+.modal__element .btn-close {
+    background-color: #b79663;
+    padding: 0px 13px 5px 14px;
+    border-radius: 50%;
+    font-weight: 700;
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.modal__element label {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.modal__element .zastepczy {
+    color: #ccc;
+    font-style: italic;
+}
+
+.file-uloader {
+    margin-top: 18px;
+}
+
+.file-selector {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 9px;
+}
+
+.file-selector :is(label, select) {
+    width: 45%;
+    min-width: 100px;
+    margin: 0;
+}
+
+.file-selector select {
+    padding-right: 30px;
+    cursor: pointer;
+    background: #fff url(/wp-content/plugins/pwe-media/media/arrow-down.png) no-repeat right 5px top 55%;
+    background-size: 20px 20px;
+}
+
+.wyslij.btn-gold {
+    margin: 18px !important;
+}
+
+.modal__element,
+.file-size-error{
+    display: none;
+}
+
+.gform_required_legend,
+.gfield_required,
+.admin-hidden-markup{
+    display: none !important;
+}
+.info-box-sign {
+    cursor: pointer;
+    border: 2px solid;
+    border-radius: 50%;
+    font-weight: 800;
+    padding: 1px 8px;
+}
+
+.border-red {
+    border-color: red;
+}
+
+.file-size-info {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    width: 400px;
+}
+
+.file-size-info :is(h5, ul) {
+    margin-top: 5px;
+}
+
+.file-size-info li {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.inner .spinner {
+    height: 0 !important;
+}
+
+.btn-gen-file {
+    color: black;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.mass_checkbox,
+.badge_name input {
+    border-color: black !important;
+}
+
+.mass_checkbox_label {
+    margin-top: 10px;
+    font-size: 14px !important;
+}
+
+.button-blocked {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+  }

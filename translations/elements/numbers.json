@@ -1,0 +1,50 @@
+{
+  "pl_PL": {
+    "days": "dni konferencji",
+    "speakers": "prelegentów",
+    "participants":"uczestników",
+    "footer_text": "NAJWIĘKSZE CENTRUM TARGOWE  W EUROPIE ŚRODKOWO-WSCHODNIEJ",
+    "exhibitors": "Wystawców<br>rocznie",
+    "visitors": "Odwiedzających<br>rocznie",
+    "fair": "Targów B2B<br>rocznie",
+    "surface": "Powierzchni m<sup>2</sup>",
+    "title": "Ptak Warsaw Expo - łączymy świat biznesu",
+    "capital":"Stolica targów",
+    "events":"Targi / Konferencje / Eventy",
+    "calendar_link":"https://warsawexpo.eu/kalendarz-targowy/",
+    "calendar": "Kalendarz targowy",
+    "certificate": "<strong>Certyfikat UFI Member</strong> to oficjalne potwierdzenie, że firma <strong>PTAK WARSAW EXPO SP. z o.o.</strong> jest członkiem UFI – The Global Association of the Exhibition Industry (Światowego Stowarzyszenia Przemysłu Targowego). UFI (Union des Foires Internationales) to międzynarodowa organizacja branżowa, która zrzesza kluczowych graczy globalnego rynku targów i wystaw, w tym m.in: organizatorów targów i wystaw, zarządców centrów wystawienniczych."
+  },
+  "en_US": {
+    "days": "conference days",
+    "speakers": "speakers",
+    "participants":"participants",
+    "footer_text":"THE LARGEST TRADE FAIR CENTER IN CENTRAL AND EASTERN EUROPE",
+    "exhibitors":"Exhibitors<br>annually",
+    "visitors":"Visitors<br>per year",
+    "fair": "B2B trade fairs <br>per year",
+    "surface": "Area m<sup>2</sup>",
+    "title":"Ptak Warsaw Expo - we connect the world of business",
+    "capital":"The capital of trade fairs",
+    "events":"Trade fairs / Conferences / Events",
+    "calendar_link":"https://warsawexpo.eu/en/fair-calendar/",
+    "calendar":"Trade show calendar",
+    "certificate": "<strong>UFI Member Certificate</strong> is an official confirmation that <strong>PTAK WARSAW EXPO SP. z o.o.</strong> is a member of UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) is an international industry organization that brings together key players in the global trade fair and exhibition market, including: trade fair and exhibition organizers, exhibition center managers."
+  },
+  "de_DE": {
+    "days": "konferenztage",
+    "speakers": "sprecher",
+    "participants":"teilnehmer",
+    "footer_text":"DAS GRÖSSTE MESSEZENTRUM IN ZENTRAL- UND OSTEUROPA",
+    "exhibitors":"Aussteller<br>pro Jahr",
+    "visitors":"Besucher<br>pro Jahr",
+    "fair": "B2B-Messen <br>pro Jahr",
+    "surface": "Oberfläche m<sup>2</sup>",
+    "title":"Ptak Warsaw Expo – wir verbinden die Geschäftswelt",
+    "capital":"Die Hauptstadt der Messen",
+    "events":"Messen / Konferenzen / Events",
+    "calendar_link":"https://warsawexpo.eu/en/fair-calendar/",
+    "calendar":"Messekalender",
+    "certificate": "<strong>UFI Member Certificate</strong> ist eine offizielle Bestätigung, dass <strong>PTAK WARSAW EXPO SP. z o.o.</strong> Mitglied der UFI – The Global Association of the Exhibition Industry ist. UFI (Union des Foires Internationales) ist eine internationale Branchenorganisation, die die wichtigsten Akteure des globalen Messe- und Ausstellungsmarktes vereint, darunter: Messe- und Ausstellungsveranstalter, Betreiber von Messezentren."
+  }
+}

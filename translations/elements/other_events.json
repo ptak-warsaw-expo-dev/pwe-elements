@@ -1,0 +1,23 @@
+{
+  "pl_PL": {
+    "other_events": "Inne wydarzenia podczas targów",
+    "visitors": "odwiedzających",
+    "exhibitors":"wystawców",
+    "exhibition_space": "powierzchni<br>wystawienniczej",
+    "more": "Więcej"
+  },
+  "en_US": {
+    "other_events": "Other events during the fair",
+    "visitors": "visitors",
+    "exhibitors":"exhibitors",
+    "exhibition_space": "powierzchni<br>wystawienniczej",
+    "more": "More"
+  },
+  "de_DE": {
+    "other_events": "Andere Veranstaltungen während der Messe",
+    "visitors": "besucher",
+    "exhibitors":"Aussteller",
+    "exhibition_space": "Ausstellungsfläche",
+    "more": "Mehr"
+  }
+}

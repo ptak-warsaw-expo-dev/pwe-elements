@@ -1,0 +1,26 @@
+{
+  "pl_PL": {
+    "stands": "DEDYKOWANA ZABUDOWA TARGOWA",
+    "catalog": "Zobacz katalog stoisk targowych i przygotuj się na udział w targach w sposób jeszcze bardziej efektywny. Dzięki temu katalogowi będziesz miał dostęp do gotowych projektów stoisk, które ułatwią Ci przygotowanie się do targów i zyskasz cenną oszczędność czasu i pieniędzy. Wybierając już gotowy projekt stoiska, będziesz mógł skupić się na innych ważnych aspektach przygotowań do targów, takich jak przygotowanie oferty, zorganizowanie transportu czy zaplanowanie działań marketingowych.",
+    "stands_link": "https://warsawexpo.eu/zabudowa-targowa",
+    "stands_button":"Zobacz Więcej",
+    "catalog_link":"https://warsawexpo.eu/katalog-zabudowy",
+    "catalog_button":"Katalog Zabudowy"
+  },
+  "en_US": {
+    "stands": "DESIGNED EXHIBITION STANDS",
+    "catalog": "Check out the trade show booth catalog and prepare for your trade show participation in an even more efficient way. With this catalog, you will have access to ready-made booth designs that will make it easier for you to prepare for the trade show and gain valuable savings in time and money. By choosing an already ready-made booth design, you will be able to focus on other important aspects of preparing for the fair, such as preparing your offer, arranging transportation or planning your marketing activities.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button":"See more",
+    "catalog_link":"https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button":"Exhibition Stand"
+  },
+  "de_DE": {
+    "stands": "GESTALTETE MESSE-STÄNDE",
+    "catalog": "Sehen Sie sich den Messestandkatalog an und bereiten Sie sich noch effizienter auf Ihre Messeteilnahme vor. Mit diesem Katalog haben Sie Zugriff auf vorgefertigte Standdesigns, die Ihnen die Vorbereitung auf die Messe erleichtern und Ihnen wertvolle Zeit- und Geldersparnisse ermöglichen. Durch die Wahl eines bereits vorgefertigten Standdesigns können Sie sich auf andere wichtige Aspekte der Messevorbereitung konzentrieren, wie z. B. die Vorbereitung Ihres Angebots, die Organisation des Transports oder die Planung Ihrer Marketingaktivitäten.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button":"Mehr sehen",
+    "catalog_link":"https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button":"Messestand"
+  }
+}

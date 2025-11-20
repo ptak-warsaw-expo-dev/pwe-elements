@@ -1,0 +1,96 @@
+.pwe-attractions-slider {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(32px,5vw,64px) 16px;
+}
+.pwe-attractions-slider__heading {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: end;
+    justify-content: space-between;
+}
+.pwe-attractions-slider__title {
+    font-family: Anton,system-ui;
+    font-size: clamp(28px,5vw,56px);
+    letter-spacing: .02em;
+    line-height: 1;
+    color: #fff!important;
+}
+.pwe-attractions-slider__subtitle {
+    color: #9c9c9c;
+    max-width: 500px;
+    font-weight: 600;
+    font-size: 14px;
+}
+.pwe-attractions-slider__carousels {
+    max-width: 1800px;
+    margin: 16px auto 0;
+    position: relative;
+}
+.pwe-attractions-slider__progress {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -8px;
+    height: 4px;
+    background: rgba(255,255,255,.06);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.pwe-attractions-slider__bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg,#00bb78,#007cc3);
+    transition: width .25s ease;
+}
+.pwe-attractions-slider__tabs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 36px;
+    padding: 6px;
+}
+.pwe-attractions-slider__tab {
+    border: 0;
+    background: transparent;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.pwe-attractions-slider__pane .swiper {
+    padding: 40px 8px 64px;
+}
+/* ukryj każdy swiper zanim będzie gotowy */
+.pwe-attractions-slider__pane .swiper{
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* pokaż płynnie dopiero, gdy dodamy klasę gotowości */
+.pwe-attractions-slider__pane .swiper.pwe-ready{
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition: opacity .28s ease, transform .28s ease;
+}
+.pwe-attractions-slider__card{position:relative;background:#000;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.pwe-attractions-slider__media{position:relative;aspect-ratio:1/1;overflow:hidden}
+.pwe-attractions-slider__media img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.pwe-attractions-slider__badge{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.pwe-attractions-slider__body{padding:14px 16px 18px}
+.pwe-attractions-slider__name{font-weight:800;font-size:18px;letter-spacing:.02em;color:#fff}
+.pwe-attractions-slider__desc{color:#9c9c9c;font-size:14px;margin-top:4px;font-weight:600}
+.pwe-attractions-slider__pane .swiper-pagination{bottom:10px!important}
+.pwe-attractions-slider__pane .swiper-pagination-bullet{background:rgba(255,255,255,.45)}
+.pwe-attractions-slider__pane .swiper-pagination-bullet-active{background:linear-gradient(90deg,#00bb78,#007cc3)}
+.pwe-attractions-slider__card{will-change:transform;backface-visibility:hidden;transform:translateZ(0)}

@@ -1,0 +1,17 @@
+{
+  "pl_PL": {
+    "recommendations": "REKOMENDACJE",
+    "more":"więcej...",
+    "see_more":"ZOBACZ WIĘCEJ"
+  },
+  "en_US": {
+    "recommendations": "RECOMMENDATIONS",
+    "more":"more...",
+    "see_more":"SEE MORE"
+  },
+  "de_DE": {
+    "recommendations": "EMPFEHLUNGEN",
+    "more":"mehr...",
+    "see_more":"MEHR SEHEN"
+  }
+}

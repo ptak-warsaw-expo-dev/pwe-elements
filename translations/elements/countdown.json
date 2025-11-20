@@ -1,0 +1,93 @@
+{
+  "pl_PL": {
+    "until_the_fair": "Do targów pozostało:",
+    "until_the_fair_end": "Do końca targów pozostało:",
+    "countdown_btn_text": "Zostań wystawcą",
+    "countdown_btn_url": "/zostan-wystawca/",
+    "entrance": "Wejście",
+    "entrances": "Wejścia",
+    "hall": "Hala",
+    "halls": "Hale",
+    "hours": "GODZINY OTWARCIA:",
+    "days": " dni ",
+    "hours_1": " godzin ",
+    "minutes": " minut ",
+    "seconds": " sekund ",
+    "register_text": "<span>Zarejestruj się<br/>Odbierz darmowy bilet</span>",
+    "register_link": "/rejestracja/",
+
+    "day_one": "dzień",
+    "day_two": "dni",
+    "day_five": "dni",
+
+    "hour_one": "godzina",
+    "hour_two": "godziny",
+    "hour_five": "godzin",
+
+    "minute_one": "minuta",
+    "minute_two": "minuty",
+    "minute_five": "minut",
+
+    "second_one": "sekunda",
+    "second_two": "sekundy",
+    "second_five": "sekund",
+
+    "day": "day",
+    "hour": "hour",
+    "minute": "minute",
+    "second": "second"
+  },
+
+  "en_US": {
+    "until_the_fair": "Until the start of the fair:",
+    "until_the_fair_end": "Until the end of the fair:",
+    "countdown_btn_text": "Book a stand",
+    "countdown_btn_url": "/en/become-an-exhibitor",
+    "entrance": "Entrance",
+    "entrances": "Entrances",
+    "hall": "Hall",
+    "halls": "Halls",
+    "hours": "OPENING HOURS:",
+    "days": " days ",
+    "hours_1": " hours ",
+    "minutes": " minutes ",
+    "seconds": " seconds ",
+    "register_text": "<span>REGISTER<br/>Get a free ticket</span>",
+    "register_link": "/en/registration/",
+
+    "day": "day",
+    "hour": "hour",
+    "minute": "minute",
+    "second": "second"
+  },
+
+  "de_DE": {
+    "until_the_fair": "Bis zum Beginn der Messe:",
+    "until_the_fair_end": "Bis zum Ende der Messe:",
+    "countdown_btn_text": "Stand buchen",
+    "countdown_btn_url": "/en/become-an-exhibitor",
+    "entrance": "Eingang",
+    "entrances": "Eingänge",
+    "hall": "Halle",
+    "halls": "Hallen",
+    "hours": "ÖFFNUNGSZEITEN:",
+    "days": " Tage ",
+    "hours_1": " Stunden ",
+    "minutes": " Minuten ",
+    "seconds": " Sekunden ",
+    "register_text": "<span>REGISTRIEREN<br/>Kostenloses Ticket erhalten</span>",
+    "register_link": "/en/registration/",
+
+    "day_singular": "Tag",
+    "day_plural": "Tage",
+
+    "hour_singular": "Stunde",
+    "hour_plural": "Stunden",
+
+    "minute_singular": "Minute",
+    "minute_plural": "Minuten",
+
+    "second_singular": "Sekunde",
+    "second_plural": "Sekunden"
+  }
+}

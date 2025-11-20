@@ -1,0 +1,20 @@
+{
+  "pl_PL": {
+    "visitor_profile": "Profil odwiedzającego",
+    "exhibitor_profile":"Profil wystawcy",
+    "industry_scope": "Zakres branżowy",
+    "more": "więcej..."
+  },
+  "en_US": {
+    "visitor_profile": "Visitor profile",
+    "exhibitor_profile": "Exhibitor profile",
+    "industry_scope": "Industry scope",
+    "more": "more..."
+  },
+  "de_DE": {
+    "visitor_profile": "Besucherprofil",
+    "exhibitor_profile": "Ausstellerprofil",
+    "industry_scope": "Branchenspektrum",
+    "more": "mehr..."
+  }
+}

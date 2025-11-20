@@ -1,0 +1,104 @@
+{
+  "pl_PL": {
+    "questions": "Poznaj odpowiedzi na najczęściej zadawane pytania",
+
+    "q1_question": "Gdzie odbywają się targi?",
+    "q1_answer": "Targi odbywają się w <a style=\"text-decoration:underline;\" href=\"//warsawexpo.eu\" target=\"_blank\">Ptak Warsaw Expo</a> – największym centrum targowym w Polsce. Al. Katowicka 62, 05-830 Nadarzyn/Warszawa.",
+
+    "q2_question": "W jakich godzinach odbywają się targi?",
+    "q2_answer": "Godziny otwarcia targów - 10:00 - 17:00.",
+
+    "q3_question": "Ile kosztuje bilet na targi?",
+    "q3_answer": "Wszystkie osoby, które dokonają rejestracji online lub w biurze targowym otrzymają bezpłatną wejściówkę.",
+
+    "q4_question": "Czy moje zaproszenie uprawnia mnie do wejścia na targi?",
+    "q4_answer": "Zaproszenie ma tylko formę informacyjną i nie upoważnia do wejścia na targi. Konieczna jest rejestracja lub zakup biletu.",
+
+    "q5_question": "Czy mogę wejść z dzieckiem na targi?",
+    "q5_answer": "Wstęp dla dzieci jest niewskazany. Jednak jeśli chcesz aby Twoje dziecko towarzyszyło Ci podczas targów to zakup dla niego bilet na dany dzień. Wstęp na targi dla dzieci do 7 roku życia jest bezpłatny.",
+
+    "q6_question": "Czy na targi dozwolone jest wprowadzanie zwierząt?",
+    "q6_answer": "Nie, zwierzęta nie są wpuszczane na hale targowe.",
+
+    "q7_question": "Jak dotrzeć na targi?",
+    "q7_answer": "Na targi można dotrzeć samochodem lub autobusami linii 703 oraz 711 dojeżdżającymi z przystanku P+R Al. Krakowska 15 do Ptak Warsaw Expo.",
+
+    "q8_question": "Czy parking jest płatny?",
+    "q8_answer": "Dla wygody odwiedzających nas gości parking jest bezpłatny.",
+
+    "q9_question": "Czy mogę coś zjeść na miejscu?",
+    "q9_answer": "Tak, na terenie targów będą punkty gastronomiczne.",
+
+    "q10_question": "Czy jest dostępna szatnia? Czy mogę zostawić walizkę w szatni?",
+    "q10_answer": "Tak. Na terenie hal znajdują się szatnie i będzie można zostawić w nich małą walizkę."
+
+  },
+  "en_US": {
+    "questions": "Get answers to the most frequently asked questions",
+
+    "q1_question": "Where are the fairs held?",
+    "q1_answer": "The fair takes place in <a style=\"text-decoration:underline;\" href=\"//warsawexpo.eu/en/\" target=\"_blank\">Ptak Warsaw Expo</a> - the largest trade fair center in Poland. Al Katowicka 62, 05-830 Nadarzyn/Warsaw.",
+
+    "q2_question": "What hours are the fairs held?",
+    "q2_answer": "Fair opening hours - 10:00 - 17:00.",
+
+    "q3_question": "How much is the ticket to the fair?",
+    "q3_answer": "All persons who register online or at the fair office will receive a free pass.",
+
+    "q4_question": "Does my invitation entitle me to enter the fair?",
+    "q4_answer": "The invitation is for information purposes only and does not entitle you to enter the fair. It is necessary to register or purchase a ticket.",
+
+    "q5_question": "Can I enter the fair with my child?",
+    "q5_answer": "Admission for children is not recommended. However, if you want your child to accompany you during the fair, buy a ticket for the day. Admission to the fair for children under 7 is free.",
+
+    "q6_question": "Are animals allowed at the fair?",
+    "q6_answer": "No, animals are not allowed in the exhibition halls.",
+
+    "q7_question": "How to get to the fair?",
+    "q7_answer": "The fair can be reached by car or by buses 703 and 711 from P+R Al. Krakowska 15 to Ptak Warsaw Expo.",
+
+    "q8_question": "Is parking paid?",
+    "q8_answer": "For the convenience of our guests, the car park is free of charge.",
+
+    "q9_question": "Can I eat something on the spot?",
+    "q9_answer": "Yes, there will be food outlets at the fairgrounds.",
+
+    "q10_question": "Is there a cloakroom available? Can I leave my suitcase in the cloakroom?",
+    "q10_answer": "Yes. There are cloakrooms in the halls and you will be able to leave a small suitcase in them."
+
+  },
+  "de_DE": {
+    "questions": "Erhalten Sie Antworten auf die am häufigsten gestellten Fragen",
+
+    "q1_question": "Wo findet die Messe statt?",
+    "q1_answer": "Die Messe findet im <a style=\"text-decoration:underline;\" href=\"//warsawexpo.eu\" target=\"_blank\">Ptak Warsaw Expo</a> statt – dem größten Messezentrum in Polen. Al. Katowicka 62, 05-830 Nadarzyn/Warschau.",
+
+    "q2_question": "Zu welchen Zeiten findet die Messe statt?",
+    "q2_answer": "Öffnungszeiten der Messe – 10:00 bis 17:00 Uhr.",
+
+    "q3_question": "Wie viel kostet das Ticket für die Messe?",
+    "q3_answer": "Alle Personen, die sich online oder im Messebüro registrieren, erhalten einen kostenlosen Eintritt.",
+
+    "q4_question": "Berechtigt meine Einladung zum Eintritt in die Messe?",
+    "q4_answer": "Die Einladung dient nur zu Informationszwecken und berechtigt nicht zum Eintritt. Eine Registrierung oder der Kauf eines Tickets ist erforderlich.",
+
+    "q5_question": "Kann ich die Messe mit meinem Kind betreten?",
+    "q5_answer": "Der Zutritt für Kinder wird nicht empfohlen. Wenn Ihr Kind Sie jedoch auf der Messe begleiten soll, kaufen Sie ein Ticket für den entsprechenden Tag. Der Eintritt für Kinder unter 7 Jahren ist kostenlos.",
+
+    "q6_question": "Dürfen Tiere auf die Messe mitgenommen werden?",
+    "q6_answer": "Nein, Tiere sind in den Ausstellungshallen nicht erlaubt.",
+
+    "q7_question": "Wie komme ich zur Messe?",
+    "q7_answer": "Die Messe ist mit dem Auto oder mit den Buslinien 703 und 711 erreichbar, die vom P+R Al. Krakowska 15 zum Ptak Warsaw Expo fahren.",
+
+    "q8_question": "Ist das Parken kostenpflichtig?",
+    "q8_answer": "Für den Komfort unserer Gäste ist das Parken kostenlos.",
+
+    "q9_question": "Kann ich vor Ort etwas essen?",
+    "q9_answer": "Ja, auf dem Messegelände wird es gastronomische Stände geben.",
+
+    "q10_question": "Gibt es eine Garderobe? Kann ich meinen Koffer dort lassen?",
+    "q10_answer": "Ja. In den Hallen gibt es Garderoben, in denen Sie einen kleinen Koffer aufbewahren können."
+
+  }
+}

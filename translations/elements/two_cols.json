@@ -1,0 +1,29 @@
+{
+  "pl_PL": {
+    "patron_partners": "PATRONI I PARTNERZY",
+    "exhibitors": "Wystawcy",
+    "patrons": "Patroni",
+    "join": "DOŁĄCZ DO NAS",
+    "gallery":"GALERIA",
+    "galeria_link": "/galeria/",
+    "registration": "/rejestracja/"
+  },
+  "en_US": {
+    "patron_partners": "PATRONS AND PARTNERS",
+    "exhibitors": "Exhibitors",
+    "patrons": "Patrons",
+    "join": "JOIN US",
+    "gallery":"GALLERY",
+    "galeria_link": "/en/gallery/",
+    "registration": "/en/registration/"
+  },
+  "de_DE": {
+    "patron_partners": "FÖRDERER UND PARTNER",
+    "exhibitors": "Aussteller",
+    "patrons": "Patrons",
+    "join": "MACH MIT",
+    "gallery":"GALERIE",
+    "galeria_link": "/en/gallery/",
+    "registration": "/en/registration/"
+  }
+}

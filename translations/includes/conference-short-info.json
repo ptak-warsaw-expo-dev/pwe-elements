@@ -1,0 +1,41 @@
+{
+  "pl_PL": {
+    "conferences_events": "Konferencje i wydarzenia towarzyszące",
+    "conference":"Konferencja",
+    "conferences_link":"/wydarzenia/",
+    "details":"Szczegóły",
+    "registration_link": "/rejestracja/",
+    "registration": "Zarejestruj się",
+    "take_part": "WEŹ UDZIAŁ",
+    "patrons": "PATRONI I PARTNERZY",
+    "find_out_more": "DOWIEDZ SIĘ WIĘCEJ",
+    "organizer": "Organizator",
+    "subject": "Temat"
+  },
+  "en_US": {
+    "conferences_events": "Conferences and accompanying events",
+    "conference":"Conference",
+    "conferences_link":"/en/conferences/",
+    "details":"Details",
+    "registration_link": "/en/registration/",
+    "registration": "Registration",
+    "take_part": "TAKE PART",
+    "patrons": "PATRONS AND PARTNERS",
+    "find_out_more": "FIND OUT MORE",
+    "organizer": "Organizer",
+    "subject": "Subject"
+  },
+  "de_DE": {
+    "conferences_events": "Konferenzen und Begleitveranstaltungen",
+    "conference":"Konferenz",
+    "conferences_link":"/en/conferences/",
+    "details":"Details",
+    "registration_link": "/en/registration/",
+    "registration": "Anmeldung",
+    "take_part": "NIMM TEIL",
+    "patrons": "FÖRDERER UND PARTNER",
+    "find_out_more": "ERFAHREN SIE MEHR",
+    "organizer": "Veranstalter",
+    "subject": "Thema"
+  }
+}

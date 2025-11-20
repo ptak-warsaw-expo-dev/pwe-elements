@@ -1,0 +1,43 @@
+{
+    "pl_PL": {
+        "benefit_networking_img": "/wp-content/plugins/pwe-media/media/Strefa_Networkingu.png",
+        "benefit_networking_alt": "Strefa Networkingu",
+        "benefit_networking_text": "Podczas targów dostępna będzie, specjalnie wydzielona <strong>strefa networkingu</strong> – przestrzeń do wymiany doświadczeń i zacieśnienia kontaktów. Spotkania branżowe to idealna okazja do poszerzenia grona potencjalnych partnerów biznesowych, a także zbudowania bazy odbiorców.",
+
+        "benefit_panel_img": "/wp-content/plugins/pwe-media/media/Panel_Edukacyjny.png",
+        "benefit_panel_alt": "Panel Edukacyjny",
+        "benefit_panel_text": "Liczne wystąpienia i konferencja branżowa prowadzona przez uznanych prelegentów – doświadczonych praktyków i znawców branży.",
+
+        "benefit_welcome_img": "/wp-content/plugins/pwe-media/media/Pakiety_Powitalne.png",
+        "benefit_welcome_alt": "Pakiety Powitalne",
+        "benefit_welcome_text": "Przygotowanie identyfikatorów oraz indywidualnych pakietów powitalnych do wszystkich zarejestrowanych, które zostaną przesłane bezpośrednio pod adres podany w formularzu rejestracyjnym."
+    },
+
+    "en_US": {
+        "benefit_networking_img": "/wp-content/plugins/pwe-media/media/Networking_Zone.png",
+        "benefit_networking_alt": "Networking Zone",
+        "benefit_networking_text": "During the fair, a specially separated networking zone will be available - a space for exchanging experiences and strengthening contacts. Industry meetings are an ideal opportunity to expand the group of potential business partners, as well as build a strong customer base.",
+
+        "benefit_panel_img": "/wp-content/plugins/pwe-media/media/Educational_Panel.png",
+        "benefit_panel_alt": "Educational Panel",
+        "benefit_panel_text": "Numerous speeches and an industry conference conducted by recognized speakers – experienced practitioners and industry experts.",
+
+        "benefit_welcome_img": "/wp-content/plugins/pwe-media/media/Welcome_Package.png",
+        "benefit_welcome_alt": "Welcome Package",
+        "benefit_welcome_text": "Preparation of badges and individual welcome packages for all registered participants, which will be sent directly to the address provided in the registration form."
+    },
+
+    "de_DE": {
+        "benefit_networking_img": "/wp-content/plugins/pwe-media/media/Networking_Zone.png",
+        "benefit_networking_alt": "Netzwerkbereich",
+        "benefit_networking_text": "Während der Messe steht eine speziell abgetrennte Networking-Zone zur Verfügung – ein Ort zum Erfahrungsaustausch und zur Vertiefung von Kontakten. Branchentreffen sind eine ideale Gelegenheit, um den Kreis potenzieller Geschäftspartner zu erweitern und einen starken Kundenstamm aufzubauen.",
+
+        "benefit_panel_img": "/wp-content/plugins/pwe-media/media/Educational_Panel.png",
+        "benefit_panel_alt": "Bildungsgremium",
+        "benefit_panel_text": "Zahlreiche Vorträge und eine Branchenkonferenz mit renommierten Referenten – erfahrenen Praktikern und Branchenexperten.",
+
+        "benefit_welcome_img": "/wp-content/plugins/pwe-media/media/Welcome_Package.png",
+        "benefit_welcome_alt": "Willkommenspaket",
+        "benefit_welcome_text": "Vorbereitung von Namensschildern und individuellen Willkommenspaketen für alle angemeldeten Teilnehmer, die direkt an die im Anmeldeformular angegebene Adresse geschickt werden."
+    }
+}

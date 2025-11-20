@@ -1,0 +1,21 @@
+{
+  "pl_PL": {
+    "documents": "<h3 class=\"pl_PL\">Dokumenty do pobrania:</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-pl-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin targów</a><br>",
+    "facility_regulations":"<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin obiektu</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_zabudowy.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin zabudowy</a><br>",
+    "voucher":"<a href=\"https://warsawexpo.eu/docs/Regulamin na Voucher_2023.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin Voucherów</a>"
+  },
+  "en_US": {
+    "documents": "<h3 class=\"en_US\">Documents for Download</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Fair regulations</a><br>",
+    "facility_regulations":"<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Facility regulations</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Building regulations</a>"
+  },
+  "de_DE": {
+    "documents": "<h3 class=\"en_US\">Dokumente zum Herunterladen</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Faire Vorschriften</a><br>",
+    "facility_regulations":"<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Einrichtungsvorschriften</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Bauvorschriften</a>"
+  }
+}

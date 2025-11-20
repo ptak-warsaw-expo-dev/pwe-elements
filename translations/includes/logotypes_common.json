@@ -1,0 +1,52 @@
+{
+  "pl_PL": {
+    "international_patrons": "patroni międzynarodowi",
+    "foreign_patrons": "PATRONI I PARTNERZY ZAGRANICZNI",
+    "international": "międzynarodowy",
+    "exhibitor":"Wystawca",
+
+    "plurals": {
+      "Prelegent": "Prelegenci",
+      "Partner Targów": "Partnerzy Targów",
+      "Partner Merytoryczny": "Partnerzy Merytoryczni",
+      "Partner Branżowy": "Partnerzy Branżowi",
+      "Partner targów i konferencji": "Partnerzy Targów i Konferencji",
+      "Patronat Honorowy": "Patronaty Honorowe",
+      "Partner Organizacyjny": "Partnerzy Organizacyjni"
+    }
+  },
+
+  "en_US": {
+    "international_patrons": "international patrons",
+    "foreign_patrons": "FOREIGN PATRONS AND PARTNERS",
+    "international": "international",
+    "exhibitor":"Exhibitor",
+
+    "plurals": {
+      "Speaker": "Speakers",
+      "Fair Partner": "Fair Partners",
+      "Content Partner": "Content Partners",
+      "Industry Partner": "Industry Partners",
+      "Trade and Conference Partner": "Trade and Conference Partners",
+      "Honorary Patronage": "Honorary Patronages",
+      "Organizational partner": "Organizational partners"
+    }
+  },
+
+  "de_DE": {
+    "international_patrons": "internationale Förderer",
+    "foreign_patrons": "AUSLÄNDISCHE FÖRDERER UND PARTNER",
+    "international": "international",
+    "exhibitor":"Aussteller",
+
+    "plurals": {
+      "Redner": "Referenten",
+      "Messepartner": "Messepartner",
+      "Fachlicher Partner": "Fachliche Partner",
+      "Branchenpartner": "Branchenpartner",
+      "Messe- und Konferenzpartner": "Messe- und Konferenzpartner",
+      "Ehrenpatronat": "Ehrenpatronate",
+      "Organisationspartner": "Organisationspartner"
+    }
+  }
+}

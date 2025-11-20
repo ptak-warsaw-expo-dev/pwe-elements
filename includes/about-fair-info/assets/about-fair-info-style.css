@@ -1,0 +1,9 @@
+#PWEAboutFairInfo a:hover{
+    background-color: color-mix(in oklch, var(--accent-color) 85%, black 15%);
+}
+#PWEAboutFairInfo a.accent:hover{
+    background-color: color-mix(in oklch, var(--accent-color) 85%, black 15%);
+}
+#PWEAboutFairInfo a.main2:hover{
+    background-color: color-mix(in oklch, var(--main2-color) 85%, black 15%);
+}
