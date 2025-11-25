@@ -212,7 +212,7 @@ class PWElementHale extends PWElements {
                     <div class="pwe-halls__info-container">
                         <img src="'. self::multi_translation("logo_link") .'"/>
                         <div class="pwe-halls__information">
-                            <p class="pwe-halls__dates"><strong>'. self::multi_translation("trade_fair_date") .'</strong></p>
+                            <p class="pwe-halls__dates"><strong>[trade_fair_date_multilang]</strong></p>
                             <p class="pwe-halls__letters">'. (!empty($hall_names) ? $hall_names : $halls_word .' '. $all_halls) .'</p>
                             <p class="pwe-halls__time">10:00-17:00</p>
                             <p class="pwe-halls__parking">'. self::multi_translation("parking") .'</p>

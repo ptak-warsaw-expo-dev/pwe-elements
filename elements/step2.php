@@ -102,6 +102,24 @@ class PWElementStepTwo extends PWElements {
         return $element_output;
     }
 
+    public static function multi_translation($key) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../translations/elements/step2.json';
+
+        // JSON file with translation
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        // Is the language in translations
+        if (isset($translations_data[$locale])) {
+            $translations_map = $translations_data[$locale];
+        } else {
+            // By default use English translation if no translation for current language
+            $translations_map = $translations_data['en_US'];
+        }
+
+        // Return translation based on key
+        return isset($translations_map[$key]) ? $translations_map[$key] : $key;
+    }
      /**
      * Static method to display seccond step form (step2).
      * Returns the HTML output as a string.
@@ -323,46 +341,13 @@ class PWElementStepTwo extends PWElements {
             <div id="Step2">
                 <div class="form-2">
                     <div>
-                        <h5 class="krok"> '.
-                            self::languageChecker(
-                                <<<PL
-                                    Krok <span class="text-accent-color">2 z 2
-                                PL,
-                                <<<EN
-                                    Step <span class="text-accent-color">2 of 2
-                                EN
-                            )
-                        .'</span></h5>
-                        <h2 class="text-color-jevc-color">'.
-                            self::languageChecker(
-                                <<<PL
-                                    Twój bilet został<br>wygenerowany pomyślnie!
-                                PL,
-                                <<<EN
-                                    Your ticket has been<br>generated successfully!
-                                EN
-                            )
-                        .'</h2>
-                        <p class="font13">'.
-                            self::languageChecker(
-                                <<<PL
-                                    Otrzymasz go na wskazany adres e-mail.<br>Może to potrwać kilka minut.
-                                PL,
-                                <<<EN
-                                    You will receive it at the e-mail address indicated.<br>May take a few minutes.
-                                EN
-                            )
-                        .'</p>
-                        <h3 class="wystawca">'.
-                            self::languageChecker(
-                                <<<PL
-                                    Czy chcesz zostać <span class="text-accent-color">wystawcą</span> targów [trade_fair_name] ?
-                                PL,
-                                <<<EN
-                                    Do you want to become a <span class="text-accent-color">exhibitor</span> of [trade_fair_name_eng] ?
-                                EN
-                            )
-                        .'</h3>';
+                        <h5 class="krok">
+                        '. self::multi_translation("step") .'
+                        </span></h5>
+                        <h2 class="text-color-jevc-color">'. self::multi_translation("your_ticket") .'</h2>
+                        <p class="font13">'. self::multi_translation("receive_e-mail") .'</p>
+                        <h3 class="wystawca">'. self::multi_translation("become_exhibitor") .'
+                        </h3>';
                         if(!$step2_no_forms){
                             $output .= '
                                 <div class="pwe-gravity-form">
@@ -370,38 +355,13 @@ class PWElementStepTwo extends PWElements {
                                 </div>
 
                                 <div class="pwe-submitting-buttons">
-                                    <button type="submit" class="btn exhibitor-yes" name="exhibitor-yes">'.
-                                        self::languageChecker(
-                                            <<<PL
-                                                Tak, jestem zainteresowany
-                                            PL,
-                                            <<<EN
-                                                Yes, I am interested
-                                            EN
-                                        )
-                                    .'</button>';
+                                    <button type="submit" class="btn exhibitor-yes" name="exhibitor-yes">
+                                    '. self::multi_translation("i_am_interested") .'
+                                    </button>';
                         } else {
                             $output .= '<div class="pwe-submitting-buttons">
-                                    <a href="'.
-                                        self::languageChecker(
-                                            <<<PL
-                                                /potwierdzenie-rejestracji-wystawcy/
-                                            PL,
-                                            <<<EN
-                                                /en/exhibitor-registration-confirmation/
-                                            EN
-                                        )
-                                        .'">
-                                        <button type="submit" class="btn exhibitor-yes" name="exhibitor-yes">'.
-                                        self::languageChecker(
-                                            <<<PL
-                                                Tak, jestem zainteresowany
-                                            PL,
-                                            <<<EN
-                                                Yes, I am interested
-                                            EN
-                                        )
-                                        .'</button>
+                                    <a href="'. self::multi_translation("confirmation_link") .'">
+                                        <button type="submit" class="btn exhibitor-yes" name="exhibitor-yes">'. self::multi_translation("confirmation_text") .'</button>
                                     </a>';
                         }
 
@@ -416,31 +376,29 @@ class PWElementStepTwo extends PWElements {
                             if ((($trade_fair_timestamp == false || empty($trade_fair_date)) || $days_difference > 17 || $trade_fair_timestamp < $current_timestamp) && get_locale() == "pl_PL") {
                                 $output .= '
                                 <a href="'. $step2_link_exhibitor_no .'">
-                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">'. self::languageChecker("Nie, dziękuję", "No, thank you") .'</button>
+                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">'. self::multi_translation("no_thank_you") .'</button>
                                 </a>';
                             } else {
                                 $output .= '
-                                <a href="'. self::languageChecker("/", "/en/") .'">
-                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">'. self::languageChecker("Nie, dziękuję", "No, thank you") .'</button>
+                                <a href="'. self::multi_translation("back_link") .'">
+                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">'. self::multi_translation("no_thank_you") .'</button>
                                 </a>';
                             }
                             $output .= '
                         </div>
                     </div>
                 </div>
-                <div class="form-2-right">'.
-                        self::languageChecker(
-                            <<<PL
-                                <img src="/doc/logo.webp">
-                                <h4>[trade_fair_date]</h4>
-                            PL,
-                            <<<EN
-                                <img src="/doc/logo-en.webp">
-                                <h4>[trade_fair_date_eng]</h4>
-                            EN
-                        )
-                    .'
-                    <h6>w Ptak Warsaw Expo</h6>
+                <div class="form-2-right">';
+
+                if(get_locale() == "pl_PL"){
+                    $output .= '<img src="/doc/logo.webp">
+                                <h4>[trade_fair_date]</h4>';
+                } else {
+                    $output .= '<img src="/doc/logo-en.webp">
+                                <h4>[trade_fair_date_multilang]</h4>';
+                };
+
+                    $output .= '<h6>w Ptak Warsaw Expo</h6>
                 </div>
             </div>
             <div class="form-2-bottom">
@@ -449,44 +407,17 @@ class PWElementStepTwo extends PWElements {
                         <a href="https://warsawexpo.eu/" target="_blanc"><img src="' . plugin_dir_url(dirname( __FILE__ )) . "/media/logo_pwe_black.webp" . '"></a>
                     </div>
                     <div class="fair-logo">
-                        <a href="'.
-                        self::languageChecker(
-                            <<<PL
-                               /
-                            PL,
-                            <<<EN
-                                /en/
-                            EN
-                        )
-                        .'"><img src="' . $fair_logo . '"></a>
+                        <a href="'. self::multi_translation("back_link") .'"><img src="' . $fair_logo . '"></a>
                     </div>
                 </div>
                 <div class="numbers">
                     <div class="for-exhibitors">
                         <i class="fa fa-envelope-o fa-3x fa-fw"></i>
-                        <p>'.
-                        self::languageChecker(
-                            <<<PL
-                                "Zostań wystawcą"
-                            PL,
-                            <<<EN
-                                "Become an exhibitor"
-                            EN
-                        )
-                    .'<br> <a href="tel:48 517 121 906">+48 517 121 906</a>
+                        <p>'. self::multi_translation("become_an_exhibitor") .'<br> <a href="tel:48 517 121 906">+48 517 121 906</a>
                     </div>
                     <div class="for-visitors">
                         <i class="fa fa-phone fa-3x fa-fw"></i>
-                        <p>'.
-                        self::languageChecker(
-                            <<<PL
-                                "Odwiedzający"
-                            PL,
-                            <<<EN
-                                "Visitors"
-                            EN
-                        )
-                    .'<br> <a href="tel:48 513 903 628">+48 513 903 628</a>
+                        <p>'. self::multi_translation("visitors") .'<br> <a href="tel:48 513 903 628">+48 513 903 628</a>
                     </div>
                 </div>
             </div>

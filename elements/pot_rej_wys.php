@@ -30,6 +30,39 @@ class PWElementStepTwoExhibitor extends PWElements {
         }
         return $form;
     }
+
+    public static function multi_translation($key) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../translations/elements/pot_rej_wys.json';
+
+        // JSON file with translation
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        // Is the language in translations
+        if (isset($translations_data[$locale])) {
+            $translations_map = $translations_data[$locale];
+        } else {
+            // By default use English translation if no translation for current language
+            $translations_map = $translations_data['en_US'];
+        }
+
+        // Return translation based on key
+        return isset($translations_map[$key]) ? $translations_map[$key] : $key;
+    }
+
+    public static function get_translations() {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../translations/elements/pot_rej_wys.json';
+
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        if (isset($translations_data[$locale])) {
+            return $translations_data[$locale];
+        }
+
+        return $translations_data['en_US'];
+    }
+
     // /**
     //  * Static method to initialize Visual Composer elements.
     //  * Returns an array of parameters for the Visual Composer element.
@@ -81,6 +114,7 @@ class PWElementStepTwoExhibitor extends PWElements {
         return $element_output;
     }
 
+
      /**
      * Static method to display seccond step form (step2).
      * Returns the HTML output as a string.
@@ -113,8 +147,8 @@ class PWElementStepTwoExhibitor extends PWElements {
         }
 
 
-        $confirmation_button_text = (get_locale() == 'pl_PL') ? "Wygeneruj ofertę" : "Generate an offer" ;
-        $main_page_text_btn = (get_locale() == 'pl_PL') ? "Powrót do strony głównej" : "Back to main page" ;
+        $confirmation_button_text = self::multi_translation("generate_an_offer");
+        $main_page_text_btn = self::multi_translation("back_to_main_page");;
 
         $file_url = plugins_url('elements/fetch.php', dirname(__FILE__));
 
@@ -127,7 +161,7 @@ class PWElementStepTwoExhibitor extends PWElements {
 
         $directUrl = $_SESSION['pwe_exhibitor_entry']['current_url'];
 
-        if ($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/") {
+        if ($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/") {
             $form_to_update = $registration_form_step2_exhibitor;
         } elseif (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") !== false) {
             $form_to_update = $registration_form_step2_exhibitor;
@@ -135,34 +169,34 @@ class PWElementStepTwoExhibitor extends PWElements {
             $form_to_update = $registration_form_step2_exhibitor_www2;
         }
 
-        $translations = [
-            'pl' => [
-                'name' => 'Imię i Nazwisko',
-                'area' => 'Wybierz powierzchnię wystawienniczą',
-                'company' => 'Firma',
-                'confirm_text' => 'Dziękujemy za uzupełnienie danych. Do usłyszenia już wkrótce. Zespół Ptak Warsaw Expo',
-                'error' => 'Oznaczona pola są wymagane!',
-                'tax' => 'NIP',
-                'company_desc' => 'Dodatkowe informacje o firmie',
-                'consent' => '* pola oznaczone gwiazdką są obowiązkowe',
-                'from' => 'od',
-                'to' => 'do',
-            ],
-            'en' => [
-                'name' => 'Name',
-                'area' => 'Select exhibition area',
-                'company' => 'Company',
-                'confirm_text' => 'Thank you for completing the data. We look forward to hearing from you soon. Ptak Warsaw Expo Team',
-                'error' => 'Marked fields are required!',
-                'tax' => 'TAX ID',
-                'company_desc' => 'Additional information about the company',
-                'consent' => '* fields marked with an asterisk are required',
-                'from' => 'from',
-                'to' => 'to',
-            ]
-        ];
+        // $translations = [
+        //     'pl' => [
+        //         'name' => 'Imię i Nazwisko',
+        //         'area' => 'Wybierz powierzchnię wystawienniczą',
+        //         'company' => 'Firma',
+        //         'confirm_text' => 'Dziękujemy za uzupełnienie danych. Do usłyszenia już wkrótce. Zespół Ptak Warsaw Expo',
+        //         'error' => 'Oznaczona pola są wymagane!',
+        //         'tax' => 'NIP',
+        //         'company_desc' => 'Dodatkowe informacje o firmie',
+        //         'consent' => '* pola oznaczone gwiazdką są obowiązkowe',
+        //         'from' => 'od',
+        //         'to' => 'do',
+        //     ],
+        //     'en' => [
+        //         'name' => 'Name',
+        //         'area' => 'Select exhibition area',
+        //         'company' => 'Company',
+        //         'confirm_text' => 'Thank you for completing the data. We look forward to hearing from you soon. Ptak Warsaw Expo Team',
+        //         'error' => 'Marked fields are required!',
+        //         'tax' => 'TAX ID',
+        //         'company_desc' => 'Additional information about the company',
+        //         'consent' => '* fields marked with an asterisk are required',
+        //         'from' => 'from',
+        //         'to' => 'to',
+        //     ]
+        // ];
 
-        $t = (strpos($lang, 'en') !== false) ? $translations['en'] : $translations['pl'];
+        $t = PWElementStepTwoExhibitor::get_translations();
 
         $output = '
             <style>
@@ -524,37 +558,15 @@ class PWElementStepTwoExhibitor extends PWElements {
 
             <div id="pweForm">
                 <div class="form-left">
-                    <div>'.
-                        self::languageChecker(
-                            <<<PL
-                                <h2 class="text-color-jevc-color">Dziękujemy za rejestrację chęci udziału Państwa firmy na targach <span>[trade_fair_name]!</span></h2>
-                                <p>Wkrótce nasz przedstawiciel skontaktuje się z Państwem, aby przedstawić ofertę wystawienniczą oraz korzyści płynące z udziału w targach.</p>
-                            PL,
-                            <<<EN
-                                <h2 class="text-color-jevc-color">Thank you for registering your company's desire to participate in the trade fair <span>[trade_fair_name]!</span></h2>
-                                <p>Our representative will be in touch with you shortly to present our exhibition offer and the benefits of participating in the fair.</p>
-                            EN
-                        )
-                    .'
+                    <div>'. self::multi_translation("thank_you_for_registering") .'
                     </div>
                 </div>';
 
                 $output .= '
                 <div class="form">
-                    <div class="display-before-submit">'.
-                        self::languageChecker(
-                            <<<PL
-                                <h3>Prosimy o podanie dodatkowych szczegółów</span></h3>
-                                <p>Pomoże nam to w dobraniu odpowiednich warunków i usprawnieniu komunikacji.</p>
-                            PL,
-                            <<<EN
-                                <h3>Please provide additional details</span></h3>
-                                <p>This will help us to choose the right conditions and improve communication.</p>
-                            EN
-                        )
-                    .'</div>';
+                    <div class="display-before-submit">'. self::multi_translation("provide_additional_details") .'</div>';
 
-                    if(($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/") && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
+                    if(($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/") && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
                         $output .= '
                         <div class="gf_browser_chrome gform_wrapper gravity-theme gform-theme--no-framework">
                             <form id="addressUpdateForm">
@@ -586,7 +598,7 @@ class PWElementStepTwoExhibitor extends PWElements {
                     } else {
                         $output .= '[gravityform id="'. $form_to_update .'" title="false" description="false" ajax="false"]';
                     }
-                    if($directUrl =="/zostan-wystawca/" || $directUrl =="/en/become-an-exhibitor/"){
+                    if($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/"){
                         $output .= '
                         <input style="margin-top:20px;" type="submit" id="pweConfirmation" class="display-before-submit" value="'. $confirmation_button_text .'" onclick="updateGravityForm()">';
                     } else {
@@ -595,16 +607,7 @@ class PWElementStepTwoExhibitor extends PWElements {
                     }
                     $output .= '
                     <div class="pwe-submitting-buttons display-after-submit">
-                        <a href="'.
-                        self::languageChecker(
-                            <<<PL
-                               /
-                            PL,
-                            <<<EN
-                                /en/
-                            EN
-                        )
-                    .'"><button class="btn pwe-btn pwe_reg_exhibitor">'. $main_page_text_btn .'</button></a>
+                        <a href="'. self::multi_translation("back_link") .'"><button class="btn pwe-btn pwe_reg_exhibitor">'. $main_page_text_btn .'</button></a>
                     </div>';
                 $output .= '
                 </div>';
@@ -612,33 +615,15 @@ class PWElementStepTwoExhibitor extends PWElements {
                 $output .= '
                 <div class="form-right">
                     <img class="img-stand" src="/wp-content/plugins/pwe-media/media/zabudowa.webp" alt="zdjęcie przykładowej zabudowy"/>
-                    <h5>'.
-                        self::languageChecker(
-                            <<<PL
-                                Dedykowana Zabudowa Targowa
-                            PL,
-                            <<<EN
-                                Dedicated Market Place
-                            EN
-                        )
-                    .'</h5>
-                        <a class="pwe-link btn pwe-btn btn-stand" target="_blank" '.
-                            self::languageChecker(
-                                <<<PL
-                                    href="https://warsawexpo.eu/zabudowa-targowa">Sprawdź ofertę zabudowy
-                                PL,
-                                <<<EN
-                                    href="https://warsawexpo.eu/en/exhibition-stands">See the offer
-                                EN
-                            )
-                        .'</a>
+                    <h5>'. self::multi_translation("dedicated_market_place") .'</h5>
+                        <a class="pwe-link btn pwe-btn btn-stand" target="_blank" '. self::multi_translation("see_the_offer") .'</a>
                 </div>
             </div>
         ';
         $output .= '
 
         ';
-        if (($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/") && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
+        if (($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/") && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
             $output .= '
             <script>
                 const formEmail = document.querySelector(".input-area");
@@ -801,16 +786,7 @@ class PWElementStepTwoExhibitor extends PWElements {
                 sliderContainer.className = "input-range-container";
                 sliderContainer.innerHTML = `
                     <div class="input-range-wrapper">
-                        <p style="font-size:14px; font-weight:700; margin-top:18px;">'.
-                            self::languageChecker(
-                                <<<PL
-                                Wybierz powierzchnię wystawienniczą
-                                PL,
-                                <<<EN
-                                Choose an exhibition space
-                                EN
-                            )
-                        .'</p>
+                        <p style="font-size:14px; font-weight:700; margin-top:18px;">'. self::multi_translation("exhibition_space") .'</p>
                         <div class="input-range-inputs">
                             <div class="input-range-track"></div>
                             <input type="range" min="16" max="100" value="16"  id="inputRange1" oninput="slideOne()">
