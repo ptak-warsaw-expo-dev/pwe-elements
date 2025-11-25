@@ -145,7 +145,7 @@ class PWEConferenceCap {
                                 'save_always' => true,
                             ),
                             array(
-                                'type' => 'textarea_raw_html',
+                                'type' => 'textarea',
                                 'heading' => __('Custom html', 'pwe_conference_cap'),
                                 'param_name' => 'conference_cap_html_code',
                                 'save_always' => true,
@@ -268,7 +268,7 @@ class PWEConferenceCap {
                 $html_content = '';
 
                 if (!empty($conf_cap_html['conference_cap_html_code'])) {
-                    $html_content = PWECommonFunctions::decode_clean_content($conf_cap_html['conference_cap_html_code']);
+                    $html_content = $conf_cap_html['conference_cap_html_code'];
                 } elseif (!empty($conf_cap_html['conference_cap_html_element_id'])) {
                     $element_id = esc_attr(trim($conf_cap_html['conference_cap_html_element_id']));
                     $html_content = '<div data-html-inject-id="' . $element_id . '"></div>';

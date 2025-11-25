@@ -366,7 +366,7 @@ class PWEConferenceShortInfoDefaultSchedule extends PWEConferenceShortInfo {
 
                                 foreach ($group as $conf) {
                                     $output .= '
-                                    <tr class="pwe-conf-short-info-default__row-link" data-href="/' . PWEConferenceShortInfo::multi_translation("conferences_link") . '/?konferencja=' . esc_attr($conf['slug']) . '">
+                                    <tr class="pwe-conf-short-info-default__row-link" data-href="' . PWEConferenceShortInfo::multi_translation("conferences_link") . '?konferencja=' . esc_attr($conf['slug']) . '">
                                         <td><img src="' . esc_url($conf['logo']) . '" alt="" class="pwe-conf-short-info-default__org-logo"></td>
                                         <td><strong>' . esc_html(str_replace('<br>', '', $conf['title'])) . '</strong><br><small>' . esc_html($conf['organizer']) . '</small></td>';
 

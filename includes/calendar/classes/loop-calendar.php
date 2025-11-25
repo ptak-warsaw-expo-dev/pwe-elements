@@ -580,26 +580,44 @@ class PWECalendar extends PWECommonFunctions {
 
             $event_posts_full = $event_posts;
 
-            // Sorting by date first, and if the date is the same, "week" goes first
-            usort($event_posts, function($a, $b) {
-                $a_date = DateTime::createFromFormat('d-m-Y', $a['start_date']);
-                $b_date = DateTime::createFromFormat('d-m-Y', $b['start_date']);
+            // Sorting by date first, then category, then week before event
+            usort($event_posts, function ($a, $b) {
 
-                // Date comparison
-                $dateComparison = $a_date <=> $b_date;
-                if ($dateComparison !== 0) {
-                    return $dateComparison;
+                // SORTING BY DATE
+                $dateA = DateTime::createFromFormat('d-m-Y', $a['start_date']);
+                $dateB = DateTime::createFromFormat('d-m-Y', $b['start_date']);
+
+                $cmpDate = $dateA <=> $dateB;
+                if ($cmpDate !== 0) return $cmpDate;
+
+
+                // SORTING BY CATEGORY
+                $catA = '';
+                if (!empty($a['categories'])) {
+                    foreach ($a['categories'] as $cat) $catA .= $cat->slug . ' ';
                 }
 
-                // If the dates are the same, "week" should go first
-                if ($a['event_type'] === 'week' && $b['event_type'] !== 'week') {
-                    return -1; // $a przed $b
-                } elseif ($a['event_type'] !== 'week' && $b['event_type'] === 'week') {
-                    return 1; // $b przed $a
+                $catB = '';
+                if (!empty($b['categories'])) {
+                    foreach ($b['categories'] as $cat) $catB .= $cat->slug . ' ';
                 }
 
-                // If both are the same type or neither is "week", leave the order unchanged
-                return 0;
+                $catA = trim($catA);
+                $catB = trim($catB);
+
+                $cmpCat = strcmp($catA, $catB);
+                if ($cmpCat !== 0) return $cmpCat;
+
+
+                // SEQUENCE WEEK → EVENT
+                $order = [
+                    'week' => 0,
+                    'event' => 1,
+                    '' => 1,
+                    null => 1
+                ];
+
+                return $order[$a['event_type']] <=> $order[$b['event_type']];
             });
 
             if (!empty($pwe_calendar_posts_num) && $pwe_calendar_posts_num > 0) {

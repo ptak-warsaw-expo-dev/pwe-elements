@@ -3097,8 +3097,10 @@ if ($event_type === "week") {
                     if (!empty($cap_logotypes_data)) {
 
                         $saving_paths = function (&$files, $logo_data) {
-                            $link = $logo_data->logos_link;
-                            $alt = $logo_data->logos_alt;
+                            $data = json_decode($logo_data->data, true);
+
+                            $link = $data['logos_link'] ?? null;
+                            $alt  = $data['logos_alt'] ?? ($logo_data->logos_alt ?? null);
 
                             $element = [
                                 'url' => 'https://cap.warsawexpo.eu/public' . $logo_data->logos_url,
@@ -3137,10 +3139,19 @@ if ($event_type === "week") {
                                 </div>
                                 <div class="single-event__partners-logotypes single-event__logotypes-slider">';
                                     foreach ($files as $logo) {
-                                        $output .= '
-                                        <div class="single-event__partners-logo">
-                                            <img src="'. $logo["url"] .'" alt="Partner\'s logo"/>
-                                        </div>'; 
+                                        if (!empty($logo['link'])) {
+                                            $output .= '
+                                            <a href="'. $logo["link"] .'" target="_blank">
+                                                <div class="single-event__partners-logo">
+                                                    <img src="'. $logo["url"] .'" alt="Partner\'s logo"/>
+                                                </div>
+                                            </a>'; 
+                                        } else {
+                                            $output .= '
+                                            <div class="single-event__partners-logo">
+                                                <img src="'. $logo["url"] .'" alt="Partner\'s logo"/>
+                                            </div>'; 
+                                        }
                                     } 
                                 $output .= '
                                 </div>

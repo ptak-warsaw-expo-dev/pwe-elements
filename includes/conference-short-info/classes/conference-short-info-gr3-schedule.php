@@ -382,13 +382,14 @@ class PWEConferenceShortInfoGr3Schedule extends PWEConferenceShortInfo {
             <style>
                 @media (min-width: 961px) {
                     .' . $rnd_class . '  .swiper-wrapper {
-                        display: grid !important;
-                        grid-template-columns: repeat(4, 1fr);
+                        display: flex !important;
                         gap: 10px;
                         transform: none !important;
+                        justify-content: center;
                     }
 
                     .' . $rnd_class . '  .swiper-slide {
+                        max-width: 24%;
                         width: auto !important;
                         min-height: auto !important;
                         margin: 0 !important;
