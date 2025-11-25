@@ -525,7 +525,7 @@ $output .= '
                             </div>
                         </div>
                         <div class="pwe-header-date-block">
-                            <h2>'. $trade_fair_date .'<span class="el-hidden-desktop" style="text-transform: capitalize;">, '. $city .'</span></h2>
+                            <h2>[trade_fair_date_multilang]<span class="el-hidden-desktop" style="text-transform: capitalize;">, '. $city .'</span></h2>
                             <p class="pwe-header-city pwe-header-location">'. PWEHeader::multi_translation("warsaw_poland") .'</p>
                         </div>
                     </div>

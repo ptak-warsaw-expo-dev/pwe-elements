@@ -740,15 +740,27 @@ class PWElementAdditionalLogotypes {
                     if (empty($visibilityFlags)) {
                         $showLogo = true;
                     } else {
-                        $keyForCurrentLocale = 'logos_' . $currentLocale;
+                        // If no flags: show
+                        $allNull = true;
+                        foreach ($visibilityFlags as $val) {
+                            if (!is_null($val)) {
+                                $allNull = false;
+                                break;
+                            }
+                        }
 
-                        if (isset($visibilityFlags[$keyForCurrentLocale])) {
-                            $showLogo = ($visibilityFlags[$keyForCurrentLocale] === 'true');
+                        if ($allNull) {
+                            $showLogo = true;
                         } else {
-                            $showLogo = false;
+                            $keyForCurrentLocale = 'logos_' . $currentLocale;
+
+                            if (isset($visibilityFlags[$keyForCurrentLocale])) {
+                                $showLogo = ($visibilityFlags[$keyForCurrentLocale] === 'true');
+                            } else {
+                                $showLogo = false;
+                            }
                         }
                     }
-
 
                     if (!$showLogo) {
                         return;
@@ -1341,13 +1353,13 @@ class PWElementAdditionalLogotypes {
 
                 // console.log(get_database_logotypes_data);
 
-                if (updated_images_url != null) {
-                    updated_images_url.forEach(logo => {
-                        if (logo.site !== "" && logo.site != null) {
-                            console.log("url:" + logo.img + " " + "link:" + logo.site);
-                        }
-                    });
-                }
+                // if (updated_images_url != null) {
+                //     updated_images_url.forEach(logo => {
+                //         if (logo.site !== "" && logo.site != null) {
+                //             console.log("url:" + logo.img + " " + "link:" + logo.site);
+                //         }
+                //     });
+                // }
 
                 // Funkcja do sprawdzania statusu obrazu
                 function checkImage(url, callback) {

@@ -20,7 +20,7 @@ class PWELogotypes extends PWECommonFunctions {
         }
 
         require_once plugin_dir_path(__FILE__) . 'classes/logotypes_common.php';
-        
+
          // Hook actions
         add_action('init', array($this, 'initVCMapLogotypes'));
         add_shortcode('pwe_logotypes', array($this, 'PWELogotypesOutput'));
@@ -85,7 +85,7 @@ class PWELogotypes extends PWECommonFunctions {
                             'description' => __('Write hex number for text shadow color for the element.', 'pwe_logotypes'),
                             'value' => '',
                             'save_always' => true,
-                        ),                        
+                        ),
                         array(
                             'type' => 'dropdown',
                             'heading' => __('Select button color <a href="#" onclick="yourFunction(`btn_color_manual_hidden`, `btn_color`)">Hex</a>', 'pwe_logotypes'),
@@ -151,7 +151,7 @@ class PWELogotypes extends PWECommonFunctions {
                             'description' => __('Write hex number for button shadow color for the element.', 'pwe_logotypes'),
                             'value' => '',
                             'save_always' => true
-                        ),    
+                        ),
                         array(
                             'type' => 'attach_images',
                             'group' => 'PWE Element',
@@ -261,7 +261,7 @@ class PWELogotypes extends PWECommonFunctions {
 
     /**
      * Get logotypes for catalog (top 21)
-     * 
+     *
      * @param string $catalog_id fair id for api.
      * @return array
      */
@@ -278,12 +278,12 @@ class PWELogotypes extends PWECommonFunctions {
                 if ($json === false) {
                     throw new Exception('Nie można pobrać danych JSON.');
                 }
-        
+
                 $data = json_decode($json, true);
                 if ($data === null) {
                     throw new Exception('Błąd dekodowania danych JSON.');
                 }
-        
+
                 $basic_exhibitors = reset($data)['Wystawcy'];
             } catch (Exception $e) {
                 if (current_user_can('administrator')) {
@@ -307,14 +307,14 @@ class PWELogotypes extends PWECommonFunctions {
                         }
                     }
                     return $acc;
-                }, []);            
+                }, []);
             } else {
                 $basic_exhibitors = [];
             }
 
             $i = 0;
             foreach($basic_exhibitors as $exhibitor){
-                if ($exhibitor['URL_logo_wystawcy']){ 
+                if ($exhibitor['URL_logo_wystawcy']){
                     $logotypes_array[] = $exhibitor;
                     $i++;
                     if ($i >= $logotypes_exhibitors_count) {
@@ -322,11 +322,11 @@ class PWELogotypes extends PWECommonFunctions {
                     }
                 }
             }
-            
+
             return $logotypes_array;
         }
     }
- 
+
 
     /**
      * Output method for PWelement shortcode.
@@ -355,29 +355,29 @@ class PWELogotypes extends PWECommonFunctions {
             $exhibitors_logotypes = array();
             foreach($exhibitors as $exhibitor){
                 $exhibitors_logotypes[] = array('img' => $exhibitor['URL_logo_wystawcy']);
-            } 
+            }
         } else $exhibitors_logotypes = array();
 
         $output = '';
-        
+
         // Replace strings
         $pwe_replace_urldecode = urldecode($pwe_replace);
         $pwe_replace_json = json_decode($pwe_replace_urldecode, true);
         $input_replace_array_html = array();
         $output_replace_array_html = array();
-        
+
         if (is_array($pwe_replace_json)) {
             foreach ($pwe_replace_json as $replace_item) {
                 $input_replace_array_html[] = $replace_item["input_replace_html"];
                 $output_replace_array_html[] = $replace_item["output_replace_html"];
             }
         }
-        
+
         // // Adding the result from additionalOutput to $output
         $output .= PWElementAdditionalLogotypes::additionalOutput($atts, $el_id, null, $exhibitors_logotypes);
-        
+
         $output = do_shortcode($output);
-        
+
         $file_cont = '<div class="pwelement pwelement_'. $el_id .' pwe_logotypes">' . $output . '</div>';
 
         if ($input_replace_array_html && $output_replace_array_html) {

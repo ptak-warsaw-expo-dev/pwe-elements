@@ -49,6 +49,25 @@ class PWERegistrationVisitors extends PWERegistration {
         }
         return $form;
     }
+
+    public static function multi_translation($key) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../../../translations/includes/registration_visitors.json';
+
+        // JSON file with translation
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        // Is the language in translations
+        if (isset($translations_data[$locale])) {
+            $translations_map = $translations_data[$locale];
+        } else {
+            // By default use English translation if no translation for current language
+            $translations_map = $translations_data['en_US'];
+        }
+
+        // Return translation based on key
+        return isset($translations_map[$key]) ? $translations_map[$key] : $key;
+    }
     public static $inline_styles = '';
     /**
      * Static method to generate the HTML output for the PWE Element.
@@ -82,9 +101,9 @@ class PWERegistrationVisitors extends PWERegistration {
         ? $atts['register_ticket_register_benefits']
         : '
             <ul class="ticket-card__benefits">
-              <li>'. self::languageChecker('<strong>wejścia na targi po rejestracji przez 3 dni</strong>', '<strong>access to the trade fair for all 3 days upon registration</strong>') .'</li>
-              <li>'. self::languageChecker('<strong>możliwość udziału w konferencjach</strong> lub warsztatach na zasadzie “wolnego słuchacza”', '<strong>the chance to join conferences</strong> or workshops as a listener') .'</li>
-              <li>'. self::languageChecker('darmowy parking', 'free parking') .'</li>
+              <li>'. self::multi_translation("access").'</li>
+              <li>'. self::multi_translation("conferences").'</li>
+              <li>'. self::multi_translation("free_parking").'</li>
             </ul>
         ';
 
@@ -92,12 +111,12 @@ class PWERegistrationVisitors extends PWERegistration {
             ? $atts['register_ticket_benefits']
             : '
                 <ul class="ticket-card__benefits">
-                    <li>'. self::languageChecker('<strong>fast track</strong> - szybkie wejście na targi dedykowaną bramką przez 3 dni', '<strong>fast track access</strong> – skip the line and enter the trade fair through a dedicated priority gate for all 3 days') .'</li>
-                    <li>'. self::languageChecker('<strong>imienny pakiet</strong> - targowy przesyłany kurierem przed wydarzeniem', '<strong>Personalized trade fair package</strong> - delivered by courier to your address before the event') .'</li>
-                    <li>'. self::languageChecker('<strong>welcome pack</strong> - przygotowany specjalnie przez wystawców', '<strong>welcome pack</strong> - a special set of materials and gifts prepared by exhibitors') .'</li>
-                    <li>'. self::languageChecker('obsługa concierge', 'Concierge service') .'</li>
-                    <li>'. self::languageChecker('możliwość udziału w konferencjach i  warsztatach', 'Access to conferences and workshops') .'</li>
-                    <li>'. self::languageChecker('darmowy parking', 'Free parking') .'</li>
+                    <li>'. self::multi_translation("fast_track").'</li>
+                    <li>'. self::multi_translation("personalized_fair").'</li>
+                    <li>'. self::multi_translation("welcome_pack").'</li>
+                    <li>'. self::multi_translation("concierge_service").'</li>
+                    <li>'. self::multi_translation("access_to_conferences").'</li>
+                    <li>'. self::multi_translation("free_parking").'</li>
                 </ul>
             ';
 
@@ -138,6 +157,13 @@ class PWERegistrationVisitors extends PWERegistration {
             //     return render_gr3($atts);
         }
 
+        if (get_locale() == 'pl_PL') {
+            $registration_benefits = do_shortcode('[trade_fair_registration_benefits_pl]');
+            $ticket_benefits = do_shortcode('[trade_fair_ticket_benefits_pl]');
+        } else {
+            $registration_benefits = do_shortcode('[trade_fair_registration_benefits_en]');
+            $ticket_benefits = do_shortcode('[trade_fair_ticket_benefits_en]');
+        }
 
         if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false || strpos($source_utm, 'utm_source=platyna') !== false) {
             $output .= '
@@ -147,10 +173,10 @@ class PWERegistrationVisitors extends PWERegistration {
                 </div>
                 <div class="pwe-reg-column pwe-registration-column">
                     <div class="pwe-registration-step-text">
-                        <p>'. self::languageChecker('Krok 1 z 2', 'Step 1 of 2') .'</p>
+                        <p>'. self::multi_translation("step_1_of_2").'</p>
                     </div>
                     <div class="pwe-registration-title">
-                        <h4>'. self::languageChecker('Twój bilet na targi', 'Your ticket to the trade fair') .'</h4>
+                        <h4>'. self::multi_translation("ticket").'</h4>
                     </div>
                     <div class="pwe-registration-form">
                         [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
@@ -160,21 +186,21 @@ class PWERegistrationVisitors extends PWERegistration {
             } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
                 $output .= '
                     <div id="pweRegistrationTicket" class="registration-ticket">
-                      <h1 class="registration-ticket__title">'. self::languageChecker('Opcje biletów dla odwiedzających:', 'Ticket options for visitors:') .'</h1>
+                      <h1 class="registration-ticket__title">'. self::multi_translation("ticket_options").'</h1>
                       <div class="registration-ticket-container">
                         <div class="registration-ticket__option registration-ticket__option--standard">
-                          <div class="ticket-card__label">'. self::languageChecker('Najczęstszy wybór', 'Most common choice') .'</div>
-                          <div class="ticket-card__name">'. self::languageChecker('Bilet Branżowy', 'Trade Pass') .'</div>
+                          <div class="ticket-card__label">'. self::multi_translation("common_choice").'</div>
+                          <div class="ticket-card__name">'. self::multi_translation("trade_pass").'</div>
 
                           <div class="ticket-card">
                             <div class="ticket-card__price">
-                              <h2 class="ticket-card__price-value">'. self::languageChecker('Bezpłatny po rejestracji</br>online', 'Free after online</br>registration') .'</h2>
-                              <p class="ticket-card__note">'. self::languageChecker('lub ', 'or ') .' '.$register_ticket_price_frist .' '. self::languageChecker('PLN podczas dni targowych', 'PLN during the trade fair days') .'</p>
+                              <h2 class="ticket-card__price-value">'. self::multi_translation("free_after_online").'</h2>
+                              <p class="ticket-card__note">'. self::multi_translation("or").' '.$register_ticket_price_frist .' '. self::multi_translation("PLN_during_fair").'</p>
                             </div>
 
                             <div class="ticket-card__details">
-                                <p class="ticket-card__details-title">'. self::languageChecker('Bilet upoważnia do:', 'With this ticket, you get:') .'</p>
-                                '. self::languageChecker(do_shortcode('[trade_fair_registration_benefits_pl]'), do_shortcode('[trade_fair_registration_benefits_en]')) .'
+                                <p class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</p>
+                                '. $registration_benefits .'
                               <div class="pwe-registration-form">
                                 [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
                               </div>
@@ -184,27 +210,27 @@ class PWERegistrationVisitors extends PWERegistration {
 
                         <div class="registration-ticket__option registration-ticket__option--business">
                           <img src="/wp-content/plugins/pwe-media/media/fast-track.webp">
-                          <div class="ticket-card__name">'. self::languageChecker('Business Priority Pass', 'Business Priority Pass') .'</div>
+                          <div class="ticket-card__name">'. self::multi_translation("business_priority_pass").'</div>
                           <div class="ticket-card">
                             <div class="ticket-card__price">
                               <h2 class="ticket-card__price-value">'.$register_ticket_price.' PLN</h2>
-                              <p class="ticket-card__note">'. self::languageChecker('lub poproś o zaproszenie wystawcę', 'or request an invitation from an exhibitor') .'</p>
-                              <a class="exhibitor-catalog" href="'. self::languageChecker('/katalog-wystawcow', '/en/exhibitors-catalog/') .'">'. self::languageChecker('katalog wystawców', 'exhibitor catalog') .'</a>
+                              <p class="ticket-card__note">'. self::multi_translation("or_request_an_invitation").'</p>
+                              <a class="exhibitor-catalog" href="'. self::multi_translation("catalog_link").'">'. self::multi_translation("catalog").'</a>
                             </div>
 
                             <div class="ticket-card__details">
-                              <h2 class="ticket-card__details-title">'. self::languageChecker('Bilet upoważnia do:', 'With this ticket, you get:') .'</h2>
-                                '. self::languageChecker(do_shortcode('[trade_fair_ticket_benefits_pl]'), do_shortcode('[trade_fair_ticket_benefits_en]')) .'
+                              <h2 class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</h2>
+                                '. $ticket_benefits .'
                               <div class="ticket-card__details_button">';
                               if(empty($register_ticket_link)){
                                 $output .= '
                                  <a href="#" class="ticket-card__cta" data-popup-trigger>
-                                  '. self::languageChecker('Kup bilet', 'Buy a ticket') .'
+                                  '. self::multi_translation("buy_a_ticket").'
                                 </a>';
                               } else {
                                 $output .= '
                                 <a target="_blank" href="'.$register_ticket_link.'" class="ticket-card__cta">
-                                    '. self::languageChecker('Kup bilet', 'Buy a ticket') .'
+                                    '. self::multi_translation("buy_a_ticket").'
                                 </a>';
                               }
                               $output .= '
@@ -254,8 +280,8 @@ class PWERegistrationVisitors extends PWERegistration {
                             <div class="popup__content">
                                 <div class="popup__content_text_container">
                                     <div class="popup__content_text">
-                                        <p style="font-size:16px;">'. self::languageChecker('Poproś wybranego wystawcę o zaproszenie – to szybki i pewny sposób aby otrzymać Zaproszenie Priority Pass', 'Ask your chosen exhibitor for an invitation - it s a quick and sure way to get a Priority Pass invitation') .'</p>
-                                        <p class="text">'. self::languageChecker('Obecna pula biletów Business Priority Pass przeznaczona do sprzedaży została wyczerpana. Zachęcamy do bezpłatnej rejestracji i odbioru Biletu Branżowego', 'The current pool of Business Priority Pass tickets for sale has been exhausted. We encourage you to register and pick up your Business Pass for free') .'</p>
+                                        <p style="font-size:16px;">'. self::multi_translation("ask_your_chosen_exhibitor").'</p>
+                                        <p class="text">'. self::multi_translation("the_current_pool").'</p>
 
                                     </div>
                                     <div class="popup__content_button">
@@ -263,8 +289,8 @@ class PWERegistrationVisitors extends PWERegistration {
                                     </div>
                                 </div>
                                 <div class="popup__content_button_container">
-                                    <a href="'. self::languageChecker('/rejestracja', '/en/registration/') .'" class="popup_katalog ">'. self::languageChecker('Zarejestruj się', 'Register') .'</a>
-                                    <a href="'. self::languageChecker('/katalog-wystawcow', '/en/exhibitors-catalog/') .'" class="popup_katalog popup_rej">'. self::languageChecker('Katalog wystawców', 'Exhibitor Catalog') .'</a>
+                                    <a href="'. self::multi_translation("registration_link").'" class="popup_katalog ">'. self::multi_translation("registration_text").'</a>
+                                    <a href="'. self::multi_translation("catalog_link").'" class="popup_katalog popup_rej">'. self::multi_translation("catalog").'</a>
                                 </div>
                             </div>
 
@@ -278,7 +304,7 @@ class PWERegistrationVisitors extends PWERegistration {
                         <img class="form-badge-top" src="/wp-content/plugins/pwe-media/media/badge_top.png">
                         <div class="form-container pwe-registration">
                             <div class="form-badge-header">
-                                <h1 class="form-header-title">'. self::languageChecker('Twój bilet<br>na targi', 'Your ticket<br>to the fair') .'</h1>
+                                <h1 class="form-header-title">'. self::multi_translation("ticket").'</h1>
                                 <a href="https://warsawexpo.eu/" target="_blank"><img class="form-header-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
                             </div>
                             <img class="form-badge-left" src="/wp-content/plugins/pwe-media/media/badge_left.png">
@@ -286,7 +312,7 @@ class PWERegistrationVisitors extends PWERegistration {
                             <img class="form-badge-right" src="/wp-content/plugins/pwe-media/media/badge_right.png">
                             <a href="https://warsawexpo.eu/" target="_blank"><img class="form-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
                             <div class="form">
-                                <h2 id="main-content" class="form-title">'. self::languageChecker('Twój bilet<br>na targi', 'Your ticket<br>to the fair') .'</h2>
+                                <h2 id="main-content" class="form-title">'. self::multi_translation("ticket").'</h2>
                                 <div class="pwe-registration-form">
                                     [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
                                 </div>

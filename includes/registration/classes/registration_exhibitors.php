@@ -39,23 +39,14 @@ class PWERegistrationExhibitors extends PWERegistration {
 
         $domain_gr_exhib = $current_fair_group;
 
-        if(get_locale() == 'pl_PL') {
-            if($current_fair_group === "gr3"){
-                $registration_text = "Wypełnij poniższy formularz, a my skontaktujemy się z Tobą w celu przedstawienia preferencyjnych stawek* za powierzchnię wystawienniczą i zabudowę stoiska.<br>*oferta ograniczona czasowo";
-                $registration_title = "Zapytaj o stoisko";
-            } else {
-                $registration_text = "Zapytaj o stoisko<br>Wypełnij poniższy formularz, a my skontaktujemy się z Tobą w celu przedstawienia preferencyjnych stawek* za powierzchnię wystawienniczą i zabudowę stoiska.<br>*oferta ograniczona czasowo";
-                $registration_title = "DLA WYSTAWCÓW";
-            }
+        if($current_fair_group === "gr3"){
+            $registration_text = PWERegistrationVisitors::multi_translation("exhibitor_registration_text");
+            $registration_title = PWERegistrationVisitors::multi_translation("exhibitor_ask_for_stand");
         } else {
-            if($current_fair_group === "gr3"){
-                $registration_text = "Fill out the form below and we will contact you to present preferential rates *  for the exhibition space and stand construction<br>* limited time offer";
-                $registration_title = "Ask for a stand";
-            } else {
-                $registration_text = "Ask for a stand<br>Fill out the form below and we will contact you to present preferential rates *  for the exhibition space and stand construction<br>* limited time offer";
-                $registration_title = "BOOK A STAND";
-            }
+            $registration_text = PWERegistrationVisitors::multi_translation("exhibitor_registration_text_gr12");
+            $registration_title = PWERegistrationVisitors::multi_translation("exhibitor_registration_for");
         }
+
 
         $output = '
         <style>

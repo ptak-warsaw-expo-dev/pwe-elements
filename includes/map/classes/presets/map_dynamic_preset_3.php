@@ -23,7 +23,7 @@ $output .= '
                 <div class="pwe-map__title-section">
                     <h2 class="pwe-map__title">'. $map_custom_title .'</h2>
                     <strong><p class="pwe-map__edition">' . $map_custom_current_edition . '</p></strong>
-                    <p class="pwe-map__year">'. self::multi_translation("trade_fair_date") .'</p>
+                    <p class="pwe-map__year">[trade_fair_date_multilang]</p>
                     <a href="'. self::multi_translation("registration_link") .'" class="pwe-map__button-link pwe-button-link">'. self::multi_translation("registration_text") .' ' . $svg_icon_arrow_right . '</a>
                 </div>
                 <div class="pwe-map__stats-number-box">
