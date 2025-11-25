@@ -4,9 +4,10 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.0.9
- * Author: PWE Web Developers
- * Author URI: github.com/ptak-warsaw-expo-dev
+ * Version: 3.1.0
+ * Author: Marek Rumianek
+ * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
+ * Author URI: github.com/RumianekMarek
  * Update URI: https://api.github.com/repos/ptak-warsaw-expo-dev/pwe-elements/releases/latest
  */
 
@@ -274,7 +275,7 @@ class PWElementsPlugin {
             return null;
         }
 
-        $github_pre = $wpdb->prepare("SELECT klavio_list_id FROM $table_name WHERE klavio_list_name = %s", 'github_secret');
+        $github_pre = $wpdb->prepare("SELECT klavio_list_id FROM $table_name WHERE klavio_list_name = %s", 'github_secret_2');
         $github_result = $wpdb->get_results($github_pre);
 
         if (!empty($github_result)) {

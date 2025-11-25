@@ -19,8 +19,7 @@
     "registration_text": "Zarejestruj się",
     "from_abroad": "w tym z zagranicy",
     "logo-x-link":"/doc/logo-x-pl.webp",
-    "fair_logo": "Logo targów",
-    "trade_fair_date":"[trade_fair_date]"
+    "fair_logo": "Logo targów"
   },
   "en_US": {
     "statistics": "Statistics",
@@ -45,8 +44,7 @@
     "registration_text": "Registration",
     "from_abroad": "of which from abroad",
     "logo-x-link":"/doc/logo-x-en.webp",
-    "fair_logo": "Fair logo",
-    "trade_fair_date": "[trade_fair_date_eng]"
+    "fair_logo": "Fair logo"
   },
   "de_DE": {
     "statistics": "Statistik",
@@ -68,7 +66,6 @@
     "registration_text": "Anmeldung",
     "from_abroad": "davon aus dem Ausland",
     "logo-x-link":"/doc/logo-x-en.webp",
-    "fair_logo": "Messe-Logo",
-    "trade_fair_date": "[trade_fair_date_eng]"
+    "fair_logo": "Messe-Logo"
   }
 }
