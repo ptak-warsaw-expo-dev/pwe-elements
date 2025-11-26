@@ -3311,8 +3311,10 @@ if ($event_type === "week") {
                         $europe_events_logotypes = [];
 
                         $saving_paths = function (&$europe_events_logotypes, $logo_data) {
+                            $data = json_decode($logo_data->data ?? '{}', true);
+
                             $link = $logo_data->logos_link;
-                            $alt = $logo_data->logos_alt;
+                            $alt = !empty($data['logos_alt']) ? $data['logos_alt'] : $logo_data->logos_alt;
 
                             $element = [
                                 'url' => 'https://cap.warsawexpo.eu/public' . $logo_data->logos_url,

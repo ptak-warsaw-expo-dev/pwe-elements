@@ -583,33 +583,21 @@ class PWECalendar extends PWECommonFunctions {
             // Sorting by date first, then category, then week before event
             usort($event_posts, function ($a, $b) {
 
-                // SORTING BY DATE
+                // SORT BY DATE
                 $dateA = DateTime::createFromFormat('d-m-Y', $a['start_date']);
                 $dateB = DateTime::createFromFormat('d-m-Y', $b['start_date']);
 
                 $cmpDate = $dateA <=> $dateB;
                 if ($cmpDate !== 0) return $cmpDate;
 
-
-                // SORTING BY CATEGORY
-                $catA = '';
-                if (!empty($a['categories'])) {
-                    foreach ($a['categories'] as $cat) $catA .= $cat->slug . ' ';
-                }
-
-                $catB = '';
-                if (!empty($b['categories'])) {
-                    foreach ($b['categories'] as $cat) $catB .= $cat->slug . ' ';
-                }
-
-                $catA = trim($catA);
-                $catB = trim($catB);
+                // SORT BY MAIN CATEGORY
+                $catA = !empty($a['categories']) ? $a['categories'][0]->slug : '';
+                $catB = !empty($b['categories']) ? $b['categories'][0]->slug : '';
 
                 $cmpCat = strcmp($catA, $catB);
                 if ($cmpCat !== 0) return $cmpCat;
 
-
-                // SEQUENCE WEEK → EVENT
+                // WEEK BEFORE EVENT
                 $order = [
                     'week' => 0,
                     'event' => 1,
