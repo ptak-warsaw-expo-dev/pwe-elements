@@ -1,0 +1,17 @@
+{
+  "pl_PL": {
+    "catalog": "Katalog wystawców ",
+    "exhibitors":"Wystawcy ",
+    "new_exhibitors":"Nowi wystawcy na targach "
+  },
+  "en_US": {
+    "catalog": "Exhibitor Catalog ",
+    "exhibitors":"Exhibitors ",
+    "new_exhibitors":"New exhibitors at the fair "
+  },
+  "de_DE": {
+    "catalog": "Ausstellerverzeichnis ",
+    "exhibitors":"Aussteller ",
+    "new_exhibitors":"Neue Aussteller auf der Messe "
+  }
+}
