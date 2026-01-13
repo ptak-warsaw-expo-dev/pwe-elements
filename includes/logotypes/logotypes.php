@@ -351,12 +351,16 @@ class PWELogotypes extends PWECommonFunctions {
         // Exhibitors logotypes top 21
         $exhibitors = self::exhibitors_catalog_checker(do_shortcode('[trade_fair_catalog]'), $logotypes_exhibitors_count, $logotypes_file_changer);
 
+
         if (!empty($exhibitors)) {
             $exhibitors_logotypes = array();
-            foreach($exhibitors as $exhibitor){
+
+            foreach ($exhibitors as $exhibitor) {
                 $exhibitors_logotypes[] = array('img' => $exhibitor['URL_logo_wystawcy']);
             }
-        } else $exhibitors_logotypes = array();
+        } else {
+            $exhibitors_logotypes = array();
+        }
 
         $output = '';
 
