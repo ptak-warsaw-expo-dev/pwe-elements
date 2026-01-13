@@ -1,0 +1,20 @@
+{
+  "pl_PL": {
+    "promote_yourself": "Hala",
+    "promote_yourself_html": "promote-yourself-pl.html",
+    "parking":"DARMOWY PARKING",
+    "logo_link":"/doc/logo-color.webp"
+  },
+  "en_US": {
+    "promote_yourself": "Hall",
+    "promote_yourself_html": "promote-yourself-en.html",
+    "parking":"FREE PARKING",
+    "logo_link":"/doc/logo-color-en.webp"
+  },
+  "de_DE": {
+    "promote_yourself": "Halle",
+    "promote_yourself_html": "promote-yourself-de.html",
+    "parking":"KOSTENLOSE PARKPLÄTZE",
+    "logo_link":"/doc/logo-color-en.webp"
+  }
+}

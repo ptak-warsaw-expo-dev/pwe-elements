@@ -1,3 +1,6 @@
+textarea{
+    overflow-y: auto !important;
+}
 .pwe_dependent-hidden {
     display: none !important;
 }
@@ -13,6 +16,7 @@
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_registration"],
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_map"],
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_attractions"] {
+
 
     .backend-area-full-width { 
         width: 100% !important;

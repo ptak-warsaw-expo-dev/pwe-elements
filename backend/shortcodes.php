@@ -18,7 +18,7 @@ function get_fair_data($specific_domain = null) {
 
             // Add data about the fair
             foreach ($pwe_fairs as $fair) {
-                if (!isset($fair->fair_domain) || empty($fair->fair_domain)) { 
+                if (!isset($fair->fair_domain) || empty($fair->fair_domain)) {
                     continue;
                 }
 
@@ -54,7 +54,7 @@ function get_fair_data($specific_domain = null) {
         } else {
             // URL to JSON file
             $json_file = 'https://mr.glasstec.pl/doc/pwe-data.json';
-            
+
             // Getting data from JSON file
             $json_data = @file_get_contents($json_file); // Use @ to ignore PHP warnings on failure
 
@@ -119,7 +119,7 @@ function get_fair_data($specific_domain = null) {
 
     // Return data or null if domain does not exist in data
     return $current_domain && isset($cached_data[$current_domain]) ? $cached_data[$current_domain] : null;
-} 
+}
 
 function register_dynamic_shortcodes() {
     // List of shortcodes and their corresponding fields
@@ -154,7 +154,7 @@ function register_dynamic_shortcodes() {
         'pwe_color_main2'           => 'color_main2',
         'pwe_badge'                 => 'badge',
         'pwe_facebook'              => 'facebook',
-        'pwe_instagram'             => 'instagram',
+        'pwe_instagram'             => 'instagram', // [pwe_instagram domain="domena"]
         'pwe_linkedin'              => 'linkedin',
         'pwe_youtube'               => 'youtube',
         'pwe_catalog'               => 'catalog',
@@ -196,7 +196,7 @@ function register_dynamic_shortcodes() {
     function handle_fair_shortcode($atts, $field) {
         $atts = shortcode_atts(['domain' => null], $atts);
         $fair_data = get_fair_data($atts['domain']);
-        return esc_html($fair_data[$field] ?? ''); 
+        return esc_html($fair_data[$field] ?? '');
     }
 
     // Registering shortcodes in the loop
@@ -208,3 +208,83 @@ function register_dynamic_shortcodes() {
 }
 
 add_action('init', 'register_dynamic_shortcodes');
+
+add_filter('gform_replace_merge_tags', 'PWE_GF_shortcodes', 10, 7);
+
+function PWE_GF_shortcodes($text, $form, $entry, $url_encode, $esc_html, $nl2br, $format) {
+
+    // Shortcode list => field in fair data
+    $shortcode_map = [
+        'pwe_name_pl'               => 'name_pl',
+        'pwe_name_en'               => 'name_en',
+        'pwe_desc_pl'               => 'desc_pl',
+        'pwe_desc_en'               => 'desc_en',
+        'pwe_short_desc_pl'         => 'short_desc_pl',
+        'pwe_short_desc_en'         => 'short_desc_en',
+        'pwe_full_desc_pl'          => 'full_desc_pl',
+        'pwe_full_desc_en'          => 'full_desc_en',
+        'pwe_date_start'            => 'date_start',
+        'pwe_date_start_hour'       => 'date_start_hour',
+        'pwe_date_end'              => 'date_end',
+        'pwe_date_end_hour'         => 'date_end_hour',
+        'pwe_edition'               => 'edition',
+        'pwe_visitors'              => 'fair_visitors_current',
+        'pwe_visitors_foreign'      => 'fair_foreign_current',
+        'pwe_exhibitors'            => 'fair_exhibitors_current',
+        'pwe_countries'             => 'fair_countries_current',
+        'pwe_area'                  => 'fair_area_current',
+        'pwe_statistics_year_curr'  => 'fair_year_current',
+        'pwe_visitors_prev'         => 'fair_visitors_previous',
+        'pwe_visitors_foreign_prev' => 'fair_foreign_previous',
+        'pwe_exhibitors_prev'       => 'fair_exhibitors_previous',
+        'pwe_countries_prev'        => 'fair_countries_previous',
+        'pwe_area_prev'             => 'fair_area_previous',
+        'pwe_statistics_year_prev'  => 'fair_year_previous',
+        'pwe_hall'                  => 'hall',
+        'pwe_color_accent'          => 'color_accent',
+        'pwe_color_main2'           => 'color_main2',
+        'pwe_badge'                 => 'badge',
+        'pwe_facebook'              => 'facebook',
+        'pwe_instagram'             => 'instagram',
+        'pwe_linkedin'              => 'linkedin',
+        'pwe_youtube'               => 'youtube',
+        'pwe_catalog'               => 'catalog',
+        'pwe_catalog_id'            => 'catalog_id',
+        'pwe_category_pl'           => 'category_pl',
+        'pwe_category_en'           => 'category_en',
+        'pwe_conference_name'       => 'conference_name'
+    ];
+
+    // Searching for tags {pwe_xxx} and {pwe_xxx:domain=yyy}
+    preg_match_all('/\{(pwe_[a-z0-9_]+)(:domain=([^}]+))?\}/i', $text, $matches, PREG_SET_ORDER);
+
+    if (!$matches) {
+        return $text;
+    }
+
+    foreach ($matches as $match) {
+
+        $full_tag = $match[0];     // {pwe_instagram:domain=domain.pl}
+        $tag_name = $match[1];     // pwe_instagram
+        $domain   = $match[3] ?? null;
+
+        if (!isset($shortcode_map[$tag_name])) {
+            continue;
+        }
+
+        // Downloading trade fair data
+        $fair_data = get_fair_data($domain);
+
+        if (!$fair_data || !is_array($fair_data)) {
+            $text = str_replace($full_tag, '', $text);
+            continue;
+        }
+
+        $field = $shortcode_map[$tag_name];
+        $value = $fair_data[$field] ?? '';
+
+        $text = str_replace($full_tag, esc_html($value), $text);
+    }
+
+    return $text;
+}

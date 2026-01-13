@@ -331,7 +331,7 @@ if ($pwe_header_cap_auto_partners_off) {
 
         foreach ($cap_logotypes_data as $logo_data) {
 
-            if (strpos($logo_data->logos_type, 'header-') === 0) {
+            if (strpos($logo_data->logos_type, 'header-') === 0) { 
 
                 $meta = json_decode($logo_data->meta_data, true);
                 $data = json_decode($logo_data->data ?? '{}', true);
@@ -393,8 +393,6 @@ if ($pwe_header_cap_auto_partners_off) {
                 $grouped_logos[$logo_data->logos_type][] = $element;
             }
         }
-
-
 
         // Mapowanie odmian
         $plural_map_pl = [
@@ -547,6 +545,32 @@ if ($pwe_header_cap_auto_partners_off) {
 
         }
     }
-}
+} 
+
+$output .= '
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const pweHeaderPartners = document.querySelector(".pwe-header-partners");
+        const pweHeaderContainer = document.querySelector(".pwe-header-container");
+
+        if (!pweHeaderPartners) {
+            return;
+        }
+
+        setTimeout(() => {
+            pweHeaderPartners.style.opacity = 1;
+
+            const partnersHeight = pweHeaderPartners.offsetHeight;
+            const containerHeight = pweHeaderContainer.offsetHeight;
+
+            const diff = Math.abs(partnersHeight - containerHeight);
+
+            if (containerHeight < partnersHeight || diff < 30) {
+                pweHeaderContainer.style.minHeight = partnersHeight + 60 + "px";
+            }
+        }, 300);
+        
+    });
+</script>';
 
 return $output;

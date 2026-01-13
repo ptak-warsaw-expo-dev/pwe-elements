@@ -32,7 +32,7 @@
     "for_visitors_1":"Die [trade_fair_name_eng] ist eine hervorragende Gelegenheit für Sie, alle auf dem polnischen Markt verfügbaren Angebote für die Branche zu vergleichen und sorgfältig zu analysieren. Die Veranstaltung bietet auch eine ausgezeichnete Gelegenheit, an Konferenzen, Workshops und Kongressen der Branche [trade_fair_opisbranzy_eng] teilzunehmen, um Ihr Wissen über den Markt zu erweitern und die Funktionsweise der neuesten Technologien kennenzulernen. Registrieren Sie sich und erhalten Sie eine Einladung zur Messe.",
     "ticket_link":"/en/tickets/",
     "ticket_text":"TICKET KAUFEN",
-    "register_link":"/en/registration/",
+    "register_link":"/de/registrieren/",
     "register_text":"REGISTRIEREN<span style='display: block; font-weight: 300;'>KOSTENLOSE EINTRITTSKARTE ERHALTEN"
   }
 }

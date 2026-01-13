@@ -1,0 +1,14 @@
+{
+  "pl_PL": {
+    "information_for_exhibitors": "Informacje organizacyjne dla Wystawców",
+    "information_for_exhibitors_text": "org-information-pl.html"
+  },
+  "en_US": {
+    "information_for_exhibitors": "Organizational information for Exhibitors",
+    "information_for_exhibitors_text": "org-information-en.html"
+  },
+  "de_DE": {
+    "information_for_exhibitors": "Organizational information for Exhibitors",
+    "information_for_exhibitors_text": "org-information-de.html"
+  }
+}

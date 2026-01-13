@@ -139,6 +139,17 @@ class PWESwiperScripts {
                     margin: 14px 0 0;
                 }
 
+                ' . $pwe_element . ' .swiper, .swiper-wrapper, .swiper-slide {
+                    -webkit-user-select: text !important;
+                    -moz-user-select: text !important;
+                    -ms-user-select: text !important;
+                    user-select: text !important;
+                }
+                ' . $pwe_element . ' .swiper-slide * {
+                    pointer-events: auto !important;
+                    user-select: text !important;
+                }
+
                 @media(max-width: 400px) {
 
                     ' . $pwe_element . ' .swiper-navigation-container {
@@ -279,10 +290,13 @@ class PWESwiperScripts {
                     const needForLoop = (Number.isInteger(spv) ? (spv + 1) : (Math.floor(spv) + 2));
                     let shouldLoop = totalSlides >= needForLoop;
 
-                    if (centeredSlides && totalSlides <= 2) {
-                    shouldLoop = true;
-                    }
+                    const isDesktop = window.matchMedia("(min-width: 961px)").matches;
 
+                    if (isDesktop && totalSlides < 5) {
+                        shouldLoop = false;
+                    } else if (centeredSlides && totalSlides <= 2) {
+                        shouldLoop = true; // tylko mobile
+                    }
                     // Zapisz do configu również "rewind", żeby na mobile nadal dało się „zawinąć”
                     const useRewind = !shouldLoop;
 
@@ -294,6 +308,8 @@ class PWESwiperScripts {
                         observeParents: true,
                         autoplay: ' . $autoplay_js . ',
                         breakpoints: ' . $swiper_breakpoints_json . ',
+                        touchStartPreventDefault: false,
+                        touchStartForcePreventDefault: false,
                         on: {
                             init: function () {
                                 setTimeout(() => {
@@ -325,38 +341,37 @@ class PWESwiperScripts {
                     // Dodaj warunki dynamiczne do konfiguracji Swipera
                     if ($dots_display === "true") {
                         $output .= '
-                            swiperConfig.pagination = {
-                                el: "' . $pwe_element . ' .swiper-pagination",
-                                clickable: true,
-                                dynamicBullets: false,
-                                dynamicMainBullets: 3
-                            };';
+                        swiperConfig.pagination = {
+                            el: "' . $pwe_element . ' .swiper-pagination",
+                            clickable: true,
+                            dynamicBullets: false,
+                            dynamicMainBullets: 3
+                        };';
                     }
 
                     if ($arrows_display === "true") {
                         $output .= '
-                    swiperConfig.navigation = {
-                        nextEl: "' . $pwe_element . ' .swiper-button-next",
-                        prevEl: "' . $pwe_element . ' .swiper-button-prev"
-                    };';
+                        swiperConfig.navigation = {
+                            nextEl: "' . $pwe_element . ' .swiper-button-next",
+                            prevEl: "' . $pwe_element . ' .swiper-button-prev"
+                        };';
                     }
 
                     if ($arrows_display === "true" && $scrollbar_display === "true") {
                         $output .= '
-                    swiperConfig.scrollbar = {
-                        el: "' . $pwe_element . ' .swiper-scrollbar",
-                        draggable: false
-                    };';
+                        swiperConfig.scrollbar = {
+                            el: "' . $pwe_element . ' .swiper-scrollbar",
+                            draggable: false
+                        };';
                     } else if (empty($arrows_display) && $scrollbar_display === "true") {
                         $output .= '
-                    swiperConfig.scrollbar = {
-                        el: "' . $pwe_element . ' .swiper-scrollbar",
-                        draggable: true
-                    };';
+                        swiperConfig.scrollbar = {
+                            el: "' . $pwe_element . ' .swiper-scrollbar",
+                            draggable: true
+                        };';
                     }
 
-                $output .= '
-
+                    $output .= '
                     const swiper = new Swiper(container, swiperConfig);
 
                     // Przewijanie paginacji tak, by aktywna kropka była na środku
@@ -391,21 +406,21 @@ class PWESwiperScripts {
 
                     // --- RĘCZNY klik do realnego indeksu, działa stabilnie w loop
                     if (swiper.params.loop === true && swiperConfig.slideToClickedSlide === true) {
-                    // wyłącz natywne, żeby nie było podwójnych ruchów
-                    swiper.params.slideToClickedSlide = false;
+                        // wyłącz natywne, żeby nie było podwójnych ruchów
+                        swiper.params.slideToClickedSlide = false;
 
-                    const allSlides = container.querySelectorAll(".swiper-slide");
-                    allSlides.forEach((slideEl) => {
-                        slideEl.addEventListener("click", (e) => {
-                        // jeśli to był drag, nie reaguj na klik
-                        if (swiper.animating) return;
-                        const realAttr = slideEl.getAttribute("data-swiper-slide-index");
-                        if (realAttr != null) {
-                            const realIndex = parseInt(realAttr, 10);
-                            swiper.slideToLoop(realIndex); // właściwy skok do klikniętego slajdu, niezależnie od duplikatów
-                        }
+                        const allSlides = container.querySelectorAll(".swiper-slide");
+                        allSlides.forEach((slideEl) => {
+                            slideEl.addEventListener("click", (e) => {
+                                // jeśli to był drag, nie reaguj na klik
+                                if (swiper.animating) return;
+                                const realAttr = slideEl.getAttribute("data-swiper-slide-index");
+                                if (realAttr != null) {
+                                    const realIndex = parseInt(realAttr, 10);
+                                    swiper.slideToLoop(realIndex); // właściwy skok do klikniętego slajdu, niezależnie od duplikatów
+                                }
+                            });
                         });
-                    });
                     }
 
                 });

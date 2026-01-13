@@ -1,0 +1,41 @@
+{
+  "pl_PL": {
+    "step": "Krok <span class=\"text-accent-color\">2 z 2",
+    "your_ticket":"Twój bilet został<br>wygenerowany pomyślnie!",
+    "receive_e-mail": "Otrzymasz go na wskazany adres e-mail.<br>Może to potrwać kilka minut.",
+    "become_exhibitor": "Czy chcesz zostać <span class=\"text-accent-color\">wystawcą</span> targów [trade_fair_name]?",
+    "i_am_interested":"Tak, jestem zainteresowany",
+    "confirmation_link":"/potwierdzenie-rejestracji-wystawcy/",
+    "confirmation_text": "Tak, jestem zainteresowany",
+    "no_thank_you": "Nie, dziękuję",
+    "back_link": "/",
+    "become_an_exhibitor":"Zostań wystawcą",
+    "visitors":"Odwiedzający"
+  },
+  "en_US": {
+    "step": "Step <span class=\"text-accent-color\">2 of 2",
+    "your_ticket":"Twój bilet został<br>wygenerowany pomyślnie!",
+    "receive_e-mail": "You will receive it at the e-mail address indicated.<br>May take a few minutes.",
+    "become_exhibitor": "Do you want to become a <span class=\"text-accent-color\">exhibitor</span> of [trade_fair_name_eng]?",
+    "i_am_interested":"Yes, I am interested",
+    "confirmation_link":"/en/exhibitor-registration-confirmation/",
+    "confirmation_text": "Yes, I am interested",
+    "no_thank_you": "No, thank you",
+    "back_link": "/en/",
+    "become_an_exhibitor":"Become an exhibitor",
+    "visitors":"Visitors"
+  },
+  "de_DE": {
+    "step": "Step <span class=\"text-accent-color\">2 of 2",
+    "your_ticket":"Twój bilet został<br>wygenerowany pomyślnie!",
+    "receive_e-mail": "You will receive it at the e-mail address indicated.<br>May take a few minutes.",
+    "become_exhibitor": "Do you want to become a <span class=\"text-accent-color\">exhibitor</span> of [trade_fair_name_eng]?",
+    "i_am_interested":"Yes, I am interested",
+    "confirmation_link":"/en/exhibitor-registration-confirmation/",
+    "confirmation_text": "Yes, I am interested",
+    "no_thank_you": "No, thank you",
+    "back_link": "/de/",
+    "become_an_exhibitor":"Become an exhibitor",
+    "visitors":"Visitors"
+  }
+}

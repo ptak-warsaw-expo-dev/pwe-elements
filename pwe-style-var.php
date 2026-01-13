@@ -27,7 +27,6 @@ class PWEStyleVar extends PWECommonFunctions {
         $main2_lighter_color  = self::adjustBrightness($main2_color, +20);
         $main2_light_color  = self::adjustBrightness($main2_color, +60);
 
-
         $style = '
         <style>
             :root {
@@ -41,6 +40,8 @@ class PWEStyleVar extends PWECommonFunctions {
                 --main2-color: ' . $main2_color . ';
                 --main2_darker_color: ' . $main2_darker_color . ';
                 --main2_dark_color: ' . $main2_dark_color . ';
+                --accent_color_95_white: color-mix(in srgb, var(--accent-color) 5%, #ffffff 95%);
+                --main2_color_95_white: color-mix(in srgb, var(--main2-color) 5%, #ffffff 95%);
             }
         </style>';
 

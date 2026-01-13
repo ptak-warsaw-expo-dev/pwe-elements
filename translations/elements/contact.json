@@ -1,0 +1,52 @@
+{
+  "pl_PL": {
+    "send_message": "WYŚLIJ WIADOMOŚĆ",
+    "write_to_us": "Napisz do nas",
+    "reply":"odpiszemy lub oddzwonimy,<br>jeżeli zostawisz nam numer telefonu.",
+    "organized_groups":"Kontakt dla grup zorganizowanych",
+    "participation":"W celu zapewnienia państwu komfortowego udziału w naszych wydarzeniach, wstęp dla grupnzorganizowanych możliwy jest tylko ostatniego dnia targowego. Przed wcześniejszym przybyciem zachęcamy do kontaktu przez formularz dostępny na stronie: <a id=\"pweGroupsLink\" href=\"https://warsawexpo.eu/grupy\" alt=\"link do rejestracji grup zorganizowanych\" target=\"_blank\">warsawexpo.eu/grupy</a>. Pozostawienie plecaków oraz walizek w szatni jest obligatoryjne. Na targach obowiązuje business dress code.",
+    "contact_form": "Formularz kontaktowy",
+    "contact_link": "https://warsawexpo.eu/grupy/",
+    "customer_service": "Obsługa klienta",
+    "customer_service_office":"Biuro obsługi",
+    "technical_support":"Obsługa techniczna wystawców<br>",
+    "media_marketing":"Media i marketing",
+    "media_marketing_service":"Obsługa marketingowa i media"
+  },
+  "en_US": {
+    "send_message": "SEND MESSAGE",
+    "write_to_us": "Write to us",
+    "reply":"we will reply or call you back<br>if you leave us your telephone number.",
+    "organized_groups":"Contact for organized groups",
+    "participation": "To ensure your comfortable participation in our events, admission for organized groups is only possible on the last day of the fair. Before your arrival, we encourage you to contact us through the form available on the website:  <a id=\"pweGroupsLink\" href=\"https://warsawexpo.eu/en/groups\" alt=\"link to group registration\" target=\"_blank\">warsawexpo.eu/en/groups</a>. Leaving backpacks and suitcases in the cloakroom is mandatory. A business dress code is required at the fair.",
+    "contact_form": "Contact form",
+    "contact_link": "https://warsawexpo.eu/en/groups/",
+    "customer_service": "Customer service",
+    "customer_service_office":"Customer Service Office",
+    "technical_support":"Technical support for exhibitors<br>",
+    "media_marketing":"Media and marketing",
+    "media_marketing_service":"Marketing and media services"
+  },
+  "de_DE": {
+    "send_message": "NACHRICHT SENDEN",
+    "write_to_us": "Schreiben Sie uns",
+    "reply":"Wir werden Ihnen antworten oder Sie zurückrufen, wenn Sie uns Ihre Telefonnummer hinterlassen.",
+    "organized_groups":"Kontakt für organisierte Gruppen",
+    "participation": "Um Ihnen eine angenehme Teilnahme an unseren Veranstaltungen zu gewährleisten, ist der Eintritt für organisierte Gruppen nur am letzten Messetag möglich. Wir empfehlen Ihnen, sich vor Ihrer Ankunft über das Formular auf der Website mit uns in Verbindung zu setzen:  <a id=\"pweGroupsLink\" href=\"https://warsawexpo.eu/en/groups\" alt=\"link to group registration\" target=\"_blank\">warsawexpo.eu/en/groups</a>. Rucksäcke und Koffer müssen an der Garderobe abgegeben werden. Auf der Messe ist Business-Kleidung vorgeschrieben.",
+    "contact_form": "Kontaktformular",
+    "contact_link": "https://warsawexpo.eu/en/groups/",
+    "customer_service": "Kundendienst",
+    "customer_service_office":"Kundendienstbüro",
+    "technical_support":"Technischer Support für Aussteller<br>",
+    "media_marketing":"Medien und Marketing",
+    "media_marketing_service":"Marketing- und Mediendienstleistungen",
+
+    "first_name": "Vor- und Nachname",
+    "help_you": "Wie können wir Ihnen helfen?",
+    "department": "Abteilung:",
+    "exhibitors": "Aussteller",
+    "visitors": "Besucher",
+    "technical": "Technische Abteilung",
+    "marketing": "Marketing"
+  }
+}
