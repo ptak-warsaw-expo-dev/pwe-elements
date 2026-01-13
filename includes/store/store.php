@@ -81,10 +81,6 @@ class PWEStore extends PWECommonFunctions {
         $css_file = plugins_url('assets/style.css', __FILE__);
         $css_version = filemtime(plugin_dir_path(__FILE__) . 'assets/style.css');
         wp_enqueue_style('pwe-store-css', $css_file, array(), $css_version);
-
-        $css_file_feedback = plugins_url('assets/feedback.css', __FILE__);
-        $css_version_feedback = filemtime(plugin_dir_path(__FILE__) . 'assets/feedback.css');
-        wp_enqueue_style('pwe-store-feedback-css', $css_file_feedback, array(), $css_version_feedback);
     }
 
     public function addingScripts(){
@@ -105,10 +101,6 @@ class PWEStore extends PWECommonFunctions {
         $js_version = filemtime(plugin_dir_path(__FILE__) . 'assets/script.js');
         wp_enqueue_script('pwe-store-js', $js_file, array('jquery'), $js_version, true);
         wp_localize_script( 'pwe-store-js', 'store_js', $store_js_array );
-
-        $js_file_feedback = plugins_url('assets/feedback.js', __FILE__);
-        $js_version_feedback = filemtime(plugin_dir_path(__FILE__) . 'assets/feedback.js');
-        wp_enqueue_script('pwe-store-feedback-js', $js_file_feedback, array('jquery'), $js_version_feedback, true);
     }
 
     public function price($product, $store_options, $pwe_meta_data, $category, $current_domain, $num_only = false) {
@@ -201,18 +193,10 @@ class PWEStore extends PWECommonFunctions {
                 && strpos($headers["Content-Type"], "image/") === 0);
     }
     
-    public function PWEStoreOutput() {   
+    public function PWEStoreOutput() {  
         $pwe_store_data = self::get_database_store_data(); 
         $pwe_store_packages_data = self::get_database_store_packages_data();
         $pwe_meta_data = self::get_database_meta_data();   
-
-        $pwe_store_data_filtered = [];
-        foreach ($pwe_store_data as $item) {
-            if ((strpos($item->prod_groups, do_shortcode('[trade_fair_group]')) !== false || empty($item->prod_groups)) && strpos($item->prod_groups, 'hide') === false) {
-                $pwe_store_data_filtered[] = $item;
-            }
-        }
-        $pwe_store_data = $pwe_store_data_filtered;
 
         $categories = [];
         foreach ($pwe_store_data as $item) {
@@ -258,8 +242,6 @@ class PWEStore extends PWECommonFunctions {
             require_once plugin_dir_path(__FILE__) . 'parts/store_product_card.php';
 
             require_once plugin_dir_path(__FILE__) . 'parts/store_fairs.php';
-
-            require_once plugin_dir_path(__FILE__) . 'parts/store_feedback.php';
 
         $output .= '
         </div>';

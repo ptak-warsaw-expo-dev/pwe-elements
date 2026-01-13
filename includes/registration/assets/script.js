@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     option.style.display = "none";
                 }
-
             });
         }
 
@@ -179,10 +178,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const inputFairDate =
             document.querySelector(".accreditations-input-fair-date input") ||
             document.querySelector(".potential-exhibitors-input-fair-date input");
-
-        const inputFairGroup =
-            document.querySelector(".accreditations-input-fair-group input") ||
-            document.querySelector(".potential-exhibitors-input-fair-group input");
 
         const inputFairLang = document.querySelector(".potential-exhibitors-input-fair-lang input");
 
@@ -257,9 +252,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 inputFairName.value = e.target.getAttribute("name");
                 inputFairDomain.value = e.target.getAttribute("domain");
 
-                if (inputFairGroup) {
-                    inputFairGroup.value = e.target.getAttribute("group") || "";
-                }
                 // Adding the "active" class to the selected option
                 e.target.classList.add("active");
 
@@ -271,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     } else if (accreditationsElement) {
                         submit = accreditationsElement.querySelector(".gform_footer .gform_button");
                     }
-
+                    
                     if (domainAttr !== null && domainAttr !== '') {
                         submit.classList.add('active');
                     } else submit.classList.remove('active');
