@@ -21,8 +21,9 @@ class PWERegistrationPotentialExhibitors extends PWERegistration {
      * @param array @atts pwe-registration-fairs-options
      */
     public static function output($atts, $registration_type, $registration_form_id) {
-        
+
         $fairs_json = PWECommonFunctions::json_fairs();
+
 
         // CSS <----------------------------------------------------------------------------------------------<
         require_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php';
@@ -46,14 +47,26 @@ class PWERegistrationPotentialExhibitors extends PWERegistration {
                             <div class="pwe-registration-fairs-options-container">
                                 <div class="pwe-registration-fairs-option" domain="">Wybierz Targi</div>';
                                 foreach ($fairs_json as $fair) {
+
+                                    $pwe_groups_data = PWECommonFunctions::get_database_groups_data();
+                                    $current_domain = $fair["domain"];
+
+                                    foreach ($pwe_groups_data as $group) {
+                                        if ($current_domain == $group->fair_domain) {
+                                            $current_group = $group->fair_group;
+                                        }
+                                    }
+
                                     if (!empty($fair["name_pl"])) {
                                         $output .= '
-                                        <div 
-                                            class="pwe-registration-fairs-option" 
-                                            name="' . $fair["name_pl"] . '" 
-                                            domain="' . $fair["domain"] . '" 
-                                            date-start="' . $fair["date_start"] . '" 
-                                            date-end="' . $fair["date_end"] . '">
+                                        <div
+                                            class="pwe-registration-fairs-option"
+                                            name="' . $fair["name_pl"] . '"
+                                            domain="' . $fair["domain"] . '"
+                                            date-start="' . $fair["date_start"] . '"
+                                            date-end="' . $fair["date_end"] . '"
+                                            group="' . $current_group . '"
+                                            >
                                             ' . $fair["name_pl"] . '
                                         </div>';
                                     }

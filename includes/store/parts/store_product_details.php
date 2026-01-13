@@ -40,6 +40,8 @@ $output .= '
                                                             : "";
                                             $status = !empty($status_text) ? "status" : "";
 
+                                            $disabled = !empty($status) && (stripos($option['prod_image_text_pl'], 'nie pokazuj') !== false) ? false : true;
+
                                             // Prices descriptions
                                             $new_price_desc_pl = $option['prod_price_desc_pl'] ? $option['prod_price_desc_pl'] : "";
                                             $new_price_desc_en = $option['prod_price_desc_en'] ? $option['prod_price_desc_en'] : "";
@@ -98,6 +100,8 @@ $output .= '
                             $img_url = 'https://cap.warsawexpo.eu/public/uploads/shop/'. (!empty($product->prod_image_en) ? $product->prod_image_en : $product->prod_image_pl);
                         }
                     }
+
+                    if (!$disabled && $options != null) continue;
 
                     $output .= '
                     <!-- Desc item -->
