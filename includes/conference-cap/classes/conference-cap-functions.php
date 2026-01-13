@@ -1,15 +1,15 @@
 <?php
-class PWEConferenceCapFunctions extends PWEConferenceCap{    
+class PWEConferenceCapFunctions extends PWEConferenceCap{
 
     public static function findConferenceMode($new_class) {
 
         switch ($new_class){
-            case 'PWEConferenceCapSimpleMode' : 
+            case 'PWEConferenceCapSimpleMode' :
                 return array (
                 'php' => 'classes/conference-cap-simple-mode/conference-cap-simple-mode.php',
                 'css' => 'classes/conference-cap-simple-mode/conference-cap-simple-mode-style.css',
                 );
-            case 'PWEConferenceCapMedalCeremony' : 
+            case 'PWEConferenceCapMedalCeremony' :
                 return array (
                     'php' => 'classes/conference-cap-medal-ceremony/conference-cap-medal-ceremony.php',
                     'css' => 'classes/conference-cap-medal-ceremony/conference-cap-medal-ceremony-style.css',
@@ -22,27 +22,27 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
         };
     }
 
-    public static function speakerImageMini($speaker_images) { 
+    public static function speakerImageMini($speaker_images) {
         // Filtrowanie pustych wartości
         $head_images = array_filter($speaker_images);
         // Resetowanie indeksów tablicy
-        $head_images = array_values($head_images); 
-        
+        $head_images = array_values($head_images);
+
         // Jeśli nie ma obrazów, zwracamy pusty string
         if (empty($head_images)) {
-            return ''; 
+            return '';
         }
-    
+
         // Inicjalizacja kontenera na obrazy
         $speaker_html = '<div class="pwe-box-speakers-img">';
-    
+
         // Pętla po obrazach i dynamiczne ustawianie ich pozycji
-        foreach ($head_images as $i => $image_src) {    
+        foreach ($head_images as $i => $image_src) {
             if (!empty($image_src)) {
                 $z_index = (1 + $i);
                 $margin_top_index = '';
                 $max_width_index = "50%";
-    
+
                 // Ustawienia pozycji w zależności od liczby prelegentów
                 switch (count($head_images)) {
                     case 1:
@@ -50,7 +50,7 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
                         $left_index = "unset";
                         $max_width_index = "80%";
                         break;
-    
+
                     case 2:
                         switch ($i) {
                             case 0:
@@ -66,7 +66,7 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
                                 break;
                         }
                         break;
-    
+
                     case 3:
                         switch ($i) {
                             case 0:
@@ -83,7 +83,7 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
                                 break;
                         }
                         break;
-    
+
                     default:
                         switch ($i) {
                             case 0:
@@ -104,15 +104,15 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
                                 break;
                         }
                 }
-    
+
                 // Generowanie HTML obrazów
-                $speaker_html .= '<img class="pwe-box-speaker" src="'. esc_url($image_src) .'" alt="speaker portrait" 
+                $speaker_html .= '<img class="pwe-box-speaker" src="'. esc_url($image_src) .'" alt="speaker portrait"
                     style="position:relative; z-index:'.$z_index.'; top:'.$top_index.'; left:'.$left_index.'; max-width: '.$max_width_index.';'.$margin_top_index.';" />';
             }
         }
-    
+
         $speaker_html .= '</div>';
-    
+
         return $speaker_html;
     }
 
@@ -300,12 +300,65 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
         ];
     }
 
+    public static function getConferenceOrganizersAll($conf_slug) {
+        $cap_db = PWECommonFunctions::connect_database();
+        if (!$cap_db) {
+            return [];
+        }
+
+        $conf_slug = esc_sql($conf_slug);
+
+        $conference = $cap_db->get_row("
+            SELECT id, organizers_img
+            FROM conferences
+            WHERE conf_slug = '$conf_slug'
+        ", ARRAY_A);
+
+        if (!$conference || empty($conference['organizers_img'])) {
+            return [];
+        }
+
+        $conf_id = intval($conference['id']);
+
+        $logos = array_map('trim', explode(",", $conference['organizers_img']));
+
+        $results = [];
+
+        foreach ($logos as $logo) {
+            if ($logo === "") continue;
+
+            $slug = 'org-' . $logo;
+
+            $conf_add = $cap_db->get_row("
+                SELECT data
+                FROM conf_adds
+                WHERE slug = '$slug'
+                AND conf_id = $conf_id
+            ", ARRAY_A);
+
+            $data = [];
+            if (!empty($conf_add['data'])) {
+                $data = json_decode($conf_add['data'], true);
+            }
+
+            $results[] = [
+                "src" => 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/organizer/' . $logo,
+                "data" => $data
+            ];
+        }
+
+        return $results;
+    }
+
+
+
+
     protected static function debugConferencesConsole( array $database_data ) {
 
         if ( ! is_user_logged_in() || ! current_user_can( 'administrator' ) ) {
             return;
         }
-    
+
         $debug = array_map(
             static function ( $conf ) {
                 return array(
@@ -316,7 +369,7 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             },
             $database_data
         );
-    
+
         wp_register_script( 'pwe-conference-cap-debug', '' );
         wp_add_inline_script(
             'pwe-conference-cap-debug',

@@ -1,6 +1,6 @@
 <?php
 
-class PWECalendar extends PWECommonFunctions { 
+class PWECalendar extends PWECommonFunctions {
 
     public function __construct() {
         // Hook actions
@@ -109,7 +109,7 @@ class PWECalendar extends PWECommonFunctions {
 
         // Select month name depending on language
         $lang_key = strtoupper(substr($locale, 0, 2));
-        
+
         $start_month_name = isset($months[$start_month][$lang_key]) ? $months[$start_month][$lang_key] : "";
         $end_month_name = isset($months[$end_month][$lang_key]) ? $months[$end_month][$lang_key] : "";
 
@@ -244,7 +244,7 @@ class PWECalendar extends PWECommonFunctions {
         $terms = get_terms(array(
             'taxonomy' => 'event_category',
             'hide_empty' => false,
-        )); 
+        ));
 
         if (!is_wp_error($terms) && !empty($terms)) {
             $all_categories = array();
@@ -259,9 +259,9 @@ class PWECalendar extends PWECommonFunctions {
         if ($query->have_posts()) :
 
             $thumbnail_url = '';
-            $lang_pl = get_locale() == "pl_PL"; 
+            $lang_pl = get_locale() == "pl_PL";
             $shortcodes_active = empty(get_option('pwe_general_options', [])['pwe_dp_shortcodes_unactive']);
-            
+
             $output = '
             <style>
                 .pwe-calendar__wrapper {
@@ -367,7 +367,7 @@ class PWECalendar extends PWECommonFunctions {
                     text-transform: uppercase;
                     display: flex;
                     justify-content: space-evenly;
-                } 
+                }
                 .pwe-calendar_statistics {
                     padding: 10px;
                 }
@@ -413,7 +413,7 @@ class PWECalendar extends PWECommonFunctions {
                 @media (min-width: 960px){
                     .row-parent:has(.pwe-calendar__item){
                         max-width: unset !important;
-                    } 
+                    }
                 }
                 @media (max-width: 1200px){
                     .pwe-calendar__wrapper {
@@ -446,13 +446,13 @@ class PWECalendar extends PWECommonFunctions {
                     }
                     .pwe-calendar__date h5 {
                         font-size: 15px;
-                    } 
+                    }
                     .pwe-calendar_strip {
                         width: 100%;
                         margin: 0;
                         height: 20%;
                     }
-                    .pwe-calendar__button-check p, 
+                    .pwe-calendar__button-check p,
                     .pwe-calendar__edition p {
                         font-size: 10px !important;
                         padding: 4px !important;
@@ -460,7 +460,7 @@ class PWECalendar extends PWECommonFunctions {
                     .pwe-calendar_statistics {
                         display: flex;
                         flex-direction: column;
-                        gap: 6px;   
+                        gap: 6px;
                     }
                     .pwe-calendar__statistics-name {
                         flex-direction: column;
@@ -530,7 +530,7 @@ class PWECalendar extends PWECommonFunctions {
                 }
 
                 $current_time = strtotime("now");
-                
+
                 $pwe_db_date_start = do_shortcode('[pwe_date_start domain="' . $domain . '"]');
                 $pwe_db_date_end = do_shortcode('[pwe_date_end domain="' . $domain . '"]');
                 $pwe_db_date_start_available = $shortcodes_active && !empty($pwe_db_date_start) && $pwe_db_date_start !== "";
@@ -538,7 +538,7 @@ class PWECalendar extends PWECommonFunctions {
 
                 $start_date = $pwe_db_date_start_available ? date("d-m-Y", strtotime(str_replace("/", "-", $pwe_db_date_start))) : get_post_meta($post_id, 'fair_date_start', true);
                 $end_date = $pwe_db_date_end_available ? date("d-m-Y", strtotime(str_replace("/", "-", $pwe_db_date_end))) : get_post_meta($post_id, 'fair_date_end', true);
-                
+
                 $start_date = (empty($start_date) || (!empty($end_date) && strtotime($end_date . " +20 hours") < $current_time)) ? "28-01-2050" : $start_date;
                 $end_date = (empty($end_date) || (!empty($end_date) && strtotime($end_date . " +20 hours") < $current_time)) ? "30-01-2050" : $end_date;
 
@@ -548,65 +548,69 @@ class PWECalendar extends PWECommonFunctions {
 
                 $event_type = get_post_meta($post_id, 'pwe_event_type', true);
 
+
                 // Add only posts with edition_num == 1 if $pwe_calendar_premier_edition is true
                 if ($pwe_calendar_premier_edition == true && $edition_num == 1) {
                     $event_posts[] = [
-                        'post_id' => $post_id,
-                        'event_type' => $event_type,
-                        'start_date' => $start_date,
-                        'end_date' => $end_date,
-                        'domain' => $domain,
-                        'permalink' => $permalink,
-                        'categories' => $categories,
-                        'post_title' => get_the_title(),
+                        'post_id'     => $post_id,
+                        'event_type'  => $event_type,
+                        'edition_num' => $edition_num,
+                        'start_date'  => $start_date,
+                        'end_date'    => $end_date,
+                        'domain'      => $domain,
+                        'permalink'   => $permalink,
+                        'categories'  => $categories,
+                        'post_title'  => get_the_title(),
                     ];
                 } elseif ($pwe_calendar_premier_edition == false) {
-                    // If $pwe_calendar_premier_edition is false, add all posts
                     $event_posts[] = [
-                        'post_id' => $post_id,
-                        'event_type' => $event_type,
-                        'start_date' => $start_date,
-                        'end_date' => $end_date,
-                        'domain' => $domain,
-                        'permalink' => $permalink,
-                        'categories' => $categories,
-                        'post_title' => get_the_title(),
+                        'post_id'     => $post_id,
+                        'event_type'  => $event_type,
+                        'edition_num' => $edition_num,
+                        'start_date'  => $start_date,
+                        'end_date'    => $end_date,
+                        'domain'      => $domain,
+                        'permalink'   => $permalink,
+                        'categories'  => $categories,
+                        'post_title'  => get_the_title(),
                     ];
                 }
 
             endwhile;
 
-            wp_reset_postdata(); 
+            wp_reset_postdata();
 
             $event_posts_full = $event_posts;
 
             // Sorting by date first, then category, then week before event
             usort($event_posts, function ($a, $b) {
 
-                // SORT BY DATE
+                // 1. SORT BY DATE
                 $dateA = DateTime::createFromFormat('d-m-Y', $a['start_date']);
                 $dateB = DateTime::createFromFormat('d-m-Y', $b['start_date']);
 
                 $cmpDate = $dateA <=> $dateB;
-                if ($cmpDate !== 0) return $cmpDate;
+                if ($cmpDate !== 0) {
+                    return $cmpDate;
+                }
 
-                // SORT BY MAIN CATEGORY
-                $catA = !empty($a['categories']) ? $a['categories'][0]->slug : '';
-                $catB = !empty($b['categories']) ? $b['categories'][0]->slug : '';
+                // 2. WEEK FIRST (within same date)
+                $isWeekA = ($a['event_type'] === 'week') ? 0 : 1;
+                $isWeekB = ($b['event_type'] === 'week') ? 0 : 1;
 
-                $cmpCat = strcmp($catA, $catB);
-                if ($cmpCat !== 0) return $cmpCat;
+                $cmpWeek = $isWeekA <=> $isWeekB;
+                if ($cmpWeek !== 0) {
+                    return $cmpWeek;
+                }
 
-                // WEEK BEFORE EVENT
-                $order = [
-                    'week' => 0,
-                    'event' => 1,
-                    '' => 1,
-                    null => 1
-                ];
+                // 3. SORT BY EDITION NUMBER (DESC)
+                $editionA = !empty($a['edition_num']) ? (int) $a['edition_num'] : 0;
+                $editionB = !empty($b['edition_num']) ? (int) $b['edition_num'] : 0;
 
-                return $order[$a['event_type']] <=> $order[$b['event_type']];
+                return $editionB <=> $editionA;
             });
+
+
 
             if (!empty($pwe_calendar_posts_num) && $pwe_calendar_posts_num > 0) {
                 $event_posts = array_slice($event_posts, 0, $pwe_calendar_posts_num);
@@ -729,7 +733,7 @@ class PWECalendar extends PWECommonFunctions {
                             margin: 5px 0;
                         }
                     }
-                    .pwe-calendar__categories-dropdown-content .all { 
+                    .pwe-calendar__categories-dropdown-content .all {
                         background-color: #594334;
                         font-size: 21px;
                     }
@@ -762,7 +766,7 @@ class PWECalendar extends PWECommonFunctions {
                     $output .= self::render_calendar_event_card($event, $shortcodes_active, $lang_pl);
                 }
 
-                $output .= 
+                $output .=
                 ob_get_clean();
 
                 wp_reset_postdata();
@@ -774,34 +778,34 @@ class PWECalendar extends PWECommonFunctions {
             if (current_user_can('administrator')) {
                 echo '<script>console.log("Calendar memory size loop - '. ($endMemory - $startMemory) / 1024 .'kb")</script>';
             }
-            
+
             // Add load more button and script if needed
             if ($pwe_calendar_load_more && !empty($pwe_calendar_posts_num) && (count($event_posts_full) > $pwe_calendar_posts_num)) {
                 $output .= '
                 <div class="load-more-btn-container" style="text-align: center; margin-top: 36px;">
-                    <button 
-                        id="loadMore" 
-                        data-page="2" 
-                        class="load-more" 
+                    <button
+                        id="loadMore"
+                        data-page="2"
+                        class="load-more"
                         style="text-transform: uppercase; background-color: var(--main2-color); border-color: var(--main2-color); border-radius: 10px; color: white; padding: 8px 14px; transition: .3s ease; transform: scale(1);">
                         ' . ($lang_pl ? "Załaduj więcej" : "Load more") . '
                     </button>
                 </div>
-                
+
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
                         let loadMoreBtn = document.getElementById("loadMore");
-        
+
                         if (loadMoreBtn) {
                             loadMoreBtn.addEventListener("click", function () {
                                 let button = this;
                                 button.innerText = "'. ($lang_pl ? "Ładowanie..." : "Loading...") .'";
                                 let page = button.getAttribute("data-page");
-        
+
                                 let xhr = new XMLHttpRequest();
                                 xhr.open("POST", "/wp-admin/admin-ajax.php", true); // Użyj admin-ajax.php
                                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        
+
                                 xhr.onload = function () {
                                     if (xhr.status === 200) {
                                             let response = xhr.responseText;
@@ -814,7 +818,7 @@ class PWECalendar extends PWECommonFunctions {
                                             }
                                     }
                                 };
-        
+
                                 xhr.send("action=load_more_calendar&page=" + page);
                             });
                         }
@@ -855,7 +859,7 @@ class PWECalendar extends PWECommonFunctions {
                     .pwe-pagination-loading .loading-bar {
                         width: 0%;
                         height: 100%;
-                        background-color: var(--main2-color); 
+                        background-color: var(--main2-color);
                         position: absolute;
                         left: 50%;
                         transform: translateX(-50%);
@@ -869,11 +873,11 @@ class PWECalendar extends PWECommonFunctions {
                     </div>
                 </div>
 
-                <script> 
+                <script>
                     document.addEventListener("DOMContentLoaded", function () {
                         // Reading the "calendar-page" parameter from the URL at the beginning
                         let urlParams = new URLSearchParams(window.location.search);
-                        let currentCalendarPage = parseInt(urlParams.get("calendar-page")) || 1; 
+                        let currentCalendarPage = parseInt(urlParams.get("calendar-page")) || 1;
 
                         // Set the page if there is a "calendar-page" parameter in the URL
                         loadPosts(currentCalendarPage);
@@ -884,12 +888,12 @@ class PWECalendar extends PWECommonFunctions {
                             let calendarP = parseInt(urlParams.get("calendar-page")) || 1;
                             loadPosts(calendarP); // Loading the appropriate page
                         });
-                        
+
                         // Function to load posts
                         function loadPosts(calendarP) {
                             // Get the loading bar element outside the condition so its accessible throughout the function
                             let loadingBar = document.querySelector(".pwe-pagination-loading");
-                            
+
                             // Show loading bar before sending AJAX request
                             if (loadingBar) {
                                 loadingBar.style.visibility = "visible"; // Display the loading bar
@@ -911,14 +915,14 @@ class PWECalendar extends PWECommonFunctions {
                             let xhr = new XMLHttpRequest();
                             xhr.open("POST", "/wp-admin/admin-ajax.php", true);
                             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            
+
                             xhr.onload = function () {
                                 if (xhr.status === 200) {
                                     let response = xhr.responseText;
                                     if (response.trim()) {
                                         // Update posts
                                         document.querySelector(".pwe-calendar__wrapper").innerHTML = response;
-                                        
+
                                         // Update pagination based on current page
                                         updatePagination(calendarP);
 
@@ -927,7 +931,7 @@ class PWECalendar extends PWECommonFunctions {
 
                                         if (loadingBar) {
                                             setTimeout(function () {
-                                                loadingBar.style.visibility = "hidden"; 
+                                                loadingBar.style.visibility = "hidden";
                                             }, 300);
                                         }
 
@@ -936,7 +940,7 @@ class PWECalendar extends PWECommonFunctions {
                                             setTimeout(function () {
                                                 window.scrollBy(0, -150);
                                             }, 300);
-                                        }  
+                                        }
                                     }
                                 }
                             };
@@ -953,7 +957,7 @@ class PWECalendar extends PWECommonFunctions {
                             let maxPages = 5; // Maximum number of page buttons
                             let startPage = Math.max(1, currentCalendarPage - 1); // Calculate the starting page
                             let endPage = Math.min(totalPages, currentCalendarPage + 1); // Calculate the ending page
-                            
+
                             let paginationHTML = "";
 
                             // Show "Previous" button
@@ -989,12 +993,12 @@ class PWECalendar extends PWECommonFunctions {
                             pagination.querySelectorAll(".page-btn").forEach(btn => {
                                 btn.addEventListener("click", function () {
                                     let calendarP = parseInt(this.getAttribute("data-calendar-page"));
-                                    
+
                                     // Otherwise, update the URL with the selected page
                                     history.replaceState(null, null, "?calendar-page=" + calendarP);
 
                                     // Loading posts for the selected page
-                                    loadPosts(calendarP); 
+                                    loadPosts(calendarP);
                                 });
                             });
 
@@ -1003,7 +1007,7 @@ class PWECalendar extends PWECommonFunctions {
                                 if (currentCalendarPage > 1) {
                                     history.replaceState(null, null, "?calendar-page=" + (currentCalendarPage - 1));
                                     // Loading previous page
-                                    loadPosts(currentCalendarPage - 1); 
+                                    loadPosts(currentCalendarPage - 1);
                                 }
                             });
 
@@ -1037,14 +1041,14 @@ class PWECalendar extends PWECommonFunctions {
                             }
 
                             requestAnimationFrame(animation);
-    
+
                         }
                     });
-                </script>';  
+                </script>';
             }
 
-        endif;  
-        
+        endif;
+
         if ($pwe_calendar_hide_filter != true) {
             $output .= '
             <script>
@@ -1165,7 +1169,7 @@ class PWECalendar extends PWECommonFunctions {
         $output = do_shortcode($output);
         // Zwracamy HTML z dodanym wrapperem
         return '<div id="pweCalendar" class="pwe-calendar">' . $output . '</div>';
-    } 
+    }
 
     public function render_calendar_event_card($event, $shortcodes_active, $lang_pl = true) {
         $locale = get_locale();
@@ -1178,7 +1182,7 @@ class PWECalendar extends PWECommonFunctions {
             $permalink = $event['permalink'];
         } else {
             $domain = '';
-        }  
+        }
 
         $event_type = get_post_meta($post_id, 'pwe_event_type', true);
 
@@ -1278,7 +1282,7 @@ class PWECalendar extends PWECommonFunctions {
                                 <h4>'. $short_desc .'</h4>
                             </div>';
                         };
-                        
+
                         $output .= '
                         <div class="pwe-calendar_strip">
                             <div class="pwe-calendar__button-check"><p>' . self::multi_translation("check_out") . ' ❯</p></div>';
@@ -1287,7 +1291,7 @@ class PWECalendar extends PWECommonFunctions {
                             }
                         $output .= '
                         </div>';
-                        
+
                     $output .= '
                     </div>
                     <div class="pwe-calendar__date">
@@ -1303,8 +1307,8 @@ class PWECalendar extends PWECommonFunctions {
                         <div class="pwe-calendar_statistics">
                             <div class="pwe-calendar__statistics-item">
                                 <div class="pwe-calendar__statistics-icon">
-                                    <img 
-                                        src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_odwiedzajacy.svg" 
+                                    <img
+                                        src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_odwiedzajacy.svg"
                                         alt="' . ($lang_pl ? "Ikona odwiedzający" : "Icon visitors") . '"
                                     >
                                 </div>
@@ -1315,8 +1319,8 @@ class PWECalendar extends PWECommonFunctions {
                             </div>
                             <div class="pwe-calendar__statistics-item">
                                 <div class="pwe-calendar__statistics-icon">
-                                    <img 
-                                        src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_wystawcy.svg" 
+                                    <img
+                                        src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_wystawcy.svg"
                                         alt="' . ($lang_pl ? "Ikona wystawcy" : "Icon exhibitors") . '"
                                     >
                                 </div>
@@ -1327,8 +1331,8 @@ class PWECalendar extends PWECommonFunctions {
                             </div>
                             <div class="pwe-calendar__statistics-item">
                                 <div class="pwe-calendar__statistics-icon">
-                                    <img 
-                                        src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_powierzchnia.svg" 
+                                    <img
+                                        src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_powierzchnia.svg"
                                         alt="' . ($lang_pl ? "Ikona powierzchnia wystawiennicza" : "Icon exhibition area") . '"
                                     >
                                 </div>
@@ -1449,17 +1453,17 @@ class PWECalendar extends PWECommonFunctions {
         try {
             $page = $pwe_calendar_pagination ? (isset($_POST['calendar-page']) ? intval($_POST['calendar-page']) : 1) : (isset($_POST['page']) ? intval($_POST['page']) : 1);
             $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 16;
-        
+
             $args = array(
                 'post_type' => 'event',
-                'posts_per_page' => -1,  
-                'paged' => $page, 
+                'posts_per_page' => -1,
+                'paged' => $page,
                 'post_status' => 'publish',
             );
-        
+
             $query = new WP_Query($args);
             $event_posts = [];
-        
+
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
                     $query->the_post();
@@ -1471,7 +1475,7 @@ class PWECalendar extends PWECommonFunctions {
                     $start_date = !empty($pwe_db_date_start) ? $pwe_db_date_start : "28-01-2050";
                     $end_date = get_post_meta($post_id, 'fair_date_end', true);
                     $end_date = empty($end_date) ? "30-01-2050" : $end_date;
-        
+
                     $event_posts[] = [
                         'post_id' => $post_id,
                         'start_date' => $start_date,
@@ -1483,18 +1487,18 @@ class PWECalendar extends PWECommonFunctions {
                     ];
                 }
             }
-        
+
             wp_reset_postdata();
-        
+
             usort($event_posts, function ($a, $b) {
                 $a_date = DateTime::createFromFormat('d-m-Y', $a['start_date']);
                 $b_date = DateTime::createFromFormat('d-m-Y', $b['start_date']);
                 return $a_date <=> $b_date;
             });
-        
+
             $offset = ($page - 1) * $posts_per_page;
             $paged_posts = array_slice($event_posts, $offset, $posts_per_page);
-        
+
             foreach ($paged_posts as $event) {
                 echo self::render_calendar_event_card($event, true, get_locale() == "pl_PL");
             }
@@ -1508,7 +1512,7 @@ class PWECalendar extends PWECommonFunctions {
         } catch (Throwable $e) {
             echo '<script>console.log("AJAX ERROR: '. $e->getMessage() .');</script>';
         }
-    
+
         wp_die();
     }
 }

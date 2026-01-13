@@ -74,8 +74,12 @@ class PWEConferenceCalendar {
         $results = [];
 
         foreach ($conferences as $conf) {
-            // Separate into domains (after spaces), remove empty strings
-            $all_domains = array_filter(preg_split('/\s+/', trim($conf->conf_site_link)));
+
+            // Remove everything in inline brackets + parentheses
+            $clean_links = preg_replace('/\[[^\]]*\]/', '', $conf->conf_site_link);
+
+            // Divide by decimal point
+            $all_domains = array_map('trim', array_filter(explode(',', $clean_links)));
 
             // List of domains to exclude (lowercase)
             $excluded_domains = ['mr.glasstec.pl', 'patryk.targibiurowe.com'];
@@ -102,7 +106,7 @@ class PWEConferenceCalendar {
                         'conf_date_range' => $conf->conf_date_range,
                         'conf_img_pl' => $conf->conf_img_pl,
                         'conf_img_en' => $conf->conf_img_en,
-                        'conf_site_link' => $conf->conf_site_link,
+                        'conf_site_link' => implode(',', $all_domains),
                         'conf_fair_domain' => $fair->fair_domain,
                         'conf_fair_name_pl' => $fair->fair_name_pl,
                         'conf_fair_name_en' => $fair->fair_name_en,

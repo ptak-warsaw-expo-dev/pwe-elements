@@ -101,21 +101,42 @@
     text-align: center;
 }
 
-.conference_cap__conf-organizer-logo {
+.conference_cap__conf-organizer-wrapper .conference_cap__conf-organizer-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.conference_cap__conf-organizer-wrapper .conference_cap__conf-org-logo {
+.conference_cap__conf-organizer-wrapper.old .conference_cap__conf-org-logo {
     max-width: 260px;
     margin: 0 auto;
 }
 
-.conference_cap__conf-organizer-wrapper .conference_cap__conf-organizer-logo-title {
+.conference_cap__conf-organizer-wrapper.old .conference_cap__conf-organizer-logo-title {
     font-size: 18px;
     font-weight: 600;
     text-align: center;
+}
+
+.conference_cap__conf-organizer-logotypes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.conference_cap__conf-organizer-logotypes .conference_cap__conf-organizer-logo {
+  max-width: 150px;
+  aspect-ratio: 3/2;
+}
+.conference_cap__conf-organizer-logotypes .conference_cap__conf-organizer-logo img {
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  .conference_cap__conf-organizer-logotypes .conference_cap__conf-organizer-logo {
+    max-width: 120px;
+  }
 }
 
 /* ------------------ Default Header ------------------ */

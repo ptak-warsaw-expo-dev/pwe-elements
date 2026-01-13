@@ -51,7 +51,14 @@ class PWEConferenceShortInfoGr3Schedule extends PWEConferenceShortInfo {
             }
 
             $decoded_data = json_decode($conf->conf_data, true);
-            if (!is_array($decoded_data) || !isset($decoded_data[$lang])) continue;
+
+            if (!is_array($decoded_data)) {
+                $decoded_data = [];
+            }
+
+            if (!isset($decoded_data[$lang])) {
+                $decoded_data[$lang] = [];
+            }
 
             // NIE przerywamy, gdy brak dni – tylko logujemy
             $keys = array_diff(array_keys($decoded_data[$lang]), ['main-desc']);

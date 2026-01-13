@@ -419,20 +419,20 @@ class PWEConferenceCapWarsawExpo {
                     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
                     text-align: center;
                 }
-                .conference-cap-warsawexpo__day-tabs button:hover { 
-                    border-color: var(--main2-color); 
+                .conference-cap-warsawexpo__day-tabs button:hover {
+                    border-color: var(--main2-color);
                 }
                 .conference-cap-warsawexpo__day-tabs button.active {
                     background: white;
                     border-color: var(--main2-color);
                     font-weight: 700;
                 }
-                .conference-cap-warsawexpo__day-tabs button.active .conference-cap-warsawexpo__day-name, 
+                .conference-cap-warsawexpo__day-tabs button.active .conference-cap-warsawexpo__day-name,
                 .conference-cap-warsawexpo__day-tabs button.active .conference-cap-warsawexpo__day-date {
                     color: var(--main2-color);
                 }
-                .conference-cap-warsawexpo__day-tabs .conference-cap-warsawexpo__day-name { 
-                    font-size: 0.95rem; display: block; 
+                .conference-cap-warsawexpo__day-tabs .conference-cap-warsawexpo__day-name {
+                    font-size: 0.95rem; display: block;
                 }
                 .conference-cap-warsawexpo__day-tabs .conference-cap-warsawexpo__day-date {
                     font-size: 0.75rem;
@@ -523,7 +523,7 @@ class PWEConferenceCapWarsawExpo {
                 /* kursor podczas przeciągania */
                 .conference-cap-warsawexpo__schedule-container.grabbing{
                     cursor:grabbing;
-                    scroll-behavior:auto; 
+                    scroll-behavior:auto;
                 }
                 /* gdyby w środku były elementy z własnym user‑select */
                 .conference-cap-warsawexpo__schedule-container *{
@@ -532,7 +532,7 @@ class PWEConferenceCapWarsawExpo {
                     user-select:none;
                 }
                 /* szerokość osi (musi się zgadzać z padding-left kontenera) */
-                :root { --axis-w: 56px; }      
+                :root { --axis-w: 56px; }
 
                 .conference-cap-warsawexpo__schedule-container{
                     position: relative;
@@ -570,8 +570,8 @@ class PWEConferenceCapWarsawExpo {
                     background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 199px, #eaeaea 199px, #eaeaea 200px );
                     background-position: 0 16px;
                 }
-                .conference-cap-warsawexpo__hall-column:last-child { 
-                    border-right: none; 
+                .conference-cap-warsawexpo__hall-column:last-child {
+                    border-right: none;
                 }
                 .conference-cap-warsawexpo__hall-header {
                     text-align: center;
@@ -617,9 +617,9 @@ class PWEConferenceCapWarsawExpo {
                     margin: 0 5px;
                     box-sizing: border-box;
                 }
-                .conference-cap-warsawexpo__event:hover { 
+                .conference-cap-warsawexpo__event:hover {
                     transform: translateY(-30px);
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
                 }
                 .conference-cap-warsawexpo__event .title {
                     font-weight: 600;
@@ -660,10 +660,10 @@ class PWEConferenceCapWarsawExpo {
                 }
                 /* TOGGLE */
                 .conference-cap-warsawexpo__day-content {
-                    display: none; 
+                    display: none;
                 }
-                .conference-cap-warsawexpo__day-content.active { 
-                    display: block; 
+                .conference-cap-warsawexpo__day-content.active {
+                    display: block;
                 }
 
                 /* RESPONSIVE */

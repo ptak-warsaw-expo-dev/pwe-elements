@@ -1,6 +1,6 @@
 <?php
 get_header();
-add_filter('the_content', 'wpautop'); 
+add_filter('the_content', 'wpautop');
 
 $months_en = array(
     'stycznia' => 'january',
@@ -24,7 +24,7 @@ function adjustBrightness($hex, $steps) {
     $g = hexdec(substr($hex, 2, 2));
     $b = hexdec(substr($hex, 4, 2));
 
-    // Shift RGB values 
+    // Shift RGB values
     $r = max(0, min(255, $r + $steps));
     $g = max(0, min(255, $g + $steps));
     $b = max(0, min(255, $b + $steps));
@@ -62,7 +62,7 @@ $api_media = json_decode($api_response, true);
 
 $output = '';
 
-$main_logo = 'https://'. $domain .'/doc/logo.webp'; 
+$main_logo = 'https://'. $domain .'/doc/logo.webp';
 $header_bg = 'https://'. $domain .'/doc/background.webp';
 if (!empty($api_media["doc"])) {
     // Logo search
@@ -80,7 +80,7 @@ if (!empty($api_media["doc"])) {
         if (strpos($file['path'], 'doc/background.webp') !== false) {
             $header_bg = $file['path'];
         }
-    }  
+    }
 }
 $main_logo = !empty(get_post_meta($post_id, '_logo_image', true)) ? get_post_meta($post_id, '_logo_image', true) : $main_logo;
 $header_bg = !empty(get_post_meta($post_id, '_header_image', true)) ? get_post_meta($post_id, '_header_image', true) : $header_bg;
@@ -163,7 +163,7 @@ if (!function_exists('format_date_range')) {
     function format_date_range($start_date, $end_date, $months, $locale) {
         $start_parts = explode("-", $start_date);
         $end_parts = explode("-", $end_date);
-        
+
         $start_day = intval($start_parts[0]);
         $end_day = intval($end_parts[0]);
         $start_month = $start_parts[1];
@@ -330,7 +330,7 @@ if ($event_type === "week") {
     foreach ($all_events_json as $event) {
         $exhibitors = CatalogFunctions::logosChecker($event['catalog'], 'PWECatalogCombined', false, null, false);
         $conferences[] = PWECommonFunctions::get_database_fairs_data_adds($event['domain']);
-                
+
         if (is_array($exhibitors)) {
             foreach ($exhibitors as $exhibitor) {
                 $exhibitor['id_katalogu'] = $event['catalog'];
@@ -380,7 +380,7 @@ if ($event_type === "week") {
     $color_2 = !empty(get_post_meta($post_id, 'events_week_color_2', true)) ? get_post_meta($post_id, 'events_week_color_2', true) : 'black';
 
     $events_week_halls_image_url = !empty(get_post_meta($post_id, 'events_week_halls_image_url', true)) ? get_post_meta($post_id, 'events_week_halls_image_url', true) : '';
-    
+
     $header_image_url = !empty(get_post_meta($post_id, '_header_image', true)) ? get_post_meta($post_id, '_header_image', true) : '';
     $header_bg = !empty($header_image_url) ? 'url('. $header_image_url .')' : '#464646';
 
@@ -721,18 +721,18 @@ if ($event_type === "week") {
         }
 
         @media (max-width: 960px) {
-            .single-event__stats { 
-                flex-direction: column; 
-                gap: 18px; 
-                padding: 18px; 
+            .single-event__stats {
+                flex-direction: column;
+                gap: 18px;
+                padding: 18px;
             }
             .single-event__stats-text,
             .single-event__stats-diagram,
             .single-event__stats-numbers {
                 flex: auto;
             }
-            .single-event__stats-diagram { 
-                margin: 0 auto; 
+            .single-event__stats-diagram {
+                margin: 0 auto;
             }
         }
         .single-event__catalog {
@@ -758,10 +758,10 @@ if ($event_type === "week") {
         }
         .single-event__catalog-columns :is(.col-2, .col-4, .col-6) {
             margin-top: 50px;
-        } 
+        }
         .single-event__catalog-columns :is(.col-3, .col-5) {
             margin-top: -50px;
-        }   
+        }
         .single-event__catalog-columns :is(.col-1, .col-7) {
             margin-top: 50px;
         }
@@ -785,7 +785,7 @@ if ($event_type === "week") {
         .flipped .single-event__catalog-flip-card-inner {
             transform: rotateY(180deg);
         }
-        .single-event__catalog-flip-card-front, 
+        .single-event__catalog-flip-card-front,
         .single-event__catalog-flip-card-back {
             position: absolute;
             width: 100%;
@@ -798,7 +798,7 @@ if ($event_type === "week") {
             justify-content: center;
             backface-visibility: hidden;
         }
-        .single-event__catalog-flip-card-front img, 
+        .single-event__catalog-flip-card-front img,
         .single-event__catalog-flip-card-back img {
             max-width: 90%;
             aspect-ratio: 3 / 2;
@@ -837,9 +837,9 @@ if ($event_type === "week") {
             }
             .single-event__catalog-columns :is(.col-2, .col-4, .col-6, .col-3, .col-5, .col-1, .col-7) {
                 margin-top: 0;
-            } 
+            }
         }
-        @media(max-width: 550px) { 
+        @media(max-width: 550px) {
             .single-event__catalog-columns {
                 gap: 10px;
             }
@@ -850,7 +850,7 @@ if ($event_type === "week") {
                 width: 120px;
             }
         }
-        @media(max-width: 400px) { 
+        @media(max-width: 400px) {
             .single-event__catalog-logo-tile {
                 width: 100px;
             }
@@ -986,7 +986,7 @@ if ($event_type === "week") {
         .single-event__fairs-item-logo {
             margin: 5px;
         }
-        @media(max-width: 960px) { 
+        @media(max-width: 960px) {
             .single-event__fairs-item-wrapper {
                 flex-direction: column;
             }
@@ -1002,7 +1002,7 @@ if ($event_type === "week") {
                 aspect-ratio: 21 / 9;
             }
             .single-event__fairs-item-image .single-event__fairs-item-title {
-                display: flex; 
+                display: flex;
                 flex-direction: column;
             }
             .single-event__fairs-item-info .single-event__fairs-item-title {
@@ -1023,7 +1023,7 @@ if ($event_type === "week") {
             .single-event__fairs-item-image {
                 flex-direction: row-reverse;
             }
-        
+
         }
         @media(max-width: 450px) {
             .single-event__fairs-items {
@@ -1048,11 +1048,11 @@ if ($event_type === "week") {
                 font-size: 16px;
             }
         }
-        
-        
+
+
 
         .single-event__exhibitors {
-            display: none;  
+            display: none;
             flex-direction: column;
         }
         .single-event__exhibitors-fairs {
@@ -1189,7 +1189,7 @@ if ($event_type === "week") {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-        
+
 
 
 
@@ -1318,7 +1318,7 @@ if ($event_type === "week") {
                                     <div class="single-event__header-stripe-logo">
                                         <img src="https://' . $domain . '/doc/logo.webp" alt="' . esc_attr($name) . '">
                                     </div>
-                                </a>             
+                                </a>
                             </div>';
                         }
 
@@ -1339,12 +1339,12 @@ if ($event_type === "week") {
                                     <h3>'. get_the_title() .'</h3>
                                 </div>
                                 <div class="single-event__description-date">
-                                    <h4>'. $fair_date .' | <span>Ptak Warsaw Expo</span></h4>  
+                                    <h4>'. $fair_date .' | <span>Ptak Warsaw Expo</span></h4>
                                 </div>
                                 <div class="single-event__description-text">
-                                    <p>'. get_the_content() .'</p>    
+                                    <p>'. get_the_content() .'</p>
                                 </div>
-                            </div> 
+                            </div>
                         </div>';
 
                         $output .= '
@@ -1475,10 +1475,10 @@ if ($event_type === "week") {
                                     <div class="single-event__halls-image">
                                         <img src="'. $events_week_halls_image_url .'" alt="Halls">
                                     </div>
-                                </div> 
+                                </div>
                             </div>';
                         }
-                    
+
                         $output .= '
                         <div id="singleEventFairs" class="single-event__fairs">';
 
@@ -1523,7 +1523,7 @@ if ($event_type === "week") {
 
                                         if (!empty($fair_full_desc)) {
                                             $full_description = strstr($fair_full_desc, '<br>', true);
-                                            
+
                                             // If strstr returned false (i.e. no <br>), we assign the entire content
                                             if ($full_description === false) {
                                                 $full_description = $fair_full_desc;
@@ -1538,11 +1538,11 @@ if ($event_type === "week") {
                                             if($shortcode_edition == '1'){
                                                 $edition = multi_translation("premier_edition");
                                             } else {
-                                                $edition = $shortcode_edition . multi_translation("edition"); 
+                                                $edition = $shortcode_edition . multi_translation("edition");
                                             }
                                         }
 
-                                        $cap_logotypes_data = PWECommonFunctions::get_database_logotypes_data($event['domain']); 
+                                        $cap_logotypes_data = PWECommonFunctions::get_database_logotypes_data($event['domain']);
                                         if (!empty($cap_logotypes_data)) {
 
                                             $saving_paths = function (&$files, $logo_data) {
@@ -1573,11 +1573,11 @@ if ($event_type === "week") {
                                                     $saving_paths($files, $logo_data);
                                                 }
                                             }
-                                            
+
                                         }
 
                                         $output .= '
-                                        <div class="single-event__fairs-item"> 
+                                        <div class="single-event__fairs-item">
                                             <div class="single-event__fairs-item-wrapper">
                                                 <div class="single-event__fairs-item-image">
                                                     <div class="single-event__fairs-item-title">
@@ -1614,9 +1614,9 @@ if ($event_type === "week") {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="single-event__fairs-item-slider">';
-                                            
+
                                                 foreach ($files as $logo) {
                                                     $output .= '<div class="single-event__fairs-item-logo"><img src="'. $logo['url'] .'"></div>';
                                                 }
@@ -1627,13 +1627,13 @@ if ($event_type === "week") {
                                         </div>';
                                     }
 
-                                $output .= ' 
+                                $output .= '
                                 </div>
-                            </div> 
+                            </div>
                         </div>
 
                         <div id="singleEventConferences" class="single-event__conferences">';
-                            
+
                             $atts = [];
                             $domains = [];
 
@@ -1650,7 +1650,7 @@ if ($event_type === "week") {
                             //     $output .= PWEConferenceCapWarsawExpo::output($atts, $lang);
                             // }
 
-                            $output .= '            
+                            $output .= '
                         </div>
 
                     </div>
@@ -1687,7 +1687,7 @@ if ($event_type === "week") {
                                 <div class="single-event__catalog-header-wrapper">
                                     <h3>'. ($lang_pl ? "Katalog wystawców" : "Exhibitor catalog") .'</h3>
                                     <h4>'. get_the_title() .'</h4>
-                                </div> 
+                                </div>
 
                                 <div id="hideAllExhibitors" class="single-event__exhibitors-hideall">
                                     <button>'. ($lang_pl ? "Zamknij katalog" : "Close catalog") .'</button>
@@ -1729,10 +1729,10 @@ if ($event_type === "week") {
                                         <p>'. $event['desc'] .'</p>
                                     </div>';
                                 }
-                                
+
                                 $output .= '
                             </div>';
-                            
+
                             $output .= do_shortcode('[pwe-elements-auto-switch-page-catalog archive_catalog_id="'. $catalog_ids .'"]');
                         } else {
                             $output .= '
@@ -1741,13 +1741,13 @@ if ($event_type === "week") {
                                     <h3>'. ($lang_pl ? "Katalog wystawców" : "Exhibitor catalog") .'</h3>
                                     <h4>'. get_the_title() .'</h4>
                                     <input id="searchInput" placeholder="'. ($lang_pl ? "Wyszukaj wystawców" : "Search for exhibitors") .'"/>
-                                </div> 
+                                </div>
 
                                 <div id="hideAllExhibitors" class="single-event__exhibitors-hideall">
                                     <button>'. ($lang_pl ? "Zamknij katalog" : "Close catalog") .'</button>
                                 </div>
                             </div>
-                            
+
                             <div class="single-event__exhibitors-fairs">';
 
                                 $domains_with_logos = [];
@@ -1780,36 +1780,36 @@ if ($event_type === "week") {
                                         <p>'. $event['desc'] .'</p>
                                     </div>';
                                 }
-                                
+
                                 $output .= '
-                            </div> 
-                            
+                            </div>
+
                             <div class="single-event__exhibitors-catalog">';
 
                                 $already_shown_logos = [];
                                 foreach ($merge_exhibitors as $exhibitor) {
-                                    $logo_url = $exhibitor['exhibitor']['URL_logo_wystawcy']; 
+                                    $logo_url = $exhibitor['exhibitor']['URL_logo_wystawcy'];
                                     if (empty($logo_url)) continue;
 
                                     $is_duplicate = isset($already_shown_logos[$logo_url]);
                                     if (!$is_duplicate) $already_shown_logos[$logo_url] = true;
 
                                     $output .= '
-                                    <div class="single-event__exhibitors-card' . ($is_duplicate ? ' is-duplicate' : ' is-main') . '" 
-                                        data-domain="' . htmlspecialchars($exhibitor['domain']) . '" 
-                                        data-logo="' . htmlspecialchars($logo_url) . '" 
+                                    <div class="single-event__exhibitors-card' . ($is_duplicate ? ' is-duplicate' : ' is-main') . '"
+                                        data-domain="' . htmlspecialchars($exhibitor['domain']) . '"
+                                        data-logo="' . htmlspecialchars($logo_url) . '"
                                         data-name="' . htmlspecialchars($exhibitor['exhibitor']['Nazwa_wystawcy']) . '"
-                                        data-booth="' . htmlspecialchars($exhibitor['exhibitor']['Numer_stoiska']) . '" 
-                                        data-website="' . htmlspecialchars($exhibitor['exhibitor']['www']) . '" 
+                                        data-booth="' . htmlspecialchars($exhibitor['exhibitor']['Numer_stoiska']) . '"
+                                        data-website="' . htmlspecialchars($exhibitor['exhibitor']['www']) . '"
                                         style="display:' . ($is_duplicate ? 'none' : 'block') . ';">
                                         <img src="' . htmlspecialchars($logo_url) . '" alt="' . htmlspecialchars($exhibitor['exhibitor']['Nazwa_wystawcy']) . '">
                                         <p>' . htmlspecialchars($exhibitor['exhibitor']['Numer_stoiska']) . '</p>
                                     </div>';
                                 }
 
-                                $output .= '  
-                            </div>  
-                            
+                                $output .= '
+                            </div>
+
                             <!-- Modal -->
                             <div id="exhibitor-modal" class="single-event__exhibitor-modal">
                                 <div class="single-event__exhibitor-modal-content">
@@ -1830,11 +1830,11 @@ if ($event_type === "week") {
                 </div>
             </div>
         </div>
-        
+
         <script>
             document.addEventListener("DOMContentLoaded", () => {
 
-                // Exhibitors logotypes <-----------------------------------------------------------------< 
+                // Exhibitors logotypes <-----------------------------------------------------------------<
                 const tileCount = 19;
                 const allLogos = '.json_encode($remaining_logos).';
 
@@ -1966,7 +1966,7 @@ if ($event_type === "week") {
                             flipTile(idx);
                         });
                     });
-                    
+
                     setInterval(flipRandomTiles, 2500);
 
                 }
@@ -2008,7 +2008,7 @@ if ($event_type === "week") {
                     });
                 }
 
-                // Slick slider (partners) <-----------------------------------------------------------------< 
+                // Slick slider (partners) <-----------------------------------------------------------------<
                 const fairsItemSlider = document.querySelector(".single-event__fairs-item-slider");
                 if (fairsItemSlider) {
                     jQuery(document).ready(function($) {
@@ -2100,7 +2100,7 @@ if ($event_type === "week") {
                 window.addEventListener("scroll", triggerStatsAnimations);
                 window.addEventListener("load", triggerStatsAnimations);
 
-                // Exhibitors logotypes (all) <-----------------------------------------------------------------< 
+                // Exhibitors logotypes (all) <-----------------------------------------------------------------<
                 const catalogButton = document.querySelector(".single-event__catalog-button");
                 const mainContent = document.querySelector(".single-event__main-content");
                 const exhibitorsCotainer = document.querySelector(".single-event__exhibitors");
@@ -2314,7 +2314,7 @@ if ($event_type === "week") {
         if($shortcode_edition == '1'){
             $edition .= multi_translation("premier_edition");
         } else {
-            $edition .= $shortcode_edition . multi_translation("edition"); 
+            $edition .= $shortcode_edition . multi_translation("edition");
         }
     }
 
@@ -2399,8 +2399,8 @@ if ($event_type === "week") {
             box-shadow: inset -3px -3px 5px 0px #ffffff, 3px 3px 5px 0px #ffffff, 3px 3px 5px 0px #ffffff, inset 3px 3px 5px 0px #cfcfcf;
         }
         .single-event__btn-container {
-            min-width: 300px; 
-            margin-top: 14px;   
+            min-width: 300px;
+            margin-top: 14px;
         }
         .single-event__btn-container a {
             display: flex;
@@ -2594,14 +2594,14 @@ if ($event_type === "week") {
         .single-event__container-partners img {
             aspect-ratio: 4 / 2;
             object-fit: contain;
-        }  
+        }
         @media (max-width: 960px){
             .single-event__container-partners {
                 box-shadow: 0px 0px 10px #d2d2d2 !important;
                 padding: 18px;
                 margin: 10px 0;
             }
-        }  
+        }
         @media (max-width: 650px){
             .single-event__container-partners {
                 flex-direction: column;
@@ -2757,7 +2757,7 @@ if ($event_type === "week") {
             background: white;
         }
         .single-event__conference-logotype {
-            display: flex;   
+            display: flex;
         }
         .single-event__tiles-hover:hover {
             transform: scale(0.98);
@@ -2774,16 +2774,16 @@ if ($event_type === "week") {
             z-index: 2;
             left: 0 !important;
             bottom: 0 !important;
-            box-shadow: inset 2px -2px 3px 0px #ffffff, 
-                        -1px 7px 1px #ffffff, 
-                        -7px 7px 5px #ffffff, 
-                        -7px 1px 1px #ffffff, 
+            box-shadow: inset 2px -2px 3px 0px #ffffff,
+                        -1px 7px 1px #ffffff,
+                        -7px 7px 5px #ffffff,
+                        -7px 1px 1px #ffffff,
                         inset -2px 2px 5px 0px #cfcfcf;
         }
         .single-event__container-tiles a {
             color: black !important;
         }
-        
+
         @media (max-width: 960px){
             .single-event__container-tiles {
                 flex-direction: column;
@@ -2929,7 +2929,7 @@ if ($event_type === "week") {
             flex-wrap: wrap;
             justify-content: space-around;
         }
-        .single-event__footer-ptak-adress, 
+        .single-event__footer-ptak-adress,
         .single-event__footer-ptak-contact {
             display: flex;
             align-items: center;
@@ -2938,12 +2938,12 @@ if ($event_type === "week") {
             width: 100px;
             object-fit: contain;
         }
-        .single-event__footer-ptak-adress div, 
+        .single-event__footer-ptak-adress div,
         .single-event__footer-ptak-contact div {
             display: flex;
             flex-direction: column;
         }
-        .single-event__footer-ptak-adress p, 
+        .single-event__footer-ptak-adress p,
         .single-event__footer-ptak-contact p {
             margin: 0;
         }
@@ -2963,7 +2963,7 @@ if ($event_type === "week") {
      while (have_posts()):
         the_post();
 
-        $cap_logotypes_data = PWECommonFunctions::get_database_logotypes_data($domain); 
+        $cap_logotypes_data = PWECommonFunctions::get_database_logotypes_data($domain);
 
         $output .= '
         <div data-parent="true" class="vc_row limit-width row-container boomapps_vcrow '. $title .'" data-section="21" itemscope itemtype="http://schema.org/Event">
@@ -2984,30 +2984,30 @@ if ($event_type === "week") {
                                 if(!empty(get_post_meta($post_id, 'buy_ticket_link', true))) {
                                     $output .= '
                                     <span class="single-event__btn-container">
-                                        <a 
-                                            target="_blank" 
-                                            rel="noopener" 
-                                            href="'. get_post_meta($post_id, 'buy_ticket_link', true) .'" 
-                                            class="single-event__btn" 
-                                            data-title="'. multi_translation("buy_ticket") .'" 
+                                        <a
+                                            target="_blank"
+                                            rel="noopener"
+                                            href="'. get_post_meta($post_id, 'buy_ticket_link', true) .'"
+                                            class="single-event__btn"
+                                            data-title="'. multi_translation("buy_ticket") .'"
                                             title="'. multi_translation("buy_ticket") .'">
                                             '. multi_translation("buy_ticket") .'
                                         </a>
                                     </span>';
                                 } else if(!empty(get_post_meta($post_id, 'visitor_registration_link', true))) {
                                     $output .= '
-                                    <span 
-                                        itemprop="offers" 
-                                        itemscope 
-                                        itemtype="http://schema.org/Offer" 
+                                    <span
+                                        itemprop="offers"
+                                        itemscope
+                                        itemtype="http://schema.org/Offer"
                                         class="single-event__btn-container">
-                                        <a 
-                                            itemprop="url" 
-                                            target="_blank" 
-                                            rel="noopener" 
-                                            href="'. get_post_meta($post_id, 'visitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" 
-                                            class="single-event__btn" 
-                                            data-title="'. multi_translation("collect_invitation") .'" 
+                                        <a
+                                            itemprop="url"
+                                            target="_blank"
+                                            rel="noopener"
+                                            href="'. get_post_meta($post_id, 'visitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal"
+                                            class="single-event__btn"
+                                            data-title="'. multi_translation("collect_invitation") .'"
                                             title="'. multi_translation("collect_invitation") .'">
                                             '. multi_translation("collect_invitation") .'
                                         </a>
@@ -3016,12 +3016,12 @@ if ($event_type === "week") {
                                 if(!empty(get_post_meta($post_id, 'exhibitor_registration_link', true))) {
                                     $output .= '
                                     <span class="single-event__btn-container single-event-btn">
-                                        <a 
-                                            target="_blank" 
-                                            rel="noopener" 
-                                            href="'. get_post_meta($post_id, 'exhibitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" 
-                                            class="single-event__btn single-event__btn-dark" 
-                                            data-title="'. multi_translation("become_exhibitor") .'" 
+                                        <a
+                                            target="_blank"
+                                            rel="noopener"
+                                            href="'. get_post_meta($post_id, 'exhibitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal"
+                                            class="single-event__btn single-event__btn-dark"
+                                            data-title="'. multi_translation("become_exhibitor") .'"
                                             title="'. multi_translation("become_exhibitor") .'">
                                             '. multi_translation("become_exhibitor") .'
                                         </a>
@@ -3029,7 +3029,7 @@ if ($event_type === "week") {
                                 }
                                 $output .= '
                             </div>
-                        </div>    
+                        </div>
                     </div>';
 
                     // Description section mobile
@@ -3045,30 +3045,30 @@ if ($event_type === "week") {
                                 if(!empty(get_post_meta($post_id, 'buy_ticket_link', true))) {
                                     $output .= '
                                     <span class="single-event__btn-container">
-                                        <a 
-                                            target="_blank" 
-                                            rel="noopener" 
-                                            href="'. get_post_meta($post_id, 'buy_ticket_link', true) .'" 
-                                            class="single-event__btn" 
-                                            data-title="'. multi_translation("buy_ticket") .'" 
+                                        <a
+                                            target="_blank"
+                                            rel="noopener"
+                                            href="'. get_post_meta($post_id, 'buy_ticket_link', true) .'"
+                                            class="single-event__btn"
+                                            data-title="'. multi_translation("buy_ticket") .'"
                                             title="'. multi_translation("buy_ticket") .'">
                                             '. multi_translation("buy_ticket") .'
                                         </a>
                                     </span>';
                                 } else if(!empty(get_post_meta($post_id, 'visitor_registration_link', true))) {
                                     $output .= '
-                                    <span 
-                                        itemprop="offers" 
-                                        itemscope 
-                                        itemtype="http://schema.org/Offer" 
-                                        class="single-event__btn-container"> 
-                                        <a 
-                                            itemprop="url" 
-                                            target="_blank" 
-                                            rel="noopener" 
-                                            href="'. get_post_meta($post_id, 'visitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" 
-                                            class="single-event__btn" 
-                                            data-title="'. multi_translation("collect_invitation") .'" 
+                                    <span
+                                        itemprop="offers"
+                                        itemscope
+                                        itemtype="http://schema.org/Offer"
+                                        class="single-event__btn-container">
+                                        <a
+                                            itemprop="url"
+                                            target="_blank"
+                                            rel="noopener"
+                                            href="'. get_post_meta($post_id, 'visitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal"
+                                            class="single-event__btn"
+                                            data-title="'. multi_translation("collect_invitation") .'"
                                             title="'. multi_translation("collect_invitation") .'">
                                             '. multi_translation("collect_invitation") .'
                                         </a>
@@ -3077,12 +3077,12 @@ if ($event_type === "week") {
                                 if(!empty(get_post_meta($post_id, 'exhibitor_registration_link', true))) {
                                     $output .= '
                                     <span class="single-event__btn-container single-event-btn">
-                                        <a 
-                                            target="_blank" 
-                                            rel="noopener" 
-                                            href="'. get_post_meta($post_id, 'exhibitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" 
-                                            class="single-event__btn single-event__btn-dark" 
-                                            data-title="'. multi_translation("become_exhibitor") .'" 
+                                        <a
+                                            target="_blank"
+                                            rel="noopener"
+                                            href="'. get_post_meta($post_id, 'exhibitor_registration_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal"
+                                            class="single-event__btn single-event__btn-dark"
+                                            data-title="'. multi_translation("become_exhibitor") .'"
                                             title="'. multi_translation("become_exhibitor") .'">
                                             '. multi_translation("become_exhibitor") .'
                                         </a>
@@ -3091,9 +3091,9 @@ if ($event_type === "week") {
                                 $output .= '
                             </div>
                         </div>
-                    </div>'; 
+                    </div>';
 
-                    // Partners section                    
+                    // Partners section
                     if (!empty($cap_logotypes_data)) {
 
                         $saving_paths = function (&$files, $logo_data) {
@@ -3145,23 +3145,23 @@ if ($event_type === "week") {
                                                 <div class="single-event__partners-logo">
                                                     <img src="'. $logo["url"] .'" alt="Partner\'s logo"/>
                                                 </div>
-                                            </a>'; 
+                                            </a>';
                                         } else {
                                             $output .= '
                                             <div class="single-event__partners-logo">
                                                 <img src="'. $logo["url"] .'" alt="Partner\'s logo"/>
-                                            </div>'; 
+                                            </div>';
                                         }
-                                    } 
+                                    }
                                 $output .= '
                                 </div>
                             </div>';
 
                         }
-                        
+
                     } else if (!empty(get_post_meta($post_id, 'partners_gallery', true))) {
                         $seperated_logotypes = get_post_meta($post_id, 'partners_gallery', true);
-                        
+
                         $output .= '
                         <div class="single-event__container-partners">
                             <div class="single-event__partners-title">
@@ -3180,7 +3180,7 @@ if ($event_type === "week") {
                         </div>';
                     }
 
-                    // Description section 
+                    // Description section
                     $output .= '
                     <div class="single-event__container-desc desktop">
                         <div class="single-event__desc-column title">
@@ -3191,13 +3191,13 @@ if ($event_type === "week") {
                             if(!empty(get_post_meta($post_id, 'web_page_link', true))) {
                                 $output .= '
                                 <span class="single-event__btn-container webpage">
-                                    <a 
-                                        target="_blank" 
-                                        rel="noopener" 
-                                        itemprop="url" 
-                                        href="'. get_post_meta($post_id, 'web_page_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" 
-                                        class="single-event__btn" 
-                                        data-title="'. multi_translation("website") .'" 
+                                    <a
+                                        target="_blank"
+                                        rel="noopener"
+                                        itemprop="url"
+                                        href="'. get_post_meta($post_id, 'web_page_link', true) .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal"
+                                        class="single-event__btn"
+                                        data-title="'. multi_translation("website") .'"
                                         title="'. multi_translation("website") .'">
                                         '. multi_translation("website") .' <span class="btn-angle-right">&#8250;</span>
                                     </a>
@@ -3206,7 +3206,7 @@ if ($event_type === "week") {
                         $output .= '
                         </div>
                         <div class="single-event__desc-column description" itemprop="description">'.  $fair_full_desc .'</div>
-                    </div>'; 
+                    </div>';
 
                     // Tiles section
                     if ($organizer === "warsaw") {
@@ -3214,7 +3214,7 @@ if ($event_type === "week") {
                         <div class="single-event__container-tiles">
                             <div class="single-event__tiles-left-container single-event__tiles-item single-event__tiles-hover">
                                 <a href="https://'. $domain . ($lang_pl ? "/" : "/en/") .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" target="_blank">
-                                    <span class="single-event__single-event__stats-caption">'. multi_translation("discover_trade_fair") .'</span>   
+                                    <span class="single-event__single-event__stats-caption">'. multi_translation("discover_trade_fair") .'</span>
                                 </a>
                             </div>
                             <div class="single-event__tiles-right-container">
@@ -3242,9 +3242,9 @@ if ($event_type === "week") {
                                                 <span class="single-event__statistics-name">'. multi_translation("countries") .'</span>
                                             </div>';
                                         }
-                                    $output .= '    
+                                    $output .= '
                                     </div>
-                                    <span class="single-event__single-event__stats-caption">'. ($shortcode_edition == '1' ? multi_translation("estimates") : multi_translation("statistics")) .'</span>  
+                                    <span class="single-event__single-event__stats-caption">'. ($shortcode_edition == '1' ? multi_translation("estimates") : multi_translation("statistics")) .'</span>
                                 </div>
 
                                 <div class="single-event__tiles-right-bottom">';
@@ -3253,7 +3253,7 @@ if ($event_type === "week") {
                                         $output .= '
                                         <div class="single-event__tiles-right-bottom-attractions single-event__tiles-item single-event__tiles-hover">
                                             <a href="https://'. $domain . multi_translation("attractions_url") .'?utm_source=warsawexpo&utm_medium=kalendarz&utm_campaign=refferal" target="_blank">
-                                                <span class="single-event__single-event__stats-caption">'. multi_translation("attractions") .'</span>   
+                                                <span class="single-event__single-event__stats-caption">'. multi_translation("attractions") .'</span>
                                             </a>
                                         </div>';
                                     } else {
@@ -3263,7 +3263,7 @@ if ($event_type === "week") {
                                                 <div class="single-event__conference-logotype">
                                                     <img src="https://'. $domain .'/doc/kongres.webp"/ alt="Congress Logo">
                                                 </div>
-                                                <span class="single-event__single-event__stats-caption">'. multi_translation("conference") .'</span>  
+                                                <span class="single-event__single-event__stats-caption">'. multi_translation("conference") .'</span>
                                             </a>
                                         </div>';
 
@@ -3278,30 +3278,30 @@ if ($event_type === "week") {
                                                         // Matching name in format "Partner Targów - Partner of the Fair"
                                                         if (preg_match('/^(.*) - (.*)$/', $filename_conferences, $matches)) {
                                                             // Polish name before " - "
-                                                            $title_pl = trim($matches[1]); 
+                                                            $title_pl = trim($matches[1]);
                                                             // English name after " - "
-                                                            $title_en = trim($matches[2]); 
+                                                            $title_en = trim($matches[2]);
                                                         } else {
                                                             // If no match found, use full name
-                                                            $title_pl = $filename_conferences; 
+                                                            $title_pl = $filename_conferences;
                                                             $title_en = $filename_conferences;
                                                         }
 
                                                         $output .= '
                                                         <div class="single-event__conferences-logo">
                                                             <img src="'. $logo["path"] .'" alt="'. ($lang_pl ? $title_pl : $title_en) .'"/>
-                                                        </div>'; 
-                                                    } 
+                                                        </div>';
+                                                    }
                                                 $output .= '
                                                 </div>
-                                                <span class="single-event__single-event__stats-caption"></span>  
+                                                <span class="single-event__single-event__stats-caption"></span>
                                             </div>';
                                         }
-                                    }     
+                                    }
                                     $output .= '
                                 </div>
 
-                            </div> 
+                            </div>
                         </div>';
                     }
 
@@ -3349,52 +3349,52 @@ if ($event_type === "week") {
                             <div class="single-event__events-logotypes single-event__logotypes-slider">';
                                 $non_warsaw = [];
                                 $warsaw_logos = [];
-                                
+
                                 // Division of logos into two groups
                                 foreach ($europe_events_logotypes as $logo) {
                                     // Get file alt
                                     $filename_events = $logo["alt"];
-                                    
+
                                     // Check if name contains "warsaw" or "warsawa" (case-insensitive)
                                     if (stripos($filename_events, "warsaw") !== false || stripos($filename_events, "warszawa") !== false) {
                                         $warsaw_logos[] = $logo;
                                     } else {
                                         $non_warsaw[] = $logo;
                                     }
-                                } 
-                                
+                                }
+
                                 // Merge the boards – the ones with warsaw at the end
                                 $sorted_logos = array_merge($non_warsaw, $warsaw_logos);
-                                
+
                                 foreach ($sorted_logos as $logo) {
                                     // Get file name without extension
                                     $filename_events = $logo["alt"];
-                                
+
                                     // Matching name in format "Europe/IPM (Essen, Germany) - IPM (Essen, Germany)"
                                     if (preg_match('/^(.*) - (.*)$/', $filename_events, $matches)) {
                                         // Polish name before " - "
-                                        $title_pl = trim($matches[1]); 
+                                        $title_pl = trim($matches[1]);
                                         // English name after " - "
-                                        $title_en = trim($matches[2]); 
+                                        $title_en = trim($matches[2]);
                                     } else {
                                         // If no match, use full name
-                                        $title_pl = $filename_events; 
+                                        $title_pl = $filename_events;
                                         $title_en = $filename_events;
                                     }
-                                
+
                                     $formatted_title_pl = format_title($title_pl ?? '');
                                     $formatted_title_en = format_title($title_en ?? '');
-                                                                                            
+
                                     $output .= '
                                     <div class="single-event__events-logo">
                                         <img src="'. $logo["url"] .'" alt="'. (PWECommonFunctions::lang_pl() ? $title_pl : $title_en) .'"/>
                                         <div class="single-event__events-logo-title"><span>'. (PWECommonFunctions::lang_pl() ? $formatted_title_pl : $formatted_title_en) .'</span></div>
-                                    </div>'; 
-                                } 
+                                    </div>';
+                                }
                             $output .= '
                             </div>
                         </div>';
-                    
+
                     } else if (!empty($api_media["wydarzenia"])) {
 
                         $api_media_events = $api_media["wydarzenia"];
@@ -3439,12 +3439,12 @@ if ($event_type === "week") {
                             <div class="single-event__events-logotypes single-event__logotypes-slider">';
                                 $non_warsaw = [];
                                 $warsaw_logos = [];
-                                
+
                                 // Division of logos into two groups
                                 foreach ($events_logotypes as $logo) {
                                     // Get file name without extension
                                     $filename_events = basename($logo["path"], ".webp");
-                                    
+
                                     // Check if name contains "warsaw" or "warsawa" (case-insensitive)
                                     if (stripos($filename_events, "warsaw") !== false || stripos($filename_events, "warszawa") !== false) {
                                         $warsaw_logos[] = $logo;
@@ -3452,34 +3452,34 @@ if ($event_type === "week") {
                                         $non_warsaw[] = $logo;
                                     }
                                 }
-                                
+
                                 // Merge the boards – the ones with warsaw at the end
                                 $sorted_logos = array_merge($non_warsaw, $warsaw_logos);
-                                
+
                                 foreach ($sorted_logos as $logo) {
                                     // Get file name without extension
                                     $filename_events = basename($logo["path"], ".webp");
-                                
+
                                     // Matching name in format "Europe/IPM (Essen, Germany) - IPM (Essen, Germany)"
                                     if (preg_match('/^(.*) - (.*)$/', $filename_events, $matches)) {
                                         // Polish name before " - "
-                                        $title_pl = trim($matches[1]); 
+                                        $title_pl = trim($matches[1]);
                                         // English name after " - "
-                                        $title_en = trim($matches[2]); 
+                                        $title_en = trim($matches[2]);
                                     } else {
                                         // If no match, use full name
-                                        $title_pl = $filename_events; 
+                                        $title_pl = $filename_events;
                                         $title_en = $filename_events;
                                     }
-                                
+
                                     $formatted_title_pl = format_title($title_pl ?? '');
                                     $formatted_title_en = format_title($title_en ?? '');
-                                                                                            
+
                                     $output .= '
                                     <div class="single-event__events-logo">
                                         <img src="'. $logo["path"] .'" alt="'. ($lang_pl ? $title_pl : $title_en) .'"/>
                                         <div class="single-event__events-logo-title"><span>'. ($lang_pl ? $formatted_title_pl : $formatted_title_en) .'</span></div>
-                                    </div>'; 
+                                    </div>';
                                 }
                             $output .= '
                             </div>
@@ -3546,7 +3546,7 @@ if ($event_type === "week") {
                 </div>
             </div>
         </div>
-        
+
         <script>
             jQuery(function ($) {
                 const slickSliders = $(".single-event__logotypes-slider");
@@ -3648,13 +3648,13 @@ if ($event_type === "week") {
                 setEqualHeight();
 
                 function animateCount(element) {
-                    const targetValue = parseInt(element.getAttribute("data-count"), 10); 
-                    const duration = 3000; 
+                    const targetValue = parseInt(element.getAttribute("data-count"), 10);
+                    const duration = 3000;
 
                     const startTime = performance.now();
                     const update = (currentTime) => {
                         const elapsedTime = currentTime - startTime;
-                        const progress = Math.min(elapsedTime / duration, 1); 
+                        const progress = Math.min(elapsedTime / duration, 1);
                         const currentValue = Math.floor(progress * targetValue);
 
                         element.textContent = currentValue;

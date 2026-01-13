@@ -20,7 +20,6 @@ trait PWEConferenceShortInfoFunctions {
             'mr.glasstec.pll'         => ['conference-short-info-solar.php', 'PWEConferenceShortInfoSolar'],
             'remadays.com'            => ['conference-short-info-rema.php', 'PWEConferenceShortInfoRema'],
             'warsawhvacexpo.com'      => ['conference-short-info-hvac.php', 'PWEConferenceShortInfoHvac'],
-            'warsawpack.pl'           => ['conference-short-info-pack.php', 'PWEConferenceShortInfoPack'],
             'industryweek.pl'         => ['conference-short-info-pack.php', 'PWEConferenceShortInfoPack'],
         ];
 
