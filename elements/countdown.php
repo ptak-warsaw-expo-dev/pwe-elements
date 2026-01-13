@@ -396,7 +396,7 @@ class PWElementMainCountdown extends PWElements {
             'A' => ['A8'],
             'B' => ['B8', 'B16'],
             'C' => ['C8', 'C16'],
-            'D' => ['D8', 'D16'],
+            'D' => ['D8', 'D11'],
             'E' => ['E1', 'E6'],
             'F' => ['F1', 'F7'],
             'A1' => ['A8'], 'A2' => ['A8'],

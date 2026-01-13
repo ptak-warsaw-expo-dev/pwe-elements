@@ -386,7 +386,7 @@ class PWElementFooter extends PWElements {
                     dropMenu.appendChild(becomeAnAgentMenuItem);
                 }';
 
-                if (!empty(do_shortcode('catalog_id')) && get_locale() == "pl_PL") {
+                if (!empty(do_shortcode('[trade_fair_catalog_id]')) && get_locale() == "pl_PL") {
                     $output .= '
                     // --------------------------------------------
 

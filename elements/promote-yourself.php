@@ -12,7 +12,7 @@ class PWElementPromot extends PWElements {
     public function __construct() {
         parent::__construct();
     }
-    
+
     /**
      * Static method to initialize Visual Composer elements.
      * Returns an array of parameters for the Visual Composer element.
@@ -50,8 +50,8 @@ class PWElementPromot extends PWElements {
     /**
      * Static method to generate the HTML output for the PWE Element.
     * Returns the HTML output as a string.
-    * 
-    * @return string @output 
+    *
+    * @return string @output
     */
     public static function output($atts) {
         $show_banners = isset($atts['show_banners']) ? $atts['show_banners'] : false;
@@ -59,11 +59,11 @@ class PWElementPromot extends PWElements {
         $btn_text_color = self::findColor($atts['btn_text_color_manual_hidden'], $atts['btn_text_color'], 'white') . '!important';
         $btn_color = self::findColor($atts['btn_color_manual_hidden'], $atts['btn_color'], self::$fair_colors['Accent']) . '!important';
         $btn_border = self::findColor($atts['btn_color_manual_hidden'], $atts['btn_color'], self::$fair_colors['Accent']) . '!important';
-        
+
         $darker_btn_color = self::adjustBrightness($btn_color, -20);
-        
+
         $logo_href = '';
-        $logo_color = self::findBestLogo($atts["logo_color"]); 
+        $logo_color = self::findBestLogo($atts["logo_color"]);
         $logo_color_array = explode('"', $logo_color);
         foreach($logo_color_array as $href) {
             if(strpos(strtolower($href), '/doc/') !== false) {
@@ -71,8 +71,8 @@ class PWElementPromot extends PWElements {
             }
         }
 
-        $pwe_groups_data = PWECommonFunctions::get_database_groups_data(); 
-        $pwe_groups_contacts_data = PWECommonFunctions::get_database_groups_contacts_data();  
+        $pwe_groups_data = PWECommonFunctions::get_database_groups_data();
+        $pwe_groups_contacts_data = PWECommonFunctions::get_database_groups_contacts_data();
 
         // Get domain address
         $current_domain = $_SERVER['HTTP_HOST'];
@@ -86,7 +86,7 @@ class PWElementPromot extends PWElements {
                             $marketing_contact_data = json_decode($group_contact->groups_data);
                             $marketing_email = trim($marketing_contact_data->email);
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -94,8 +94,8 @@ class PWElementPromot extends PWElements {
         $output = '';
 
         $promoteImage = self::findAllImages('/doc/galeria', 1);
-        
-        $output .= 
+
+        $output .=
             '<style>
                 .pwe-image-container {
                     position: relative;
@@ -175,7 +175,7 @@ class PWElementPromot extends PWElements {
                     max-width: 860px;
                     margin: auto;
                 }
-                .pwe-content-promote-item__help h2 { 
+                .pwe-content-promote-item__help h2 {
                     margin-top: 0;
                     color:' . $text_color . ';
                 }
@@ -218,8 +218,8 @@ class PWElementPromot extends PWElements {
                     justify-content: space-around;
                     gap: 12px;
                 }
-                .pwe-content-promote-tile-info h5, 
-                .pwe-content-promote-tile-info ul, 
+                .pwe-content-promote-tile-info h5,
+                .pwe-content-promote-tile-info ul,
                 .pwe-content-promote-tile-info p {
                     margin: 0;
                 }
@@ -437,7 +437,7 @@ class PWElementPromot extends PWElements {
 
                 if ($show_banners != 'true') {
                     $promoteBaners = self::findAllImages('/doc/wypromuj', 4);
-                    
+
                     foreach($promoteBaners as $baner){
                         switch(true){
                             case(strpos($baner, '800_pl') != false):
@@ -455,13 +455,13 @@ class PWElementPromot extends PWElements {
                         }
                     }
 
-                    $pwe_groups_data = PWECommonFunctions::get_database_groups_data(); 
+                    $pwe_groups_data = PWECommonFunctions::get_database_groups_data();
                     $current_domain = $_SERVER['HTTP_HOST'];
 
                     if (!empty($pwe_groups_data)) {
                         foreach ($pwe_groups_data as $group) {
                             if ($current_domain == $group->fair_domain) {
-                                $fair_group = $group->fair_group;    
+                                $fair_group = $group->fair_group;
                             }
                         }
                     }
@@ -524,7 +524,7 @@ class PWElementPromot extends PWElements {
                             </span>
                         </div>';
                 }
-                
+
                 $output .= '
                     <div class="pwe-column pwe-content-promote-element">
                         <h3>'.
@@ -590,7 +590,7 @@ class PWElementPromot extends PWElements {
                                 <<<EN
                                     If you need more, write to us and we will try to help! Only by working together can we be successful.
                                 EN
-                            )                           
+                            )
                         .'</h2>
                         <div class="text-centered link-text-underline">';
                                 if ($fair_group === "gr3") {
@@ -598,7 +598,7 @@ class PWElementPromot extends PWElements {
                                 } else {
                                     $output .= '<a class="h2 mobile-kons-email" href="mailto:konsultantmarketingowy@warsawexpo.eu"><span style="display:inline-block;">konsultantmarketingowy</span><span style="display:inline-block;">@warsawexpo.eu</span></a>';
                                 }
-                        $output .= '    
+                        $output .= '
                         </div>
                     </div>
                 </div>';

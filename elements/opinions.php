@@ -309,6 +309,12 @@ class PWElementOpinions extends PWElements {
                     position: relative;
                     padding: 18px;
                 }
+                .pwelement_'. self::$rnd_id .' .pwe-opinions__item :is(p, h4) {
+                    -webkit-user-select: text !important;
+                    -moz-user-select: text !important;
+                    -ms-user-select: text !important;
+                    user-select: text !important;
+                }
                 .pwelement_'. self::$rnd_id .' .pwe-opinions__item-opinion-text p {
                     font-size: 14px;
                     line-height: 1.3;
@@ -1250,6 +1256,12 @@ class PWElementOpinions extends PWElements {
                     position: relative;
                     padding: 18px;
                     margin: 12px;
+                }
+                .pwelement_'. self::$rnd_id .' .pwe-opinions__item :is(p, h4) {
+                    -webkit-user-select: text !important;
+                    -moz-user-select: text !important;
+                    -ms-user-select: text !important;
+                    user-select: text !important;
                 }
                 .pwelement_'. self::$rnd_id .' .pwe-opinions__item-opinion-text p {
                     font-size: 14px;

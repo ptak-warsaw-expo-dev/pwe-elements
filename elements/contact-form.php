@@ -50,6 +50,25 @@ class PWElementContactForm extends PWElements {
         return $element_output;
     }
 
+    public static function multi_translation($key) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../translations/elements/contact.json';
+
+        // JSON file with translation
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        // Is the language in translations
+        if (isset($translations_data[$locale])) {
+            $translations_map = $translations_data[$locale];
+        } else {
+            // By default use English translation if no translation for current language
+            $translations_map = $translations_data['en_US'];
+        }
+
+        // Return translation based on key
+        return isset($translations_map[$key]) ? $translations_map[$key] : $key;
+    }
+
     /**
      * Static method to generate the HTML output for the PWE Element.
      * Returns the HTML output as a string.
@@ -67,15 +86,12 @@ class PWElementContactForm extends PWElements {
 
         extract( shortcode_atts( array(
             'contact_form_id' => '',
-            'contact_button_text' => '', 
+            'contact_button_text' => '',
         ), $atts ));
 
-        if(get_locale() == 'pl_PL') {
-            $contact_button_text = empty($contact_button_text) ? 'WYŚLIJ WIADOMOŚĆ' : $contact_button_text;
-        } else {
-            $contact_button_text = empty($contact_button_text) ? 'SEND MESSAGE' : $contact_button_text;
-        }
-        
+        $contact_button_text = empty($contact_button_text) ? self::multi_translation("send_message") : $contact_button_text;
+
+
         $output .= '
         <style>
             .pwelement_'. self::$rnd_id .' .pwe-contact {
@@ -92,8 +108,8 @@ class PWElementContactForm extends PWElements {
                 box-shadow: none !important;
                 border-radius: 8px;
             }
-            .pwelement_'. self::$rnd_id .' .gform_fields, 
-            .pwelement_'. self::$rnd_id .' .gfield, .gfield_radio, 
+            .pwelement_'. self::$rnd_id .' .gform_fields,
+            .pwelement_'. self::$rnd_id .' .gfield, .gfield_radio,
             .pwelement_'. self::$rnd_id .' .pwe-contact h2 {
                 padding: 0 !important;
             }
@@ -129,7 +145,7 @@ class PWElementContactForm extends PWElements {
             }
             .pwelement_'. self::$rnd_id .' .pwe-btn:hover {
                 background-color: #eeeeee;
-                border: 2px solid #eeeeee; 
+                border: 2px solid #eeeeee;
             }
         </style>';
 
@@ -137,8 +153,8 @@ class PWElementContactForm extends PWElements {
         <div id="pweContact" class="pwe-contact">
             <div class="pwe-contact__wrapper">
                 <div class="pwe-contact__text">
-                    <h2>'. self::languageChecker('Napisz do nas', 'Write to us') .'</h2>
-                    <p>'. self::languageChecker('odpiszemy lub oddzwonimy,<br>jeżeli zostawisz nam numer telefonu.', 'we will reply or call you back<br>if you leave us your telephone number.') .'</p>
+                    <h2>'.self::multi_translation("write_to_us").'</h2>
+                    <p>'. self::multi_translation("reply"). '</p>
                 </div>
                 <div class="pwe-contact__form">
                     [gravityform id="'. $contact_form_id .'" title="false" description="false" ajax="false"]
@@ -170,13 +186,57 @@ class PWElementContactForm extends PWElements {
             }
             add_filter('gform_submit_button', 'custom_gform_submit_button', 10, 2);
         }
+        if(get_locale() != "pl_PL" && get_locale() != "en_US" ){
 
-        $output .= '
-        <script>
+            $output .= '
+            <script>
+                function translateElement(element, newText) {
+                    if (!element) return;
+                    element.textContent = newText;
+                }
 
-        
+                const nameInput = document.querySelector(\'input[placeholder="First name and last name"]\');
+                if (nameInput) {
+                    nameInput.placeholder = "'. self::multi_translation("first_name"). '";
+                }
 
-        </script>';
+                const helpTextarea = document.querySelector(\'textarea[placeholder="How can we help you?"]\');
+                if (helpTextarea) {
+                    helpTextarea.placeholder = "'. self::multi_translation("help_you"). '";
+                }
+
+                const departmentLabel = Array.from(document.querySelectorAll("label"))
+                    .find(label => label.textContent.trim().startsWith("Department"));
+
+                if (departmentLabel) {
+                    translateElement(departmentLabel, "'. self::multi_translation("department"). '");
+                }
+
+                const departmentField = departmentLabel?.closest(".gfield");
+                if (departmentField) {
+                    const radioLabels = departmentField.querySelectorAll("label.gform-field-label--type-inline");
+
+                    radioLabels.forEach(label => {
+                        const text = label.textContent.trim();
+
+                        switch (text) {
+                            case "Exhibitors":
+                                label.textContent = "Aussteller";
+                                break;
+                            case "Visitors":
+                                label.textContent = "Besucher";
+                                break;
+                            case "Technical Department":
+                                label.textContent = "Technische Abteilung";
+                                break;
+                            case "Marketing":
+                                label.textContent = "Marketing";
+                                break;
+                        }
+                    });
+                }
+            </script>';
+        };
 
         return $output;
 

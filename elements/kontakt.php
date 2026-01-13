@@ -165,7 +165,7 @@ class PWElementContact extends PWElements {
         <div id="contact" class="pwe-container-contact">
 
             <div class="pwe-heading-text main-pwe-heading-text">
-                <h4>'.self::languageChecker('Obsługa klienta', 'Customer service').'</h4>
+                <h4>'.PWElementContactForm::multi_translation("customer_service").'</h4>
             </div>
 
             <div class="pwe-container-contact-items">
@@ -174,7 +174,7 @@ class PWElementContact extends PWElements {
                     <img src="/wp-content/plugins/pwe-media/media/Phone.jpg" alt="grafika słuchawka">
                     <div class="uncode_text_column">
                         <p>
-                            <b>'. self::languageChecker('Biuro obsługi', 'Customer Service Office') .'</b>';
+                            <b>'.PWElementContactForm::multi_translation("customer_service_office").'</b>';
                             if (!empty($service_phone)) {
                                 $output .= '<a href="tel:'. $service_phone .'">'. $service_phone .'</a>';
                             }
@@ -192,7 +192,7 @@ class PWElementContact extends PWElements {
                         <img src="/wp-content/plugins/pwe-media/media/WystawcyZ.jpg" alt="grafika wystawcy">
                         <div class="uncode_text_column">
                             <p>
-                                <b>'.self::languageChecker('Obsługa techniczna wystawców<br>', 'Technical support for exhibitors<br>').'</b>
+                                <b>'.PWElementContactForm::multi_translation("technical_support").'</b>
                                 <a href="mailto:'. str_replace("@warsawexpo.eu", "", $consultant_email) .'@warsawexpo.eu">
                                     <span>'. str_replace("@warsawexpo.eu", "", $consultant_email) .'</span><span>@warsawexpo.eu</span>
                                 </a>
@@ -205,7 +205,7 @@ class PWElementContact extends PWElements {
             </div>
 
             <div class="pwe-heading-text main-pwe-heading-text" style="margin-top: 36px;">
-                <h4>'.self::languageChecker('Media i marketing', 'Media and marketing').'</h4>
+                <h4>'.PWElementContactForm::multi_translation("media_marketing").'</h4>
             </div>
 
             <div class="pwe-container-contact-items">';
@@ -216,7 +216,7 @@ class PWElementContact extends PWElements {
                         <img src="/wp-content/plugins/pwe-media/media/Marketing.jpg" alt="grafika technicy">
                         <div class="uncode_text_column" style="overflow-wrap: anywhere;">
                             <p>
-                                <b>'. self::languageChecker('Obsługa marketingowa i media', 'Marketing and media services').'</b>
+                                <b>'.PWElementContactForm::multi_translation("media_marketing_service").'</b>
                                 <a href="mailto:'. str_replace("@warsawexpo.eu", "", $marketing_email) .'@warsawexpo.eu">
                                     <span>'. str_replace("@warsawexpo.eu", "", $marketing_email) .'</span><span>@warsawexpo.eu</span>
                                 </a>
