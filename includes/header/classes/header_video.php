@@ -159,7 +159,7 @@ $output .= '
         width: 100%;
         height: 100%;
         overflow: hidden;
-        z-index: -1;
+        z-index: 0;
         pointer-events: none;
     }
     .pwelement_'. $el_id .' .pwe-header .video-background iframe {
@@ -169,7 +169,7 @@ $output .= '
         width: 100vw;
         height: 160vh;
         object-fit: cover;
-        z-index: -1; /* Wideo w tle za elementami */
+        z-index: 0; /* Wideo w tle za elementami */
         pointer-events: none; /* Brak interakcji z wideo */
     }
     .pwelement_'. $el_id .' .pwe-header .pwe-header-container {
@@ -589,13 +589,12 @@ $output .= '
                 $output .= '
             </div>
 
-            <div class="video-background">
-                <div class="video-overlay"></div>
-                <video autoplay muted loop preload="auto" class="bg-video">
-                    <source src="/doc/header.mp4" media="(min-width: 961px)">
-                </video>
-            </div>
-
+        </div>
+        <div class="video-background">
+            <div class="video-overlay"></div>
+            <video autoplay muted loop preload="auto" class="bg-video">
+                <source src="/doc/header.mp4" media="(min-width: 961px)">
+            </video>
         </div>
     </div>
 </div>';

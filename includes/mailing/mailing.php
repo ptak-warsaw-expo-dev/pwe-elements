@@ -8,6 +8,8 @@ if ( ! defined('ABSPATH') ) exit;
 define('PWEM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PWEM_NOTIF_DIR', rtrim(PWEM_PLUGIN_DIR, '/\\') . '/notifications');
 
+require_once __DIR__ . '/core/FormGenerator.php';
+require_once __DIR__ . '/config/FormPresets.php';
 require_once __DIR__ . '/core/NotificationProcessor.php';
 require_once __DIR__ . '/config/NotificationPresets.php';
 
@@ -31,6 +33,9 @@ class PWEMailing extends PWECommonFunctions {
         PWE_NotificationProcessor::setVersionChanged($this->versionChanged);
 
         // Uruchom po załadowaniu Gravity Forms
+
+        add_action('gform_loaded', [ $this, 'catalog_feedback_form' ], 10);
+
         add_action('gform_loaded', [ $this, 'register_resend' ], 20);
 
         add_action('gform_loaded', [ $this, 'register_resend_platyna' ], 20);
@@ -38,6 +43,16 @@ class PWEMailing extends PWECommonFunctions {
         add_action('shutdown', function () {
             self::gateCommit($this->todayYmd, $this->currentVer);
         });
+    }
+
+    public function catalog_feedback_form() {
+        if ( defined('DOING_CRON') && DOING_CRON ) return;
+
+        $params = PWE_FormPresets::catalog_feedback_form([
+            // tu możesz nadpisać np. tytuły, pola, ustawienia, itd.
+        ]);
+
+        PWE_FormGenerator::apply($params);
     }
 
     public function register_resend() {
@@ -123,3 +138,9 @@ class PWEMailing extends PWECommonFunctions {
         }
     }
 }
+
+add_action('plugins_loaded', function () {
+    if (class_exists('PWEMailing')) {
+        new PWEMailing();
+    }
+});

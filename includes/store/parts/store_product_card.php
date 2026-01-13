@@ -26,6 +26,8 @@ $output .= '
                                                             : "";
                                                 $status = !empty($status_text) ? "status" : ""; 
 
+                                                $disabled = !empty($status) && (stripos($option['prod_image_text_pl'], 'nie pokazuj') !== false) ? false : true;
+
                                                 $custom_link = isset($option['custom-link']) ? $option['custom-link'] : "";
                                                 // $custom_link = self::lang_pl() ? $custom_link : str_replace("/pl/", "/en/", $custom_link);
                                             }
@@ -80,6 +82,8 @@ $output .= '
                                 $img_url = 'https://cap.warsawexpo.eu/public/uploads/shop/'. (!empty($product->prod_image_en) ? $product->prod_image_en : $product->prod_image_pl);
                             }
                         }
+
+                        if (!$disabled && $options != null) continue;
  
                         $output .= '
                         <!-- Card item -->
