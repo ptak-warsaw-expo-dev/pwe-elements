@@ -15,8 +15,6 @@ class PWECatalog10 extends PWECatalog {
         $file_changer = isset($atts['file_changer']) ? $atts['file_changer'] : null;
 
         $exhibitors = CatalogFunctions::logosChecker($identification, $atts['format'], $pwecatalog_display_random, $file_changer);
-
-
         if ($exhibitors === null) {
             return;
         }

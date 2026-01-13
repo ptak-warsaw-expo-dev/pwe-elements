@@ -2,8 +2,6 @@ const menu_transparent = menu_js.menu_transparent;
 const trade_fair_datetotimer = menu_js.trade_fair_datetotimer;
 const trade_fair_enddata = menu_js.trade_fair_enddata;
 
-console.log('PWElements');
-
 document.addEventListener("DOMContentLoaded", function () {
     const adminBar = document.querySelector("#wpadminbar");
     const pweNavMenu = document.querySelector('#pweMenu');

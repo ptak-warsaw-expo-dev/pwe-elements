@@ -12,6 +12,8 @@ class PWECatalog {
     public function __construct() {
         require_once plugin_dir_path(__FILE__) . 'classes/catalog_functions.php';
 
+        
+
         self::$rnd_id = rand(10000, 99999);
         self::$fair_colors = PWECommonFunctions::findPalletColorsStatic();
         self::$accent_color = (self::$fair_colors['Accent']) ? self::$fair_colors['Accent'] : '';
@@ -141,7 +143,7 @@ class PWECatalog {
                 }
             }
         }
-
+        
         if ((empty($identification) || (is_array($exhibitors_top10) && count($exhibitors_top10) < 12)) && $format == 'PWECatalog10') {
             if (isset($_SERVER['argv'][0])) {
                 $source_utm = $_SERVER['argv'][0];
@@ -242,7 +244,7 @@ class PWECatalog {
             </style>
 
             <div id="katalog-' . self::$rnd_id . '" class="exhibitors-catalog">' . $output . '</div>
-
+            
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     const pweContainerLogotypes = document.querySelector("#katalog-' . self::$rnd_id . ' .pwe-container-logotypes");

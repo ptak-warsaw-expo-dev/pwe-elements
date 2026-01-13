@@ -560,45 +560,44 @@ public static function output($atts) {
                             </div>
                         </div>
                     </div>
+                </div>';
+
+                // Karty
+            $output .= '
+                <div class="pwe-news-summary-stats__cards">
+                    <div class="pwe-news-summary-stats__card">
+                        <h5>'. self::languageChecker('Powierzchnia wystawiennicza:', 'Exhibition area:') .'</h5>
+                        <p>'. self::languageChecker('Całkowita powierzchnia:', 'Total area:') .' <span style="color:#00b050;">' . $spc_curr . '</span> m².</p>
+                    </div>
+                    <div class="pwe-news-summary-stats__card">
+                        <h5>'. self::languageChecker('Wystawcy:', 'Exhibitors:') .'</h5>';
+
+            if ($exh_prev > 0 && $year_prev !== '') {
+                $output .= '<p><span style="color:#00b050;">' . $exh_curr . '</span> ' .
+                        self::languageChecker('prezentujących swoje rozwiązania. Wzrost o', 'companies presenting their solutions. An increase of') .
+                        ' <span style="color:#00b050;">' . $exh_growth_pct . '%</span> ' .
+                        self::languageChecker('w porównaniu do ' . $year_prev . ' roku.', 'compared to ' . $year_prev . '.') .
+                        '</p>';
+            } else {
+                $output .= '<p><span style="color:#00b050;">' . $exh_curr . '</span> ' .
+                        self::languageChecker(
+                            'firm z różnych branż zaprezentowało podczas wydarzenia swoje innowacyjne rozwiązania, produkty i technologie.',
+                            'companies from various sectors presented their innovative solutions, products, and technologies during the event.'
+                        ) .
+                        '</p>';
+            }
+
+            $output .= '
+                    </div>
+                    <div class="pwe-news-summary-stats__card">
+                        <h5>'. self::languageChecker('Kraje uczestniczące:', 'Participating countries:') .'</h5>
+                        <p>'. self::languageChecker('Reprezentanci', 'Representatives from') .'  <span style="color:#00b050;">' .
+                        esc_html((string)$countries) . ' ' . self::languageChecker('krajów', 'countries') .
+                        ' </span>, ' . self::languageChecker('co nadało targom międzynarodowy charakter.', 'which gave the fair an international character.') . '</p>
+                    </div>
                 </div>
                 <hr class="pwe-news-summary__hr">';
 
-                // Karty - zakomentowane, bo ma byc nieuzywane na polecenie Natalii
-            // $output .= '
-            //     <div class="pwe-news-summary-stats__cards">
-            //         <div class="pwe-news-summary-stats__card">
-            //             <h5>'. self::languageChecker('Powierzchnia wystawiennicza:', 'Exhibition area:') .'</h5>
-            //             <p>'. self::languageChecker('Całkowita powierzchnia:', 'Total area:') .' <span style="color:#00b050;">' . $spc_curr . '</span> m².</p>
-            //         </div>
-            //         <div class="pwe-news-summary-stats__card">
-            //             <h5>'. self::languageChecker('Wystawcy:', 'Exhibitors:') .'</h5>';
-
-            // if ($exh_prev > 0 && $year_prev !== '') {
-            //     $output .= '<p><span style="color:#00b050;">' . $exh_curr . '</span> ' .
-            //             self::languageChecker('firm prezentujących swoje rozwiązania. Wzrost o', 'companies presenting their solutions. An increase of') .
-            //             ' <span style="color:#00b050;">' . $exh_growth_pct . '%</span> ' .
-            //             self::languageChecker('w porównaniu do ' . $year_prev . ' roku.', 'compared to ' . $year_prev . '.') .
-            //             '</p>';
-            // } else {
-            //     $output .= '<p><span style="color:#00b050;">' . $exh_curr . '</span> ' .
-            //             self::languageChecker(
-            //                 'firm z różnych branż zaprezentowało podczas wydarzenia swoje innowacyjne rozwiązania, produkty i technologie.',
-            //                 'companies from various sectors presented their innovative solutions, products, and technologies during the event.'
-            //             ) .
-            //             '</p>';
-            // }
-
-            // $output .= '
-            //         </div>
-            //         <div class="pwe-news-summary-stats__card">
-            //             <h5>'. self::languageChecker('Kraje uczestniczące:', 'Participating countries:') .'</h5>
-            //             <p>'. self::languageChecker('Reprezentanci', 'Representatives from') .'  <span style="color:#00b050;">' .
-            //             esc_html((string)$countries) . ' ' . self::languageChecker('krajów', 'countries') .
-            //             ' </span>, ' . self::languageChecker('co nadało targom międzynarodowy charakter.', 'which gave the fair an international character.') . '</p>
-            //         </div>
-            //     </div>
-            // <hr class="pwe-news-summary__hr">';
-                                            
         }
         // Iframe + galeria
         if (!empty($pwe_news_summary_iframe_link) || !empty($pwe_news_summary_iframe_desc) || !empty($gallery_html)) {

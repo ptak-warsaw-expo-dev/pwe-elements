@@ -52,7 +52,6 @@ class PWEHeader extends PWECommonFunctions {
         // Return translation based on key
         return isset($translations_map[$key]) ? $translations_map[$key] : $key;
     }
-
     /**
      * Output method for PWelement shortcode.
      *

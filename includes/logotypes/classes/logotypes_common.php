@@ -726,7 +726,7 @@ class PWElementAdditionalLogotypes {
 
             if (!empty($cap_logotypes_data)) {
 
-                $saving_paths = function (&$files, $logo_data) {
+                $saving_paths = function (&$files, $logo_data, $currentLocale) {
 
                     $meta = json_decode($logo_data->meta_data, true);
                     $data = json_decode($logo_data->data ?? '{}', true);
@@ -773,8 +773,7 @@ class PWElementAdditionalLogotypes {
                         'url'  => 'https://cap.warsawexpo.eu/public' . $logo_data->logos_url,
                         'desc_pl' => $desc_pl,
                         'desc_en' => $desc_en,
-                        'link' => self::getLangLink($data, 'logos_link'),
-                        'meta' => $meta
+                        'link' => self::getLangLink($data, 'logos_link')
                     ];
 
                     if (!in_array($element, $files)) {
@@ -808,7 +807,7 @@ class PWElementAdditionalLogotypes {
                     foreach ($order as $type) {
                         if (!empty($grouped[$type])) {
                             foreach ($grouped[$type] as $logo_data) {
-                                $saving_paths($files, $logo_data);
+                                $saving_paths($files, $logo_data, $isPolish);
                             }
                         }
                     }
@@ -820,7 +819,7 @@ class PWElementAdditionalLogotypes {
                     foreach ($cap_logotypes_data as $logo_data) {
                         if ($logo_data->logos_type === "patron-medialny" ||
                             $logo_data->logos_type === "partner-merytoryczny") {
-                            $saving_paths($files, $logo_data);
+                            $saving_paths($files, $logo_data, $isPolish);
                         }
                     }
                 }
@@ -831,7 +830,7 @@ class PWElementAdditionalLogotypes {
                     foreach ($cap_logotypes_data as $logo_data) {
                         if ($logo_data->logos_type === "international-partner" ||
                             $logo_data->logos_type === "miedzynarodowy-patron-medialny") {
-                            $saving_paths($files, $logo_data);
+                            $saving_paths($files, $logo_data, $isPolish);
                         }
                     }
                 }
@@ -839,7 +838,7 @@ class PWElementAdditionalLogotypes {
                 $logotypes_catalogs_array = explode(',', $logotypes_catalog);
                 foreach ($cap_logotypes_data as $logo_data) {
                     if (in_array($logo_data->logos_type, $logotypes_catalogs_array)) {
-                        $saving_paths($files, $logo_data);
+                        $saving_paths($files, $logo_data, $isPolish);
                     }
                 }
 
@@ -1052,7 +1051,6 @@ class PWElementAdditionalLogotypes {
 
                         // Używamy $desc_pl jako folder_name jeśli jest dostępne, inaczej wyciągamy z URL
                         $folder_name = PWECommonFunctions::lang_pl() ? (!empty($desc_pl) ? $desc_pl : basename(dirname($url))) : (!empty($desc_en) ? $desc_en : basename(dirname($url)));
-                        $meta = $file['meta'] ?? [];
 
                         // Build the final data structure for the image
                         $updated_images_url[] = array(
@@ -1116,8 +1114,9 @@ class PWElementAdditionalLogotypes {
                                         if (strpos($url["img"], 'expoplanner.com') !== false) {
                                            $logo_caption_text = '<p>'. self::multi_translation("exhibitor").'</p>';
                                         } else {
-                                            if (get_locale() == 'pl_PL') {
-                                                $logo_caption_text = '<p>' . str_replace(' ', '<br>', $url["folder_name"]) . '</p>';
+
+                                            if (strpos($url["img"], 'expoplanner.com') !== false) {
+                                                $logo_caption_text = '<p>Exhibitor</p>';
                                             } else {
                                                 $logo_caption_text = array_key_exists($url["folder_name"], $translations)
                                                     ? '<p>' . $translations[$url["folder_name"]] . '</p>'

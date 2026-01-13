@@ -226,7 +226,6 @@
 }
 .pwe-news-summary__iframe-title{
     text-align:justify;
-    line-height: 1.5;
 }
 @media(max-width:960px){
     
@@ -259,7 +258,6 @@
 @media(max-width:760px){
     .pwe-news-summary__iframe-title{
     text-align:left;
-    line-height: 1.5;
     }
     .pwe-news-summary-stats__stats-section {
         flex-direction: column-reverse;

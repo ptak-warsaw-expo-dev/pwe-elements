@@ -1,6 +1,6 @@
 <?php
 
-class pweNavMenu extends PWECommonFunctions { 
+class pweNavMenu extends PWECommonFunctions {
 
     public function __construct() {
         
@@ -10,25 +10,8 @@ class pweNavMenu extends PWECommonFunctions {
             add_action('wp_enqueue_scripts', array($this, 'addingStyles'));
             add_action('wp_enqueue_scripts', array($this, 'addingScripts'));
 
-            // blocked wp_enqueue_scripts if override detected
-            add_action('init', [$this, 'detect_override'], 1);
-
             // Registering a function
             add_action('wp_head', array($this, 'pwe_nav_menu'), 5);   
-        }
-    }
-
-    public function detect_override() {
-        $output = 'test';
-        $filtered = apply_filters('pwe_override_menu_output', $output);
-
-        if ($filtered !== $output) {
-            $this->menu_overridden = true;
-        }
-
-        if ($this->menu_overridden) {
-            remove_action('wp_enqueue_scripts', [$this, 'addingStyles']);
-            remove_action('wp_enqueue_scripts', [$this, 'addingScripts']);
         }
     }
 
@@ -217,8 +200,7 @@ class pweNavMenu extends PWECommonFunctions {
             <div class="pwe-menu__overlay"></div>
         </header>';
     
-        return apply_filters('pwe_override_menu_output', $output); // override menu from plugin pwe-elements-auto-switch/components/menu
-        // return $output;
+        return $output;
     }
     
     // Function to display submenu
@@ -276,8 +258,10 @@ $pwe_nav_menu = new pweNavMenu();
 
 /**
  * Сollapse ADMIN-BAR (Toolbar) into left-top corner.
+ *
+ * @version 1.0
  */
-final class Collapse_Adminbar {
+final class Kama_Collapse_Toolbar {
 
     public static function init(){
         add_action( 'admin_bar_init', [ __CLASS__, 'hooks' ] );
@@ -293,13 +277,15 @@ final class Collapse_Adminbar {
 
     public static function collapse_styles(){
 
+        // do nothing for admin-panel.
+        // Remove this if you want to collapse admin-bar in admin-panel too.
         if( is_admin() ){
             return;
         }
 
         ob_start();
         ?>
-        <style id="collapse_admin_bar">
+        <style id="kama_collapse_admin_bar">
             @media screen and ( max-width: 600px ) {
                 #wpadminbar{ background:none; float:left; width:auto; height:auto; bottom:0; min-width:0 !important; }
                 #wpadminbar > *{ float:left !important; clear:both !important; }
@@ -313,22 +299,30 @@ final class Collapse_Adminbar {
                 #wpadminbar{ overflow:hidden; width:auto; height:30px; }
                 #wpadminbar:hover{ overflow:visible; width:auto; height:auto; background:rgba(102,102,102,.7); }
 
+                /* the color of the main icon */
                 #wp-admin-bar-<?= is_multisite() ? 'my-sites' : 'site-name' ?> .ab-item:before{ color:#797c7d; }
+
+                /* hide wp-logo */
                 #wp-admin-bar-wp-logo{ display:none; }
                 #wp-admin-bar-search{ display:none; }
+
+                /* edit for twentysixteen */
                 body.admin-bar:before{ display:none; }
+
                 body.logged-in.admin-bar { padding-top: 0 !important; }
 
+                /* Gutenberg */
                 #wpwrap .edit-post-header{ top:0; }
                 #wpwrap .edit-post-sidebar{ top:56px; }
+                
             }   
         </style>
         <?php
         $styles = ob_get_clean();
 
-        echo preg_replace( '/[\n\t]/', '', $styles ) . "\n";
+        echo preg_replace( '/[\n\t]/', '', $styles ) ."\n";
     }
 }
 
-Collapse_Adminbar::init();
+Kama_Collapse_Toolbar::init();
 

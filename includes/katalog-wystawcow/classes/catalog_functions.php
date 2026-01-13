@@ -27,7 +27,7 @@ class CatalogFunctions {
      * @return array
      */
     public static function logosChecker($katalog_id, $PWECatalogFull = 'PWECatalogFull', $pwe_catalog_random = false, $file_changer = null, $catalog_display_duplicate = false){
-
+        
         $basic_wystawcy = [];
         $data = [];
 
@@ -58,7 +58,7 @@ class CatalogFunctions {
                     echo '<script>console.log("Dane pobrane z lokalnego pliku (https://'.  $_SERVER['HTTP_HOST'] .'/doc/pwe-exhibitors.json) dla katalogu ' . $katalog_id . '. Link do katalogu expoplanner: '. $can_url .'")</script>';
                 };
             }
-        }
+        } 
 
         // If local missing/invalid → get external JSON
         if (empty($basic_wystawcy) && !empty($katalog_id)) {
@@ -276,26 +276,6 @@ class CatalogFunctions {
         }
         return $data;
     }
-    public static function multi_translation($key, $plural = false)
-    {
-        $locale = get_locale();
-        $translations_file = __DIR__ . '/../../../translations/includes/katalog-wystawcow.json';
-
-        $translations_data = json_decode(file_get_contents($translations_file), true);
-
-        $translations_map = $translations_data[$locale] ?? $translations_data['en_US'];
-
-
-        if ($plural === true) {
-            if (isset($translations_map['plurals'][$key])) {
-                return $translations_map['plurals'][$key];
-            }
-
-            return $key;
-        }
-
-        return $translations_map[$key] ?? $key;
-    }
 
     /**
      * Check Title for Exhibitors Catalog
@@ -307,11 +287,11 @@ class CatalogFunctions {
         if (substr($title, 0, 2) === "``") {
             $exhibitors_title = substr($title, 2, -2);
         } elseif($format == 'PWECatalogFull'){
-            $exhibitors_title = self::multi_translation('catalog') . $title;
+            $exhibitors_title = PWECommonFunctions::languageChecker('Katalog wystawców ','Exhibitor Catalog ') . $title;
         } elseif ($format == 'PWECatalog21' || $format == 'PWECatalog10'){
-            $exhibitors_title = self::multi_translation('exhibitors') . (($title) ? $title : do_shortcode('[trade_fair_catalog_year]'));
+            $exhibitors_title = PWECommonFunctions::languageChecker('Wystawcy ','Exhibitors ') . (($title) ? $title : do_shortcode('[trade_fair_catalog_year]'));
         } elseif ($format == 'PWECatalog7'){
-            $exhibitors_title = self::multi_translation('new_exhibitors') . $title;
+            $exhibitors_title = PWECommonFunctions::languageChecker('Nowi wystawcy na targach ','New exhibitors at the fair ') . $title;
         }
         return $exhibitors_title;
     }
