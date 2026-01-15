@@ -61,17 +61,22 @@ class PWEMapDynamic extends PWEMap {
             if ($edition == 4) return self::multi_translation("industry_visitors_3rd");
 
             // For 4+ use generic + ordinal_suffix
-            $ordinal = self::ordinal_suffix($edition - 1);
-            return str_replace("{number}", $ordinal, self::multi_translation("industry_visitors_nth"));
-              
-            // If translation already includes ordinal suffix like "{number}th", do not generate "th" again
+            $number = $edition - 1;
+            $translation = self::multi_translation("industry_visitors_nth");
+
+            // if translation already have correct ordinal placeholder, just replace
             if (   strpos($translation, '{number}th') !== false
                 || strpos($translation, '{number}st') !== false
                 || strpos($translation, '{number}nd') !== false
                 || strpos($translation, '{number}rd') !== false) {
 
-                return str_replace("{number}", $number, $translation);
+                return str_replace('{number}', $number, $translation);
             }
+
+            // in other cases, generate ordinal suffix
+            $ordinal = self::ordinal_suffix($number);
+            return str_replace('{number}', $ordinal, $translation);
+
         }
 
         // PL, DE — normal placeholder

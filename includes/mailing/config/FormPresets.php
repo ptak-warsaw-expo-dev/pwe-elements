@@ -139,10 +139,17 @@ class PWE_FormPresets {
                     'adminLabel'    => 'opinions_source',
                     'defaultValue'  => '',
                 ],
+                [
+                    'id'            => 4,
+                    'type'          => 'hidden',
+                    'label'         => 'opinions_device_width',
+                    'adminLabel'    => 'opinions_device_width',
+                    'defaultValue'  => '',
+                ],
             ],
 
             // opcjonalnie: wymuś nextFieldId (GF zwykle policzy sam, ale można ustawić)
-            'nextFieldId' => 4,
+            'nextFieldId' => 5,
         ];
 
         return array_replace_recursive($base, $overrides);
