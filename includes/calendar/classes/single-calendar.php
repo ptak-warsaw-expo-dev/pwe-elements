@@ -3342,10 +3342,16 @@ if ($event_type === "week") {
                         }
 
                         $output .= '
-                        <div class="single-event__container-events">
-                            <div class="single-event__events-title">
-                                <h4>'. multi_translation("most_important_industry_events_in_europe") .'</h4>
-                            </div>
+                        <div class="single-event__container-events">';
+
+                        if($europe_events_logotypes){
+                            $output .= '
+                                <div class="single-event__events-title">
+                                    <h4>'. multi_translation("most_important_industry_events_in_europe") .'</h4>
+                                </div>';
+                        }
+
+                        $output .= '
                             <div class="single-event__events-logotypes single-event__logotypes-slider">';
                                 $non_warsaw = [];
                                 $warsaw_logos = [];

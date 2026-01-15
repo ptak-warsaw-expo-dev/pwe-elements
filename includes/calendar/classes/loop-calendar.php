@@ -1064,36 +1064,38 @@ class PWECalendar extends PWECommonFunctions {
                     const callendarContainer = document.querySelector(".pwe-calendar__wrapper");
                     const allEvents = callendarContainer ? callendarContainer.querySelectorAll(".pwe-calendar__item") : [];
 
-                    // 1. Get all categories from the search_category attribute
+                    // Get all categories from the search_category attribute
                     const categorySet = new Set();
                     allEvents.forEach(eventItem => {
-                        const categories = eventItem.getAttribute("search_category")?.split(/\s+/) || [];
-                        categories.forEach(cat => categorySet.add(cat.toLowerCase()));
+                        const categories = eventItem.getAttribute("search_category")?.split(",").map(cat => cat.trim()) || [];
+                        categories.forEach(cat => {
+                            if (cat.toLowerCase() !== "b2c") categorySet.add(cat.toLowerCase());
+                        });
                     });
 
-                    // 2. Convert Set to array
+                    // Convert Set to array
                     let allCategoriesArray = Array.from(categorySet);
 
-                    // 3. Sort alphabetically, but move "other" to the end
+                    // Sort alphabetically, but move "other" to the end
                     allCategoriesArray.sort((a, b) => {
                         if (a === "'. self::multi_translation('other') .'") return 1; // "other" after everything else
                         if (b === "'. self::multi_translation('other') .'") return -1;
                         return a.localeCompare(b); // alphabetical order for the rest
                     });
 
-                    // 4. Map to objects for dropdown
+                    // Map to objects for dropdown
                     let sortedCategories = allCategoriesArray.map(cat => ({
                         name: cat,
                         slug: cat.toLowerCase().replace(/\s+/g, "-")
                     }));
 
-                    // 5. Add "All" at the beginning
+                    // Add "All" at the beginning
                     sortedCategories.unshift({
                         name: "'. self::multi_translation('all') .'",
                         slug: "all"
                     });
 
-                    // 6. Add "Premier editions" at the end if needed
+                    // Add "Premier editions" at the end if needed
                     if ("'. $pwe_calendar_week .'" !== "true") {
                         sortedCategories.push({
                             name: "'. self::multi_translation('premier_edition') .'",
@@ -1104,7 +1106,7 @@ class PWECalendar extends PWECommonFunctions {
                     // Now use sortedCategories to build your dropdown
                     let allCategoriesData = sortedCategories;
 
-                    // 3. Fill the dropdown
+                    // Fill the dropdown
                     allCategoriesData.forEach((category, i) => {
                         const li = document.createElement("li");
                         const categorySlug = category.slug.toLowerCase().replace(/\s+/g, "-");
@@ -1124,8 +1126,8 @@ class PWECalendar extends PWECommonFunctions {
                                 });
                             } else {
                                 allEvents.forEach(eventItem => {
-                                    const eventCategories = eventItem.getAttribute("search_category")?.split(/\s+/) || [];
-                                    const eventCategorySlug = eventCategories.map(cat => cat.toLowerCase().replace(/\s+/g, "-"));
+                                    const eventCategories = eventItem.getAttribute("search_category")?.split(",").map(cat => cat.trim().toLowerCase()) || [];
+                                    const eventCategorySlug = eventCategories.filter(cat => cat !== "b2c").map(cat => cat.replace(/\s+/g, "-"));
                                     const isCategoryMatched = eventCategorySlug.includes(categorySlug);
                                     eventItem.classList.toggle("dont-show", !isCategoryMatched);
                                 });
@@ -1262,18 +1264,21 @@ class PWECalendar extends PWECommonFunctions {
             $edition .= $edition_num . self::multi_translation("edition");
         }
 
+        // $categories = $event['categories'];
+        // $category_names = '';
+        // foreach ($categories as $category) {
+        //         $category_names .= ' ' . $category->name;
+        // }
+
         $categories = $event['categories'];
-        $category_classes = '';
-        foreach ($categories as $category) {
-                $category_classes .= ' ' . $category->slug;
-        }
+        $category_names = implode(', ', array_map(fn($c) => $c->name, $categories));
 
         $featured_image_url = $post_meta['_featured_image_url'][0];
         $secondary_image_url = $post_meta['_secondary_image_url'][0];
 
         if ($event_type === "" || $event_type === "event") {
             $output = '
-            <div class="pwe-calendar__item" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_classes . '">
+            <div class="pwe-calendar__item" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '">
                 <a class="pwe-calendar__link" href="'. ($target_blank ? $website : $permalink) .'" '. ($target_blank ? 'target="_blank"' : '') .'>
                     <div class="pwe-calendar__tile" style="background-image:url(' . esc_url($secondary_image_url) . ');">';
                         if (!empty($short_desc)) {
@@ -1420,7 +1425,7 @@ class PWECalendar extends PWECommonFunctions {
             }
 
             $output = '
-            <div class="pwe-calendar__item '. $event_type .'" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_classes . '">
+            <div class="pwe-calendar__item '. $event_type .'" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '">
                 <a class="pwe-calendar__link" href="'. $permalink .'">
                     <div class="pwe-calendar__tile" style="background-image:url(' . esc_url($secondary_image_url) . ');">
                         <div class="pwe-calendar__short-name">
