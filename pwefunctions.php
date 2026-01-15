@@ -798,6 +798,7 @@ class PWECommonFunctions {
             "name_en" => $fair->fair_name_en ?? "",
             "desc_pl" => $fair->fair_desc_pl ?? "",
             "desc_en" => $fair->fair_desc_en ?? "",
+            "id" => $fair->id ?? "",
             "short_desc_pl" => $fair->fair_short_desc_pl ?? "",
             "short_desc_en" => $fair->fair_short_desc_en ?? "",
             "full_desc_pl" => $fair->fair_full_desc_pl ?? "",
@@ -869,7 +870,7 @@ class PWECommonFunctions {
     /**
      * JSON all trade fairs
      */
-    public static function json_fairs() { 
+    public static function json_fairs() {
         $pwe_fairs = self::get_database_fairs_data();
         $pwe_fairs_desc_translations = self::get_database_translations_data();
 
@@ -882,7 +883,7 @@ class PWECommonFunctions {
 
             // Add data about the fair
             foreach ($pwe_fairs as $fair) {
-                if (!isset($fair->fair_domain) || empty($fair->fair_domain)) { 
+                if (!isset($fair->fair_domain) || empty($fair->fair_domain)) {
                     continue;
                 }
 
@@ -918,7 +919,7 @@ class PWECommonFunctions {
         } else {
             // URL to JSON file
             $json_file = 'https://mr.glasstec.pl/doc/pwe-data.json';
-            
+
             // Getting data from JSON file
             $json_data = @file_get_contents($json_file); // Use @ to ignore PHP warnings on failure
 
@@ -1111,7 +1112,7 @@ class PWECommonFunctions {
         } else {
             return $de;
         }
-        
+
     }
 
     /**
