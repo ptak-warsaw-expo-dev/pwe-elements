@@ -574,10 +574,9 @@ class PWECommonFunctions {
         return $results;
     }
 
-    public static function get_database_logotypes_data($fair_domain = null) {
-        // Database connection
+    public static function get_database_week_data($fair_domain = null) {
+
         $cap_db = self::connect_database();
-        // If connection failed, return empty array
         if (!$cap_db) {
             if (current_user_can('administrator') && !is_admin()) {
                 echo '<script>console.error("Brak połączenia z bazą danych.")</script>';
@@ -585,35 +584,199 @@ class PWECommonFunctions {
             return [];
         }
 
-        // Get current domain
-        if ($fair_domain == null) {
-            $domain = $_SERVER['HTTP_HOST'];
-        } else {
-            $domain = $fair_domain;
+        $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
+
+        $week = $cap_db->get_row(
+            $cap_db->prepare(
+                "SELECT fairs_domains
+                FROM fair_weeks
+                WHERE week_domain = %s
+                LIMIT 1",
+                $current_domain
+            )
+        );
+
+        if ($week && !empty($week->fairs_domains)) {
+            return array_map('trim', explode(',', $week->fairs_domains));
         }
 
-        // SQL query to fetch logos with the matching fair_id and fair_domain
-        $query = "
-            SELECT logos.*,
-                meta_data.meta_data AS meta_data
-            FROM logos
-            INNER JOIN fairs ON logos.fair_id = fairs.id
-            LEFT JOIN meta_data ON meta_data.slug = 'patrons'
-                                AND JSON_UNQUOTE(JSON_EXTRACT(meta_data.meta_data, '$.slug')) = logos.logos_type
-            WHERE fairs.fair_domain = %s
-        ";
+        return [];
+    }
 
-        // Retrieve data from the database
-        $results = $cap_db->get_results($cap_db->prepare($query, $domain));
+    public static function get_database_week_all($fair_domain = null){
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            if (current_user_can('administrator') && !is_admin()) {
+                echo '<script>console.error("Brak połączenia z bazą danych.")</script>';
+            }
+            return null;
+        }
 
-        // SQL error checking
+        $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
+
+        $week = $cap_db->get_row(
+            $cap_db->prepare(
+                "SELECT week_data
+                FROM fair_weeks
+                WHERE week_domain = %s
+                LIMIT 1",
+                $current_domain
+            )
+        );
+
+        if (!$week || empty($week->week_data)) {
+            return null;
+        }
+
+        // dekodujemy JSON
+        $decoded = json_decode($week->week_data, true);
+
+        // jeśli JSON jest poprawny → zwróć tablicę
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $decoded;
+        }
+
+        // fallback – zwróć surowy string
+        return $week->week_data;
+    }
+
+    public static function get_all_week_domains() {
+
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            return [];
+        }
+
+        $rows = $cap_db->get_results(
+            "SELECT week_domain FROM fair_weeks"
+        );
+
+        if (empty($rows)) {
+            return [];
+        }
+
+        $domains = [];
+
+        foreach ($rows as $row) {
+            if (!empty($row->week_domain)) {
+                $domains[] = trim($row->week_domain);
+            }
+        }
+
+        return array_values(array_unique($domains));
+    }
+
+    private static function remove_logo_duplicates(array $logos): array {
+
+        $unique = [];
+        $seen = [];
+
+        foreach ($logos as $logo) {
+
+            if (empty($logo->logos_url)) {
+                $unique[] = $logo;
+                continue;
+            }
+
+            if (preg_match('#/partners/([^/]+)/#', $logo->logos_url, $m)) {
+                $partner_type = $m[1];
+            } else {
+                $partner_type = 'unknown';
+            }
+
+            $filename = basename($logo->logos_url);
+
+            $key = $partner_type . '|' . $filename;
+
+            if (isset($seen[$key])) {
+                continue;
+            }
+
+            $seen[$key] = true;
+            $unique[] = $logo;
+        }
+
+        return $unique;
+    }
+
+    public static function get_database_logotypes_data($fair_domain = null) {
+
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            if (current_user_can('administrator') && !is_admin()) {
+                echo '<script>console.error("Brak połączenia z bazą danych.")</script>';
+            }
+            return [];
+        }
+
+        $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
+
+        $week = $cap_db->get_row(
+            $cap_db->prepare(
+                "SELECT fairs_domains
+                FROM fair_weeks
+                WHERE week_domain = %s
+                LIMIT 1",
+                $current_domain
+            )
+        );
+
+        if ($week && !empty($week->fairs_domains)) {
+
+            $domains = json_decode($week->fairs_domains, true);
+
+            if (!is_array($domains)) {
+                $domains = [];
+            }
+
+            $domains = array_values(array_filter(array_map('trim', $domains)));
+
+
+            if (!empty($domains)) {
+
+                $placeholders = implode(',', array_fill(0, count($domains), '%s'));
+
+                $query = "
+                    SELECT DISTINCT logos.*,
+                        meta_data.meta_data AS meta_data
+                    FROM logos
+                    INNER JOIN fairs ON logos.fair_id = fairs.id
+                    LEFT JOIN meta_data ON meta_data.slug = 'patrons'
+                        AND JSON_UNQUOTE(JSON_EXTRACT(meta_data.meta_data, '$.slug')) = logos.logos_type
+                    WHERE fairs.fair_domain IN ($placeholders)
+                ";
+
+                $results = $cap_db->get_results(
+                    $cap_db->prepare($query, $domains)
+                );
+
+            } else {
+                $results = [];
+            }
+        } else {
+
+            $query = "
+                SELECT logos.*,
+                    meta_data.meta_data AS meta_data
+                FROM logos
+                INNER JOIN fairs ON logos.fair_id = fairs.id
+                LEFT JOIN meta_data ON meta_data.slug = 'patrons'
+                    AND JSON_UNQUOTE(JSON_EXTRACT(meta_data.meta_data, '$.slug')) = logos.logos_type
+                WHERE fairs.fair_domain = %s
+            ";
+
+            $results = $cap_db->get_results(
+                $cap_db->prepare($query, $current_domain)
+            );
+        }
+
         if ($cap_db->last_error) {
             if (current_user_can("administrator") && !is_admin()) {
                 echo '<script>console.error("Błąd SQL: ' . addslashes($cap_db->last_error) . '")</script>';
             }
             return [];
         }
-
+        $results = self::remove_logo_duplicates($results);
         return $results;
     }
 
@@ -821,6 +984,7 @@ class PWECommonFunctions {
             "category_pl" => $fair->category_pl ?? "",
             "category_en" => $fair->category_en ?? "",
             "conference_name" => $fair->konf_name ?? "",
+            "group" => $fair->fair_group ?? "",
         ];
 
         // Add estimations to data
