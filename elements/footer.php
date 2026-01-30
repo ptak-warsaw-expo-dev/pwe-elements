@@ -367,44 +367,26 @@ class PWElementFooter extends PWElements {
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const uncodeNavMenu = document.querySelector("#masthead");
-                const pweNavMenu = document.querySelector("#pweMenu");
+                const pweNavMenu = document.querySelector("#pweMenuAutoSwitch");
 
                 // Top main menu "For exhibitors"
-                const mainMenu = pweNavMenu ? document.querySelector(".pwe-menu__nav") : document.querySelector("ul.menu-primary-inner");
+                const mainMenu = pweNavMenu ? document.querySelector(".pwe-menu-auto-switch__nav") : document.querySelector("ul.menu-primary-inner");
                 const secondChild = mainMenu.children[1];
-                const dropMenu = pweNavMenu ? secondChild.querySelector(".pwe-menu__submenu") : secondChild.querySelector("ul.drop-menu");
+                const dropMenu = pweNavMenu ? secondChild.querySelector(".pwe-menu-auto-switch__submenu") : secondChild.querySelector("ul.drop-menu");
 
                 // Create new element li
-                const becomeAnAgentMenuItem = document.createElement("li");
-                becomeAnAgentMenuItem.className = pweNavMenu ? "pwe-menu__submenu-item" : "menu-item menu-item-type-custom menu-item-object-custom menu-item-99999";
-                becomeAnAgentMenuItem.innerHTML = `<a title="'. (get_locale() == "pl_PL" ? 'Zostań agentem' : 'Become an agent') .'" target="_blank" href="https://warsawexpo.eu'. (get_locale() == "pl_PL" ? '/formularz-dla-agentow/' : '/en/forms-for-agents/') .'">'. (get_locale() == "pl_PL" ? 'Zostań agentem' : 'Become an agent') .'</a>`;
+                const newMenuItem = document.createElement("li");
+                newMenuItem.id = pweNavMenu ? "" : "menu-item-99999";
+                newMenuItem.className = pweNavMenu ? "pwe-menu-auto-switch__submenu-item" : "menu-item menu-item-type-custom menu-item-object-custom menu-item-99999";
+                newMenuItem.innerHTML = `<a title="'. (get_locale() == "pl_PL" ? 'Zostań agentem' : 'Become an agent') .'" target="_blank" href="https://warsawexpo.eu'. (get_locale() == "pl_PL" ? '/formularz-dla-agentow/' : '/en/forms-for-agents/') .'">'. (get_locale() == "pl_PL" ? 'Zostań agentem' : 'Become an agent') .'</a>`;
 
                 // Add new element as second in the list
                 if (dropMenu && dropMenu.children.length > 1) {
-                    dropMenu.insertBefore(becomeAnAgentMenuItem, dropMenu.children[1]);
+                    dropMenu.insertBefore(newMenuItem, dropMenu.children[1]);
                 } else {
-                    dropMenu.appendChild(becomeAnAgentMenuItem);
-                }';
-
-                if (!empty(do_shortcode('[trade_fair_catalog_id]')) && get_locale() == "pl_PL") {
-                    $output .= '
-                    // --------------------------------------------
-
-                    // Create new element li
-                    const instructionMenuItem = document.createElement("li");
-                    instructionMenuItem.className = pweNavMenu ? "pwe-menu__submenu-item" : "menu-item menu-item-type-custom menu-item-object-custom menu-item-99999";
-                    instructionMenuItem.innerHTML = `<a title="'. (get_locale() == "pl_PL" ? 'Instrukcja aplikacji' : 'Application instructions') .'" target="_blank" href="https://warsawexpo.eu'. (get_locale() == "pl_PL" ? '/docs/Instrukcja-do-aplikacji.pdf' : '/docs/Instrukcja-do-aplikacji.pdf') .'">'. (get_locale() == "pl_PL" ? 'Instrukcja aplikacji' : 'Application instructions') .'</a>`;
-
-                    // Add new element as penultimate in the list
-                    if (dropMenu && dropMenu.children.length > 0) {
-                    const penultimateItem = dropMenu.children[dropMenu.children.length - 1];
-                        dropMenu.insertBefore(instructionMenuItem, penultimateItem);
-                    } else {
-                        dropMenu.appendChild(instructionMenuItem);
-                    }'; 
+                    dropMenu.appendChild(newMenuItem);
                 }
-                
-                $output .= '
+                    
                 // --------------------------------------------
 
                 // Bottom main menu "For exhibitors"
@@ -414,6 +396,7 @@ class PWElementFooter extends PWElements {
 
                 // Create new element li
                 const newFooterMenuItem = document.createElement("li");
+                newFooterMenuItem.id = "menu-item-99999";
                 newFooterMenuItem.className = "menu-item menu-item-type-custom menu-item-object-custom menu-item-99999";
                 newFooterMenuItem.innerHTML = `<a title="'. (get_locale() == "pl_PL" ? 'Zostań agentem' : 'Become an agent') .'" target="_blank" href="https://warsawexpo.eu'. (get_locale() == "pl_PL" ? '/formularz-dla-agentow/' : '/en/forms-for-agents/') .'">'. (get_locale() == "pl_PL" ? 'Zostań agentem' : 'Become an agent') .'</a>`;
 
