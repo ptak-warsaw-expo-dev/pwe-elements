@@ -12,8 +12,6 @@ class PWECatalog {
     public function __construct() {
         require_once plugin_dir_path(__FILE__) . 'classes/catalog_functions.php';
 
-        
-
         self::$rnd_id = rand(10000, 99999);
         self::$fair_colors = PWECommonFunctions::findPalletColorsStatic();
         self::$accent_color = (self::$fair_colors['Accent']) ? self::$fair_colors['Accent'] : '';
@@ -78,10 +76,10 @@ class PWECatalog {
      */
     public function PWECatalogOutput($atts, $content = null) {
 
-        $exh_catalog_cron_pass = PWECommonFunctions::get_database_meta_data('cron_secret_pass');
+        $exh_catalog_cron_pass = PWECommonFunctions::get_database_meta_data('cron_catalog_secret_pass');
 
         if (current_user_can('administrator')) {
-            echo '<script>console.log("Link do odświeżenia katalogu: https://'. do_shortcode('[trade_fair_domainadress]') .'/wp-content/plugins/custom-element/other/mass_vip_cron.php?pass=' . $exh_catalog_cron_pass . '")</script>';
+            echo '<script>console.log("Link do odświeżenia katalogu: https://'. do_shortcode('[trade_fair_domainadress]') .'/wp-content/plugins/custom-element/other/cron_catalog.php?pass=' . $exh_catalog_cron_pass . '")</script>';
         };
 
         $btn_text_color = PWECommonFunctions::findColor($atts['btn_text_color_manual_hidden'], $atts['btn_text_color'], 'white') . '!important';
@@ -143,7 +141,7 @@ class PWECatalog {
                 }
             }
         }
-        
+
         if ((empty($identification) || (is_array($exhibitors_top10) && count($exhibitors_top10) < 12)) && $format == 'PWECatalog10') {
             if (isset($_SERVER['argv'][0])) {
                 $source_utm = $_SERVER['argv'][0];
@@ -244,7 +242,7 @@ class PWECatalog {
             </style>
 
             <div id="katalog-' . self::$rnd_id . '" class="exhibitors-catalog">' . $output . '</div>
-            
+
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     const pweContainerLogotypes = document.querySelector("#katalog-' . self::$rnd_id . ' .pwe-container-logotypes");

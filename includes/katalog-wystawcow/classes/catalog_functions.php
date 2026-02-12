@@ -26,8 +26,8 @@ class CatalogFunctions {
      * @param string $katalog_format format of display.
      * @return array
      */
-    public static function logosChecker($katalog_id, $PWECatalogFull = 'PWECatalogFull', $pwe_catalog_random = false, $file_changer = null, $catalog_display_duplicate = false){
-        
+    public static function logosChecker($katalog_id, $PWECatalogFull = 'PWECatalogFull', $pwe_catalog_random = false, $file_changer = null, $catalog_display_duplicate = false, $catalog_year = null){
+
         $basic_wystawcy = [];
         $data = [];
 
@@ -44,21 +44,46 @@ class CatalogFunctions {
             }
         }
 
-        // Try local file first
-        $local_file = $_SERVER['DOCUMENT_ROOT'] . '/doc/pwe-exhibitors.json';
+        // Formatting $catalog_year
+        if (!empty($catalog_year)) {
+            if (preg_match('/\b(\d{4})\b/', $catalog_year, $matches)) {
+                $catalog_year = $matches[1];
+            } else {
+                $catalog_year = null;
+            }
+        }
+
+        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/uploads/exhibitor-catalogs/';
+
+        // Default current catalog
+        $local_file = $basePath . 'old-pwe-exhibitors.json';
+
+        // If exist year and file, use it
+        if (!empty($catalog_year)) {
+            $year = (int) $catalog_year;
+            $yearFile = $basePath . "old-pwe-exhibitors-$year.json";
+
+            if (file_exists($yearFile) && filesize($yearFile) > 0) {
+                $local_file = $yearFile;
+            }
+        }
 
         if (file_exists($local_file)) {
             $json = file_get_contents($local_file);
             $data = json_decode($json, true);
 
-            if (is_array($data) && isset($data[$katalog_id]['Wystawcy'])) {
-                $basic_wystawcy = $data[$katalog_id]['Wystawcy'];
+            if (is_array($data)) {
+                $firstKey = array_key_first($data);
 
-                if (current_user_can('administrator')) {
-                    echo '<script>console.log("Dane pobrane z lokalnego pliku (https://'.  $_SERVER['HTTP_HOST'] .'/doc/pwe-exhibitors.json) dla katalogu ' . $katalog_id . '. Link do katalogu expoplanner: '. $can_url .'")</script>';
-                };
+                if (isset($data[$firstKey]['Wystawcy'])) {
+                    $basic_wystawcy = $data[$firstKey]['Wystawcy'];
+
+                    if (current_user_can('administrator')) {
+                        echo '<script>console.log("Dane pobrane z pliku: https://' . $_SERVER['HTTP_HOST'] . '/wp-content/uploads/exhibitor-catalogs/' . basename($local_file) . ' (catalog_id=' . $firstKey . ')")</script>';
+                    }
+                }
             }
-        } 
+        }
 
         // If local missing/invalid → get external JSON
         if (empty($basic_wystawcy) && !empty($katalog_id)) {
@@ -189,7 +214,169 @@ class CatalogFunctions {
         if($pwe_catalog_random){
             shuffle($logos_array);
         }
+
+        if ($PWECatalogFull === 'PWECatalogFull') {
+            self::sync_archive_catalog_entry($katalog_id, $catalog_year);
+        }
+
         return $logos_array;
+    }
+
+    public static function sync_archive_catalog_entry($katalog_id, $catalog_year = null) {
+
+        // --------------------------------------------------
+        // Log setup
+        // --------------------------------------------------
+        $logDir  = $_SERVER["DOCUMENT_ROOT"] . '/wp-content/uploads/exhibitor-catalogs/';
+        $logFile = $logDir . 'archive_catalog.log';
+
+        if (!is_dir($logDir)) {
+            wp_mkdir_p($logDir);
+        }
+
+        $log = function ($msg) use ($logFile) {
+            $time = date('Y-m-d H:i:s');
+            file_put_contents($logFile, "[$time] $msg\n", FILE_APPEND);
+        };
+
+        $log("START [OLD CATALOG] sync_archive_catalog_entry | katalog_id={$katalog_id}, catalog_year={$catalog_year}");
+
+        // --------------------------------------------------
+        // Basic validation
+        // --------------------------------------------------
+        if (empty($katalog_id)) {
+            // $log("STOP: katalog_id is missing");
+            return;
+        }
+
+        // Extract only YYYY from catalog_year (e.g. "text 2025")
+        $year = null;
+        if (!empty($catalog_year) && preg_match('/(19|20)\d{2}/', $catalog_year, $m)) {
+            $year = $m[0];
+        }
+
+        if (!$year) {
+            // $log("STOP: valid year not found in catalog_year");
+            return;
+        }
+
+        $domain = $_SERVER['HTTP_HOST'] ?? null;
+        if (!$domain) {
+            $log("STOP: domain missing");
+            return;
+        }
+
+        $log("DOMAIN={$domain}, YEAR={$year}");
+
+        // --------------------------------------------------
+        // Database configurations
+        // --------------------------------------------------
+        $databases = [
+            ['host'=>'dedyk180.cyber-folks.pl','name'=>PWE_DB_NAME_180,'user'=>PWE_DB_USER_180,'pass'=>PWE_DB_PASSWORD_180],
+            ['host'=>'dedyk93.cyber-folks.pl','name'=>PWE_DB_NAME_93,'user'=>PWE_DB_USER_93,'pass'=>PWE_DB_PASSWORD_93],
+            ['host'=>'dedyk239.cyber-folks.pl','name'=>PWE_DB_NAME_239,'user'=>PWE_DB_USER_239,'pass'=>PWE_DB_PASSWORD_239],
+        ];
+
+        // Use localhost on the current server
+        switch ($_SERVER['SERVER_ADDR']) {
+            case '94.152.207.180': $databases[0]['host'] = 'localhost'; break;
+            case '94.152.206.93':  $databases[1]['host'] = 'localhost'; break;
+            case '91.225.28.47':   $databases[2]['host'] = 'localhost'; break;
+        }
+
+        // --------------------------------------------------
+        // Process each database
+        // --------------------------------------------------
+        foreach ($databases as $i => $db) {
+
+            $log("DATABASE #" . ($i+1) . " | host={$db['host']} | db={$db['name']}");
+
+            $wpdb = new wpdb($db['user'], $db['pass'], $db['name'], $db['host']);
+
+            if ($wpdb->last_error) {
+                $log("DB CONNECTION ERROR: " . $wpdb->last_error);
+                continue;
+            }
+
+            // --------------------------------------------------
+            // Get fair_id
+            // --------------------------------------------------
+            $fair_id = $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT id FROM fairs WHERE fair_domain = %s",
+                    $domain
+                )
+            );
+
+            if (empty($fair_id)) {
+                $log("FAIR_ID not found – skip database");
+                continue;
+            }
+
+            $log("FAIR_ID={$fair_id}");
+
+            // --------------------------------------------------
+            // Get existing archive data
+            // --------------------------------------------------
+            $slug = 'fair_kw_old_arch';
+            $existing_data = $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT data FROM fair_adds WHERE fair_id = %d AND slug = %s",
+                    $fair_id,
+                    $slug
+                )
+            );
+
+            // --------------------------------------------------
+            // Rebuild data: ONE entry per year
+            // --------------------------------------------------
+            $pairs = [];
+
+            if (!empty($existing_data)) {
+                $items = array_filter(explode(';', $existing_data));
+
+                foreach ($items as $item) {
+                    if (!str_contains($item, '-')) {
+                        continue;
+                    }
+
+                    [$y, $id] = explode('-', $item, 2);
+
+                    // Keep only entries for other years
+                    if ($y !== $year) {
+                        $pairs[$y] = $y . '-' . $id;
+                    }
+                }
+            }
+
+            // Overwrite / add current year
+            $pairs[$year] = $year . '-' . $katalog_id;
+
+            $new_data = implode(';', $pairs) . ';';
+
+            // --------------------------------------------------
+            // Insert or update
+            // --------------------------------------------------
+            $query = $wpdb->prepare(
+                "INSERT INTO fair_adds (fair_id, slug, data)
+                VALUES (%d, %s, %s)
+                ON DUPLICATE KEY UPDATE data = VALUES(data)",
+                $fair_id,
+                $slug,
+                $new_data
+            );
+
+            $result = $wpdb->query($query);
+
+            if ($result === false) {
+                $log("DB ERROR: " . $wpdb->last_error);
+            } else {
+                $log("OK | saved data={$new_data}");
+            }
+        }
+
+        $log("DONE");
+        $log("--------------------------------------------------");
     }
 
     /**
@@ -276,6 +463,25 @@ class CatalogFunctions {
         }
         return $data;
     }
+    public static function multi_translation($key, $plural = false) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../../../translations/includes/katalog-wystawcow.json';
+
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        $translations_map = $translations_data[$locale] ?? $translations_data['en_US'];
+
+
+        if ($plural === true) {
+            if (isset($translations_map['plurals'][$key])) {
+                return $translations_map['plurals'][$key];
+            }
+
+            return $key;
+        }
+
+        return $translations_map[$key] ?? $key;
+    }
 
     /**
      * Check Title for Exhibitors Catalog
@@ -287,11 +493,11 @@ class CatalogFunctions {
         if (substr($title, 0, 2) === "``") {
             $exhibitors_title = substr($title, 2, -2);
         } elseif($format == 'PWECatalogFull'){
-            $exhibitors_title = PWECommonFunctions::languageChecker('Katalog wystawców ','Exhibitor Catalog ') . $title;
+            $exhibitors_title = self::multi_translation('catalog') . $title;
         } elseif ($format == 'PWECatalog21' || $format == 'PWECatalog10'){
-            $exhibitors_title = PWECommonFunctions::languageChecker('Wystawcy ','Exhibitors ') . (($title) ? $title : do_shortcode('[trade_fair_catalog_year]'));
+            $exhibitors_title = self::multi_translation('exhibitors') . (($title) ? $title : do_shortcode('[trade_fair_catalog_year]'));
         } elseif ($format == 'PWECatalog7'){
-            $exhibitors_title = PWECommonFunctions::languageChecker('Nowi wystawcy na targach ','New exhibitors at the fair ') . $title;
+            $exhibitors_title = self::multi_translation('new_exhibitors') . $title;
         }
         return $exhibitors_title;
     }

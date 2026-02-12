@@ -1073,29 +1073,29 @@ class PWECalendar extends PWECommonFunctions {
                         });
                     });
 
-                    // Convert Set to array
+                    // 2. Convert Set to array
                     let allCategoriesArray = Array.from(categorySet);
 
-                    // Sort alphabetically, but move "other" to the end
+                    // 3. Sort alphabetically, but move "other" to the end
                     allCategoriesArray.sort((a, b) => {
                         if (a === "'. self::multi_translation('other') .'") return 1; // "other" after everything else
                         if (b === "'. self::multi_translation('other') .'") return -1;
                         return a.localeCompare(b); // alphabetical order for the rest
                     });
 
-                    // Map to objects for dropdown
+                    // 4. Map to objects for dropdown
                     let sortedCategories = allCategoriesArray.map(cat => ({
                         name: cat,
                         slug: cat.toLowerCase().replace(/\s+/g, "-")
                     }));
 
-                    // Add "All" at the beginning
+                    // 5. Add "All" at the beginning
                     sortedCategories.unshift({
                         name: "'. self::multi_translation('all') .'",
                         slug: "all"
                     });
 
-                    // Add "Premier editions" at the end if needed
+                    // 6. Add "Premier editions" at the end if needed
                     if ("'. $pwe_calendar_week .'" !== "true") {
                         sortedCategories.push({
                             name: "'. self::multi_translation('premier_edition') .'",
@@ -1106,7 +1106,7 @@ class PWECalendar extends PWECommonFunctions {
                     // Now use sortedCategories to build your dropdown
                     let allCategoriesData = sortedCategories;
 
-                    // Fill the dropdown
+                    // 3. Fill the dropdown
                     allCategoriesData.forEach((category, i) => {
                         const li = document.createElement("li");
                         const categorySlug = category.slug.toLowerCase().replace(/\s+/g, "-");
@@ -1126,8 +1126,8 @@ class PWECalendar extends PWECommonFunctions {
                                 });
                             } else {
                                 allEvents.forEach(eventItem => {
-                                    const eventCategories = eventItem.getAttribute("search_category")?.split(",").map(cat => cat.trim().toLowerCase()) || [];
-                                    const eventCategorySlug = eventCategories.filter(cat => cat !== "b2c").map(cat => cat.replace(/\s+/g, "-"));
+                                    const eventCategories = eventItem.getAttribute("search_category")?.split(/\s+/) || [];
+                                    const eventCategorySlug = eventCategories.map(cat => cat.toLowerCase().replace(/\s+/g, "-"));
                                     const isCategoryMatched = eventCategorySlug.includes(categorySlug);
                                     eventItem.classList.toggle("dont-show", !isCategoryMatched);
                                 });
@@ -1146,17 +1146,63 @@ class PWECalendar extends PWECommonFunctions {
                     b2cElements.forEach(element => element.style.display = "none");
 
                     // Search functionality
-                    inputSearchElement?.addEventListener("input", () => {
+                    inputSearchElement?.addEventListener("input", async (e) => {
                         const query = inputSearchElement.value.toLowerCase().trim();
+
+
+                        const localMatches = [];
                         allEvents.forEach(eventItem => {
                             const fairName = eventItem.getAttribute("search_engine")?.toLowerCase().trim() || "";
                             const shortName = eventItem.querySelector(".pwe-calendar__short-name")?.innerText.toLowerCase().trim() || "";
-                            const match = eventItem.classList.contains(query) || fairName.includes(query) || shortName.includes(query);
-                            eventItem.classList.toggle("dont-show", !match);
+
+                            const isLocalMatch = eventItem.classList.contains(query) ||
+                                                fairName.includes(query) ||
+                                                shortName.includes(query);
+
+                            if (isLocalMatch) {
+                                localMatches.push(eventItem);
+                            }
+
+                        });
+
+                        let apiMatchIds = [];
+                        if (query.length > 2) {
+                            try {
+                                const response = await fetch("https://cap.warsawexpo.eu/api/tagsSearch", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Accept": "application/json"
+                                    },
+                                    body: JSON.stringify({ tag: query })
+                                });
+
+                                if (response.ok) {
+                                    const data = await response.json();
+                                    apiMatchIds = data.map(id => String(id));
+                                }
+                            } catch (error) {
+                                console.error("Fetch Error:", error);
+                            }
+                        }
+
+                        allEvents.forEach(eventItem => {
+                            const eventId = eventItem.getAttribute("id");
+
+                            const isLocalMatch = localMatches.includes(eventItem);
+                            const isApiMatch = apiMatchIds.includes(eventId);
+
+
+
+                            if (!isLocalMatch || !isApiMatch) {
+                                eventItem.classList.add("dont-show");
+                            }
+                            if (isLocalMatch || isApiMatch) {
+                                eventItem.classList.remove("dont-show");
+                            }
                         });
                     });
 
-                    // Handle dropdown open/close
                     dropdownBtn?.addEventListener("click", () => {
                         let isExpanded = dropdownBtn.getAttribute("aria-expanded") === "true";
                         dropdownBtn.setAttribute("aria-expanded", !isExpanded);
@@ -1165,6 +1211,7 @@ class PWECalendar extends PWECommonFunctions {
                     });
 
                 });
+
             </script>';
         }
 
@@ -1238,6 +1285,10 @@ class PWECalendar extends PWECommonFunctions {
         $shortcode_short_desc_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_short_desc);
         $short_desc = $shortcode_short_desc_available ? $shortcode_short_desc : $post_meta['short_desc'][0];
 
+
+        // [pwe_fair_id]
+        $shortcode_fair_id = self::get_pwe_shortcode("pwe_fair_id", $domain);
+
         // [pwe_visitors]
         $shortcode_visitors = self::get_pwe_shortcode("pwe_visitors", $domain);
         $shortcode_visitors_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_visitors);
@@ -1278,7 +1329,7 @@ class PWECalendar extends PWECommonFunctions {
 
         if ($event_type === "" || $event_type === "event") {
             $output = '
-            <div class="pwe-calendar__item" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '">
+            <div class="pwe-calendar__item" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '" id="'.$shortcode_fair_id.'">
                 <a class="pwe-calendar__link" href="'. ($target_blank ? $website : $permalink) .'" '. ($target_blank ? 'target="_blank"' : '') .'>
                     <div class="pwe-calendar__tile" style="background-image:url(' . esc_url($secondary_image_url) . ');">';
                         if (!empty($short_desc)) {
