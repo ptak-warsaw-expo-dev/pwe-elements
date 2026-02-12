@@ -15,7 +15,8 @@ textarea{
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_profile"],
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_registration"],
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_map"],
-#vc_ui-panel-edit-element[data-vc-shortcode="pwe_attractions"] {
+#vc_ui-panel-edit-element[data-vc-shortcode="pwe_attractions"],
+#vc_ui-panel-edit-element[data-vc-shortcode="pwe_news"] {
 
 
     .backend-area-full-width { 
@@ -208,4 +209,10 @@ textarea{
 
 #vc_ui-panel-edit-element[data-vc-shortcode="pwe_header"] .vc_column[data-vc-shortcode-param-name="logotypes_layout"] {
     display: none;
+}
+
+/* News say about us SVG text area raw html*/
+.vc_ui-panel-content textarea[name$="[news_say_about_us_blocks_icon]"],
+.vc_ui-panel-content textarea[name*="news_say_about_us_blocks_icon"]{
+  height: 50px !important;
 }

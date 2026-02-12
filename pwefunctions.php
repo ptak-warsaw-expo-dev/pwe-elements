@@ -173,7 +173,9 @@ class PWECommonFunctions {
                 MAX(CASE WHEN fa.slug = 'category_pl' THEN fa.data END) AS category_pl,
                 MAX(CASE WHEN fa.slug = 'category_en' THEN fa.data END) AS category_en,
                 MAX(CASE WHEN fa.slug = 'konf_name' THEN fa.data END) AS konf_name,
-                MAX(CASE WHEN fa.slug = 'fair_kw_new' THEN fa.data END) AS fair_kw_new
+                MAX(CASE WHEN fa.slug = 'fair_kw_new' THEN fa.data END) AS fair_kw_new,
+                MAX(CASE WHEN fa.slug = 'fair_kw_old_arch' THEN fa.data END) AS fair_kw_old_arch,
+                MAX(CASE WHEN fa.slug = 'fair_kw_new_arch' THEN fa.data END) AS fair_kw_new_arch
 
             FROM fairs f
             LEFT JOIN fair_adds fa ON fa.fair_id = f.id
@@ -980,6 +982,8 @@ class PWECommonFunctions {
             "badge" => $fair->fair_badge ?? "",
             "catalog" => $fair->fair_kw ?? "",
             "catalog_id" => $fair->fair_kw_new ?? "",
+            "catalog_archive" => $fair->fair_kw_old_arch ?? "",
+            "catalog_id_archive" => $fair->fair_kw_new_arch ?? "",
             "shop" => $fair->fair_shop ?? "",
             "category_pl" => $fair->category_pl ?? "",
             "category_en" => $fair->category_en ?? "",

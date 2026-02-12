@@ -121,13 +121,14 @@ function get_fair_data($specific_domain = null) {
     return $current_domain && isset($cached_data[$current_domain]) ? $cached_data[$current_domain] : null;
 }
 
-function register_dynamic_shortcodes() {
+function register_dynamic_shortcodes() { 
     // List of shortcodes and their corresponding fields
     $shortcodes = [
         'pwe_name_pl'               => 'name_pl', // [pwe_name_pl] || [pwe_name_pl domain="domain.com"]
         'pwe_name_en'               => 'name_en',
         'pwe_desc_pl'               => 'desc_pl',
         'pwe_desc_en'               => 'desc_en',
+        'pwe_fair_id'               => 'id',
         'pwe_short_desc_pl'         => 'short_desc_pl',
         'pwe_short_desc_en'         => 'short_desc_en',
         'pwe_full_desc_pl'          => 'full_desc_pl',
@@ -159,8 +160,11 @@ function register_dynamic_shortcodes() {
         'pwe_youtube'               => 'youtube',
         'pwe_catalog'               => 'catalog',
         'pwe_catalog_id'            => 'catalog_id',
+        'pwe_catalog_archive'       => 'catalog_archive',
+        'pwe_catalog_id_archive'    => 'catalog_id_archive',
         'pwe_category_pl'           => 'category_pl',
         'pwe_category_en'           => 'category_en',
+        'pwe_group'                 => 'group',
         'pwe_conference_name'       => 'conference_name',
         'pwe_name_cs'               => 'name_cs',
         'pwe_desc_cs'               => 'desc_cs',
@@ -219,6 +223,7 @@ function PWE_GF_shortcodes($text, $form, $entry, $url_encode, $esc_html, $nl2br,
         'pwe_name_en'               => 'name_en',
         'pwe_desc_pl'               => 'desc_pl',
         'pwe_desc_en'               => 'desc_en',
+        'pwe_fair_id'               => 'id',
         'pwe_short_desc_pl'         => 'short_desc_pl',
         'pwe_short_desc_en'         => 'short_desc_en',
         'pwe_full_desc_pl'          => 'full_desc_pl',
@@ -252,6 +257,7 @@ function PWE_GF_shortcodes($text, $form, $entry, $url_encode, $esc_html, $nl2br,
         'pwe_catalog_id'            => 'catalog_id',
         'pwe_category_pl'           => 'category_pl',
         'pwe_category_en'           => 'category_en',
+        'pwe_group'                 => 'group',
         'pwe_conference_name'       => 'conference_name'
     ];
 
