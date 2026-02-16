@@ -1459,7 +1459,7 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
 
 
                 $(event.target)
-                    .closest("form").find(".gfield_visibility_visible").not(`[data-conditional-logic="hidden"]`).find("input").each(function() {
+                    .closest("form").find(".gfield_visibility_visible").not(`[data-conditional-logic="hidden"]`).not(".gfield--type-honeypot").find("input").each(function() {
                         const $input = $(this);
                         const getLocal = $("html").attr("lang");
 
