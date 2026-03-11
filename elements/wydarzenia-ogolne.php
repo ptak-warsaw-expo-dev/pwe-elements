@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Class PWElementConferences
@@ -31,51 +31,16 @@ class PWElementConferences extends PWElements {
                     'element' => 'pwe_element',
                     'value' => 'PWElementConferences',
                 ),
-            ),
-            array(
-                'type' => 'checkbox',
-                'group' => 'PWE Element',
-                'heading' => esc_html__('Get conferance from CAP', 'pwelement'),
-                'param_name' => 'conf_cap',
-                'description' => __('Set Yes if You want to get all elements from central data baze', 'pwelement'),
-                'save_always' => true,
-                'dependency' => array(
-                    'element' => 'pwe_element',
-                    'value' => 'PWElementConferences',
-                ),
-            ),
+            )
         );
 
         return $element_output;
-    }
-    
-    /**
-    * Creating the connection to data dase.
-    * 
-    * @return wpdb Obiekt bazy danych
-    */
-    private static function connectToDatabase() {
-
-        if ($_SERVER['SERVER_ADDR'] != '94.152.207.180') {
-            $database_host = 'localhost';
-            $database_name = 'warsawexpo_dodatkowa';
-            $database_user = 'warsawexpo_admin-dodatkowy';
-            $database_password = 'N4c-TsI+I4-C56@q';
-        } else {
-            $database_host = 'localhost';
-            $database_name = 'automechanicawar_dodatkowa';
-            $database_user = 'automechanicawar_admin-dodatkowa';
-            $database_password = '9tL-2-88UAnO_x2e';
-        }
-        $custom_db = new wpdb($database_user, $database_password, $database_name, $database_host);
-
-        return $custom_db;
     }
 
     /**
      * Static method to generate the HTML output_general for the PWE Element.
      * Returns the HTML output_general as a string.
-     * 
+     *
      * @param array @atts options
      * @return string @output html
      */
@@ -91,7 +56,7 @@ class PWElementConferences extends PWElements {
         } else {
             $text_shadow = 'black !important;';
         }
-        
+
         extract( shortcode_atts( array(
             'conf_logotypes_catalog' => '',
         ), $atts ));
@@ -107,8 +72,8 @@ class PWElementConferences extends PWElements {
                     text-shadow: 2px 2px '. $text_shadow .';
                 }
                 .pwelement_'. self::$rnd_id .' .pwe-conferences-header {
-                    background-image:url("'. (file_exists($_SERVER["DOCUMENT_ROOT"] . "/doc/background.webp") ? "/doc/background.webp" : "/doc/background.jpg") .'"); 
-                    background-position: center; 
+                    background-image:url("'. (file_exists($_SERVER["DOCUMENT_ROOT"] . "/doc/background.webp") ? "/doc/background.webp" : "/doc/background.jpg") .'");
+                    background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
                     padding: 100px 18px;
@@ -136,7 +101,7 @@ class PWElementConferences extends PWElements {
             <div id="pweConferences" class="pwe-conferences">
                 <div class="pwe-conferences-header">
                     <h1 class="text-uppercase text-centered">
-                        <span>'. 
+                        <span>'.
                             self::languageChecker(
                                 <<<PL
                                 Kongres Branży<br>[trade_fair_opisbranzy]
@@ -148,7 +113,7 @@ class PWElementConferences extends PWElements {
                         .'</span>
                     </h1>
                 </div>
-                <div class="custom-width-limit single-block-padding">'. 
+                <div class="custom-width-limit single-block-padding">'.
                     self::languageChecker(
                         <<<PL
                             <p>Zapraszamy na specjalistyczną Konferencję, która odbędzie się w ramach międzynarodowych targów [trade_fair_name]. Tematyka spotkania skupiać się będzie na najnowszych trendach, innowacjach i wyzwaniach w branży [trade_fair_opisbranzy]. W jej programie znajdziecie Państwo prelekcje ekspertów, panele dyskusyjne, warsztaty oraz prezentacje firm powiązanych sektorem.</p>
@@ -163,7 +128,7 @@ class PWElementConferences extends PWElements {
                             <p>Outline of the Conference program during [trade_fair_name_eng]:</p>
                         EN
                     )
-                    .'<ul>'. 
+                    .'<ul>'.
                         self::languageChecker(
                             <<<PL
                                 <li>Najnowsze trendy i innowacje w branży [trade_fair_opisbranzy]</li>
@@ -187,7 +152,7 @@ class PWElementConferences extends PWElements {
                             EN
                         )
                     .'</ul>
-                    <p>'. 
+                    <p>'.
                         self::languageChecker(
                             <<<PL
                             Te tematy pomogą uczestnikom poznać aktualne zmiany w branży [trade_fair_opisbranzy], a także nawiązać cenne kontakty biznesowe i wymienić się wiedzą z innymi specjalistami z tej dziedziny.
@@ -203,7 +168,7 @@ class PWElementConferences extends PWElements {
                 $files = glob($logotypes_catalog_path . '/*');
                 if(!empty($conf_logotypes_catalog) && is_dir($logotypes_catalog_path) && count($files) > 0) {
                     $output .= '<div class="pwe-conferences-logotypes text-centered custom-width-limit single-block-padding">
-                        <h2>'. 
+                        <h2>'.
                             self::languageChecker(
                                 <<<PL
                                 PARTNERZY MEDIALNI
@@ -219,7 +184,7 @@ class PWElementConferences extends PWElements {
             $output .= '</div>
 
             <script>
-                
+
                 const congresSections = document.querySelectorAll(`[class^="konferencja-"]`);
                 const pweConferences = document.querySelector(".row-container:has(.pwe-conferences)");
                 const pageHeader = document.querySelector("#page-header");
@@ -247,228 +212,12 @@ class PWElementConferences extends PWElements {
     }
 
     /**
-     * Static method to generate the HTML output_general for the PWE Element.
-     * Returns the HTML output_general as a string.
-     * 
-     * @param array @pre_data prelection
-     * @return string @output html
-     */
-    private static function cap_css() {
-        $css_output = '
-            <style>
-                .pwe-conf-day-selector{
-                    display: flex;
-                    justify-content: space-evenly;                
-                }
-                .pwe-conf-day-selector .active{
-                    font-weight: 800;
-                    color: ' . self::$accent_color . ';
-                }
-                .pwe-conf-day-select{
-                    cursor: pointer;
-                }
-                .pwe-conf-pre{
-                    display: flex;
-                    flex-direction: row;
-                    margin-bottom: 18px;
-                    align-items: center;
-                }
-                .pwe-conf-head-container{
-                    width: 30%;
-                }
-                .pwe-conf-pre-text-container{
-                    text-align: left;
-                    width: 70%;
-                }
-                .pwe-conf-pre-text-container :is(h3, h4, h5, p){
-                    margin-top: 18px;
-                }
-                .speakers-img{
-                    display: flex;
-                    gap: 27px;
-                    flex-direction: column;
-                    align-items: center;
-                }
-                img{
-                    position: relative;
-                    border-radius: 50%;
-                    z-index: 1;
-                    top: unset;
-                    left: unset;
-                    width: 40%;
-                }
-            </style>
-        ';
-
-        return $css_output;
-    }
-
-    /**
-     * Static method to generate the HTML output_general for the PWE Element.
-     * Returns the HTML output_general as a string.
-     * 
-     * @param array @pre_data prelection
-     * @return string @output html
-     */
-    private static function cap_js() {
-        $css_output = '
-            <script>
-                jQuery(document).ready(function ($){
-                    $(".pwe-conf-day-select").on("click", function(){
-                        $(".pwe-conf-day-select").each(function(){
-                            $(this).removeClass("active");
-                        })
-                        $(".pwe-conf-day").each(function(){
-                            $(this).hide();
-                        })
-                        const classChecker = $(this).attr("id");
-                        console.log($("." + classChecker));
-                        $("." + classChecker).show();
-                        $(this).addClass("active");
-                    })
-
-                })
-            </script>
-        ';
-
-        return $css_output;
-    }
-
-    /**
-     * Static method to generate the HTML output_general for the PWE Element.
-     * Returns the HTML output_general as a string.
-     * 
-     * @param array @pre_data prelection
-     * @return string @output html
-     */
-    private static function add_days($day_data) {
-        $day_count = 1;
-        $day_count_pre = 1;
-        $day_output .= '
-            <div class="pwe-conf-day-selector">
-        ';
-
-        foreach ($day_data as $key => $value) {         
-            $day_output .= '
-                <div class="pwe-conf-day-select" id="pwe-conf-day-' . $day_count . '">
-                    <p>' . $key . '</p>
-                </div>
-            ';
-            $day_count++;
-        }
-
-        $day_output .= '
-            </div>
-            <hr class="pwe-conf-break">
-        ';
-
-        foreach ($day_data as $value) {
-            $day_output .= '
-                <div class="pwe-conf-day pwe-conf-day-' . $day_count_pre . '">
-                    ' . self::add_prelection($value) . '
-                </div>
-            ';
-            $day_count_pre++;
-        }
-        return $day_output;
-    }
-
-    /**
-     * Static method to generate the HTML output_general for the PWE Element.
-     * Returns the HTML output_general as a string.
-     * 
-     * @param array @pre_data prelection
-     * @return string @output html
-     */
-    private static function add_prelection($pre_data) {
-        $pre_count = 1;
-        foreach ($pre_data as $key => $value){
-            $pre_output .='
-                <div class="pwe-conf-pre">
-                    <div class="pwe-conf-head-container">
-                        <div class="speakers-img">';
-                            foreach($value as $url_data){
-                                if($url_data->url){
-                                    $pre_output .='<img class="speake" src="' . $url_data->url . '">';
-                                }
-                                if($url_data->desc){
-                                    $pre_output .='<button class="pwe-conf-lecturer-bio-btn btn btn-sm">BIO</button>';
-                                }
-                            }
-            $pre_output .='
-                        </div>
-                    </div>
-                    <div class="pwe-conf-pre-text-container">
-                        <h4 class="lectur-time">' . $value->time . '</h4>
-                        <h5 class="lecturer-name">';
-                    foreach($value as $lect_key => $lect_data){
-                        if (strpos($lect_key, 'legent') === 0 && $lect_data->name != '*') {
-                            $pre_output .= $lect_data->name . '<br>';
-                        }
-                    }
-            $pre_output .='
-                        </h5>
-                        <h3 class="lectur-title">' . $value->title . '</h3>
-                        <div class="inside-text">
-                            <p>' . $value->desc . '</p>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            ';
-            $day_count_pre++;
-        }
-        return $pre_output;
-    }
-
-    /**
-     * Static method to generate the HTML output_general for the PWE Element.
-     * Returns the HTML output_general as a string.
-     * 
-     * @param array @atts options
-     * @return string @output html
-     */
-    private static function output_cap($atts) {
-        $custom_db = self::connectToDatabase();
-
-        $name = do_shortcode('[trade_fair_name]');
-        $prepared_query = $custom_db->prepare("SELECT primary_fair FROM associates WHERE primary_fair = %s OR side1 = %s OR side2 = %s OR side3 = %s OR side4 = %s OR side5 = %s OR side6 = %s LIMIT 1", $name, $name, $name, $name, $name, $name, $name, $name);
-
-        $results = $custom_db->get_results($prepared_query);
-        $primary_fair = $results[0]->primary_fair;
-
-        $prepared_query = $custom_db->prepare("SELECT * FROM conferances WHERE conf_main_fair = %s", $primary_fair);
-
-        $conf_data = $custom_db->get_results($prepared_query);
-        $data = json_decode($conf_data[0]->conf_data);
-
-        $output_cap .= self::cap_css();
-        $output_cap .= self::cap_js();
-
-        $output_cap .= '
-            <div class="conf-data text-centered">
-                <div class="conf-header">
-                <h3> Program Kongresu </h3>
-                <p>Wybierz dzień kongresu aby sprawdzić program</p>
-            </div>
-        ';
-
-        $output_cap .= self::add_days($data);
-
-        return $output_cap;
-    }
-
-    /**
      * Static method to generate the HTML output for the PWE Element.
      * Returns the HTML output as a string.
-     * 
+     *
      * @param array @atts options
      */
     public static function output($atts) {
-        if($atts['conf_cap'] != true){
-            return self::output_general($atts);
-        } else {
-            return self::output_cap($atts);
-        }
+        return self::output_general($atts); 
     }
 }
