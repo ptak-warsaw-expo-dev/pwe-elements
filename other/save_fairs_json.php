@@ -28,7 +28,7 @@ if ($token === $secret_key) {
 
     $get_fairs_data = function () {
 
-        $pwe_fairs = PWECommonFunctions::get_database_fairs_data();
+        $pwe_fairs = PWECommonFunctions::get_database_fairs_data('all');
         $pwe_fairs_translations = PWECommonFunctions::get_database_translations_data();
 
         $fairs_data = ["fairs" => []];
