@@ -1317,6 +1317,14 @@ if ($event_type === "week") {
     while (have_posts()):
         the_post();
 
+        $is_first_edition = true;
+        foreach ($all_events_json as $event) {
+            if ($event['edition'] !== "1") {
+                $is_first_edition = false;
+                break;
+            }
+        }
+
         $output .= '
         <div data-parent="true" class="vc_row row-container boomapps_vcrow '. $title .'" data-section="21" itemscope itemtype="http://schema.org/Event">
             <div class="single-event" data-imgready="true">
@@ -1326,17 +1334,9 @@ if ($event_type === "week") {
                     <div id="singleEventHeader" class="single-event__header">
                         <div class="single-event__header-stripes">';
 
-                        $is_first_edition = false;
-
                         foreach ($all_events_json as $event) {
                             $domain   = $event['domain'];
                             $name     = $event['name'];
-                            $edition  = $event['edition'];
-
-                            if ($event['edition'] === "1") {
-                                $is_first_edition = true;
-                                break;
-                            }
 
                             $output .= '
                             <div class="single-event__header-stripe" style="background-image:url(https://' . $domain . '/doc/background.webp)">
@@ -1596,7 +1596,6 @@ if ($event_type === "week") {
                                                 display: none;
                                             }
                                             .single-event__halls-element.active > .single-event__halls-link {
-                                                pointer-events: none;
                                                 display: block;
                                             }
                                             .single-event__halls-element.unactive > .single-event__halls-link {
@@ -2767,121 +2766,167 @@ if ($event_type === "week") {
                             </div>
 
                             <script>
+                                const currentDomain = window.location.hostname;
                                 const allItems = '. json_encode($json_data_all) .';
 
                                 const allActiveItemsObject = [];
 
-                                /* =========================
-                                FULL
-                                ========================= */
-                                const addActiveClassToFullObject = () => {
-                                    allItems.forEach(item => {
-                                        if (!/^[A-Z]$/.test(item.id)) return;
+                                // =========================
+                                // GROUP (letter + domain)
+                                // =========================
+                                const grouped = {};
 
-                                        const fullObject = document.getElementById(item.id);
-                                        if (!fullObject) return;
+                                allItems.forEach(item => {
+                                    const letter = item.id[0];
+                                    const key = `${letter}_${item.domain}`;
 
-                                        // Full can always be active
-                                        fullObject.classList.add("active");
-
-                                        // Color
-                                        const colors = fullObject.querySelectorAll(".single-event__halls-element-color");
-                                        colors.forEach(el => {
-                                            el.style.fill = item.color;
-                                        });
-
-                                        // Logo
-                                        const logoLinks = fullObject.querySelectorAll(".single-event__halls-element-logo-link.full");
-                                        logoLinks.forEach(link => {
-                                            const logo = link.querySelector(".single-event__halls-element-logo");
-                                            if (!logo) return;
-                                            link.setAttribute("href", `https://${item.domain}`);
-                                            logo.setAttribute("href", `https://${item.domain}/doc/logo.webp`);
-                                        });
-
-                                        allActiveItemsObject.push({ id: fullObject.id });
-                                    });
-                                };
-
-                                /* =========================
-                                HALF
-                                ========================= */
-                                const addActiveClassToHalfObject = () => {
-                                    const halfItems = allItems.filter(item => /^[A-Z]\d$/.test(item.id));
-
-                                    halfItems.forEach((item1, index) => {
-                                        halfItems.slice(index + 1).forEach(item2 => {
-                                            const combinedIds = [`${item1.id}_${item2.id}`, `${item2.id}_${item1.id}`];
-
-                                            combinedIds.forEach(id => {
-                                                const halfElement = document.getElementById(id);
-                                                if (!halfElement) return;
-
-                                                // Do not add active children if half is active
-                                                halfElement.classList.add("active");
-
-                                                const colors = halfElement.querySelectorAll(".single-event__halls-element-color");
-                                                colors.forEach(el => {
-                                                    el.style.fill = item1.color; // kolor bierzemy z pierwszego elementu
-                                                });
-
-                                                // Logo half
-                                                const logoLinks = halfElement.querySelectorAll(".single-event__halls-element-favicon-link.half");
-                                                logoLinks.forEach(link => {
-                                                    const logo = link.querySelector(".single-event__halls-element-favicon");
-                                                    if (!logo) return;
-                                                    link.setAttribute("href", `https://${item1.domain}`);
-                                                    logo.setAttribute("href", `https://${item1.domain}/doc/favicon.webp`);
-                                                });
-
-                                                allActiveItemsObject.push({ id: halfElement.id });
-                                            });
-                                        });
-                                    });
-                                };
-
-                                /* =========================
-                                QUARTER
-                                ========================= */
-                                const addActiveClassToQuarterObject = () => {
-                                    allItems.forEach(item => {
-                                        if (!/^[A-Z]\d$/.test(item.id)) return;
-
-                                        const quarter = document.getElementById(item.id);
-                                        if (!quarter) return;
-
-                                        // If parent half or full is active, do not overwrite
-                                        const parentHalfOrFull = quarter.closest(".single-event__halls-element.half, .single-event__halls-element.full");
-                                        if (parentHalfOrFull && parentHalfOrFull.classList.contains("active")) return;
-
-                                        quarter.classList.add("active");
-
-                                        const colors = quarter.querySelectorAll(".single-event__halls-element-color");
-                                        colors.forEach(el => {
-                                            el.style.fill = item.color;
-                                        });
-
-                                        const logoLinks = quarter.querySelectorAll(".single-event__halls-element-logo-link.quarter");
-                                        logoLinks.forEach(link => {
-                                            const logo = link.querySelector(".single-event__halls-element-logo");
-                                            if (!logo) return;
-                                            link.setAttribute("href", `https://${item.domain}`);
-                                            logo.setAttribute("href", `https://${item.domain}/doc/logo.webp`);
-                                        });
-
-                                        allActiveItemsObject.push({ id: quarter.id });
-                                    });
-                                };
-
-                                /* =========================
-                                INIT
-                                ========================= */
-                                window.addEventListener("load", () => {
-                                    addActiveClassToFullObject();
-                                    addActiveClassToHalfObject();
-                                    addActiveClassToQuarterObject();
+                                    if (!grouped[key]) grouped[key] = [];
+                                    grouped[key].push(item);
                                 });
 
+                                // =========================
+                                // FULL
+                                // =========================
+                                const activateFull = () => {
+                                    const letters = [...new Set(allItems.map(item => item.id[0]))];
+
+                                    letters.forEach(letter => {
+                                        const itemsForLetter = allItems.filter(item => item.id[0] === letter);
+
+                                        // Extracting all unique domains
+                                        const domains = [...new Set(itemsForLetter.map(i => i.domain))];
+                                        if (domains.length !== 1) return;
+
+                                        // If exist full element (e.g. F)
+                                        const fullLetterItem = itemsForLetter.find(i => i.id.length === 1);
+                                        if (fullLetterItem) {
+                                            const el = document.getElementById(letter);
+                                            if (!el) return;
+
+                                            el.classList.add("active");
+
+                                            if (items[0].domain === currentDomain) {
+                                                el.classList.add("current-fair");
+                                            }
+
+                                            const colors = el.querySelectorAll(".single-event__halls-element-color");
+                                            colors.forEach(c => c.style.fill = fullLetterItem.color);
+
+                                            const logoLinksFull = el.querySelectorAll(".single-event__halls-element-logo-link.full");
+                                            logoLinksFull.forEach(link => {
+                                                const logo = link.querySelector(".single-event__halls-element-logo");
+                                                if (!logo) return;
+
+                                                link.setAttribute("href", `https://${fullLetterItem.domain}`);
+                                                logo.setAttribute("href", `https://${fullLetterItem.domain}/doc/logo.webp`);
+                                            });
+
+                                            allActiveItemsObject.push({ id: letter });
+                                            return;
+                                        }
+
+                                        // If all sub-elements (F1..F4) exist and are of the same domain, activate full element
+                                        const subItems = itemsForLetter.filter(i => i.id.length > 1);
+                                        if (subItems.length === 4) {
+                                            const el = document.getElementById(letter);
+                                            if (!el) return;
+
+                                            el.classList.add("active");
+
+                                            if (items[0].domain === currentDomain) {
+                                                el.classList.add("current-fair");
+                                            }
+
+                                            const colors = el.querySelectorAll(".single-event__halls-element-color");
+                                            colors.forEach(c => c.style.fill = subItems[0].color);
+
+                                            const logoLinksFull = el.querySelectorAll(".single-event__halls-element-logo-link.full");
+                                            logoLinksFull.forEach(link => {
+                                                const logo = link.querySelector(".single-event__halls-element-logo");
+                                                if (!logo) return;
+
+                                                link.setAttribute("href", `https://${subItems[0].domain}`);
+                                                logo.setAttribute("href", `https://${subItems[0].domain}/doc/logo.webp`);
+                                            });
+
+                                            allActiveItemsObject.push({ id: letter });
+                                        }
+                                    });
+                                };
+
+                                // =========================
+                                // HALF
+                                // =========================
+                                const activateHalf = () => {
+                                    Object.entries(grouped).forEach(([key, items]) => {
+                                        if (items.length !== 2) return;
+
+                                        const id = `${items[0].id}_${items[1].id}`;
+                                        const reverseId = `${items[1].id}_${items[0].id}`;
+
+                                        let el = document.getElementById(id);
+                                        if (!el) el = document.getElementById(reverseId);
+                                        if (!el) return;
+
+                                        el.classList.add("active");
+
+                                        if (items[0].domain === currentDomain) {
+                                            el.classList.add("current-fair");
+                                        }
+
+                                        const colors = el.querySelectorAll(".single-event__halls-element-color");
+                                        colors.forEach(c => c.style.fill = items[0].color);
+
+                                        const logoLinksHalf = el.querySelectorAll(".single-event__halls-element-favicon-link.half");
+                                        logoLinksHalf.forEach(link => {
+                                            const logo = link.querySelector(".single-event__halls-element-favicon");
+                                            if (!logo) return;
+
+                                            link.setAttribute("href", `https://${items[0].domain}`);
+                                            logo.setAttribute("href", `https://${items[0].domain}/doc/favicon.webp`);
+                                        });
+
+                                        allActiveItemsObject.push({ id: el.id });
+                                    });
+                                };
+
+                                // =========================
+                                // QUARTER
+                                // =========================
+                                const activateQuarter = () => {
+                                    Object.entries(grouped).forEach(([key, items]) => {
+                                        if (items.length !== 1) return;
+
+                                        const item = items[0];
+                                        const el = document.getElementById(item.id);
+                                        if (!el) return;
+
+                                        el.classList.add("active");
+
+                                        const colors = el.querySelectorAll(".single-event__halls-element-color");
+                                        colors.forEach(c => c.style.fill = item.color);
+
+                                        const logoLinks = el.querySelectorAll(".single-event__halls-element-logo-link.quarter");
+                                        logoLinks.forEach(link => {
+                                            const logo = link.querySelector(".single-event__halls-element-logo");
+                                            if (!logo) return;
+
+                                            link.setAttribute("href", `https://${item.domain}`);
+                                            logo.setAttribute("href", `https://${item.domain}/doc/logo.webp`);
+                                        });
+
+                                        allActiveItemsObject.push({ id: item.id });
+                                    });
+                                };
+
+                                // =========================
+                                // INIT
+                                // =========================
+                                window.addEventListener("load", () => {
+                                    activateFull();
+                                    activateHalf();
+                                    activateQuarter();
+                                });
                             </script>';  
                         }
 
@@ -2889,11 +2934,11 @@ if ($event_type === "week") {
                         <div id="singleEventFairs" class="single-event__fairs">';
 
                             if (count($all_events_json) == 1) {
-                                $events_word_declination = "wydarzenie";
+                                $events_word_declination =  ($lang_pl ? "wydarzenie" : "event");
                             } else if (count($all_events_json) > 1 && count($all_events_json) < 5) {
-                                $events_word_declination = "wydarzenia";
+                                $events_word_declination = ($lang_pl ? "wydarzenia" : "events");
                             } else {
-                                $events_word_declination = "wydarzeń";
+                                $events_word_declination = ($lang_pl ? "wydarzeń" : "events");
                             }
 
                             $output .= '
@@ -2902,10 +2947,20 @@ if ($event_type === "week") {
                                     <h3>'. get_the_title() .'</h3>
                                     <div class="single-event__fairs-counts">
                                         <img src="/wp-content/plugins/PWElements/includes/calendar/assets/calendar-icon.png"><span>'. $days .' '. ($lang_pl ? "dni" : "days") .'</span>
-                                        <img src="/wp-content/plugins/PWElements/includes/calendar/assets/right-arrow-icon.png"><span>'. count($all_events_json) .' '. ($lang_pl ? $events_word_declination : "events") .'</span>
+                                        <img src="/wp-content/plugins/PWElements/includes/calendar/assets/right-arrow-icon.png"><span>'. count($all_events_json) .' '. $events_word_declination .'</span>
                                     </div>
                                 </div>
                                 <div class="single-event__fairs-items">';
+
+                                    foreach ($all_events_json as &$event) {
+                                        $shortcode_edition = get_pwe_shortcode("pwe_edition", $event['domain']);
+                                        $event['edition_sort'] = (int)$shortcode_edition;
+                                    }
+                                    unset($event);
+
+                                    usort($all_events_json, function($a, $b) {
+                                        return $a['edition_sort'] <=> $b['edition_sort'];
+                                    });
 
                                     foreach ($all_events_json as $event) {
 

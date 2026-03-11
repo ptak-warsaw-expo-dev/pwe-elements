@@ -239,6 +239,61 @@ class PWEConferenceCap {
         }
 
         $database_data = PWECommonFunctions::get_database_conferences_data();
+        $isWeek = PWECommonFunctions::get_database_week_data();
+
+        if(!empty($isWeek)){
+            $week_data = PWECommonFunctions::get_database_week_all();
+            if(!empty($week_data)){
+                $conf_slugs = $week_data['conf']['conf'] ?? [];
+                $pre_slugs  = $week_data['conf']['pre']  ?? [];
+
+                $current_url = $_SERVER['REQUEST_URI'];
+
+                $is_conf_page =
+                    str_contains($current_url, '/wydarzenia/')
+                    || str_contains($current_url, '/en/conferences/');
+
+                $is_pre_page =
+                    str_contains($current_url, '/prelegenci/')
+                    || str_contains($current_url, '/en/speakers/');
+
+                $allowed = [];
+
+                if ($is_conf_page) {
+                    $allowed = $conf_slugs;
+                }
+
+                if ($is_pre_page) {
+                    $allowed = $pre_slugs;
+                }
+
+                if (!$is_conf_page && !$is_pre_page) {
+                    $allowed = array_merge($conf_slugs, $pre_slugs);
+                }
+
+                $filtered = array_filter($database_data, function ($conf) use ($allowed) {
+                    return in_array($conf->conf_slug, $allowed, true);
+                });
+                $database_data = array_values($filtered);
+
+                if($_SERVER['HTTP_HOST'] == 'warsawsecuritydefenceexpo.com'){
+                    if($is_conf_page){
+                        $desiredOrder = [481, 514, 482, 499, 500, 501, 464, 508];
+
+                        $orderMap = array_flip($desiredOrder);
+
+                        usort($database_data, function ($a, $b) use ($orderMap) {
+                            $posA = $orderMap[$a->id] ?? PHP_INT_MAX;
+                            $posB = $orderMap[$b->id] ?? PHP_INT_MAX;
+
+                            return $posA <=> $posB;
+                        });
+                    }
+                };
+            }
+        }
+
+
         // PWEConferenceCapFunctions::debugConferencesConsole( $database_data ); // checking recent changes
 
         $one_conf_mode = isset($atts['conference_cap_one_conference_mode']) && $atts['conference_cap_one_conference_mode'] === 'true';

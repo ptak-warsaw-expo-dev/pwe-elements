@@ -106,6 +106,45 @@ class PWEConferenceShortInfo {
 
         // 1) Zbierz konferencje + dni targowe
         $all_conferences = PWECommonFunctions::get_database_conferences_data();
+        $isWeek = PWECommonFunctions::get_database_week_data();
+
+        if(!empty($isWeek)){
+            $week_data = PWECommonFunctions::get_database_week_all();
+            if(!empty($week_data)){
+                $conf_slugs = $week_data['conf']['conf'] ?? [];
+                $pre_slugs  = $week_data['conf']['pre']  ?? [];
+
+                $current_url = $_SERVER['REQUEST_URI'];
+
+                $is_conf_page =
+                    str_contains($current_url, '/wydarzenia/')
+                    || str_contains($current_url, '/en/conferences/');
+
+                $is_pre_page =
+                    str_contains($current_url, '/')
+                    || str_contains($current_url, '/en/');
+
+                $allowed = [];
+
+                if ($is_conf_page) {
+                    $allowed = $conf_slugs;
+                }
+
+                if ($is_pre_page) {
+                    $allowed = $pre_slugs;
+                }
+
+                if (!$is_conf_page && !$is_pre_page) {
+                    $allowed = array_merge($conf_slugs, $pre_slugs);
+                }
+
+                $filtered = array_filter($all_conferences, function ($conf) use ($allowed) {
+                    return in_array($conf->conf_slug, $allowed, true);
+                });
+                $all_conferences = array_values($filtered);
+            }
+        }
+
         $fair_days       = self::getFairDaysFromShortcodes();
         $lang            = (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE === 'en') ? 'EN' : 'PL';
 
@@ -150,7 +189,7 @@ class PWEConferenceShortInfo {
         $list_for_renderer = $use_schedule ? $sorted_current_conferences : [];
 
         if (method_exists($renderer_class, 'output')) {
-            $content = $renderer_class::output($atts, $list_for_renderer, $rnd_class, $name, $title, $desc);
+            $content = $renderer_class::output($atts, $list_for_renderer, $rnd_class, $name, $title, $desc, $isWeek);
             if (trim($content) === '') return '';
             return '<div id="PWEConferenceShortInfo" class="' . esc_attr($rnd_class) . '">' . $content . '</div>';
         }

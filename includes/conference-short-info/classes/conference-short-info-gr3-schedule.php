@@ -25,7 +25,7 @@ class PWEConferenceShortInfoGr3Schedule extends PWEConferenceShortInfo {
         return implode(' ', array_slice($words, 0, $max_words)) . $ellipsis;
     }
 
-    public static function output($atts, $all_conferences, $rnd_class, $name, $title, $desc) {
+    public static function output($atts, $all_conferences, $rnd_class, $name, $title, $desc, $isWeek) {
 
         $lang = (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE === 'en') ? 'EN' : 'PL';
 
@@ -100,6 +100,14 @@ class PWEConferenceShortInfoGr3Schedule extends PWEConferenceShortInfo {
                 }
             }
 
+            $url_pl = '/wydarzenia/?konferencja=' . $conf_slug;
+            $url_en = '/en/conferences/?konferencja=' . $conf_slug;
+
+            if (!empty($isWeek)) {
+                $url_pl = '/prelegenci/?konferencja=' . $conf_slug;
+                $url_en = '/en/speakers/?konferencja=' . $conf_slug;
+            }
+
             // Dodajemy konferencję ZAWSZE — data może być pusta
             $processed_conferences[] = [
                 'slug'  => $conf_slug,
@@ -108,10 +116,7 @@ class PWEConferenceShortInfoGr3Schedule extends PWEConferenceShortInfo {
                 'logo'  => $logo,
                 'alt' => $logo_alt,
                 'date'  => $date_range,
-                'url' => self::confLang(
-                    '/wydarzenia/?konferencja=' . $conf_slug,
-                    '/en/conferences/?konferencja=' . $conf_slug
-                ),
+                'url'   => self::confLang($url_pl, $url_en),
             ];
         }
 

@@ -1276,15 +1276,12 @@ class PWECalendar extends PWECommonFunctions {
             $fair_date = $formatted_date;
         }
 
-        $target_blank = $post_meta['web_page_link_target_blank'][0];
-
         $lang = ICL_LANGUAGE_CODE;
 
         // [pwe_short_desc_{lang}]
         $shortcode_short_desc = self::get_pwe_shortcode("pwe_short_desc_$lang", $domain);
         $shortcode_short_desc_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_short_desc);
         $short_desc = $shortcode_short_desc_available ? $shortcode_short_desc : $post_meta['short_desc'][0];
-
 
         // [pwe_fair_id]
         $shortcode_fair_id = self::get_pwe_shortcode("pwe_fair_id", $domain);
@@ -1328,6 +1325,9 @@ class PWECalendar extends PWECommonFunctions {
         $secondary_image_url = $post_meta['_secondary_image_url'][0];
 
         if ($event_type === "" || $event_type === "event") {
+
+            $target_blank = $post_meta['web_page_link_target_blank'][0];
+
             $output = '
             <div class="pwe-calendar__item" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '" id="'.$shortcode_fair_id.'">
                 <a class="pwe-calendar__link" href="'. ($target_blank ? $website : $permalink) .'" '. ($target_blank ? 'target="_blank"' : '') .'>
@@ -1403,6 +1403,17 @@ class PWECalendar extends PWECommonFunctions {
                 </a>
             </div>';
         } else {
+            $post_id = $event['post_id'];
+
+            if ($post_id) {
+                $website = get_post_meta($post_id, 'web_page_link', true);
+                $host = parse_url($website, PHP_URL_HOST);
+                $domain = preg_replace('/^www\./', '', $host);
+                $permalink = $event['permalink'];
+            } else {
+                $domain = '';
+            }
+
             $date_start = get_post_meta($post_id, 'fair_date_start', true);
             $date_end   = get_post_meta($post_id, 'fair_date_end', true);
 
@@ -1468,23 +1479,28 @@ class PWECalendar extends PWECommonFunctions {
             $week_area       = !empty($meta_area) ? $meta_area : ceil($cap_area / 10) * 10;
 
             if (count($filtered_events) == 1) {
-                $events_word_declination = "wydarzenie";
+                $events_word_declination = ($lang_pl ? "wydarzenie" : "event");
             } else if (count($filtered_events) > 1 && count($filtered_events) < 5) {
-                $events_word_declination = "wydarzenia";
+                $events_word_declination = ($lang_pl ? "wydarzenia" : "events");
             } else {
-                $events_word_declination = "wydarzeń";
+                $events_word_declination = ($lang_pl ? "wydarzeń" : "events");
             }
+
+            $short_desc = get_post_meta($post_id, 'events_week_short_desc', true);
+            $event_link = get_post_meta($post_id, 'events_week_link', true);
+
+            $target_blank = $post_meta['events_week_link'][0];
 
             $output = '
             <div class="pwe-calendar__item '. $event_type .'" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '">
-                <a class="pwe-calendar__link" href="'. $permalink .'">
+                <a class="pwe-calendar__link" href="'. ((!empty($event_link) && $target_blank) ? $event_link : $permalink) .'" '. ($target_blank ? 'target="_blank"' : '') .'>
                     <div class="pwe-calendar__tile" style="background-image:url(' . esc_url($secondary_image_url) . ');">
-                        <div class="pwe-calendar__short-name">
-                            <h4>'. get_the_title($post_id) .'</h4>
+                        <div class="pwe-calendar__short-name" style="'. (!empty($short_desc) ? 'top:65% !important;' : '') .'">
+                            <h4>'. (!empty($short_desc) ? $short_desc : get_the_title($post_id)) .'</h4>
                         </div>
                         <div class="pwe-calendar_strip">
                             <div class="pwe-calendar__button-check"><p>' . self::multi_translation("check_out") . ' ❯</p></div>
-                            <div class="pwe-calendar__count-events"><p>'. count($filtered_events) . ' ' . $events_word_declination .'</p></div>
+                            <div class="pwe-calendar__count-events"><p>'. count($filtered_events) . '  ' . $events_word_declination .'</p></div>
                         </div>
                     </div>
                     <div class="pwe-calendar_info">

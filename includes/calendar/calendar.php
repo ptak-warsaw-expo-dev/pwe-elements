@@ -340,6 +340,24 @@ add_action('add_meta_boxes_event', function($post) {
             'normal',
             'high'
         );
+        // Metabox for description fields
+        add_meta_box(
+            'events_desc',
+            'Events week description',
+            'events_week_desc_callback',
+            'event',
+            'normal',
+            'high'
+        );
+        // Metabox for custom link fields
+        add_meta_box(
+            'events_custom_link',
+            'Events week custom link',
+            'events_week_link_callback',
+            'event',
+            'normal',
+            'high'
+        );
         // Metabox for dates fields
         add_meta_box(
             'events_dates',
@@ -787,6 +805,37 @@ function events_week_fairs_callback($post) {
     }
 }
 
+function events_week_desc_callback($post) {
+    wp_nonce_field('save_events_week_desc', 'events_week_desc_nonce');
+
+    $events_week_short_desc = get_post_meta($post->ID, 'events_week_short_desc', true);
+    
+    echo '
+    <label for="events_week_short_desc">Short description:</label>
+    <div class="events_week_short_desc-container">
+        <input type="text" id="events_week_short_desc" name="events_week_short_desc" class="pwe-calendar-full-width-input" value="' . esc_attr($events_week_short_desc) . '" />
+    </div>';
+}
+
+function events_week_link_callback($post) {
+    wp_nonce_field('save_events_week_link', 'events_week_link_nonce');
+
+    $events_week_link = get_post_meta($post->ID, 'events_week_link', true);
+    $target_blank = get_post_meta($post->ID, 'events_week_link_target_blank', true);
+    
+    echo '
+    <div class="pwe-calendar-inputs-container">
+        <div class="pwe-calendar-input one-seventh-width">
+            <label for="events_week_link">Custom link:</label>
+            <input type="text" id="events_week_link" name="events_week_link" class="pwe-calendar-full-width-input" value="'. esc_attr($events_week_link) .'" />
+        </div>
+        <div class="pwe-calendar-input one-third-width checkbox">
+            <label for="events_week_link_target_blank">Open <strong>Custom link</strong><br>in a new window</label>
+            <input type="checkbox" id="events_week_link_target_blank" name="events_week_link_target_blank" '. checked($target_blank, true, false) .'/>
+        </div>
+    </div>';
+}
+
 function events_week_dates_callback($post) {
     wp_nonce_field('save_events_week_dates', 'events_week_dates_nonce');
  
@@ -926,6 +975,19 @@ function save_events_week_meta($post_id) {
         update_post_meta($post_id, 'header_slider', $headers);
     } else {
         delete_post_meta($post_id, 'header_slider');
+    }
+
+    if (isset($_POST['events_week_desc_nonce']) && wp_verify_nonce($_POST['events_week_desc_nonce'], 'save_events_week_desc')) {
+        if (isset($_POST['events_week_short_desc'])) {
+            update_post_meta($post_id, 'events_week_short_desc', sanitize_text_field($_POST['events_week_short_desc']));
+        }
+    }
+
+    if (isset($_POST['events_week_link_nonce']) && wp_verify_nonce($_POST['events_week_link_nonce'], 'save_events_week_link')) {
+        update_post_meta($post_id, 'events_week_link', sanitize_text_field($_POST['events_week_link']));
+
+        $target_blank = isset($_POST['events_week_link_target_blank']) ? true : false;
+        update_post_meta($post_id, 'events_week_link_target_blank', $target_blank);
     }
 
     if (isset($_POST['events_week_halls_nonce']) && wp_verify_nonce($_POST['events_week_halls_nonce'], 'save_events_week_halls')) {

@@ -25,7 +25,10 @@
     "all": "wszystkie",
     "other": "inne",
     "premier_editions_class": "premierowe-edycje",
-    "new_date_coming_soon": "Nowa data wkrótce"
+    "new_date_coming_soon": "Nowa data wkrótce",
+    "events_word_1": "wydarzenie",
+    "events_word_2": "wydarzenia",
+    "events_word_3": "wydarzeń"
   },
   "en_US": {
     "buy_ticket": "Buy ticket",
@@ -53,7 +56,10 @@
     "all": "all-categories",
     "other": "other",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "New date coming soon"
+    "new_date_coming_soon": "New date coming soon",
+    "events_word_1": "event",
+    "events_word_2": "events",
+    "events_word_3": "events"
   },
   "de_DE": {
     "buy_ticket": "Ticket kaufen",
@@ -81,7 +87,10 @@
     "all": "alle-kategorien",
     "other": "andere",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Neuer Termin folgt in Kürze"
+    "new_date_coming_soon": "Neuer Termin folgt in Kürze",
+    "events_word_1": "Ereignis",
+    "events_word_2": "Ereignisse",
+    "events_word_3": "Ereignisse"
   },
   "lt_LT": {
     "buy_ticket": "Pirkti bilietą",
@@ -109,7 +118,10 @@
     "all": "visos-kategorijos",
     "other": "kita",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Nauja data netrukus"
+    "new_date_coming_soon": "Nauja data netrukus",
+    "events_word_1": "įvykis",
+    "events_word_2": "įvykiai",
+    "events_word_3": "įvykiai"
   },
   "lv_LV": {
     "buy_ticket": "Pirkt biļeti",
@@ -137,7 +149,10 @@
     "all": "visas-kategorijas",
     "other": "cits",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Jauns datums drīzumā"
+    "new_date_coming_soon": "Jauns datums drīzumā",
+    "events_word_1": "notikums",
+    "events_word_2": "notikumi",
+    "events_word_3": "notikumi"
   },
   "uk": {
     "buy_ticket": "Купити квиток",
@@ -165,7 +180,10 @@
     "all": "vsi-kategorii",
     "other": "inshi",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Нова дата незабаром"
+    "new_date_coming_soon": "Нова дата незабаром",
+    "events_word_1": "подія",
+    "events_word_2": "події",
+    "events_word_3": "події"
   },
   "cs_CZ": {
     "buy_ticket": "Koupit vstupenku",
@@ -193,7 +211,10 @@
     "all": "vsechny-kategorie",
     "other": "ostatni",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Nový termín již brzy"
+    "new_date_coming_soon": "Nový termín již brzy",
+    "events_word_1": "událost",
+    "events_word_2": "události",
+    "events_word_3": "události"
   },
   "sk_SK": {
     "buy_ticket": "Kúpiť vstupenku",
@@ -221,7 +242,10 @@
     "all": "vsetky-kategorie",
     "other": "ostatne",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Nový termín už čoskoro"
+    "new_date_coming_soon": "Nový termín už čoskoro",
+    "events_word_1": "udalosť",
+    "events_word_2": "udalosti",
+    "events_word_3": "udalosti"
   },
   "ru_RU": {
     "buy_ticket": "Купить билет",
@@ -249,6 +273,9 @@
     "all": "vse-kategorii",
     "other": "drugie",
     "premier_editions_class": "premier-editions",
-    "new_date_coming_soon": "Новая дата скоро"
+    "new_date_coming_soon": "Новая дата скоро",
+    "events_word_1": "событие",
+    "events_word_2": "события",
+    "events_word_3": "события"
   }
 }  
