@@ -88,6 +88,24 @@ class PWENewsSummary extends PWENews {
                 'dependency' => $dep,
             ),
             array(
+                'type' => 'colorpicker',
+                'group' => 'News',
+                'heading' => __('Color diagram (current year)', 'pwelement'),
+                'param_name' => 'pwe_news_summary_stats_year_current_color',
+                'param_holder_class' => 'backend-area-half-width',
+                'save_always' => true,
+                'dependency' => $dep,
+            ),
+            array(
+                'type' => 'colorpicker',
+                'group' => 'News',
+                'heading' => __('Color diagram (previous year)', 'pwelement'),
+                'param_name' => 'pwe_news_summary_stats_year_previous_color',
+                'param_holder_class' => 'backend-area-half-width',
+                'save_always' => true,
+                'dependency' => $dep,
+            ),
+            array(
                 'type' => 'textfield',
                 'group' => 'News',
                 'heading' => __('Number of visitors (current period)', 'pwelement'),
@@ -252,33 +270,35 @@ public static function output($atts) {
 
         
         $args = shortcode_atts( array(
-            'pwe_news_summary_domain'               => '',
-            'pwe_news_summary_title'                => '',
-            'pwe_news_summary_desc'                 => '',
-            'pwe_news_summary_stats_title'          => '',
-            'pwe_news_summary_stats_subtitle'       => '',
-            'pwe_news_summary_stats_countries'      => '',
-            'pwe_news_summary_stats_year'           => '',
-            'pwe_news_summary_stats_year_previous'  => '',
-            'pwe_news_summary_stats_visitors'       => '',
-            'pwe_news_summary_stats_visitors_previous' => '',
-            'pwe_news_summary_stats_exhibitors'     => '',
+            'pwe_news_summary_domain'                    => '',
+            'pwe_news_summary_title'                     => '',
+            'pwe_news_summary_desc'                      => '',
+            'pwe_news_summary_stats_title'               => '',
+            'pwe_news_summary_stats_subtitle'            => '',
+            'pwe_news_summary_stats_countries'           => '',
+            'pwe_news_summary_stats_year'                => '',
+            'pwe_news_summary_stats_year_previous'       => '',
+            'pwe_news_summary_stats_year_current_color'  => '',
+            'pwe_news_summary_stats_year_previous_color' => '',
+            'pwe_news_summary_stats_visitors'            => '',
+            'pwe_news_summary_stats_visitors_previous'   => '',
+            'pwe_news_summary_stats_exhibitors'          => '',
             'pwe_news_summary_stats_exhibitors_previous' => '',
-            'pwe_news_summary_stats_space'          => '',
-            'pwe_news_summary_stats_space_previous' => '',
-            'pwe_news_summary_iframe_title'         => '',
-            'pwe_news_summary_iframe_link'          => '',
-            'pwe_news_summary_iframe_desc'          => '',
-            'pwe_news_summary_images'               => '',
-            'pwe_news_summary_medals_desc'          => '',
-            'pwe_news_summary_medals_button_title'  => '',
-            'pwe_news_summary_medals_button_link'   => '',
-            'pwe_news_summary_medals_images'        => '',
-            'pwe_news_summary_conf_title'           => '',
-            'pwe_news_summary_conf_desc'            => '',
-            'pwe_news_summary_conf_button_link'     => '',
-            'pwe_news_summary_next_title'           => '',
-            'pwe_news_summary_next_desc'            => '',
+            'pwe_news_summary_stats_space'               => '',
+            'pwe_news_summary_stats_space_previous'      => '',
+            'pwe_news_summary_iframe_title'              => '',
+            'pwe_news_summary_iframe_link'               => '',
+            'pwe_news_summary_iframe_desc'               => '',
+            'pwe_news_summary_images'                    => '',
+            'pwe_news_summary_medals_desc'               => '',
+            'pwe_news_summary_medals_button_title'       => '',
+            'pwe_news_summary_medals_button_link'        => '',
+            'pwe_news_summary_medals_images'             => '',
+            'pwe_news_summary_conf_title'                => '',
+            'pwe_news_summary_conf_desc'                 => '',
+            'pwe_news_summary_conf_button_link'          => '',
+            'pwe_news_summary_next_title'                => '',
+            'pwe_news_summary_next_desc'                 => '',
         ), $atts );
 
         // mozna uzywac i $args['...'] i $pwe_news_summary_...
@@ -416,6 +436,26 @@ public static function output($atts) {
 
         /* ======= OUTPUT ======= */
         $output  = '';
+
+        if (!empty($pwe_news_summary_stats_year_current_color)) {
+            $output .= '
+            <style>
+                .pwe-news-summary-stats__stats-diagram-bar-item.current,
+                .pwe-news-summary-stats__stats-diagram-year-box.current {
+                    background: '. $pwe_news_summary_stats_year_current_color .' !important;
+                }
+            </style>';
+        }
+        if (!empty($pwe_news_summary_stats_year_previous_color)) {
+            $output .= '
+            <style>
+                .pwe-news-summary-stats__stats-diagram-bar-item.prev,
+                .pwe-news-summary-stats__stats-diagram-year-box.prev {
+                    background: '. $pwe_news_summary_stats_year_previous_color .' !important;
+                }
+            </style>';
+        }
+
         $output .= '<div class="pwe-news-summary" id="PWENewsSummary">';
 
         if (!$is_warsawexpo && $thumbnail_url) {
@@ -424,7 +464,7 @@ public static function output($atts) {
 
         $output .= '<h1 class="pwe-news-summary__title">' . $pwe_news_summary_title . '</h1>
                  <hr class="pwe-news-summary__hr">
-                 <p class="pwe-news-summary__desc">' . $desc_html . '</p>
+                 <div class="pwe-news-summary__desc">' . $desc_html . '</div>
                  <hr class="pwe-news-summary__hr">';
 
         // Blok statystyk
@@ -446,13 +486,13 @@ public static function output($atts) {
                                     if ($vis_prev > 0 || $exh_prev > 0 || $spc_prev > 0) {
                                         $output .= '
                                         <div class="pwe-news-summary-stats__stats-diagram-year">
-                                            <div class="pwe-news-summary-stats__stats-diagram-year-box"></div>
+                                            <div class="pwe-news-summary-stats__stats-diagram-year-box prev"></div>
                                             <span>'. $year_prev .'</span>
                                         </div>';
                                     }
                                     $output .= '
                                     <div class="pwe-news-summary-stats__stats-diagram-year">
-                                        <div class="pwe-news-summary-stats__stats-diagram-year-box"></div>
+                                        <div class="pwe-news-summary-stats__stats-diagram-year-box current"></div>
                                         <span>'. $year_cur .'</span>
                                     </div>
                                 </div>
@@ -466,14 +506,14 @@ public static function output($atts) {
                                             if ($vis_prev > 0) {
                                                 $output .= '
                                                 <div class="pwe-news-summary-stats__stats-diagram-bar">
-                                                    <div class="pwe-news-summary-stats__stats-diagram-bar-item" data-count="'. $vis_prev_pct .'">
+                                                    <div class="pwe-news-summary-stats__stats-diagram-bar-item prev" data-count="'. $vis_prev_pct .'">
                                                         <div class="pwe-news-summary-stats__stats-diagram-bar-number"><span class="countup" data-count="'. $vis_prev .'">0</span></div>
                                                     </div>
                                                 </div>';
                                             }
                                             $output .= '
                                             <div class="pwe-news-summary-stats__stats-diagram-bar">
-                                                <div class="pwe-news-summary-stats__stats-diagram-bar-item" data-count="'. $vis_curr_pct .'">
+                                                <div class="pwe-news-summary-stats__stats-diagram-bar-item current" data-count="'. $vis_curr_pct .'">
                                                     <div class="pwe-news-summary-stats__stats-diagram-bar-number"><span class="countup" data-count="'. $vis_curr .'">0</span></div>
                                                 </div>
                                             </div>
@@ -487,14 +527,14 @@ public static function output($atts) {
                                             if ($exh_prev > 0) {
                                                 $output .= '
                                                 <div class="pwe-news-summary-stats__stats-diagram-bar">
-                                                    <div class="pwe-news-summary-stats__stats-diagram-bar-item" data-count="'. $exh_prev_pct .'">
+                                                    <div class="pwe-news-summary-stats__stats-diagram-bar-item prev" data-count="'. $exh_prev_pct .'">
                                                         <div class="pwe-news-summary-stats__stats-diagram-bar-number"><span class="countup" data-count="'. $exh_prev .'">0</span></div>
                                                     </div>
                                                 </div>';
                                             }
                                             $output .= '
                                             <div class="pwe-news-summary-stats__stats-diagram-bar">
-                                                <div class="pwe-news-summary-stats__stats-diagram-bar-item" data-count="'. $exh_curr_pct .'">
+                                                <div class="pwe-news-summary-stats__stats-diagram-bar-item current" data-count="'. $exh_curr_pct .'">
                                                     <div class="pwe-news-summary-stats__stats-diagram-bar-number"><span class="countup" data-count="'. $exh_curr .'">0</span></div>
                                                 </div>
                                             </div>
@@ -508,14 +548,14 @@ public static function output($atts) {
                                             if ($spc_prev > 0) {
                                                 $output .= '
                                                 <div class="pwe-news-summary-stats__stats-diagram-bar">
-                                                    <div class="pwe-news-summary-stats__stats-diagram-bar-item" data-count="'. $spc_prev_pct .'">
+                                                    <div class="pwe-news-summary-stats__stats-diagram-bar-item prev" data-count="'. $spc_prev_pct .'">
                                                         <div class="pwe-news-summary-stats__stats-diagram-bar-number"><span class="countup" data-count="'. $spc_prev .'">0</span> m<sup>2</sup></div>
                                                     </div>
                                                 </div>';
                                             }
                                             $output .= '
                                             <div class="pwe-news-summary-stats__stats-diagram-bar">
-                                                <div class="pwe-news-summary-stats__stats-diagram-bar-item" data-count="'. $spc_curr_pct .'">
+                                                <div class="pwe-news-summary-stats__stats-diagram-bar-item current" data-count="'. $spc_curr_pct .'">
                                                     <div class="pwe-news-summary-stats__stats-diagram-bar-number"><span class="countup" data-count="'. $spc_curr .'">0</span> m<sup>2</sup></div>
                                                 </div>
                                             </div>
@@ -653,7 +693,10 @@ public static function output($atts) {
                             <a class="pwe-news-summary__btn" href="' . $medals_btn_link . '"' . $a_target . '>' . $pwe_news_summary_medals_button_title . '</a>
                         </div>';
             if ($medals_img_url) {
-                $output .= '<img src="' . $medals_img_url . '" alt="' . self::languageChecker('Medale dla najlepszych wystawców', 'Medals for the best exhibitors') . '">';
+                $output .= '
+                <div class="pwe-news-summary__medal-image">
+                    <img src="' . $medals_img_url . '" alt="' . self::languageChecker('Medale dla najlepszych wystawców', 'Medals for the best exhibitors') . '">
+                </div>';
             }
             $output .= '
                     </div>
@@ -684,7 +727,9 @@ public static function output($atts) {
                             <a class="pwe-news-summary__btn--black" href="' . $exh_link . '"' . $a_target . '>' . self::languageChecker('Zostań wystawcą', 'Become an exhibitor') . '</a>
                         </div>
                     </div>
-                    <img src="https://' . $domain . '/doc/kafelek.jpg" alt="' . self::languageChecker('Główne logo targów', 'Main trade fair logo') . '">
+                    <div class="pwe-news-summary__next-image">
+                        <img src="https://' . $domain . '/doc/kafelek.jpg" alt="' . self::languageChecker('Główne logo targów', 'Main trade fair logo') . '">
+                    </div>
                 </div>
                 <hr class="pwe-news-summary__hr">';
         }

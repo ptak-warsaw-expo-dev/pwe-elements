@@ -11,6 +11,9 @@
     min-height: 90vh;
     padding: 18px !important;
 }
+.wpb_column:has(.pwe-store) {
+    max-width: 100% !important;
+}
 @media (max-width: 960px) {
     .wpb_column:has(.pwe-store) {
         padding: 0 !important;

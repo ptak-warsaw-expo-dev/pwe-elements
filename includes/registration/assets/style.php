@@ -1419,7 +1419,7 @@ if(strpos($source_utm, 'utm_source=platyna') !== false && $domain_gr=="gr2"){
             width: 100%;
             border-radius: 18px !important;
             color:white !important;
-            background-color:#636363;
+            background-color:#636363 !important;
         }
         #pweRegistration .benefits_icon img {
             width: 70px;

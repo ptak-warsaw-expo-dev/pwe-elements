@@ -446,13 +446,13 @@ ease;
     justify-content: center;
 }
 .pwe-news-summary__gallery-slide {
+    display: flex !important;
     aspect-ratio: 3/2;
     margin: 5px;
 }
 img.pwe-news-summary__gallery-img {
     object-fit: cover;
     object-position: center;
-    height: 100%;
 }
 
 
@@ -463,13 +463,18 @@ img.pwe-news-summary__gallery-img {
     justify-content: space-around;
     gap: 24px;
 }
-.pwe-news-summary__medal-container img {
+.pwe-news-summary__medal-image {
     flex: .4;
     max-width: 320px !important;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 18px;
     box-shadow: 0px 30px 60px -30px rgba(0,0,0,.45);
+    overflow: hidden;
+}
+.pwe-news-summary__medal-image img {
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
 }
 .pwe-news-summary__medal-desc {
     flex: .6;
@@ -509,11 +514,13 @@ img.pwe-news-summary__gallery-img {
     flex-direction: column;
     gap: 18px;
 }
-.pwe-news-summary__next img {
+.pwe-news-summary__next-image {
     flex: .3;
     max-width: 360px;
     border-radius: 50%;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+    aspect-ratio: 1/1;
+    overflow: hidden;
 }
 .pwe-news-summary__next-btn-container {
     display: flex;
@@ -575,8 +582,14 @@ img.pwe-news-summary__gallery-img {
     .pwe-news-summary__medal-container {
         flex-direction: column;
     }
+    .pwe-news-summary__medal-desc p {
+        text-align: start;
+    }
     .pwe-news-summary__next {
         flex-direction: column-reverse;
+    }
+    .pwe-news-summary__next-image {
+        max-width: 100%;
     }
     .pwe-news-summary__next-btn-container { 
         flex-direction: column;
