@@ -62,10 +62,10 @@ class PWECatalogCombined extends PWECatalog {
             }
             #katalog-'. self::$rnd_id .' :is(.col-2, .col-4, .col-6) {
                 margin-top: 50px;
-            } 
+            }
             #katalog-'. self::$rnd_id .' :is(.col-3, .col-5) {
                 margin-top: -50px;
-            }   
+            }
             #katalog-'. self::$rnd_id .' :is(.col-1, .col-7) {
                 margin-top: 50px;
             }
@@ -101,7 +101,7 @@ class PWECatalogCombined extends PWECatalog {
                 justify-content: center;
                 backface-visibility: hidden;
             }
-            #katalog-'. self::$rnd_id .' .combined-catalog__flip-card-front img, 
+            #katalog-'. self::$rnd_id .' .combined-catalog__flip-card-front img,
             #katalog-'. self::$rnd_id .' .combined-catalog__flip-card-back img {
                 max-width: 90%;
                 aspect-ratio: 3 / 2;
@@ -134,9 +134,9 @@ class PWECatalogCombined extends PWECatalog {
                 }
                 #katalog-'. self::$rnd_id .' :is(.col-2, .col-4, .col-6, .col-3, .col-5, .col-1, .col-7) {
                     margin-top: 0;
-                } 
+                }
             }
-            @media(max-width: 550px) { 
+            @media(max-width: 550px) {
                 #katalog-'. self::$rnd_id .' .combined-catalog__columns {
                     gap: 10px;
                 }
@@ -147,7 +147,7 @@ class PWECatalogCombined extends PWECatalog {
                     width: 120px;
                 }
             }
-            @media(max-width: 400px) { 
+            @media(max-width: 400px) {
                 #katalog-'. self::$rnd_id .' .combined-catalog__logo-tile {
                     width: 100px;
                 }
@@ -323,7 +323,7 @@ class PWECatalogCombined extends PWECatalog {
                     flipTile(idx);
                 });
             });
-            
+
             setInterval(flipRandomTiles, 2500);
         </script>';
 

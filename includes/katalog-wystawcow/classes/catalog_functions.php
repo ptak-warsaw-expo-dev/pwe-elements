@@ -36,7 +36,8 @@ class CatalogFunctions {
         $formatted_date = $today->format('Y-m-d');
         $token = md5("#22targiexpo22@@@#" . $formatted_date);
         $exh_catalog_address = PWECommonFunctions::get_database_meta_data('exh_catalog_address');
-        $can_url = $exh_catalog_address . $token . '&id_targow=' . $katalog_id;
+        $catalog_ids = array_filter(array_map('trim', explode(',', (string)$katalog_id)));
+
 
         if (current_user_can('administrator')) {
             if (empty($katalog_id)) {
@@ -81,28 +82,51 @@ class CatalogFunctions {
                     if (current_user_can('administrator')) {
                         echo '<script>console.log("Dane pobrane z pliku: https://' . $_SERVER['HTTP_HOST'] . '/wp-content/uploads/exhibitor-catalogs/' . basename($local_file) . ' (catalog_id=' . $firstKey . ')")</script>';
                     }
+
+                    if (!empty($catalog_ids)) {
+
+                        foreach ($catalog_ids as $single_id) {
+                            $api_url = $exh_catalog_address . $token . '&id_targow=' . $single_id;
+                            if (current_user_can('administrator')) {
+                                echo '<script>console.log("Dane zapisane do pliku z: '. $api_url .'")</script>';
+                                // echo '<script>console.log("Link do odświeżenia pliku API: '. $api_url .'&v='. time() .'")</script>';
+                            }
+                        }
+
+                    }
                 }
             }
         }
 
         // If local missing/invalid → get external JSON
-        if (empty($basic_wystawcy) && !empty($katalog_id)) {
+        if (empty($basic_wystawcy) && !empty($catalog_ids)) {
             try {
-                $json = @file_get_contents($can_url);
+                $basic_wystawcy = [];
 
-                if ($json === false) {
-                    throw new Exception('Nie można pobrać danych JSON z zewnętrznego źródła.');
-                }
+                foreach ($catalog_ids as $single_id) {
 
-                $data = json_decode($json, true);
-                if (!is_array($data)) {
-                    throw new Exception('Błąd dekodowania danych JSON.');
-                }
+                    $can_url = $exh_catalog_address . $token . '&id_targow=' . $single_id;
 
-                $basic_wystawcy = reset($data)['Wystawcy'] ?? [];
+                    $json = @file_get_contents($can_url);
 
-                if (current_user_can('administrator')) {
-                    echo '<script>console.log("Dane pobrane z zewnętrznego API '. $can_url .'")</script>';
+                    if ($json === false) {
+                        continue; // nie wywalamy wszystkiego przez jedno ID
+                    }
+
+                    $data = json_decode($json, true);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+
+                    $wystawcy = reset($data)['Wystawcy'] ?? [];
+
+                    if (is_array($wystawcy)) {
+                        $basic_wystawcy = array_merge($basic_wystawcy, $wystawcy);
+                    }
+
+                    if (current_user_can('administrator')) {
+                        echo '<script>console.log("Dane pobrane z API: '. $can_url .'")</script>';
+                    }
                 }
 
             } catch (Exception $e) {
@@ -211,6 +235,7 @@ class CatalogFunctions {
                 }
 
         }
+
         if($pwe_catalog_random){
             shuffle($logos_array);
         }
@@ -239,8 +264,6 @@ class CatalogFunctions {
             file_put_contents($logFile, "[$time] $msg\n", FILE_APPEND);
         };
 
-        $log("START [OLD CATALOG] sync_archive_catalog_entry | katalog_id={$katalog_id}, catalog_year={$catalog_year}");
-
         // --------------------------------------------------
         // Basic validation
         // --------------------------------------------------
@@ -259,6 +282,8 @@ class CatalogFunctions {
             // $log("STOP: valid year not found in catalog_year");
             return;
         }
+
+        $log("START [OLD CATALOG] sync_archive_catalog_entry | katalog_id={$katalog_id}, catalog_year={$year}");
 
         $domain = $_SERVER['HTTP_HOST'] ?? null;
         if (!$domain) {

@@ -34,21 +34,37 @@ class PWEMailing extends PWECommonFunctions {
 
         // Uruchom po załadowaniu Gravity Forms
 
+        self::gateCommit($this->todayYmd, $this->currentVer);
+
+        add_action('gform_loaded', [ $this, 'cleanup_catalog_feedback_entries' ], 5);
+
         add_action('gform_loaded', [ $this, 'catalog_feedback_form' ], 10);
+
+        add_action('gform_loaded', [ $this, 'catalog_exhibitors_details' ], 10);
 
         add_action('gform_loaded', [ $this, 'register_resend' ], 20);
 
         add_action('gform_loaded', [ $this, 'register_resend_platyna' ], 20);
 
-        add_action('shutdown', function () {
-            self::gateCommit($this->todayYmd, $this->currentVer);
-        });
+        add_action('gform_loaded', [ $this, 'enable_honeypot_for_all_forms' ], 30);
+
+
     }
 
     public function catalog_feedback_form() {
         if ( defined('DOING_CRON') && DOING_CRON ) return;
 
         $params = PWE_FormPresets::catalog_feedback_form([
+            // tu możesz nadpisać np. tytuły, pola, ustawienia, itd.
+        ]);
+
+        PWE_FormGenerator::apply($params);
+    }
+
+    public function catalog_exhibitors_details() {
+        if ( defined('DOING_CRON') && DOING_CRON ) return;
+
+        $params = PWE_FormPresets::catalog_exhibitors_details([
             // tu możesz nadpisać np. tytuły, pola, ustawienia, itd.
         ]);
 
@@ -77,6 +93,56 @@ class PWEMailing extends PWECommonFunctions {
         ]);
 
         PWE_NotificationProcessor::apply($params);
+    }
+
+    public function enable_honeypot_for_all_forms() : void {
+        if (defined('DOING_CRON') && DOING_CRON) {
+            return;
+        }
+
+        if (!class_exists('GFAPI') || !method_exists('GFAPI', 'get_forms')) {
+            return;
+        }
+
+        $changedIds = [];
+        $errorIds   = [];
+
+        foreach (GFAPI::get_forms() as $f) {
+            if(stripos('part_', $f['title']) !== false) continue;
+            $form = GFAPI::get_form($f['id']);
+
+            if (!$form || !is_array($form)) {
+                continue;
+            }
+
+            if (!empty($form['enableHoneypot'])) {
+                continue;
+            }
+
+            $form['enableHoneypot'] = true;
+
+            $res = GFAPI::update_form($form);
+
+            if (is_wp_error($res)) {
+                $errorIds[] = (int) $form['id'];
+            } else {
+                $changedIds[] = (int) $form['id'];
+            }
+        }
+
+        if (!empty($changedIds) || !empty($errorIds)) {
+            $msg = 'HONEYPOT:';
+
+            if (!empty($changedIds)) {
+                $msg .= ' zmieniono [' . implode(', ', $changedIds) . ']';
+            }
+
+            if (!empty($errorIds)) {
+                $msg .= ' błędy [' . implode(', ', $errorIds) . ']';
+            }
+
+            PWE_NotificationProcessor::mailing_log($msg);
+        }
     }
 
     /** PRE-CHECK */
@@ -135,6 +201,77 @@ class PWEMailing extends PWECommonFunctions {
             }
         } catch (\Throwable $e) {
             PWE_NotificationProcessor::mailing_log('GF: gateCommit exception – ' . $e->getMessage());
+        }
+    }
+
+    private function get_form_id_by_title(string $title) : ?int {
+
+        if ( ! class_exists('GFAPI') ) {
+            return null;
+        }
+
+        foreach (GFAPI::get_forms() as $form) {
+            if (
+                isset($form['title']) &&
+                trim($form['title']) === $title
+            ) {
+                return (int) $form['id'];
+            }
+        }
+
+        return null;
+    }
+
+    public function cleanup_catalog_feedback_entries() : void {
+
+        if ( defined('DOING_CRON') && DOING_CRON ) return;
+        if ( ! class_exists('GFAPI') ) return;
+
+        $form_id = $this->get_form_id_by_title('User opinions');
+        if ( ! $form_id ) return;
+
+        $page     = 1;
+        $per_page = 200;
+        $trashed  = 0;
+
+        // ID pola opinions_source
+        $opinions_source_field_id = 3;
+
+        do {
+            $entries = GFAPI::get_entries(
+                $form_id,
+                [ 'status' => 'active' ],
+                null,
+                [
+                    'page_size' => $per_page,
+                    'offset'   => ($page - 1) * $per_page,
+                ]
+            );
+
+            if ( is_wp_error($entries) || empty($entries) ) {
+                break;
+            }
+
+            foreach ($entries as $entry) {
+
+                $source_raw = $entry[(string) $opinions_source_field_id] ?? '';
+                $source     = trim((string) $source_raw);
+
+                // warunek: puste LUB same cyfry
+                if ( $source === '' || ctype_digit($source) ) {
+                    GFAPI::update_entry_property($entry['id'], 'status', 'trash');
+                    $trashed++;
+                }
+            }
+
+            $page++;
+
+        } while ( count($entries) === $per_page );
+
+        if ( $trashed > 0 ) {
+            PWE_NotificationProcessor::mailing_log(
+                'GF cleanup (catalog_feedback): ' . $trashed
+            );
         }
     }
 }

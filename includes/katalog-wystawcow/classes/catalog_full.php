@@ -32,8 +32,9 @@ class PWECatalogFull extends PWECatalog {
         $pwecatalog_display_random = isset($atts['pwecatalog_display_random1']) ? $atts['pwecatalog_display_random1'] : false;
         $file_changer = isset($atts['file_changer']) ? $atts['file_changer'] : null;
 
-        $exhibitors = CatalogFunctions::logosChecker($identification, $atts['format'], $pwecatalog_display_random, $file_changer, $catalog_display_duplicate, $atts['katalog_year']);
+        $output = '';
 
+        $exhibitors = CatalogFunctions::logosChecker($identification, $atts['format'], $pwecatalog_display_random, $file_changer, $catalog_display_duplicate, $atts['katalog_year']);
 
         if ($exhibitors === null){
             return;

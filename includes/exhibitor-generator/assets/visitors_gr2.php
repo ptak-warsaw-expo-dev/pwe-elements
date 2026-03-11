@@ -1279,65 +1279,86 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
 
     $output .= '
     <script>
-        jQuery(document).ready(function($){
+        jQuery(document).ready(function($) {
+
             const allSenders = ' . json_encode($all_senders) . ';
-
-            $(`form .gfield--type-phone`).addClass("gfield_visibility_hidden");
-
+            const selectElement = $("#exhibitors_selector");
+            const selectField = selectElement.closest(".gfield");
             const exhibitorCompany = $(`input[placeholder="Firma Zapraszająca"], input[placeholder="Inviting Company"]`).closest(".gfield");
+            const companyInput = exhibitorCompany.find("input");
             const exhibitorLogo = $(`.exhibitor-selector__container`);
-
-            exhibitorCompany.hide();
-            $("#exhibitors_selector").on("change", function() {
-                const exhId = $(this).val();
-                const exhibitorName = allSenders?.[exhId]?.name ?? "";
-                const exhibitorLogoUrl = allSenders?.[exhId]?.logo ?? "";
-
-                switch ($(this).val()) {
-                    case "":
-                        exhibitorCompany.hide();
-                        exhibitorLogo.hide();
-
-                        // wyczyść pola
-                        exhibitorCompany.find("input").val("");
-                        $(".gform_wrapper").find(`.exhibitor_logo input`).val("");
-                        $(".company-logo_add").html(`<img class="exhibitors-logo"><span>Miejsce na twój logotyp</span>`);
-
-                        exhibitorCompany.addClass("gfield_visibility_hidden");
-                        break;
-
-                    case "new_exhibitor":
-                        exhibitorCompany.show();
-                        exhibitorLogo.show();
-
-                        $(".company-logo_add").html(`
-                            <img class="exhibitors-logo">
-                            <span>Miejsce na twój logotyp</span><br>
-                            <span style="font-weight:700; font-size:22px; text-align:center;">Kliknij</span>
-                        `);
-                        exhibitorCompany.find("input").val("");
-                        $(".gform_wrapper").find(`.exhibitor_logo input`).val("");
-                        exhibitorCompany.removeClass("gfield_visibility_hidden");
-                        break;
-
-                    default:
-                        exhibitorLogo.show();
-
-                        exhibitorCompany.find("input").val(exhibitorName);
-                        $(".gform_wrapper").find(`.exhibitor_logo input`).val(exhibitorLogoUrl);
-                        $(".company-logo_add").html(`<img class="exhibitors-logo" src="${exhibitorLogoUrl}">`);
-
-                        exhibitorCompany.addClass("gfield_visibility_hidden");
-                }
-            });
-
 
             let exhibitor_name = $(".exhibitors-name").data("ex") ?? ' . json_encode($all_senders[$_GET['wystawca']]['name']) . ';
             let exhibitor_desc = `' . PWEExhibitorVisitorGenerator::$exhibitor_desc . '`;
             let exhibitor_stand = "' . PWEExhibitorVisitorGenerator::$exhibitor_stand . '";
-            let submitBtn = $(`input[type="submit"]`);
-            let massTable = $(".tabela-masowa");
-            console.log("Typ nadawcy: ' . $gr_data . '");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let patronValue = urlParams.get(\'p\');
+            if (!patronValue) {
+                const match = window.location.href.match(/[?&]p=([^&]+)/);
+                if (match) patronValue = decodeURIComponent(match[1]);
+            }
+
+            const cleanText = (str) => str ? str.toString().toLowerCase().replace(/[\s.]/g, "").trim() : "";
+
+            selectElement.on("change", function() {
+                const exhId = $(this).val();
+                const exhName = allSenders?.[exhId]?.name ?? "";
+                const exhLogoUrl = allSenders?.[exhId]?.logo ?? "";
+
+                if (exhId === "") {
+                    if (patronValue) {
+                        exhibitorCompany.attr("style", "display: block !important").removeClass("gfield_visibility_hidden");
+                        exhibitorLogo.hide();
+                        companyInput.val(patronValue);
+                        $(".exhibitors_name input").val(patronValue); // Synchronizacja z polem ukrytym
+                    } else {
+                        exhibitorCompany.attr("style", "display: none !important").addClass("gfield_visibility_hidden");
+                        companyInput.val("");
+                    }
+                } else if (exhId === "new_exhibitor") {
+                    exhibitorCompany.attr("style", "display: block !important").removeClass("gfield_visibility_hidden");
+                    exhibitorLogo.show();
+                    companyInput.val("");
+                    $(".company-logo_add").html(`<img class="exhibitors-logo"><span>Miejsce na twój logotyp</span><br><span style="font-weight:700; font-size:22px; text-align:center;">Kliknij</span>`);
+                } else {
+                    exhibitorLogo.show();
+                    companyInput.val(exhName);
+                    $(".exhibitors_name input").val(exhName);
+                    $(".gform_wrapper").find(`.exhibitor_logo input`).val(exhLogoUrl);
+                    $(".company-logo_add").html(`<img class="exhibitors-logo" src="${exhLogoUrl}">`);
+                    exhibitorCompany.attr("style", "display: none !important").addClass("gfield_visibility_hidden");
+                }
+            });
+
+            $(`form .gfield--type-phone`).addClass("gfield_visibility_hidden");
+
+            $(".exhibitor_logo input").val("' . PWEExhibitorVisitorGenerator::$exhibitor_logo_url . '");
+            $(".exhibitors_name input").val(exhibitor_name);
+            $(".exhibitor_desc input").val(exhibitor_desc);
+            $(".exhibitor_stand input").val(exhibitor_stand);
+
+            if (patronValue) {
+                // Blokada wizualna selecta
+                $("<style>").prop("type", "text/css").html(".exhibitors_selector-select { display: none !important; }").appendTo("head");
+                selectField.attr("style", "display: none !important").addClass("gfield_visibility_hidden");
+
+                let targetClean = cleanText(patronValue);
+                let foundId = null;
+                for (let id in allSenders) {
+                    if (cleanText(allSenders[id].name) === targetClean) { foundId = id; break; }
+                }
+
+                if (foundId) {
+                    selectElement.val(foundId).trigger(\'change\');
+                } else {
+                    selectElement.val("").trigger(\'change\');
+                    setTimeout(() => { if(companyInput.val() === "") companyInput.val(patronValue); }, 500);
+                }
+            } else {
+                companyInput.val(exhibitor_name);
+                exhibitorCompany.hide();
+            }
 
             $(".company-logo_add").on("click", function () {
                 $(".gform_wrapper").find(`input[type="file"]`).first().trigger("click");
@@ -1345,87 +1366,17 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
 
             $(".gform_wrapper").find(`input[type="file"]`).on("change", function(){
                 const file = this.files && this.files[0];
-                console.log(file);
-                if(file == undefined){
-                    return;
-                };
-
-                const $form = $(this).closest("form");
+                if(!file) return;
                 const $preview = $(".company-logo_add").first();
                 $preview.empty();
-
                 const url = URL.createObjectURL(file);
                 const img = new Image();
-
                 img.classList.add("exhibitors-logo");
-
-                img.onload = () => {
-                    URL.revokeObjectURL(url);
-                    $preview.append(img);
-                };
-
+                img.onload = () => { URL.revokeObjectURL(url); $preview.append(img); };
                 img.src = url;
-            })
+            });
 
-            // $(`input[placeholder="patron"]`).val("' . $gr_data . '");
-            // if ($("#exhibitors_selector").length) {
-            //     submitBtn.addClass("button-blocked");
-            //     massTable.addClass("123");
-
-            //     $("#exhibitors_selector").on("change",function(){
-            //     console.log($("#exhibitors_selector"));
-            //         switch($(this).val()){
-            //             case "Firma Zapraszająca":
-            //                 $(`input[placeholder="Firma Zapraszająca"]`).closest(".gfield").hide();
-            //                 $(`input[placeholder="Inviting Company"]`).closest(".gfield").hide();
-            //                 submitBtn.addClass("button-blocked");
-            //                 break;
-            //             case "Patron":
-            //                 submitBtn.removeClass("button-blocked");
-            //                 $(`input[placeholder="Firma Zapraszająca"]`).closest(".gfield").show();
-            //                 $(`input[placeholder="Inviting Company"]`).closest(".gfield").show();
-            //                 $(`input[placeholder="Firma Zapraszająca"]`).val("");
-            //                 $(`input[placeholder="Inviting Company"]`).val("");
-            //                 $(`input[placeholder="patron"]`).val("patron");
-            //                 break;
-            //             default:
-            //                 $(`input[placeholder="Firma Zapraszająca"]`).closest(".gfield").hide();
-            //                 $(`input[placeholder="Inviting Company"]`).closest(".gfield").hide();
-            //                 $(`input[placeholder="Firma Zapraszająca"]`).val($(this).val());
-            //                 $(`input[placeholder="Inviting Company"]`).val($(this).val());
-            //                 $(`input[placeholder="patron"]`).val("gr2");
-            //                 submitBtn.removeClass("button-blocked");
-            //         }
-            //     });
-            // }
-
-
-            /*
-                if ($("#exhibitors_selector").length) {
-                    $(".gform_body .gfield").hide();
-                    $(".gform_footer").hide();
-
-                    let checkInterval = setInterval(function() {
-                        if ($(".gform_wrapper").length > 0) {
-                            $(".gform_wrapper").hide();
-                            clearInterval(checkInterval);
-                        }
-                    }, 100); // sprawdzaj co 100 ms
-
-
-                    $("#exhibitors_selector").closest(".gfield").show();
-                }
-            */
-
-            $(".exhibitor_logo input").val("' . PWEExhibitorVisitorGenerator::$exhibitor_logo_url . '");
-            $(".exhibitors_name input").val(exhibitor_name);
-            $(".exhibitor_desc input").val(exhibitor_desc);
-            $(".exhibitor_stand input").val(exhibitor_stand);
-
-            $(`input[placeholder="Firma Zapraszająca"]`).val(exhibitor_name);
-            $(`input[placeholder="Inviting Company"]`).val(exhibitor_name);
-
-            $(`input[placeholder="Firma Zapraszająca"]`).on("input", function(){
+            companyInput.on("input", function(){
                 if(!$(".badge_name").find("input").is(":checked")){
                     $(".exhibitors_name input").val($(this).val());
                 }
@@ -1441,67 +1392,38 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
             });
 
             $("label").each(function() {
-                let decoded = $(this).html()
-                    .replace(/&lt;/g, "<")
-                    .replace(/&gt;/g, ">")
-                    .replace(/&amp;/g, "&");
-
+                let decoded = $(this).html().replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
                 if (decoded.includes("<strong>") || decoded.includes("<em>") || decoded.includes("<span")) {
                     $(this).html(decoded);
                 }
             });
 
-            /* ---- WALIDACJA PUSTYCH PÓL W .gfield_visibility_visible ---- */
             const errorEmptyField = (event) => {
                 event.preventDefault();
+                $(event.target).closest("form").find(".gfield_validation_message").remove();
 
-                $(event.target).closest("form").find(".gfield_description.validation_message.gfield_validation_message").remove();
+                $(event.target).closest("form").find(".gfield_visibility_visible").not(`[data-conditional-logic="hidden"]`).not(".gfield--type-honeypot").find("input").each(function() {
+                    const $input = $(this);
+                    const getLocal = $("html").attr("lang");
+                    let errorMessage = getLocal != "pl-PL" ? "This field is required." : "To pole jest wymagane.";
 
-
-                $(event.target)
-                    .closest("form").find(".gfield_visibility_visible").not(`[data-conditional-logic="hidden"]`).not(".gfield--type-honeypot").find("input").each(function() {
-                        const $input = $(this);
-                        const getLocal = $("html").attr("lang");
-
-                        let errorMessage = "To pole jest wymagane.";
-                        if (getLocal != "pl-PL") {
-                            errorMessage = "This field is required.";
-                        }
-
-                        const errorDiv = $("<span>")
-                            .addClass("gfield_description validation_message gfield_validation_message")
-                            .text(errorMessage);
-
-                        if ($input.attr("type") === "checkbox") {
-                            if (!$input.prop("checked")) {
-                                $input.closest(".gfield").append(errorDiv);
-                            }
-                        } else {
-                            if ($.trim($input.val()) === "") {
-                                $input.closest(".gfield").append(errorDiv);
-                            }
-                        }
-                    });
-
-                if ($(".validation_message:not(.validation_message--hidden-on-empty)").length === 0 &&
-                    ($(".gfield--type-phone").hasClass("gfield_visibility_hidden") ||
-                    $(".pwe-phone-number").hasClass("gfield_visibility_hidden") ||
-                    $(".pwe-phone-number").is(".gfield_visibility_visible[data-conditional-logic=\'hidden\']")))
-                    {
-                    console.log(event.target);
-                        $(event.target).closest("form").submit();
+                    if (($input.attr("type") === "checkbox" && !$input.prop("checked")) || $.trim($input.val()) === "") {
+                        $input.closest(".gfield").append(`<span class="gfield_description validation_message gfield_validation_message">${errorMessage}</span>`);
                     }
-            }
+                });
+
+                if ($(".validation_message").length === 0) {
+                    $(event.target).closest("form").submit();
+                }
+            };
 
             $("form").has(".gfield_visibility_visible").find(".gform_button").on("click", function (event) {
                 if (window.location.hostname !== "warsawexpo.eu") {
                     errorEmptyField(event);
                 }
             });
-            /* ---- KONIEC WALIDACJI ---- */
 
             const target = document.querySelector(".gform_footer");
-
             if (target) {
                 const observer = new MutationObserver(function(mutations) {
                     mutations.forEach(function(mutation) {
@@ -1510,57 +1432,9 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
                         }
                     });
                 });
-
                 observer.observe(target, { childList: true, subtree: true });
             }
         });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            function getParamFromURL(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(param);
-            }
-
-            const patronValue = getParamFromURL("p");
-
-            if (patronValue) {
-                const labels = document.querySelectorAll("label");
-
-                labels.forEach(function(label) {
-
-                if (label.textContent.trim().toLowerCase() === "patron") {
-                    const inputId = label.getAttribute("for");
-                    if (inputId) {
-                    const inputElement = document.getElementById(inputId);
-                    if (inputElement) {
-                        inputElement.value = patronValue;
-                    }
-                    }
-                }
-                });
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Funkcja do pobierania parametru z URL
-            function getURLParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-            }
-
-            // Pobierz wartość parametru "p"
-            const parametr = getURLParameter("p");
-
-            // Jeśli parametr istnieje, znajdź input w elemencie o klasie "parametr" i wpisz wartość
-            if (parametr) {
-            const inputElement = document.querySelector(".parametr input");
-            if (inputElement) {
-                inputElement.value = parametr;
-            }
-            }
-        });
-
-
     </script>
 
     <style>

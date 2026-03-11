@@ -207,21 +207,27 @@ class PWE_FormGenerator {
         ];
 
         // Przepuść dodatkowe właściwości 1:1 (jeśli podane w presencie)
-            $passthroughKeys = [
-                'size',
-                'cssClass',
-                'placeholder',
-                'description',
-                'labelPlacement',
-                'descriptionPlacement',
-                'subLabelPlacement',
-                'choices',
-                'enableChoiceValue',
-                'layoutGridColumnSpan',
-                'enableEnhancedUI',
-                'defaultValue',
-                'noDuplicates',
-            ];
+        $passthroughKeys = [
+            'checkboxLabel',
+            'choices',
+            'cssClass',
+            'defaultValue',
+            'description',
+            'descriptionPlacement',
+            'descriptionPlaceholder',
+            'enableChoiceValue',
+            'enableEnhancedUI',
+            'inputName',
+            'inputs',
+            'inputType',
+            'labelPlacement',
+            'layoutGridColumnSpan',
+            'noDuplicates',
+            'placeholder',
+            'size',
+            'subLabelPlacement',
+            'visibility',
+        ];
 
             foreach ($passthroughKeys as $k) {
                 if (array_key_exists($k, $f)) {

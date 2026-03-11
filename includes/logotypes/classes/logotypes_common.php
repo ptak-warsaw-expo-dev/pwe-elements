@@ -786,13 +786,13 @@ class PWElementAdditionalLogotypes {
                     $files = [];
 
                     $order = [
+                        "partner-strategiczny",
                         "partner-honorowy",
                         "partner-merytoryczny",
                         "partner-targow",
                         "patron-medialny",
                         "partner-branzowy",
                         "industry-media-partner",
-                        "partner-strategiczny",
                         "principal-partner"
                     ];
 
@@ -844,7 +844,12 @@ class PWElementAdditionalLogotypes {
                 }
 
                 // Check if 'catalog' was added and if so, add $exhibitors_catalog to $files
-                if ($logotypes_exhibitors_on == true && in_array('wystawcy', $logotypes_catalogs) && count($logotypes_catalogs) > 1) {
+                if (
+                    $logotypes_exhibitors_on === true
+                    && is_array($logotypes_catalogs)
+                    && in_array('wystawcy', $logotypes_catalogs, true)
+                    && count($logotypes_catalogs) > 1
+                ) {
                     foreach ($exhibitors_catalog as $catalog_img) {
                         $element = [
                             'url' => $catalog_img,
