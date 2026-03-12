@@ -114,9 +114,13 @@ class PWECommonFunctions {
         }
 
         // Put localhost at the top
-        usort($servers, function ($a, $b) {
-            return ($a['host'] === 'localhost') ? -1 : 0;
-        });
+        foreach ($servers as $k => $s) {
+            if ($s['host'] === 'localhost') {
+                unset($servers[$k]);
+                array_unshift($servers, $s);
+                break;
+            }
+        }
 
         foreach ($servers as $server_index => $server) {
 
@@ -130,7 +134,7 @@ class PWECommonFunctions {
 
             // Skip hosts that failed recently
             if (get_transient($fail_key)) {
-                error_log("PWE DB: Skipping recently failed host $host.");
+                // error_log("PWE DB: Skipping recently failed host $host.");
                 continue;
             }
 
@@ -165,7 +169,7 @@ class PWECommonFunctions {
      * Timeout filter for wpdb connection
      */
     public static function set_db_timeout() {
-        return 10;
+        return 2;
     }
 
     // DATABASE CONNECTIONS START <==================================================================================>
@@ -1590,10 +1594,12 @@ class PWECommonFunctions {
     private static $fairs_profiles_cache = [];
     public static function get_database_fairs_data_profiles($fair_domain = null): array {
 
-        $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
-        $cache_key = $current_domain;
+        if ($fair_domain === null) {
+            $fair_domain = $_SERVER['HTTP_HOST'] ?? '';
+        }
 
         // Check runtime cache first
+        $cache_key = $fair_domain ?? ($_SERVER['HTTP_HOST'] ?? '');
         if (isset(self::$fairs_profiles_cache[$cache_key])) {
             self::debug_log('get_database_fairs_data_profiles: data from STATIC → key='. $cache_key);
             return self::$fairs_profiles_cache[$cache_key];
@@ -1637,9 +1643,9 @@ class PWECommonFunctions {
         $start_time = microtime(true);
         $start_memory  = memory_get_usage();
 
-        $results = $fair_domain
-            ? $cap_db->get_results($cap_db->prepare($sql . " WHERE f.fair_domain = %s", $fair_domain))
-            : $cap_db->get_results($sql);
+        $results = $cap_db->get_results(
+            $cap_db->prepare($sql . " WHERE f.fair_domain = %s", $fair_domain)
+        );
 
         $time = round((microtime(true) - $start_time) * 1000, 2);
         $memory = round((memory_get_usage() - $start_memory) / 1024, 2);
