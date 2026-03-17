@@ -1,5 +1,6 @@
 :root {
-    --gradient_main2_color: linear-gradient(to right, var(--main2_lighter_color), var(--main2_darker_color));
+    --gradient_main2_color: linear-gradient(to right, var(--main2_lighter_color), #E60076);
+    /* --gradient_main2_color: linear-gradient(90deg, #FF4F21 16.83%, #FF4F21 50.48%, #E60076 100%); */
     --gray_color: rgba(241, 241, 241, 0.95);
     --gray_color_text: #99A1AF;
 }
@@ -236,7 +237,7 @@
 #pwePosts .pwe-posts__item-title {
     font-size: 18px !important;
     transition: .3s ease;
-    font-weight: 600;
+    font-weight: 700;
     margin: 0;
 }
 #pwePosts .pwe-posts__item--large .pwe-posts__item-title {
@@ -260,6 +261,7 @@
     margin: 0;
     transition: .3s ease;
     font-size: 14px;
+    font-weight: 600;
 }
 #pwePosts .pwe-posts__item--large .pwe-posts__item-btn {
     position: absolute;
@@ -311,7 +313,7 @@
     color: white;
     padding: 4px 12px;
     border-radius: 20px;
-    font-weight: 600;
+    font-weight: 700;
     margin: 0;
     font-size: 12px;
     text-transform: uppercase;
@@ -321,7 +323,7 @@
     align-items: center;
     margin: 0;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     line-height: 1;
 }
