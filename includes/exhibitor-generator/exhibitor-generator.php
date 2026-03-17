@@ -258,20 +258,41 @@ class PWEExhibitorGenerator{
         $formattedDate = $today->format('Y-m-d');
         $token = md5("#22targiexpo22@@@#".$formattedDate);
         $exh_catalog_address = PWECommonFunctions::get_database_meta_data('exh_catalog_address');
-        $canUrl = $exh_catalog_address . $token.'&id_targow='.$katalog_id;
-        $json = file_get_contents($canUrl);
-        if ($exhibitor_id === null){
-            $data_array = json_decode($json, true);
-            return  $data_array;
+        $canUrl = $exh_catalog_address . $token.'&id_targow='.$katalog_id . '&v=' . time();
+
+        $context = stream_context_create([
+            'http' => [
+                'method'  => 'GET',
+                'timeout' => 2,
+                'header'  => "User-Agent: Mozilla/5.0\r\n"
+            ]
+        ]);
+
+        $json = @file_get_contents($canUrl, false, $context);
+
+        if ($json === false) {
+            $error = error_get_last();
+
+            if (!empty($error['message'])) {
+                echo '<script>console.log('. json_encode($error['message']) .');</script>';
+            }
+
+            return [];
         }
 
-        if ($json !== null){
+        if ($exhibitor_id === null){
+            $data_array = json_decode($json, true);
+            return $data_array ?? [];
+        }
+
+        if (!empty($data)){
             $search_id = $exhibitor_id . '.00';
             $data_array = json_decode($json, true);
             $exhibitors_data = reset($data_array)['Wystawcy'];
             $exhibitor =  $exhibitors_data[$search_id];
             return  $exhibitor;
         };
+
         return null;
     }
 
