@@ -1674,7 +1674,7 @@ class PWElementOpinions extends PWElements {
                         }
                     }
                 </style>';
-            }else if ($opinions_preset == 'preset_5') {
+            } else if ($opinions_preset == 'preset_5') {
                 $output .= '
                 <style>
                     .pwelement_'. self::$rnd_id .' .pwe-opinions__item {
@@ -1817,7 +1817,7 @@ class PWElementOpinions extends PWElements {
             $edition = do_shortcode('[trade_fair_edition]');
 
             // Loading JSON with default opinions
-            $opinions_file = 'https://mr.glasstec.pl/doc/pwe-opinions.json';
+            $opinions_file = __DIR__ . '/../assets/default-opinions.json';  
             $opinions_data = json_decode(file_get_contents($opinions_file), true);
 
             $default_opinions = $opinions_data['default'] ?? [];
@@ -1838,7 +1838,33 @@ class PWElementOpinions extends PWElements {
             }
 
             // Get opinions from the database
-            $data = PWECommonFunctions::get_database_fairs_data_opinions();
+
+
+            $isWeek = PWECommonFunctions::get_database_week_data();
+
+            $isWeek = json_decode(implode(',', $isWeek), true);
+
+            if (!is_array($isWeek)) {
+                $isWeek = [];
+            }
+
+            $data = [];
+
+            if (!empty($isWeek)) {
+                foreach ($isWeek as $domain) {
+                    $rows = PWECommonFunctions::get_database_fairs_data_opinions($domain);
+
+                    if (!empty($rows)) {
+                        foreach ($rows as $r) {
+                            $r->_source_domain = $domain; // dopisujemy skąd pochodzi
+                            $data[] = $r;
+                        }
+                    }
+                }
+            } else {
+                $data = PWECommonFunctions::get_database_fairs_data_opinions();
+            }
+
             if (!empty($data)) {
                 // If there are 2 opinions in the summary – overwrite
                 if (count($data) >= 2) {
@@ -1856,19 +1882,23 @@ class PWElementOpinions extends PWElements {
                     if (!empty($row->data)) {
                         $decoded = json_decode($row->data, true);
 
+
                         if ($decoded) {
+
+                            $sourceDomain = $row->_source_domain ?? $_SERVER['HTTP_HOST'];
 
                             $opinion = [
                                 'opinions_slug'       => $row->slug ?? '',
                                 'opinion_person_img'  => !empty($decoded['opinion_person_img'])
-                                    ? 'https://cap.warsawexpo.eu/public/uploads/domains/' . str_replace('.', '-', $_SERVER['HTTP_HOST']) . '/opinions/' . $row->slug . '/' . $decoded['opinion_person_img']
+                                    ? 'https://cap.warsawexpo.eu/public/uploads/domains/' . str_replace('.', '-', $sourceDomain) . '/opinions/' . $row->slug . '/' . $decoded['opinion_person_img']
                                     : '',
                                 'opinion_company_img' => !empty($decoded['opinion_company_img'])
-                                    ? 'https://cap.warsawexpo.eu/public/uploads/domains/' . str_replace('.', '-', $_SERVER['HTTP_HOST']) . '/opinions/' . $row->slug . '/' . $decoded['opinion_company_img']
+                                    ? 'https://cap.warsawexpo.eu/public/uploads/domains/' . str_replace('.', '-', $sourceDomain) . '/opinions/' . $row->slug . '/' . $decoded['opinion_company_img']
                                     : '',
                                 'opinion_person_name' => $decoded['opinion_person_name'] ?? '',
                                 'opinions_order'      => $row->order ?? ''
                             ];
+
 
                             foreach ($multilang_fields as $field) {
                                 foreach ($decoded as $key => $val) {
