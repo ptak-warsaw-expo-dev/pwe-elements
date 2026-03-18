@@ -55,8 +55,24 @@ function get_fair_data($specific_domain = null) {
             // URL to JSON file
             $json_file = 'https://mr.glasstec.pl/doc/pwe-data.json';
 
+            $context = stream_context_create([
+                'http' => [
+                    'method'  => 'GET',
+                    'timeout' => 2,
+                    'header'  => [
+                        "User-Agent: Mozilla/5.0\r\n",
+                        "Accept: application/json\r\n"
+                    ],
+                    'ignore_errors' => true
+                ],
+                'ssl' => [
+                    'verify_peer' => true,
+                    'verify_peer_name' => true,
+                ]
+            ]);
+
             // Getting data from JSON file
-            $json_data = @file_get_contents($json_file); // Use @ to ignore PHP warnings on failure
+            $json_data = @file_get_contents($json_file, false, $context); // Use @ to ignore PHP warnings on failure
 
             // Checking if data has been downloaded
             if ($json_data === false) {
