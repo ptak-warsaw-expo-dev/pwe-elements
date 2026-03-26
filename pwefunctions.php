@@ -11,6 +11,23 @@ class PWECommonFunctions {
     }
 
     /**
+     * Add logs to uploads/logs/{$filename}.log
+     */
+    public static function add_log($message, $filename = 'logs') {
+        $upload_dir = wp_upload_dir();
+        $dir = $upload_dir['basedir'] . '/logs';
+        $file = $dir . '/'. $filename .'.log';
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $line = date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL;
+
+        file_put_contents($file, $line, FILE_APPEND);
+    }
+
+    /**
      * Collecting all logs
      */
     private static $debug_logs = [];
@@ -31,7 +48,7 @@ class PWECommonFunctions {
     }
 
     /**
-     * Output console & error logs 
+     * Output console logs 
      */
     public static function output_db_connection_logs() {
 
@@ -145,68 +162,71 @@ class PWECommonFunctions {
             $timeout_filter_added = true;
         }
 
-        // Checking servers, looking for the current one
+        // Find local server
         $is_local_server = false;
         foreach ($servers as $s) {
             if (!empty($s['is_local'])) {
                 $is_local_server = true;
-
                 break;
             }
         }
 
-        // If return true - localhost only
+        // If running on local server, only use that one
         if ($is_local_server) {
             $servers = array_values(array_filter($servers, function ($s) {
                 return !empty($s['is_local']);
             }));
         }
 
+        // Local in-request blocking (no transient)
+        static $blocked_hosts = [];
+
         foreach ($servers as $server) {
-            
+
             if (empty($server['user']) || empty($server['pass']) || empty($server['name'])) {
-                // Skip server with missing data
                 continue;
             }
 
             $host = $server['host'] ?? 'localhost';
-            $fail_key = 'pwe_db_fail_' . md5($host);
 
-            // Temporary blocking
-            static $logged_blocked_hosts = [];
-            if (get_transient($fail_key)) {
-
-                if (empty($logged_blocked_hosts[$host])) {
-                    error_log("PWE DB: Host $host is temporarily blocked. Will retry later.");
-                    $logged_blocked_hosts[$host] = true;
-                }
-
+            // Skip if already marked as blocked in THIS request
+            if (!empty($blocked_hosts[$host])) {
                 continue;
             }
 
-            // Attempt DB connection
+            // Try connecting
             $wpdb = new wpdb($server['user'], $server['pass'], $server['name'], $host);
 
             if (!$wpdb->dbh) {
-                error_log("PWE DB: Cannot connect to $host. Blocking for 30s.");
-                set_transient($fail_key, 1, 30);
+
+                error_log("PWE DB: Cannot connect to $host (immediate block).");
+                error_log(json_encode([
+                    'error' => $wpdb->last_error,
+                    'host'  => $host,
+                    'db'    => $server['name']
+                ]));
+
+                self::add_log('[PWE_Functions] DB CONNECTION FAILED: Host=' . $host . ' User=' . $server['name'], 'db-connections');
+
+                // Mark blocked for this request so next iterations skip it
+                $blocked_hosts[$host] = true;
                 continue;
             }
 
             // Test query
             $test = $wpdb->get_var("SELECT 1");
             if ((int)$test !== 1) {
-                error_log("PWE DB: Test query failed on $host. Blocking for 30s.");
-                set_transient($fail_key, 1, 30);
+                error_log("PWE DB: Test query failed on $host (immediate block).");
+                $blocked_hosts[$host] = true;
                 continue;
             }
 
-            // Cache connection for this request
+            // Cache connection
             self::$cached_db_connection = $wpdb;
             return $wpdb;
         }
 
-        // All connection attempts failed
+        // No server worked
         error_log('PWE DB: All connection attempts failed.');
         return false;
     }

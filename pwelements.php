@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.3.0
+ * Version: 3.3.1
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -37,6 +37,9 @@ class PWElementsPlugin {
     // public $PWELogoFetcher;
 
     public function __construct() {
+
+        date_default_timezone_set('Europe/Warsaw');
+
         // Clearing wp_rocket cache
         add_action( 'upgrader_process_complete', array( $this, 'clearWpRocketCacheOnPluginUpdate' ), 10, 2 );
 
