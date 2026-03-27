@@ -107,10 +107,24 @@ class CatalogFunctions {
 
                     $can_url = $exh_catalog_address . $token . '&id_targow=' . $single_id;
 
-                    $json = @file_get_contents($can_url);
+                    $context = stream_context_create([
+                        'http' => [
+                            'method'  => 'GET',
+                            'timeout' => 2,
+                            'header'  => "User-Agent: Mozilla/5.0\r\n"
+                        ]
+                    ]);
+
+                    $json = @file_get_contents($can_url, false, $context);
 
                     if ($json === false) {
-                        continue; // nie wywalamy wszystkiego przez jedno ID
+                        $error = error_get_last();
+
+                        if (!empty($error['message'])) {
+                            echo '<script>console.log('. json_encode($error['message']) .');</script>';
+                        }
+
+                        continue;
                     }
 
                     $data = json_decode($json, true);
@@ -297,9 +311,30 @@ class CatalogFunctions {
         // Database configurations
         // --------------------------------------------------
         $databases = [
-            ['host'=>'dedyk180.cyber-folks.pl','name'=>PWE_DB_NAME_180,'user'=>PWE_DB_USER_180,'pass'=>PWE_DB_PASSWORD_180],
-            ['host'=>'dedyk93.cyber-folks.pl','name'=>PWE_DB_NAME_93,'user'=>PWE_DB_USER_93,'pass'=>PWE_DB_PASSWORD_93],
-            ['host'=>'dedyk239.cyber-folks.pl','name'=>PWE_DB_NAME_239,'user'=>PWE_DB_USER_239,'pass'=>PWE_DB_PASSWORD_239],
+            [
+                'host' => 'dedyk180.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_180') ? PWE_DB_NAME_180 : null,
+                'user' => defined('PWE_DB_USER_180') ? PWE_DB_USER_180 : null,
+                'pass' => defined('PWE_DB_PASSWORD_180') ? PWE_DB_PASSWORD_180 : null,
+            ],
+            [
+                'host' => 'dedyk93.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_93') ? PWE_DB_NAME_93 : null,
+                'user' => defined('PWE_DB_USER_93') ? PWE_DB_USER_93 : null,
+                'pass' => defined('PWE_DB_PASSWORD_93') ? PWE_DB_PASSWORD_93 : null,
+            ],
+            [
+                'host' => 'dedyk239.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_239') ? PWE_DB_NAME_239 : null,
+                'user' => defined('PWE_DB_USER_239') ? PWE_DB_USER_239 : null,
+                'pass' => defined('PWE_DB_PASSWORD_239') ? PWE_DB_PASSWORD_239 : null,
+            ],
+            [
+                'host' => 'dedyk1072.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_1072') ? PWE_DB_NAME_1072 : null,
+                'user' => defined('PWE_DB_USER_1072') ? PWE_DB_USER_1072 : null,
+                'pass' => defined('PWE_DB_PASSWORD_1072') ? PWE_DB_PASSWORD_1072 : null,
+            ],
         ];
 
         // Use localhost on the current server
@@ -307,6 +342,7 @@ class CatalogFunctions {
             case '94.152.207.180': $databases[0]['host'] = 'localhost'; break;
             case '94.152.206.93':  $databases[1]['host'] = 'localhost'; break;
             case '91.225.28.47':   $databases[2]['host'] = 'localhost'; break;
+            case '91.225.28.72':   $databases[3]['host'] = 'localhost'; break;
         }
 
         // --------------------------------------------------
@@ -320,6 +356,7 @@ class CatalogFunctions {
 
             if ($wpdb->last_error) {
                 $log("DB CONNECTION ERROR: " . $wpdb->last_error);
+                PWECommonFunctions::add_log('[CatalogFunctions] DB CONNECTION FAILED: Host: ' . $db['host'] . ' User: ' . $db['user'] .' Error: ' . mysqli_connect_error(), 'db-connections');
                 continue;
             }
 
