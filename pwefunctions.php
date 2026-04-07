@@ -201,12 +201,12 @@ class PWECommonFunctions {
 
                 error_log("PWE DB: Cannot connect to $host (immediate block).");
                 error_log(json_encode([
-                    'error' => $wpdb->last_error,
+                    'error' => mysqli_connect_error(),
                     'host'  => $host,
                     'db'    => $server['name']
-                ]));
+                ], JSON_UNESCAPED_UNICODE));
 
-                self::add_log('[PWE_Functions] DB CONNECTION FAILED: Host=' . $host . ' User=' . $server['name'], 'db-connections');
+                self::add_log('[PWE_Functions] DB CONNECTION FAILED: Host: ' . $host . ' User: ' . $server['name'] . ' Error: ' . mysqli_connect_error(), 'db-connections');
 
                 // Mark blocked for this request so next iterations skip it
                 $blocked_hosts[$host] = true;
@@ -902,11 +902,11 @@ class PWECommonFunctions {
      * Get meta data from CAP databases
      */
     private static $meta_cache = [];
-    public static function get_database_meta_data($data_id = null) {
+    public static function get_database_meta_data($data_id = null, $domain = null) {
 
-        $domain = $_SERVER['HTTP_HOST'] ?? '';
-        $domain = preg_replace('/:\d+$/', '', $domain);
-        $cache_key = $data_id . '_' . $domain;
+        $current_domain = $_SERVER['HTTP_HOST'] ?? '';
+        $current_domain = preg_replace('/:\d+$/', '', $current_domain);
+        $cache_key = $data_id . '_' . $current_domain;
 
         // STATIC cache
         if (isset(self::$meta_cache[$cache_key])) {
@@ -947,15 +947,17 @@ class PWECommonFunctions {
         // SQL query
         if ($data_id === null) {
             $results = $cap_db->get_results("SELECT * FROM meta_data");
-        } elseif ($data_id === 'header_order') {
+        } elseif ($domain !== null) {
             $query = "
                 SELECT m.meta_data
                 FROM meta_data AS m
                 INNER JOIN fairs AS f ON m.rights = f.id
-                WHERE m.slug = 'header_order'
+                WHERE m.slug = %s
                 AND f.fair_domain = %s
             ";
-            $results = $cap_db->get_results($cap_db->prepare($query, $domain));
+            $results = $cap_db->get_results(
+                $cap_db->prepare($query, $data_id, $domain)
+            );
         } else {
             $results = $cap_db->get_var(
                 $cap_db->prepare("SELECT meta_data FROM meta_data WHERE slug = %s", $data_id)
@@ -1497,13 +1499,30 @@ class PWECommonFunctions {
             return [];
         }
 
+        $sql = "
+            SELECT
+                c.*,
+                MAX(CASE WHEN ca.slug = 'main_pic_pl' THEN ca.data END) AS main_pic_pl,
+                MAX(CASE WHEN ca.slug = 'main_pic_en' THEN ca.data END) AS main_pic_en
+            FROM conferences c
+            LEFT JOIN conf_adds ca
+                ON ca.conf_id = c.id
+                AND ca.slug IN ('main_pic_pl', 'main_pic_en')
+            WHERE c.conf_site_link LIKE %s
+            AND c.deleted_at IS NULL
+            GROUP BY c.id;
+        ";
+
         $start_time = microtime(true);
+        
         $results = $cap_db->get_results(
             $cap_db->prepare(
-                "SELECT * FROM conferences WHERE conf_site_link LIKE %s AND deleted_at IS NULL",
+                $sql,
                 '%' . $domain . '%'
             )
         );
+
+        $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
             self::debug_log('get_database_conferences_data: SQL error: '. addslashes($cap_db->last_error), 'error');
@@ -1533,7 +1552,6 @@ class PWECommonFunctions {
             }
         }
 
-        $time = round((microtime(true) - $start_time) * 1000, 2);
         set_transient($transient_key, $results, 600);
         self::$conferences_cache[$cache_key] = $results;
         self::debug_log('get_database_conferences_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');

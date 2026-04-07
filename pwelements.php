@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.3.2
+ * Version: 3.3.3
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -96,6 +96,36 @@ class PWElementsPlugin {
         // // Display post views
         // // Only works on a single post in the main loop and main query
         // add_action('the_content', array($this, 'display_views'), 20 );
+
+        add_action('template_redirect', array($this, 'pwe_handle_custom_redirects'));
+    }
+
+    public function pwe_handle_custom_redirects() {
+
+        $current_path = untrailingslashit(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+        $redirects = array(
+            '/sms' => '/rejestracja/?utm_source=smsapi&utm_medium=sms&utm_campaign=pack_302',
+            '/en/registration-confirmation' => '/en',
+            '/platyna' => '/rejestracja/?utm_source=platyna&utm_medium=sms&utm_campaign=sms',
+            '/en/platyna' => '/en/registration/?utm_source=platyna&utm_medium=sms&utm_campaign=sms',
+            '/wapremium2' => '/rejestracja/?utm_source=whatsapp&utm_medium=whatsapp&utm_campaign=wapremium',
+            '/rejestracja/SMS1' => '/rejestracja/?utm_source=SMS&utm_medium=SMS&utm_campaign=SMS1'
+        );
+
+        if (array_key_exists($current_path, $redirects)) {
+            $target_url = home_url($redirects[$current_path]);
+
+            $query_string = $_SERVER['QUERY_STRING'];
+
+            if (!empty($query_string)) {
+                $separator = (strpos($target_url, '?') !== false) ? '&' : '?';
+                $target_url .= $separator . $query_string;
+            }
+
+            wp_redirect($target_url, 301);
+            exit;
+        }
     }
 
     public function get_count_views() {
@@ -110,7 +140,7 @@ class PWElementsPlugin {
         $views = (int) get_post_meta($post_id, 'vc_views', true); // pobranie aktualnych wyswietlen i rzutownie ich na integer
         update_post_meta($post_id, 'vc_views', $views + 1); // zapisanie wyswietlen + 1
 
-        setcookie($cookie, 
+        setcookie($cookie,
             '1', // ustawienie zycia ciastka
             time() + 7200, // czas wygasniecia ciastka
             COOKIEPATH ?: '/', // sciezka cookie dostepna na calej domenie
@@ -167,7 +197,7 @@ class PWElementsPlugin {
         // Shortcodes from CAP
         require_once plugin_dir_path(__FILE__) . 'backend/shortcodes.php';
 
-        // GF Mailing 
+        // GF Mailing
         require_once plugin_dir_path(__FILE__) . 'includes/mailing/mailing.php';
         $this->PWEMailing = new PWEMailing();
 
@@ -266,7 +296,7 @@ class PWElementsPlugin {
 
         require_once plugin_dir_path(__FILE__) . 'includes/news/news.php';
         $this->PWENews = new PWENews();
-        
+
         require_once plugin_dir_path(__FILE__) . 'includes/posts/posts.php';
         $this->PWEPosts = new PWEPosts();
     }
