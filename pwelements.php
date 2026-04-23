@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.3.4
+ * Version: 3.3.5
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -34,6 +34,7 @@ class PWElementsPlugin {
     public $PWEAttractions;
     public $PWENews;
     public $PWEPosts;
+    public $PWEArticleAuthor;
     // public $PWELogoFetcher;
 
     public function __construct() {
@@ -89,6 +90,8 @@ class PWElementsPlugin {
         }, 10, 1);
 
         add_filter( 'the_content', array($this, 'add_date_to_post') );
+
+
 
         // // Get count post views
         // add_action('template_redirect', array($this, 'get_count_views') );
@@ -272,7 +275,10 @@ class PWElementsPlugin {
 
         require_once plugin_dir_path(__FILE__) . 'includes/posts/posts.php';
         $this->PWEPosts = new PWEPosts();
-    }
+
+        require_once plugin_dir_path(__FILE__) . 'includes/article_author/article_author.php';
+        $this->PWEArticleAuthor = new PWEArticleAuthorManager();
+        }
 
     // Czyszczenie pamięci wp_rocket
     public function clearWpRocketCacheOnPluginUpdate( $upgrader_object, $options ) {
