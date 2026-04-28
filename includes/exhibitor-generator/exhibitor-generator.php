@@ -253,45 +253,75 @@ class PWEExhibitorGenerator{
      */
     public static function catalog_data($exhibitor_id = null) {
         $katalog_id = do_shortcode('[trade_fair_catalog]');
+        $katalog_ids = array_map('trim', explode(',', $katalog_id));
 
         $today = new DateTime();
         $formattedDate = $today->format('Y-m-d');
-        $token = md5("#22targiexpo22@@@#".$formattedDate);
+        $token = md5("#22targiexpo22@@@#" . $formattedDate);
+
         $exh_catalog_address = PWECommonFunctions::get_database_meta_data('exh_catalog_address');
-        $canUrl = $exh_catalog_address . $token.'&id_targow='.$katalog_id . '&v=' . time();
 
-        $context = stream_context_create([
-            'http' => [
-                'method'  => 'GET',
-                'timeout' => 2,
-                'header'  => "User-Agent: Mozilla/5.0\r\n"
-            ]
-        ]);
+        $all_exhibitors = [];
 
-        $json = @file_get_contents($canUrl, false, $context);
+        foreach ($katalog_ids as $single_id) {
 
-        if ($json === false) {
-            $error = error_get_last();
+            $canUrl = $exh_catalog_address . $token . '&id_targow=' . $single_id . '&v=' . time();
 
-            if (!empty($error['message'])) {
-                echo '<script>console.log('. json_encode($error['message']) .');</script>';
+            $context = stream_context_create([
+                'http' => [
+                    'method'  => 'GET',
+                    'timeout' => 2,
+                    'header'  => "User-Agent: Mozilla/5.0\r\n"
+                ]
+            ]);
+
+            $json = @file_get_contents($canUrl, false, $context);
+
+            if ($json === false) {
+                $error = error_get_last();
+
+                if (!empty($error['message'])) {
+                    echo '<script>console.log(' . json_encode($error['message']) . ');</script>';
+                }
+
+                continue;
             }
 
-            return [];
+            $data_array = json_decode($json, true);
+
+            if (empty($data_array)) {
+                continue;
+            }
+
+            // Get first element (eg. "1860" => [...])
+            $catalog_data = reset($data_array);
+
+            if (empty($catalog_data['Wystawcy'])) {
+                continue;
+            }
+
+            foreach ($catalog_data['Wystawcy'] as $key => $exhibitor) {
+                // unique key so there are no conflicts like "1.00"
+                $unique_key = $single_id . '_' . $key;
+
+                // add the fair ID to the data
+                $exhibitor['id_targow'] = $single_id;
+
+                $all_exhibitors[$unique_key] = $exhibitor;
+            }
         }
 
-        if ($exhibitor_id === null){
-            $data_array = json_decode($json, true);
-            return $data_array ?? [];
+        // If we are not looking for a specific exhibitor
+        if ($exhibitor_id === null) {
+            return $all_exhibitors;
         }
 
-        if (!empty($data)){
-            $search_id = $exhibitor_id . '.00';
-            $data_array = json_decode($json, true);
-            $exhibitors_data = reset($data_array)['Wystawcy'];
-            $exhibitor =  $exhibitors_data[$search_id];
-            return  $exhibitor;
-        };
+        // Searching for an issuer by ID
+        foreach ($all_exhibitors as $exhibitor) {
+            if (($exhibitor['ID'] ?? null) == $exhibitor_id) {
+                return $exhibitor;
+            }
+        }
 
         return null;
     }

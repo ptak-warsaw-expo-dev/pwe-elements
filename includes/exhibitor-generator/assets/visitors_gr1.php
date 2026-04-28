@@ -8,6 +8,12 @@ function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
         'generator_patron' => '',
     ), $atts ));
 
+    $current_url = home_url( add_query_arg( array(), $wp->request ) );
+
+    $is_ptak = ( isset( $_GET['p'] ) && $_GET['p'] === 'Ptak Warsaw Expo' );
+
+    $final_name = $is_ptak ? 'Ptak Warsaw Expo' : PWEExhibitorVisitorGenerator::$exhibitor_name;
+
     $output = '';
     $output .= '
         <div class="exhibitor-generator gr1" data-group="gr1">
@@ -15,8 +21,15 @@ function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
                 <div class="exhibitor-generator__left"></div>
                 <div class="exhibitor-generator__right">
                     <div class="exhibitor-generator__right-wrapper">
-                        <div class="exhibitor-generator__right-title">
-                            <h3>' . PWECommonFunctions::languageChecker('Zadbaj o wyjątkowe doświadczenie klientów – nadaj im status VIP już teraz!', 'Ensure a unique experience for your customers!') . '</h3>';
+                        <div class="exhibitor-generator__right-title">';
+                            if ( $is_ptak ) {
+                                $output .='
+                                    <h3>' . PWECommonFunctions::languageChecker('Ciesz się wyjątkowymi wrażeniami przygotowanymi specjalnie dla Ciebie!', 'Enjoy a unique experience tailored just for you!') . '</h3>';
+                            } else {
+                                $output .='
+                                    <h3>' . PWECommonFunctions::languageChecker('Zadbaj o wyjątkowe doświadczenie klientów – nadaj im status VIP już teraz!', 'Ensure a unique experience for your customers!') . '</h3>';
+                            }
+
                         $output .= '
                         </div>
                         <div class="exhibitor-generator__right-icons">
@@ -69,11 +82,12 @@ function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
             </div>
         </div>
         <script>
-           jQuery(document).ready(function($){
-                let exhibitor_name = "' . PWEExhibitorVisitorGenerator::$exhibitor_name . '";
+            jQuery(document).ready(function($){
+                let exhibitor_name = "' . $final_name . '";
                 let exhibitor_desc = `' . PWEExhibitorVisitorGenerator::$exhibitor_desc . '`;
                 let exhibitor_stand = "' . PWEExhibitorVisitorGenerator::$exhibitor_stand . '";
-                const group_tag = $(".exhibitor-generator").data("group");
+
+                const fieldSelector = `input[placeholder="Firma Zapraszająca"], input[placeholder="Inviting Company"]`;
 
                 $(`.gfield--type-fileupload input[type="file"]`).attr("accept", "image/jpeg, image/png");
                 $(".exhibitor_stand").addClass("gfield_visibility_visible").removeClass("gfield_visibility_hidden");
@@ -82,11 +96,18 @@ function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
                 $(".exhibitor_logo input").val("' . PWEExhibitorVisitorGenerator::$exhibitor_logo_url . '");
                 $(".exhibitors_name input").val(exhibitor_name);
                 $(".exhibitor_desc input").val(exhibitor_desc);
-                $(".exhibitor_stand input").val(exhibitor_stand);
+                $(".exhibitor_stand input").val(exhibitor_stand);';
 
-                $(`input[placeholder="FIRMA ZAPRASZAJĄCA"]`).val(exhibitor_name);
+                if($is_ptak){
+                    $output .='
+                    $(fieldSelector).closest(".gfield").hide();';
+                }
 
-                $(`input[placeholder="FIRMA ZAPRASZAJĄCA"]`).on("input", function(){
+                $output .= '
+
+                $(fieldSelector).val(exhibitor_name);
+
+                $(fieldSelector).on("input", function(){
                     if(!$(".badge_name").find("input").is(":checked")){
                         $(".exhibitors_name input").val($(this).val());
                     }
@@ -100,9 +121,18 @@ function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
                         $(".exhibitors_name input").val(exhibitor_name);
                     }
                 });
-           });
+            });
         </script>
         ';
+        if ( $is_ptak ) {
+            $output .='
+            <style>
+                .exhibitor_stand, .input_logo, .tabela-masowa  {
+                    display:none !important;
+                }
+            </style>';
+        }
+
         if($pweGeneratorWebsite){
             $output .= '
             <script>

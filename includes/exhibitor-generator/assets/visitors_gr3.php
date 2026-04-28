@@ -10,6 +10,12 @@ function render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite){
 
     $badgevip = file_exists($_SERVER['DOCUMENT_ROOT'] . '/doc/badgevip.webp') ? 'badgevip' : '';
 
+    $current_url = home_url( add_query_arg( array(), $wp->request ) );
+
+    $is_ptak = ( isset( $_GET['p'] ) && $_GET['p'] === 'Ptak Warsaw Expo' );
+
+    $final_name = $is_ptak ? 'Ptak Warsaw Expo' : PWEExhibitorVisitorGenerator::$exhibitor_name;
+
     $output = '';
     $output .= '
         <div class="exhibitor-generator gr3" data-group="gr3">
@@ -17,8 +23,16 @@ function render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite){
                 <div class="exhibitor-generator__left '. $badgevip .'"></div>
                 <div class="exhibitor-generator__right">
                     <div class="exhibitor-generator__right-wrapper">
-                        <div class="exhibitor-generator__right-title">
-                            <h3>' . PWECommonFunctions::languageChecker('WYGENERUJ IDENTYFIKATOR</br>BUSINESS PRIORITY PASS </br>DLA SWOICH GOŚCI!', 'GENERATE</br> A BUSINESS PRIORITY PASS</br>INVITATION FOR YOUR GUESTS!') . '</h3>';
+                        <div class="exhibitor-generator__right-title">';
+
+                            if ( $is_ptak ) {
+                            $output .='
+                                <h3>' . PWECommonFunctions::languageChecker('WYGENERUJ IDENTYFIKATOR</br>BUSINESS PRIORITY PASS!', 'GENERATE</br> YOUR BUSINESS PRIORITY PASS</br>INVITATION!') . '</h3>';
+                            } else {
+                                $output .='
+                                    <h3>' . PWECommonFunctions::languageChecker('WYGENERUJ IDENTYFIKATOR</br>BUSINESS PRIORITY PASS </br>DLA SWOICH GOŚCI!', 'GENERATE</br> A BUSINESS PRIORITY PASS</br>INVITATION FOR YOUR GUESTS!') . '</h3>';
+                            }
+
                             if (!empty(PWEExhibitorVisitorGenerator::$exhibitor_logo_url)  && !$pweGeneratorWebsite) {
                                 $output .= '
                                 <img id="exhibitor_logo_img" style="max-height: 120px;" src="' . PWEExhibitorVisitorGenerator::$exhibitor_logo_url . '">
@@ -82,19 +96,29 @@ function render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite){
             </div>
         </div>
         <script>
-           jQuery(document).ready(function($){
-                let exhibitor_name = "' . PWEExhibitorVisitorGenerator::$exhibitor_name . '";
+            jQuery(document).ready(function($){
+
+                let exhibitor_name = "' . $final_name . '";
                 let exhibitor_desc = `' . PWEExhibitorVisitorGenerator::$exhibitor_desc . '`;
                 let exhibitor_stand = "' . PWEExhibitorVisitorGenerator::$exhibitor_stand . '";
+
+                const fieldSelector = `input[placeholder="Firma Zapraszająca"], input[placeholder="Inviting Company"]`;
 
                 $(".exhibitor_logo input").val("' . PWEExhibitorVisitorGenerator::$exhibitor_logo_url . '");
                 $(".exhibitors_name input").val(exhibitor_name);
                 $(".exhibitor_desc input").val(exhibitor_desc);
                 $(".exhibitor_stand input").val(exhibitor_stand);
 
-                $(`input[placeholder="FIRMA ZAPRASZAJĄCA"]`).val(exhibitor_name);
+                const $targetField = $(fieldSelector);
+                $targetField.val(exhibitor_name);';
 
-                $(`input[placeholder="FIRMA ZAPRASZAJĄCA"]`).on("input", function(){
+                if ( $is_ptak ) {
+                    $output .= '
+                    $targetField.closest(".gfield").hide();';
+                }
+
+                $output .= '
+                $targetField.on("input", function(){
                     if(!$(".badge_name").find("input").is(":checked")){
                         $(".exhibitors_name input").val($(this).val());
                     }
@@ -108,7 +132,7 @@ function render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite){
                         $(".exhibitors_name input").val(exhibitor_name);
                     }
                 });
-           });
+            });
         </script>
         <style>
             .exhibitor-generator__right-icons h5 {
@@ -116,6 +140,15 @@ function render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite){
             }
         </style>
         ';
+        if ( $is_ptak ) {
+            $output .= '
+                <style>
+                    .tabela-masowa {
+                        display:none !important;
+                    }
+                </style>';
+        }
+
         if($pweGeneratorWebsite){
             $output .= '
             <script>

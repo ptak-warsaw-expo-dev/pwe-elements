@@ -102,7 +102,7 @@ class PWEExhibitorVisitorGenerator extends PWEExhibitorGenerator {
         $catalog_array = self::catalog_data();
 
         if(!empty($catalog_array)){
-            $all_exhibitors = reset($catalog_array)['Wystawcy'];
+            $all_exhibitors = $catalog_array;
         }
 
         $pweGeneratorWebsite = strpos($_SERVER['REQUEST_URI'], '/generator-odwiedzajacych-pwe') !== false || strpos($_SERVER['REQUEST_URI'], '/en/exhibitor-generator-pwe/') !== false;
@@ -135,7 +135,7 @@ class PWEExhibitorVisitorGenerator extends PWEExhibitorGenerator {
         } else {
             $catalog_array = self::catalog_data();
             if(!empty($catalog_array)){
-                $all_exhibitors = reset($catalog_array)['Wystawcy'];
+                $all_exhibitors = $catalog_array;
             }
 
             self::$exhibitor_logo_url = 'https://' . do_shortcode('[trade_fair_domainadress]') . '/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/media/logotyp_wystawcy.png';

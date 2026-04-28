@@ -20,7 +20,7 @@ jQuery(document).ready(function($){
     const formId = send_data['custom_form'];
     const group_tag = $('.exhibitor-generator').data('group');
 
-    console.log(group_tag);
+    console.log('group tag: ' + group_tag);
     $('.patron').val(group_tag);
     $('.patron input').val(group_tag);
     $('.gform_footer').append($('.tabela-masowa'));
