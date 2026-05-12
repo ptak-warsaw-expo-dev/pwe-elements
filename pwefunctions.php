@@ -2467,113 +2467,113 @@ class PWECommonFunctions {
             . ' onclick="this.value = this.checked ? \'true\' : \'\';" />'
             . '</div>';
     }
-    private static $redirect_cache = [];
-    public static function get_fair_redirects() {
-        $current_domain = $_SERVER['HTTP_HOST'] ?? '';
-        $current_domain = preg_replace('/:\d+$/', '', $current_domain);
+    // private static $redirect_cache = [];
+    // public static function get_fair_redirects() {
+    //     $current_domain = $_SERVER['HTTP_HOST'] ?? '';
+    //     $current_domain = preg_replace('/:\d+$/', '', $current_domain);
 
 
-                // Cache key
-        if ($current_domain === 'warsawexpo.eu' || $fair_domain === 'all') {
-            $cache_key = 'all_fairs';
-        } elseif ($fair_domain !== null) {
-            $cache_key = $fair_domain;
-        } else {
-            $cache_key = 'month';
-        }
+    //             // Cache key
+    //     if ($current_domain === 'warsawexpo.eu' || $fair_domain === 'all') {
+    //         $cache_key = 'all_fairs';
+    //     } elseif ($fair_domain !== null) {
+    //         $cache_key = $fair_domain;
+    //     } else {
+    //         $cache_key = 'month';
+    //     }
 
-        // Static cache
-        if (isset(self::$redirect_cache[$cache_key])) {
-            self::debug_log('get_database_fairs_data: data from STATIC → key=' . $cache_key);
-            return self::$redirect_cache[$cache_key];
-        }
+    //     // Static cache
+    //     if (isset(self::$redirect_cache[$cache_key])) {
+    //         self::debug_log('get_database_fairs_data: data from STATIC → key=' . $cache_key);
+    //         return self::$redirect_cache[$cache_key];
+    //     }
 
-        // Transient cache
-        $transient_key = 'pwe_fairs_' . md5($cache_key);
-        $cached = get_transient($transient_key);
+    //     // Transient cache
+    //     $transient_key = 'pwe_fairs_' . md5($cache_key);
+    //     $cached = get_transient($transient_key);
 
-        // Log timeout if transient exists
-        $timeout = get_option('_transient_timeout_' . $transient_key);
-        if ($timeout !== false) {
-            $time_left = $timeout - time();
-            $time_left_str = gmdate('H:i:s', max($time_left, 0));
-        } else {
-            $time_left_str = 'unknown';
-        }
+    //     // Log timeout if transient exists
+    //     $timeout = get_option('_transient_timeout_' . $transient_key);
+    //     if ($timeout !== false) {
+    //         $time_left = $timeout - time();
+    //         $time_left_str = gmdate('H:i:s', max($time_left, 0));
+    //     } else {
+    //         $time_left_str = 'unknown';
+    //     }
 
-        if ($cached !== false) {
-            self::debug_log('get_database_fairs_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
-        }
+    //     if ($cached !== false) {
+    //         self::debug_log('get_database_fairs_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+    //     }
 
-        // Connect database
-        $cap_db = self::connect_database();
+    //     // Connect database
+    //     $cap_db = self::connect_database();
 
-        if (!$cap_db) {
-            // DB not available → use last transient if exists, else empty
-            if ($cached !== false) {
+    //     if (!$cap_db) {
+    //         // DB not available → use last transient if exists, else empty
+    //         if ($cached !== false) {
 
-                // Extend transient by 10 minutes in emergency mode
-                set_transient($transient_key, $cached, 600);
+    //             // Extend transient by 10 minutes in emergency mode
+    //             set_transient($transient_key, $cached, 600);
 
-                self::debug_log('get_database_fairs_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+    //             self::debug_log('get_database_fairs_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
 
-                self::$fairs_cache[$cache_key] = $cached;
-                return $cached;
-            }
+    //             self::$fairs_cache[$cache_key] = $cached;
+    //             return $cached;
+    //         }
 
-            // No transient available → return empty
-            self::debug_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
-            error_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key);
+    //         // No transient available → return empty
+    //         self::debug_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+    //         error_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key);
 
-            // CRON-safe: no wp_die()
-            if (defined('DOING_CRON') && DOING_CRON) {
-                return [];
-            }
+    //         // CRON-safe: no wp_die()
+    //         if (defined('DOING_CRON') && DOING_CRON) {
+    //             return [];
+    //         }
 
-            // Frontend fallback → user-friendly 503
-            wp_die(
-                '<h1>Przepraszamy</h1><p>Trwają prace techniczne. Spróbuj ponownie później.</p>',
-                'Strona tymczasowo niedostępna',
-                ['response' => 503]
-            );
+    //         // Frontend fallback → user-friendly 503
+    //         wp_die(
+    //             '<h1>Przepraszamy</h1><p>Trwają prace techniczne. Spróbuj ponownie później.</p>',
+    //             'Strona tymczasowo niedostępna',
+    //             ['response' => 503]
+    //         );
 
-            return [];
-        }
+    //         return [];
+    //     }
 
-        $query = "
-            SELECT r.address_from, r.address_to, r.options
-            FROM redirects AS r
-            INNER JOIN fairs AS f ON r.fair_id = f.id
-            WHERE f.fair_domain = %s
-        ";
+    //     $query = "
+    //         SELECT r.address_from, r.address_to, r.options
+    //         FROM redirects AS r
+    //         INNER JOIN fairs AS f ON r.fair_id = f.id
+    //         WHERE f.fair_domain = %s
+    //     ";
 
-        $results = $cap_db->get_results($cap_db->prepare($query, $current_domain));
+    //     $results = $cap_db->get_results($cap_db->prepare($query, $current_domain));
 
-        if ($cap_db->last_error) {
-            return [];
-        }
+    //     if ($cap_db->last_error) {
+    //         return [];
+    //     }
 
-        // SQL error
-        if ($cap_db->last_error) {
-            self::debug_log('get_database_fairs_data: SQL error → '. addslashes($cap_db->last_error), 'error');
-            // Use last transient if available
-            if ($cached !== false) {
-                set_transient($transient_key, $cached, 600);
-                self::$fairs_cache[$cache_key] = $cached;
-                return $cached;
-            }
-            self::$fairs_cache[$cache_key] = [];
-            return [];
-        }
+    //     // SQL error
+    //     if ($cap_db->last_error) {
+    //         self::debug_log('get_database_fairs_data: SQL error → '. addslashes($cap_db->last_error), 'error');
+    //         // Use last transient if available
+    //         if ($cached !== false) {
+    //             set_transient($transient_key, $cached, 600);
+    //             self::$fairs_cache[$cache_key] = $cached;
+    //             return $cached;
+    //         }
+    //         self::$fairs_cache[$cache_key] = [];
+    //         return [];
+    //     }
 
-        // Cache results for 10 minutes
-        set_transient($transient_key, $results, 600);
+    //     // Cache results for 10 minutes
+    //     set_transient($transient_key, $results, 600);
 
-        self::$fairs_cache[$cache_key] = $results;
-        self::debug_log('get_database_fairs_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+    //     self::$fairs_cache[$cache_key] = $results;
+    //     self::debug_log('get_database_fairs_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
 
-        return $results;
-    }
+    //     return $results;
+    // }
 
 
 
