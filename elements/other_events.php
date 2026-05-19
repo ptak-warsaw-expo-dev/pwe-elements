@@ -218,6 +218,14 @@ class PWElementOtherEvents extends PWElements {
         // Return translation based on key
         return isset($translations_map[$key]) ? $translations_map[$key] : $key;
     }
+    private static function is_excluded_domain(string $domain, array $excluded): bool {
+        foreach ($excluded as $ex) {
+            if (strpos($domain, $ex) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static function outputOtherEventsSwiper($atts) {
 
@@ -790,6 +798,16 @@ class PWElementOtherEvents extends PWElements {
 
         // Get JSON
         $fairs_json = PWECommonFunctions::json_fairs();
+        $domain_week = PWECommonFunctions::get_all_week_domains();
+
+        $manual_excluded = [
+            "fasttextile.com",
+            "expotrends.eu",
+            "fabrics-expo.eu",
+            "mr.glasstec.pl"
+        ];
+
+        $all_excluded = array_merge($manual_excluded, $domain_week);
 
         // Check if there is any data entered into the element
         if (empty($other_events_items_json[0]["other_events_domain"])) {
@@ -810,10 +828,8 @@ class PWElementOtherEvents extends PWElements {
                     if ((($date_start >= $trade_fair_start_timestamp && $date_start <= $trade_fair_end_timestamp) ||
                         ($date_end >= $trade_fair_start_timestamp && $date_end <= $trade_fair_end_timestamp)) &&
                         strpos($fair['domain'], $current_domain) === false &&
-                        (strpos($fair['domain'], "fasttextile.com") === false &&
-                        strpos($fair['domain'], "expotrends.eu") === false &&
-                        strpos($fair['domain'], "fabrics-expo.eu") === false &&
-                        strpos($fair['domain'], "mr.glasstec.pl") === false)) {
+                        !self::is_excluded_domain($fair['domain'], $all_excluded)) {
+
                         $other_events_items_json[] = [
                             "other_events_domain" => $fair["domain"],
                             "other_events_text"   => self::getLangField($fair, "desc")

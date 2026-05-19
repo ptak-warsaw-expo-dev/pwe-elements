@@ -86,18 +86,39 @@ class PWElementHale extends PWElements {
         $hall_image_src = wp_get_attachment_url($hall_image);
 
         // Get current domain
-        $current_domain = do_shortcode('[trade_fair_domainadress]');
+        $current_domain = trim(do_shortcode('[trade_fair_domainadress]'));
+        $domains_week = PWECommonFunctions::get_database_week_data();
 
-        // Fair dates
-        $trade_fair_start = do_shortcode('[trade_fair_datetotimer]');
-        $trade_fair_end = do_shortcode('[trade_fair_enddata]');
+        if (!empty($domains_week)) {
+            $current_domain = trim($domains_week[0]);
+        }
+
+        // Get JSON
+        $fairs_json = PWECommonFunctions::json_fairs();
+        $trade_fair_start = '';
+        $trade_fair_end   = '';
+
+        if (!empty($domains_week)) {
+            foreach ($fairs_json as $fair) {
+                $clean_fair_domain = trim($fair['domain'] ?? '', '[]" ');
+                $clean_current_domain = trim($current_domain, '[]" ');
+
+                if (!empty($clean_fair_domain) && $clean_fair_domain === $clean_current_domain) {
+                    $trade_fair_start = $fair['date_start'] ?? '';
+                    $trade_fair_end   = $fair['date_end']   ?? '';
+                    break;
+                }
+            }
+        } else {
+            $trade_fair_start = do_shortcode('[trade_fair_datetotimer]');
+            $trade_fair_end   = do_shortcode('[trade_fair_enddata]');
+        }
 
         // Converting dates to timestamps
         $trade_fair_start_timestamp = strtotime($trade_fair_start);
         $trade_fair_end_timestamp = strtotime($trade_fair_end);
 
-        // Get JSON
-        $fairs_json = PWECommonFunctions::json_fairs();
+
 
         $fair_items_json = [];
 
@@ -129,8 +150,14 @@ class PWElementHale extends PWElements {
         $json_data_all = [];
         $json_data_active = [];
 
+        if(!empty($domains_week)){
+            $fair_items_json = array_filter($fair_items_json, function($item) {
+                return $item['domain'] !== 'mr.glasstec.pl';
+            });
+        }
         foreach ($fair_items_json as $item) {
             $halls = array_map('trim', explode(',', $item['halls']));
+
             foreach ($halls as $hall) {
                 if (strpos($item['domain'], "mr.glasstec.pl") === false) {
                     $json_data_all[] = [
@@ -140,7 +167,24 @@ class PWElementHale extends PWElements {
                 }
             }
 
-            if ($item['domain'] === $current_domain) {
+            $current_domain = trim($current_domain, '[]" ');
+
+            if(empty($domains_week)){
+                if ($item['domain'] === $current_domain) {
+                    foreach ($halls as $hall) {
+                        $json_data_active[] = [
+                            "id" => $hall,
+                            "color" => $item['color']
+                        ];
+
+                        // Adding halls to $all_halls without numbers
+                        $clean_hall = preg_replace('/\d/', '', $hall);
+                        if (strpos($all_halls, $clean_hall) === false) {
+                            $all_halls .= $clean_hall . ', ';
+                        }
+                    }
+                }
+            } else {
                 foreach ($halls as $hall) {
                     $json_data_active[] = [
                         "id" => $hall,
@@ -154,9 +198,16 @@ class PWElementHale extends PWElements {
                     }
                 }
             }
+
         }
 
         $all_halls = rtrim($all_halls, ', ');
+
+        if(!empty($domains_week)){
+            $halls_array = explode(', ', $all_halls);
+            sort($halls_array);
+            $all_halls = implode(', ', $halls_array);
+        }
 
         $halls_word = (count(array_filter(array_map('trim', explode(',', $all_halls)))) > 1)
             ? self::multi_translation("halls")

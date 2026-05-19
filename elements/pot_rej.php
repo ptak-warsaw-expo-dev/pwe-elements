@@ -253,6 +253,10 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
         ];
 
         $t = (strpos($lang, 'en') !== false) ? $translations['en'] : $translations['pl'];
+        $trade_fair_group = do_shortcode('[trade_fair_group]');
+
+
+        var_dump($trade_fair_group);
 
         $output = '
             <style>
@@ -566,33 +570,64 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
             $output .= '
             <div id="xForm">';
             if (strpos($source_utm, 'utm_source=byli') === false) {
-                $output .= '
-                    <div class="form-3-left">
-                        <div>'.
-                            self::languageChecker(
-                                <<<PL
-                                    <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na <br><span class="very-strong">[trade_fair_name]!</span></h2>
-                                    <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu VIP<br><span class="very-strong">[trade_fair_name]!</span></h2>
+                if($trade_fair_group=="gr3"){
+                    $output .= '
+                        <div class="form-3-left">
+                            <div>'.
+                                self::languageChecker(
+                                    <<<PL
+                                        <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na <br><span class="very-strong">[trade_fair_name]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu VIP<br><span class="very-strong">[trade_fair_name]!</span></h2>
 
-                                    <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
+                                        <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
 
-                                    <p class="display-befor-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Was <span class="very-strong">wyjątkowy pakiet powitalny VIP</span>, który usprawni Państwa pobyt na targach.</p>
-                                    <p class="display-after-subbmit">Twój <span class="very-strong"> wyjątkowy pakiet powitalny VIP</span>  : spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingowa, otrzymasz na podany w formularzu adres za pośrednictwem poczty polskiej na około tydzień przed targami.</p>
-                                PL,
-                                <<<EN
-                                    <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering at <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
-                                    <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering VIP welcome package <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
+                                        <p class="display-befor-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Was <span class="very-strong">wyjątkowy pakiet powitalny VIP</span>, który usprawni Państwa pobyt na targach.</p>
+                                        <p class="display-after-subbmit">Twój <span class="very-strong"> wyjątkowy pakiet powitalny VIP</span>  : spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingowa, otrzymasz na podany w formularzu adres za pośrednictwem poczty polskiej na około tydzień przed targami.</p>
+                                    PL,
+                                    <<<EN
+                                        <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering at <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering VIP welcome package <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
 
-                                    <p class="">We are delighted that you are joining our event, full of market news and inspiration for use in your business.</p><br>
+                                        <p class="">We are delighted that you are joining our event, full of market news and inspiration for use in your business.</p><br>
 
-                                    <p class="display-befor-subbmit"><span class="very-strong">We encourage you to fill in</span> the last form, thanks to which we will be able to prepare for you a <span class="very-strong">exclusive VIP welcome package</span> that will enhance your stay at the fair.</p>
-                                    <p class="display-after-subbmit">Your <span class="very-strong">exclusive VIP welcome package</span>  which includes a personalized badge with the trade fair plan/schedule and a parking card, will be sent to the address provided in the form via postal service approximately one week before the trade fair.</p>
-                                EN
-                            )
-                        .'
+                                        <p class="display-befor-subbmit"><span class="very-strong">We encourage you to fill in</span> the last form, thanks to which we will be able to prepare for you a <span class="very-strong">exclusive VIP welcome package</span> that will enhance your stay at the fair.</p>
+                                        <p class="display-after-subbmit">Your <span class="very-strong">exclusive VIP welcome package</span>  which includes a personalized badge with the trade fair plan/schedule and a parking card, will be sent to the address provided in the form via postal service approximately one week before the trade fair.</p>
+                                    EN
+                                )
+                            .'
+                            </div>
                         </div>
-                    </div>
-                ';
+                    ';
+                } else {
+                    $output .= '
+                        <div class="form-3-left">
+                            <div>'.
+                                self::languageChecker(
+                                    <<<PL
+                                        <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na <br><span class="very-strong">[trade_fair_name]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu VIP<br><span class="very-strong">[trade_fair_name]!</span></h2>
+
+                                        <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
+
+                                        <p class="display-befor-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Państwa <span class="very-strong">spersonalizowany identyfikator</span> targowy, który usprawni pobyt na targach.</p>
+                                        <p class="display-after-subbmit">Twój <span class="very-strong"> >spersonalizowany identyfikator</span> : wraz z planem/harmonogramem targów oraz kartę parkingowa, otrzymasz na podany w formularzu adres za pośrednictwem poczty polskiej na około tydzień przed targami.</p>
+                                    PL,
+                                    <<<EN
+                                        <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering at <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering VIP welcome package <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
+
+                                        <p class="">We are delighted that you are joining our event, full of market news and inspiration for use in your business.</p><br>
+
+                                        <p class="display-before-submit"><span class="very-strong">We encourage you to fill in</span> the final form, so that we can prepare a <span class="very-strong">personalised badge</span> for you, which will make your visit to the fair more convenient.</p>
+                                        <p class="display-after-subbmit">Your <span class="very-strong"> >personalised badge</span> : together with the fair map/programme and a parking pass, will be sent to the address provided in the form via the Post Office approximately one week before the fair.</p>
+                                    EN
+                                )
+                            .'
+                            </div>
+                        </div>
+                    ';
+                }
+
             } else {
                 if (strpos($source_utm, 'utm_source=byli') !== false ) {
                     if (get_locale() == 'pl_PL') {
@@ -609,20 +644,36 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                         </div>
                     ';
             }
+
             $output .= '
                 <div class="form-3">';
                     if (strpos($source_utm, 'utm_source=byli') === false) {
-                        $output .=
-                            self::languageChecker(
-                                <<<PL
-                                    <h3 class="display-befor-subbmit">Podaj adres, na który mamy wysłać <span class="golden-text">darmowy pakiet powitalny VIP</span></h3>
-                                    <p class="display-befor-subbmit">Otrzymasz bezpłatny spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingową.</p>
-                                PL,
-                                <<<EN
-                                    <h3 class="display-befor-subbmit">Enter the address where we should send the <span class="golden-text">free VIP welcome pack</span></h3>
-                                    <p class="display-befor-subbmit">You will receive a complimentary personalised badge along with the exhibition schedule/schedule and a parking pass.</p>
-                                EN
-                            );
+                        if($trade_fair_group=="gr3"){
+                            $output .=
+                                self::languageChecker(
+                                    <<<PL
+                                        <h3 class="display-befor-subbmit">Podaj adres, na który mamy wysłać <span class="golden-text">darmowy pakiet powitalny VIP</span></h3>
+                                        <p class="display-befor-subbmit">Otrzymasz bezpłatny spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingową.</p>
+                                    PL,
+                                    <<<EN
+                                        <h3 class="display-befor-subbmit">Enter the address where we should send the <span class="golden-text">free VIP welcome pack</span></h3>
+                                        <p class="display-befor-subbmit">You will receive a complimentary personalised badge along with the exhibition schedule/schedule and a parking pass.</p>
+                                    EN
+                                );
+                        } else {
+                            $output .=
+                                self::languageChecker(
+                                    <<<PL
+                                        <h3 class="display-befor-subbmit"><span class="golden-text">Podaj adres, na który mamy wysłać darmowy pakiet powitalny.</span></h3>
+                                        <p class="display-befor-subbmit">Otrzymasz bezpłatny spersonalizowany identyfikator wraz z planem i harmonogramem targów.</p>
+                                    PL,
+                                    <<<EN
+                                        <h3 class="display-befor-submit"><span class="golden-text">Please enter the address to which we should send your free welcome pack.</span></h3>
+                                        <p class="display-befor-submit">You will receive a free personalised badge along with the exhibition plan and schedule.</p>
+                                    EN
+                                );
+                        }
+
                     } else {
                         if (strpos($source_utm, 'utm_source=byli') !== false) {
                             $output .='

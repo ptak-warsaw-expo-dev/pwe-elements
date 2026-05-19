@@ -1,11 +1,13 @@
 <?php
 
-class PWECommonFunctions {
+class PWECommonFunctions
+{
 
     /**
      * Random number
      */
-    public static function id_rnd() {
+    public static function id_rnd()
+    {
         $id_rnd = rand(10000, 99999);
         return $id_rnd;
     }
@@ -13,10 +15,11 @@ class PWECommonFunctions {
     /**
      * Add logs to uploads/logs/{$filename}.log
      */
-    public static function add_log($message, $filename = 'logs') {
+    public static function add_log($message, $filename = 'logs')
+    {
         $upload_dir = wp_upload_dir();
         $dir = $upload_dir['basedir'] . '/logs';
-        $file = $dir . '/'. $filename .'.log';
+        $file = $dir . '/' . $filename . '.log';
 
         if (!is_dir($dir)) {
             mkdir($dir, 0755, true);
@@ -31,7 +34,8 @@ class PWECommonFunctions {
      * Collecting all logs
      */
     private static $debug_logs = [];
-    private static function debug_log($message, $type = 'log') {
+    private static function debug_log($message, $type = 'log')
+    {
 
         if (!function_exists('wp_get_current_user')) {
             return;
@@ -50,14 +54,15 @@ class PWECommonFunctions {
     /**
      * Output console logs
      */
-    public static function output_db_connection_logs() {
+    public static function output_db_connection_logs()
+    {
 
         if (empty(self::$debug_logs)) {
             return;
         }
 
         echo '<script>';
-        echo 'console.groupCollapsed("DB CONNECTIONS ('. self::class .')");';
+        echo 'console.groupCollapsed("DB CONNECTIONS (' . self::class . ')");';
 
         foreach (self::$debug_logs as $log) {
             $msg = addslashes($log['message']);
@@ -71,50 +76,57 @@ class PWECommonFunctions {
     /**
      * Returning server hosts
      */
-    private static function resolve_server_addr_fallback() {
+    private static function resolve_server_addr_fallback()
+    {
         $host = php_uname('n');
-            switch ($host) {
-            case 'dedyk93.cyber-folks.pl': return '94.152.206.93';
-            case 'dedyk180.cyber-folks.pl': return '94.152.207.180';
-            case 'dedyk239.cyber-folks.pl': return '91.225.28.47';
-            case 'dedyk1072.cyber-folks.pl': return '91.225.28.72';
-            default: return '';
+        switch ($host) {
+            case 'dedyk93.cyber-folks.pl':
+                return '94.152.206.93';
+            case 'dedyk180.cyber-folks.pl':
+                return '94.152.207.180';
+            case 'dedyk239.cyber-folks.pl':
+                return '91.225.28.47';
+            case 'dedyk1072.cyber-folks.pl':
+                return '91.225.28.72';
+            default:
+                return '';
         }
     }
 
     /**
      * List of DB servers
      */
-    private static function get_database_servers() {
+    private static function get_database_servers()
+    {
 
         // All PWE servers
         $servers = [
             [
-                'host'=>'dedyk93.cyber-folks.pl',
-                'name'=> defined('PWE_DB_NAME_93') ? PWE_DB_NAME_93 : null,
-                'user'=> defined('PWE_DB_USER_93') ? PWE_DB_USER_93 : null,
-                'pass'=> defined('PWE_DB_PASSWORD_93') ? PWE_DB_PASSWORD_93 : null,
+                'host' => 'dedyk93.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_93') ? PWE_DB_NAME_93 : null,
+                'user' => defined('PWE_DB_USER_93') ? PWE_DB_USER_93 : null,
+                'pass' => defined('PWE_DB_PASSWORD_93') ? PWE_DB_PASSWORD_93 : null,
                 'ip'  => '94.152.206.93'
             ],
             [
-                'host'=>'dedyk180.cyber-folks.pl',
-                'name'=> defined('PWE_DB_NAME_180') ? PWE_DB_NAME_180 : null,
-                'user'=> defined('PWE_DB_USER_180') ? PWE_DB_USER_180 : null,
-                'pass'=> defined('PWE_DB_PASSWORD_180') ? PWE_DB_PASSWORD_180 : null,
+                'host' => 'dedyk180.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_180') ? PWE_DB_NAME_180 : null,
+                'user' => defined('PWE_DB_USER_180') ? PWE_DB_USER_180 : null,
+                'pass' => defined('PWE_DB_PASSWORD_180') ? PWE_DB_PASSWORD_180 : null,
                 'ip'  => '94.152.207.180'
             ],
             [
-                'host'=>'dedyk239.cyber-folks.pl',
-                'name'=> defined('PWE_DB_NAME_239') ? PWE_DB_NAME_239 : null,
-                'user'=> defined('PWE_DB_USER_239') ? PWE_DB_USER_239 : null,
-                'pass'=> defined('PWE_DB_PASSWORD_239') ? PWE_DB_PASSWORD_239 : null,
+                'host' => 'dedyk239.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_239') ? PWE_DB_NAME_239 : null,
+                'user' => defined('PWE_DB_USER_239') ? PWE_DB_USER_239 : null,
+                'pass' => defined('PWE_DB_PASSWORD_239') ? PWE_DB_PASSWORD_239 : null,
                 'ip'  => '91.225.28.47'
             ],
             [
-                'host'=>'dedyk1072.cyber-folks.pl',
-                'name'=> defined('PWE_DB_NAME_1072') ? PWE_DB_NAME_1072 : null,
-                'user'=> defined('PWE_DB_USER_1072') ? PWE_DB_USER_1072 : null,
-                'pass'=> defined('PWE_DB_PASSWORD_1072') ? PWE_DB_PASSWORD_1072 : null,
+                'host' => 'dedyk1072.cyber-folks.pl',
+                'name' => defined('PWE_DB_NAME_1072') ? PWE_DB_NAME_1072 : null,
+                'user' => defined('PWE_DB_USER_1072') ? PWE_DB_USER_1072 : null,
+                'pass' => defined('PWE_DB_PASSWORD_1072') ? PWE_DB_PASSWORD_1072 : null,
                 'ip'  => '91.225.28.72'
             ],
         ];
@@ -144,7 +156,8 @@ class PWECommonFunctions {
      * Connecting to CAP database
      */
     private static $cached_db_connection = null;
-    public static function connect_database() {
+    public static function connect_database()
+    {
 
         // Return cached connection if already connected
         if (self::$cached_db_connection !== null) {
@@ -234,7 +247,8 @@ class PWECommonFunctions {
     /**
      * Timeout filter for wpdb connection
      */
-    public static function set_db_timeout() {
+    public static function set_db_timeout()
+    {
         return 2;
     }
 
@@ -249,7 +263,8 @@ class PWECommonFunctions {
      * - get_database_fairs_data() → fairs within ±17 days window
      */
     private static $fairs_cache = [];
-    public static function get_database_fairs_data($fair_domain = null): array {
+    public static function get_database_fairs_data($fair_domain = null): array
+    {
 
         // Detect current domain
         $current_domain = $_SERVER['HTTP_HOST'] ?? '';
@@ -283,7 +298,7 @@ class PWECommonFunctions {
         }
 
         if ($cached !== false) {
-            self::debug_log('get_database_fairs_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_fairs_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
         }
 
         // Connect database
@@ -296,15 +311,15 @@ class PWECommonFunctions {
                 // Extend transient by 10 minutes in emergency mode
                 set_transient($transient_key, $cached, 600);
 
-                self::debug_log('get_database_fairs_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_fairs_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
 
                 self::$fairs_cache[$cache_key] = $cached;
                 return $cached;
             }
 
             // No transient available → return empty
-            self::debug_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
-            error_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key);
+            self::debug_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
+            error_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key);
 
             // CRON-safe: no wp_die()
             if (defined('DOING_CRON') && DOING_CRON) {
@@ -431,7 +446,7 @@ class PWECommonFunctions {
 
         // SQL error
         if ($cap_db->last_error) {
-            self::debug_log('get_database_fairs_data: SQL error → '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_fairs_data: SQL error → ' . addslashes($cap_db->last_error), 'error');
             // Use last transient if available
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
@@ -446,7 +461,7 @@ class PWECommonFunctions {
         set_transient($transient_key, $results, 600);
 
         self::$fairs_cache[$cache_key] = $results;
-        self::debug_log('get_database_fairs_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_fairs_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -455,7 +470,8 @@ class PWECommonFunctions {
      * Get fairs additional data from CAP databases
      */
     private static $fairs_adds_cache = [];
-    public static function get_database_fairs_data_adds($fair_domain = null): array {
+    public static function get_database_fairs_data_adds($fair_domain = null): array
+    {
 
         // Resolve current domain
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
@@ -463,7 +479,7 @@ class PWECommonFunctions {
 
         // STATIC cache
         if (isset(self::$fairs_adds_cache[$cache_key])) {
-            self::debug_log('get_database_fairs_data_adds: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_fairs_data_adds: data from STATIC → key=' . $cache_key);
             return self::$fairs_adds_cache[$cache_key];
         }
 
@@ -481,7 +497,7 @@ class PWECommonFunctions {
         }
 
         if ($cached !== false) {
-            self::debug_log('get_database_fairs_data_adds: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_fairs_data_adds: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$fairs_adds_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -491,11 +507,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_fairs_data_adds: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_fairs_data_adds: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$fairs_adds_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_fairs_data_adds: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_fairs_data_adds: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$fairs_adds_cache[$cache_key] = [];
             return [];
         }
@@ -534,7 +550,7 @@ class PWECommonFunctions {
 
         // SQL error
         if ($cap_db->last_error) {
-            self::debug_log('get_database_fairs_data_adds: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_fairs_data_adds: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$fairs_adds_cache[$cache_key] = $cached;
@@ -547,7 +563,7 @@ class PWECommonFunctions {
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
         self::$fairs_adds_cache[$cache_key] = $results;
-        self::debug_log('get_database_fairs_data_adds: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_fairs_data_adds: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -556,14 +572,15 @@ class PWECommonFunctions {
      * Get translations data from CAP databases
      */
     private static $translations_cache = [];
-    public static function get_database_translations_data($fair_domain = null): array {
+    public static function get_database_translations_data($fair_domain = null): array
+    {
 
         // Cache key
         $cache_key = $fair_domain ?? 'all';
 
         // STATIC cache
         if (isset(self::$translations_cache[$cache_key])) {
-            self::debug_log('get_database_translations_data: STATIC → key='. $cache_key);
+            self::debug_log('get_database_translations_data: STATIC → key=' . $cache_key);
             return self::$translations_cache[$cache_key];
         }
 
@@ -581,7 +598,7 @@ class PWECommonFunctions {
         }
 
         if ($cached !== false) {
-            self::debug_log('get_database_translations_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_translations_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$translations_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -591,11 +608,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_translations_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_translations_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$translations_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_translations_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_translations_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$translations_cache[$cache_key] = [];
             return [];
         }
@@ -664,7 +681,7 @@ class PWECommonFunctions {
                 $lang = strtolower($row->language);
                 $data = json_decode($row->translation, true);
                 if ($data) {
-                    foreach (['fair_name','fair_desc','fair_short_desc','fair_full_desc'] as $field) {
+                    foreach (['fair_name', 'fair_desc', 'fair_short_desc', 'fair_full_desc'] as $field) {
                         if (isset($data[$field])) {
                             $results[$fair_id]["{$field}_$lang"] = $data[$field];
                         }
@@ -678,7 +695,7 @@ class PWECommonFunctions {
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
         self::$translations_cache[$cache_key] = $results;
-        self::debug_log('get_database_translations_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_translations_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -687,7 +704,8 @@ class PWECommonFunctions {
      * Get associates data from CAP databases
      */
     private static $associates_cache = [];
-    public static function get_database_associates_data($fair_domain = null): array {
+    public static function get_database_associates_data($fair_domain = null): array
+    {
 
         // Resolve domain
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
@@ -695,7 +713,7 @@ class PWECommonFunctions {
 
         // STATIC cache
         if (isset(self::$associates_cache[$cache_key])) {
-            self::debug_log('get_database_associates_data: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_associates_data: data from STATIC → key=' . $cache_key);
             return self::$associates_cache[$cache_key];
         }
 
@@ -713,7 +731,7 @@ class PWECommonFunctions {
         }
 
         if ($cached !== false) {
-            self::debug_log('get_database_associates_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_associates_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$associates_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -723,11 +741,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_associates_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_associates_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$associates_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_associates_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_associates_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$associates_cache[$cache_key] = [];
             return [];
         }
@@ -741,7 +759,7 @@ class PWECommonFunctions {
 
         // SQL error
         if ($cap_db->last_error) {
-            self::debug_log('get_database_associates_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_associates_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$associates_cache[$cache_key] = $cached;
@@ -754,7 +772,7 @@ class PWECommonFunctions {
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
         self::$associates_cache[$cache_key] = $results;
-        self::debug_log('get_database_associates_data: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_associates_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -763,7 +781,8 @@ class PWECommonFunctions {
      * Get store data from CAP databases
      */
     private static $store_cache = null;
-    public static function get_database_store_data(): array {
+    public static function get_database_store_data(): array
+    {
 
         $cache_key = 'store';
 
@@ -787,7 +806,7 @@ class PWECommonFunctions {
         }
 
         if ($cached !== false) {
-            self::debug_log('get_database_store_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_store_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$store_cache = $cached;
             return $cached;
         }
@@ -797,11 +816,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_store_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_store_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$store_cache = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_store_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_store_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$store_cache = [];
             return [];
         }
@@ -814,7 +833,7 @@ class PWECommonFunctions {
 
         // SQL error
         if ($cap_db->last_error) {
-            self::debug_log('get_database_store_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_store_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$store_cache = $cached;
@@ -827,7 +846,7 @@ class PWECommonFunctions {
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
         self::$store_cache = $results;
-        self::debug_log('get_database_store_data: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_store_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -836,7 +855,8 @@ class PWECommonFunctions {
      * Get store packages data from CAP databases
      */
     private static $store_packages_cache = null;
-    public static function get_database_store_packages_data(): array {
+    public static function get_database_store_packages_data(): array
+    {
 
         $cache_key = 'store_packages';
 
@@ -852,10 +872,10 @@ class PWECommonFunctions {
 
         // Log transient timeout
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_store_packages_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_store_packages_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$store_packages_cache = $cached;
             return $cached;
         }
@@ -865,11 +885,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_store_packages_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_store_packages_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$store_packages_cache = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_store_packages_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_store_packages_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$store_packages_cache = [];
             return [];
         }
@@ -882,7 +902,7 @@ class PWECommonFunctions {
 
         // SQL error
         if ($cap_db->last_error) {
-            self::debug_log('get_database_store_packages_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_store_packages_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$store_packages_cache = $cached;
@@ -895,7 +915,7 @@ class PWECommonFunctions {
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
         self::$store_packages_cache = $results;
-        self::debug_log('get_database_store_packages_data: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_store_packages_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -904,7 +924,8 @@ class PWECommonFunctions {
      * Get meta data from CAP databases
      */
     private static $meta_cache = [];
-    public static function get_database_meta_data($data_id = null, $domain = null) {
+    public static function get_database_meta_data($data_id = null, $domain = null)
+    {
 
         $current_domain = $_SERVER['HTTP_HOST'] ?? '';
         $current_domain = preg_replace('/:\d+$/', '', $current_domain);
@@ -912,7 +933,7 @@ class PWECommonFunctions {
 
         // STATIC cache
         if (isset(self::$meta_cache[$cache_key])) {
-            self::debug_log('get_database_meta_data: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_meta_data: data from STATIC → key=' . $cache_key);
             return self::$meta_cache[$cache_key];
         }
 
@@ -922,10 +943,10 @@ class PWECommonFunctions {
 
         // Log transient timeout
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_meta_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_meta_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$meta_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -935,11 +956,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_meta_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_meta_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$meta_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_meta_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_meta_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$meta_cache[$cache_key] = [];
             return [];
         }
@@ -970,7 +991,7 @@ class PWECommonFunctions {
 
         // SQL error
         if ($cap_db->last_error) {
-            self::debug_log('get_database_meta_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_meta_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$meta_cache[$cache_key] = $cached;
@@ -983,7 +1004,7 @@ class PWECommonFunctions {
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
         self::$meta_cache[$cache_key] = $results;
-        self::debug_log('get_database_meta_data: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_meta_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -992,7 +1013,8 @@ class PWECommonFunctions {
      * Get group contacts data from CAP databases
      */
     private static $groups_contacts_cache = null;
-    public static function get_database_groups_contacts_data(): array {
+    public static function get_database_groups_contacts_data(): array
+    {
 
         $cache_key = 'groups_contacts';
 
@@ -1005,10 +1027,10 @@ class PWECommonFunctions {
         $transient_key = 'pwe_groups_contacts';
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_groups_contacts_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_groups_contacts_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$groups_contacts_cache = $cached;
             return $cached;
         }
@@ -1017,11 +1039,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_groups_contacts_data: NO DB → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_groups_contacts_data: NO DB → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$groups_contacts_cache = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_groups_contacts_data: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_groups_contacts_data: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$groups_contacts_cache = [];
             return [];
         }
@@ -1031,7 +1053,7 @@ class PWECommonFunctions {
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_groups_contacts_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_groups_contacts_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$groups_contacts_cache = $cached;
@@ -1043,7 +1065,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$groups_contacts_cache = $results;
-        self::debug_log('get_database_groups_contacts_data: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_groups_contacts_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1052,7 +1074,8 @@ class PWECommonFunctions {
      * Get group callcenter data from CAP databases
      */
     private static $groups_callcenter_cache = null;
-    public static function get_database_groups_callcenter_data(): array {
+    public static function get_database_groups_callcenter_data(): array
+    {
 
         $cache_key = 'groups_callcenter';
 
@@ -1064,10 +1087,10 @@ class PWECommonFunctions {
         $transient_key = 'pwe_groups_callcenter';
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_groups_callcenter_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_groups_callcenter_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$groups_callcenter_cache = $cached;
             return $cached;
         }
@@ -1076,11 +1099,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_groups_callcenter_data: NO DB → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_groups_callcenter_data: NO DB → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$groups_callcenter_cache = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_groups_callcenter_data: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_groups_callcenter_data: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$groups_callcenter_cache = [];
             return [];
         }
@@ -1090,7 +1113,7 @@ class PWECommonFunctions {
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_groups_callcenter_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_groups_callcenter_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$groups_callcenter_cache = $cached;
@@ -1102,7 +1125,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$groups_callcenter_cache = $results;
-        self::debug_log('get_database_groups_callcenter_data: data from database DIRECTLY (SQL time '.$time.'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_groups_callcenter_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1111,7 +1134,8 @@ class PWECommonFunctions {
      * Get groups data from CAP databases
      */
     private static $groups_cache = null;
-    public static function get_database_groups_data(): array {
+    public static function get_database_groups_data(): array
+    {
 
         $cache_key = 'groups';
 
@@ -1123,10 +1147,10 @@ class PWECommonFunctions {
         $transient_key = 'pwe_groups';
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_groups_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_groups_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$groups_cache = $cached;
             return $cached;
         }
@@ -1135,11 +1159,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_groups_data: NO DB → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_groups_data: NO DB → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$groups_cache = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_groups_data: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_groups_data: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$groups_cache = [];
             return [];
         }
@@ -1149,7 +1173,7 @@ class PWECommonFunctions {
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_groups_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_groups_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$groups_cache = $cached;
@@ -1161,7 +1185,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$groups_cache = $results;
-        self::debug_log('get_database_groups_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_groups_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1170,23 +1194,24 @@ class PWECommonFunctions {
      * Get week data from CAP databases
      */
     private static $week_data_cache = [];
-    public static function get_database_week_data($fair_domain = null): array {
+    public static function get_database_week_data($fair_domain = null): array
+    {
 
         $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $current_domain;
 
         if (isset(self::$week_data_cache[$cache_key])) {
-            self::debug_log('get_database_week_data: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_week_data: data from STATIC → key=' . $cache_key);
             return self::$week_data_cache[$cache_key];
         }
 
         $transient_key = 'pwe_week_data_' . md5($cache_key);
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_week_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_week_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$week_data_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1195,11 +1220,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_week_data: NO DB → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_week_data: NO DB → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$week_data_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_week_data: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_week_data: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$week_data_cache[$cache_key] = [];
             return [];
         }
@@ -1209,7 +1234,7 @@ class PWECommonFunctions {
         );
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_week_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_week_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$week_data_cache[$cache_key] = $cached;
@@ -1228,7 +1253,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$week_data_cache[$cache_key] = $results;
-        self::debug_log('get_database_week_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_week_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1237,23 +1262,24 @@ class PWECommonFunctions {
      * Get full week data from CAP databases
      */
     private static $week_all_cache = [];
-    public static function get_database_week_all($fair_domain = null) {
+    public static function get_database_week_all($fair_domain = null)
+    {
 
         $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $current_domain;
 
         if (isset(self::$week_all_cache[$cache_key])) {
-            self::debug_log('get_database_week_all: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_week_all: data from STATIC → key=' . $cache_key);
             return self::$week_all_cache[$cache_key];
         }
 
         $transient_key = 'pwe_week_all_' . md5($cache_key);
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_week_all: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_week_all: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$week_all_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1262,11 +1288,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_week_all: NO DB → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_database_week_all: NO DB → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$week_all_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_week_all: NO DB and no TRANSIENT → returning null → key='. $cache_key, 'error');
+            self::debug_log('get_database_week_all: NO DB and no TRANSIENT → returning null → key=' . $cache_key, 'error');
             self::$week_all_cache[$cache_key] = null;
             return null;
         }
@@ -1276,7 +1302,7 @@ class PWECommonFunctions {
         );
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_week_all: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_week_all: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$week_all_cache[$cache_key] = $cached;
@@ -1296,7 +1322,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$week_all_cache[$cache_key] = $results;
-        self::debug_log('get_database_week_all: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_week_all: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1305,7 +1331,8 @@ class PWECommonFunctions {
      * Get all week domains from CAP databases
      */
     private static $all_week_domains_cache = null;
-    public static function get_all_week_domains(): array {
+    public static function get_all_week_domains(): array
+    {
 
         $cache_key = 'all_week_domains';
 
@@ -1317,10 +1344,10 @@ class PWECommonFunctions {
         $transient_key = 'pwe_all_week_domains';
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_all_week_domains: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_all_week_domains: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$all_week_domains_cache = $cached;
             return $cached;
         }
@@ -1329,11 +1356,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_all_week_domains: NO DB → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
+                self::debug_log('get_all_week_domains: NO DB → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
                 self::$all_week_domains_cache = $cached;
                 return $cached;
             }
-            self::debug_log('get_all_week_domains: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_all_week_domains: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$all_week_domains_cache = [];
             return [];
         }
@@ -1341,7 +1368,7 @@ class PWECommonFunctions {
         $rows = $cap_db->get_results("SELECT week_domain FROM fair_weeks");
 
         if ($cap_db->last_error) {
-            self::debug_log('get_all_week_domains: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_all_week_domains: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$all_week_domains_cache = $cached;
@@ -1363,7 +1390,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$all_week_domains_cache = $results;
-        self::debug_log('get_all_week_domains: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_all_week_domains: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1372,23 +1399,24 @@ class PWECommonFunctions {
      * Get logotypes data from CAP databases
      */
     private static $logotypes_cache = [];
-    public static function get_database_logotypes_data($fair_domain = null): array {
+    public static function get_database_logotypes_data($fair_domain = null): array
+    {
 
         $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $current_domain;
 
         if (isset(self::$logotypes_cache[$cache_key])) {
-            self::debug_log('get_database_logotypes_data: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_logotypes_data: data from STATIC → key=' . $cache_key);
             return self::$logotypes_cache[$cache_key];
         }
 
         $transient_key = 'pwe_logotypes_' . md5($cache_key);
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_logotypes_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_logotypes_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$logotypes_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1397,11 +1425,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_logotypes_data: NO DB → using last TRANSIENT → key='. $cache_key, 'error');
+                self::debug_log('get_database_logotypes_data: NO DB → using last TRANSIENT → key=' . $cache_key, 'error');
                 self::$logotypes_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_logotypes_data: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_logotypes_data: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$logotypes_cache[$cache_key] = [];
             return [];
         }
@@ -1443,7 +1471,7 @@ class PWECommonFunctions {
         }
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_logotypes_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_logotypes_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$logotypes_cache[$cache_key] = $cached;
@@ -1458,7 +1486,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$logotypes_cache[$cache_key] = $results;
-        self::debug_log('get_database_logotypes_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_logotypes_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1467,23 +1495,24 @@ class PWECommonFunctions {
      * Get conferences data from CAP databases
      */
     private static $conferences_cache = [];
-    public static function get_database_conferences_data($domain = null): array {
+    public static function get_database_conferences_data($domain = null): array
+    {
 
         $domain = $domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $domain;
 
         if (isset(self::$conferences_cache[$cache_key])) {
-            self::debug_log('get_database_conferences_data: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_conferences_data: data from STATIC → key=' . $cache_key);
             return self::$conferences_cache[$cache_key];
         }
 
         $transient_key = 'pwe_conferences_' . md5($cache_key);
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_conferences_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_conferences_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$conferences_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1492,11 +1521,11 @@ class PWECommonFunctions {
         if (!$cap_db) {
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
-                self::debug_log('get_database_conferences_data: NO DB → using last TRANSIENT → key='. $cache_key, 'error');
+                self::debug_log('get_database_conferences_data: NO DB → using last TRANSIENT → key=' . $cache_key, 'error');
                 self::$conferences_cache[$cache_key] = $cached;
                 return $cached;
             }
-            self::debug_log('get_database_conferences_data: NO DB and no TRANSIENT → returning empty → key='. $cache_key, 'error');
+            self::debug_log('get_database_conferences_data: NO DB and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
             self::$conferences_cache[$cache_key] = [];
             return [];
         }
@@ -1527,7 +1556,7 @@ class PWECommonFunctions {
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_conferences_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_conferences_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             if ($cached !== false) {
                 set_transient($transient_key, $cached, 600);
                 self::$conferences_cache[$cache_key] = $cached;
@@ -1556,7 +1585,7 @@ class PWECommonFunctions {
 
         set_transient($transient_key, $results, 600);
         self::$conferences_cache[$cache_key] = $results;
-        self::debug_log('get_database_conferences_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_conferences_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1565,23 +1594,24 @@ class PWECommonFunctions {
      * Get fairs profiles data from CAP databases
      */
     private static $fairs_profiles_cache = [];
-    public static function get_database_fairs_data_profiles($fair_domain = null): array {
+    public static function get_database_fairs_data_profiles($fair_domain = null): array
+    {
 
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
         $cache_key = $fair_domain;
 
         if (isset(self::$fairs_profiles_cache[$cache_key])) {
-            self::debug_log('get_database_fairs_data_profiles: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_fairs_data_profiles: data from STATIC → key=' . $cache_key);
             return self::$fairs_profiles_cache[$cache_key];
         }
 
         $transient_key = 'pwe_fairs_profiles_' . md5($cache_key);
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_fairs_data_profiles: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_fairs_data_profiles: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$fairs_profiles_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1605,13 +1635,13 @@ class PWECommonFunctions {
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_fairs_data_profiles: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_fairs_data_profiles: SQL error: ' . addslashes($cap_db->last_error), 'error');
             $results = [];
         }
 
         set_transient($transient_key, $results, 600);
         self::$fairs_profiles_cache[$cache_key] = $results;
-        self::debug_log('get_database_fairs_data_profiles: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_fairs_data_profiles: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1620,22 +1650,23 @@ class PWECommonFunctions {
      * Get premieres data from CAP databases
      */
     private static $premieres_cache = [];
-    public static function get_database_premieres_data($fair_domain = null): array {
+    public static function get_database_premieres_data($fair_domain = null): array
+    {
 
         $cache_key = $fair_domain ?? 'all';
 
         if (isset(self::$premieres_cache[$cache_key])) {
-            self::debug_log('get_database_premieres_data: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_premieres_data: data from STATIC → key=' . $cache_key);
             return self::$premieres_cache[$cache_key];
         }
 
         $transient_key = 'pwe_premieres_' . md5($cache_key);
         $cached = get_transient($transient_key);
         $timeout = get_option('_transient_timeout_' . $transient_key);
-        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(),0)) : 'unknown';
+        $time_left_str = ($timeout !== false) ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
         if ($cached !== false) {
-            self::debug_log('get_database_premieres_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_premieres_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$premieres_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1667,14 +1698,14 @@ class PWECommonFunctions {
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
-            self::debug_log('get_database_premieres_data: SQL error: '. addslashes($cap_db->last_error), 'error');
+            self::debug_log('get_database_premieres_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
             self::$premieres_cache[$cache_key] = [];
             return [];
         }
 
         set_transient($transient_key, $results, 600);
         self::$premieres_cache[$cache_key] = $results;
-        self::debug_log('get_database_premieres_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_premieres_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1683,14 +1714,15 @@ class PWECommonFunctions {
      * Get fairs opinions data from CAP databases
      */
     private static $fairs_opinions_cache = [];
-    public static function get_database_fairs_data_opinions($fair_domain = null): array {
+    public static function get_database_fairs_data_opinions($fair_domain = null): array
+    {
 
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
         $cache_key = $fair_domain;
 
         // Check runtime cache first
         if (isset(self::$fairs_opinions_cache[$cache_key])) {
-            self::debug_log('get_database_fairs_data_opinions: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_fairs_data_opinions: data from STATIC → key=' . $cache_key);
             return self::$fairs_opinions_cache[$cache_key];
         }
 
@@ -1703,7 +1735,7 @@ class PWECommonFunctions {
             $timeout = get_option('_transient_timeout_' . $transient_key);
             $time_left_str = $timeout !== false ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
-            self::debug_log('get_database_fairs_data_opinions: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_fairs_data_opinions: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$fairs_opinions_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1746,7 +1778,7 @@ class PWECommonFunctions {
 
         // Save to runtime cache
         self::$fairs_opinions_cache[$cache_key] = $results;
-        self::debug_log('get_database_fairs_data_opinions: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_fairs_data_opinions: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1755,14 +1787,15 @@ class PWECommonFunctions {
      * Get fairs speakers data from CAP databases
      */
     private static $fairs_speakers_cache = [];
-    public static function get_database_fairs_data_speakers($fair_domain = null): array {
+    public static function get_database_fairs_data_speakers($fair_domain = null): array
+    {
 
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
         $cache_key = $fair_domain;
 
         // Check runtime cache first
         if (isset(self::$fairs_speakers_cache[$cache_key])) {
-            self::debug_log('get_database_fairs_data_speakers: data from STATIC → key='. $cache_key);
+            self::debug_log('get_database_fairs_data_speakers: data from STATIC → key=' . $cache_key);
             return self::$fairs_speakers_cache[$cache_key];
         }
 
@@ -1775,7 +1808,7 @@ class PWECommonFunctions {
             $timeout = get_option('_transient_timeout_' . $transient_key);
             $time_left_str = $timeout !== false ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
 
-            self::debug_log('get_database_fairs_data_speakers: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
+            self::debug_log('get_database_fairs_data_speakers: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
             self::$fairs_speakers_cache[$cache_key] = $cached;
             return $cached;
         }
@@ -1818,7 +1851,7 @@ class PWECommonFunctions {
 
         // Save to runtime cache
         self::$fairs_speakers_cache[$cache_key] = $results;
-        self::debug_log('get_database_fairs_data_speakers: data from database DIRECTLY (SQL time ' . $time . 'ms) → key='. $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
+        self::debug_log('get_database_fairs_data_speakers: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -1826,7 +1859,8 @@ class PWECommonFunctions {
     // DATABASE CONNECTIONS END <==================================================================================>
 
 
-    private static function remove_logo_duplicates(array $logos): array {
+    private static function remove_logo_duplicates(array $logos): array
+    {
         $unique = [];
         $seen = [];
 
@@ -1857,7 +1891,8 @@ class PWECommonFunctions {
     /**
      * Colors (accent or main2)
      */
-    public static function pwe_color($color) {
+    public static function pwe_color($color)
+    {
         $fair_colors = self::findPalletColorsStatic();
         $result_color = null;
 
@@ -1879,7 +1914,8 @@ class PWECommonFunctions {
         return $result_color;
     }
 
-    public static function generate_fair_data($fair) {
+    public static function generate_fair_data($fair)
+    {
         // Decode JSON estimations
         $estimations = !empty($fair->estimations) ? json_decode($fair->estimations, true) : [];
 
@@ -1935,7 +1971,8 @@ class PWECommonFunctions {
         return $data;
     }
 
-    public static function generate_fair_translation_data($fair) {
+    public static function generate_fair_translation_data($fair)
+    {
         return [
             "domain" => $fair["fair_domain"],
             "name_cs" => $fair["fair_name_cs"] ?? "",
@@ -1972,7 +2009,8 @@ class PWECommonFunctions {
     /**
      * JSON all trade fairs
      */
-    public static function json_fairs() {
+    public static function json_fairs()
+    {
         static $runtime_cache = null;
 
         if ($runtime_cache !== null) {
@@ -2074,7 +2112,8 @@ class PWECommonFunctions {
     /**
      * Function to transform the date
      */
-    public static function transform_dates($start_date, $end_date, $include_hours = true) {
+    public static function transform_dates($start_date, $end_date, $include_hours = true)
+    {
         $format = $include_hours ? "Y/m/d H:i" : "Y/m/d";
 
         // Convert date strings to DateTime objects
@@ -2109,7 +2148,8 @@ class PWECommonFunctions {
      * Decoding URL
      * Remowe wpautop
      */
-    public static function decode_clean_content($encoded_content) {
+    public static function decode_clean_content($encoded_content)
+    {
         $decoded_content = wpb_js_remove_wpautop(urldecode(base64_decode($encoded_content)), true);
         return $decoded_content;
     }
@@ -2118,7 +2158,8 @@ class PWECommonFunctions {
      * Decodes URL-encoded string
      * Decodes a JSON string
      */
-    public static function json_decode($encoded_variable) {
+    public static function json_decode($encoded_variable)
+    {
         $encoded_variable_urldecode = urldecode($encoded_variable);
         $encoded_variable_json = json_decode($encoded_variable_urldecode, true);
         return $encoded_variable_json;
@@ -2127,8 +2168,9 @@ class PWECommonFunctions {
     /**
      * Adding colors
      */
-    public static function findColor($primary, $secondary, $default = '') {
-        if($primary != '') {
+    public static function findColor($primary, $secondary, $default = '')
+    {
+        if ($primary != '') {
             return $primary;
         } elseif ($secondary != '') {
             return $secondary;
@@ -2142,7 +2184,8 @@ class PWECommonFunctions {
      *
      * @return array
      */
-    public static function findPalletColorsStatic() {
+    public static function findPalletColorsStatic()
+    {
         $uncode_options = get_option('uncode');
         $accent_uncode_color = $uncode_options["_uncode_accent_color"];
         $custom_element_colors = array();
@@ -2172,7 +2215,8 @@ class PWECommonFunctions {
      *
      * @return array
      */
-    public function findPalletColors() {
+    public function findPalletColors()
+    {
         $uncode_options = get_option('uncode');
         $accent_uncode_color = $uncode_options["_uncode_accent_color"];
         $custom_element_colors = array();
@@ -2202,7 +2246,8 @@ class PWECommonFunctions {
      *
      * @return bool
      */
-    public static function lang_pl() {
+    public static function lang_pl()
+    {
         return get_locale() == 'pl_PL';
     }
 
@@ -2213,7 +2258,8 @@ class PWECommonFunctions {
      * @param string $pl text in English.
      * @return string
      */
-    public static function languageChecker($pl, $en = '', $de = '') {
+    public static function languageChecker($pl, $en = '', $de = '')
+    {
         if (get_locale() == 'pl_PL') {
             return $pl;
         } else if (get_locale() == 'en_US') {
@@ -2221,7 +2267,6 @@ class PWECommonFunctions {
         } else {
             return $de;
         }
-
     }
 
     /**
@@ -2229,7 +2274,8 @@ class PWECommonFunctions {
      *
      * @return array
      */
-    public static function adjustBrightness($hex, $steps) {
+    public static function adjustBrightness($hex, $steps)
+    {
         // Convert hex to RGB
         $hex = str_replace('#', '', $hex);
         $r = hexdec(substr($hex, 0, 2));
@@ -2243,8 +2289,8 @@ class PWECommonFunctions {
 
         // Convert RGB back to hex
         return '#' . str_pad(dechex($r), 2, '0', STR_PAD_LEFT)
-                . str_pad(dechex($g), 2, '0', STR_PAD_LEFT)
-                . str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
+            . str_pad(dechex($g), 2, '0', STR_PAD_LEFT)
+            . str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -2252,12 +2298,13 @@ class PWECommonFunctions {
      *
      * @return array
      */
-    public function findFormsGF($mode = ''){
+    public function findFormsGF($mode = '')
+    {
         $pwe_forms_array = array();
         if (is_admin()) {
             if (method_exists('GFAPI', 'get_forms')) {
                 $pwe_forms = GFAPI::get_forms();
-                if($mode == 'id'){
+                if ($mode == 'id') {
                     foreach ($pwe_forms as $form) {
                         $pwe_forms_array[$form['title']] = $form['id'];
                     }
@@ -2277,7 +2324,8 @@ class PWECommonFunctions {
      * @param string $form_name
      * @return string
      */
-    public static function findFormsID($form_name) {
+    public static function findFormsID($form_name)
+    {
         $pwe_form_id = '';
         if (method_exists('GFAPI', 'get_forms')) {
             $pwe_forms = GFAPI::get_forms();
@@ -2296,7 +2344,8 @@ class PWECommonFunctions {
      *
      * @return bool
      */
-    public static function checkForMobile(){
+    public static function checkForMobile()
+    {
         return (preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']));
     }
 
@@ -2306,7 +2355,8 @@ class PWECommonFunctions {
      * @param bool $logo_color schould logo be in color.
      * @return string
      */
-    public static function findBestLogo($logo_color = false) {
+    public static function findBestLogo($logo_color = false)
+    {
         $filePaths = array(
             '/doc/logo-color-en.webp',
             '/doc/logo-color-en.png',
@@ -2318,9 +2368,9 @@ class PWECommonFunctions {
             '/doc/logo.png'
         );
 
-        switch (true){
-            case(get_locale() == 'pl_PL'):
-                if($logo_color){
+        switch (true) {
+            case (get_locale() == 'pl_PL'):
+                if ($logo_color) {
                     foreach ($filePaths as $path) {
                         if (strpos($path, '-en.') === false && file_exists(ABSPATH . $path)) {
                             return '<img src="' . $path . '"/>';
@@ -2328,15 +2378,15 @@ class PWECommonFunctions {
                     }
                 } else {
                     foreach ($filePaths as $path) {
-                        if ( strpos($path, 'color') === false && strpos($path, '-en.') === false && file_exists(ABSPATH . $path)) {
+                        if (strpos($path, 'color') === false && strpos($path, '-en.') === false && file_exists(ABSPATH . $path)) {
                             return '<img src="' . $path . '"/>';
                         }
                     }
                 }
                 break;
 
-            case(get_locale() == 'en_US'):
-                if($logo_color){
+            case (get_locale() == 'en_US'):
+                if ($logo_color) {
                     foreach ($filePaths as $path) {
                         if (file_exists(ABSPATH . $path)) {
                             return '<img src="' . $path . '"/>';
@@ -2356,7 +2406,8 @@ class PWECommonFunctions {
     /**
      * Finding URL of all images based on katalog
      */
-    public static function findAllImages($firstPath, $image_count = false, $secondPath = '/doc/galeria') {
+    public static function findAllImages($firstPath, $image_count = false, $secondPath = '/doc/galeria')
+    {
         $firstPath = $_SERVER['DOCUMENT_ROOT'] . $firstPath;
 
         if (is_dir($firstPath) && !empty(glob($firstPath . '/*.{jpeg,jpg,png,webp,svg,JPEG,JPG,PNG,WEBP}', GLOB_BRACE))) {
@@ -2366,8 +2417,8 @@ class PWECommonFunctions {
             $exhibitorsImages = glob($secondPath . '/*.{jpeg,jpg,png,webp,svg,JPEG,JPG,PNG,WEBP}', GLOB_BRACE);
         }
         $count = 0;
-        foreach($exhibitorsImages as $image){
-            if($image_count != false && $count >= $image_count){
+        foreach ($exhibitorsImages as $image) {
+            if ($image_count != false && $count >= $image_count) {
                 break;
             } else {
                 $exhibitors_path[] = substr($image, strpos($image, '/doc/'));
@@ -2384,15 +2435,16 @@ class PWECommonFunctions {
      * @param bool $logo_color schould logo be in color.
      * @return string
      */
-    public static function findBestFile($file_path) {
+    public static function findBestFile($file_path)
+    {
         $filePaths = array(
             '.webp',
             '.jpg',
             '.png'
         );
 
-        foreach($filePaths as $com){
-            if(file_exists(ABSPATH . $file_path . $com)) {
+        foreach ($filePaths as $com) {
+            if (file_exists(ABSPATH . $file_path . $com)) {
                 return $file_path . $com;
             }
         }
@@ -2403,7 +2455,8 @@ class PWECommonFunctions {
      *
      * @return bool
      */
-    public static function isTradeDateExist() {
+    public static function isTradeDateExist()
+    {
 
         $seasons = ["nowa data", "wiosna", "lato", "jesień", "zima", "new date", "spring", "summer", "autumn", "winter"];
         $trade_date_lower = strtolower(do_shortcode('[trade_fair_date]'));
@@ -2420,32 +2473,35 @@ class PWECommonFunctions {
     /**
      * Adding element input[type="range"]
      */
-    public static function inputRange() {
-        if ( function_exists( 'vc_add_shortcode_param' ) ) {
-            vc_add_shortcode_param( 'input_range', array('PWEHeader', 'input_range_field_html') );
+    public static function inputRange()
+    {
+        if (function_exists('vc_add_shortcode_param')) {
+            vc_add_shortcode_param('input_range', array('PWEHeader', 'input_range_field_html'));
         }
     }
-    public static function input_range_field_html( $settings, $value ) {
+    public static function input_range_field_html($settings, $value)
+    {
         $id = uniqid('range_');
         return '<div class="pwe-input-range">'
             . '<input type="range" '
-            . 'id="' . esc_attr( $id ) . '" '
-            . 'name="' . esc_attr( $settings['param_name'] ) . '" '
-            . 'class="wpb_vc_param_value ' . esc_attr( $settings['param_name'] ) . ' ' . esc_attr( $settings['type'] ) . '_field" '
-            . 'value="' . esc_attr( $value ) . '" '
-            . 'min="' . esc_attr( $settings['min'] ) . '" '
-            . 'max="' . esc_attr( $settings['max'] ) . '" '
-            . 'step="' . esc_attr( $settings['step'] ) . '" '
-            . 'oninput="document.getElementById(\'value_' . esc_attr( $id ) . '\').innerHTML = this.value" '
+            . 'id="' . esc_attr($id) . '" '
+            . 'name="' . esc_attr($settings['param_name']) . '" '
+            . 'class="wpb_vc_param_value ' . esc_attr($settings['param_name']) . ' ' . esc_attr($settings['type']) . '_field" '
+            . 'value="' . esc_attr($value) . '" '
+            . 'min="' . esc_attr($settings['min']) . '" '
+            . 'max="' . esc_attr($settings['max']) . '" '
+            . 'step="' . esc_attr($settings['step']) . '" '
+            . 'oninput="document.getElementById(\'value_' . esc_attr($id) . '\').innerHTML = this.value" '
             . '/>'
-            . '<span id="value_' . esc_attr( $id ) . '">' . esc_attr( $value ) . '</span>'
+            . '<span id="value_' . esc_attr($id) . '">' . esc_attr($value) . '</span>'
             . '</div>';
     }
 
     /**
      * Adding custom checkbox element
      */
-    function pweCheckbox() {
+    function pweCheckbox()
+    {
         if (function_exists('vc_add_shortcode_param')) {
             vc_add_shortcode_param('pwe_checkbox', array('PWEHeader', 'pwe_checkbox_html'));
         }
@@ -2453,7 +2509,8 @@ class PWECommonFunctions {
     /**
      * Generate HTML for custom checkbox
      */
-    public static function pwe_checkbox_html($settings, $value) {
+    public static function pwe_checkbox_html($settings, $value)
+    {
         $checked = $value === 'true' ? 'checked' : '';
         $id = uniqid('pwe_checkbox_');
 
@@ -2462,11 +2519,71 @@ class PWECommonFunctions {
             . 'id="' . esc_attr($id) . '" '
             . 'name="' . esc_attr($settings['param_name']) . '" '
             . 'class="wpb_vc_param_value ' . esc_attr($settings['param_name']) . ' ' . esc_attr($settings['type']) . '_field" '
-            . 'value="'.$value.'" '
+            . 'value="' . $value . '" '
             . $checked
             . ' onclick="this.value = this.checked ? \'true\' : \'\';" />'
             . '</div>';
     }
+
+    // TRANSLATIONS START <==================================================================================>
+    private static $translation_context = [
+        'element_slug' => null,
+        'group' => null,
+        'element_type' => 'main'
+    ];
+
+    // Setting translation context for multi_translation function
+    public static function set_translation_context($element_slug, $group, $element_type = 'main')
+    {
+        self::$translation_context['element_slug'] = $element_slug;
+        self::$translation_context['group'] = $group;
+        self::$translation_context['element_type'] = $element_type;
+    }
+
+    // Get translations from JSONs
+    private static $translation_cache = [];
+    public static function multi_translation($key)
+    {
+        $ctx = self::$translation_context;
+
+        if (empty($ctx['element_slug']) || empty($ctx['group'])) {
+            return $key;
+        }
+
+        $locale = get_locale();
+
+        // Cache key for this file
+        $cache_key = $ctx['element_slug'] . '.json';
+
+        // If not loaded yet, load it
+        if (!isset(self::$translation_cache[$cache_key])) {
+
+            $translations_file = plugin_dir_path(__DIR__) .
+                'translations/elements/' . $cache_key;
+
+            var_dump($translations_file);
+
+            if (file_exists($translations_file)) {
+                $json = file_get_contents($translations_file);
+                $data = json_decode($json, true);
+                self::$translation_cache[$cache_key] = is_array($data) ? $data : [];
+            } else {
+                // If the file is missing, the cache is empty
+                self::$translation_cache[$cache_key] = [];
+            }
+        }
+
+        // Download from the cache
+        $translations_data = self::$translation_cache[$cache_key];
+
+        // Choosing the right map
+        $map = $translations_data[$locale]
+            ?? $translations_data['en_US']
+            ?? [];
+
+        return $map[$key] ?? $key;
+    }
+
     // private static $redirect_cache = [];
     // public static function get_fair_redirects() {
     //     $current_domain = $_SERVER['HTTP_HOST'] ?? '';
@@ -2577,6 +2694,6 @@ class PWECommonFunctions {
 
 
 
-    }
+}
 
 add_action('wp_footer', ['PWECommonFunctions', 'output_db_connection_logs']);

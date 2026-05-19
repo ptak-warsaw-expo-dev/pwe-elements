@@ -89,10 +89,36 @@ class PWBadgeElement extends PWElements {
 
                 // Getting QR-code url
                 $meta_key = '';
-                for ($j=0; $j<=300; $j++){
-                    if(gform_get_meta($entry_id , 'qr-code_feed_' . $j . '_url') != ''){
-                        $meta_key = 'qr-code_feed_' . $j . '_url';
-                        break;
+                $entry_id = GFAPI::add_entry($multi_badge);
+
+                $meta_key = '';
+                $qr_code_url = '';
+
+                // priority: pwe_qr
+                $pwe_url = gform_get_meta($entry_id, 'pwe_qr_code_url');
+
+                if (!empty($pwe_url)) {
+
+                    $qr_code_url = $pwe_url;
+
+                } else {
+
+                    // fallback: qr-code feeds
+                    $qr_feeds = GFAPI::get_feeds(null, $multi_badge['form_id'], 'qr-code');
+
+                    if (!is_wp_error($qr_feeds)) {
+                        foreach ($qr_feeds as $feed) {
+
+                            $url = gform_get_meta(
+                                $entry_id,
+                                'qr-code_feed_' . $feed['id'] . '_url'
+                            );
+
+                            if (!empty($url)) {
+                                $qr_code_url = $url;
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -164,15 +190,45 @@ class PWBadgeElement extends PWElements {
 
                     // Getting QR-code url
                     $meta_key = '';
-                    for ($j=0; $j<=300; $j++){
-                        if(gform_get_meta($entry_id , 'qr-code_feed_' . $j . '_file') != ''){
-                            $meta_key = 'qr-code_feed_' . $j . '_file';
-                            break;
+                    $entry_id = GFAPI::add_entry($multi_badge);
+
+                    $file_path = '';
+
+                    // priority: pwe_qr
+                    $pwe_file = gform_get_meta($entry_id, 'pwe_qr_code_file');
+
+                    if (!empty($pwe_file)) {
+
+                        $file_path = $pwe_file;
+
+                    } else {
+
+                        // fallback: qr-code feeds
+                        $qr_feeds = GFAPI::get_feeds(null, $multi_badge['form_id'], 'qr-code');
+
+                        if (!is_wp_error($qr_feeds)) {
+                            foreach ($qr_feeds as $feed) {
+
+                                $path = gform_get_meta(
+                                    $entry_id,
+                                    'qr-code_feed_' . $feed['id'] . '_file'
+                                );
+
+                                if (!empty($path)) {
+                                    $file_path = $path;
+                                    break;
+                                }
+                            }
                         }
+                    }
+
+                    if (!empty($file_path) && file_exists($file_path)) {
+                        $zip->addFile($file_path, basename($file_path));
                     }
                     $file_path = gform_get_meta($entry_id, $meta_key);
                     $zip->addFile($file_path, basename($file_path));
                 }
+                
                 $zip->close();
     
                 echo '<script>

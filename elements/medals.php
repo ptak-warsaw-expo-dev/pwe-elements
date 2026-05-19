@@ -66,26 +66,17 @@ class PWElementMedals extends PWElements {
 
         $darker_btn_color = self::adjustBrightness($btn_color, -20);
 
-        $medals = [
-            'innowacyjnosc' => [
-                'pl' => '/wp-content/plugins/pwe-media/media/medals/innowacyjnosc.webp',
-                'en' => '/wp-content/plugins/pwe-media/media/medals/innowacyjnosc-en.webp'
-            ],
-            'premiera-targowa' => [
-                'pl' => '/wp-content/plugins/pwe-media/media/medals/premiera-targowa.webp',
-                'en' => '/wp-content/plugins/pwe-media/media/medals/premiera-targowa-en.webp'
-            ],
-            'produkt-targowy' => [
-                'pl' => '/wp-content/plugins/pwe-media/media/medals/produkt-targowy.webp',
-                'en' => '/wp-content/plugins/pwe-media/media/medals/produkt-targowy-en.webp'
-            ],
-            'ekspozycja-targowa' => [
-                'pl' => '/wp-content/plugins/pwe-media/media/medals/ekspozycja-targowa.webp',
-                'en' => '/wp-content/plugins/pwe-media/media/medals/ekspozycja-targowa-en.webp'
-            ]
-        ];
-
         $trade_fair_edition = do_shortcode('[trade_fair_edition]');
+
+
+
+        // global $fairs_data;
+
+        // echo '<pre>';
+        // var_dump(PWECommonFunctions::get_database_fairs_data());
+        // echo '</pre>';
+
+
 
         if (trim($trade_fair_edition) === "Premierowa" || trim($trade_fair_edition) === "Premier") {
             $output = '
@@ -166,35 +157,34 @@ class PWElementMedals extends PWElements {
                 }
             </style>
 
-
-                <div id="pweMedals" class="pwe-medals">
-                    <div class="pwe-medals__wrapper">
-                        <div class="pwe-medals__heading">
-                            <h4>'. self::multi_translation("award") .'</h4>
-                        </div>
-                        <div class="pwe-medals__text">
-                            <p>'. self::multi_translation("text_premier") .'</p>
-                        </div>
-                        <div class="pwe-medals__text">
-                            <p><strong>'. self::multi_translation("category_premier") .'</strong></p>
-                        </div>
-                        <div class="pwe-medals__items-container">
-                            <div class="pwe-medals__items">
-                                <div class="pwe-medals__item"><img src="'. self::multi_translation("premier_fair") .'"/></div>
-                            </div>
-                            <div class="pwe-medals__items-text">
-                                <p>'. self::multi_translation("partner_premier") .'</p>
-                                <p>'. self::multi_translation("cocreator_premier") .'</p>
-                            </div>
-                        </div>';
-
-                        $output .= '
-                        <div class="pwe-medals__button">
-                            <a class="pwe-button-link btn" href="'. self::multi_translation("book_stand") .'">'. self::multi_translation("book_stand_button") .'</a>
-                        </div>
-
+            <div id="pweMedals" class="pwe-medals">
+                <div class="pwe-medals__wrapper">
+                    <div class="pwe-medals__heading">
+                        <h4>'. self::multi_translation("award") .'</h4>
                     </div>
-                </div>';
+                    <div class="pwe-medals__text">
+                        <p>'. self::multi_translation("text_premier") .'</p>
+                    </div>
+                    <div class="pwe-medals__text">
+                        <p><strong>'. self::multi_translation("category_premier") .'</strong></p>
+                    </div>
+                    <div class="pwe-medals__items-container">
+                        <div class="pwe-medals__items">
+                            <div class="pwe-medals__item"><img src="'. self::multi_translation("premier_fair") .'"/></div>
+                        </div>
+                        <div class="pwe-medals__items-text">
+                            <p>'. self::multi_translation("partner_premier") .'</p>
+                            <p>'. self::multi_translation("cocreator_premier") .'</p>
+                        </div>
+                    </div>';
+
+                    $output .= '
+                    <div class="pwe-medals__button">
+                        <a class="pwe-button-link btn" href="'. self::multi_translation("book_stand") .'">'. self::multi_translation("book_stand_button") .'</a>
+                    </div>
+
+                </div>
+            </div>';
 
         } else {
             if ($medals_preset == 'default' || empty($medals_preset)) {
@@ -214,15 +204,12 @@ class PWElementMedals extends PWElements {
                         text-transform: uppercase;
                     }
                     .pwe-medals__items {
-                        display: grid;
-                        grid-template-columns: repeat(4, 1fr);
+                        display: flex;
+                        justify-content:center;
                         gap: 10px;
                     }
-                    .pwe-medals__wrapper .pwe-medals__items {
-                        display: grid;
-                    }
-                    .pwe-medals__wrapper .pwe-medals__items_mobile {
-                        display: none;
+                       .pwe-medals__item {
+                       flex:0.25;
                     }
                     .pwe-medals__wrapper .pwe-button-link {
                         transform-origin: center !important;
@@ -240,18 +227,16 @@ class PWElementMedals extends PWElements {
                             flex-wrap: wrap;
                             justify-content: center;
                         }
-                        .pwe-medals__item {
-                            max-width: 100px;
-                        }
                         .pwe-medals__item img {
                             width: 100%;
                         }
                         .pwe-medals__wrapper .pwe-medals__items_mobile {
                             display: block;
                         }
-                        .pwe-medals__wrapper .pwe-medals__items {
-                            display: none;
+                        .pwe-medals__item {
+                            flex:0.5;
                         }
+
                     }
                     .pwe-medals .pwe-button-link {
                         color: white;
@@ -288,9 +273,6 @@ class PWElementMedals extends PWElements {
                         justify-content: center;
                         align-items: center;
                     }
-                    .pwe-medals__wrapper .pwe-medals__items_mobile {
-                        display: none;
-                    }
                     .pwe-medals__wrapper .pwe-button-link {
                         transform-origin: center !important;
                     }
@@ -303,28 +285,8 @@ class PWElementMedals extends PWElements {
                             margin: 18px auto 0;
                         }
                         .pwe-medals__item {
-                            position: absolute;
+                            flex:0.5;
                         }
-                        .pwe-medals__item:nth-child(1) {
-                            z-index: 4;
-                            left: 5%;
-                        }
-                        .pwe-medals__item:nth-child(2) {
-                            z-index: 3;
-                            left: 25%;
-                            filter: brightness(0.8);
-                        }
-                        .pwe-medals__item:nth-child(3) {
-                            z-index: 2;
-                            left: 45%;
-                            filter: brightness(0.7);
-                        }
-                        .pwe-medals__item:nth-child(4) {
-                            z-index: 1;
-                            left: 65%;
-                            filter: brightness(0.6);
-                        }
-
                         .pwe-medals__item img {
                             width: 25vw;
                             max-width: 300px;
@@ -344,17 +306,15 @@ class PWElementMedals extends PWElements {
                             flex-wrap: wrap;
                             justify-content: center;
                         }
-                        .pwe-medals__item {
-                            max-width: 100px;
-                        }
+
                         .pwe-medals__item img {
                             width: 100%;
                         }
                         .pwe-medals__wrapper .pwe-medals__items_mobile {
                             display: block;
                         }
-                        .pwe-medals__wrapper .pwe-medals__items {
-                            display: none;
+                        .pwe-medals__item {
+                            flex:0.5;
                         }
                     }
                     .pwe-medals .pwe-button-link {
@@ -380,29 +340,11 @@ class PWElementMedals extends PWElements {
                     </div>
                     <div class="pwe-medals__text">'. self::multi_translation("text") .'</div>
                     <div class="pwe-medals__items">
-                        <div class="pwe-medals__item"><img src="'. self::languageChecker('/wp-content/plugins/pwe-media/media/medals/innowacyjnosc.webp', '/wp-content/plugins/pwe-media/media/medals/innowacyjnosc-en.webp') .'"/></div>
-                        <div class="pwe-medals__item"><img src="'. self::languageChecker('/wp-content/plugins/pwe-media/media/medals/premiera-targowa.webp', '/wp-content/plugins/pwe-media/media/medals/premiera-targowa-en.webp') .'"/></div>
-                        <div class="pwe-medals__item"><img src="'. self::languageChecker('/wp-content/plugins/pwe-media/media/medals/produkt-targowy.webp', '/wp-content/plugins/pwe-media/media/medals/produkt-targowy-en.webp') .'"/></div>
-                        <div class="pwe-medals__item"><img src="'. self::languageChecker('/wp-content/plugins/pwe-media/media/medals/ekspozycja-targowa.webp', '/wp-content/plugins/pwe-media/media/medals/ekspozycja-targowa-en.webp') .'"/></div>
+                        <div class="pwe-medals__item"><img src="/wp-content/plugins/pwe-media/media/medals/medale-2026.webp"/></div>
+                        <div class="pwe-medals__item"><img src="/wp-content/plugins/pwe-media/media/medals/medale-2026r.webp"/></div>
                     </div>';
 
                     $output .= '<div class="pwe-medals__items_mobile pwe-slides">';
-
-                    foreach ($medals as $key => $paths) {
-                        $img_src = self::languageChecker($paths['pl'], $paths['en']);
-                        $output .= '<img data-no-lazy="1" src="' . htmlspecialchars($img_src, ENT_QUOTES, 'UTF-8') . '" alt="Medal ' . $key . '"/>';
-                    }
-                    $output .= '</div>';
-
-                    // Dodanie slidera
-                    include_once plugin_dir_path(__FILE__) . '/../scripts/slider.php';
-                    $output .= PWESliderScripts::sliderScripts(
-                        'pwe-medals__items_mobile',
-                        '#pweMedals',
-                        $opinions_dots_display = 'true',
-                        $opinions_arrows_display = false,
-                        5
-                    );
 
                     $output .= '
                     <div class="pwe-medals__heading">

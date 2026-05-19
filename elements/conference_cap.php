@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Class PWElementConferenceCap
@@ -15,7 +15,7 @@ class PWElementConferenceCap extends PWElements {
      */
     public function __construct() {
         parent::__construct();
-    }    
+    }
 
     /**
      * Static method to initialize Visual Composer elements.
@@ -88,12 +88,12 @@ class PWElementConferenceCap extends PWElements {
                         'save_always' => true,
                     ),
                 ),
-            ),            
+            ),
         );
         return $element_output;
     }
 
-    
+
     public static function connectToDatabase() {
         if ($_SERVER['SERVER_ADDR'] === '94.152.207.180') {
             $database_host = 'localhost';
@@ -140,27 +140,27 @@ class PWElementConferenceCap extends PWElements {
     }
 
 
-    private static function speakerImageMini($speaker_images) { 
+    private static function speakerImageMini($speaker_images) {
         // Filtrowanie pustych wartości
         $head_images = array_filter($speaker_images);
         // Resetowanie indeksów tablicy
-        $head_images = array_values($head_images); 
-        
+        $head_images = array_values($head_images);
+
         // Jeśli nie ma obrazów, zwracamy pusty string
         if (empty($head_images)) {
-            return ''; 
+            return '';
         }
-    
+
         // Inicjalizacja kontenera na obrazy
         $speaker_html = '<div class="pwe-box-speakers-img">';
-    
+
         // Pętla po obrazach i dynamiczne ustawianie ich pozycji
-        foreach ($head_images as $i => $image_src) {    
+        foreach ($head_images as $i => $image_src) {
             if (!empty($image_src)) {
                 $z_index = (1 + $i);
                 $margin_top_index = '';
                 $max_width_index = "50%";
-    
+
                 // Ustawienia pozycji w zależności od liczby prelegentów
                 switch (count($head_images)) {
                     case 1:
@@ -168,7 +168,7 @@ class PWElementConferenceCap extends PWElements {
                         $left_index = "unset";
                         $max_width_index = "80%";
                         break;
-    
+
                     case 2:
                         switch ($i) {
                             case 0:
@@ -184,7 +184,7 @@ class PWElementConferenceCap extends PWElements {
                                 break;
                         }
                         break;
-    
+
                     case 3:
                         switch ($i) {
                             case 0:
@@ -201,7 +201,7 @@ class PWElementConferenceCap extends PWElements {
                                 break;
                         }
                         break;
-    
+
                     default:
                         switch ($i) {
                             case 0:
@@ -222,18 +222,18 @@ class PWElementConferenceCap extends PWElements {
                                 break;
                         }
                 }
-    
+
                 // Generowanie HTML obrazów
-                $speaker_html .= '<img class="pwe-box-speaker" src="'. esc_url($image_src) .'" alt="speaker portrait" 
+                $speaker_html .= '<img class="pwe-box-speaker" src="'. esc_url($image_src) .'" alt="speaker portrait"
                     style="position:relative; z-index:'.$z_index.'; top:'.$top_index.'; left:'.$left_index.'; max-width: '.$max_width_index.';'.$margin_top_index.';" />';
             }
         }
-    
+
         $speaker_html .= '</div>';
-    
+
         return $speaker_html;
     }
-    
+
 
     public static function output($atts) {
 
@@ -248,10 +248,10 @@ class PWElementConferenceCap extends PWElements {
 
         $database_data = self::getDatabaseDataConferences();
         // var_dump($database_data);
-        
+
         // Zmienna na dynamiczne reguły CSS do pokazywania właściwej treści
         $dynamic_css = "";
-        
+
         // Tablica na zapis danych prelegentów (bio) – identyfikator lecture-box => dane
         $speakersDataMapping = array();
 
@@ -374,7 +374,7 @@ class PWElementConferenceCap extends PWElements {
                     color: white;
                     background-color: color-mix(in srgb, var(--accent-color), black 20%);
                     border: 1px solid color-mix(in srgb, var(--accent-color), black 20%);
-                }       
+                }
                 /* Style modala */
                 .custom-modal-overlay {
                     position: fixed;
@@ -433,13 +433,13 @@ class PWElementConferenceCap extends PWElements {
                 }
             </style>
         ';
-        
+
         if (!empty($conference_cap_title)) {
             $output .= '<h2>' . esc_html($conference_cap_title) . '</h2>';
         }
-        
+
         $output .= '<div class="pwe-conference-cap-element" style="' . esc_attr($conference_cap_style) . '">';
-        
+
         if (!empty($database_data)) {
             $conf_slug_index = 0;
             $conf_slugs = [];
@@ -447,18 +447,18 @@ class PWElementConferenceCap extends PWElements {
             $conf_slug_radio_inputs = '';
             $conf_slug_tab_headers = '';
             $conf_slug_tab_contents = '';
-        
+
             // **Zbiór `conf_slug` i grupowanie konferencji wg nich**
             foreach ($database_data as $conference) {
                 if (empty($conference->conf_data)) {
                     continue;
                 }
-        
+
                 $confData = json_decode($conference->conf_data, true);
                 if (!is_array($confData)) {
                     continue;
                 }
-        
+
                 $conf_slug = $conference->conf_slug;
                 if (!isset($conf_slugs[$conf_slug])) {
                     $conf_slugs[$conf_slug] = [];
@@ -479,7 +479,7 @@ class PWElementConferenceCap extends PWElements {
 
                 $conf_slug_index++;
                 $checked = ($conf_slug_index === 1) ? ' checked' : '';
-        
+
                 // Zakładki dla `conf_slug`
                 $conf_slug_radio_inputs .= '<input type="radio" name="conference_cap_conf_tabs" id="conference_cap_conf_tab_' . $conf_slug_index . '" class="conference_cap__conf-tab-radio"' . $checked . '>';
                 // Pobieranie obrazu dla danego conf_slug
@@ -502,7 +502,7 @@ class PWElementConferenceCap extends PWElements {
 
                 $conf_slug_tab_headers .= '</label>';
 
-        
+
                 $conf_slug_content = '<div class="conference_cap__conf-tab-content" id="content_conference_cap_conf_tab_' . $conf_slug_index . '">';
 
                 // Pobieranie obrazu i nazwy konferencji dla `conf_slug`
@@ -535,23 +535,23 @@ class PWElementConferenceCap extends PWElements {
                     $conf_slug_content .= '</div>'; // Koniec nagłówka konferencji
                 }
 
-        
+
                 // **Tworzenie zakładek dni dla `conf_slug`**
                 $tab_index = 0;
                 $radio_inputs = '';
                 $tab_headers = '';
                 $tab_contents = '';
                 foreach ($conferences as $confData) {
-                    
+
                     foreach ($confData as $day => $sessions) {
                         $data_check = explode(' ', $day);
                         $tab_index++;
                         $day_checked = ($tab_index === 1) ? ' checked' : '';
-        
+
                         // **Unikalne ID dla każdego dnia w danym `conf_slug`**
                         $radio_inputs .= '<input type="radio" name="conference_cap_tabs_' . $conf_slug_index . '" id="conference_cap_tab_' . $conf_slug_index . '_' . $tab_index . '" class="conference_cap__tab-radio"' . $day_checked . '>';
                         $tab_headers .= '<label for="conference_cap_tab_' . $conf_slug_index . '_' . $tab_index . '" class="conference_cap__tab-label">' . esc_html($day) . '</label>';
-        
+
                         $content = '<div class="conference_cap__tab-content" id="content_conference_cap_tab_' . $conf_slug_index . '_' . $tab_index . '">';
 
                         $content .= $inf_conf['before_day_' . $data_check[1]] ?? '';
@@ -563,13 +563,13 @@ class PWElementConferenceCap extends PWElements {
                                 if (strpos($key, 'pre-') !== 0) {
                                     continue; // Pomijamy wpisy, które nie zaczynają się od "pre-"
                                 }
-        
+
                                 $lecture_counter++;
                                 $lectureId = 'cap-lecture-' . $lecture_counter;
                                 $time  = isset($session['time']) ? $session['time'] : '';
                                 $title = isset($session['title']) ? $session['title'] : '';
                                 $desc  = isset($session['desc']) ? $session['desc'] : '';
-        
+
                                 // Pobieramy dane prelegentów
                                 $speakers = [];
                                 foreach ($session as $key => $value) {
@@ -577,29 +577,29 @@ class PWElementConferenceCap extends PWElements {
                                         $speakers[] = $value;
                                     }
                                 }
-        
+
                                 $content .= '<div id="' . esc_attr($lectureId) . '" class="conference_cap__lecture-box">';
                                 $content .= '<div class="conference_cap__lecture-speaker">';
                                 $speakers_bios = [];
-        
+
                                 if (!empty($speakers)) {
                                     $speaker_images = []; // Tablica na zdjęcia prelegentów
-                                
+
                                     foreach ($speakers as $speaker) {
                                         $speaker_name = isset($speaker['name']) ? $speaker['name'] : '';
                                         $speaker_url  = isset($speaker['url']) ? $speaker['url'] : '';
                                         $speaker_desc = isset($speaker['desc']) ? $speaker['desc'] : '';
-                                
+
                                         if (!empty($speaker_name) && $speaker_name !== '*') {
                                             $content .= '<div class="conference_cap__lecture-speaker-item">';
-                                
+
                                             if (!empty($speaker_url)) {
                                                 // Zapisanie URL do tablicy, zamiast dodawania pojedynczego obrazka w pętli
                                                 $speaker_images[] = $speaker_url;
                                             }
-                                
+
                                             $content .= '</div>'; // Koniec .conference_cap__lecture-speaker-item
-                                
+
                                             if (!empty($speaker_desc)) {
                                                 $speakers_bios[] = array(
                                                     'name' => $speaker_name,
@@ -609,37 +609,37 @@ class PWElementConferenceCap extends PWElements {
                                             }
                                         }
                                     }
-                                
+
                                     // Dodanie funkcji speakerImageMini po pętli
                                     if (!empty($speaker_images)) {
                                         $content .= '<div class="conference_cap__lecture-speaker-img">' . self::speakerImageMini($speaker_images) . '</div>';
                                     }
-                                
+
                                     if (!empty($speakers_bios)) {
                                         $speakersDataMapping[$lectureId] = $speakers_bios;
                                         $content .= '<button class="conference_cap__lecture-speaker-btn">BIO</button>';
                                     }
                                 }
-                                
+
                                 $content .= '</div>';
-        
+
                                 $content .= '<div class="conference_cap__lecture-box-info">';
                                 $content .= '<h4 class="conference_cap__lecture-time">' . esc_html($time) . '</h4>';
                                 $speaker_names = array_map(function ($speaker) {
                                     return $speaker['name'];
                                 }, $speakers);
-    
+
                                 if (!empty($speaker_names) && implode('', $speaker_names) !== 'brak') {
                                     $content .= '<h5 class="conference_cap__lecture-name">' . esc_html(implode(', ', $speaker_names)) . '</h5>';
                                 }
-                                
+
                                 $content .= '<h4 class="conference_cap__lecture-title">' . esc_html($title) . '</h4>';
                                 $content .= '<div class="conference_cap__lecture-desc"><p>' . esc_html($desc) . '</p></div>';
                                 $content .= '</div>';
                                 $content .= '</div>';
                             }
-                        
-                            
+
+
                             $content .= '</div>';
                         } else {
                             $content .= '<p>Brak danych do wyświetlenia.</p>';
@@ -648,9 +648,9 @@ class PWElementConferenceCap extends PWElements {
                         $content .= $inf_conf['after_day_' . $data_check[1]] ?? '';
 
                         $content .= '</div>';
-        
+
                         $tab_contents .= $content;
-        
+
                         // **Dynamiczny CSS do przełączania dni w danym `conf_slug`**
                         $dynamic_css .= "
                             #content_conference_cap_tab_{$conf_slug_index}_{$tab_index} {
@@ -662,13 +662,13 @@ class PWElementConferenceCap extends PWElements {
                         ";
                     }
                 }
-        
+
                 // **Struktura zakładek dni**
                 $conf_slug_content .= '<div class="conference_cap__tabs">' . $radio_inputs . '<div class="conference_cap__tabs-labels">' . $tab_headers . '</div><div class="conference_cap__tabs-contents">' . $tab_contents . '</div></div>';
                 $conf_slug_content .= '</div>';
-        
+
                 $conf_slug_tab_contents .= $conf_slug_content;
-        
+
                 // **Dynamiczny CSS do przełączania `conf_slug`**
                 $dynamic_css .= "
                     #content_conference_cap_conf_tab_{$conf_slug_index} {
@@ -679,17 +679,17 @@ class PWElementConferenceCap extends PWElements {
                     }
                 ";
             }
-        
+
             // **Główna struktura HTML**
             $output .= '<div class="conference_cap__conf-tabs">' . $conf_slug_radio_inputs . '<div class="conference_cap__conf-tabs-labels">' . $conf_slug_tab_headers . '</div><div class="conference_cap__conf-tabs-contents">' . $conf_slug_tab_contents . '</div></div>';
             $output .= '<style>' . $dynamic_css . '</style>';
         } else {
             $output .= '<p>Brak danych do wyświetlenia.</p>';
         }
-        
-    
+
+
         $output .= '</div>';
-    
+
         $globalSpeakersData = json_encode($speakersDataMapping);
         $output .= '<script>
             window.speakersData = ' . $globalSpeakersData . ' || {};
@@ -704,14 +704,14 @@ class PWElementConferenceCap extends PWElements {
                         openSpeakersModal(window.speakersData[lectureId]);
                     });
                 });
-    
+
                 function openSpeakersModal(speakers) {
                     var overlay = document.createElement("div");
                     overlay.classList.add("custom-modal-overlay");
-    
+
                     var modal = document.createElement("div");
                     modal.classList.add("custom-modal", "visible");
-    
+
                     var modalContent = "";
                     speakers.forEach(function(speaker, index) {
                         modalContent += `<div class="modal-speaker">
@@ -723,16 +723,16 @@ class PWElementConferenceCap extends PWElements {
                             modalContent += "<hr>";
                         }
                     });
-    
+
                     modal.innerHTML = `<button class="custom-modal-close">&times;</button>
                         <div class="custom-modal-content">${modalContent}</div>`;
                     overlay.appendChild(modal);
                     document.body.appendChild(overlay);
-    
+
                     modal.querySelector(".custom-modal-close").addEventListener("click", function() {
                         document.body.removeChild(overlay);
                     });
-    
+
                     overlay.addEventListener("click", function(e) {
                         if(e.target === overlay) {
                             document.body.removeChild(overlay);
@@ -741,8 +741,8 @@ class PWElementConferenceCap extends PWElements {
                 }
             });
         </script>';
-    
+
         return $output;
-    }    
-    
+    }
+
 }

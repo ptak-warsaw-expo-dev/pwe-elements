@@ -161,7 +161,7 @@ class PWElementStepTwo extends PWElements {
                     padding: 0 !important;
                 }
                 .pwelement_'. self::$rnd_id .' #Step2{
-                    min-height: 700px;
+                    min-height: 80vh;
                     display: flex;
                     align-items: center;
                 }
@@ -373,17 +373,29 @@ class PWElementStepTwo extends PWElements {
 
                             $days_difference = ($trade_fair_timestamp - $current_timestamp) / (60 * 60 * 24);
 
-                            if ((($trade_fair_timestamp == false || empty($trade_fair_date)) || $days_difference > 17 || $trade_fair_timestamp < $current_timestamp) && get_locale() == "pl_PL") {
-                                $output .= '
-                                <a href="'. $step2_link_exhibitor_no .'">
-                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">'. self::multi_translation("no_thank_you") .'</button>
-                                </a>';
+                            $pwe_groups_data = do_shortcode('[pwe_group]');
+
+                            $current_domain = trim(do_shortcode('[trade_fair_domainadress]'));
+
+                            $day_limit = in_array($pwe_groups_data, ["gr1", "gr2"]) ? 21 : 17;
+
+                            $is_invalid_date = ($trade_fair_timestamp === false || empty($trade_fair_date));
+                            $is_past_or_far  = ($days_difference > $day_limit || $trade_fair_timestamp < $current_timestamp);
+                            $is_pl           = (get_locale() === "pl_PL");
+
+                            if ($current_domain === "gunshootingexpo.com") {
+                                $link = self::multi_translation("back_link");
                             } else {
-                                $output .= '
-                                <a href="'. self::multi_translation("back_link") .'">
-                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">'. self::multi_translation("no_thank_you") .'</button>
-                                </a>';
+                                $link = (($is_invalid_date || $is_past_or_far) && $is_pl)
+                                    ? $step2_link_exhibitor_no
+                                    : self::multi_translation("back_link");
                             }
+
+                            $output .= '
+                                <a href="' . $link . '">
+                                    <button type="submit" class="btn exhibitor-no" name="exhibitor-no">' . self::multi_translation("no_thank_you") . '</button>
+                                </a>';
+
                             $output .= '
                         </div>
                     </div>

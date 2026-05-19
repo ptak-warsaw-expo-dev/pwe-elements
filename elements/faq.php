@@ -5,10 +5,6 @@
 */
 class PWElementFaq extends PWElements {
 
-    /**
-     * Constructor method.
-    * Calls parent constructor and adds an action for initializing the Visual Composer map.
-    */
     public function __construct() {
         parent::__construct();
     }
@@ -17,33 +13,59 @@ class PWElementFaq extends PWElements {
         $locale = get_locale();
         $translations_file = __DIR__ . '/../translations/elements/faq.json';
 
-        // JSON file with translation
         $translations_data = json_decode(file_get_contents($translations_file), true);
 
-        // Is the language in translations
         if (isset($translations_data[$locale])) {
             $translations_map = $translations_data[$locale];
         } else {
-            // By default use English translation if no translation for current language
             $translations_map = $translations_data['en_US'];
         }
 
-        // Return translation based on key
         return isset($translations_map[$key]) ? $translations_map[$key] : $key;
     }
 
-    /**
-     * Static method to generate the HTML output for the PWE Element.
-    * Returns the HTML output as a string.
-    *
-    * @return string @output
-    */
     public static function output($atts) {
         $text_color = 'color: ' . self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'white') . '!important;';
         $title_shadow_color = 'box-shadow: 9px 9px 0px -6px ' . self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'white') . '!important;';
         $border_color = 'border-bottom: 1px solid ' . self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'white') . '!important;';
 
-        $output = '';
+        $current_host = parse_url(home_url(), PHP_URL_HOST);
+
+        $q1_answer = self::multi_translation("q1_answer");
+        $q2_answer = self::multi_translation("q2_answer");
+        $q3_answer = self::multi_translation("q3_answer");
+        $q4_answer = self::multi_translation("q4_answer");
+        $q5_answer = self::multi_translation("q5_answer");
+        $q6_answer = self::multi_translation("q6_answer");
+        $q7_answer = self::multi_translation("q7_answer");
+        $q8_answer = self::multi_translation("q8_answer");
+        $q9_answer = self::multi_translation("q9_answer");
+        $q10_answer = self::multi_translation("q10_answer");
+
+        $current_url = trailingslashit(home_url(add_query_arg(array(), $GLOBALS['wp']->request)));
+
+        $custom_urls_for_q3_pl = array(
+            'https://mr.glasstec.pl/dla-odwiedzajacych/dla-odwiedzajacych-2/',
+            'https://animalsdays.eu/dla-odwiedzajacych/',
+            'https://autotuningshow.com/dla-odwiedzajacych/',
+            'https://warszawskietargidomowmodulowych.com/dla-odwiedzajacych/',
+        );
+
+        $custom_urls_for_q3_en = array(
+            'https://mr.glasstec.pl/en/for-visitors-2/',
+            'https://animalsdays.eu/en/for-visitors/',
+            'https://autotuningshow.com/en/for-visitors/',
+            'https://warszawskietargidomowmodulowych.com/en/for-visitors/',
+        );
+
+        if (in_array($current_url, $custom_urls_for_q3_pl, true)) {
+            $q3_answer = 'Zapoznaj się z ofertą biletów: <a href="/bilety/">Bilety</a>';
+        }
+
+        if (in_array($current_url, $custom_urls_for_q3_en, true)) {
+            $q3_answer = 'See the ticket offer: <a href="/tickets/">Tickets</a>';
+        }
+        
 
         $output = '
             <style>
@@ -61,8 +83,8 @@ class PWElementFaq extends PWElements {
                     ' . $border_color . '
                 }
                 .pwelement_'. self::$rnd_id .' .pwe-container-faq h4 {
-                        padding: 0 10px 5px 0;
-                        ' . $title_shadow_color . '
+                    padding: 0 10px 5px 0;
+                    ' . $title_shadow_color . '
                 }
                 .pwelement_'. self::$rnd_id .' .pytanie::after{
                     content: ">";
@@ -96,44 +118,43 @@ class PWElementFaq extends PWElements {
                     <div class="container-pytan half-block-padding link-text-underline">
                         <div class="pytanie-odpowiedz pytanie-odpowiedz-1">
                             <div class="pytanie half-block-padding">'. self::multi_translation("q1_question") .'</div>
-                            <div class="odpowiedz half-block-padding">'. self::multi_translation("q1_answer") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q1_answer .'</div>
                         </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-2">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q2_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q2_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-3">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q3_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q3_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-4">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q4_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q4_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-5">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q5_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q5_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-6">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q6_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q6_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-7">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q7_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q7_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-8">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q8_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q8_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-9">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q9_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q9_answer") .'</div>
-                            </div>
-                            <div class="pytanie-odpowiedz pytanie-odpowiedz-10">
-                                <div class="pytanie half-block-padding">'. self::multi_translation("q10_question") .'</div>
-                                <div class="odpowiedz half-block-padding">'. self::multi_translation("q10_answer") .'</div>
-                            </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-2">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q2_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q2_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-3">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q3_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q3_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-4">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q4_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q4_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-5">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q5_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q5_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-6">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q6_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q6_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-7">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q7_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q7_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-8">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q8_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q8_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-9">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q9_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q9_answer .'</div>
+                        </div>
+                        <div class="pytanie-odpowiedz pytanie-odpowiedz-10">
+                            <div class="pytanie half-block-padding">'. self::multi_translation("q10_question") .'</div>
+                            <div class="odpowiedz half-block-padding">'. $q10_answer .'</div>
                         </div>
                     </div>
                 </div>
@@ -142,10 +163,10 @@ class PWElementFaq extends PWElements {
             <script>
                 if (document.querySelector(".pwe-container-faq")) {
                     jQuery(function ($) {
-                    $(".pytanie").click(function (event) {
-                        $(event.target.nextElementSibling).slideToggle();
-                        $(event.target).toggleClass("active");
-                    });
+                        $(".pytanie").click(function (event) {
+                            $(event.target.nextElementSibling).slideToggle();
+                            $(event.target).toggleClass("active");
+                        });
                     });
                 }
             </script>';

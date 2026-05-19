@@ -163,7 +163,7 @@ class PWElementExhibitors extends PWElements {
                     <!-- benefit-item -->
                         <div class="pwe-benefit-item">
                             <div class="pwe-benefit-img">
-                                <img src="'. self::multi_translation("benefit_networking_img") .'" alt="'. self::multi_translation("benefit_networking_text") .'">
+                                <img src="'. self::multi_translation("benefit_networking_img") .'" alt="'. self::multi_translation("benefit_networking_alt") .'">
                             </div>
                             <div class="pwe-benefit-text uncode_text_column pwe-align-left">
                                 <p class="pwe-line-height">
