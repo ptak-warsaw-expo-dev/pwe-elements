@@ -118,4 +118,102 @@ class PWE_NotificationPresets {
 
         return array_replace_recursive($base, $overrides);
     }
+
+    public static function generator_wystawcow_gr1(array $overrides = []) : array {
+        $base = [
+            // Wykrywanie formularzy po tytule
+            'target_titles' => [
+                'Rejestracja gości wystawców EN' => 'en',
+            ],
+            'not_followed_by'   => ['FB'],
+
+            // Parametry powiadomienia
+            'notification' => [
+                'name'    => [
+                    'en' => 'Dziękujemy za rejestrację na Targi gr1- ENG', 
+                ],
+                'subject' => [
+                    'en' => '{FIRMA ZAPRASZAJĄCA:5} invites you to the fair and congress {trade_fair_name}',
+                ],
+                'template' => [
+                    'en' => 'generator_gosci_wystawcow_gr1.html',
+                ],
+                'isActive'            => true,
+                'event'               => 'form_submission',
+                'from'                => '{trade_fair_rejestracja}',
+                'fromName'            => '{trade_fair_name}',
+                'match_by'            => 'name',
+                'overwrite_if_exists' => true,
+            ],
+            // Wyślij do pola
+            'to' => [
+                'type'           => 'field',
+                'field_strategy' => 'first_email',
+                'admin_label'    => null,
+                'field_id'       => null,
+                'email_address'  => null,
+            ],
+            // QR-feed
+            'qr' => [
+                'enable' => true,
+                'embed'  => true,
+                'attach' => true,
+            ],
+
+            // Inne
+            'option_key_prefix' => 'gf_generator_wystawcow_gr1_',
+            'template_dir'      => WP_CONTENT_DIR,
+        ];
+
+        return array_replace_recursive($base, $overrides);
+    }
+
+    public static function generator_wystawcow_gr2_3(array $overrides = []) : array {
+        $base = [
+            // Wykrywanie formularzy po tytule
+            'target_titles' => [
+                'Rejestracja gości wystawców EN' => 'en',
+            ],
+            'not_followed_by'   => ['FB'],
+
+            // Parametry powiadomienia
+            'notification' => [
+                'name'    => [
+                    'en' => 'Dziękujemy za rejestrację na Targi gr2, gr3 - ENG', 
+                ],
+                'subject' => [
+                    'en' => '{FIRMA ZAPRASZAJĄCA:5} invites you to the fair and congress {trade_fair_name}',
+                ],
+                'template' => [
+                    'en' => 'generator_gosci_wystawcow_gr2.html',
+                ],
+                'isActive'            => true,
+                'event'               => 'form_submission',
+                'from'                => '{trade_fair_rejestracja}',
+                'fromName'            => '{trade_fair_name}',
+                'match_by'            => 'name',
+                'overwrite_if_exists' => true,
+            ],
+            // Wyślij do pola
+            'to' => [
+                'type'           => 'field',
+                'field_strategy' => 'first_email',
+                'admin_label'    => null,
+                'field_id'       => null,
+                'email_address'  => null,
+            ],
+            // QR-feed
+            'qr' => [
+                'enable' => true,
+                'embed'  => true,
+                'attach' => true,
+            ],
+
+            // Inne
+            'option_key_prefix' => 'generator_wystawcow_gr2_3_',
+            'template_dir'      => WP_CONTENT_DIR,
+        ];
+
+        return array_replace_recursive($base, $overrides);
+    }
 }

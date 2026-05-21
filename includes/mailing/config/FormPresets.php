@@ -310,6 +310,8 @@ class PWE_FormPresets {
                     'service' => 'wordpress',
                     'name'    => 'Exhibitors details link',
                     'event'   => 'form_submission',
+                    'from'    => '{trade_fair_rejestracja}',
+                    'fromName'=> '{trade_fair_name}',
                     'toType'  => 'field',
                     'to'      => '1',
                     'subject' => '{trade_fair_name} link do odkrywania detali wystawców',

@@ -162,10 +162,20 @@ class PWE_NotificationProcessor {
 
         // C) QR feed – zbierz wszystkie feedy QR
         $qr_feed_ids = [];
+        $pwe_qr_name = null;
+
         if (!empty($p['qr']['enable'])) {
             $feeds = GFAPI::get_feeds(null, $form_id);
+
             foreach ($feeds as $feed) {
                 $slug = $feed['addon_slug'] ?? '';
+
+                // PRIORITY: pwe_qr
+                if ($slug === 'pwe_qr') {
+                    $pwe_qr_name = $feed['meta']['feedName'] ?? null;
+                }
+
+                // fallback QR plugins
                 if (in_array($slug, ['qr-code', 'sp-qrcode', 'gf-qr-code'], true)) {
                     $qr_feed_ids[] = (int)$feed['id'];
                 }
@@ -180,8 +190,23 @@ class PWE_NotificationProcessor {
             ? file_get_contents($template_file)
             : 'Dziękujemy za udział w wydarzeniu.';
 
-        if (!empty($qr_feed_ids)) {
-            $message = str_replace('[qr_feed_id]', $qr_feed_ids[0], $message);
+        if (!empty($pwe_qr_name)) {
+
+            // new qr (pwe_qr)
+            $message = str_replace(
+                '{notfc-qrcode-url}',
+                '{pwe_qr_url name=' . $pwe_qr_name . '}',
+                $message
+            );
+
+        } elseif (!empty($qr_feed_ids)) {
+
+            // fallback old qr (qr-code)
+            $message = str_replace(
+                '{notfc-qrcode-url}',
+                '{qrcode-url-' . $qr_feed_ids[0] . '}',
+                $message
+            );
         }
 
         // E) payload (bez enableQrAttachment / *_image_feed_*)

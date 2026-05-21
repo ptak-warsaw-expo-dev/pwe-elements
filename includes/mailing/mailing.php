@@ -46,8 +46,9 @@ class PWEMailing extends PWECommonFunctions {
 
         add_action('gform_loaded', [ $this, 'register_resend_platyna' ], 20);
 
-        add_action('gform_loaded', [ $this, 'enable_honeypot_for_all_forms' ], 30);
+        // add_action('gform_loaded', [ $this, 'update_generator' ], 20);
 
+        add_action('gform_loaded', [ $this, 'enable_honeypot_for_all_forms' ], 30);
 
     }
 
@@ -94,6 +95,26 @@ class PWEMailing extends PWECommonFunctions {
 
         PWE_NotificationProcessor::apply($params);
     }
+
+    // public function update_generator() {        
+    //     if ( defined('DOING_CRON') && DOING_CRON ) return;
+
+    //     $params = PWE_NotificationPresets::generator_wystawcow_gr1([
+    //         'template_dir'      => PWEM_NOTIF_DIR,
+    //         'option_key_prefix' => 'gf_generator_wystawcow_gr1_',
+    //         'period'            => 'days:1',
+    //     ]);
+
+    //     PWE_NotificationProcessor::apply($params);
+
+    //     $params1 = PWE_NotificationPresets::generator_wystawcow_gr2_3([
+    //         'template_dir'      => PWEM_NOTIF_DIR,
+    //         'option_key_prefix' => 'generator_wystawcow_gr2_3_',
+    //         'period'            => 'days:1',
+    //     ]);
+        
+    //     PWE_NotificationProcessor::apply($params1);
+    // }
 
     public function enable_honeypot_for_all_forms() : void {
         if (defined('DOING_CRON') && DOING_CRON) {
@@ -147,6 +168,7 @@ class PWEMailing extends PWECommonFunctions {
 
     /** PRE-CHECK */
     private static function gatePrecheck() : array {
+        
         try {
             $verKey  = 'gf_mailing_ver';
             $dayKey  = 'gf_mailing_day';
@@ -173,7 +195,7 @@ class PWEMailing extends PWECommonFunctions {
 
             if ($currVer !== null) {
                 $savedVer = (string) get_option($verKey, '');
-                if ($savedVer === '' || version_compare($currVer, $savedVer, '>')) {
+                if (empty($savedVer) || version_compare($currVer, $savedVer, '>')) {
                     $versionChanged = true;
                     $shouldRun = true;
                 }
