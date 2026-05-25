@@ -48,84 +48,119 @@ class PWBadgeElement extends PWElements {
      * 4. Generates multiple badges adding to forms and opens each badge URL in a new window for download.w.
      */
     public static function massGenerator($badge_form_id) {
+
         // 1. Checks if the form was submitted and necessary inputs are present.
-        if (isset($_POST["gform_submit"]) && $_POST["gform_submit"] == $badge_form_id && !empty($_POST['input_6']) && isset($_POST['input_3'])){
-            
+        if (
+            isset($_POST["gform_submit"]) &&
+            $_POST["gform_submit"] == $badge_form_id &&
+            !empty($_POST['input_6']) &&
+            isset($_POST['input_3'])
+        ) {
+
             // 2. Updates the URL of the confirmation message.
             echo '<script>
             jQuery(function ($) {
                 const gfMessage = $(".gform_confirmation_message a");
                 if (gfMessage.length) {
-                    const urlMessage = gfMessage.eq(0).attr("href")+"?parametr=masowy";
-                    gfMessage.eq(0).attr("href", urlMessage)
+                    const urlMessage = gfMessage.eq(0).attr("href") + "?parametr=masowy";
+                    gfMessage.eq(0).attr("href", urlMessage);
                     gfMessage.eq(1).hide();
                     window.open(gfMessage.eq(1).attr("href"));
                 }
             });
             </script>';
 
-            // 3. Collects data from the form inputs prepares it for badge generation.
-            $multi_badge = array();
-            $multi_badge['form_id'] = $badge_form_id;
-  
-            // Get the badge domain from a shortcode
-            $badge_domain = do_shortcode('[trade_fair_badge]');
-            
-            // Collect all form inputs
+            // base entry data
+            $multi_badge = [
+                'form_id' => $badge_form_id
+            ];
+
+            // 3. Collects data from the form inputs and prepares it for badge generation.
             foreach ($_POST as $key => $value) {
-                
                 if (strpos(strtolower($key), 'input') !== false) {
                     preg_match_all('/\d+/', $key, $id);
-                    $filed = $id[0][0];
-                    $multi_badge[$filed] = $value;
+                    $field_id = $id[0][0];
+                    $multi_badge[$field_id] = $value;
                 }
             }
 
+            $count = (int) ($_POST['multi_send'] ?? 1);
+
             // 4. Generates multiple badges adding to forms and opens each badge URL in a new window for download.
-            for($i=1; $i<$_POST['multi_send']; $i++){  
-                
-                // Adding entry to Gravity form
+            for ($i = 1; $i < $count; $i++) {
+
+                // create entry for each badge
                 $entry_id = GFAPI::add_entry($multi_badge);
 
-                // Getting QR-code url
-                $meta_key = '';
-                $entry_id = GFAPI::add_entry($multi_badge);
+                if (is_wp_error($entry_id)) {
+                    continue;
+                }
 
-                $meta_key = '';
+                // force processing
+                $entry = GFAPI::get_entry($entry_id);
+
+                if (!is_wp_error($entry)) {
+                    do_action(
+                        'gform_after_submission',
+                        $entry,
+                        ['id' => $badge_form_id]
+                    );
+                }
+
                 $qr_code_url = '';
+                $tries = 0;
 
-                // priority: pwe_qr
-                $pwe_url = gform_get_meta($entry_id, 'pwe_qr_code_url');
+                while ($tries < 10) {
 
-                if (!empty($pwe_url)) {
+                    // priority 1: PWE QR
+                    $pwe_url = gform_get_meta($entry_id, 'pwe_qr_code_url_encoded');
 
-                    $qr_code_url = $pwe_url;
+                    if (!empty($pwe_url)) {
+                        $qr_code_url = $pwe_url;
+                        break;
+                    }
 
-                } else {
-
-                    // fallback: qr-code feeds
-                    $qr_feeds = GFAPI::get_feeds(null, $multi_badge['form_id'], 'qr-code');
+                    // priority 2: QR CODE FEEDS
+                    $qr_feeds = GFAPI::get_feeds(null, $badge_form_id, 'qr-code');
 
                     if (!is_wp_error($qr_feeds)) {
                         foreach ($qr_feeds as $feed) {
 
+                            $feed_id = $feed['id'] ?? null;
+                            if (!$feed_id) {
+                                continue;
+                            }
+
                             $url = gform_get_meta(
                                 $entry_id,
-                                'qr-code_feed_' . $feed['id'] . '_url'
+                                'qr-code_feed_' . $feed_id . '_url'
                             );
 
                             if (!empty($url)) {
                                 $qr_code_url = $url;
-                                break;
+                                break 2;
                             }
                         }
                     }
+
+                    usleep(200000);
+                    $tries++;
                 }
 
-                // Opening new window to download
-                $qr_code_url = (gform_get_meta($entry_id, $meta_key));
-                $badge_url = 'https://warsawexpo.eu/assets/badge/local/loading.html?category='.$multi_badge[3].'&getname='.$multi_badge[1].'&firma='.$multi_badge[2].'&qrcode='.$qr_code_url;
-                echo '<script>window.open("'.$badge_url.'");</script>';
+                if (empty($qr_code_url)) {
+                    error_log("MassGenerator: missing QR for entry " . $entry_id);
+                    continue;
+                }
+
+                // generate badge URL with query parameters
+                $badge_url =
+                    'https://warsawexpo.eu/assets/badge/local/loading.html'
+                    . '?category=' . $multi_badge[3]
+                    . '&getname=' . $multi_badge[1]
+                    . '&firma=' . $multi_badge[2]
+                    . '&qrcode=' . $qr_code_url;
+
+                echo '<script>window.open("' . $badge_url . '");</script>';
             }
         }
     }
@@ -142,101 +177,185 @@ class PWBadgeElement extends PWElements {
      * 4. Generates multiple badges adding to forms and opens each badge URL in a new window for download.w.
      */
     public static function qrOnlyDownload($badge_form_id) {
-        // 1. Checks if the form was submitted and necessary inputs are present.
-        if (isset($_POST["gform_submit"]) && $_POST["gform_submit"] == $badge_form_id && !empty($_POST['input_6']) && isset($_POST['input_3'])){
-            
-            // 2. Updates the URL of the confirmation message.
-            $time = new DateTime();
-            $time_formatted = $time->format('m/d-H:i');
-            
-            // Get the badge domain from a shortcode
-            $badge_domain = do_shortcode('[trade_fair_badge]');
 
-            // 3. Collects data from the form inputs prepares it for badge generation.
-            $multi_badge = array();
-            $multi_badge['form_id'] = $badge_form_id;
-            
-            // Collect all form inputs
-            foreach ($_POST as $key => $value) {
-                if (strpos(strtolower($key), 'input') !== false) {
-                    preg_match_all('/\d+/', $key, $id);
-                    $filed = $id[0][0];
-                    $multi_badge[$filed] = $value;
+        // 1. Checks if the form was submitted and necessary inputs are present.
+        if (
+            !isset($_POST["gform_submit"]) ||
+            $_POST["gform_submit"] != $badge_form_id ||
+            empty($_POST['input_6']) ||
+            !isset($_POST['input_3'])
+        ) {
+            return;
+        }
+
+        // 2. Updates the URL of the confirmation message.
+        echo '<script>
+        jQuery(function ($) {
+            const gfMessage = $(".gform_confirmation_message a");
+            if (gfMessage.length) {
+                const urlMessage = gfMessage.eq(0).attr("href") + "?parametr=masowy&qrcode=only";
+                gfMessage.eq(0).attr("href", urlMessage);
+                gfMessage.eq(1).hide();
+            }
+        });
+        </script>';
+
+        $multi_badge = [
+            'form_id' => $badge_form_id
+        ];
+
+        // 3. Collects data from the form inputs and prepares it for badge generation.
+        foreach ($_POST as $key => $value) {
+            if (strpos(strtolower($key), 'input') !== false) {
+                preg_match_all('/\d+/', $key, $id);
+                $field = $id[0][0];
+                $multi_badge[$field] = $value;
+            }
+        }
+
+        $zip = new ZipArchive();
+        $upload_dir = wp_upload_dir();
+        $zip_path = $upload_dir['basedir'] . '/' . do_shortcode('[trade_fair_badge]') . '_qr_only.zip';
+
+        // array to keep track of temporary files for cleanup
+        $temp_files = [];
+
+        // 4. Generates multiple badges adding to forms and opens each badge URL in a new window for download.
+        if ($zip->open($zip_path, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+
+            $count = (int)($_POST['multi_send'] ?? 1);
+
+            for ($i = 0; $i < $count; $i++) {
+
+                $entry_id = GFAPI::add_entry($multi_badge);
+
+                if (is_wp_error($entry_id)) {
+                    continue;
+                }
+
+                $entry = GFAPI::get_entry($entry_id);
+
+                // force processing
+                if (!is_wp_error($entry)) {
+                    do_action(
+                        'gform_after_submission',
+                        $entry,
+                        ['id' => $badge_form_id]
+                    );
+                }
+
+                $file_path = '';
+
+                // dynamic QR (remote)
+                $pwe_url = gform_get_meta($entry_id, 'pwe_qr_code_url');
+
+                if (!empty($pwe_url)) {
+
+                    $tmp_file = self::pwe_download_temp_qr($pwe_url);
+
+                    if (!empty($tmp_file) && file_exists($tmp_file)) {
+                        $file_path = $tmp_file;
+                        $temp_files[] = $tmp_file;
+                    }
+
+                } else {
+
+                    // static QR fallback
+                    $qr_feeds = GFAPI::get_feeds(null, $badge_form_id, 'qr-code');
+
+                    if (!is_wp_error($qr_feeds)) {
+                        foreach ($qr_feeds as $feed) {
+
+                            $path = gform_get_meta(
+                                $entry_id,
+                                'qr-code_feed_' . $feed['id'] . '_file'
+                            );
+
+                            if (!empty($path) && file_exists($path)) {
+                                $file_path = $path;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // add to zip
+                if (!empty($file_path) && file_exists($file_path)) {
+
+                    $zip->addFile($file_path, basename($file_path));
+
+                    // cleanup temp file immediately after adding to zip
+                    if (isset($tmp_file) && file_exists($tmp_file)) {
+                        @unlink($tmp_file);
+                        $tmp_file = null;
+                    }
+                }
+            }
+
+            $zip->close();
+
+            // fallback cleanup
+            foreach ($temp_files as $f) {
+                if (file_exists($f)) {
+                    @unlink($f);
                 }
             }
 
             echo '<script>
-            jQuery(function ($) {
-                const gfMessage = $(".gform_confirmation_message a");
-                if (gfMessage.length) {
-                    const urlMessage = gfMessage.eq(0).attr("href")+"?parametr=masowy&qrcode=only";
-                    gfMessage.eq(0).attr("href", urlMessage)
-                    gfMessage.eq(1).hide();
-                }
-            });
+                const url = "' . $upload_dir['baseurl'] . '/' . do_shortcode('[trade_fair_badge]') . '_qr_only.zip?ts=" + Date.now();
+                window.open(url, "_blank");
             </script>';
-
-            $zip = new ZipArchive();
-            $upload_dir = wp_upload_dir();
-            $zip_path = $upload_dir['basedir'] . '/' . do_shortcode('[trade_fair_badge]') . '_qr_only.zip';
-
-            // 4. Generates multiple badges adding to forms and opens each badge URL in a new window for download.
-            if ($zip->open($zip_path, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-                for($i=0; $i<$_POST['multi_send']; $i++){  
-                    echo '<script>console.log("'.$i.'")</script>';
-                    
-                    // Adding entry to Gravity form
-                    $entry_id = GFAPI::add_entry($multi_badge);
-
-                    // Getting QR-code url
-                    $meta_key = '';
-                    $entry_id = GFAPI::add_entry($multi_badge);
-
-                    $file_path = '';
-
-                    // priority: pwe_qr
-                    $pwe_file = gform_get_meta($entry_id, 'pwe_qr_code_file');
-
-                    if (!empty($pwe_file)) {
-
-                        $file_path = $pwe_file;
-
-                    } else {
-
-                        // fallback: qr-code feeds
-                        $qr_feeds = GFAPI::get_feeds(null, $multi_badge['form_id'], 'qr-code');
-
-                        if (!is_wp_error($qr_feeds)) {
-                            foreach ($qr_feeds as $feed) {
-
-                                $path = gform_get_meta(
-                                    $entry_id,
-                                    'qr-code_feed_' . $feed['id'] . '_file'
-                                );
-
-                                if (!empty($path)) {
-                                    $file_path = $path;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (!empty($file_path) && file_exists($file_path)) {
-                        $zip->addFile($file_path, basename($file_path));
-                    }
-                    $file_path = gform_get_meta($entry_id, $meta_key);
-                    $zip->addFile($file_path, basename($file_path));
-                }
-                
-                $zip->close();
-    
-                echo '<script>
-                     const url = "' . $upload_dir['baseurl'] . '/' . do_shortcode('[trade_fair_badge]') . '_qr_only.zip?ts=" + Date.now();
-                    const newTab = window.open(url, "_blank");
-                </script>';
-            }
         }
+    }
+
+    /**
+     * Static method to download QR code from URL and save it as a temporary file.
+     * 
+     * @param string $url The URL of the QR code to download.
+     * 
+     * @return string The path to the downloaded temporary file, or an empty string on failure.
+     */
+    public static function pwe_download_temp_qr($url) {
+
+        if (empty($url)) {
+            return '';
+        }
+
+        $upload_dir = wp_upload_dir();
+        $tmp_dir = $upload_dir['basedir'] . '/tmp_qr/';
+
+        if (!file_exists($tmp_dir)) {
+            mkdir($tmp_dir, 0777, true);
+        }
+
+        $filename = 'qr_' . md5($url . microtime(true)) . '.png';
+        $path = $tmp_dir . $filename;
+
+        $response = wp_remote_get($url, [
+            'timeout' => 10,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0'
+            ]
+        ]);
+
+        if (is_wp_error($response)) {
+            return '';
+        }
+
+        $code = wp_remote_retrieve_response_code($response);
+        if ($code !== 200) {
+            return '';
+        }
+
+        $body = wp_remote_retrieve_body($response);
+
+        if (empty($body) || strpos($body, "\x89PNG") !== 0) {
+            return '';
+        }
+
+        file_put_contents($path, $body);
+
+        return $path;
     }
 
     /**
@@ -308,6 +427,10 @@ class PWBadgeElement extends PWElements {
             #badge-generator ::placeholder, .gform-field-label, .gform-field-label span{
                 color:black !important;
                 opacity: 1;
+            }
+            #badge-generator #multi_send{
+                width: 200px;
+                
             }
             </style>';
 
