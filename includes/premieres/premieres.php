@@ -30,6 +30,25 @@ class PWEPremieres extends PWECommonFunctions {
         }
     }
 
+    public static function multi_translation($key) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../../translations/includes/premieres.json';
+
+        // JSON file with translation
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        // Is the language in translations
+        if (isset($translations_data[$locale])) {
+            $translations_map = $translations_data[$locale];
+        } else {
+            // By default use English translation if no translation for current language
+            $translations_map = $translations_data['en_US'];
+        }
+
+        // Return translation based on key
+        return isset($translations_map[$key]) ? $translations_map[$key] : $key;
+    }
+
     // public function addingStyles(){
     //     $css_file = plugins_url('assets/style.css', __FILE__);
     //     $css_version = filemtime(plugin_dir_path(__FILE__) . 'assets/style.css');
@@ -394,6 +413,8 @@ class PWEPremieres extends PWECommonFunctions {
         <div id="pwePremieres" class="pwe-premieres">';
 
         if (!empty($premieres[0]->slug)) {
+
+            $lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : 'pl';
             
             $slides = [];
 
@@ -408,8 +429,8 @@ class PWEPremieres extends PWECommonFunctions {
                 $item = $data[$premiere->slug];
 
                 $slides[] = [
-                    'name'      => PWECommonFunctions::lang_pl() ? $item['name_pl'] : (!empty($item['name_en']) ? $item['name_en'] : $item['name_pl']),
-                    'desc'      => PWECommonFunctions::lang_pl() ? trim($item['desc_pl']) : (trim($item['desc_en']) ?? trim($item['desc_pl'])),
+                    'name'      => trim($item['name_' . $lang]) ?? '',
+                    'desc'      => trim($item['desc_' . $lang]) ?? '',
                     'exhibitor' => $item['exhibitor'] ?? '',
                     'stand'     => (!empty($item['stand']) ? (PWECommonFunctions::lang_pl() ? 'Stoisko: ' : 'Stand: ') . $item['stand'] : ''),
                     'img'       => $item['background'] ?? '',
@@ -419,7 +440,7 @@ class PWEPremieres extends PWECommonFunctions {
 
             $output .= '
             <div class="pwe-premieres__title">
-                <span>'. (PWECommonFunctions::lang_pl() ? "Co zobaczysz na [trade_fair_name]" : "What you'll see at [trade_fair_name_eng]") .'</span>
+                <span>' . self::multi_translation('premieres') . ' ' . (PWECommonFunctions::lang_pl() ? '[trade_fair_name]' : '[trade_fair_name_eng]') . '</span>
             </div>
 
             <div class="pwe-premieres__hero loading">
@@ -429,7 +450,7 @@ class PWEPremieres extends PWECommonFunctions {
                     </div>
                 </div>
                 <div class="pwe-premieres__logo">
-                    <img id="logoImg" src="" alt="Logo" style="max-height:80px;">
+                    <img id="logoImg" src="" alt="Logo" style="max-height:80px;" onerror="this.onerror=null; this.style.display=\'none\';">
                 </div>
                 <div class="pwe-premieres__content">
                     <h2 id="heroTitle"></h2>
@@ -557,8 +578,8 @@ class PWEPremieres extends PWECommonFunctions {
                         changeBackground(heroData.img);
                         const logoEl = document.getElementById("logoImg");
                         if (heroData.logo) {
-                            logoEl.src = heroData.logo;
                             logoEl.style.display = "block";
+                            logoEl.src = heroData.logo;
                         } else {
                             logoEl.src = "";
                             logoEl.style.display = "none";
@@ -574,9 +595,12 @@ class PWEPremieres extends PWECommonFunctions {
                     heroDescription.innerHTML = heroData.desc;
                     changeBackground(heroData.img);
                     const logoEl = document.getElementById("logoImg");
+                    logoEl.addEventListener("error", function () {
+                        this.style.display = "none";
+                    });
                     if (heroData.logo) {
-                        logoEl.src = heroData.logo;
                         logoEl.style.display = "block";
+                        logoEl.src = heroData.logo;
                     } else {
                         logoEl.src = "";
                         logoEl.style.display = "none";

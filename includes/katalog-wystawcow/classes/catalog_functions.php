@@ -254,9 +254,9 @@ class CatalogFunctions {
             shuffle($logos_array);
         }
 
-        if ($PWECatalogFull === 'PWECatalogFull') {
-            self::sync_archive_catalog_entry($katalog_id, $catalog_year);
-        }
+        // if ($PWECatalogFull === 'PWECatalogFull') {
+        //     self::sync_archive_catalog_entry($katalog_id, $catalog_year);
+        // }
 
         return $logos_array;
     }

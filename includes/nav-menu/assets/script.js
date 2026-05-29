@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 uncodeStickyElement.style.position = 'relative';
                 uncodeStickyElement.style.top = '0';
-            } 
+            }
         }
 
         window.addEventListener("scroll", function () {
@@ -104,13 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             pweNavMenu.classList.add('color');
         }
-    } 
-    
+    }
+
     if (burgerButton && pweNavMenu) {
         // Listening for click on burger menu
         burgerButton.addEventListener("click", function() {
             pweNavMenu.classList.toggle("burger-menu");
-            
+
             // If the menu is open, close all submenus
             const openSubmenus = document.querySelectorAll('.pwe-menu__submenu.visible');
             openSubmenus.forEach(submenu => {
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Block link
                     e.preventDefault();
                     // Open submenu
-                    toggleSubmenu(this); 
+                    toggleSubmenu(this);
                     clickedOnce = true;
                 } else if (clickedOnce) {
                     // Second click: allow the transition if the link is valid
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Block link
                     e.preventDefault();
                     // Close submenu if open
-                    toggleSubmenu(this); 
+                    toggleSubmenu(this);
                 }
             });
         });
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Check if the current domain is NOT in the B2C domains list
                 if (!b2cDomains.includes(currentDomain)) {
                     let newText, newHref;
-                    
+
                     // Check if the trade fair end date is less than 90 days away
                     if (endDate < threeMonths) {
                         newText = (htmlLang === 'pl-PL') ? 'WEŹ UDZIAŁ' : 'JOIN US';
@@ -289,13 +289,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 mobileRegisterButtonContainer.classList.remove("visible");
             }
         });
-        
+
         // Run once on page load to set initial state
         if (window.innerWidth < 960) {
             mobileRegisterButtonContainer.classList.add("visible");
         } else {
             mobileRegisterButtonContainer.classList.remove("visible");
         }
-        
+
     }
 });

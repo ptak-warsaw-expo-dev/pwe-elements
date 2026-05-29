@@ -1,6 +1,5 @@
 :root {
     --gradient_main2_color: linear-gradient(to right, var(--main2_lighter_color), #E60076);
-    /* --gradient_main2_color: linear-gradient(90deg, #FF4F21 16.83%, #FF4F21 50.48%, #E60076 100%); */
     --gray_color: rgba(241, 241, 241, 0.95);
     --gray_color_text: #99A1AF;
 }
@@ -197,10 +196,12 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        to top,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0) 35%,
-        rgba(0,0,0,0) 100%
+        to top, 
+        rgba(0, 0, 0, 4) 2%,
+        rgba(0, 0, 0, 0.7) 20%,
+        rgba(0, 0, 0, 0.4) 40%, 
+        rgba(0, 0, 0, 0.1) 60%, 
+        rgba(0, 0, 0, 0) 70%
     );
 }
 #pwePosts .pwe-posts__item-content {
@@ -227,7 +228,7 @@
     color: white;
     min-height: 160px;
     max-height: 160px;
-    padding: 0px 20px 20px;
+    padding: 12px 20px 20px;
     gap: 10px;
 }
 #pwePosts .pwe-posts__item--side :is(h4, p),

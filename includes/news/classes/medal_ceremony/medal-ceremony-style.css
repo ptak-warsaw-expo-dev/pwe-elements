@@ -1,0 +1,192 @@
+.pwe-news-medal_ceremony img {
+    margin: 0;
+}
+
+.pwe-news-medal_ceremony__title {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 10px;
+    font-size: 40px;
+}
+
+.pwe-news-medal_ceremony__header-desc {
+    color: black;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.pwe-news-medal_ceremony__main-title {
+    text-align: center;
+    font-size: 32px;
+    padding: 0;
+    color: black;
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.pwe-news-medal_ceremony__main-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 12px auto 0 auto;
+    border-radius: 999px;
+}
+
+.pwe-news-medal_ceremony__main-desc {
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pwe-news-medal_ceremony__main-text {
+    margin: 0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-shadow: 0 12px 35px rgba(1, 25, 54, 0.03);
+}
+
+.pwe-news-medal_ceremony__main-blocks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.pwe-news-medal_ceremony__main-blocks .pwe-news-medal_ceremony__main-categories {
+    margin: 20px;
+    padding: 0 30px;
+    box-shadow: 0 12px 35px rgba(1, 25, 54, 0.03);
+    border-radius: 5px;
+    background-color: rgba(1, 25, 54, 0.03);
+}
+
+.pwe-news-medal_ceremony__main-categories--full-width {
+    grid-column: 1 / span 2;
+    max-width: 100% !important; 
+}
+
+.pwe-news-medal_ceremony__categories-title {
+    color: black;
+    font-size: 20px !important;
+}
+
+.pwe-news-medal_ceremony__main-categories li {
+    color: black;
+    padding: 5px;
+}
+
+.pwe-news-medal_ceremony__footer {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.pwe-news-medal_ceremony__footer-desc {
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: black;
+    box-shadow: 0 12px 35px rgba(1, 25, 54, 0.03);
+    padding:20px;
+    background-color: rgba(1, 25, 54, 0.03);
+
+}
+
+.pwe-news-medal_ceremony__footer-summary {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 10px;
+    box-shadow: 0 12px 35px rgba(1, 25, 54, 0.03);
+    padding: 20px;
+}
+
+.pwe-news-medal_ceremony__buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 18px;
+    padding: 18px;
+}
+
+.pwe-news-medal_ceremony__btn-registration a,
+.pwe-news-medal_ceremony__btn-become-exhibitor a {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 13px 31px;
+    min-width: 168px;
+    text-align: center !important;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff !important;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 200ms ease-in-out;
+}
+
+.pwe-news-medal_ceremony__btn-registration a {
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.pwe-news-medal_ceremony__btn-become-exhibitor a {
+    background-color: black;
+    border: 2px solid black;
+}
+
+.pwe-news-medal_ceremony__btn-registration a:hover {
+    color: var(--accent-color) !important;
+    background-color: transparent !important;
+}
+
+.pwe-news-medal_ceremony__btn-become-exhibitor a:hover {
+    color: black !important;
+    background-color: transparent !important;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1200px) {
+    .pwe-news-medal_ceremony__main-blocks {
+        grid-template-columns: repeat(2, minmax(0, 360px));
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .pwe-news-medal_ceremony__main-categories--full-width {
+        grid-column: 1 / span 2;
+        max-width: 740px !important;
+    }
+}
+
+@media (max-width: 960px) {
+    .pwe-news-medal_ceremony__main-blocks {
+        grid-template-columns: 1fr;
+    }
+
+    .pwe-news-medal_ceremony__main-categories--full-width {
+        max-width: 360px;
+    }
+
+    .pwe-news-medal_ceremony__main-categories {
+        max-width: 360px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pwe-news-medal_ceremony__main-blocks {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+
+    .pwe-news-medal_ceremony__main-blocks div {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+}

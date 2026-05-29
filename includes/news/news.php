@@ -32,6 +32,7 @@ class PWENews extends PWECommonFunctions {
                     __('News Upcoming', 'pwe_news') => 'PWENewsUpcoming',
                     __('News Say About Us', 'pwe_news') => 'PWENewsSayAboutUs',
                     // __('News Interview', 'pwe_news') => 'PWENewsInterview',
+                    __('News Medal Ceremony', 'pwe_news') => 'PWENewsMedalCeremony'
                 ),
                 'std' => 'PWENewsSummary',
             ),
@@ -68,13 +69,16 @@ class PWENews extends PWECommonFunctions {
             'PWENewsUpcoming' => 'classes/news-upcoming/',
             'PWENewsSayAboutUs' => 'classes/news-say-about-us/',
             // 'PWENewsInterview' => 'classes/news-interview/',
+            'PWENewsMedalCeremony' => 'classes/medal_ceremony/',
         );
     }
 
     private function getBasenameFromType($template_type) {
         if ($template_type === 'PWENewsSayAboutUs') return 'news-say-about-us';
-        
+        if ($template_type === 'PWENewsMedalCeremony') return 'medal-ceremony';
+
         if (strpos($template_type, 'PWENews') !== 0) return false;
+
         return strtolower(str_replace('PWENews', 'news-', $template_type));
     }
 

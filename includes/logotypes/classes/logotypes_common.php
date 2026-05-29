@@ -117,6 +117,16 @@ class PWElementAdditionalLogotypes {
             array(
                 'type' => 'checkbox',
                 'group' => 'Aditional options',
+                'heading' => __('home slider', 'pwe_logotypes'),
+                'param_name' => 'home_slider',
+                'description' => __('Check if you want to display home slider.', 'pwe_logotypes'),
+                'admin_label' => true,
+                'save_always' => true,
+                'value' => array(__('True', 'pwe_logotypes') => 'true',),
+            ),
+            array(
+                'type' => 'checkbox',
+                'group' => 'Aditional options',
                 'heading' => __('Grid mobile', 'pwe_logotypes'),
                 'param_name' => 'logotypes_grid_mobile',
                 'description' => __('Check if you want to display in grid on mobile.', 'pwe_logotypes'),
@@ -322,6 +332,7 @@ class PWElementAdditionalLogotypes {
             'slides_to_show_400' => '',
             'logotypes_slider_3_row' => '',
             'logotypes_display_arrows' => '',
+            'home_slider' => ''
         ), $atts ));
 
         if ($logotypes_position_title == ''){
@@ -1108,7 +1119,6 @@ class PWElementAdditionalLogotypes {
                         "caption_translations" => $translations
                     );
 
-                    // Output logotypes
                     if (!$logotypes_slider_3_row) {
                         if (count($updated_images_url) > 0) {
                             foreach ($updated_images_url as $url) {
@@ -1169,48 +1179,75 @@ class PWElementAdditionalLogotypes {
                                 }
                             }
                         }
-                    } else {
-                        // Obsługa trybu slidera 3-rzędowego
+                    } else if($logotypes_slider_3_row){
+                        $is_home = ($home_slider);
                         if (count($updated_images_url) > 0) {
                             $logos_count = count($updated_images_url);
                             $rows = ($logos_count < 30) ? 2 : 3;
                             $logos_chunked = array_chunk($updated_images_url, ceil($logos_count / $rows));
 
-                            $output .= '<div class="logotypes-slider-wrapper">';
 
+                        if ($is_home) {
+                            $current_lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : substr(get_locale(), 0, 2);
+
+                            if ($current_lang === 'en') {
+                                $lbl_brands_subtitle = 'TOP BRANDS';
+                                $lbl_brands_title    = 'Industry leaders <br><span>choose Warsaw Home</span>';
+                                $lbl_brands_desc     = 'Together, we create the most important interior design event in Central and Eastern Europe. <br> Thank you to the brands that have been part of our <span class="wh-highlight">decade of design</span>.';
+                            } else {
+                                // Domyślny polski (PL)
+                                $lbl_brands_subtitle = 'TOP FIRMY';
+                                $lbl_brands_title    = 'Liderzy branży <br><span>wybierają Warsaw Home</span>';
+                                $lbl_brands_desc     = 'Wspólnie tworzymy najważniejsze wydarzenie wnętrzarskie w Europie Środkowo-Wschodniej. <br> Dziękujemy markom, które były częścią naszej <span class="wh-highlight">dekady designu</span>.';
+                            }
+
+                            $output .= '
+                            <div id="pwe-brands-unique" class="wh-brands-section">
+                                <div class="wh-header-container">
+                                    <span class="wh-subtitle">' . esc_html($lbl_brands_subtitle) . '</span>
+                                    <h2 class="wh-title">' . wp_kses_post($lbl_brands_title) . '</h2>
+                                    <p class="wh-description">
+                                        ' . wp_kses_post($lbl_brands_desc) . '
+                                    </p>
+                                </div>
+
+                                <div class="wh-carousel-wrapper logotypes-slider-wrapper">
+                                    <div class="wh-arrow wh-arrow-left">
+                                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg>
+                                    </div>
+                                    <div class="wh-slick-container-box">';
+                        } else {
+                            $output .= '<div class="logotypes-slider-wrapper" style="position: relative; padding-bottom: 30px;">';
+                        }
+
+                            // Pętla generująca rzędy sliderów (wspólna dla obu wersji)
                             foreach ($logos_chunked as $index => $logos_group) {
                                 $slider_id = $element_unique_id . "-slider-" . ($index + 1);
-                                $direction = ($index == 1) ? 'rtl' : 'ltr';
+                                $direction = $is_home ? 'rtl' : (($index == 1) ? 'rtl' : 'ltr');
 
                                 $output .= '<div class="'. $element_unique_id .'-logotypes-slider logotypes-slider" id="'. $slider_id .'" data-direction="'. $direction .'">';
 
                                 foreach ($logos_group as $url) {
-                                    // Ustalanie napisu (caption) dla logotypów
                                     if (($logotypes_caption_on == true || (isset($header_logotypes_caption_on) && $header_logotypes_caption_on == true)) && empty($logotypes_name)) {
                                         if (get_locale() == 'pl_PL') {
-                                            $logo_caption_text = (strpos($url["img"], 'expoplanner.com') !== false)
-                                                ? '<p>Wystawca</p>'
-                                                : '<p>' . str_replace(' ', '<br>', $url["folder_name"]) . '</p>';
+                                            $logo_caption_text = (strpos($url["img"], 'expoplanner.com') !== false) ? '<p>Wystawca</p>' : '<p>' . str_replace(' ', '<br>', $url["folder_name"]) . '</p>';
                                         } else {
-                                            $logo_caption_text = array_key_exists($url["folder_name"], $translations)
-                                                ? '<p>' . $translations[$url["folder_name"]] . '</p>'
-                                                : '<p>' . $url["folder_name"] . '</p>';
+                                            $logo_caption_text = array_key_exists($url["folder_name"], $translations) ? '<p>' . $translations[$url["folder_name"]] . '</p>' : '<p>' . $url["folder_name"] . '</p>';
                                         }
                                     } else {
                                         $logo_caption_text = '<p>' . $url["logotypes_name"] . '</p>';
                                     }
 
-                                    // Ustalanie szerokości elementów logotypów
-                                    $logotypes_items_width = isset($header_logotypes_items_width) && $header_logotypes_items_width != ''
-                                        ? 'min-width:' . $header_logotypes_items_width . ';'
-                                        : '';
-
+                                    $logotypes_items_width = isset($header_logotypes_items_width) && $header_logotypes_items_width != '' ? 'min-width:' . $header_logotypes_items_width . ';' : '';
                                     $target_blank = (strpos($url["site"], 'http') !== false) ? 'target="_blank"' : '';
 
                                     if (!empty($url["img"])) {
+                                        // Dodajemy klasę wh-logo-item jeśli to glasstec dla ładnego ostylowania obrazków w siatce
+                                        $wrapper_class = "pwe-logo-item-container" . ($is_home ? " wh-logo-item" : "");
+
                                         if (!empty($url["site"])) {
                                             $output .= '
-                                            <a class="pwe-logo-item-container" ' . $target_blank . ' href="' . $url["site"] . '" style="' . $logotypes_items_custom_style . '">
+                                            <a class="' . $wrapper_class . '" ' . $target_blank . ' href="' . $url["site"] . '" style="' . $logotypes_items_custom_style . '">
                                                 <div class="pwe-logo-item ' . $url["class"] . '" style="' . $url["style"] . ' ' . $logotypes_items_width . ' ' . $logotypes_items_custom_style . '">
                                                     <img data-no-lazy="1" src="' . $url["img"] . '" />
                                                     ' . $logo_caption_text . '
@@ -1218,7 +1255,7 @@ class PWElementAdditionalLogotypes {
                                             </a>';
                                         } else {
                                             $output .= '
-                                            <div class="pwe-logo-item-container" style="' . $logotypes_items_custom_style . '">
+                                            <div class="' . $wrapper_class . '" style="' . $logotypes_items_custom_style . '">
                                                 <div class="pwe-logo-item ' . $url["class"] . '" style="' . $url["style"] . ' ' . $logotypes_items_width . '">
                                                     <img data-no-lazy="1" src="' . $url["img"] . '" />
                                                     ' . $logo_caption_text . '
@@ -1229,39 +1266,233 @@ class PWElementAdditionalLogotypes {
                                 }
                                 $output .= '</div>';
                             }
-                            $output .= '</div>';
-                        }
 
+                            if ($is_home) {
+                                $current_lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : substr(get_locale(), 0, 2);
+
+                                if ($current_lang === 'en') {
+                                    $lbl_btn_text    = 'SEE ALL BRANDS &nbsp; →';
+                                    $lbl_footer_note = 'Join the industry leaders during the next edition.';
+                                    $lbl_footer_link = '/en/exhibitors-catalog/';
+                                } else {
+                                    $lbl_btn_text    = 'ZOBACZ WSZYSTKIE MARKI &nbsp; →';
+                                    $lbl_footer_note = 'Dołącz do liderów branży podczas kolejnej edycji.';
+                                    $lbl_footer_link = '/katalog-wystawcow/';
+                                }
+
+                                $output .= '
+                                        </div>
+                                        <div class="wh-arrow wh-arrow-right">
+                                            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" /></svg>
+                                        </div>
+                                        <div class="swiper-pagination wh-pagination"></div>
+                                    </div>
+                                    <div class="wh-footer-container">
+                                        <a class="wh-standard-btn" href="' . esc_html($lbl_footer_link) . '"> ' . esc_html($lbl_btn_text) . '</a>
+                                        <p class="wh-footer-note">' . esc_html($lbl_footer_note) . '</p>
+                                    </div>
+                                </div>';
+                            } else {
+                                // Klasyczne strzałki dla pozostałych domen
+                                if ($logotypes_display_arrows) {
+                                    $output .= '
+                                    <span class="pwe-logotypes__arrow pwe-logotypes__arrow-prev pwe-arrow pwe-arrow-prev" style="position: absolute; left: -30px; top: 40%; transform: translateY(-50%); cursor: pointer; z-index: 10;">‹</span>
+                                    <span class="pwe-logotypes__arrow pwe-logotypes__arrow-next pwe-arrow pwe-arrow-next" style="position: absolute; right: -30px; top: 40%; transform: translateY(-50%); cursor: pointer; z-index: 10;">›</span>';
+                                }
+                                $output .= '</div>';
+                            }
+                        }
                         $output .= '
                         <style>
+                            .logotypes-slider-wrapper {
+                                position: relative;
+                            }
                             .'.$element_unique_id.'-logotypes-slider {
                                 display: flex !important;
                                 flex-wrap: nowrap;
                                 justify-content: center;
                                 align-items: center;
-                                overflow: hidden;
                                 width: 100%;
                                 position: relative;
                                 opacity: 0;
-                                margin: 0 auto;
+                                margin: 0 auto 15px auto;
                                 padding: 0;
-                                overflow: hidden;
                             }
                             .'.$element_unique_id.'-logotypes-slider .slick-list {
-                                margin-left: 9px !important;
+                                overflow: hidden;
+                                width: 100%;
                             }
                             .'.$element_unique_id.'-logotypes-slider .slick-slide {
                                 display: flex !important;
                                 justify-content: center;
                                 align-items: center;
-                                gap:10px;
                                 '. ($logotypes_items_shadow !== 'none' ? 'min-width:auto !important;' : '') .'
                                 '. ($logotypes_items_shadow !== 'none' ? 'margin:5px !important;' : '') .'
                             }
-                            .'.$element_unique_id.'-logotypes-slider[data-direction="rtl"] .slick-track {
-                                float: right;
+
+                            .'.$element_unique_id.'-logotypes-slider[data-direction="rtl"] .slick-track { float: right !important; }
+                            .'.$element_unique_id.'-logotypes-slider[data-direction="ltr"] .slick-track { float: left !important; }
+
+                            /* --- STYLE PREMIUM WARSAW HOME --- */
+                            #'.$element_unique_id.' .pwe-logotypes__arrow {
+                                display:none !important;
+                            }
+                            .wh-brands-section {
+                                background-color: #F7EFE9;
+                                padding: 80px 20px;
+                                text-align: center;
+                                box-sizing: border-box;
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                                width: 100%;
+                            }
+                            .wh-header-container {
+                                max-width: 800px;
+                                margin: 0 auto 50px auto;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                            .wh-subtitle { font-size: 11px; letter-spacing: 3px; color: #C39A77; text-transform: uppercase; font-weight: 500; }
+                            .wh-title {
+                                font-size: 44px !important;
+                                font-weight: 400;
+                                line-height: 1.1;
+                                color: #1A1A1A;
+                                margin: 15px 0 10px 0;
+                            }
+                            .wh-title span { background: #e0ccb8; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+                            .wh-description { font-size: 15px; color: #666666; line-height: 1.6; }
+                            .wh-highlight { color: #DDA16B; }
+
+                            .wh-carousel-wrapper { max-width: 1140px; margin: 0 auto; padding: 0 60px; position: relative; }
+
+                            /* Kontener zastępujący szarą ramkę swipera, dopasowany pod 3 linie Slicka */
+                            .wh-slick-container-box {
+                                background: #FAF6F2;
+                                border-radius: 16px;
+                                box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.02);
+                                padding: 40px;
+                                box-sizing: border-box;
                             }
 
+                            /* Dopasowanie logotypów Slicka do stylu gridu WH */
+                            .wh-brands-section .pwe-logo-item-container {
+                                padding: 15px 25px;
+                                display: flex !important;
+                                align-items: center;
+                                justify-content: center;
+                                min-height: 90px;
+                                box-sizing: border-box;
+                            }
+                            .wh-brands-section .pwe-logo-item img {
+                                max-width: 100%;
+                                max-height: 45px;
+                                object-fit: contain;
+                                filter: grayscale(100%);
+                                opacity: 0.8;
+                                transition: all 0.3s ease;
+                            }
+                            .wh-brands-section .pwe-logo-item-container:hover img {
+                                filter: grayscale(0%);
+                                opacity: 1;
+                            }
+
+                            /* Nowoczesne okrągłe strzałki sterujące */
+                            .wh-arrow {
+                                background: #FAF6F2;
+                                width: 48px !important;
+                                height: 48px !important;
+                                border-radius: 50%;
+                                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+                                transition: all 0.3s ease;
+                                position: absolute;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                z-index: 99;
+                            }
+                            .wh-arrow svg { width: 20px; fill: #DDA16B; transition: fill 0.3s; }
+                            .wh-arrow:hover { background: #F0E6DD; }
+                            .wh-arrow-left { left: 0px; }
+                            .wh-arrow-right { right: 0px; }
+
+                            .slick-dots li button:hover:before, .slick-dots li button:before {
+                                display:none;
+                            }
+                            /* Ukrycie strzałek na mobile zgodnie z projektem */
+                            @media (max-width: 991px) {
+                                .wh-arrow { display: none !important; }
+                                .wh-carousel-wrapper { padding: 0 10px; }
+                                .wh-slick-container-box { padding: 20px; }
+                                .wh-title { font-size: 32px; }
+                            }
+
+                            /* Kropki podpięte pod styl WH */
+                            .wh-pagination {
+                                margin: 25px auto;
+                                display: flex;
+                                justify-content: center;
+                                list-style: none;
+                                padding: 0;
+                                width: 90%;
+                            }
+                            .wh-pagination .slick-dots { position: static; display: flex !important; justify-content: center; list-style: none; padding:0; margin:0; }
+                            .wh-pagination .slick-dots li { margin: 0 5px; }
+                            .wh-pagination .slick-dots li button {
+                                font-size: 0;
+                                background: #DDA16B !important;
+                                opacity: 0.3;
+                                border: none;
+                                width: 8px;
+                                height: 8px;
+                                border-radius: 50%;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                padding: 0;
+                            }
+                            .wh-pagination .slick-dots li.slick-active button {
+                                opacity: 1 !important;
+                                width: 18px;
+                                border-radius: 4px;
+                            }
+
+                            /* Dolna sekcja i przycisk */
+                            .wh-footer-container { margin-top: 60px; }
+                            .wh-standard-btn {
+                                cursor: pointer;
+                                padding: 14px 36px;
+                                border-radius: 50px;
+                                background: transparent;
+                                border: 1px solid #DDA16B;
+                                color: #DDA16B;
+                                font-weight: 500;
+                                font-size: 13px;
+                                letter-spacing: 1px;
+                                display: inline-block;
+                                outline: none;
+                                transition: all 0.3s ease;
+                            }
+                            .wh-standard-btn:hover { background: #DDA16B; color: #FFFFFF; }
+                            .wh-footer-note { font-size: 13px; color: #888888; margin-top: 15px; }
+
+                            /* Klasyczny wygląd kropek (dla pozostałych domen) */
+                            .logotypes-slider-wrapper > .slick-dots {
+                                position: absolute;
+                                bottom: 0;
+                                display: flex !important;
+                                justify-content: center;
+                                list-style: none;
+                                width: 100%;
+                                padding: 0;
+                                margin: 0;
+                            }
+                            .logotypes-slider-wrapper > .slick-dots li { margin: 0 5px; }
+                            .logotypes-slider-wrapper > .slick-dots li button { font-size: 0; background: #ccc; border: none; width: 10px; height: 10px; border-radius: 50%; cursor: pointer; }
+                            .logotypes-slider-wrapper > .slick-dots li.slick-active button { background: #000; }
                         </style>';
                     }
 
@@ -1285,56 +1516,88 @@ class PWElementAdditionalLogotypes {
                     if(!$logotypes_slider_3_row){
                         $output .= PWESliderScripts::sliderScripts('logotypes', '#'. $element_unique_id, $logotypes_dots_display, $logotypes_display_arrows, $slides_to_show, $options = null, $slides_to_show_960, $slides_to_show_600, $slides_to_show_400);
                     } else {
+                        $is_home = ($home_slider);
+                        $force_right = $is_home ? 'true' : 'false';
+
                         $slides_to_show = !empty($slides_to_show) ? $slides_to_show : 7;
+
                         wp_enqueue_style('slick-slider-css', plugins_url('../../../assets/slick-slider/slick.css', __FILE__));
                         wp_enqueue_style('slick-slider-theme-css', plugins_url('../../../assets/slick-slider/slick-theme.css', __FILE__));
                         wp_enqueue_script('slick-slider-js', plugins_url('../../../assets/slick-slider/slick.min.js', __FILE__), array('jquery'), null, true);
+
                         $output .= '
                             <script>
                                 jQuery(document).ready(function ($) {
+                                    let forceRight = ' . $force_right . ';
+
                                     setTimeout(function () {
-                                        let sliders = $(".logotypes-slider");
+                                        $(".logotypes-slider-wrapper").each(function () {
+                                            let $wrapper = $(this);
+                                            let sliders = $wrapper.find(".logotypes-slider");
+                                            let isSyncing = false;
 
-                                        sliders.each(function () {
-                                            let isRTL = $(this).data("direction") === "rtl";
-                                            let totalSlides = $(this).find(".pwe-logo-item-container").length;
-                                            let slidesToShow = ' . $slides_to_show . ';
-                                            let useInfinite = totalSlides > slidesToShow;
+                                            sliders.each(function (index) {
+                                                let isRTL = forceRight ? true : (index === 1);
+                                                let totalSlides = $(this).find(".pwe-logo-item-container").length;
+                                                let slidesToShow = ' . $slides_to_show . ';
+                                                let useInfinite = totalSlides > slidesToShow;
 
-                                            $(this).slick({
-                                                slidesToShow: slidesToShow,
-                                                slidesToScroll: 1,
-                                                autoplay: true,
-                                                autoplaySpeed: 2000,
-                                                arrows: false,
-                                                dots: false,
-                                                infinite: useInfinite,
-                                                speed: 1000,
-                                                cssEase: "linear",
-                                                rtl: isRTL,
-                                                draggable: false,
-                                                swipe: false,
-                                                touchMove: false,
-                                                pauseOnHover: false,
-                                                waitForAnimate: false,
-                                                responsive: [
-                                                    {
-                                                        breakpoint: 1024,
-                                                        settings: {
-                                                            slidesToShow: 5
+                                                // WŁĄCZAMY KROPKI TYLKO DLA PIERWSZEGO RZĘDU (index === 0)
+                                                // Dzięki temu na ekranie pojawi się tylko jeden zestaw kropek sterujących
+                                                let showDots = (index === 0);
+
+                                                $(this).slick({
+                                                    slidesToShow: slidesToShow,
+                                                    slidesToScroll: 1,
+                                                    autoplay: true,
+                                                    autoplaySpeed: 2000,
+                                                    prevArrow: forceRight ? $wrapper.find(".wh-arrow-left") : $wrapper.find(".pwe-arrow-prev"),
+                                                    nextArrow: forceRight ? $wrapper.find(".wh-arrow-right") : $wrapper.find(".pwe-arrow-next"),
+                                                    dots: showDots,
+                                                    appendDots: forceRight ? $wrapper.find(".wh-pagination") : $wrapper,
+                                                    infinite: useInfinite,
+                                                    speed: 1000,
+                                                    cssEase: "linear",
+                                                    rtl: isRTL,
+                                                    draggable: false,
+                                                    swipe: false,
+                                                    touchMove: false,
+                                                    pauseOnHover: false,
+                                                    waitForAnimate: false,
+                                                    responsive: [
+                                                        {
+                                                            breakpoint: 1024,
+                                                            settings: {
+                                                                slidesToShow: 5
+                                                            }
+                                                        },
+                                                        {
+                                                            breakpoint: 768,
+                                                            settings: {
+                                                                slidesToShow: 3
+                                                            }
                                                         }
-                                                    },
-                                                    {
-                                                        breakpoint: 768,
-                                                        settings: {
-                                                            slidesToShow: 3
-                                                        }
-                                                    }
-                                                ]
+                                                    ]
+                                                });
                                             });
-                                        });
 
-                                        sliders.css({ "opacity": "1" });
+                                            // Synchronizacja przewijania: Kiedy pierwszy rząd (lub jakikolwiek inny) zmieni slajd,
+                                            // natychmiastowo wyrównujemy pozostałe linie
+                                            sliders.on("beforeChange", function (event, slick, currentSlide, nextSlide) {
+                                                if (isSyncing) return;
+                                                isSyncing = true;
+
+                                                sliders.each(function() {
+                                                    if ($(this).slick("slickCurrentSlide") !== nextSlide) {
+                                                        $(this).slick("slickGoTo", nextSlide);
+                                                    }
+                                                });
+
+                                                isSyncing = false;
+                                            });
+
+                                            sliders.css({ "opacity": "1" });
+                                        });
                                     }, 500);
                                 });
                             </script>';

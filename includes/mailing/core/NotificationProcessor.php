@@ -170,7 +170,7 @@ class PWE_NotificationProcessor {
             foreach ($feeds as $feed) {
                 $slug = $feed['addon_slug'] ?? '';
 
-                // PRIORITY: pwe_qr
+                // priority: pwe_qr
                 if ($slug === 'pwe_qr') {
                     $pwe_qr_name = $feed['meta']['feedName'] ?? null;
                 }

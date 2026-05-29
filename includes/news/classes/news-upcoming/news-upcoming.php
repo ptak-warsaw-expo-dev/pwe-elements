@@ -122,7 +122,25 @@ class PWENewsUpcoming extends PWENews {
                         'save_always' => true,
                     ),
                 ),
-            ), 
+            ),
+            array(
+                'type' => 'dropdown',
+                'group' => 'News',
+                'heading' => __('Article author', 'pwelement'),
+                'param_name' => 'pwe_news_upcoming_article_author',
+                'value' => array(
+                    __('Nikodem Zygadło', 'pwelement') => 'Nikodem Zygadło',
+                    __('Karolina Majewska', 'pwelement') => 'Karolina Majewska',
+                    __('Michał Rutkowski', 'pwelement') => 'Michał Rutkowski',
+                    __('Natalia Stępień', 'pwelement') => 'Natalia Stępień',
+                    __('Paweł Zieliński', 'pwelement') => 'Paweł Zieliński',
+                    __('Aleksandra Krawczyk', 'pwelement') => 'Aleksandra Krawczyk',
+                    __('Mariusz Kwiatkowski', 'pwelement') => 'Mariusz Kwiatkowski',
+                ),
+                'save_always' => true,
+                'dependency' => $dep,
+                'std' => 'Karolina Majewska',
+            ),
         );
     }
 
@@ -141,6 +159,7 @@ class PWENewsUpcoming extends PWENews {
             'pwe_news_upcoming_worth_title'   => '',
             'pwe_news_upcoming_worth_desc'    => '',
             'pwe_news_upcoming_domain'        => '',
+            'pwe_news_upcoming_article_author'=> '',
         ), $atts ));
 
 
@@ -154,7 +173,95 @@ class PWENewsUpcoming extends PWENews {
         $icon_svg_book = '<i class="fa fa-book-open fa-5x fa-fw"></i>';
 
         $default_svgs = array($icon_svg_handshake, $icon_svg_bulb, $icon_svg_book);
+                $authors = array(
+            'Karolina Majewska' => array(
+                'position' => self::languageChecker(
+                    'Analityk rynku i rozwoju wydarzeń branżowych | Dział Analiz Ptak Warsaw Expo',
+                    'Market and Industry Events Development Analyst | Analysis Department Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Na co dzień zajmuje się obserwacją trendów rynkowych oraz analizą sektorów rozwijanych w ramach portfolio targowego Ptak Warsaw Expo.',
+                    'On a daily basis, she is engaged in observing market trends and analyzing sectors developed within the trade fair portfolio of Ptak Warsaw Expo.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/karolina-majewska.webp',
+            ),
+            'Nikodem Zygadło' => array(
+                'position' => self::languageChecker(
+                    'Dyrektor Działu Analiz | Z-ca Dyrektora ds. Rozwoju | Ptak Warsaw Expo',
+                    'Director of Analysis Department | Deputy Director of Development | Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Pasjonat targów, z niemal 30-letnim doświadczeniem w tworzeniu, organizacji imprez i zarządzaniu projektami targowymi.',
+                    'A trade fair enthusiast with nearly 30 years of experience in creating, organizing events and managing trade fair projects.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/nikodem-zygadlo.webp',
+            ),
+            'Michał Rutkowski' => array(
+                'position' => self::languageChecker(
+                    'Specjalista ds. analiz branżowych i komunikacji rynkowej | Ptak Warsaw Expo',
+                    'Specialist for industry analyses and market communication | Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Zajmuje się analizą trendów, monitorowaniem zmian zachodzących w poszczególnych sektorach oraz opracowywaniem komunikacji rynkowej wspierającej rozwój wydarzeń targowych organizowanych przez Ptak Warsaw Expo.',
+                    'She is engaged in the analysis of trends, monitoring changes taking place in individual sectors, and developing market communication supporting the development of trade fair events organized by Ptak Warsaw Expo.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/michal-rutkowski.webp',
+            ),
+            'Natalia Stępień' => array(
+                'position' => self::languageChecker(
+                    'Specjalista ds. analiz branżowych i rozwoju portfolio targowego | Ptak Warsaw Expo',
+                    'Specialist for industry analyses and trade fair portfolio development | Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Odpowiada za monitorowanie zmian rynkowych, analizę potencjału poszczególnych sektorów oraz wsparcie w rozwoju wydarzeń targowych odpowiadających na aktualne potrzeby branży.',
+                    'She is responsible for monitoring market changes, analyzing the potential of individual sectors, and supporting the development of trade fair events that respond to the current needs of the industry.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/natalia-stepien.webp',
+            ),
+            'Paweł Zieliński' => array(
+                'position' => self::languageChecker(
+                    'Redaktor treści branżowych | Ptak Warsaw Expo',
+                    'Industry Content Editor | Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Tworzy i redaguje materiały dotyczące kluczowych trendów oraz zmian zachodzących w poszczególnych sektorach rynku, wspierając komunikację branżową wydarzeń organizowanych przez Ptak Warsaw Expo.',
+                    'She creates and edits materials concerning key trends and changes taking place in individual market sectors, supporting the industry communication of events organized by Ptak Warsaw Expo.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/pawel-zielinski.webp',
+            ),
+            'Aleksandra Krawczyk' => array(
+                'position' => self::languageChecker(
+                    'Koordynator komunikacji branżowej | Ptak Warsaw Expo',
+                    'Industry Communication Coordinator | Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Zajmuje się tworzeniem i rozwijaniem komunikacji wokół sektorów obecnych w portfolio targowym, analizując trendy oraz potrzeby rynku i wystawców.',
+                    'She is engaged in creating and developing communication around the sectors present in the trade fair portfolio, analyzing trends as well as the needs of the market and exhibitors.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/aleksandra-krawczyk.webp',
+            ),
+            'Mariusz Kwiatkowski' => array(
+                'position' => self::languageChecker(
+                    'Specjalista ds. analiz branżowych w Dziale Rozwoju Targów | Ptak Warsaw Expo',
+                    'Specialist for industry analyses in the Trade Fair Development Department | Ptak Warsaw Expo'
+                ),
+                'desc' => self::languageChecker(
+                    'Na co dzień zajmuje się analizą trendów rynkowych, obserwacją zmian zachodzących w poszczególnych sektorach oraz wsparciem merytorycznym w rozwoju wydarzeń targowych organizowanych przez Ptak Warsaw Expo.',
+                    'On a daily basis, she is engaged in the analysis of market trends, the observation of changes taking place in individual sectors, and substantive support in the development of trade fair events organized by Ptak Warsaw Expo.'
+                ),
+                'image' => '/wp-content/plugins/pwe-media/media/article-authors/mariusz-kwiatkowski.webp',
+            ),
+        );
+        $author_name = $pwe_news_upcoming_article_author;
+        $author_position = '';
+        $author_desc = '';
+        $author_image = '';
 
+        if (!empty($author_name) && isset($authors[$author_name])) {
+            $author_position = $authors[$author_name]['position'];
+            $author_desc = $authors[$author_name]['desc'];
+            $author_image = $authors[$author_name]['image'];
+        }
         $output  = '
         <style>
             .site-footer .limit-width {
@@ -294,20 +401,18 @@ $desc_html .= '</div>';
             $output .= '
                 <div class="pwe-news-upcoming__linkedin">
                     <div class="pwe-news-upcoming__linkedin-content">
-                        <img src="/wp-content/plugins/pwe-media/media/Dariusz_Drag.webp" alt="' . self::languageChecker('Dariusz Drąg – Ekspert rynku wystawienniczego', 'Dariusz Drąg – Exhibition market expert') . '">
+                        <img src="' . esc_url($author_image) . '" alt="' . esc_attr($author_name) . '">
                         <div class="pwe-news-upcoming__linkedin-content-text">
-                            <h2 class="pwe-news-upcoming__linkedin-title">Dariusz Drąg</h2>
-                            <h3 class="pwe-news-upcoming__linkedin-subtitle">' . self::languageChecker('Ekspert rynku wystawienniczego | Ptak Warsaw Expo', 'Exhibition market expert | Ptak Warsaw Expo') . '</h3>
-                            <p class="pwe-news-upcoming__linkedin-desc">' . self::languageChecker('Kreatywny profesjonalista z dużym doświadczeniem w organizacji różnego rodzaju przedsięwzięć, zarządzaniu zespołem oraz prowadzeniu negocjacji.', 'Creative professional with extensive experience in organizing various types of events, managing a team and conducting negotiations.') . '</p>
+                            <h2 class="pwe-news-upcoming__linkedin-title">' . esc_html($author_name) . '</h2>
+                            <h3 class="pwe-news-upcoming__linkedin-subtitle">' . esc_html($author_position) . '</h3>
+                            <p class="pwe-news-upcoming__linkedin-desc">' . esc_html($author_desc) . '</p>
                         </div>
                     </div>
                     <div class="pwe-news-upcoming__linkedin-footer">
                         <p class="pwe-news-upcoming__linkedin-thx">' . self::languageChecker('Dziękujemy, że przeczytałaś/eś nasz artykuł do końca.', 'Thank you for reading our article to the end.') . '</p>
                         <a class="pwe-news-upcoming__btn--black" target="_blank" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7185929412658302977">' . self::languageChecker('Dołącz do Newslettera na LinkedIn', 'Join the newsletter on LinkedIn') . '</a>
                     </div>
-                </div>
-            </div>';
-
+                </div>';
         $output .= '</div>';
 
         return $output;
