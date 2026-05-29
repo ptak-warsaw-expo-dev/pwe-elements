@@ -323,6 +323,50 @@ class PWERegistrationVisitors extends PWERegistration {
             </div>';
         }
 
+        if (get_locale() != "pl_PL" && get_locale() != "en_US") {
+
+            $output .= '
+            <script>
+                function translateElement(element, newText) {
+                    if (!element) return;
+                    element.textContent = newText;
+                }
+
+                const emailInput = document.querySelector(\'input[placeholder="Email"]\');
+                if (emailInput) {
+                    emailInput.placeholder = "' . self::multi_translation("email") . '";
+                }
+
+                const emailLabel = Array.from(document.querySelectorAll("label"))
+                    .find(label => label.textContent.trim().startsWith("Email"));
+
+                if (emailLabel) {
+                    emailLabel.childNodes[0].textContent = "' . self::multi_translation("email") . '";
+                }
+
+                const phoneLabel = Array.from(document.querySelectorAll("label"))
+                    .find(label => label.textContent.trim().startsWith("Phone number"));
+
+                if (phoneLabel) {
+                    phoneLabel.childNodes[0].textContent = "' . self::multi_translation("phone") . '";
+                }
+
+                const consentLabel = Array.from(document.querySelectorAll(".gfield_consent_label"))
+                    .find(label => label.textContent.trim().startsWith("I agree to the processing by PTAK WARSAW EXPO"));
+
+                if (consentLabel) {
+                    consentLabel.innerHTML = "' . self::multi_translation("consent_processing_data_short") . '<span class=\"show-consent\">(' . self::multi_translation("more") . ')</span><span class=\"gfield_required gfield_required_asterisk\">*</span>";
+                }
+
+                const consentDescription = Array.from(document.querySelectorAll(".gfield_consent_description"))
+                    .find(description => description.textContent.trim().includes("e-mail address"));
+
+                if (consentDescription) {
+                    translateElement(consentDescription, "' . self::multi_translation("consent_processing_data_email") . '");
+                }
+            </script>';
+        }
+
         return $output;
     }
 }

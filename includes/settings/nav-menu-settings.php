@@ -1,7 +1,13 @@
 <?php
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('admin_init', 'pwe_register_menu_settings');
 
-function pwe_register_menu_settings() {
+function pwe_register_menu_settings()
+{
     register_setting('pwe_menu_options_group', 'pwe_menu_options');
 
     add_settings_section(
@@ -26,46 +32,33 @@ function pwe_register_menu_settings() {
         'pwe-menu-settings',
         'pwe_menu_main_section'
     );
-
-    // add_settings_field(
-    //     'pwe_menu_logo',
-    //     'Menu Logo',
-    //     'pwe_menu_logo_callback',
-    //     'pwe-menu-settings',
-    //     'pwe_menu_main_section'
-    // );
-
-    // add_settings_field(
-    //     'pwe_menu_color',
-    //     'Menu Background Color',
-    //     'pwe_menu_color_callback',
-    //     'pwe-menu-settings',
-    //     'pwe_menu_main_section'
-    // );
 }
 
-function pwe_menu_section_callback() {
+function pwe_menu_section_callback()
+{
     echo '<p>Customize your menu settings here.</p>';
 }
 
-function pwe_menu_active_callback() {
-    $options = get_option('pwe_menu_options');
-    $is_checked = isset($options['pwe_menu_active']) && $options['pwe_menu_active'] === '1';
+function pwe_menu_active_callback()
+{
+    $options = get_option('pwe_menu_options', []);
+    $is_checked = isset($options['pwe_menu_active']) && (string) $options['pwe_menu_active'] === '1';
+
+    echo '<input type="hidden" name="pwe_menu_options[pwe_menu_active]" value="0">';
+    echo '<label>';
     echo '<input type="checkbox" name="pwe_menu_options[pwe_menu_active]" value="1" ' . checked($is_checked, true, false) . '>';
+    echo ' Włącz niestandardowe menu PWE.';
+    echo '</label>';
 }
 
-function pwe_menu_transparent_callback() {
-    $options = get_option('pwe_menu_options');
-    $is_checked = isset($options['pwe_menu_transparent']) && $options['pwe_menu_transparent'] === '1';
+function pwe_menu_transparent_callback()
+{
+    $options = get_option('pwe_menu_options', []);
+    $is_checked = isset($options['pwe_menu_transparent']) && (string) $options['pwe_menu_transparent'] === '1';
+
+    echo '<input type="hidden" name="pwe_menu_options[pwe_menu_transparent]" value="0">';
+    echo '<label>';
     echo '<input type="checkbox" name="pwe_menu_options[pwe_menu_transparent]" value="1" ' . checked($is_checked, true, false) . '>';
+    echo ' Ustaw transparentne menu tylko na stronie głównej.';
+    echo '</label>';
 }
-
-// function pwe_menu_logo_callback() {
-//     $options = get_option('pwe_menu_options');
-//     echo '<input type="text" name="pwe_menu_options[pwe_menu_logo]" value="' . esc_attr($options['pwe_menu_logo'] ?? '') . '" placeholder="Logo URL">';
-// }
-
-// function pwe_menu_color_callback() {
-//     $options = get_option('pwe_menu_options');
-//     echo '<input type="color" name="pwe_menu_options[pwe_menu_color]" value="' . esc_attr($options['pwe_menu_color'] ?? '#ffffff') . '">';
-// }

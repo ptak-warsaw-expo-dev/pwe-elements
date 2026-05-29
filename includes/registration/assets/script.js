@@ -44,6 +44,15 @@ function observeFlagChanges() {
     }
 }
 
+
+function getGroupPatron(){
+    const patronInput = document.querySelector(".patron input");
+    const patronValue = document.querySelector('.pwe-registration-container').getAttribute('fair_group');
+
+    patronInput.value = patronValue;
+}
+
+getGroupPatron();
 addEventListenersToForm();
 observeFlagChanges();
 

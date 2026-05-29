@@ -1,7 +1,13 @@
 <?php
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('admin_init', 'pwe_register_general_settings');
 
-function pwe_register_general_settings() {
+function pwe_register_general_settings()
+{
     register_setting('pwe_general_options_group', 'pwe_general_options');
 
     add_settings_section(
@@ -20,12 +26,19 @@ function pwe_register_general_settings() {
     );
 }
 
-function pwe_general_section_callback() {
-    echo '<p>General settings</p>';
+function pwe_general_section_callback()
+{
+    echo '<p>General settings.</p>';
 }
 
-function pwe_dp_shortcodes_unactive_callback() {
-    $options = get_option('pwe_general_options');
-    $is_checked = isset($options['pwe_dp_shortcodes_unactive']) && $options['pwe_dp_shortcodes_unactive'] === '1';
+function pwe_dp_shortcodes_unactive_callback()
+{
+    $options = get_option('pwe_general_options', []);
+    $is_checked = isset($options['pwe_dp_shortcodes_unactive']) && (string) $options['pwe_dp_shortcodes_unactive'] === '1';
+
+    echo '<input type="hidden" name="pwe_general_options[pwe_dp_shortcodes_unactive]" value="0">';
+    echo '<label>';
     echo '<input type="checkbox" name="pwe_general_options[pwe_dp_shortcodes_unactive]" value="1" ' . checked($is_checked, true, false) . '>';
+    echo ' Wyłącz automatyczne pobieranie danych wykorzystywanych przez shortcode.';
+    echo '</label>';
 }

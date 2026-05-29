@@ -278,7 +278,7 @@ public function initVCMapPWERegistration() {
      * Adding Scripts
      */
     public function addingScripts(){
-        
+
         $source_utm = (isset($_SERVER['argv'][0])) ? $_SERVER['argv'][0] : '';
 
         $data_js_array = array(
@@ -370,7 +370,10 @@ public function initVCMapPWERegistration() {
             }
         </style>';
 
-        $output_html = '<div class="pwelement pwelement_'. self::$rnd_id .'">' . $output . '</div>';
+        $trade_fair_group = do_shortcode('[trade_fair_group]');
+
+        $output_html = '<div fair_group="'. $trade_fair_group.'" class="pwelement pwelement_'. self::$rnd_id .' pwe-registration-container">' . $output . '</div>';
+
 
         if ($input_replace_array_html && $output_replace_array_html) {
             $output_html = str_replace($input_replace_array_html, $output_replace_array_html, $output_html);
