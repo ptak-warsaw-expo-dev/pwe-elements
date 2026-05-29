@@ -62,7 +62,7 @@ $api_media = json_decode($api_response, true);
 
 $output = '';
 
-$main_logo = 'https://'. $domain .'/doc/logo.webp';
+$main_logo = $lang_pl ? 'https://'. $domain .'/doc/logo.webp' : 'https://'. $domain .'/doc/logo-en.webp';
 $header_bg = 'https://'. $domain .'/doc/background.webp';
 if (!empty($api_media["doc"])) {
     // Logo search
@@ -2805,7 +2805,7 @@ if ($event_type === "week") {
 
                                             el.classList.add("active");
 
-                                            if (items[0].domain === currentDomain) {
+                                            if (itemsForLetter[0].domain === currentDomain) {
                                                 el.classList.add("current-fair");
                                             }
 
@@ -2833,7 +2833,7 @@ if ($event_type === "week") {
 
                                             el.classList.add("active");
 
-                                            if (items[0].domain === currentDomain) {
+                                            if (itemsForLetter[0].domain === currentDomain) {
                                                 el.classList.add("current-fair");
                                             }
 
@@ -4050,9 +4050,6 @@ if ($event_type === "week") {
             width: 100%;
             overflow: hidden;
             display: flex;
-        }
-        .single-event__partners-logo {
-            margin: 10px;
         }
         .single-event__container-partners img {
             aspect-ratio: 4 / 2;

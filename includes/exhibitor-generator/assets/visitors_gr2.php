@@ -420,26 +420,64 @@ function add_notification_conf_to_form($generator_form_id) {
             'pl' => 'generator_gosci_conf_notification_pl.html',
             'en' => 'generator_gosci_conf_notification_en.html',
         ],
+        'file_pwe_qr' => [
+            'pl' => 'generator_gosci_conf_notification_pl_pwe_qr.html',
+            'en' => 'generator_gosci_conf_notification_en_pwe_qr.html',
+        ],
     ];
 
     $message = '';
-    $template_file = plugin_dir_path(__FILE__) . 'notifications/' . $notification_data['file'][$lang];
 
-    $qr_feed_id = null;
     $feeds = GFAPI::get_feeds(null, $generator_form_id);
 
+    $qr_feed_id = null;
+    $qr_feed_name = null;
+    $qr_type = null;
+
+    // priority: pwe_qr
     foreach ($feeds as $feed) {
-        if (isset($feed['addon_slug']) && $feed['addon_slug'] === 'qr-code') {
+        if (($feed['addon_slug'] ?? '') === 'pwe_qr') {
+            $qr_feed_name = $feed['meta']['feedName'] ?? null;
             $qr_feed_id = $feed['id'];
-            break; // tylko pierwszy QR-code feed
+            $qr_type = 'pwe_qr';
+            break;
         }
     }
 
-    if (file_exists($template_file)) {
-        $message = file_get_contents($template_file);
-        $message = str_replace('[qr_feed_id]', $qr_feed_id, $message);
+    // fallback: qr-code
+    if (!$qr_feed_id) {
+        foreach ($feeds as $feed) {
+            if (($feed['addon_slug'] ?? '') === 'qr-code') {
+                $qr_feed_id = $feed['id'];
+                $qr_type = 'qr-code';
+                break;
+            }
+        }
+    }
+
+    $template_file = plugin_dir_path(__FILE__) . 'notifications/' . $notification_data['file'][$lang];
+
+    if ($qr_type === 'pwe_qr') {
+
+        if (file_exists($template_file)) {
+            $message = file_get_contents($template_file);
+            $message = str_replace('{notfc-qrcode-url}', '{pwe_qr_url name=' . $qr_feed_name . '}', $message);
+            $message = str_replace('{notfc-qrcode-url-param}', '{pwe_qr_url_encoded name=' . $qr_feed_name . '}', $message);
+            
+        }
+
     } else {
-        $message = 'Dziękujemy za udział w wydarzeniu.'; // fallback
+
+        if (file_exists($template_file)) {
+            $message = file_get_contents($template_file);
+            $message = str_replace('{notfc-qrcode-url}', '{qrcode-url-' . $qr_feed_id . '}', $message);
+            $message = str_replace('{notfc-qrcode-url-param}', '{qrcode-url-' . $qr_feed_id . '}', $message);
+        }
+    }
+
+    // fallback final
+    if (empty($message)) {
+        $message = 'Dziękujemy za udział w wydarzeniu.';
     }
 
     $email_input_ref = ''; // np. inputName lub ID
@@ -1759,17 +1797,35 @@ add_filter('gform_notification', 'inject_qr_code_into_email', 10, 3);
 function inject_qr_code_into_email($notification, $form, $entry) {
     // Sprawdź, czy wiadomość zawiera placeholder
     if (strpos($notification['message'], '{qr_feed_url}') !== false) {
+
         $feeds = GFAPI::get_feeds(null, $form['id']);
 
-        foreach ($feeds as $feed) {
-            if ($feed['addon_slug'] === 'qr-code') {
-                $url = gform_get_meta($entry['id'], 'qr-code_feed_' . $feed['id'] . '_url');
+        $url = null;
 
-                if ($url) {
-                    $notification['message'] = str_replace('{qr_feed_url}', $url, $notification['message']);
-                    break;
+        // priority: pwe_qr
+        foreach ($feeds as $feed) {
+            if ($feed['addon_slug'] === 'pwe_qr') {
+                $url = gform_get_meta($entry['id'], 'pwe_qr_code_url');
+                break;
+            }
+        }
+
+        // fallback: qr-code
+        if (!$url) {
+            foreach ($feeds as $feed) {
+                if ($feed['addon_slug'] === 'qr-code') {
+
+                    $url = gform_get_meta($entry['id'], 'qr-code_feed_' . $feed['id'] . '_url');
+
+                    if ($url) {
+                        break;
+                    }
                 }
             }
+        }
+
+        if ($url) {
+            $notification['message'] = str_replace('{qr_feed_url}', $url, $notification['message']);
         }
     }
 

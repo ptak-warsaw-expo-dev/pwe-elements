@@ -198,8 +198,10 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
         foreach ($adds_raw as $row) {
             $slug = trim($row['slug']);
             $adds[$slug] = json_decode($row['data'], true);
+            echo '<script>console.log("'.$slug.'")</script>';
+            echo '<script>console.log("'.$conf_id.'")</script>';
         }
-
+        
         // URL do katalogu
         $patroni_dir_url = 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/patrons';
         $output = '';

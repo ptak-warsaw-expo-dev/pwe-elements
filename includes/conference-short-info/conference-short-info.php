@@ -179,7 +179,7 @@ class PWEConferenceShortInfo {
 
         // 4) Dane nagłówka / opisu jak u Ciebie
         $fairs_data_adds = PWECommonFunctions::get_database_fairs_data_adds();
-        $selected_lang   = self::$local_lang_pl ? 'pl' : 'en';
+        $selected_lang   = PWECommonFunctions::lang_pl() ? 'pl' : 'en';
 
         $first_fair_adds = $fairs_data_adds[0] ?? null;
         $name  = $first_fair_adds ? ($first_fair_adds->{'konf_name'} ?? '') : '';

@@ -213,8 +213,6 @@ class PWEConferenceCap {
 
     }
 
-
-
     public static function PWEConferenceCapOutput($atts) {
 
         require_once plugin_dir_path(__FILE__) . 'classes/conference-cap-functions.php';
@@ -480,6 +478,7 @@ class PWEConferenceCap {
             } else {
                 $cap_database = false;
             }
+
             if (!$one_conf_mode) {
                 // Generujemy nawigację (kafelki)
                 $output .= '<div class="conference_cap__conf-slug-navigation">';
@@ -636,12 +635,12 @@ class PWEConferenceCap {
                 }
             }
 
-
             // **Główna struktura HTML**
             if ($cap_database || !empty($manual_conferences)) {
             $output .= '<div class="conference_cap__conf-slugs-container">';
 
                 foreach ($conf_slugs as $conf_slug => $conferences) {
+
                     // Pobranie danych konferencji
                     $conf_img = '';
                     $conf_name = '';
@@ -791,9 +790,26 @@ class PWEConferenceCap {
                                 <div class="conference_cap__after-patrons-html">' . ($inf_conf['after_patrons_' . $conf_slug] ?? '') . '</div>
                                 <h2 class="conference_cap__conf-slug-location">' . $conf_location . '</h2>
                                 <div class="conference_cap__after-location-html">' . ($inf_conf['after_location_' . $conf_slug] ?? '') . '</div>
-                                <h2 class="conference_cap__conf-slug-title">' . $conf_name . '</h2>
+                                <h2 class="conference_cap__conf-slug-title">' . $conf_name . '</h2>';
+                                
+                                // Add main picture in conference 
+                                $pic_pl = !empty($conf->main_pic_pl) ? trim($conf->main_pic_pl) : null;
+                                $pic_en = !empty($conf->main_pic_en) ? trim($conf->main_pic_en) : null;
+
+                                $selected = null;
+                                if ($lang === 'EN') {
+                                    $selected = $pic_en ?: $pic_pl;
+                                } else {
+                                    $selected = $pic_pl;
+                                }
+
+                                if (!empty($selected)) {
+                                    $output .= '<img class="conf-main-pic" src="https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/' . $selected . '" alt="conference image">';
+                                }
+
+                                $output .= '
                                 <div class="conference_cap__after-title-html">' . ($inf_conf['after_title_' . $conf_slug] ?? '') . '</div>';
-                            }else if(get_class($mode_class) == 'PWEConferenceCapMedalCeremony'){
+                            } else if(get_class($mode_class) == 'PWEConferenceCapMedalCeremony'){
                                 foreach ($conferences as $confData) {
                                     foreach ($confData as $day => $sessions) {
                                         if ( $day === 'main-desc' ) {

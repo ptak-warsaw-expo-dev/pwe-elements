@@ -231,7 +231,7 @@ class PWECalendar extends PWECommonFunctions {
 
         // Creating a query for 'event' posts
         $args = array(
-            'post_type' => array('event', 'events_week'),
+            'post_type' => 'event',
             'posts_per_page' => -1,
             'post_status' => 'publish',
             'lang' => $lang
@@ -548,9 +548,7 @@ class PWECalendar extends PWECommonFunctions {
 
                 $event_type = get_post_meta($post_id, 'pwe_event_type', true);
 
-
-                // Add only posts with edition_num == 1 if $pwe_calendar_premier_edition is true
-                if ($pwe_calendar_premier_edition == true && $edition_num == 1) {
+                if ($pwe_calendar_premier_edition && $edition_num == 1 || !$pwe_calendar_premier_edition) {
                     $event_posts[] = [
                         'post_id'     => $post_id,
                         'event_type'  => $event_type,
@@ -560,19 +558,7 @@ class PWECalendar extends PWECommonFunctions {
                         'domain'      => $domain,
                         'permalink'   => $permalink,
                         'categories'  => $categories,
-                        'post_title'  => get_the_title(),
-                    ];
-                } elseif ($pwe_calendar_premier_edition == false) {
-                    $event_posts[] = [
-                        'post_id'     => $post_id,
-                        'event_type'  => $event_type,
-                        'edition_num' => $edition_num,
-                        'start_date'  => $start_date,
-                        'end_date'    => $end_date,
-                        'domain'      => $domain,
-                        'permalink'   => $permalink,
-                        'categories'  => $categories,
-                        'post_title'  => get_the_title(),
+                        'post_title'  => get_the_title($post_id),
                     ];
                 }
 
@@ -609,7 +595,6 @@ class PWECalendar extends PWECommonFunctions {
 
                 return $editionB <=> $editionA;
             });
-
 
 
             if (!empty($pwe_calendar_posts_num) && $pwe_calendar_posts_num > 0) {
@@ -757,7 +742,9 @@ class PWECalendar extends PWECommonFunctions {
 
             $output .= '<div class="pwe-calendar__wrapper">';
 
-                ob_start();
+                if (current_user_can('administrator') == false) {
+                    ob_start();
+                }
 
                 foreach ($event_posts as $event) {
                     if ($pwe_calendar_week && $event['event_type'] !== "week") {
@@ -766,9 +753,10 @@ class PWECalendar extends PWECommonFunctions {
                     $output .= self::render_calendar_event_card($event, $shortcodes_active, $lang_pl);
                 }
 
-                $output .=
-                ob_get_clean();
-
+                if (current_user_can('administrator') == false) {
+                    ob_get_clean();
+                }
+            
                 wp_reset_postdata();
 
             $output .= '</div>';
@@ -1216,7 +1204,6 @@ class PWECalendar extends PWECommonFunctions {
         }
 
         $output = do_shortcode($output);
-        // Zwracamy HTML z dodanym wrapperem
         return '<div id="pweCalendar" class="pwe-calendar">' . $output . '</div>';
     }
 
@@ -1224,6 +1211,8 @@ class PWECalendar extends PWECommonFunctions {
         $locale = get_locale();
 
         $post_id = $event['post_id'];
+        $post_title = get_the_title($post_id);
+
         if ($post_id) {
             $website = get_post_meta($post_id, 'web_page_link', true);
             $host = parse_url($website, PHP_URL_HOST);
@@ -1312,12 +1301,6 @@ class PWECalendar extends PWECommonFunctions {
             $edition .= $edition_num . self::multi_translation("edition");
         }
 
-        // $categories = $event['categories'];
-        // $category_names = '';
-        // foreach ($categories as $category) {
-        //         $category_names .= ' ' . $category->name;
-        // }
-
         $categories = $event['categories'];
         $category_names = implode(', ', array_map(fn($c) => $c->name, $categories));
 
@@ -1326,10 +1309,12 @@ class PWECalendar extends PWECommonFunctions {
 
         if ($event_type === "" || $event_type === "event") {
 
+            $event_type = "event";
+
             $target_blank = $post_meta['web_page_link_target_blank'][0];
 
             $output = '
-            <div class="pwe-calendar__item" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '" id="'.$shortcode_fair_id.'">
+            <div class="pwe-calendar__item '. $event_type .'" search_engine="'. $post_title .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '" id="'.$shortcode_fair_id.'">
                 <a class="pwe-calendar__link" href="'. ($target_blank ? $website : $permalink) .'" '. ($target_blank ? 'target="_blank"' : '') .'>
                     <div class="pwe-calendar__tile" style="background-image:url(' . esc_url($secondary_image_url) . ');">';
                         if (!empty($short_desc)) {
@@ -1403,28 +1388,18 @@ class PWECalendar extends PWECommonFunctions {
                 </a>
             </div>';
         } else {
-            $post_id = $event['post_id'];
 
-            if ($post_id) {
-                $website = get_post_meta($post_id, 'web_page_link', true);
-                $host = parse_url($website, PHP_URL_HOST);
-                $domain = preg_replace('/^www\./', '', $host);
-                $permalink = $event['permalink'];
-            } else {
-                $domain = '';
-            }
-
-            $date_start = get_post_meta($post_id, 'fair_date_start', true);
-            $date_end   = get_post_meta($post_id, 'fair_date_end', true);
+            $week_date_start = get_post_meta($post_id, 'fair_date_start', true);
+            $week_date_end   = get_post_meta($post_id, 'fair_date_end', true);
 
             // Download saved excluded fairs
             $excluded_events = get_post_meta($post_id, 'events_week_fairs_excluded', true);
             $excluded_events_array = !empty($excluded_events) ? array_map('trim', explode(', ', $excluded_events)) : [];
 
             $events_map = [];
-            if (!empty($date_start) && !empty($date_end)) {
-                $trade_fair_start_timestamp = strtotime($date_start);
-                $trade_fair_end_timestamp   = strtotime($date_end);
+            if (!empty($week_date_start) && !empty($week_date_end)) {
+                $trade_fair_start_timestamp = strtotime($week_date_start);
+                $trade_fair_end_timestamp   = strtotime($week_date_end);
 
                 $fairs_json = PWECommonFunctions::json_fairs();
 
@@ -1492,7 +1467,7 @@ class PWECalendar extends PWECommonFunctions {
             $target_blank = $post_meta['events_week_link'][0];
 
             $output = '
-            <div class="pwe-calendar__item '. $event_type .'" search_engine="'. $event['post_title'] .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '">
+            <div class="pwe-calendar__item '. $event_type .'" search_engine="'. $post_title .' '. $post_meta['keywords'][0] .' " search_category="' . $category_names . '">
                 <a class="pwe-calendar__link" href="'. ((!empty($event_link) && $target_blank) ? $event_link : $permalink) .'" '. ($target_blank ? 'target="_blank"' : '') .'>
                     <div class="pwe-calendar__tile" style="background-image:url(' . esc_url($secondary_image_url) . ');">
                         <div class="pwe-calendar__short-name" style="'. (!empty($short_desc) ? 'top:65% !important;' : '') .'">
@@ -1575,7 +1550,7 @@ class PWECalendar extends PWECommonFunctions {
                 echo self::render_calendar_event_card($event, true, get_locale() == "pl_PL");
             }
 
-            // Jeśli są posty do załadowania, zmień przycisk
+            // If there are posts to load, change the button
             if ($query->found_posts > ($page * $posts_per_page)) {
                 echo '<script>document.getElementById("loadMore").style.display = "block";</script>';
             } else {

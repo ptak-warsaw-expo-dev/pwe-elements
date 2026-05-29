@@ -428,10 +428,26 @@ function add_notification_conf_to_form($generator_form_id) {
     $qr_feed_id = null;
     $feeds = GFAPI::get_feeds(null, $generator_form_id);
 
+    $qr_feed_id = null;
+    $qr_type = null;
+
+    // priority: pwe_qr
     foreach ($feeds as $feed) {
-        if (isset($feed['addon_slug']) && $feed['addon_slug'] === 'qr-code') {
+        if (isset($feed['addon_slug']) && $feed['addon_slug'] === 'pwe_qr') {
             $qr_feed_id = $feed['id'];
-            break; // tylko pierwszy QR-code feed
+            $qr_type = 'pwe_qr';
+            break;
+        }
+    }
+
+    // fallback: qr-code
+    if (!$qr_feed_id) {
+        foreach ($feeds as $feed) {
+            if (isset($feed['addon_slug']) && $feed['addon_slug'] === 'qr-code') {
+                $qr_feed_id = $feed['id'];
+                $qr_type = 'qr-code';
+                break;
+            }
         }
     }
 
@@ -1652,17 +1668,35 @@ add_filter('gform_notification', 'inject_qr_code_into_email', 10, 3);
 function inject_qr_code_into_email($notification, $form, $entry) {
     // Sprawdź, czy wiadomość zawiera placeholder
     if (strpos($notification['message'], '{qr_feed_url}') !== false) {
+
         $feeds = GFAPI::get_feeds(null, $form['id']);
 
-        foreach ($feeds as $feed) {
-            if ($feed['addon_slug'] === 'qr-code') {
-                $url = gform_get_meta($entry['id'], 'qr-code_feed_' . $feed['id'] . '_url');
+        $url = null;
 
-                if ($url) {
-                    $notification['message'] = str_replace('{qr_feed_url}', $url, $notification['message']);
-                    break;
+        // priority: pwe_qr
+        foreach ($feeds as $feed) {
+            if ($feed['addon_slug'] === 'pwe_qr') {
+                $url = gform_get_meta($entry['id'], 'pwe_qr_code_url');
+                break;
+            }
+        }
+
+        // fallback: qr-code
+        if (!$url) {
+            foreach ($feeds as $feed) {
+                if ($feed['addon_slug'] === 'qr-code') {
+
+                    $url = gform_get_meta($entry['id'], 'qr-code_feed_' . $feed['id'] . '_url');
+
+                    if ($url) {
+                        break;
+                    }
                 }
             }
+        }
+
+        if ($url) {
+            $notification['message'] = str_replace('{qr_feed_url}', $url, $notification['message']);
         }
     }
 

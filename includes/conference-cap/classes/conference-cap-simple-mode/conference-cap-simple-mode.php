@@ -2,11 +2,11 @@
 <?php
 class PWEConferenceCapSimpleMode extends PWEConferenceCap{
 
-        /**
-       * Constructor method.
-       * Calls parent constructor and adds an action for initializing the Visual Composer map.
-       */
-      public function __construct() {
+    /**
+     * Constructor method.
+     * Calls parent constructor and adds an action for initializing the Visual Composer map.
+     */
+    public function __construct() {
         parent::__construct();
     }
 
