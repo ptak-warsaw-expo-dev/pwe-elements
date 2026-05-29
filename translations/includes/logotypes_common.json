@@ -3,8 +3,7 @@
     "international_patrons": "patroni międzynarodowi",
     "foreign_patrons": "PATRONI I PARTNERZY ZAGRANICZNI",
     "international": "międzynarodowy",
-    "exhibitor":"Wystawca",
-
+    "exhibitor": "Wystawca",
     "plurals": {
       "Prelegent": "Prelegenci",
       "Partner Targów": "Partnerzy Targów",
@@ -15,13 +14,11 @@
       "Partner Organizacyjny": "Partnerzy Organizacyjni"
     }
   },
-
   "en_US": {
     "international_patrons": "international patrons",
     "foreign_patrons": "FOREIGN PATRONS AND PARTNERS",
     "international": "international",
-    "exhibitor":"Exhibitor",
-
+    "exhibitor": "Exhibitor",
     "plurals": {
       "Speaker": "Speakers",
       "Fair Partner": "Fair Partners",
@@ -32,13 +29,11 @@
       "Organizational partner": "Organizational partners"
     }
   },
-
   "de_DE": {
     "international_patrons": "internationale Förderer",
     "foreign_patrons": "AUSLÄNDISCHE FÖRDERER UND PARTNER",
     "international": "international",
-    "exhibitor":"Aussteller",
-
+    "exhibitor": "Aussteller",
     "plurals": {
       "Redner": "Referenten",
       "Messepartner": "Messepartner",
@@ -47,6 +42,96 @@
       "Messe- und Konferenzpartner": "Messe- und Konferenzpartner",
       "Ehrenpatronat": "Ehrenpatronate",
       "Organisationspartner": "Organisationspartner"
+    }
+  },
+  "cs_CZ": {
+    "international_patrons": "mezinárodní patroni",
+    "foreign_patrons": "ZAHRANIČNÍ PATRONI A PARTNEŘI",
+    "international": "mezinárodní",
+    "exhibitor": "Vystavovatel",
+    "plurals": {
+      "Speaker": "Přednášející",
+      "Fair Partner": "Partneři veletrhu",
+      "Content Partner": "Partneri obsahu",
+      "Industry Partner": "Odvětvoví partneři",
+      "Trade and Conference Partner": "Partneři veletrhu a konference",
+      "Honorary Patronage": "Čestné patronáty",
+      "Organizational partner": "Organizační partneři"
+    }
+  },
+  "it_IT": {
+    "international_patrons": "patroni internazionali",
+    "foreign_patrons": "PATRONI E PARTNER ESTERI",
+    "international": "internazionale",
+    "exhibitor": "Espositore",
+    "plurals": {
+      "Speaker": "Relatori",
+      "Fair Partner": "Partner della fiera",
+      "Content Partner": "Partner di contenuti",
+      "Industry Partner": "Partner del settore",
+      "Trade and Conference Partner": "Partner della fiera e della conferenza",
+      "Honorary Patronage": "Patronati onorari",
+      "Organizational partner": "Partner organizzativi"
+    }
+  },
+  "lt_LT": {
+    "international_patrons": "tarptautiniai rėmėjai",
+    "foreign_patrons": "UŽSIENIO RĖMĖJAI IR PARTNERIAI",
+    "international": "tarptautinis",
+    "exhibitor": "Parodos dalyvis",
+    "plurals": {
+      "Speaker": "Pranešėjai",
+      "Fair Partner": "Parodos partneriai",
+      "Content Partner": "Turinio partneriai",
+      "Industry Partner": "Pramonės partneriai",
+      "Trade and Conference Partner": "Parodos ir konferencijos partneriai",
+      "Honorary Patronage": "Garbingieji patronatai",
+      "Organizational partner": "Organizaciniai partneriai"
+    }
+  },
+  "lv_LV": {
+    "international_patrons": "starptautiskie patroni",
+    "foreign_patrons": "ĀRZEMJU PATRONI UN PARTNERI",
+    "international": "starptautisks",
+    "exhibitor": "Izstādes dalībnieks",
+    "plurals": {
+      "Speaker": "Runātāji",
+      "Fair Partner": "Tirdzniecības partneri",
+      "Content Partner": "Satura partneri",
+      "Industry Partner": "Nozares partneri",
+      "Trade and Conference Partner": "Tirdzniecības un konferences partneri",
+      "Honorary Patronage": "Goda patronāti",
+      "Organizational partner": "Organizatoriskie partneri"
+    }
+  },
+  "sk_SK": {
+    "international_patrons": "medzinárodní patroni",
+    "foreign_patrons": "ZAHRANIČNÍ PATRONI A PARTNERI",
+    "international": "medzinárodný",
+    "exhibitor": "Vystavovateľ",
+    "plurals": {
+      "Speaker": "Prednášajúci",
+      "Fair Partner": "Partneri veľtrhu",
+      "Content Partner": "Partneri obsahu",
+      "Industry Partner": "Odvetvní partneri",
+      "Trade and Conference Partner": "Partneri veľtrhu a konferencie",
+      "Honorary Patronage": "Čestné patronáty",
+      "Organizational partner": "Organizační partneri"
+    }
+  },
+  "uk_UA": {
+    "international_patrons": "міжнародні патрони",
+    "foreign_patrons": "ЗАРУБІЖНІ ПАТРОНИ ТА ПАРТНЕРИ",
+    "international": "міжнародний",
+    "exhibitor": "Учасник",
+    "plurals": {
+      "Speaker": "Доповідачі",
+      "Fair Partner": "Партнери ярмарку",
+      "Content Partner": "Контент-партнери",
+      "Industry Partner": "Галузеві партнери",
+      "Trade and Conference Partner": "Партнери ярмарку та конференції",
+      "Honorary Patronage": "Почесні патронати",
+      "Organizational partner": "Організаційні партнери"
     }
   }
 }

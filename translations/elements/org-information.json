@@ -10,5 +10,29 @@
   "de_DE": {
     "information_for_exhibitors": "Organizational information for Exhibitors",
     "information_for_exhibitors_text": "org-information-de.html"
+  },
+  "cs_CZ": {
+    "information_for_exhibitors": "Organizační informace pro vystavovatele",
+    "information_for_exhibitors_text": "org-information-cs.html"
+  },
+  "it_IT": {
+    "information_for_exhibitors": "Informazioni organizzative per gli espositori",
+    "information_for_exhibitors_text": "org-information-it.html"
+  },
+  "lt_LT": {
+    "information_for_exhibitors": "Organizacinė informacija dalyviams",
+    "information_for_exhibitors_text": "org-information-lt.html"
+  },
+  "lv_LV": {
+    "information_for_exhibitors": "Organizatoriskā informācija izstādītājiem",
+    "information_for_exhibitors_text": "org-information-lv.html"
+  },
+  "sk_SK": {
+    "information_for_exhibitors": "Organizačné informácie pre vystavovateľov",
+    "information_for_exhibitors_text": "org-information-sk.html"
+  },
+  "uk": {
+    "information_for_exhibitors": "Організаційна інформація для експонентів",
+    "information_for_exhibitors_text": "org-information-uk.html"
   }
 }

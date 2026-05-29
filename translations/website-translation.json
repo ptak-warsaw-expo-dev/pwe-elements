@@ -1,0 +1,123 @@
+{
+    "home": {
+        "pl": { "label": "Strona główna", "url": "/" },
+        "en": { "label": "Home", "url": "/" },
+        "cs": { "label": "Úvodní stránka", "url": "/" },
+        "de": { "label": "Startseite", "url": "/" },
+        "it": { "label": "Home", "url": "/" },
+        "lt": { "label": "Pagrindinis puslapis", "url": "/" },
+        "lv": { "label": "Sākums", "url": "/" },
+        "sk": { "label": "Domovská stránka", "url": "/" },
+        "uk": { "label": "Головна", "url": "/" }
+    },
+    "dla_odwiedzajacych": {
+        "pl": { "label": "Dla odwiedzających", "url": "/dla-odwiedzajacych/" },
+        "en": { "label": "For Visitors", "url": "/for-visitors/" },
+        "cs": { "label": "Pro návštěvníky", "url": "/pro-návštěvníky/" },
+        "de": { "label": "Für Besucher", "url": "/für-Besucher/" },
+        "it": { "label": "Per i visitatori", "url": "/per-i-visitatori/" },
+        "lt": { "label": "Lankytojams", "url": "/lankytojams/" },
+        "lv": { "label": "Apmeklētājiem", "url": "/apmeklētājiem/" },
+        "sk": { "label": "Pre návštevníkov", "url": "/pre-návštevníkov/" },
+        "uk": { "label": "Для відвідувачів", "url": "/для-відвідувачів/" }
+    },
+    "dla_wystawcow": {
+        "pl": { "label": "Dla wystawców", "url": "/dla-wystawcow/" },
+        "en": { "label": "For Exhibitors", "url": "/for-exhibitors/" },
+        "cs": { "label": "Pro vystavovatele", "url": "/pro-vystavovatele/" },
+        "de": { "label": "Für Aussteller", "url": "/für-Aussteller/" },
+        "it": { "label": "Per gli espositori", "url": "/per-gli-espositori/" },
+        "lt": { "label": "Eksponentams", "url": "/eksponentams/" },
+        "lv": { "label": "Izstādes dalībniekiem", "url": "/izstādes dalībniekiem/" },
+        "sk": { "label": "Pre vystavovateľov", "url": "/pre-vystavovateľov/" },
+        "uk": { "label": "Для експонентів", "url": "/для-експонентів/" }
+    },
+    "informacje_organizacyjne_dla_wystawcow": {
+        "pl": { "label": "Informacje organizacyjne dla Wystawców", "url": "/informacje-organizacyjne-dla-wystawcow/" },
+        "en": { "label": "Organizational Information for Exhibitors", "url": "/organizational-information-for-exhibitors/" },
+        "cs": { "label": "Organizační informace pro vystavovatele", "url": "/organizační-informace-pro-vystavovatele/" },
+        "de": { "label": "Organisatorische Informationen für Aussteller", "url": "/organisatorische-Informationen-für-Aussteller/" },
+        "it": { "label": "Informazioni organizzative per gli espositori", "url": "/informazioni-organizzative-per-gli-espositori/" },
+        "lt": { "label": "Organizacinė informacija eksponentams", "url": "/organizacinė informacija eksponentams/" },
+        "lv": { "label": "Organizatoriskā informācija izstādes dalībniekiem", "url": "/organizatoriskā informācija izstādes dalībniekiem/" },
+        "sk": { "label": "Organizačné informácie pre vystavovateľov", "url": "/organizačné-informácie-pre-vystavovateľov/" },
+        "uk": { "label": "Організаційна інформація для експонентів", "url": "/організаційна-інформація-для-експонентів/" }
+    },
+    "kontakt": {
+        "pl": { "label": "Kontakt", "url": "/kontakt/" },
+        "en": { "label": "Contact", "url": "/contact/" },
+        "cs": { "label": "Kontakt", "url": "/kontakt/" },
+        "de": { "label": "Kontakt", "url": "/Kontakt/" },
+        "it": { "label": "Contatti", "url": "/contatti/" },
+        "lt": { "label": "Kontaktai", "url": "/kontaktai/" },
+        "lv": { "label": "Kontakti", "url": "/kontakti/" },
+        "sk": { "label": "Kontakt", "url": "/kontakt/" },
+        "uk": { "label": "Контакти", "url": "/контакти/" }
+    },
+    "krok2": {
+        "pl": { "label": "krok2", "url": "/krok2/" },
+        "en": { "label": "Step 2", "url": "/step-2/" },
+        "cs": { "label": "krok2", "url": "/krok2/" },
+        "de": { "label": "Schritt 2", "url": "/Schritt 2/" },
+        "it": { "label": "Passo 2", "url": "/fase-2/" },
+        "lt": { "label": "2 etapas", "url": "/2-asis žingsnis/" },
+        "lv": { "label": "2. solis", "url": "/2. solis/" },
+        "sk": { "label": "krok2", "url": "/krok2/" },
+        "uk": { "label": "крок2", "url": "/крок-2/" }
+    },
+    "wypromuj_sie": {
+        "pl": { "label": "Wypromuj się", "url": "/wypromuj-sie/" },
+        "en": { "label": "Promote Your Business", "url": "/promote-yourself/" },
+        "cs": { "label": "Zviditelněte se", "url": "/propagujte-se/" },
+        "de": { "label": "Werben Sie für sich", "url": "/Werben-Sie-für-sich/" },
+        "it": { "label": "Promuoviti", "url": "/promuoviti/" },
+        "lt": { "label": "Reklamuokitės", "url": "/reklamuokitės/" },
+        "lv": { "label": "Reklāmējieties", "url": "/reklamējieties/" },
+        "sk": { "label": "Zviditeľnite sa", "url": "/propagujte-sa/" },
+        "uk": { "label": "Просуньте свій бізнес", "url": "/просунь-себе/" }
+    },
+    "katalog_wystawcow": {
+        "pl": { "label": "Katalog wystawców", "url": "/katalog-wystawcow/" },
+        "en": { "label": "Exhibitor Directory", "url": "/exhibitor-directory/" },
+        "cs": { "label": "Katalog vystavovatelů", "url": "/katalog-vystavovatelů/" },
+        "de": { "label": "Ausstellerverzeichnis", "url": "/Ausstellerverzeichnis/" },
+        "it": { "label": "Elenco degli espositori", "url": "/catalogo-espositori/" },
+        "lt": { "label": "Eksponentų katalogas", "url": "/dalyvių-katalogas/" },
+        "lv": { "label": "Izstādes dalībnieku katalogs", "url": "/izstādes dalībnieku katalogs/" },
+        "sk": { "label": "Zoznam vystavovateľov", "url": "/katalóg-vystavovateľov/" },
+        "uk": { "label": "Каталог експонентів", "url": "/каталог-експонентів/" }
+    },
+    "rejestracja": {
+        "pl": { "label": "Rejestracja", "url": "/rejestracja/" },
+        "en": { "label": "Registration", "url": "/registration/" },
+        "cs": { "label": "Registrace", "url": "/registrace/" },
+        "de": { "label": "Anmeldung", "url": "/Anmeldung/" },
+        "it": { "label": "Registrazione", "url": "/registrazione/" },
+        "lt": { "label": "Registracija", "url": "/registracija/" },
+        "lv": { "label": "Reģistrācija", "url": "/reģistrācija/" },
+        "sk": { "label": "Registrácia", "url": "/registrácia/" },
+        "uk": { "label": "Реєстрація", "url": "/реєстрація/" }
+    },
+    "zostan_wystawca": {
+        "pl": { "label": "Zostań wystawcą", "url": "/zostan-wystawca/" },
+        "en": { "label": "Become an Exhibitor", "url": "/become-an-exhibitor/" },
+        "cs": { "label": "Staňte se vystavovatelem", "url": "/staňte-se-vystavovatelem/" },
+        "de": { "label": "Werden Sie Aussteller", "url": "/Werden Sie Aussteller/" },
+        "it": { "label": "Diventa espositore", "url": "/diventa-espositore/" },
+        "lt": { "label": "Tapkite eksponentu", "url": "/tapk-dalyviu/" },
+        "lv": { "label": "Kļūsti par izstādes dalībnieku", "url": "/kļūsti par izstādes dalībnieku/" },
+        "sk": { "label": "Staňte sa vystavovateľom", "url": "/staňte-sa-vystavovateľom/" },
+        "uk": { "label": "Стати експонентом", "url": "/стань-експонентом/" }
+    },
+    "potwierdzenie_rejestracji_wystawcy": {
+        "pl": { "label": "Potwierdzenie rejestracji wystawcy", "url": "/potwierdzenie-rejestracji-wystawcy/" },
+        "en": { "label": "Exhibitor Registration Confirmation", "url": "/exhibitor-registration-confirmation/" },
+        "cs": { "label": "Potvrzení registrace vystavovatele", "url": "/potvrzení-registrace-vystavovatele/" },
+        "de": { "label": "Bestätigung der Ausstelleranmeldung", "url": "/Bestätigung der Ausstelleranmeldung/" },
+        "it": { "label": "Conferma della registrazione dell'espositore", "url": "/conferma-registrazione-espositore/" },
+        "lt": { "label": "Eksponento registracijos patvirtinimas", "url": "/dalyvio-registracijos-patvirtinimas/" },
+        "lv": { "label": "Izstādes dalībnieka reģistrācijas apstiprinājums", "url": "/izstādes dalībnieka reģistrācijas apstiprinājums/" },
+        "sk": { "label": "Potvrdenie registrácie vystavovateľa", "url": "/potvrdenie-registrácie-vystavovateľa/" },
+        "uk": { "label": "Підтвердження реєстрації експонента", "url": "/підтвердження-реєстрації-експонента/" }
+    }
+}

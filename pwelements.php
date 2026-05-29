@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.4.0
+ * Version: 3.4.1
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -13,7 +13,8 @@
 
 
 
-class PWElementsPlugin {
+class PWElementsPlugin
+{
     public $PWEStyleVar;
     public $PWElements;
     public $PWELogotypes;
@@ -37,25 +38,16 @@ class PWElementsPlugin {
     public $PWEArticleAuthor;
     // public $PWELogoFetcher;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         date_default_timezone_set('Europe/Warsaw');
 
         // Clearing wp_rocket cache
-        add_action( 'upgrader_process_complete', array( $this, 'clearWpRocketCacheOnPluginUpdate' ), 10, 2 );
+        add_action('upgrader_process_complete', array($this, 'clearWpRocketCacheOnPluginUpdate'), 10, 2);
 
         // Initialize classes
         $this->initClasses();
-
-        // // Checking the connection to the CAP database
-        // $cap_db = PWECommonFunctions::connect_database();
-        // if ($cap_db === false) {
-        //     wp_die(
-        //         '<h1>Przepraszamy</h1><p>Trwają prace techniczne. Spróbuj ponownie później.</p>',
-        //         'Strona tymczasowo niedostępna',
-        //         ['response' => 503]
-        //     );
-        // }
 
         $this->init();
 
@@ -89,7 +81,7 @@ class PWElementsPlugin {
             return array_merge((array) $defer_files, $excluded_js_files);
         }, 10, 1);
 
-        add_filter( 'the_content', array($this, 'add_date_to_post') );
+        add_filter('the_content', array($this, 'add_date_to_post'));
 
 
 
@@ -104,19 +96,21 @@ class PWElementsPlugin {
     }
 
 
-    public function get_count_views() {
-        if(is_admin() || !is_single() ) return; // nie licz adminow
+    public function get_count_views()
+    {
+        if (is_admin() || !is_single()) return; // nie licz adminow
 
         $post_id = get_queried_object_id(); // zapytanie o id biezacego posta
         if (!$post_id) return;
 
-        $cookie = 'vc_post_' .$post_id; // nazwa cookie - do blokowania pozniej ponownego naliczenia
-        if(isset($_COOKIE[$cookie])) return; // jesli juz jest to nic nie rob
+        $cookie = 'vc_post_' . $post_id; // nazwa cookie - do blokowania pozniej ponownego naliczenia
+        if (isset($_COOKIE[$cookie])) return; // jesli juz jest to nic nie rob
 
         $views = (int) get_post_meta($post_id, 'vc_views', true); // pobranie aktualnych wyswietlen i rzutownie ich na integer
         update_post_meta($post_id, 'vc_views', $views + 1); // zapisanie wyswietlen + 1
 
-        setcookie($cookie,
+        setcookie(
+            $cookie,
             '1', // ustawienie zycia ciastka
             time() + 7200, // czas wygasniecia ciastka
             COOKIEPATH ?: '/', // sciezka cookie dostepna na calej domenie
@@ -126,24 +120,27 @@ class PWElementsPlugin {
         );
     }
 
-    public function display_views($content) {
-        if(!is_singular('post') || !in_the_loop() || !is_main_query()) return $content;
+    public function display_views($content)
+    {
+        if (!is_singular('post') || !in_the_loop() || !is_main_query()) return $content;
 
         // Doklejenie paragrafu ze sformatowana liczba wg Wordpress (number_format_i18n)
         $views = (int) get_post_meta(get_the_ID(), 'vc_views', true);
-        return $content . '<p class="vc_views">'. (PWECommonFunctions::lang_pl() ? "Wyświetlenia: " : "Views: ") . number_format_i18n($views) . '</p>';
+        return $content . '<p class="vc_views">' . (PWECommonFunctions::lang_pl() ? "Wyświetlenia: " : "Views: ") . number_format_i18n($views) . '</p>';
     }
 
-    public function add_date_to_post( $content ) {
-        if ( is_single() && in_the_loop() && is_main_query() ) {
-            $data_publikacji = get_the_date( 'j F Y' );
-            $label = ( get_locale() === 'pl_PL' ) ? 'Data publikacji: ' : 'Date of publication: ';
-            $content .= '<div class="pwe-post-date" style="font-style: italic; margin-top: 10px;">'. $label . esc_html( $data_publikacji ) . '</div>';
+    public function add_date_to_post($content)
+    {
+        if (is_single() && in_the_loop() && is_main_query()) {
+            $data_publikacji = get_the_date('j F Y');
+            $label = (get_locale() === 'pl_PL') ? 'Data publikacji: ' : 'Date of publication: ';
+            $content .= '<div class="pwe-post-date" style="font-style: italic; margin-top: 10px;">' . $label . esc_html($data_publikacji) . '</div>';
         }
         return $content;
     }
 
-    public function pwe_enqueue_styles() {
+    public function pwe_enqueue_styles()
+    {
         $css_version = filemtime(plugin_dir_path(__FILE__) . 'pwe-style.css');
         wp_enqueue_style(
             'pwe-main-styles',
@@ -154,18 +151,21 @@ class PWElementsPlugin {
         );
     }
 
-    public function enqueue_slick_assets() {
+    public function enqueue_slick_assets()
+    {
         wp_enqueue_style('slick-slider-css', plugins_url('/assets/slick-slider/slick.css', __FILE__));
         wp_enqueue_style('slick-slider-theme-css', plugins_url('/assets/slick-slider/slick-theme.css', __FILE__));
         wp_enqueue_script('slick-slider-js', plugins_url('/assets/slick-slider/slick.min.js', __FILE__), array('jquery'), null, true);
     }
 
-    public function enqueue_swiper_assets() {
+    public function enqueue_swiper_assets()
+    {
         wp_enqueue_style('swiper-slider-theme-css', plugins_url('/assets/swiper-slider/swiper-bundle.min.css', __FILE__));
         wp_enqueue_script('swiper-slider-js', plugins_url('/assets/swiper-slider/swiper-bundle.min.js', __FILE__), array('jquery'), null, true);
     }
 
-    private function initClasses() {
+    private function initClasses()
+    {
 
         // Helpers functions
         require_once plugin_dir_path(__FILE__) . 'pwefunctions.php';
@@ -178,14 +178,18 @@ class PWElementsPlugin {
         $this->PWEMailing = new PWEMailing();
 
         if (is_admin()) {
+
             // Admin menu
             include_once plugin_dir_path(__FILE__) . 'includes/settings/admin-menu.php';
-            // Settings nav menu
+
+            // General settings
             include_once plugin_dir_path(__FILE__) . 'includes/settings/general-settings.php';
-            // Settings nav menu
+
+            // Menu settings
             include_once plugin_dir_path(__FILE__) . 'includes/settings/nav-menu-settings.php';
-            // Settings shortcodes
-            // include_once plugin_dir_path(__FILE__) . 'includes/settings/shortcodes-settings.php';
+
+            // Translation settings
+            include_once plugin_dir_path(__FILE__) . 'includes/settings/translation-settings.php';
         }
 
         // Variables of styles
@@ -278,22 +282,24 @@ class PWElementsPlugin {
 
         require_once plugin_dir_path(__FILE__) . 'includes/article_author/article_author.php';
         $this->PWEArticleAuthor = new PWEArticleAuthorManager();
-        }
+    }
 
     // Czyszczenie pamięci wp_rocket
-    public function clearWpRocketCacheOnPluginUpdate( $upgrader_object, $options ) {
-        $plugin = isset( $options['plugin'] ) ? $options['plugin'] : '';
+    public function clearWpRocketCacheOnPluginUpdate($upgrader_object, $options)
+    {
+        $plugin = isset($options['plugin']) ? $options['plugin'] : '';
         // Sprawdź, czy zaktualizowana wtyczka to twoja wtyczka
-        if ( 'PWElements/pwelements.php' === $plugin ) {
+        if ('PWElements/pwelements.php' === $plugin) {
             // Sprawdź, czy WP Rocket jest aktywny
-            if ( function_exists( 'rocket_clean_domain' ) ) {
+            if (function_exists('rocket_clean_domain')) {
                 // Wywołaj funkcję czyszczenia pamięci podręcznej WP Rocket
                 rocket_clean_domain();
             }
         }
     }
 
-    private function getGithubKey() {
+    private function getGithubKey()
+    {
         global $wpdb;
 
         $table_name = $wpdb->prefix . 'custom_klavio_setup';
@@ -311,10 +317,11 @@ class PWElementsPlugin {
         }
     }
 
-    private function init() {
+    private function init()
+    {
 
         // Adres autoupdate
-        include( plugin_dir_path( __FILE__ ) . 'plugin-update-checker/plugin-update-checker.php');
+        include(plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php');
 
         $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
             'https://github.com/ptak-warsaw-expo-dev/pwe-elements',
@@ -322,7 +329,7 @@ class PWElementsPlugin {
             'pwe-elements'
         );
 
-        if (self::getGithubKey()){
+        if (self::getGithubKey()) {
             $myUpdateChecker->setAuthentication(self::getGithubKey());
         }
         $myUpdateChecker->getVcsApi()->enableReleaseAssets();

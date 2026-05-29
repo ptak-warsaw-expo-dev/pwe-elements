@@ -3,24 +3,72 @@
     "stands": "DEDYKOWANA ZABUDOWA TARGOWA",
     "catalog": "Zobacz katalog stoisk targowych i przygotuj się na udział w targach w sposób jeszcze bardziej efektywny. Dzięki temu katalogowi będziesz miał dostęp do gotowych projektów stoisk, które ułatwią Ci przygotowanie się do targów i zyskasz cenną oszczędność czasu i pieniędzy. Wybierając już gotowy projekt stoiska, będziesz mógł skupić się na innych ważnych aspektach przygotowań do targów, takich jak przygotowanie oferty, zorganizowanie transportu czy zaplanowanie działań marketingowych.",
     "stands_link": "https://warsawexpo.eu/zabudowa-targowa",
-    "stands_button":"Zobacz Więcej",
-    "catalog_link":"https://warsawexpo.eu/katalog-zabudowy",
-    "catalog_button":"Katalog Zabudowy"
+    "stands_button": "Zobacz Więcej",
+    "catalog_link": "https://warsawexpo.eu/katalog-zabudowy",
+    "catalog_button": "Katalog Zabudowy"
   },
   "en_US": {
     "stands": "DESIGNED EXHIBITION STANDS",
     "catalog": "Check out the trade show booth catalog and prepare for your trade show participation in an even more efficient way. With this catalog, you will have access to ready-made booth designs that will make it easier for you to prepare for the trade show and gain valuable savings in time and money. By choosing an already ready-made booth design, you will be able to focus on other important aspects of preparing for the fair, such as preparing your offer, arranging transportation or planning your marketing activities.",
     "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
-    "stands_button":"See more",
-    "catalog_link":"https://warsawexpo.eu/en/katalog-zabudowy",
-    "catalog_button":"Exhibition Stand"
+    "stands_button": "See more",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Exhibition Stand"
   },
   "de_DE": {
     "stands": "GESTALTETE MESSE-STÄNDE",
     "catalog": "Sehen Sie sich den Messestandkatalog an und bereiten Sie sich noch effizienter auf Ihre Messeteilnahme vor. Mit diesem Katalog haben Sie Zugriff auf vorgefertigte Standdesigns, die Ihnen die Vorbereitung auf die Messe erleichtern und Ihnen wertvolle Zeit- und Geldersparnisse ermöglichen. Durch die Wahl eines bereits vorgefertigten Standdesigns können Sie sich auf andere wichtige Aspekte der Messevorbereitung konzentrieren, wie z. B. die Vorbereitung Ihres Angebots, die Organisation des Transports oder die Planung Ihrer Marketingaktivitäten.",
     "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
-    "stands_button":"Mehr sehen",
-    "catalog_link":"https://warsawexpo.eu/en/katalog-zabudowy",
-    "catalog_button":"Messestand"
+    "stands_button": "Mehr sehen",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Messestand"
+  },
+  "cs_CZ": {
+    "stands": "NÁVRHY VÝSTAVNÍCH STÁNKŮ",
+    "catalog": "Prohlédněte si katalog výstavních stánků a připravte se na účast na veletrhu ještě efektivněji. S tímto katalogem získáte přístup k hotovým návrhům stánků, které vám usnadní přípravu na veletrh a ušetří čas i peníze. Pokud si vyberete již hotový návrh stánku, budete se moci soustředit na další důležité aspekty příprav, jako je příprava nabídky, zajištění dopravy nebo plánování marketingových aktivit.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Zobrazit více",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Výstavní stánek"
+  },
+  "it_IT": {
+    "stands": "Progettazione stand espositivi",
+    "catalog": "Consulta il catalogo degli stand espositivi e preparati a partecipare alla fiera in modo ancora più efficiente. Con questo catalogo avrai accesso a design di stand già pronti che renderanno più facile la preparazione alla fiera e ti faranno risparmiare tempo e denaro. Scegliendo un design di stand già pronto, potrai concentrarti sugli altri aspetti importanti della preparazione alla fiera, come la preparazione dell'offerta, l'organizzazione del trasporto o la pianificazione delle attività di marketing.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Vedi di più",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Stand espositivo"
+  },
+  "lt_LT": {
+    "stands": "DIZAINUOTOS PARODOS STENDOS",
+    "catalog": "Peržiūrėkite parodų stendų katalogą ir pasiruoškite dalyvauti parodoje dar efektyviau. Su šiuo katalogu gausite prieigą prie paruoštų stendų dizainų, kurie palengvins pasiruošimą parodai ir padės sutaupyti laiko bei pinigų. Pasirinkę jau paruoštą stendo dizainą galėsite sutelkti dėmesį į kitus svarbius pasiruošimo aspektus, tokius kaip pasiūlymo parengimas, transporto organizavimas ar rinkodaros veiklų planavimas.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Žiūrėti daugiau",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Parodos stendas"
+  },
+  "lv_LV": {
+    "stands": "IZSTRĀDĀTI IZSTĀŽU STENDI",
+    "catalog": "Apskatiet izstāžu stendu katalogu un sagatavojieties dalībai izstādē vēl efektīvāk. Ar šo katalogu jums būs pieejami gatavi stendu dizaini, kas atvieglos sagatavošanos izstādei un sniegs vērtīgus ietaupījumus laika un naudas ziņā. Izvēloties jau gatavu stenda dizainu, jūs varēsiet koncentrēties uz citiem svarīgiem sagatavošanās aspektiem, piemēram, piedāvājuma sagatavošanu, transporta organizēšanu vai mārketinga aktivitāšu plānošanu.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Skatīt vairāk",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Izstādes stends"
+  },
+  "sk_SK": {
+    "stands": "NAVRHNUTÉ VÝSTAVNÉ STÁNKY",
+    "catalog": "Pozrite si katalóg výstavných stánkov a pripravte sa na účasť na veľtrhu ešte efektívnejšie. S týmto katalógom získate prístup k hotovým návrhom stánkov, ktoré vám uľahčia prípravu na veľtrh a ušetria čas aj peniaze. Ak si vyberiete už hotový návrh stánku, budete sa môcť sústrediť na ďalšie dôležité aspekty prípravy na veľtrh, ako je príprava ponuky, zabezpečenie dopravy alebo plánovanie marketingových aktivít.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Zobraziť viac",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Výstavný stánok"
+  },
+  "uk_UA": {
+    "stands": "РОЗРОБЛЕНІ ВИСТАВКОВІ СТЕНДИ",
+    "catalog": "Ознайомтеся з каталогом виставкових стендів і підготуйтеся до участі у виставці ще ефективніше. За цим каталогом ви отримаєте доступ до готових дизайнів стендів, які полегшать підготовку до виставки та допоможуть заощадити час і гроші. Обравши вже готовий дизайн стенду, ви зможете зосередитися на інших важливих аспектах підготовки до виставки, таких як підготовка пропозиції, організація транспорту або планування маркетингових заходів.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Дивитися більше",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Виставковий стенд"
   }
 }

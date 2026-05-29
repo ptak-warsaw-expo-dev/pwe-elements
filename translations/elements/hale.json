@@ -2,19 +2,55 @@
   "pl_PL": {
     "hall": "Hala",
     "halls": "Hale",
-    "parking":"DARMOWY PARKING",
-    "logo_link":"/doc/logo-color.webp"
+    "parking": "DARMOWY PARKING",
+    "logo_link": "/doc/logo-color.webp"
   },
   "en_US": {
     "hall": "Hall",
     "halls": "Halls",
-    "parking":"FREE PARKING",
-    "logo_link":"/doc/logo-color-en.webp"
+    "parking": "FREE PARKING",
+    "logo_link": "/doc/logo-color-en.webp"
   },
   "de_DE": {
     "hall": "Halle",
     "halls": "Hallen",
-    "parking":"KOSTENLOSE PARKPLÄTZE",
-    "logo_link":"/doc/logo-color-en.webp"
+    "parking": "KOSTENLOSE PARKPLÄTZE",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "cs_CZ": {
+    "hall": "Hala",
+    "halls": "Haly",
+    "parking": "BEZPLATNÉ PARKOVÁNÍ",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "it_IT": {
+    "hall": "Padiglione",
+    "halls": "Padiglioni",
+    "parking": "PARCHEGGIO GRATUITO",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "lt_LT": {
+    "hall": "Hala",
+    "halls": "Hales",
+    "parking": "NEMOKAMAS PARKAVIMAS",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "lv_LV": {
+    "hall": "Halle",
+    "halls": "Halles",
+    "parking": "BEZMAKSAS STĀVVIETA",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "sk_SK": {
+    "hall": "Hala",
+    "halls": "Haly",
+    "parking": "BEZPLATNÉ PARKOVANIE",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "uk_UA": {
+    "hall": "Зала",
+    "halls": "Зали",
+    "parking": "БЕЗКОШТОВНИЙ ПАРКІНГ",
+    "logo_link": "/doc/logo-color-en.webp"
   }
 }

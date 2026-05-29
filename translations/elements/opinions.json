@@ -1,17 +1,47 @@
 {
   "pl_PL": {
     "recommendations": "REKOMENDACJE",
-    "more":"więcej...",
-    "see_more":"ZOBACZ WIĘCEJ"
+    "more": "więcej...",
+    "see_more": "ZOBACZ WIĘCEJ"
   },
   "en_US": {
     "recommendations": "RECOMMENDATIONS",
-    "more":"more...",
-    "see_more":"SEE MORE"
+    "more": "more...",
+    "see_more": "SEE MORE"
   },
   "de_DE": {
     "recommendations": "EMPFEHLUNGEN",
-    "more":"mehr...",
-    "see_more":"MEHR SEHEN"
+    "more": "mehr...",
+    "see_more": "MEHR SEHEN"
+  },
+  "cs_CZ": {
+    "recommendations": "DOPORUČENÍ",
+    "more": "více...",
+    "see_more": "VIDĚT VÍCE"
+  },
+  "it_IT": {
+    "recommendations": "RACCOMANDAZIONI",
+    "more": "altro...",
+    "see_more": "VEDI DI PIÙ"
+  },
+  "lt_LT": {
+    "recommendations": "REKOMENDACIJOS",
+    "more": "daugiau...",
+    "see_more": "ŽIŪRĖTI DAUGIAU"
+  },
+  "lv_LV": {
+    "recommendations": "IESPĒJAS",
+    "more": "vairāk...",
+    "see_more": "SKATĪT VAIRĀK"
+  },
+  "sk_SK": {
+    "recommendations": "ODPORÚČANIA",
+    "more": "viac...",
+    "see_more": "ZOBRAZIŤ VIAC"
+  },
+  "uk_UA": {
+    "recommendations": "РЕКОМЕНДАЦІЇ",
+    "more": "ще...",
+    "see_more": "ПОДИВИТИСЯ БІЛЬШЕ"
   }
 }

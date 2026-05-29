@@ -1,29 +1,83 @@
 {
   "pl_PL": {
     "premier_edition": "Premierowa Edycja",
-    "edition":" edycja",
-    "warsaw":"Warszawa",
-    "warsaw_poland":"Warszawa, Polska",
-    "link_to_registration":"link do rejestracji",
-    "register":"Zarejestruj się",
+    "edition": " edycja",
+    "warsaw": "Warszawa",
+    "warsaw_poland": "Warszawa, Polska",
+    "link_to_registration": "link do rejestracji",
+    "register": "Zarejestruj się",
     "free_ticket": "Odbierz darmowy bilet"
   },
   "en_US": {
     "premier_edition": "Premier Edition",
-    "edition":" edition",
-    "warsaw":"Warsaw",
-    "warsaw_poland":"Warsaw, Poland",
-    "link_to_registration":"link to registration",
-    "register":"Register",
+    "edition": " edition",
+    "warsaw": "Warsaw",
+    "warsaw_poland": "Warsaw, Poland",
+    "link_to_registration": "link to registration",
+    "register": "Register",
     "free_ticket": "Get a free ticket"
   },
   "de_DE": {
     "premier_edition": "Premiere Edition",
-    "edition":" ausgabe",
-    "warsaw":"Warschau",
-    "warsaw_poland":"Warschau, Polen",
-    "link_to_registration":"Registrierungslink",
-    "register":"Registrieren",
+    "edition": " ausgabe",
+    "warsaw": "Warschau",
+    "warsaw_poland": "Warschau, Polen",
+    "link_to_registration": "Registrierungslink",
+    "register": "Registrieren",
     "free_ticket": "Gratis-Ticket holen"
+  },
+  "cs_CZ": {
+    "premier_edition": "Premiérové vydání",
+    "edition": " vydání",
+    "warsaw": "Varšava",
+    "warsaw_poland": "Varšava, Polsko",
+    "link_to_registration": "odkaz na registraci",
+    "register": "Registrovat se",
+    "free_ticket": "Získejte bezplatný lístek"
+  },
+  "it_IT": {
+    "premier_edition": "Prima edizione",
+    "edition": " edizione",
+    "warsaw": "Varsavia",
+    "warsaw_poland": "Varsavia, Polonia",
+    "link_to_registration": "link alla registrazione",
+    "register": "Registrati",
+    "free_ticket": "Ottieni un biglietto gratuito"
+  },
+  "lt_LT": {
+    "premier_edition": "Premjerinė leidyba",
+    "edition": " leidimas",
+    "warsaw": "Varšuva",
+    "warsaw_poland": "Varšuva, Lenkija",
+    "link_to_registration": "nuoroda į registraciją",
+    "register": "Registruokis",
+    "free_ticket": "Gauk nemokamą bilietą"
+  },
+  "lv_LV": {
+    "premier_edition": "Pirmizrādes izdevums",
+    "edition": " izdevums",
+    "warsaw": "Varšava",
+    "warsaw_poland": "Varšava, Polija",
+    "link_to_registration": "reģistrācijas saite",
+    "register": "Reģistrēties",
+    "free_ticket": "Saņemt bezmaksas biļeti"
+  },
+  "sk_SK": {
+    "premier_edition": "Premiérové vydanie",
+    "edition": " vydanie",
+    "warsaw": "Varšava",
+    "warsaw_poland": "Varšava, Poľsko",
+    "link_to_registration": "odkaz na registráciu",
+    "register": "Registrovať sa",
+    "free_ticket": "Získajte bezplatný lístok"
+  },
+  "uk_UA": {
+    "premier_edition": "Прем’єрне видання",
+    "edition": " видання",
+    "warsaw": "Варшава",
+    "warsaw_poland": "Варшава, Польща",
+    "link_to_registration": "посилання на реєстрацію",
+    "register": "Зареєструватися",
+    "free_ticket": "Отримати безкоштовний квиток"
   }
 }

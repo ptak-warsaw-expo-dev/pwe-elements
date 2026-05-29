@@ -1,0 +1,56 @@
+{
+  "pl_PL": {
+    "voucher_title": "DEDYKOWANA ZABUDOWA TARGOWA",
+    "voucher_desc": "Z naszym kuponem masz pełną swobodę wyboru opcji, które najlepiej odpowiadają Twoim potrzebom. W ofercie znajdują się niestandardowe projekty stoisk, grafika i oznakowanie, podłogi i oświetlenie, meble, sprzęt AV i wiele innych. Wszystko, co musisz zrobić, to okazać nasz kupon przy zakupie, wartość zniżki zostanie uwzględniona w fakturze. Dzięki temu zaoszczędzisz pieniądze, a także zyskasz większą elastyczność i swobodę twórczą.",
+    "voucher_button": "Zapytaj o voucher",
+    "voucher_link": "/kontakt/"
+  },
+  "en_US": {
+    "voucher_title": "RECEIVE A CONSTRUCTION VOUCHER",
+    "voucher_desc": "View the exhibition booth catalog and prepare for trade shows more efficiently. With this catalog, you will have access to ready-made booth designs that will make your preparation for trade shows easier and help you save time and money. By choosing an existing booth design, you can focus on other important aspects of trade show preparation, such as creating your offer, organizing transportation, or planning marketing activities.",
+    "voucher_button": "Ask for a voucher",
+    "voucher_link": "/en/contact/"
+  },
+  "de_DE": {
+    "voucher_title": "ERHALTEN SIE EINEN GUTSCHEIN FÜR STANDBAU",
+    "voucher_desc": "Sehen Sie sich den Katalog für Messestände an und bereiten Sie sich effizienter auf Messen vor. Mit diesem Katalog erhalten Sie Zugriff auf fertige Standdesigns, die Ihre Vorbereitung erleichtern und Ihnen Zeit sowie Geld sparen. Wenn Sie ein bestehendes Standdesign wählen, können Sie sich auf andere wichtige Aspekte der Messenvorbereitung konzentrieren, wie die Erstellung Ihres Angebots, die Organisation des Transports oder die Planung von Marketingmaßnahmen.",
+    "voucher_button": "Gutschein anfragen",
+    "voucher_link": "/de/Kontakt/"
+  },
+  "cs_CZ": {
+    "voucher_title": "ZÍSKEJTE VOUCHER NA STAVBU STÁNKU",
+    "voucher_desc": "Prohlédněte si katalog výstavních stánků a připravte se na veletrhy efektivněji. Díky tomuto katalogu získáte přístup k hotovým návrhům stánků, které vám usnadní přípravu a pomohou ušetřit čas i peníze. Pokud zvolíte hotový návrh stánku, můžete se soustředit na další důležité aspekty přípravy veletrhu, jako je tvorba nabídky, organizace dopravy nebo plánování marketingových aktivit.",
+    "voucher_button": "Požádat o voucher",
+    "voucher_link": "/cs/kontakt/"
+  },
+  "it_IT": {
+    "voucher_title": "RICEVI UN VOUCHER PER ALLESTIMENTO STAND",
+    "voucher_desc": "Consulta il catalogo degli stand espositivi e preparati alle fiere in modo più efficiente. Con questo catalogo avrai accesso a progetti di stand già pronti che faciliteranno la tua preparazione e ti aiuteranno a risparmiare tempo e denaro. Scegliendo un progetto esistente potrai concentrarti su altri aspetti importanti della preparazione alla fiera, come la creazione della tua offerta, l'organizzazione dei trasporti o la pianificazione delle attività di marketing.",
+    "voucher_button": "Richiedi un voucher",
+    "voucher_link": "/it/contatti/"
+  },
+  "lt_LT": {
+    "voucher_title": "GAUKITE KUAPONĄ STENDO ĮRENGIMUI",
+    "voucher_desc": "Peržiūrėkite parodinių stendų katalogą ir pasiruoškite parodoms efektyviau. Su šiuo katalogu gausite prieigą prie paruoštų stendų dizainų, kurie palengvins pasiruošimą ir padės sutaupyti laiko bei pinigų. Pasirinkę esamą stendo dizainą galėsite susitelkti į kitus svarbius pasiruošimo aspektus, tokius kaip pasiūlymo parengimas, transporto organizavimas ar rinkodaros veiklų planavimas.",
+    "voucher_button": "Prašyti kupono",
+    "voucher_link": "/lt/kontaktai/"
+  },
+  "lv_LV": {
+    "voucher_title": "SAŅEMIET KUPOONU STENDA IZSTRĀDĀJUMAM",
+    "voucher_desc": "Apskatiet izstāžu stenda katalogu un sagatavojieties izstādēm efektīvāk. Ar šo katalogu jums būs piekļuve gataviem stenda dizainiem, kas atvieglos sagatavošanos un palīdzēs ietaupīt laiku un naudu. Izvēloties gatavu stenda dizainu, jūs varēsiet koncentrēties uz citiem svarīgiem sagatavošanās aspektiem, piemēram, piedāvājuma izveidi, transporta organizēšanu vai mārketinga aktivitāšu plānošanu.",
+    "voucher_button": "Pieprasīt kuponu",
+    "voucher_link": "/lv/kontakti/"
+  },
+  "sk_SK": {
+    "voucher_title": "ZÍSKAJTE VOUCHER NA STAVBU STÁNKU",
+    "voucher_desc": "Prezrite si katalóg výstavných stánkov a pripravte sa na veľtrhy efektívnejšie. S týmto katalógom získate prístup k hotovým návrhom stánkov, ktoré uľahčia vašu prípravu a pomôžu ušetriť čas a peniaze. Výberom existujúceho návrhu stánku sa môžete sústrediť na ďalšie dôležité aspekty prípravy veľtrhu, ako je tvorba ponuky, organizácia dopravy alebo plánovanie marketingových aktivít.",
+    "voucher_button": "Požiadať o voucher",
+    "voucher_link": "/sk/kontakt/"
+  },
+  "uk": {
+    "voucher_title": "ОТРИМАЙТЕ ВАУЧЕР НА ВИГОТОВЛЕННЯ СТЕНДУ",
+    "voucher_desc": "Перегляньте каталог виставкових стендів і підготуйтеся до виставок ефективніше. Завдяки цьому каталогу ви отримаєте доступ до готових дизайнів стендів, які спростять підготовку та допоможуть заощадити час і гроші. Обравши готовий дизайн стенду, ви зможете зосередитися на інших важливих аспектах підготовки до виставки, таких як підготовка вашої пропозиції, організація транспорту чи планування маркетингових активностей.",
+    "voucher_button": "Отримати ваучер",
+    "voucher_link": "/uk/контакти/"
+  }
+}

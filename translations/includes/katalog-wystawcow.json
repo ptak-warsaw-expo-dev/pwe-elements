@@ -1,17 +1,47 @@
 {
   "pl_PL": {
     "catalog": "Katalog wystawców ",
-    "exhibitors":"Wystawcy ",
-    "new_exhibitors":"Nowi wystawcy na targach "
+    "exhibitors": "Wystawcy ",
+    "new_exhibitors": "Nowi wystawcy na targach "
   },
   "en_US": {
     "catalog": "Exhibitor Catalog ",
-    "exhibitors":"Exhibitors ",
-    "new_exhibitors":"New exhibitors at the fair "
+    "exhibitors": "Exhibitors ",
+    "new_exhibitors": "New exhibitors at the fair "
   },
   "de_DE": {
     "catalog": "Ausstellerverzeichnis ",
-    "exhibitors":"Aussteller ",
-    "new_exhibitors":"Neue Aussteller auf der Messe "
+    "exhibitors": "Aussteller ",
+    "new_exhibitors": "Neue Aussteller auf der Messe "
+  },
+  "cs_CZ": {
+    "catalog": "Katalog vystavovatelů ",
+    "exhibitors": "Vystavovatelé ",
+    "new_exhibitors": "Noví vystavovatelé na veletrzích "
+  },
+  "it_IT": {
+    "catalog": "Catalogo espositori ",
+    "exhibitors": "Espositori ",
+    "new_exhibitors": "Nuovi espositori alla fiera "
+  },
+  "lt_LT": {
+    "catalog": "Parodų katalogas ",
+    "exhibitors": "Ekspozitoriai ",
+    "new_exhibitors": "Nauji parodos dalyviai "
+  },
+  "lv_LV": {
+    "catalog": "Izstādes katalogs ",
+    "exhibitors": "Izstādes dalībnieki ",
+    "new_exhibitors": "Jauni izstādes dalībnieki "
+  },
+  "sk_SK": {
+    "catalog": "Katalóg vystavovateľov ",
+    "exhibitors": "Vystavovatelia ",
+    "new_exhibitors": "Noví vystavovatelia na veľtrhu "
+  },
+  "uk_UA": {
+    "catalog": "Каталог учасників ",
+    "exhibitors": "Учасники ",
+    "new_exhibitors": "Нові учасники виставки "
   }
 }

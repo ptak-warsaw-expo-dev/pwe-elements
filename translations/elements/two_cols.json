@@ -4,7 +4,7 @@
     "exhibitors": "Wystawcy",
     "patrons": "Patroni",
     "join": "DOŁĄCZ DO NAS",
-    "gallery":"GALERIA",
+    "gallery": "GALERIA",
     "galeria_link": "/galeria/",
     "registration": "/rejestracja/"
   },
@@ -13,17 +13,71 @@
     "exhibitors": "Exhibitors",
     "patrons": "Patrons",
     "join": "JOIN US",
-    "gallery":"GALLERY",
+    "gallery": "GALLERY",
     "galeria_link": "/en/gallery/",
-    "registration": "/en/registration/"
+    "registration": "/registration/"
   },
   "de_DE": {
     "patron_partners": "FÖRDERER UND PARTNER",
     "exhibitors": "Aussteller",
     "patrons": "Patrons",
     "join": "MACH MIT",
-    "gallery":"GALERIE",
+    "gallery": "GALERIE",
     "galeria_link": "/en/gallery/",
-    "registration": "/en/registration/"
+    "registration": "/Anmeldung/"
+  },
+  "cs_CZ": {
+    "patron_partners": "PATRONI A PARTNEŘI",
+    "exhibitors": "Vystavovatelé",
+    "patrons": "Patroni",
+    "join": "PŘIDEJTE SE K NÁM",
+    "gallery": "GALERIE",
+    "galeria_link": "/en/gallery/",
+    "registration": "/registrace/"
+  },
+  "it_IT": {
+    "patron_partners": "PATRONI E PARTNER",
+    "exhibitors": "Espositori",
+    "patrons": "Patroni",
+    "join": "UNISCITI A NOI",
+    "gallery": "GALLERIA",
+    "galeria_link": "/en/gallery/",
+    "registration": "/registrazione/"
+  },
+  "lt_LT": {
+    "patron_partners": "RĖMĖJAI IR PARTNERIAI",
+    "exhibitors": "Ekspozitoriai",
+    "patrons": "Rėmėjai",
+    "join": "PRISIJUNK PRIE MŪSŲ",
+    "gallery": "GALERIJA",
+    "galeria_link": "/en/gallery/",
+    "registration": "/registracija/"
+  },
+  "lv_LV": {
+    "patron_partners": "PATRONI UN PARTNERI",
+    "exhibitors": "Izstādes dalībnieki",
+    "patrons": "Patroni",
+    "join": "PIEVIENOJIES MUMS",
+    "gallery": "GALERIJAS",
+    "galeria_link": "/en/gallery/",
+    "registration": "/reģistrācija/"
+  },
+  "sk_SK": {
+    "patron_partners": "PATRÓNI A PARTNERI",
+    "exhibitors": "Výstavcovia",
+    "patrons": "Patróni",
+    "join": "PRIDAJTE SA K NÁM",
+    "gallery": "GALÉRIA",
+    "galeria_link": "/en/gallery/",
+    "registration": "/registrácia/"
+  },
+  "uk_UA": {
+    "patron_partners": "ПАТРОНИ ТА ПАРТНЕРИ",
+    "exhibitors": "Експоненти",
+    "patrons": "Патрони",
+    "join": "ПРИЄДНУЙТЕСЯ ДО НАС",
+    "gallery": "ГАЛЕРЕЯ",
+    "galeria_link": "/en/gallery/",
+    "registration": "/реєстрація/"
   }
 }

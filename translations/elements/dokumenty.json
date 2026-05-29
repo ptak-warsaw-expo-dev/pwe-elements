@@ -2,20 +2,56 @@
   "pl_PL": {
     "documents": "<h3 class=\"pl_PL\">Dokumenty do pobrania:</h3>",
     "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-pl-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin targów</a><br>",
-    "facility_regulations":"<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin obiektu</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin obiektu</a><br>",
     "building_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_zabudowy.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin zabudowy</a><br>",
-    "voucher":"<a href=\"https://warsawexpo.eu/docs/Regulamin na Voucher_2023.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin Voucherów</a>"
+    "voucher": "<a href=\"https://warsawexpo.eu/docs/Regulamin na Voucher_2023.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regulamin Voucherów</a>"
   },
   "en_US": {
     "documents": "<h3 class=\"en_US\">Documents for Download</h3>",
     "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Fair regulations</a><br>",
-    "facility_regulations":"<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Facility regulations</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Facility regulations</a><br>",
     "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Building regulations</a>"
   },
   "de_DE": {
     "documents": "<h3 class=\"en_US\">Dokumente zum Herunterladen</h3>",
     "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Faire Vorschriften</a><br>",
-    "facility_regulations":"<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Einrichtungsvorschriften</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Einrichtungsvorschriften</a><br>",
     "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Bauvorschriften</a>"
+  },
+  "cs_CZ": {
+    "documents": "<h3 class=\"en_US\">Dokumenty ke stažení</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Předpisy veletrhu</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Předpisy objektu</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Stavební předpisy</a>"
+  },
+  "it_IT": {
+    "documents": "<h3 class=\"en_US\">Documenti da scaricare</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regolamento della fiera</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regolamento dell&#39;impianto</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Regolamento edilizio</a>"
+  },
+  "lt_LT": {
+    "documents": "<h3 class=\"en_US\">Dokumentai parsisiųsti</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Parodos taisyklės</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Objekto taisyklės</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Statybos taisyklės</a>"
+  },
+  "lv_LV": {
+    "documents": "<h3 class=\"en_US\">Dokumenti lejupielādei</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Izstādes noteikumi</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Objekta noteikumi</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Būvnoteikumi</a>"
+  },
+  "sk_SK": {
+    "documents": "<h3 class=\"en_US\">Dokumenty na stiahnutie</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Predpisy veľtrhu</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Predpisy areálu</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Stavebné predpisy</a>"
+  },
+  "uk_UA": {
+    "documents": "<h3 class=\"en_US\">Документи для завантаження</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Правила виставки</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Правила об&#39;єкта</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Правила будівництва</a>"
   }
 }

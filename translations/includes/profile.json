@@ -1,7 +1,7 @@
 {
   "pl_PL": {
     "visitor_profile": "Profil odwiedzającego",
-    "exhibitor_profile":"Profil wystawcy",
+    "exhibitor_profile": "Profil wystawcy",
     "industry_scope": "Zakres branżowy",
     "more": "więcej..."
   },
@@ -16,5 +16,41 @@
     "exhibitor_profile": "Ausstellerprofil",
     "industry_scope": "Branchenspektrum",
     "more": "mehr..."
+  },
+  "cs_CZ": {
+    "visitor_profile": "Profil návštěvníka",
+    "exhibitor_profile": "Profil vystavovatele",
+    "industry_scope": "Oborový rozsah",
+    "more": "více..."
+  },
+  "it_IT": {
+    "visitor_profile": "Profilo del visitatore",
+    "exhibitor_profile": "Profilo dell'espositore",
+    "industry_scope": "Ambito del settore",
+    "more": "altro..."
+  },
+  "lt_LT": {
+    "visitor_profile": "Lankytojui skirtas profilis",
+    "exhibitor_profile": "Parodos dalyvio profilis",
+    "industry_scope": "Pramonės apimtis",
+    "more": "daugiau..."
+  },
+  "lv_LV": {
+    "visitor_profile": "Apmeklētāja profils",
+    "exhibitor_profile": "Izstādes dalībnieka profils",
+    "industry_scope": "Nozares pārklājums",
+    "more": "vairāk..."
+  },
+  "sk_SK": {
+    "visitor_profile": "Profil návštevníka",
+    "exhibitor_profile": "Profil vystavovateľa",
+    "industry_scope": "Odvetvový rozsah",
+    "more": "viac..."
+  },
+  "uk_UA": {
+    "visitor_profile": "Профіль відвідувача",
+    "exhibitor_profile": "Профіль учасника",
+    "industry_scope": "Сфера галузі",
+    "more": "ще..."
   }
 }

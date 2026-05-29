@@ -2,22 +2,64 @@
   "pl_PL": {
     "other_events": "Inne wydarzenia podczas targów",
     "visitors": "odwiedzających",
-    "exhibitors":"wystawców",
+    "exhibitors": "wystawców",
     "exhibition_space": "powierzchni<br>wystawienniczej",
     "more": "Więcej"
   },
   "en_US": {
     "other_events": "Other events during the fair",
     "visitors": "visitors",
-    "exhibitors":"exhibitors",
+    "exhibitors": "exhibitors",
     "exhibition_space": "powierzchni<br>wystawienniczej",
     "more": "More"
   },
   "de_DE": {
     "other_events": "Andere Veranstaltungen während der Messe",
     "visitors": "besucher",
-    "exhibitors":"Aussteller",
+    "exhibitors": "Aussteller",
     "exhibition_space": "Ausstellungsfläche",
     "more": "Mehr"
+  },
+  "cs_CZ": {
+    "other_events": "Další akce během veletrhu",
+    "visitors": "návštěvníků",
+    "exhibitors": "vystavovatelů",
+    "exhibition_space": "výstavní<br>plocha",
+    "more": "Více"
+  },
+  "it_IT": {
+    "other_events": "Altri eventi durante la fiera",
+    "visitors": "visitatori",
+    "exhibitors": "espositori",
+    "exhibition_space": "spazio<br>espositivo",
+    "more": "Altro"
+  },
+  "lt_LT": {
+    "other_events": "Kiti renginiai parodoje",
+    "visitors": "lankytojai",
+    "exhibitors": "ekspozitoriai",
+    "exhibition_space": "parodų<br>plotas",
+    "more": "Daugiau"
+  },
+  "lv_LV": {
+    "other_events": "Citi notikumi izstādes laikā",
+    "visitors": "apmeklētāji",
+    "exhibitors": "izstādes dalībnieki",
+    "exhibition_space": "izstāžu<br>platība",
+    "more": "Vairāk"
+  },
+  "sk_SK": {
+    "other_events": "Ďalšie podujatia počas veľtrhu",
+    "visitors": "návštevníkov",
+    "exhibitors": "vystavovateľov",
+    "exhibition_space": "výstavná<br>plocha",
+    "more": "Viac"
+  },
+  "uk_UA": {
+    "other_events": "Інші події під час виставки",
+    "visitors": "відвідувачів",
+    "exhibitors": "експонентів",
+    "exhibition_space": "виставкова<br>площа",
+    "more": "Детальніше"
   }
 }

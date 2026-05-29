@@ -1,22 +1,47 @@
 <?php
 
-class PWECommonFunctions
-{
+class PWECommonFunctions {
+
+    // <============================================================================================>
+    // Synchronized functions from plugin pwe-elements-auto-switch 1.4.0 (21.05.2026) <========================================================>
+    // <============================================================================================>
 
     /**
      * Random number
      */
-    public static function id_rnd()
-    {
+    public static function id_rnd() {
         $id_rnd = rand(10000, 99999);
         return $id_rnd;
     }
 
     /**
+     * Get locale
+     */
+    public static function lang() {
+
+        // 1. WPML
+        if (defined('ICL_LANGUAGE_CODE') && !empty(ICL_LANGUAGE_CODE)) {
+            return strtolower(ICL_LANGUAGE_CODE);
+        }
+
+        if (function_exists('apply_filters')) {
+            $wpml_lang = apply_filters('wpml_current_language', null);
+            if (!empty($wpml_lang)) {
+                return strtolower($wpml_lang);
+            }
+        }
+
+        // 2. fallback
+        $lang = get_locale(); // np. "en_US", "pl_PL", "de_DE"
+        $lang = strtolower(str_replace('-', '_', $lang));
+
+        return substr($lang, 0, 2);
+    }
+
+    /**
      * Add logs to uploads/logs/{$filename}.log
      */
-    public static function add_log($message, $filename = 'logs')
-    {
+    public static function add_log($message, $filename = 'logs') {
         $upload_dir = wp_upload_dir();
         $dir = $upload_dir['basedir'] . '/logs';
         $file = $dir . '/' . $filename . '.log';
@@ -34,8 +59,7 @@ class PWECommonFunctions
      * Collecting all logs
      */
     private static $debug_logs = [];
-    private static function debug_log($message, $type = 'log')
-    {
+    private static function debug_log($message, $type = 'log') {
 
         if (!function_exists('wp_get_current_user')) {
             return;
@@ -52,10 +76,9 @@ class PWECommonFunctions
     }
 
     /**
-     * Output console logs
+     * Output console logs 
      */
-    public static function output_db_connection_logs()
-    {
+    public static function output_db_connection_logs() {
 
         if (empty(self::$debug_logs)) {
             return;
@@ -76,8 +99,7 @@ class PWECommonFunctions
     /**
      * Returning server hosts
      */
-    private static function resolve_server_addr_fallback()
-    {
+    private static function resolve_server_addr_fallback() {
         $host = php_uname('n');
         switch ($host) {
             case 'dedyk93.cyber-folks.pl':
@@ -96,8 +118,7 @@ class PWECommonFunctions
     /**
      * List of DB servers
      */
-    private static function get_database_servers()
-    {
+    private static function get_database_servers() {
 
         // All PWE servers
         $servers = [
@@ -156,8 +177,7 @@ class PWECommonFunctions
      * Connecting to CAP database
      */
     private static $cached_db_connection = null;
-    public static function connect_database()
-    {
+    public static function connect_database() {
 
         // Return cached connection if already connected
         if (self::$cached_db_connection !== null) {
@@ -247,8 +267,7 @@ class PWECommonFunctions
     /**
      * Timeout filter for wpdb connection
      */
-    public static function set_db_timeout()
-    {
+    public static function set_db_timeout() {
         return 2;
     }
 
@@ -263,8 +282,7 @@ class PWECommonFunctions
      * - get_database_fairs_data() → fairs within ±17 days window
      */
     private static $fairs_cache = [];
-    public static function get_database_fairs_data($fair_domain = null): array
-    {
+    public static function get_database_fairs_data($fair_domain = null): array {
 
         // Detect current domain
         $current_domain = $_SERVER['HTTP_HOST'] ?? '';
@@ -376,11 +394,17 @@ class PWECommonFunctions
                 MAX(CASE WHEN fa.slug = 'konf_name' THEN fa.data END) AS konf_name,
                 MAX(CASE WHEN fa.slug = 'konf_title_pl' THEN fa.data END) AS konf_title_pl,
                 MAX(CASE WHEN fa.slug = 'konf_title_en' THEN fa.data END) AS konf_title_en,
+                MAX(CASE WHEN fa.slug = 'konf_desc_pl' THEN fa.data END) AS konf_desc_pl,
+                MAX(CASE WHEN fa.slug = 'konf_desc_en' THEN fa.data END) AS konf_desc_en,
+                MAX(CASE WHEN fa.slug = 'about_title_pl' THEN fa.data END) AS about_title_pl,
+                MAX(CASE WHEN fa.slug = 'about_title_en' THEN fa.data END) AS about_title_en,
+                MAX(CASE WHEN fa.slug = 'about_desc_pl' THEN fa.data END) AS about_desc_pl,
+                MAX(CASE WHEN fa.slug = 'about_desc_en' THEN fa.data END) AS about_desc_en,
                 MAX(CASE WHEN fa.slug = 'fair_kw_new' THEN fa.data END) AS fair_kw_new,
                 MAX(CASE WHEN fa.slug = 'fair_kw_old_arch' THEN fa.data END) AS fair_kw_old_arch,
                 MAX(CASE WHEN fa.slug = 'fair_kw_new_arch' THEN fa.data END) AS fair_kw_new_arch,
                 MAX(CASE WHEN fa.slug = 'fair_entrance' THEN fa.data END) AS fair_entrance
-
+                
             FROM fairs f
             LEFT JOIN fair_adds fa
                 ON fa.fair_id = f.id
@@ -393,7 +417,15 @@ class PWECommonFunctions
                     'fair_kw_new',
                     'fair_kw_old_arch',
                     'fair_kw_new_arch',
-                    'fair_entrance'
+                    'fair_entrance',
+                    'about_title_pl',
+                    'about_title_en',
+                    'about_desc_pl',
+                    'about_desc_en',
+                    'konf_title_pl',
+                    'konf_title_en',
+                    'konf_desc_pl',
+                    'konf_desc_en' 
                 )
         ";
 
@@ -470,8 +502,7 @@ class PWECommonFunctions
      * Get fairs additional data from CAP databases
      */
     private static $fairs_adds_cache = [];
-    public static function get_database_fairs_data_adds($fair_domain = null): array
-    {
+    public static function get_database_fairs_data_adds($fair_domain = null): array {
 
         // Resolve current domain
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
@@ -572,8 +603,7 @@ class PWECommonFunctions
      * Get translations data from CAP databases
      */
     private static $translations_cache = [];
-    public static function get_database_translations_data($fair_domain = null): array
-    {
+    public static function get_database_translations_data($fair_domain = null): array {
 
         // Cache key
         $cache_key = $fair_domain ?? 'all';
@@ -622,19 +652,38 @@ class PWECommonFunctions
             SELECT
                 f.id,
                 f.fair_domain,
+
                 f.fair_name_pl,
-                f.fair_name_en,
                 f.fair_desc_pl,
-                f.fair_desc_en,
                 f.fair_short_desc_pl,
-                f.fair_short_desc_en,
                 f.fair_full_desc_pl,
+
+                f.fair_name_en,
+                f.fair_desc_en,
+                f.fair_short_desc_en,
                 f.fair_full_desc_en,
+
+                fa.slug,
+                fa.data,
+
                 t.language,
                 t.translation
             FROM fairs f
-            LEFT JOIN translations t
-                ON t.fair_id = f.id
+            LEFT JOIN fair_adds fa
+                ON fa.fair_id = f.id
+                AND fa.slug IN (
+                    'category_pl',
+                    'category_en',
+                    'about_title_pl',
+                    'about_title_en',
+                    'about_desc_pl',
+                    'about_desc_en',
+                    'konf_title_pl',
+                    'konf_title_en',
+                    'konf_desc_pl',
+                    'konf_desc_en'
+                )
+            LEFT JOIN translations t ON t.fair_id = f.id
         ";
 
         $start_time = microtime(true);
@@ -667,21 +716,51 @@ class PWECommonFunctions
             if (!isset($results[$fair_id])) {
                 $results[$fair_id] = [
                     'fair_domain' => $row->fair_domain,
+                    
                     'fair_name_pl' => $row->fair_name_pl,
-                    'fair_name_en' => $row->fair_name_en,
                     'fair_desc_pl' => $row->fair_desc_pl,
-                    'fair_desc_en' => $row->fair_desc_en,
                     'fair_short_desc_pl' => $row->fair_short_desc_pl,
-                    'fair_short_desc_en' => $row->fair_short_desc_en,
                     'fair_full_desc_pl' => $row->fair_full_desc_pl,
+
+                    'fair_short_desc_en' => $row->fair_short_desc_en,
+                    'fair_name_en' => $row->fair_name_en,
+                    'fair_desc_en' => $row->fair_desc_en,
                     'fair_full_desc_en' => $row->fair_full_desc_en,
                 ];
             }
+
+            $adds_fields = [
+                'category_pl',
+                'about_title_pl',
+                'about_desc_pl',
+                'konf_title_pl',
+                'konf_desc_pl',
+                'category_en',
+                'about_title_en',
+                'about_desc_en',
+                'konf_title_en',
+                'konf_desc_en'
+            ];
+
+            if (!empty($row->slug) && in_array($row->slug, $adds_fields, true)) {
+                $results[$fair_id][$row->slug] = $row->data;
+            }
+
             if (!empty($row->translation)) {
                 $lang = strtolower($row->language);
                 $data = json_decode($row->translation, true);
                 if ($data) {
-                    foreach (['fair_name', 'fair_desc', 'fair_short_desc', 'fair_full_desc'] as $field) {
+                    foreach ([
+                        'fair_name',
+                        'fair_desc',
+                        'fair_short_desc',
+                        'fair_full_desc',
+                        'category',
+                        'about_title',
+                        'about_desc',
+                        'konf_title',
+                        'konf_desc'
+                    ] as $field) {
                         if (isset($data[$field])) {
                             $results[$fair_id]["{$field}_$lang"] = $data[$field];
                         }
@@ -691,6 +770,29 @@ class PWECommonFunctions
         }
 
         $results = array_values($results);
+
+        // WPML languages
+        $languages = apply_filters('wpml_active_languages', null);
+
+        $langs = [];
+
+        if (!empty($languages) && is_array($languages)) {
+
+            foreach ($languages as $lang) {
+                $code = $lang['language_code'];
+
+                // ignore base languages
+                if (in_array($code, ['pl', 'en'], true)) {
+                    continue;
+                }
+
+                $langs[] = $code;
+            }
+
+        } else {
+            // Fallback only when WPML is not available
+            $langs = ['cs','de','it','lt','lv','ru','sk','uk'];
+        }
 
         // Save transient + STATIC cache
         set_transient($transient_key, $results, 600);
@@ -704,8 +806,7 @@ class PWECommonFunctions
      * Get associates data from CAP databases
      */
     private static $associates_cache = [];
-    public static function get_database_associates_data($fair_domain = null): array
-    {
+    public static function get_database_associates_data($fair_domain = null): array {
 
         // Resolve domain
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
@@ -781,8 +882,7 @@ class PWECommonFunctions
      * Get store data from CAP databases
      */
     private static $store_cache = null;
-    public static function get_database_store_data(): array
-    {
+    public static function get_database_store_data(): array {
 
         $cache_key = 'store';
 
@@ -855,8 +955,7 @@ class PWECommonFunctions
      * Get store packages data from CAP databases
      */
     private static $store_packages_cache = null;
-    public static function get_database_store_packages_data(): array
-    {
+    public static function get_database_store_packages_data(): array {
 
         $cache_key = 'store_packages';
 
@@ -924,8 +1023,7 @@ class PWECommonFunctions
      * Get meta data from CAP databases
      */
     private static $meta_cache = [];
-    public static function get_database_meta_data($data_id = null, $domain = null)
-    {
+    public static function get_database_meta_data($data_id = null, $domain = null) {
 
         $current_domain = $_SERVER['HTTP_HOST'] ?? '';
         $current_domain = preg_replace('/:\d+$/', '', $current_domain);
@@ -1013,8 +1111,7 @@ class PWECommonFunctions
      * Get group contacts data from CAP databases
      */
     private static $groups_contacts_cache = null;
-    public static function get_database_groups_contacts_data(): array
-    {
+    public static function get_database_groups_contacts_data(): array {
 
         $cache_key = 'groups_contacts';
 
@@ -1074,8 +1171,7 @@ class PWECommonFunctions
      * Get group callcenter data from CAP databases
      */
     private static $groups_callcenter_cache = null;
-    public static function get_database_groups_callcenter_data(): array
-    {
+    public static function get_database_groups_callcenter_data(): array {
 
         $cache_key = 'groups_callcenter';
 
@@ -1134,8 +1230,7 @@ class PWECommonFunctions
      * Get groups data from CAP databases
      */
     private static $groups_cache = null;
-    public static function get_database_groups_data(): array
-    {
+    public static function get_database_groups_data(): array {
 
         $cache_key = 'groups';
 
@@ -1194,8 +1289,7 @@ class PWECommonFunctions
      * Get week data from CAP databases
      */
     private static $week_data_cache = [];
-    public static function get_database_week_data($fair_domain = null): array
-    {
+    public static function get_database_week_data($fair_domain = null): array {
 
         $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $current_domain;
@@ -1262,8 +1356,7 @@ class PWECommonFunctions
      * Get full week data from CAP databases
      */
     private static $week_all_cache = [];
-    public static function get_database_week_all($fair_domain = null)
-    {
+    public static function get_database_week_all($fair_domain = null) {
 
         $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $current_domain;
@@ -1331,8 +1424,7 @@ class PWECommonFunctions
      * Get all week domains from CAP databases
      */
     private static $all_week_domains_cache = null;
-    public static function get_all_week_domains(): array
-    {
+    public static function get_all_week_domains(): array {
 
         $cache_key = 'all_week_domains';
 
@@ -1399,8 +1491,7 @@ class PWECommonFunctions
      * Get logotypes data from CAP databases
      */
     private static $logotypes_cache = [];
-    public static function get_database_logotypes_data($fair_domain = null): array
-    {
+    public static function get_database_logotypes_data($fair_domain = null): array {
 
         $current_domain = $fair_domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $current_domain;
@@ -1495,8 +1586,7 @@ class PWECommonFunctions
      * Get conferences data from CAP databases
      */
     private static $conferences_cache = [];
-    public static function get_database_conferences_data($domain = null): array
-    {
+    public static function get_database_conferences_data($domain = null): array {
 
         $domain = $domain ?? $_SERVER['HTTP_HOST'];
         $cache_key = $domain;
@@ -1530,30 +1620,13 @@ class PWECommonFunctions
             return [];
         }
 
-        $sql = "
-            SELECT
-                c.*,
-                MAX(CASE WHEN ca.slug = 'main_pic_pl' THEN ca.data END) AS main_pic_pl,
-                MAX(CASE WHEN ca.slug = 'main_pic_en' THEN ca.data END) AS main_pic_en
-            FROM conferences c
-            LEFT JOIN conf_adds ca
-                ON ca.conf_id = c.id
-                AND ca.slug IN ('main_pic_pl', 'main_pic_en')
-            WHERE c.conf_site_link LIKE %s
-            AND c.deleted_at IS NULL
-            GROUP BY c.id;
-        ";
-
         $start_time = microtime(true);
-
         $results = $cap_db->get_results(
             $cap_db->prepare(
-                $sql,
+                "SELECT * FROM conferences WHERE conf_site_link LIKE %s AND deleted_at IS NULL",
                 '%' . $domain . '%'
             )
         );
-
-        $time = round((microtime(true) - $start_time) * 1000, 2);
 
         if ($cap_db->last_error) {
             self::debug_log('get_database_conferences_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
@@ -1583,6 +1656,7 @@ class PWECommonFunctions
             }
         }
 
+        $time = round((microtime(true) - $start_time) * 1000, 2);
         set_transient($transient_key, $results, 600);
         self::$conferences_cache[$cache_key] = $results;
         self::debug_log('get_database_conferences_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
@@ -1594,8 +1668,7 @@ class PWECommonFunctions
      * Get fairs profiles data from CAP databases
      */
     private static $fairs_profiles_cache = [];
-    public static function get_database_fairs_data_profiles($fair_domain = null): array
-    {
+    public static function get_database_fairs_data_profiles($fair_domain = null): array {
 
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
         $cache_key = $fair_domain;
@@ -1650,8 +1723,7 @@ class PWECommonFunctions
      * Get premieres data from CAP databases
      */
     private static $premieres_cache = [];
-    public static function get_database_premieres_data($fair_domain = null): array
-    {
+    public static function get_database_premieres_data($fair_domain = null): array {
 
         $cache_key = $fair_domain ?? 'all';
 
@@ -1714,8 +1786,7 @@ class PWECommonFunctions
      * Get fairs opinions data from CAP databases
      */
     private static $fairs_opinions_cache = [];
-    public static function get_database_fairs_data_opinions($fair_domain = null): array
-    {
+    public static function get_database_fairs_data_opinions($fair_domain = null): array {
 
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
         $cache_key = $fair_domain;
@@ -1787,10 +1858,10 @@ class PWECommonFunctions
      * Get fairs speakers data from CAP databases
      */
     private static $fairs_speakers_cache = [];
-    public static function get_database_fairs_data_speakers($fair_domain = null): array
-    {
+    public static function get_database_fairs_data_speakers($fair_domain = null): array {
 
         $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
+        // $fair_domain = 'dentalmedicashow.pl';
         $cache_key = $fair_domain;
 
         // Check runtime cache first
@@ -1823,21 +1894,29 @@ class PWECommonFunctions
 
         // SQL query
         $sql = "
-            SELECT f.id, f.fair_domain, fp.data, fp.slug, fp.order
+            SELECT f.id, fp.domains, fp.slug, fp.conf_slug, fp.data, fp.order
             FROM fairs f
-            LEFT JOIN prelegents fp ON fp.fair_id = f.id
+            LEFT JOIN prelegents fp ON FIND_IN_SET(f.id, fp.fair_id)
         ";
+
         $params = [];
-        if ($fair_domain !== null) {
-            $sql .= " WHERE f.fair_domain = %s";
+
+        if (!empty($fair_domain)) {
+            $sql .= " 
+                WHERE f.fair_domain = %s
+                AND FIND_IN_SET(%s, fp.domains)
+            ";
+            $params[] = $fair_domain;
             $params[] = $fair_domain;
         }
+
         $sql .= " ORDER BY fp.order ASC";
 
         $start_time = microtime(true);
 
         // Execute query
         $results = !empty($params) ? $cap_db->get_results($cap_db->prepare($sql, $params)) : $cap_db->get_results($sql);
+
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         // Handle SQL errors
@@ -1856,11 +1935,156 @@ class PWECommonFunctions
         return $results;
     }
 
+    /**
+     * Get elements data from CAP databases
+     */
+    private static $elements_cache = null;
+    public static function get_database_elements_data(): array {
+
+        $cache_key = 'elements';
+
+        // STATIC cache
+        if (self::$elements_cache !== null) {
+            self::debug_log('get_database_elements_data: data from STATIC memory');
+            return self::$elements_cache;
+        }
+
+        // Transient
+        $transient_key = 'pwe_elements_data';
+        $cached = get_transient($transient_key);
+
+        // Log transient timeout
+        $timeout = get_option('_transient_timeout_' . $transient_key);
+        if ($timeout !== false) {
+            $time_left = $timeout - time();
+            $time_left_str = gmdate('H:i:s', max($time_left, 0));
+        } else {
+            $time_left_str = 'unknown';
+        }
+
+        if ($cached !== false) {
+            self::debug_log('get_database_elements_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
+            self::$elements_cache = $cached;
+            return $cached;
+        }
+
+        // Connect DB
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            if ($cached !== false) {
+                set_transient($transient_key, $cached, 600);
+                self::debug_log('get_database_elements_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
+                self::$elements_cache = $cached;
+                return $cached;
+            }
+            self::debug_log('get_database_elements_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
+            self::$elements_cache = [];
+            return [];
+        }
+
+        // SQL query
+        $sql = "SELECT * FROM pwelements";
+        $start_time = microtime(true);
+        $results = $cap_db->get_results($sql);
+        $time = round((microtime(true) - $start_time) * 1000, 2);
+
+        // SQL error
+        if ($cap_db->last_error) {
+            self::debug_log('get_database_elements_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
+            if ($cached !== false) {
+                set_transient($transient_key, $cached, 600);
+                self::$elements_cache = $cached;
+                return $cached;
+            }
+            self::$elements_cache = [];
+            return [];
+        }
+
+        // Save transient + STATIC cache
+        set_transient($transient_key, $results, 600);
+        self::$elements_cache = $results;
+        self::debug_log('get_database_elements_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
+
+        return $results;
+    }
+
+    /**
+     * Get elements order data from CAP databases
+     */
+    private static $elements_order_cache = null;
+    public static function get_database_elements_order_data(): array {
+
+        $cache_key = 'elements_order';
+
+        // STATIC cache
+        if (self::$elements_order_cache !== null) {
+            self::debug_log('get_database_elements_order_data: data from STATIC memory');
+            return self::$elements_order_cache;
+        }
+
+        // Transient
+        $transient_key = 'pwe_elements_order_data';
+        $cached = get_transient($transient_key);
+
+        // Log transient timeout
+        $timeout = get_option('_transient_timeout_' . $transient_key);
+        if ($timeout !== false) {
+            $time_left = $timeout - time();
+            $time_left_str = gmdate('H:i:s', max($time_left, 0));
+        } else {
+            $time_left_str = 'unknown';
+        }
+
+        if ($cached !== false) {
+            self::debug_log('get_database_elements_order_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
+            self::$elements_order_cache = $cached;
+            return $cached;
+        }
+
+        // Connect DB
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            if ($cached !== false) {
+                set_transient($transient_key, $cached, 600);
+                self::debug_log('get_database_elements_order_data: NO DB connection → using last TRANSIENT and extending 10min → key=' . $cache_key, 'error');
+                self::$elements_order_cache = $cached;
+                return $cached;
+            }
+            self::debug_log('get_database_elements_order_data: NO DB connection and no TRANSIENT → returning empty → key=' . $cache_key, 'error');
+            self::$elements_order_cache = [];
+            return [];
+        }
+
+        // SQL query
+        $sql = "SELECT * FROM pwe_order";
+        $start_time = microtime(true);
+        $results = $cap_db->get_results($sql);
+        $time = round((microtime(true) - $start_time) * 1000, 2);
+
+        // SQL error
+        if ($cap_db->last_error) {
+            self::debug_log('get_database_elements_order_data: SQL error: ' . addslashes($cap_db->last_error), 'error');
+            if ($cached !== false) {
+                set_transient($transient_key, $cached, 600);
+                self::$elements_order_cache = $cached;
+                return $cached;
+            }
+            self::$elements_order_cache = [];
+            return [];
+        }
+
+        // Save transient + STATIC cache
+        set_transient($transient_key, $results, 600);
+        self::$elements_order_cache = $results;
+        self::debug_log('get_database_elements_order_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
+
+        return $results;
+    }
+
     // DATABASE CONNECTIONS END <==================================================================================>
 
 
-    private static function remove_logo_duplicates(array $logos): array
-    {
+    private static function remove_logo_duplicates(array $logos): array {
         $unique = [];
         $seen = [];
 
@@ -1891,8 +2115,7 @@ class PWECommonFunctions
     /**
      * Colors (accent or main2)
      */
-    public static function pwe_color($color)
-    {
+    public static function pwe_color($color) {
         $fair_colors = self::findPalletColorsStatic();
         $result_color = null;
 
@@ -1914,8 +2137,10 @@ class PWECommonFunctions
         return $result_color;
     }
 
-    public static function generate_fair_data($fair)
-    {
+    /**
+     * Generate data for the fair
+     */
+    public static function generate_fair_data($fair) {
         // Decode JSON estimations
         $estimations = !empty($fair->estimations) ? json_decode($fair->estimations, true) : [];
 
@@ -1953,12 +2178,18 @@ class PWECommonFunctions
             "catalog_archive" => $fair->fair_kw_old_arch ?? "",
             "catalog_id_archive" => $fair->fair_kw_new_arch ?? "",
             "shop" => $fair->fair_shop ?? "",
+            "group" => $fair->fair_group ?? "",
             "category_pl" => $fair->category_pl ?? "",
             "category_en" => $fair->category_en ?? "",
             "conference_name" => $fair->konf_name ?? "",
             "conference_title_pl" => $fair->konf_title_pl ?? "",
             "conference_title_en" => $fair->konf_title_en ?? "",
-            "group" => $fair->fair_group ?? "",
+            'conference_desc_pl' => $fair->konf_desc_pl ?? '',
+            'conference_desc_en' => $fair->konf_desc_en ?? '',
+            'about_title_pl' => $fair->about_title_pl ?? '',
+            'about_title_en' => $fair->about_title_en ?? '',
+            'about_desc_pl' => $fair->about_desc_pl ?? '',
+            'about_desc_en' => $fair->about_desc_en ?? ''
         ];
 
         // Add estimations to data
@@ -1971,46 +2202,48 @@ class PWECommonFunctions
         return $data;
     }
 
-    public static function generate_fair_translation_data($fair)
-    {
-        return [
-            "domain" => $fair["fair_domain"],
-            "name_cs" => $fair["fair_name_cs"] ?? "",
-            "desc_cs" => $fair["fair_desc_cs"] ?? "",
-            "short_desc_cs" => $fair["fair_short_desc_cs"] ?? "",
-            "full_desc_cs" => $fair["fair_full_desc_cs"] ?? "",
-            "name_de" => $fair["fair_name_de"] ?? "",
-            "desc_de" => $fair["fair_desc_de"] ?? "",
-            "short_desc_de" => $fair["fair_short_desc_de"] ?? "",
-            "full_desc_de" => $fair["fair_full_desc_de"] ?? "",
-            "name_lt" => $fair["fair_name_lt"] ?? "",
-            "desc_lt" => $fair["fair_desc_lt"] ?? "",
-            "short_desc_lt" => $fair["fair_short_desc_lt"] ?? "",
-            "full_desc_lt" => $fair["fair_full_desc_lt"] ?? "",
-            "name_lv" => $fair["fair_name_lv"] ?? "",
-            "desc_lv" => $fair["fair_desc_lv"] ?? "",
-            "short_desc_lv" => $fair["fair_short_desc_lv"] ?? "",
-            "full_desc_lv" => $fair["fair_full_desc_lv"] ?? "",
-            "name_ru" => $fair["fair_name_ru"] ?? "",
-            "desc_ru" => $fair["fair_desc_ru"] ?? "",
-            "short_desc_ru" => $fair["fair_short_desc_ru"] ?? "",
-            "full_desc_ru" => $fair["fair_full_desc_ru"] ?? "",
-            "name_sk" => $fair["fair_name_sk"] ?? "",
-            "desc_sk" => $fair["fair_desc_sk"] ?? "",
-            "short_desc_sk" => $fair["fair_short_desc_sk"] ?? "",
-            "full_desc_sk" => $fair["fair_full_desc_sk"] ?? "",
-            "name_uk" => $fair["fair_name_uk"] ?? "",
-            "desc_uk" => $fair["fair_desc_uk"] ?? "",
-            "short_desc_uk" => $fair["fair_short_desc_uk"] ?? "",
-            "full_desc_uk" => $fair["fair_full_desc_uk"] ?? ""
+    /**
+     * Generate translations data for the fair
+     */
+    public static function generate_fair_translation_data($fair) {
+        $languages = apply_filters('wpml_active_languages', null);
+
+        // fallback if WPML doesn't work or doesn't exist
+        if (empty($languages) || !is_array($languages)) {
+            $fallback_codes = ['cs','de','it','lt','lv','ru','sk','uk'];
+
+            $languages = [];
+
+            foreach ($fallback_codes as $code) {
+                $languages[] = ['language_code' => $code];
+            }
+        }
+
+        $data = [
+            "domain" => $fair["fair_domain"] ?? "",
         ];
+
+        foreach ($languages as $lang) {
+            $code = $lang['language_code'];
+
+            $data["name_{$code}"] = $fair["fair_name_{$code}"] ?? "";
+            $data["desc_{$code}"] = $fair["fair_desc_{$code}"] ?? "";
+            $data["short_desc_{$code}"] = $fair["fair_short_desc_{$code}"] ?? "";
+            $data["full_desc_{$code}"] = $fair["fair_full_desc_{$code}"] ?? "";
+            $data["about_title_{$code}"] = $fair["about_title_{$code}"] ?? "";
+            $data["about_desc_{$code}"] = $fair["about_desc_{$code}"] ?? "";  
+            $data["conference_title_{$code}"] = $fair["konf_title_{$code}"] ?? "";
+            $data["conference_desc_{$code}"] = $fair["konf_desc_{$code}"] ?? ""; 
+            $data["category_{$code}"] = $fair["category_{$code}"] ?? ""; 
+        }
+
+        return $data;
     }
 
     /**
      * JSON all trade fairs
      */
-    public static function json_fairs()
-    {
+    public static function json_fairs() {
         static $runtime_cache = null;
 
         if ($runtime_cache !== null) {
@@ -2112,8 +2345,7 @@ class PWECommonFunctions
     /**
      * Function to transform the date
      */
-    public static function transform_dates($start_date, $end_date, $include_hours = true)
-    {
+    public static function transform_dates($start_date, $end_date, $include_hours = true) {
         $format = $include_hours ? "Y/m/d H:i" : "Y/m/d";
 
         // Convert date strings to DateTime objects
@@ -2148,8 +2380,7 @@ class PWECommonFunctions
      * Decoding URL
      * Remowe wpautop
      */
-    public static function decode_clean_content($encoded_content)
-    {
+    public static function decode_clean_content($encoded_content) {
         $decoded_content = wpb_js_remove_wpautop(urldecode(base64_decode($encoded_content)), true);
         return $decoded_content;
     }
@@ -2158,8 +2389,7 @@ class PWECommonFunctions
      * Decodes URL-encoded string
      * Decodes a JSON string
      */
-    public static function json_decode($encoded_variable)
-    {
+    public static function json_decode($encoded_variable) {
         $encoded_variable_urldecode = urldecode($encoded_variable);
         $encoded_variable_json = json_decode($encoded_variable_urldecode, true);
         return $encoded_variable_json;
@@ -2168,8 +2398,7 @@ class PWECommonFunctions
     /**
      * Adding colors
      */
-    public static function findColor($primary, $secondary, $default = '')
-    {
+    public static function findColor($primary, $secondary, $default = '') {
         if ($primary != '') {
             return $primary;
         } elseif ($secondary != '') {
@@ -2184,8 +2413,7 @@ class PWECommonFunctions
      *
      * @return array
      */
-    public static function findPalletColorsStatic()
-    {
+    public static function findPalletColorsStatic() {
         $uncode_options = get_option('uncode');
         $accent_uncode_color = $uncode_options["_uncode_accent_color"];
         $custom_element_colors = array();
@@ -2215,8 +2443,7 @@ class PWECommonFunctions
      *
      * @return array
      */
-    public function findPalletColors()
-    {
+    public function findPalletColors() {
         $uncode_options = get_option('uncode');
         $accent_uncode_color = $uncode_options["_uncode_accent_color"];
         $custom_element_colors = array();
@@ -2246,8 +2473,7 @@ class PWECommonFunctions
      *
      * @return bool
      */
-    public static function lang_pl()
-    {
+    public static function lang_pl() {
         return get_locale() == 'pl_PL';
     }
 
@@ -2258,14 +2484,13 @@ class PWECommonFunctions
      * @param string $pl text in English.
      * @return string
      */
-    public static function languageChecker($pl, $en = '', $de = '')
-    {
+    public static function languageChecker($pl, $en = '', $de = '') {
         if (get_locale() == 'pl_PL') {
             return $pl;
-        } else if (get_locale() == 'en_US') {
-            return $en;
-        } else {
+        } else if (get_locale() == 'de_DR') {
             return $de;
+        } else {
+            return $en;
         }
     }
 
@@ -2274,8 +2499,7 @@ class PWECommonFunctions
      *
      * @return array
      */
-    public static function adjustBrightness($hex, $steps)
-    {
+    public static function adjustBrightness($hex, $steps) {
         // Convert hex to RGB
         $hex = str_replace('#', '', $hex);
         $r = hexdec(substr($hex, 0, 2));
@@ -2298,8 +2522,7 @@ class PWECommonFunctions
      *
      * @return array
      */
-    public function findFormsGF($mode = '')
-    {
+    public function findFormsGF($mode = '') {
         $pwe_forms_array = array();
         if (is_admin()) {
             if (method_exists('GFAPI', 'get_forms')) {
@@ -2324,8 +2547,7 @@ class PWECommonFunctions
      * @param string $form_name
      * @return string
      */
-    public static function findFormsID($form_name)
-    {
+    public static function findFormsID($form_name) {
         $pwe_form_id = '';
         if (method_exists('GFAPI', 'get_forms')) {
             $pwe_forms = GFAPI::get_forms();
@@ -2344,8 +2566,7 @@ class PWECommonFunctions
      *
      * @return bool
      */
-    public static function checkForMobile()
-    {
+    public static function checkForMobile() {
         return (preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT']));
     }
 
@@ -2355,8 +2576,7 @@ class PWECommonFunctions
      * @param bool $logo_color schould logo be in color.
      * @return string
      */
-    public static function findBestLogo($logo_color = false)
-    {
+    public static function findBestLogo($logo_color = false) {
         $filePaths = array(
             '/doc/logo-color-en.webp',
             '/doc/logo-color-en.png',
@@ -2406,8 +2626,7 @@ class PWECommonFunctions
     /**
      * Finding URL of all images based on katalog
      */
-    public static function findAllImages($firstPath, $image_count = false, $secondPath = '/doc/galeria')
-    {
+    public static function findAllImages($firstPath, $image_count = false, $secondPath = '/doc/galeria') {
         $firstPath = $_SERVER['DOCUMENT_ROOT'] . $firstPath;
 
         if (is_dir($firstPath) && !empty(glob($firstPath . '/*.{jpeg,jpg,png,webp,svg,JPEG,JPG,PNG,WEBP}', GLOB_BRACE))) {
@@ -2435,8 +2654,7 @@ class PWECommonFunctions
      * @param bool $logo_color schould logo be in color.
      * @return string
      */
-    public static function findBestFile($file_path)
-    {
+    public static function findBestFile($file_path) {
         $filePaths = array(
             '.webp',
             '.jpg',
@@ -2455,8 +2673,7 @@ class PWECommonFunctions
      *
      * @return bool
      */
-    public static function isTradeDateExist()
-    {
+    public static function isTradeDateExist() {
 
         $seasons = ["nowa data", "wiosna", "lato", "jesień", "zima", "new date", "spring", "summer", "autumn", "winter"];
         $trade_date_lower = strtolower(do_shortcode('[trade_fair_date]'));
@@ -2473,14 +2690,12 @@ class PWECommonFunctions
     /**
      * Adding element input[type="range"]
      */
-    public static function inputRange()
-    {
+    public static function inputRange() {
         if (function_exists('vc_add_shortcode_param')) {
             vc_add_shortcode_param('input_range', array('PWEHeader', 'input_range_field_html'));
         }
     }
-    public static function input_range_field_html($settings, $value)
-    {
+    public static function input_range_field_html($settings, $value) {
         $id = uniqid('range_');
         return '<div class="pwe-input-range">'
             . '<input type="range" '
@@ -2496,204 +2711,6 @@ class PWECommonFunctions
             . '<span id="value_' . esc_attr($id) . '">' . esc_attr($value) . '</span>'
             . '</div>';
     }
-
-    /**
-     * Adding custom checkbox element
-     */
-    function pweCheckbox()
-    {
-        if (function_exists('vc_add_shortcode_param')) {
-            vc_add_shortcode_param('pwe_checkbox', array('PWEHeader', 'pwe_checkbox_html'));
-        }
-    }
-    /**
-     * Generate HTML for custom checkbox
-     */
-    public static function pwe_checkbox_html($settings, $value)
-    {
-        $checked = $value === 'true' ? 'checked' : '';
-        $id = uniqid('pwe_checkbox_');
-
-        return '<div class="pwe-checkbox">'
-            . '<input type="checkbox" '
-            . 'id="' . esc_attr($id) . '" '
-            . 'name="' . esc_attr($settings['param_name']) . '" '
-            . 'class="wpb_vc_param_value ' . esc_attr($settings['param_name']) . ' ' . esc_attr($settings['type']) . '_field" '
-            . 'value="' . $value . '" '
-            . $checked
-            . ' onclick="this.value = this.checked ? \'true\' : \'\';" />'
-            . '</div>';
-    }
-
-    // TRANSLATIONS START <==================================================================================>
-    private static $translation_context = [
-        'element_slug' => null,
-        'group' => null,
-        'element_type' => 'main'
-    ];
-
-    // Setting translation context for multi_translation function
-    public static function set_translation_context($element_slug, $group, $element_type = 'main')
-    {
-        self::$translation_context['element_slug'] = $element_slug;
-        self::$translation_context['group'] = $group;
-        self::$translation_context['element_type'] = $element_type;
-    }
-
-    // Get translations from JSONs
-    private static $translation_cache = [];
-    public static function multi_translation($key)
-    {
-        $ctx = self::$translation_context;
-
-        if (empty($ctx['element_slug']) || empty($ctx['group'])) {
-            return $key;
-        }
-
-        $locale = get_locale();
-
-        // Cache key for this file
-        $cache_key = $ctx['element_slug'] . '.json';
-
-        // If not loaded yet, load it
-        if (!isset(self::$translation_cache[$cache_key])) {
-
-            $translations_file = plugin_dir_path(__DIR__) .
-                'translations/elements/' . $cache_key;
-
-            var_dump($translations_file);
-
-            if (file_exists($translations_file)) {
-                $json = file_get_contents($translations_file);
-                $data = json_decode($json, true);
-                self::$translation_cache[$cache_key] = is_array($data) ? $data : [];
-            } else {
-                // If the file is missing, the cache is empty
-                self::$translation_cache[$cache_key] = [];
-            }
-        }
-
-        // Download from the cache
-        $translations_data = self::$translation_cache[$cache_key];
-
-        // Choosing the right map
-        $map = $translations_data[$locale]
-            ?? $translations_data['en_US']
-            ?? [];
-
-        return $map[$key] ?? $key;
-    }
-
-    // private static $redirect_cache = [];
-    // public static function get_fair_redirects() {
-    //     $current_domain = $_SERVER['HTTP_HOST'] ?? '';
-    //     $current_domain = preg_replace('/:\d+$/', '', $current_domain);
-
-
-    //             // Cache key
-    //     if ($current_domain === 'warsawexpo.eu' || $fair_domain === 'all') {
-    //         $cache_key = 'all_fairs';
-    //     } elseif ($fair_domain !== null) {
-    //         $cache_key = $fair_domain;
-    //     } else {
-    //         $cache_key = 'month';
-    //     }
-
-    //     // Static cache
-    //     if (isset(self::$redirect_cache[$cache_key])) {
-    //         self::debug_log('get_database_fairs_data: data from STATIC → key=' . $cache_key);
-    //         return self::$redirect_cache[$cache_key];
-    //     }
-
-    //     // Transient cache
-    //     $transient_key = 'pwe_fairs_' . md5($cache_key);
-    //     $cached = get_transient($transient_key);
-
-    //     // Log timeout if transient exists
-    //     $timeout = get_option('_transient_timeout_' . $transient_key);
-    //     if ($timeout !== false) {
-    //         $time_left = $timeout - time();
-    //         $time_left_str = gmdate('H:i:s', max($time_left, 0));
-    //     } else {
-    //         $time_left_str = 'unknown';
-    //     }
-
-    //     if ($cached !== false) {
-    //         self::debug_log('get_database_fairs_data: data from TRANSIENT → key='. $cache_key .', expires in '. $time_left_str);
-    //     }
-
-    //     // Connect database
-    //     $cap_db = self::connect_database();
-
-    //     if (!$cap_db) {
-    //         // DB not available → use last transient if exists, else empty
-    //         if ($cached !== false) {
-
-    //             // Extend transient by 10 minutes in emergency mode
-    //             set_transient($transient_key, $cached, 600);
-
-    //             self::debug_log('get_database_fairs_data: NO DB connection → using last TRANSIENT and extending 10min → key='. $cache_key, 'error');
-
-    //             self::$fairs_cache[$cache_key] = $cached;
-    //             return $cached;
-    //         }
-
-    //         // No transient available → return empty
-    //         self::debug_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key, 'error');
-    //         error_log('get_database_fairs_data: NO DB connection and no TRANSIENT → returning empty → key='. $cache_key);
-
-    //         // CRON-safe: no wp_die()
-    //         if (defined('DOING_CRON') && DOING_CRON) {
-    //             return [];
-    //         }
-
-    //         // Frontend fallback → user-friendly 503
-    //         wp_die(
-    //             '<h1>Przepraszamy</h1><p>Trwają prace techniczne. Spróbuj ponownie później.</p>',
-    //             'Strona tymczasowo niedostępna',
-    //             ['response' => 503]
-    //         );
-
-    //         return [];
-    //     }
-
-    //     $query = "
-    //         SELECT r.address_from, r.address_to, r.options
-    //         FROM redirects AS r
-    //         INNER JOIN fairs AS f ON r.fair_id = f.id
-    //         WHERE f.fair_domain = %s
-    //     ";
-
-    //     $results = $cap_db->get_results($cap_db->prepare($query, $current_domain));
-
-    //     if ($cap_db->last_error) {
-    //         return [];
-    //     }
-
-    //     // SQL error
-    //     if ($cap_db->last_error) {
-    //         self::debug_log('get_database_fairs_data: SQL error → '. addslashes($cap_db->last_error), 'error');
-    //         // Use last transient if available
-    //         if ($cached !== false) {
-    //             set_transient($transient_key, $cached, 600);
-    //             self::$fairs_cache[$cache_key] = $cached;
-    //             return $cached;
-    //         }
-    //         self::$fairs_cache[$cache_key] = [];
-    //         return [];
-    //     }
-
-    //     // Cache results for 10 minutes
-    //     set_transient($transient_key, $results, 600);
-
-    //     self::$fairs_cache[$cache_key] = $results;
-    //     self::debug_log('get_database_fairs_data: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key .', host='. $cap_db->dbhost .' ['. gethostname() .'] and saved to TRANSIENT.');
-
-    //     return $results;
-    // }
-
-
-
 }
 
 add_action('wp_footer', ['PWECommonFunctions', 'output_db_connection_logs']);

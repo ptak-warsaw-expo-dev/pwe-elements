@@ -2,19 +2,109 @@
   "pl_PL": {
     "promote_yourself": "Hala",
     "promote_yourself_html": "promote-yourself-pl.html",
-    "parking":"DARMOWY PARKING",
-    "logo_link":"/doc/logo-color.webp"
+    "parking": "DARMOWY PARKING",
+    "logo_link": "/doc/logo-color.webp",
+    "store_button": "Poznaj ofertę",
+    "store_button_title": "[trade_fair_name] - sklep",
+    "download": "Pobierz",
+    "download_banners": "Pobierz banery",
+    "download_logo": "Pobierz logo",
+    "help_text": "Gdybyś potrzebował więcej napisz do nas, a my postaramy się pomóc! Tylko działając razem jesteśmy w stanie osiągnąć sukces."
   },
   "en_US": {
     "promote_yourself": "Hall",
     "promote_yourself_html": "promote-yourself-en.html",
-    "parking":"FREE PARKING",
-    "logo_link":"/doc/logo-color-en.webp"
+    "parking": "FREE PARKING",
+    "logo_link": "/doc/logo-color-en.webp",
+    "store_button": "Discover the offer",
+    "store_button_title": "[trade_fair_name] - shop",
+    "download": "Download",
+    "download_banners": "Download banners",
+    "download_logo": "Download logo",
+    "help_text": "If you need more, write to us and we will do our best to help! Only by working together can we achieve success."
   },
   "de_DE": {
     "promote_yourself": "Halle",
     "promote_yourself_html": "promote-yourself-de.html",
-    "parking":"KOSTENLOSE PARKPLÄTZE",
-    "logo_link":"/doc/logo-color-en.webp"
+    "parking": "KOSTENLOSE PARKPLÄTZE",
+    "logo_link": "/doc/logo-color-de.webp",
+    "store_button": "Entdecken Sie das Angebot",
+    "store_button_title": "[trade_fair_name] - Shop",
+    "download": "Herunterladen",
+    "download_banners": "Banner herunterladen",
+    "download_logo": "Logo herunterladen",
+    "help_text": "Wenn Sie mehr benötigen, schreiben Sie uns und wir werden unser Bestes tun, um zu helfen! Nur gemeinsam können wir Erfolg erreichen."
+  },
+  "lt_LT": {
+    "promote_yourself": "Hala",
+    "promote_yourself_html": "promote-yourself-lt.html",
+    "parking": "NEMOKAMAS PARKINGAS",
+    "logo_link": "/doc/logo-color-lt.webp",
+    "store_button": "Sužinokite pasiūlymą",
+    "store_button_title": "[trade_fair_name] - parduotuvė",
+    "download": "Atsisiųsti",
+    "download_banners": "Atsisiųsti banerius",
+    "download_logo": "Atsisiųsti logotipą",
+    "help_text": "Jei reikia daugiau, rašykite mums ir mes stengsimės padėti! Tik dirbdami kartu galime pasiekti sėkmę."
+  },
+  "it_IT": {
+    "promote_yourself": "Padiglione",
+    "promote_yourself_html": "promote-yourself-it.html",
+    "parking": "PARCHEGGIO GRATUITO",
+    "logo_link": "/doc/logo-color-it.webp",
+    "store_button": "Scopri l'offerta",
+    "store_button_title": "[trade_fair_name] - negozio",
+    "download": "Scarica",
+    "download_banners": "Scarica banner",
+    "download_logo": "Scarica il logo",
+    "help_text": "Se hai bisogno di altro, scrivici e faremo del nostro meglio per aiutarti! Solo lavorando insieme possiamo raggiungere il successo."
+  },
+  "cs_CZ": {
+    "promote_yourself": "Hala",
+    "promote_yourself_html": "promote-yourself-cs.html",
+    "parking": "BEZPLATNÉ PARKOVÁNÍ",
+    "logo_link": "/doc/logo-color-cs.webp",
+    "store_button": "Objevte nabídku",
+    "store_button_title": "[trade_fair_name] - obchod",
+    "download": "Stáhnout",
+    "download_banners": "Stáhnout bannery",
+    "download_logo": "Stáhnout logo",
+    "help_text": "Pokud potřebujete více, napište nám a my se budeme snažit pomoci! Jen společnými silami můžeme dosáhnout úspěchu."
+  },
+  "lv_LV": {
+    "promote_yourself": "Hala",
+    "promote_yourself_html": "promote-yourself-lv.html",
+    "parking": "BEZMAKSAS STĀVVIETA",
+    "logo_link": "/doc/logo-color-lv.webp",
+    "store_button": "Uzziniet piedāvājumu",
+    "store_button_title": "[trade_fair_name] - veikals",
+    "download": "Lejupielādēt",
+    "download_banners": "Lejupielādēt banerus",
+    "download_logo": "Lejupielādēt logotipu",
+    "help_text": "Ja jums nepieciešams vairāk, rakstiet mums, un mēs darīsim visu iespējamo, lai palīdzētu! Tikai darbojoties kopā mēs varam sasniegt panākumus."
+  },
+  "sk_SK": {
+    "promote_yourself": "Hala",
+    "promote_yourself_html": "promote-yourself-sk.html",
+    "parking": "BEZPLATNÉ PARKOVANIE",
+    "logo_link": "/doc/logo-color-sk.webp",
+    "store_button": "Prezrite si ponuku",
+    "store_button_title": "[trade_fair_name] - obchod",
+    "download": "Stiahnuť",
+    "download_banners": "Stiahnuť banery",
+    "download_logo": "Stiahnuť logo",
+    "help_text": "Ak potrebujete viac, napíšte nám a my sa budeme snažiť pomôcť! Len konaním spoločne môžeme dosiahnuť úspech."
+  },
+  "uk": {
+    "promote_yourself": "Зал",
+    "promote_yourself_html": "promote-yourself-uk.html",
+    "parking": "БЕЗПЛАТНА ПАРКОВКА",
+    "logo_link": "/doc/logo-color-uk.webp",
+    "store_button": "Дізнатися пропозицію",
+    "store_button_title": "[trade_fair_name] - магазин",
+    "download": "Завантажити",
+    "download_banners": "Завантажити банери",
+    "download_logo": "Завантажити логотип",
+    "help_text": "Якщо вам потрібно більше, напишіть нам, і ми зробимо все можливе, щоб допомогти! Лише діючи разом ми можемо досягти успіху."
   }
 }

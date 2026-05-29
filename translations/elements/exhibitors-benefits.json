@@ -1,43 +1,101 @@
 {
-    "pl_PL": {
-        "benefit_networking_img": "/wp-content/plugins/pwe-media/media/Strefa_Networkingu.png",
-        "benefit_networking_alt": "Strefa Networkingu",
-        "benefit_networking_text": "Podczas targów dostępna będzie, specjalnie wydzielona <strong>strefa networkingu</strong> – przestrzeń do wymiany doświadczeń i zacieśnienia kontaktów. Spotkania branżowe to idealna okazja do poszerzenia grona potencjalnych partnerów biznesowych, a także zbudowania bazy odbiorców.",
-
-        "benefit_panel_img": "/wp-content/plugins/pwe-media/media/Panel_Edukacyjny.png",
-        "benefit_panel_alt": "Panel Edukacyjny",
-        "benefit_panel_text": "Liczne wystąpienia i konferencja branżowa prowadzona przez uznanych prelegentów – doświadczonych praktyków i znawców branży.",
-
-        "benefit_welcome_img": "/wp-content/plugins/pwe-media/media/Pakiety_Powitalne.png",
-        "benefit_welcome_alt": "Pakiety Powitalne",
-        "benefit_welcome_text": "Przygotowanie identyfikatorów oraz indywidualnych pakietów powitalnych do wszystkich zarejestrowanych, które zostaną przesłane bezpośrednio pod adres podany w formularzu rejestracyjnym."
-    },
-
-    "en_US": {
-        "benefit_networking_img": "/wp-content/plugins/pwe-media/media/Networking_Zone.png",
-        "benefit_networking_alt": "Networking Zone",
-        "benefit_networking_text": "During the fair, a specially separated networking zone will be available - a space for exchanging experiences and strengthening contacts. Industry meetings are an ideal opportunity to expand the group of potential business partners, as well as build a strong customer base.",
-
-        "benefit_panel_img": "/wp-content/plugins/pwe-media/media/Educational_Panel.png",
-        "benefit_panel_alt": "Educational Panel",
-        "benefit_panel_text": "Numerous speeches and an industry conference conducted by recognized speakers – experienced practitioners and industry experts.",
-
-        "benefit_welcome_img": "/wp-content/plugins/pwe-media/media/Welcome_Package.png",
-        "benefit_welcome_alt": "Welcome Package",
-        "benefit_welcome_text": "Preparation of badges and individual welcome packages for all registered participants, which will be sent directly to the address provided in the registration form."
-    },
-
-    "de_DE": {
-        "benefit_networking_img": "/wp-content/plugins/pwe-media/media/Networking_Zone.png",
-        "benefit_networking_alt": "Netzwerkbereich",
-        "benefit_networking_text": "Während der Messe steht eine speziell abgetrennte Networking-Zone zur Verfügung – ein Ort zum Erfahrungsaustausch und zur Vertiefung von Kontakten. Branchentreffen sind eine ideale Gelegenheit, um den Kreis potenzieller Geschäftspartner zu erweitern und einen starken Kundenstamm aufzubauen.",
-
-        "benefit_panel_img": "/wp-content/plugins/pwe-media/media/Educational_Panel.png",
-        "benefit_panel_alt": "Bildungsgremium",
-        "benefit_panel_text": "Zahlreiche Vorträge und eine Branchenkonferenz mit renommierten Referenten – erfahrenen Praktikern und Branchenexperten.",
-
-        "benefit_welcome_img": "/wp-content/plugins/pwe-media/media/Welcome_Package.png",
-        "benefit_welcome_alt": "Willkommenspaket",
-        "benefit_welcome_text": "Vorbereitung von Namensschildern und individuellen Willkommenspaketen für alle angemeldeten Teilnehmer, die direkt an die im Anmeldeformular angegebene Adresse geschickt werden."
-    }
+  "pl_PL": {
+    "benefit_networking_title": "Strefa Networkingu",
+    "benefit_networking_alt": "Strefa Networkingu",
+    "benefit_networking_text": "Podczas targów dostępna będzie, specjalnie wydzielona <strong>strefa networkingu</strong> – przestrzeń do wymiany doświadczeń i zacieśnienia kontaktów. Spotkania branżowe to idealna okazja do poszerzenia grona potencjalnych partnerów biznesowych, a także zbudowania bazy odbiorców.",
+    "benefit_panel_title": "Panel Edukacyjny",
+    "benefit_panel_alt": "Panel Edukacyjny",
+    "benefit_panel_text": "Liczne wystąpienia i konferencja branżowa prowadzona przez uznanych prelegentów – doświadczonych praktyków i znawców branży.",
+    "benefit_welcome_title": "Pakiety Powitalne",
+    "benefit_welcome_alt": "Pakiety Powitalne",
+    "benefit_welcome_text": "Przygotowanie identyfikatorów oraz indywidualnych pakietów powitalnych do wszystkich zarejestrowanych, które zostaną przesłane bezpośrednio pod adres podany w formularzu rejestracyjnym."
+  },
+  "en_US": {
+    "benefit_networking_title": "Networking Zone",
+    "benefit_networking_alt": "Networking Zone",
+    "benefit_networking_text": "During the fair, a specially separated networking zone will be available - a space for exchanging experiences and strengthening contacts. Industry meetings are an ideal opportunity to expand the group of potential business partners, as well as build a strong customer base.",
+    "benefit_panel_title": "Educational Panel",
+    "benefit_panel_alt": "Educational Panel",
+    "benefit_panel_text": "Numerous speeches and an industry conference conducted by recognized speakers – experienced practitioners and industry experts.",
+    "benefit_welcome_title": "Welcome Package",
+    "benefit_welcome_alt": "Welcome Package",
+    "benefit_welcome_text": "Preparation of badges and individual welcome packages for all registered participants, which will be sent directly to the address provided in the registration form."
+  },
+  "de_DE": {
+    "benefit_networking_title": "Networking-Zone",
+    "benefit_networking_alt": "Netzwerkbereich",
+    "benefit_networking_text": "Während der Messe steht eine speziell abgetrennte Networking-Zone zur Verfügung – ein Ort zum Erfahrungsaustausch und zur Vertiefung von Kontakten. Branchentreffen sind eine ideale Gelegenheit, um den Kreis potenzieller Geschäftspartner zu erweitern und einen starken Kundenstamm aufzubauen.",
+    "benefit_panel_title": "Bildungsgremium",
+    "benefit_panel_alt": "Bildungsgremium",
+    "benefit_panel_text": "Zahlreiche Vorträge und eine Branchenkonferenz mit renommierten Referenten – erfahrenen Praktikern und Branchenexperten.",
+    "benefit_welcome_title": "Willkommenspaket",
+    "benefit_welcome_alt": "Willkommenspaket",
+    "benefit_welcome_text": "Vorbereitung von Namensschildern und individuellen Willkommenspaketen für alle angemeldeten Teilnehmer, die direkt an die im Anmeldeformular angegebene Adresse geschickt werden."
+  },
+  "cs_CZ": {
+    "benefit_networking_title": "Networking zóna",
+    "benefit_networking_alt": "Networking zóna",
+    "benefit_networking_text": "Během veletrhu bude k dispozici speciálně oddělená <strong>networkingová zóna</strong> – prostor pro výměnu zkušeností a upevnění kontaktů. Setkání v oboru jsou ideální příležitostí rozšířit okruh potenciálních obchodních partnerů a vybudovat silnou zákaznickou základnu.",
+    "benefit_panel_title": "Vzdělávací panel",
+    "benefit_panel_alt": "Vzdělávací panel",
+    "benefit_panel_text": "Hodně přednášek a oborová konference vedená uznávanými řečníky – zkušenými praktiky a odborníky v oboru.",
+    "benefit_welcome_title": "Uvítací balíček",
+    "benefit_welcome_alt": "Uvítací balíček",
+    "benefit_welcome_text": "Příprava jmenovek a individuálních uvítacích balíčků pro všechny zaregistrované účastníky, které budou odeslány přímo na adresu uvedenou v registračním formuláři."
+  },
+  "it_IT": {
+    "benefit_networking_title": "Zona networking",
+    "benefit_networking_alt": "Zona networking",
+    "benefit_networking_text": "Durante la fiera sarà disponibile una zona networking appositamente separata – uno spazio per lo scambio di esperienze e il rafforzamento dei contatti. Gli incontri di settore sono un&#39;occasione ideale per ampliare il gruppo di potenziali partner commerciali e costruire una solida base di clienti.",
+    "benefit_panel_title": "Pannello formativo",
+    "benefit_panel_alt": "Pannello formativo",
+    "benefit_panel_text": "Numerosi interventi e una conferenza del settore condotta da relatori riconosciuti – professionisti esperti ed esperti del settore.",
+    "benefit_welcome_title": "Pacchetto di benvenuto",
+    "benefit_welcome_alt": "Pacchetto di benvenuto",
+    "benefit_welcome_text": "Preparazione di badge e pacchetti di benvenuto personalizzati per tutti i partecipanti registrati, che saranno inviati direttamente all&#39;indirizzo fornito nel modulo di registrazione."
+  },
+  "lt_LT": {
+    "benefit_networking_title": "Networking zona",
+    "benefit_networking_alt": "Networking zona",
+    "benefit_networking_text": "Parodos metu bus prieinama specialiai atskirta <strong>networking zona</strong> – erdvė patirčiai keistis ir stiprinti ryšius. Pramonės susitikimai yra puiki proga išplėsti potencialių verslo partnerių ratą ir sukurti stiprią klientų bazę.",
+    "benefit_panel_title": "Mokomasis panelis",
+    "benefit_panel_alt": "Mokomasis panelis",
+    "benefit_panel_text": "Daugybė pranešimų ir pramonės konferencija, kurią ves pripažinti lektoriai – patyrę praktikantai ir sektoriaus ekspertai.",
+    "benefit_welcome_title": "Pasveikinimo paketas",
+    "benefit_welcome_alt": "Pasveikinimo paketas",
+    "benefit_welcome_text": "Pažymėjimų ir individualių pasveikinimo paketų paruošimas visiems registruotiems dalyviams, kurie bus išsiųsti tiesiai į registracijos formoje nurodytą adresą."
+  },
+  "lv_LV": {
+    "benefit_networking_title": "Tīklu zona",
+    "benefit_networking_alt": "Tīklu zona",
+    "benefit_networking_text": "Izstādes laikā būs pieejama īpaši atdalīta <strong>tīklu zona</strong> – telpa pieredzes apmaiņai un kontaktu stiprināšanai. Nozares tikšanās ir lieliska iespēja paplašināt potenciālo biznesa partneru loku un izveidot spēcīgu klientu bāzi.",
+    "benefit_panel_title": "Izglītojošs panels",
+    "benefit_panel_alt": "Izglītojošs panels",
+    "benefit_panel_text": "Daudzveidīgas uzstāšanās un nozares konference, kuru vada atzīti runātāji – pieredzējuši praktiķi un nozares eksperti.",
+    "benefit_welcome_title": "Laipni gaidīts komplekts",
+    "benefit_welcome_alt": "Laipni gaidīts komplekts",
+    "benefit_welcome_text": "Biļešu un individuālo laipni gaidīts komplektu sagatavošana visiem reģistrētajiem dalībniekiem, kas tiks nosūtīti tieši uz reģistrācijas veidlapā norādīto adresi."
+  },
+  "sk_SK": {
+    "benefit_networking_title": "Networking zóna",
+    "benefit_networking_alt": "Networking zóna",
+    "benefit_networking_text": "Počas veľtrhu bude k dispozícii špeciálne oddelená <strong>networkingová zóna</strong> – priestor na výmenu skúseností a upevnenie kontaktov. Odborné stretnutia sú ideálnou príležitosťou rozšíriť okruh potenciálnych obchodných partnerov a vybudovať silnú zákaznícku základňu.",
+    "benefit_panel_title": "Vzdelávací panel",
+    "benefit_panel_alt": "Vzdelávací panel",
+    "benefit_panel_text": "Mnoho prednášok a odborná konferencia vedená uznávanými rečníkmi – skúsenými praktikmi a odborníkmi v odbore.",
+    "benefit_welcome_title": "Uvítací balík",
+    "benefit_welcome_alt": "Uvítací balík",
+    "benefit_welcome_text": "Príprava identifikačných štítkov a individuálnych uvítacích balíkov pre všetkých registrovaných účastníkov, ktoré budú zaslané priamo na adresu uvedenú v registračnom formulári."
+  },
+  "uk_UA": {
+    "benefit_networking_title": "Зона нетворкінгу",
+    "benefit_networking_alt": "Зона нетворкінгу",
+    "benefit_networking_text": "Під час виставки буде доступна спеціально відокремлена <strong>нетворкінг-зона</strong> – простір для обміну досвідом і зміцнення контактів. Галузеві зустрічі – чудова можливість розширити коло потенційних ділових партнерів і побудувати міцну клієнтську базу.",
+    "benefit_panel_title": "Освітня панель",
+    "benefit_panel_alt": "Освітня панель",
+    "benefit_panel_text": "Багато виступів та галузева конференція за участю визнаних доповідачів – досвідчених практиків та експертів галузі.",
+    "benefit_welcome_title": "Вітальний пакет",
+    "benefit_welcome_alt": "Вітальний пакет",
+    "benefit_welcome_text": "Підготовка бейджів та індивідуальних вітальних пакетів для всіх зареєстрованих учасників, які будуть надіслані безпосередньо на адресу, вказану у формі реєстрації."
+  }
 }
