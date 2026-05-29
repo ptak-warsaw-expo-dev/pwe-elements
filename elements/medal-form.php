@@ -173,35 +173,41 @@ class PWElementMedalForm extends PWElements {
 
           <div class="fair-medal">
             <div class="fair-medal__header">
-              <img src="/wp-content/plugins/pwe-media/media/ptak-medale.webp" alt="fair-medal header" class="fair-medal__header-img" />
+              <img src='.self::languageChecker('/wp-content/plugins/pwe-media/media/medals/ptak-medale.webp', '/wp-content/plugins/pwe-media/media/medals/ptak-medale-en.webp').' alt="fair-medal header" class="fair-medal__header-img" />
             </div>
             <div class="fair-medal-content">
               <div class="fair-medal-content__color-box"></div>
               <div class="fair-medal-content_container">
                 <h1 class="fair-medal-content__title">
-                  '.self::languageChecker('Zgłoszenie do Konkursu Medalowego - Ptak Warsaw Expo!', 'Application for the Medal Competition - Ptak Warsaw Expo!').'
+                  '.self::languageChecker('Tworzysz coś wyjątkowego? Pochwal się tym na Ptak Warsaw Expo!', 'Are you creating something exceptional? Showcase it at Ptak Warsaw Expo!').'
                 </h1>
 
                 <p class="fair-medal-content__description">
-                  '.self::languageChecker('Zgłoś swój udział w konkursie medalowym organizowanym podczas targów w <strong>Ptak Warsaw Expo!</strong>
-                  Wyróżniamy innowacyjne, premierowe i wartościowe produkty oraz usługi prezentowane przez wystawców.
-                  Wypełnij formularz i zgłoś swój produkt do jednej z kategorii konkursowych!', 'Submit your entry to the medal competition organized during the trade fair at <strong>Ptak Warsaw Expo!</strong> We recognize innovative, premiere, and valuable products and services presented by exhibitors. Fill out the form and enter your product in one of the competition categories!').'
+                  '.self::languageChecker('Weź udział w Konkursie Medalowym i zawalcz o prestiżowe wyróżnienie dla najbardziej innowacyjnych i premierowych produktów oraz usług prezentowanych podczas targów. 
+                  To nie tylko nagroda – to szansa na promocję marki, większe zainteresowanie odwiedzających oraz budowanie pozycji lidera w branży.  
+                  Dla najlepszego wystawcy czeka specjalne wyróżnienie. Voucher na usługi marketingowe, dzięki którym skuteczniej będzie można promować markę podczas kolejnych targów.
+                  Nie czekaj – zgłoś swój produkt do konkursu i pokaż, że wyznaczasz trendy!
+                  ', 'Take part in the Medal Competition and compete for a prestigious award for the most innovative and premier products and services presented during the trade fair.
+                  It’s not just an award – it’s an opportunity to promote your brand, attract greater interest from visitors, and strengthen your position as an industry leader.
+                  A special distinction awaits the best exhibitor – a voucher for marketing services that will help promote the brand more effectively during future trade fairs.
+                  Don’t wait – submit your product to the competition and show that you are setting industry trends!
+                  ').'
                 </p>
               </div>
-
             </div>
             <div class="fair-medal-form">
-              [gravityform id="'. $medale_form_id .'" title="false" description="false" ajax="false"]
+                [gravityform id="'. $medale_form_id .'" title="false" description="false" ajax="false"]
             </div>
             <div class="fair-rules">
-             '.self::languageChecker('Regulamin', 'Terms and Conditions:').' :<br/>
-              <a href="'.self::languageChecker('https://warsawexpo.eu/docs/Regulamin-Konkursu-Medalowego-Ptak-Warsaw-Expo.pdf', 'https://warsawexpo.eu/docs/Rules-of-the-Medal-Competition-Ptak-Warsaw-Expo.pdf').'"  target=_blank>'.self::languageChecker('Kliknij tutaj, aby przeczytać regulamin', 'Click here to read the terms and conditions:').'</a>
+                '.self::languageChecker('Regulamin', 'Terms and Conditions').' :<br/>
+                <a href="'.self::languageChecker('https://warsawexpo.eu/docs/Regulamin-Konkursu-Medalowego-Ptak-Warsaw-Expo.pdf', 'https://warsawexpo.eu/docs/Rules-of-the-Medal-Competition-Ptak-Warsaw-Expo.pdf').'" target="_blank">
+                    '.self::languageChecker('Kliknij tutaj, aby przeczytać regulamin', 'Click here to read the terms and conditions').'
+                </a>
             </div>
             <div class="fair-medal__footer">
-              <img src="/wp-content/plugins/pwe-media/media/medal.webp" alt="fair-medal footer" class="fair-medal__footer-img" />
+                <img src="'.self::languageChecker('/wp-content/plugins/pwe-media/media/medals/medal.webp', '/wp-content/plugins/pwe-media/media/medals/medal-en.webp').'" alt="fair-medal footer" class="fair-medal__footer-img" />
             </div>
           </div>
-
           <script>
             document.addEventListener("DOMContentLoaded", function() {
               const fileInputs = document.querySelectorAll(".ginput_container_fileupload input[type=\'file\']");

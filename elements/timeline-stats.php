@@ -94,6 +94,7 @@ class PWElementTimelineStats extends PWElements {
                 'value' => array(
                     'Smooth' => 'pwe_timeline_stats_svg_smooth',
                     'Zigzag' => 'pwe_timeline_stats_svg_zigzag',
+                    'Simple' => 'pwe_timeline_stats_svg_simple',
                 ),
                 'dependency' => array(
                     'element' => 'pwe_element',
@@ -167,12 +168,14 @@ class PWElementTimelineStats extends PWElements {
                         'save_always' => true,
                     ),
                 ),
-            ), 
+            ),
         );
         return $element_output;
     }
 
     public static function output($atts) {
+
+
         $btn_text_color = self::findColor($atts['btn_text_color_manual_hidden'], $atts['btn_text_color'], 'white') . '!important';
         $btn_color = self::findColor($atts['btn_color_manual_hidden'], $atts['btn_color'], self::$accent_color) . '!important';
         $btn_border = self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], self::$accent_color) . '!important';
@@ -187,12 +190,15 @@ class PWElementTimelineStats extends PWElements {
             'pwe_timeline_stats_background_link' => '',
         ), $atts));
 
+
         $darker_btn_color = self::adjustBrightness($btn_color, -20);
 
         $event_items = vc_param_group_parse_atts($atts['pwe_timeline_stats_events']);
 
         $img_data = wp_get_attachment_image_src($pwe_timeline_stats_background, 'full');
         $timeline_background = $img_data[0] ?? $pwe_timeline_stats_background_link ?? '';
+
+    if($pwe_timeline_stats_svg_style == 'pwe_timeline_stats_svg_smooth' || $pwe_timeline_stats_svg_style == "pwe_timeline_stats_svg_zigzag"){
 
         $cta_html = '
             <div class="timeline-pwe-event timeline-pwe-cta timeline-pwe-event--top">
@@ -354,21 +360,21 @@ class PWElementTimelineStats extends PWElements {
                 align-items: flex-start;
                 aspect-ratio: 6 / 3;
             }
-            
+
             .timeline-pwe-card-top {
                 display: flex;
                 flex-direction: row-reverse;
                 height: 76%;
                 width: 100%;
             }
-            
+
             .timeline-pwe-card-bottom {
                 display: flex;
                 flex-direction: row;
                 height: 24%;
                 width: 100%;
             }
-            
+
             .timeline-pwe-card dl {
                 border-radius: 0.5rem;
                 overflow: hidden;
@@ -378,7 +384,7 @@ class PWElementTimelineStats extends PWElements {
             .timeline-pwe-card dl dd {
                 padding: 0.25rem 0.5rem;
             }
-            
+
             .timeline-pwe-card dl > dt:nth-of-type(1),
             .timeline-pwe-card dl > dd:nth-of-type(1) {
                 background-color: #f4f4f4;
@@ -393,7 +399,7 @@ class PWElementTimelineStats extends PWElements {
                 height: 100%;
                 object-fit: cover;
             }
-            
+
             .timeline-pwe-card-bottom img {
                 max-width: 12%;
                 box-sizing: border-box;
@@ -466,7 +472,7 @@ class PWElementTimelineStats extends PWElements {
                 color: white;
                 font-weight: 500;
             }
-            
+
             .timeline-pwe-card-mobile .timeline-pwe-cta{
                 display: none;
                 position: absolute;
@@ -493,10 +499,10 @@ class PWElementTimelineStats extends PWElements {
                 border-radius: 36px;
             }
 
-            .timeline-pwe-cta-btn:hover { 
+            .timeline-pwe-cta-btn:hover {
                 background-color: color-mix(in srgb, var(--main2-color) 80%, white 20%);
             }
-            
+
             @media(max-width: 570px){
                 .timeline-pwe-wrapper .timeline-pwe-cta, .timeline-pwe-connector {
                     display: none;
@@ -780,7 +786,7 @@ class PWElementTimelineStats extends PWElements {
                     updateGradientPosition();
                 }';
 
-            } else if ($pwe_timeline_stats_svg_style == 'pwe_timeline_stats_svg_zigzag') { 
+            } else if ($pwe_timeline_stats_svg_style == 'pwe_timeline_stats_svg_zigzag') {
 
                 $output .= '
                 function drawTimeline() {
@@ -880,7 +886,347 @@ class PWElementTimelineStats extends PWElements {
             });
 
         </script>';
+     } else {
+        // =========================================================================
+        // NOWY PRESET 2 (PREMIUM / WARSAW HOME STYLE) - ZMODYFIKOWANY UKŁAD KART
+        // =========================================================================
+        $active_preset = 'pwe-timeline-preset-premium';
 
+        // 1. WYKRYWANIE JĘZYKA (WPML / WORDPRESS)
+        $current_lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : substr(get_locale(), 0, 2);
+
+        // 2. SŁOWNIK TŁUMACZEŃ
+        if ($current_lang === 'en') {
+            $lbl_history     = 'OUR HISTORY';
+            $lbl_exhibitors  = 'exhibitors';
+            $lbl_visitors    = 'visitors';
+            $lbl_area        = 'space';
+            $lbl_quote       = '„Each edition brings new opportunities, inspiring encounters, and even greater space for growth.”';
+        } else {
+            // Domyślny polski (PL)
+            $lbl_history     = 'NASZA HISTORIA';
+            $lbl_exhibitors  = 'wystawcy';
+            $lbl_visitors    = 'odwiedzający';
+            $lbl_area        = 'powierzchnia';
+            $lbl_quote       = '„Każda edycja to nowe możliwości, inspirujące spotkania i jeszcze większa przestrzeń dla rozwoju.”';
+        }
+
+        // Dynamiczny nagłówek z przetłumaczonym podtytułem
+        $premium_header_html = '
+        <div class="wh-timeline-header">
+            <span class="wh-timeline-subtitle">' . esc_html($lbl_history) . '</span>
+            <h2 class="wh-timeline-title">' . esc_html($pwe_timeline_stats_heading) . '</h2>
+            <p class="wh-timeline-description">
+                ' . esc_html($pwe_timeline_stats_text) . '
+            </p>
+        </div>';
+
+        $events_html = '';
+        $nav_dots_html = '';
+
+        // Definicje profesjonalnych ikon SVG w kolorze #492d14
+        $icon_exhibitors = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#492d14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wh-stat-icon"><path d="M3 21h18"/><path d="M10 21V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15"/><path d="M3 21V10a2 2 0 0 1 2-2h4"/></svg>';
+        $icon_visitors = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#492d14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wh-stat-icon"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+        $icon_area = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#492d14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wh-stat-icon"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V3"/></svg>';
+
+        foreach ($event_items as $idx => $event) {
+            $img = !empty($event['pwe_timeline_stats_event_img_url'])
+                ? esc_url($event['pwe_timeline_stats_event_img_url'])
+                : (wp_get_attachment_image_src($event['pwe_timeline_stats_event_img'], 'full')[0] ?? '');
+            $year = esc_html($event['pwe_timeline_stats_event_year'] ?? '');
+            $edition = esc_html($event['pwe_timeline_stats_event_edition'] ?? '');
+            $exhibitors = esc_html($event['pwe_timeline_stats_event_exhibitors'] ?? '');
+            $visitors = number_format((int)$event['pwe_timeline_stats_event_visitors'], 0, ',', ' ');
+            $area = number_format((int)$event['pwe_timeline_stats_event_area'], 0, ',', ' ');
+
+            $direction = 'timeline-pwe-event--top';
+
+            $logos_html = '';
+            if (!empty($event['pwe_timeline_stats_other_events'])) {
+                $domains = array_map('trim', explode(',', $event['pwe_timeline_stats_other_events']));
+                foreach ($domains as $domain) {
+                    $clean_domain = str_replace(array('http://', 'https://'), '', $domain);
+                    $logos_html .= '<img class="wh-mini-logo-img" src="https://' . esc_attr($clean_domain) . '/doc/logo-color.webp" alt="' . esc_attr($clean_domain) . '" onerror="this.style.display=\'none\';" />';
+                }
+            }
+
+            $nav_dots_html .= '
+                <div class="wh-timeline-dot-item ' . ($idx === 1 ? 'active' : '') . '" data-slide-index="' . $idx . '">
+                    <div class="wh-dot-circle"><span>' . $year . '</span></div>
+                </div>';
+
+            // Wykorzystanie przetłumaczonych etykiet (wystawcy, odwiedzający, powierzchnia)
+            $events_html .= '
+                <div class="timeline-pwe-event ' . $direction . '" data-index="' . $idx . '">
+                    <div class="timeline-pwe-card">
+                        <div class="timeline-pwe-card-top">';
+                            if (!empty($img)){
+                                $events_html .= '<div class="wh-card-img-wrapper"><img src="' . $img . '" alt="' . $year . '" /></div>';
+                            }
+                            $events_html .= '
+                            <div class="timeline-pwe-card-content">
+                                <div class="wh-card-header-row">
+                                    <h3 class="timeline-pwe-year">' . $year . '</h3>
+                                    <span class="timeline-pwe-badge">' . $edition . '</span>
+                                </div>
+                                <div class="wh-stats-list">
+                                    <div class="wh-stat-row">
+                                        <div class="wh-stat-label">' . $icon_exhibitors . '<span>' . esc_html($lbl_exhibitors) . '</span></div>
+                                        <div class="wh-stat-value">' . $exhibitors . '</div>
+                                    </div>
+                                    <div class="wh-stat-row">
+                                        <div class="wh-stat-label">' . $icon_visitors . '<span>' . esc_html($lbl_visitors) . '</span></div>
+                                        <div class="wh-stat-value">' . $visitors . '</div>
+                                    </div>
+                                    <div class="wh-stat-row no-border">
+                                        <div class="wh-stat-label">' . $icon_area . '<span>' . esc_html($lbl_area) . '</span></div>
+                                        <div class="wh-stat-value">' . $area . ' m²</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-pwe-card-bottom">
+                            ' . $logos_html . '
+                        </div>
+                    </div>
+                </div>';
+        }
+
+        $output .= '
+        <div id="pwe-timeline-premium-unique" class="pwe-timeline-global-wrapper ' . $active_preset . '" style="background-image: url(' . $timeline_background . ');">
+            ' . $premium_header_html . '
+
+            <div class="pwe-timeline-main-container">
+                <div class="pwe-timeline-slider-machinery">
+                    ' . $events_html . '
+                </div>
+            </div>
+
+            <div class="wh-timeline-axis-wrapper">
+                <div class="wh-timeline-line"></div>
+                <div class="wh-timeline-dots-container">
+                    ' . $nav_dots_html . '
+                </div>
+            </div>
+
+            <div class="wh-timeline-premium-footer">
+                <p class="wh-quote">' . esc_html($lbl_quote) . '</p>
+            </div>
+        </div>';
+
+        $output .= '
+        <script>
+        jQuery(document).ready(function($) {
+            let $context = $("#pwe-timeline-premium-unique");
+            let $machinery = $context.find(".pwe-timeline-slider-machinery");
+
+            function updateMobileDots(currentSlide) {
+                if ($(window).width() <= 768) {
+                    let $dots = $context.find(".wh-timeline-dot-item");
+
+                    $dots.removeClass("mobile-show");
+
+                    $dots.each(function() {
+                        let idx = $(this).data("slide-index");
+                        if (idx === currentSlide || idx === currentSlide - 1 || idx === currentSlide + 1) {
+                            $(this).addClass("mobile-show");
+                        }
+                    });
+
+                    if (currentSlide === 0) {
+                        $dots.filter("[data-slide-index=\'2\']").addClass("mobile-show");
+                    }
+                    if (currentSlide === $dots.length - 1) {
+                        $dots.filter("[data-slide-index=\'" + (currentSlide - 2) + "\']").addClass("mobile-show");
+                    }
+                }
+            }
+
+            if ($machinery.length) {
+                $machinery.slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    centerMode: true,
+                    centerPadding: "0px",
+                    initialSlide: 1,
+                    arrows: false,
+                    dots: false,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: { slidesToShow: 2, centerMode: false }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: { slidesToShow: 1, centerMode: true }
+                        }
+                    ]
+                });
+
+                updateMobileDots(0);
+
+                $context.on("click", ".wh-timeline-dot-item", function() {
+                    let slideIndex = $(this).data("slide-index");
+                    $machinery.slick("slickGoTo", slideIndex);
+                });
+
+                $machinery.on("afterChange", function(event, slick, currentSlide) {
+                    $context.find(".wh-timeline-dot-item").removeClass("active");
+                    $context.find(".wh-timeline-dot-item[data-slide-index=" + currentSlide + "]").addClass("active");
+
+                    updateMobileDots(currentSlide);
+                });
+
+                $(window).on("resize", function() {
+                    let current = $machinery.slick("slickCurrentSlide");
+                    if ($(window).width() > 768) {
+                        $context.find(".wh-timeline-dot-item").removeClass("mobile-show");
+                    } else {
+                        updateMobileDots(current);
+                    }
+                });
+            }
+        });
+        </script>';
+
+        $output .= '
+        <style>
+            #pwe-timeline-premium-unique.pwe-timeline-global-wrapper {
+                background-color: #d1b08d !important;
+                padding: 80px 20px;
+                box-sizing: border-box;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+
+            #pwe-timeline-premium-unique .wh-timeline-header { text-align: center; max-width: 450px; margin: 0 auto 60px; }
+            #pwe-timeline-premium-unique .wh-timeline-subtitle { font-size: 12px; letter-spacing: 4px; color: #5E4B3C; text-transform: uppercase; font-weight: 600; }
+            #pwe-timeline-premium-unique .wh-timeline-title { font-size: 44px; font-weight: 400; line-height: 1.25; color: #2A2520; margin: 18px 0; font-family: serif; }
+            #pwe-timeline-premium-unique .wh-timeline-description { font-size: 15px; color: #615347; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+
+            #pwe-timeline-premium-unique .pwe-timeline-main-container { max-width: 1400px; margin: 0 auto; position: relative; }
+            #pwe-timeline-premium-unique .pwe-timeline-slider-machinery { display: block !important; opacity: 1 !important; }
+
+            #pwe-timeline-premium-unique .slick-track {
+                display: flex !important;
+                align-items: center !important;
+            }
+
+            #pwe-timeline-premium-unique .timeline-pwe-card {
+                background: #F4EBE3 !important;
+                border: 1px solid #D6C3B2 !important;
+                border-radius: 24px !important;
+                padding: 24px !important;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.02) !important;
+                transform: scale(0.92);
+                opacity: 0.75;
+                transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                margin: 15px 10px;
+                box-sizing: border-box;
+                min-height: 250px;
+            }
+
+            #pwe-timeline-premium-unique .slick-center .timeline-pwe-card {
+                border: 2px solid #786251 !important;
+                transform: scale(1.08) !important;
+                opacity: 1 !important;
+                box-shadow: 0 25px 50px rgba(120, 98, 81, 0.15) !important;
+            }
+
+            #pwe-timeline-premium-unique .timeline-pwe-card-top { display: flex !important; gap: 24px; align-items: center; }
+
+            #pwe-timeline-premium-unique .wh-card-img-wrapper { width: 40%; border-radius: 24px; overflow: hidden; height: 180px; }
+            #pwe-timeline-premium-unique .wh-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+            #pwe-timeline-premium-unique .timeline-pwe-card-content { width: 60%; display: flex; flex-direction: column; justify-content: center; padding-right: 15px; }
+
+            #pwe-timeline-premium-unique .wh-card-header-row { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
+            #pwe-timeline-premium-unique .timeline-pwe-year { font-size: 32px; font-family: serif; font-weight: 500; color: #2A2520; margin: 0; line-height: 1; }
+            #pwe-timeline-premium-unique .timeline-pwe-badge { background: #E6DACF; border: 1px solid #C4B1A0; border-radius: 20px; padding: 4px 12px; font-size: 11px; color: #5E4B3C; white-space: nowrap; margin: 0; font-weight: 500; text-transform: lowercase; }
+
+            #pwe-timeline-premium-unique .wh-stats-list { display: flex; flex-direction: column; width: 100%; }
+            #pwe-timeline-premium-unique .wh-stat-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid #E6DACF;
+            }
+            #pwe-timeline-premium-unique .wh-stat-row.no-border { border-bottom: none; }
+
+            #pwe-timeline-premium-unique .wh-stat-label { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #5E4B3C; text-transform: lowercase; font-weight: 600; }
+            #pwe-timeline-premium-unique .wh-stat-value { font-size: 14px; font-weight: 700; color: #2A2520; }
+            #pwe-timeline-premium-unique .wh-stat-icon { width: 16px; height: 16px; display: inline-block; flex-shrink: 0; }
+
+            #pwe-timeline-premium-unique .timeline-pwe-card-bottom {
+                margin-top: 15px;
+                padding: 12px 0 0 0;
+                border-top: 1px solid #E6DACF;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                align-items: center;
+            }
+
+            #pwe-timeline-premium-unique .wh-mini-logo-img {
+                height: 22px;
+                max-width: 90px;
+                object-fit: contain;
+                display: inline-block;
+                filter: none !important;
+                opacity: 0.95;
+                transition: opacity 0.2s ease;
+            }
+            #pwe-timeline-premium-unique .wh-mini-logo-img:hover { opacity: 1; }
+
+            #pwe-timeline-premium-unique .wh-timeline-axis-wrapper { max-width: 900px; margin: 60px auto 20px auto; position: relative; height: 70px; }
+            #pwe-timeline-premium-unique .wh-timeline-line { position: absolute; top: 35px; left: 0; width: 100%; height: 2px; background: #633d19; z-index: 1; }
+            #pwe-timeline-premium-unique .wh-timeline-dots-container { display: flex; justify-content: space-between; position: relative; z-index: 2; max-width: 84%; margin: 0 auto; transition: all 0.3s ease; }
+
+            #pwe-timeline-premium-unique .wh-timeline-dot-item { cursor: pointer; display: flex; flex-direction: column; align-items: center; position: relative; transition: all 0.3s ease; }
+            #pwe-timeline-premium-unique .wh-dot-circle {
+                width: 70px; height: 70px; border-radius: 50%; background: #786251;
+                display: flex; align-items: center; justify-content: center;
+                box-shadow: 0 0 0 8px #E2D3C5; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-sizing: border-box;
+            }
+            #pwe-timeline-premium-unique .wh-dot-circle span { color: #FFF; font-size: 14px; font-weight: 600; font-family: serif; }
+
+            #pwe-timeline-premium-unique .wh-timeline-dot-item.active .wh-dot-circle {
+                transform: scale(1.15);
+                box-shadow: 0 0 0 4px #E2D3C5, 0 0 0 6px #786251, 0 0 0 16px #E2D3C5;
+            }
+
+            #pwe-timeline-premium-unique .wh-timeline-premium-footer { text-align: center; margin-top: 50px; }
+            #pwe-timeline-premium-unique .wh-quote { font-style: italic; font-size: 14px; color: #5E4B3C; opacity: 0.85; font-family: serif; }
+
+            #pwe-timeline-premium-unique .timeline-pwe-connector { display: none !important; }
+            #pwe-timeline-premium-unique .slick-list { overflow: visible !important; }
+
+            @media(max-width:640px){
+                #pwe-timeline-premium-unique .wh-stat-row {
+                    flex-direction: column;
+                }
+            }
+
+            @media(max-width: 768px) {
+                #pwe-timeline-premium-unique .wh-timeline-dots-container {
+                    max-width: 260px;
+                    margin: 0 auto;
+                }
+                #pwe-timeline-premium-unique .wh-timeline-dot-item {
+                    display: none !important;
+                }
+                #pwe-timeline-premium-unique .wh-timeline-dot-item.mobile-show {
+                    display: flex !important;
+                }
+            }
+        </style>';
+    }
         return $output;
     }
 }

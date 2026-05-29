@@ -14,6 +14,25 @@ class PWElementVoucher extends PWElements {
         parent::__construct();
     }
 
+    public static function multi_translation($key) {
+        $locale = get_locale();
+        $translations_file = __DIR__ . '/../translations/elements/voucher.json';
+
+        // JSON file with translation
+        $translations_data = json_decode(file_get_contents($translations_file), true);
+
+        // Is the language in translations
+        if (isset($translations_data[$locale])) {
+            $translations_map = $translations_data[$locale];
+        } else {
+            // By default use English translation if no translation for current language
+            $translations_map = $translations_data['en_US'];
+        }
+
+        // Return translation based on key
+        return isset($translations_map[$key]) ? $translations_map[$key] : $key;
+    }
+
     /**
      * Static method to generate the HTML output for the PWE Element.
      * Returns the HTML output as a string.
@@ -70,40 +89,13 @@ class PWElementVoucher extends PWElements {
 
                 <div class="half-block-padding" style="flex:1;">
                     <div class="heading-text el-text text-centered main-heading-text">
-                        <h4>'.
-                        self::languageChecker(
-                            <<<PL
-                            ODBIERZ VOUCHER NA ZABUDOWĘ
-                            PL,
-                            <<<EN
-                            RECEIVE A CONSTRUCTION VOUCHER
-                            EN
-                            )
-                        .'</h4>
+                        <h4>'. self::multi_translation("voucher_title") .'</h4>
                     </div>';
-                    $output .= '<p class="pwe-line-height hidden-mobile"  style="color '. $text_color .';">' .
-                        self::languageChecker(
-                            <<<PL
-                                Z naszym kuponem masz pełną swobodę wyboru opcji, które najlepiej odpowiadają Twoim potrzebom. W ofercie znajdują się niestandardowe projekty stoisk, grafika i oznakowanie, podłogi i oświetlenie, meble, sprzęt AV i wiele innych. Wszystko, co musisz zrobić, to okazać nasz kupon przy zakupie, wartość zniżki zostanie uwzględniona w fakturze. Dzięki temu zaoszczędzisz pieniądze, a także zyskasz większą elastyczność i swobodę twórczą.
-                            PL,
-                            <<<EN
-                                With our coupon, you have complete freedom to choose the options that best suit your needs. We offer pwe booth designs, graphics and signage, flooring and lighting, furniture, AV equipment and much more. All you need to do is present our coupon at the time of purchase, the value of the discount will be included in the invoice. This will save you money and give you more flexibility and creative freedom.
-                            EN
-                        )
-                    . '</p>';
+                    $output .= '<p class="pwe-line-height hidden-mobile"  style="color '. $text_color .';">'. self::multi_translation("voucher_desc") .'</p>';
 
                     $output .= '<div class="pwe-btn-container">
                         <span>
-                            <a class="pwe-link btn pwe-btn"' .
-                                self::languageChecker(
-                                    <<<PL
-                                        href="/kontakt/">Zapytaj o voucher
-                                    PL,
-                                    <<<EN
-                                        href="/en/contact/">Ask for a voucher</a>
-                                    EN
-                                )
-                        . '</a>
+                            <a class="pwe-link btn pwe-btn" href="'. self::multi_translation("voucher_link") .'">'. self::multi_translation("voucher_button") .'</a>
                     </div>
                 </div>
             </div>';

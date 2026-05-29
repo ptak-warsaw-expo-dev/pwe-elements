@@ -74,7 +74,7 @@ class PWElements {
         require_once plugin_dir_path(__FILE__) . 'generator-wystawcow.php';
         require_once plugin_dir_path(__FILE__) . 'registration.php';
         require_once plugin_dir_path(__FILE__) . 'registration-content.php';
-        require_once plugin_dir_path(__FILE__) . 'x_step_registration.php';
+        // require_once plugin_dir_path(__FILE__) . 'x_step_registration.php';
         require_once plugin_dir_path(__FILE__) . 'zaproszenie.php';
         require_once plugin_dir_path(__FILE__) . 'ticket.php';
         require_once plugin_dir_path(__FILE__) . 'numbers.php';
@@ -87,9 +87,9 @@ class PWElements {
         require_once plugin_dir_path(__FILE__) . 'pot_rej.php';
         require_once plugin_dir_path(__FILE__) . 'pot_rej_wys.php';
         require_once plugin_dir_path(__FILE__) . 'pot_akt_bil.php';
-        require_once plugin_dir_path(__FILE__) . 'test.php';
-        require_once plugin_dir_path(__FILE__) . 'test1.php';
-        require_once plugin_dir_path(__FILE__) . 'test2.php';
+        // require_once plugin_dir_path(__FILE__) . 'test.php';
+        // require_once plugin_dir_path(__FILE__) . 'test1.php';
+        // require_once plugin_dir_path(__FILE__) . 'test2.php';
         require_once plugin_dir_path(__FILE__) . 'resend-ticket.php';
         require_once plugin_dir_path(__FILE__) . 'header-new.php';
         require_once plugin_dir_path(__FILE__) . 'hale.php';
@@ -263,7 +263,7 @@ class PWElements {
                         ...PWElementRegistration::initElements(),
                         ...PWElementRegContent::initElements(),
                         ...PWElementInvite::initElements(),
-                        ...PWElementXForm::initElements(),
+                        // ...PWElementXForm::initElements(),
                         ...PWElementTicket::initElements(),
                         ...PWElementNumbers::initElements(),
                         ...PWElementConfSection::initElements(),
@@ -346,7 +346,7 @@ class PWElements {
             'For Visitors'                   => 'PWElementForVisitors',
             'Generator wystawcow'            => 'PWElementGenerator',
             'Grupy zorganizowane'            => 'PWElementGroups',
-            'Halls'                           => 'PWElementHale',
+            'Halls'                          => 'PWElementHale',
             'Informacje organizacyjne'       => 'PWElementOrgInfo',
             'Informacje kontaktowe'          => 'PWElementContactInfo',
             'Kalendarz do potwierdzenia'     => 'PWElementConfCallendar',
@@ -387,12 +387,12 @@ class PWElements {
             'Visitors Benefits'              => 'PWElementVisitorsBenefits',
             'Wydarzenia ogólne'              => 'PWElementConferences',
             'Wypromuj się na targach'        => 'PWElementPromot',
-            'X-form'                         => 'PWElementXForm',
+            // 'X-form'                         => 'PWElementXForm',
             'Zabudowa'                       => 'PWElementStand',
             'Zaproszenie'                    => 'PWElementInvite',
-            'Test'                           => 'PWElementTest',
-            'Test1'                          => 'PWElementTest1',
-            'Test2'                          => 'PWElementTest2',
+            // 'Test'                           => 'PWElementTest',
+            // 'Test1'                          => 'PWElementTest1',
+            // 'Test2'                          => 'PWElementTest2',
             'Header New'                     => 'PWElementHeaderNew',
             'Button'                         => 'PWElementButton',
             'Why its worth'                  => 'PWElementWhyItsWorth',
@@ -469,12 +469,12 @@ class PWElements {
             'PWElementVisitorsBenefits' => 'visitors-benefits.php',
             'PWElementConferences'      => 'wydarzenia-ogolne.php',
             'PWElementPromot'           => 'promote-yourself.php',
-            'PWElementXForm'            => 'x_step_registration.php',
+            // 'PWElementXForm'            => 'x_step_registration.php',
             'PWElementStand'            => 'zabudowa.php',
             'PWElementInvite'           => 'zaproszenie.php',
-            'PWElementTest'             => 'test.php',
-            'PWElementTest1'            => 'test1.php',
-            'PWElementTest2'            => 'test2.php',
+            // 'PWElementTest'             => 'test.php',
+            // 'PWElementTest1'            => 'test1.php',
+            // 'PWElementTest2'            => 'test2.php',
             'PWElementHeaderNew'        => 'header-new.php',
             'PWElementHale'             => 'hale.php',
             'PWElementButton'           => 'button.php',

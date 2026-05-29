@@ -890,6 +890,150 @@ class PWElementStepTwoExhibitor extends PWElements {
                 displayValTwo.addEventListener("keydown", preventTyping);
 
             </script>';}
+
+            if (get_locale() != "pl_PL" && get_locale() != "en_US") {
+
+                $output .= '
+                <script>
+                    function translateElement(element, newText) {
+                        if (!element) return;
+                        element.textContent = newText;
+                    }
+
+                    const nameInput = document.querySelector(\'input[placeholder="First and last name"]\');
+                    if (nameInput) {
+                        nameInput.placeholder = "' . self::multi_translation("first_name") . '";
+                    }
+
+                    const nameLabel = Array.from(document.querySelectorAll("label"))
+                        .find(label => label.textContent.trim().startsWith("First and last name"));
+
+                    if (nameLabel) {
+                        nameLabel.childNodes[0].textContent = "' . self::multi_translation("first_name") . '";
+                    }
+
+                    const taxInput = document.querySelector(\'input[placeholder="TAX ID"]\');
+                    if (taxInput) {
+                        taxInput.placeholder = "' . self::multi_translation("tax_id") . '";
+                    }
+
+                    const taxLabel = Array.from(document.querySelectorAll("label"))
+                        .find(label => label.textContent.trim().startsWith("TAX ID"));
+
+                    if (taxLabel) {
+                        taxLabel.childNodes[0].textContent = "' . self::multi_translation("tax_id") . '";
+                    }
+
+                    const emailInput = document.querySelector(\'input[placeholder="Email"]\');
+                    if (emailInput) {
+                        emailInput.placeholder = "' . self::multi_translation("email") . '";
+                    }
+
+                    const emailLabel = Array.from(document.querySelectorAll("label"))
+                        .find(label => label.textContent.trim().startsWith("Email"));
+
+                    if (emailLabel) {
+                        emailLabel.childNodes[0].textContent = "' . self::multi_translation("email") . '";
+                    }
+
+                    const phoneInput = document.querySelector(\'input[placeholder="Phone number"]\');
+                    if (phoneInput) {
+                        phoneInput.placeholder = "' . self::multi_translation("phone") . '";
+                    }
+
+                    const phoneLabel = Array.from(document.querySelectorAll("label"))
+                        .find(label => label.textContent.trim().startsWith("Phone number"));
+
+                    if (phoneLabel) {
+                        translateElement(phoneLabel, "' . self::multi_translation("phone") . '");
+                    }
+
+                    const additionalInfoTextarea = document.querySelector(\'textarea[placeholder="Additional company information"]\');
+                    if (additionalInfoTextarea) {
+                        additionalInfoTextarea.placeholder = "' . self::multi_translation("additional_company_information") . '";
+                    }
+
+                    const additionalInfoLabel = Array.from(document.querySelectorAll("label"))
+                        .find(label => label.textContent.trim().startsWith("Additional company information"));
+
+                    if (additionalInfoLabel) {
+                        translateElement(additionalInfoLabel, "' . self::multi_translation("additional_company_information") . '");
+                    }
+
+                    const exhibitionSpaceInput = document.querySelector(\'input[placeholder="Select your exhibition space"]\');
+                    if (exhibitionSpaceInput) {
+                        exhibitionSpaceInput.placeholder = "' . self::multi_translation("select_exhibition_space") . '";
+                    }
+
+                    const exhibitionSpaceLabel = Array.from(document.querySelectorAll("label"))
+                        .find(label => label.textContent.trim().startsWith("Select your exhibition space"));
+
+                    if (exhibitionSpaceLabel) {
+                        translateElement(exhibitionSpaceLabel, "' . self::multi_translation("select_exhibition_space") . '");
+                    }
+
+                    const rangeTitle = Array.from(document.querySelectorAll("p"))
+                        .find(p => p.textContent.trim().startsWith("Scegli uno spazio espositivo"));
+
+                    if (rangeTitle) {
+                        translateElement(rangeTitle, "' . self::multi_translation("select_exhibition_space") . '");
+                    }
+
+                    const rangeLabels = document.querySelectorAll(".input-range-value-label");
+
+                    rangeLabels.forEach(label => {
+                        const text = label.textContent.trim();
+
+                        switch (text) {
+                            case "da":
+                                label.textContent = "' . self::multi_translation("from") . '";
+                                break;
+                            case "a":
+                                label.textContent = "' . self::multi_translation("to") . '";
+                                break;
+                        }
+                    });
+
+                    const consentLabel = Array.from(document.querySelectorAll(".gfield_consent_label"))
+                        .find(label => label.textContent.trim().startsWith("I agree to the processing by PTAK WARSAW EXPO"));
+
+                    if (consentLabel) {
+                        consentLabel.innerHTML = "' . self::multi_translation("consent_processing_data_short") . '<span class=\"show-consent\">(' . self::multi_translation("more") . ')</span><span class=\"gfield_required gfield_required_asterisk\">*</span>";
+                    }
+
+                    const consentLabels = document.querySelectorAll(".gfield_consent_label");
+
+                    consentLabels.forEach(label => {
+                        const text = label.textContent.trim();
+
+                        if (text.startsWith("I agree to the processing by PTAK WARSAW EXPO")) {
+                            label.innerHTML = "' . self::multi_translation("consent_processing_data_short") . '<span class=\"show-consent\">(' . self::multi_translation("more") . ')</span><span class=\"gfield_required gfield_required_asterisk\">*</span>";
+                        }
+                    });
+
+                    const consentDescriptions = document.querySelectorAll(".gfield_consent_description");
+
+                    consentDescriptions.forEach(description => {
+                        const text = description.textContent.trim();
+
+                        if (text.includes("e-mail address")) {
+                            translateElement(description, "' . self::multi_translation("consent_processing_data_email") . '");
+                        }
+
+                        if (text.includes("telephone number for marketing purposes")) {
+                            translateElement(description, "' . self::multi_translation("consent_processing_data_phone") . '");
+                        }
+                    });
+
+                    const requiredInfo = Array.from(document.querySelectorAll("p"))
+                        .find(p => p.textContent.trim().includes("campi contrassegnati"));
+
+                    if (requiredInfo) {
+                        translateElement(requiredInfo, "* ' . self::multi_translation("required_fields") . '");
+                    }
+                </script>';
+            }
+
         return $output;
     }
 }
