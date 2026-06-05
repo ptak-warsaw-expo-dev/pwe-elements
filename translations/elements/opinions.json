@@ -39,9 +39,19 @@
     "more": "viac...",
     "see_more": "ZOBRAZIŤ VIAC"
   },
-  "uk_UA": {
+  "uk": {
     "recommendations": "РЕКОМЕНДАЦІЇ",
     "more": "ще...",
     "see_more": "ПОДИВИТИСЯ БІЛЬШЕ"
+  },
+  "ro_RO": {
+    "recommendations": "RECOMANDĂRI",
+    "more": "mai mult...",
+    "see_more": "VEZI MAI MULTE"
+  },
+  "et": {
+    "recommendations": "REKOMENDACIOONID",
+    "more": "rohkem...",
+    "see_more": "VAATA ROHKEM"
   }
 }

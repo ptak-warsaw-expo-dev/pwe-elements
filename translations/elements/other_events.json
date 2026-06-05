@@ -55,11 +55,25 @@
     "exhibition_space": "výstavná<br>plocha",
     "more": "Viac"
   },
-  "uk_UA": {
+  "uk": {
     "other_events": "Інші події під час виставки",
     "visitors": "відвідувачів",
     "exhibitors": "експонентів",
     "exhibition_space": "виставкова<br>площа",
     "more": "Детальніше"
+  },
+  "ro_RO": {
+    "other_events": "Alte evenimente în timpul sălbăticului",
+    "visitors": "vizitatorilor",
+    "exhibitors": "expozanților",
+    "exhibition_space": "spațiul<br>expositiv",
+    "more": "Mai mult"
+  },
+  "et": {
+    "other_events": "Muud sündmused nädala jooksul",
+    "visitors": "külastajad",
+    "exhibitors": "esitajad",
+    "exhibition_space": "esitlusala",
+    "more": "Rohkem"
   }
 }

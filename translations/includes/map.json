@@ -178,7 +178,7 @@
     "logo-x-link": "/doc/logo-x-en.webp",
     "fair_logo": "Logo veľtrhu"
   },
-  "uk_UA": {
+  "uk": {
     "statistics": "Статистика",
     "industry_visitors_nth": "Професійні відвідувачі {number}-го випуску",
     "estimates_1st": "Оцінки 1-го випуску",
@@ -199,5 +199,49 @@
     "from_abroad": "з них з-за кордону",
     "logo-x-link": "/doc/logo-x-en.webp",
     "fair_logo": "Логотип ярмарку"
+  },
+  "ro_RO": {
+    "statistics": "Statistici",
+    "industry_visitors_nth": "Vizitatori profesionisti {number}-ului număr de ediție",
+    "estimates_1st": "Estimări 1-ului număr de ediție",
+    "visitors": "vizitatori",
+    "visitors_2": "Vizitatori",
+    "countries": "țări",
+    "poland": "Polonia -",
+    "abroad": "În străinătate -",
+    "exhibition_space": "spațiu<br>de expoziție",
+    "exhibition_space_1": "spațiu de expoziție",
+    "exhibitors": "expozanți",
+    "exhibitors_2": "Expozanți",
+    "logo_url": "/doc/logo-color-en.webp",
+    "surface": "Suprafață",
+    "numbers": "Numere, care vorbesc singure de ele însele",
+    "registration_link": "/înregistrare/",
+    "registration_text": "Înregistrare",
+    "from_abroad": "din aceștia din străinătate",
+    "logo-x-link": "/doc/logo-x-en.webp",
+    "fair_logo": "Logo-ul târgului"
+  },
+  "et": {
+    "statistics": "Statistika",
+    "industry_visitors_nth": "Professionaalsete külastajate {number}. väljaanne",
+    "estimates_1st": "Hinnangud 1. väljaandele",
+    "visitors": "külastajad",
+    "visitors_2": "Külastajad",
+    "countries": "riigid",
+    "poland": "Poola -",
+    "abroad": "Välisriigist -",
+    "exhibition_space": "eksponeerimis<br>ala",
+    "exhibition_space_1": "eksponeerimisala",
+    "exhibitors": "eksponeerijad",
+    "exhibitors_2": "Eksponeerijad",
+    "logo_url": "/doc/logo-color-en.webp",
+    "surface": "Pindala",
+    "numbers": "Arvud, mis räägivad ise enda kohta",
+    "registration_link": "/registreerimine/",
+    "registration_text": "Registreerimine",
+    "from_abroad": "nendest välisriigist",
+    "logo-x-link": "/doc/logo-x-en.webp",
+    "fair_logo": "Târgu logo"
   }
 }

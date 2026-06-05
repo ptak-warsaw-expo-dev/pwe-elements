@@ -63,12 +63,28 @@
     "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
     "catalog_button": "Výstavný stánok"
   },
-  "uk_UA": {
+  "uk": {
     "stands": "РОЗРОБЛЕНІ ВИСТАВКОВІ СТЕНДИ",
     "catalog": "Ознайомтеся з каталогом виставкових стендів і підготуйтеся до участі у виставці ще ефективніше. За цим каталогом ви отримаєте доступ до готових дизайнів стендів, які полегшать підготовку до виставки та допоможуть заощадити час і гроші. Обравши вже готовий дизайн стенду, ви зможете зосередитися на інших важливих аспектах підготовки до виставки, таких як підготовка пропозиції, організація транспорту або планування маркетингових заходів.",
     "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
     "stands_button": "Дивитися більше",
     "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
     "catalog_button": "Виставковий стенд"
+  },
+  "ro_RO": {
+    "stands": "STANDURI DE EXPOZIȚIE PROIECTATE",
+    "catalog": "Consultați catalogul standurilor de expoziție și pregătiți-vă pentru participarea la expoziție într-un mod și mai eficient. Cu acest catalog, veți avea acces la designuri de standuri gata realizate, care vă vor ușura pregătirea pentru expoziție și vă vor ajuta să economisiți timp și bani. Alegând un design de stand deja gata realizat, veți putea să vă concentrați pe alte aspecte importante ale pregătirii pentru expoziție, cum ar fi pregătirea ofertei, organizarea transportului sau planificarea activităților de marketing.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Vezi mai mult",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Stand de expoziție"
+  },
+  "et": {
+    "stands": "DISAINITUD NÄITUSSTENDID",
+    "catalog": "Perexiitke katalogit vystavuskohvikute kohta ja valmistuge vystavust efektiivsemalt. Selle kataloogi abil saate ligi valmisdesignidele, mis lihtsustavad valmistumist ja aitavad säästa aega ja raha. Valitsemas valmisdesigni, saate fookusesse teha teisi olulisi valmistusaspekte, nagu pakkumise koostamine, transporti korraldamine või turundusaktiivuste planeerimine.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Vaata rohkem",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Vystavuskohvik"
   }
 }

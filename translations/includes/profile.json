@@ -47,10 +47,22 @@
     "industry_scope": "Odvetvový rozsah",
     "more": "viac..."
   },
-  "uk_UA": {
+  "uk": {
     "visitor_profile": "Профіль відвідувача",
     "exhibitor_profile": "Профіль учасника",
     "industry_scope": "Сфера галузі",
     "more": "ще..."
+  },
+  "ro_RO": {
+    "visitor_profile": "Profilul vizitatorului",
+    "exhibitor_profile": "Profilul expozantului",
+    "industry_scope": "Domeniul de activitate",
+    "more": "mai mult..."
+  },
+  "et": {
+    "visitor_profile": "Profilid külalisele",
+    "exhibitor_profile": "Profilid eksponeerijale",
+    "industry_scope": "Valdkond",
+    "more": "rohkem..."
   }
 }

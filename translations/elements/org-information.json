@@ -34,5 +34,13 @@
   "uk": {
     "information_for_exhibitors": "Організаційна інформація для експонентів",
     "information_for_exhibitors_text": "org-information-uk.html"
+  },
+  "ro_RO": {
+    "information_for_exhibitors": "Informații organizaționale pentru expozanți",
+    "information_for_exhibitors_text": "org-information-ro.html"
+  },
+  "et": {
+    "information_for_exhibitors": "Organisatsioonilised teave esitajatele",
+    "information_for_exhibitors_text": "org-information-et.html"
   }
 }

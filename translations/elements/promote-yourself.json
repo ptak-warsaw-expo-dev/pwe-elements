@@ -107,4 +107,30 @@
     "download_logo": "Завантажити логотип",
     "help_text": "Якщо вам потрібно більше, напишіть нам, і ми зробимо все можливе, щоб допомогти! Лише діючи разом ми можемо досягти успіху."
   }
+  ,
+  "ro_RO": {
+    "promote_yourself": "Zal",
+    "promote_yourself_html": "promote-yourself-ro.html",
+    "parking": "PARCARE GRATUITĂ",
+    "logo_link": "/doc/logo-color-ro.webp",
+    "store_button": "Descoperă ofertele",
+    "store_button_title": "[trade_fair_name] - magazin",
+    "download": "Descarcă",
+    "download_banners": "Descarcă bannere",
+    "download_logo": "Descarcă logo",
+    "help_text": "Dacă aveți nevoie de mai multe, scrieți-ne și vom face tot posibilul să vă ajutăm! Doar lucrând împreună putem atinge succesul."
+  },
+  "et": {
+    "promote_yourself": "Hala",
+    "promote_yourself_html": "promote-yourself-et.html",
+    "parking": "TASUTA PARKIMINE",
+    "logo_link": "/doc/logo-color-et.webp",
+    "store_button": "Tutvu pakkumisega",
+    "store_button_title": "[trade_fair_name] - pood",
+    "download": "Lae alla",
+    "download_banners": "Lae alla bännerid",
+    "download_logo": "Lae alla logo",
+    "help_text": "Kui vajate rohkem, kirjutage meile ja me teeme oma parima, et aidata! Ainult üheskoos tegutsedes suudame edu saavutada."
+  }
 }
+    

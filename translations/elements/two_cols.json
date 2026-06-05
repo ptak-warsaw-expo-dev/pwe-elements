@@ -71,7 +71,7 @@
     "galeria_link": "/en/gallery/",
     "registration": "/registrácia/"
   },
-  "uk_UA": {
+  "uk": {
     "patron_partners": "ПАТРОНИ ТА ПАРТНЕРИ",
     "exhibitors": "Експоненти",
     "patrons": "Патрони",
@@ -79,5 +79,23 @@
     "gallery": "ГАЛЕРЕЯ",
     "galeria_link": "/en/gallery/",
     "registration": "/реєстрація/"
+  },
+  "ro_RO": {
+    "patron_partners": "PATRONI ȘI PARTENERI",
+    "exhibitors": "Expozanți",
+    "patrons": "Patroni",
+    "join": "ALĂTURAȚI-VĂ NOUĂ",
+    "gallery": "GALERIE",
+    "galeria_link": "/en/gallery/",
+    "registration": "/registrare/"
+  },
+  "et": {
+    "patron_partners": "PATRONID JA PARTNERID",
+    "exhibitors": "Esitajad",
+    "patrons": "Patronid",
+    "join": "LIITU MEIGA",
+    "gallery": "GALERII",
+    "galeria_link": "/en/gallery/",
+    "registration": "/registreerimine/"
   }
 }

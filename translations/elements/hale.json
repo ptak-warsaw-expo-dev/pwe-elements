@@ -47,10 +47,23 @@
     "parking": "BEZPLATNÉ PARKOVANIE",
     "logo_link": "/doc/logo-color-en.webp"
   },
-  "uk_UA": {
+  "uk": {
     "hall": "Зала",
     "halls": "Зали",
     "parking": "БЕЗКОШТОВНИЙ ПАРКІНГ",
+    "logo_link": "/doc/logo-color-en.webp"
+  }
+  ,
+  "ro_RO": {
+    "hall": "Hala",
+    "halls": "Hale",
+    "parking": "PARCARE GRATUITĂ",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "et": {
+    "hall": "Hala",
+    "halls": "Hale",
+    "parking": "NEMOKAMAS PARKAVIMAS",
     "logo_link": "/doc/logo-color-en.webp"
   }
 }

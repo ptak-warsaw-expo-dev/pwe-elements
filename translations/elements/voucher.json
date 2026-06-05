@@ -52,5 +52,17 @@
     "voucher_desc": "Перегляньте каталог виставкових стендів і підготуйтеся до виставок ефективніше. Завдяки цьому каталогу ви отримаєте доступ до готових дизайнів стендів, які спростять підготовку та допоможуть заощадити час і гроші. Обравши готовий дизайн стенду, ви зможете зосередитися на інших важливих аспектах підготовки до виставки, таких як підготовка вашої пропозиції, організація транспорту чи планування маркетингових активностей.",
     "voucher_button": "Отримати ваучер",
     "voucher_link": "/uk/контакти/"
+  },
+  "ro_RO": {
+    "voucher_title": "OBȚINEȚI UN VOUCHER PENTRU CONSTRUCȚIA STANDULUI",
+    "voucher_desc": "Pervedete catalogul de standuri de expoziție și pregătiți-vă pentru expoziții mai eficient. Cu acest catalog veți avea acces la designuri de standuri gata realizate, care vor ușura pregătirea și vor ajuta la economisirea timpului și a banilor. Alegând un design de stand gata realizat, veți putea să vă concentrați pe alte aspecte importante ale pregătirii expoziției, cum ar fi pregătirea ofertei, organizarea transportului sau planificarea activităților de marketing.",
+    "voucher_button": "Solicitare voucher",
+    "voucher_link": "/ro/contact/"
+  },
+  "et": {
+    "voucher_title": "SAAGE SEINUKUPONG STENDI EHITAMISEKS",
+    "voucher_desc": "Perexiitke katalogit vystavuskohvikute kohta ja valmistuge vystavust efektiivsemalt. Selle kataloogi abil saate ligi valmisdesignidele, mis lihtsustavad valmistumist ja aitavad säästa aega ja raha. Valitsemas valmisdesigni, saate fookusesse teha teisi olulisi valmistusaspekte, nagu pakkumise koostamine, transporti korraldamine või turundusaktiivuste planeerimine.",
+    "voucher_button": "Taotle kupongi",
+    "voucher_link": "/et/kontakt/"
   }
 }

@@ -183,7 +183,7 @@
     "minute": "minúta",
     "second": " sekunda"
   },
-  "uk_UA": {
+  "uk": {
     "until_the_fair": "До початку виставки залишилося:",
     "until_the_fair_end": "До кінця виставки залишилося:",
     "countdown_btn_text": "Забронювати стенд",
@@ -203,5 +203,47 @@
     "hour": "година",
     "minute": "хвилина",
     "second": "секунда"
+  },
+  "ro_RO": {
+    "until_the_fair": "Până la începutul expoziției mai sunt:",
+    "until_the_fair_end": "Până la sfârșitul expoziției mai sunt:",
+    "countdown_btn_text": "Rezervare stand",
+    "countdown_btn_url": "/devineti-exhibitor/",
+    "entrance": "Intrare",
+    "entrances": "Intrări",
+    "hall": "Sali",
+    "halls": "Sali",
+    "hours": "PROGRAM DE FUNCȚIONARE:",
+    "days": " zile ",
+    "hours_1": " ore ",
+    "minutes": " minuti ",
+    "seconds": " secondi ",
+    "register_text": "<span>REGISTRATI<br/>Ricevi un biglietto gratuito</span>",
+    "register_link": "/registrazione/",
+    "day": "zi",
+    "hour": "oră",
+    "minute": "minut",
+    "second": "secundă"
+  },
+  "et": {
+    "until_the_fair": "Näituse alguseni on jäänud:",
+    "until_the_fair_end": "Näituse lõpuni on jäänud:",
+    "countdown_btn_text": "Broneeri stend",
+    "countdown_btn_url": "/saage-näituseosalejaks/",
+    "entrance": "Sissepääs",
+    "entrances": "Sissepääsud",
+    "hall": " Sali",
+    "halls": "Saalid",
+    "hours": "AVAMISAEG:",
+    "days": " päevad ",
+    "hours_1": " tunnid ",
+    "minutes": " minutid ",
+    "seconds": " secondid ",
+    "register_text": "<span>REGISTREERU<br/>Saage tasuta pilet</span>",
+    "register_link": "/registratsioon/",
+    "day": "päev",
+    "hour": "tunda",
+    "minute": "minut",
+    "second": "sekund"
   }
 }

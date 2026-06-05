@@ -48,10 +48,22 @@
     "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Predpisy areálu</a><br>",
     "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Stavebné predpisy</a>"
   },
-  "uk_UA": {
+  "uk": {
     "documents": "<h3 class=\"en_US\">Документи для завантаження</h3>",
     "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Правила виставки</a><br>",
     "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Правила об&#39;єкта</a><br>",
     "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Правила будівництва</a>"
+  },
+  "ro_RO": {
+    "documents": "<h3 class=\"en_US\">Dokumente pentru descărcare</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Reguli pentru expoziție</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Reguli pentru obiect</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Reguli pentru construcții</a>"
+  },
+  "et": {
+    "documents": "<h3 class=\"en_US\">Dokumente alla laadimiseks</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Näituse reeglid</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Objekti reeglid</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Ehitusreeglid</a>"
   }
 }

@@ -119,7 +119,7 @@
       "Organizational partner": "Organizační partneri"
     }
   },
-  "uk_UA": {
+  "uk": {
     "international_patrons": "міжнародні патрони",
     "foreign_patrons": "ЗАРУБІЖНІ ПАТРОНИ ТА ПАРТНЕРИ",
     "international": "міжнародний",
@@ -132,6 +132,36 @@
       "Trade and Conference Partner": "Партнери ярмарку та конференції",
       "Honorary Patronage": "Почесні патронати",
       "Organizational partner": "Організаційні партнери"
+    }
+  },
+  "ro_RO": {
+    "international_patrons": "patroni internaționali",
+    "foreign_patrons": "PATRONI ȘI PARTNERI STRĂINI",
+    "international": "internațional",
+    "exhibitor": "Expozant",
+    "plurals": {
+      "Speaker": "Relatori",
+      "Fair Partner": "Partnerii târgului",
+      "Content Partner": "Partnerii de conținut",
+      "Industry Partner": "Partnerii industriei",
+      "Trade and Conference Partner": "Partnerii târgului și conferinței",
+      "Honorary Patronage": "Patronatul onorar",
+      "Organizational partner": "Partnerii organizaționali"
+    }
+  },
+  "et": {
+    "international_patrons": "rahvusvahelised toetajad",
+    "foreign_patrons": "VÄLISRIIGI PATRONID JA PARTNERID",
+    "international": "rahvusvaheline",
+    "exhibitor": "Eksponeerija",
+    "plurals": {
+      "Speaker": "Relatori",
+      "Fair Partner": "Partnerii târgului",
+      "Content Partner": "Partnerii de conținut",
+      "Industry Partner": "Partnerii industriei",
+      "Trade and Conference Partner": "Partnerii târgului și conferinței",
+      "Honorary Patronage": "Patronatul onorar",
+      "Organizational partner": "Partnerii organizaționali"
     }
   }
 }

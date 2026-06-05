@@ -23,7 +23,13 @@
   "sk_SK": {
     "premieres": "Čo uvidíte na "
   },
-  "uk_UA": {
+  "uk": {
     "premieres": "Що ви побачите на "
+  },
+  "ro_RO": {
+    "premieres": "Ce veți vedea la "
+  },
+  "et": {
+    "premieres": "Ko näete "
   }
 }

@@ -115,5 +115,31 @@
     "back_link": "/uk/",
     "become_an_exhibitor": "Стати експонентом",
     "visitors": "Відвідувачі"
+  },
+  "ro_RO": {
+    "step": "Krok <span class=\"text-accent-color\">2 z 2",
+    "your_ticket": "Biletul dumneavoastră a fost <br>generat cu succes!",
+    "receive_e-mail": "Îl veți primi la adresa de e-mail indicată.<br>Poate dura câteva minute.",
+    "become_exhibitor": "Doriți să deveniți <span class=\"text-accent-color\">expozant</span> la [trade_fair_name_eng]?",
+    "i_am_interested": "Da, sunt interesat",
+    "confirmation_link": "/ro/potvrdenie-registracie-vystavovatela/",
+    "confirmation_text": "Da, sunt interesat",
+    "no_thank_you": "Nu, mulțumesc",
+    "back_link": "/ro/",
+    "become_an_exhibitor": "A fi expozant",
+    "visitors": "Vizitatori"
+  },
+  "et": {
+    "step": "Krok <span class=\"text-accent-color\">2 z 2",
+    "your_ticket": "Teie pilet on <br> edukalt loodud!",
+    "receive_e-mail": "Te saate selle näidatud e-posti aadressile.<br>See võib võtta paar minutit.",
+    "become_exhibitor": "Kas soovite saada <span class=\"text-accent-color\">eksponendiks</span> [trade_fair_name_eng]?",
+    "i_am_interested": "Jah, olen huvitatud",
+    "confirmation_link": "/et/potvrdenie-registracie-vystavovatela/",
+    "confirmation_text": "Da, sunt interesat",
+    "no_thank_you": "Ei, aitäh",
+    "back_link": "/et/",
+    "become_an_exhibitor": "Olla expozant",
+    "visitors": "Külastajad"
   }
 }

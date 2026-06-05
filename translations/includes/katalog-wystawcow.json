@@ -39,9 +39,19 @@
     "exhibitors": "Vystavovatelia ",
     "new_exhibitors": "Noví vystavovatelia na veľtrhu "
   },
-  "uk_UA": {
+  "uk": {
     "catalog": "Каталог учасників ",
     "exhibitors": "Учасники ",
     "new_exhibitors": "Нові учасники виставки "
+  },
+  "ro_RO": {
+    "catalog": "Catalogul expozanților ",
+    "exhibitors": "Expozanți ",
+    "new_exhibitors": "Noi expozanți la târg "
+  },
+  "et": {
+    "catalog": "Kataloog eksponeerijatelt ",
+    "exhibitors": "Eksponeerijad ",
+    "new_exhibitors": "Uued eksponeerijad messil "
   }
 }

@@ -103,7 +103,7 @@
     "organizer": "Organizátor",
     "subject": "Predmet"
   },
-  "uk_UA": {
+  "uk": {
     "conferences_events": "Конференції та супутні заходи",
     "conference": "Конференція",
     "conferences_link": "/en/conferences/",
@@ -115,5 +115,31 @@
     "find_out_more": "ДІЗНАЙТЕСЯ БІЛЬШЕ",
     "organizer": "Організатор",
     "subject": "Тема"
+  },
+  "ro_RO": {
+    "conferences_events": "Conferințe și evenimente însoțitoare",
+    "conference": "Conferință",
+    "conferences_link": "/en/conferences/",
+    "details": "Detalii",
+    "registration_link": "/registrare/",
+    "registration": "Registrare",
+    "take_part": "ALĂTURAȚI-VĂ",
+    "patrons": "PATRONI ȘI PARTENERI",
+    "find_out_more": "AFLAȚI MAI MULTE",
+    "organizer": "Organizator",
+    "subject": "Subiect"
+  },
+  "et": {
+    "conferences_events": "Konverentsid ja kaasnevad üritused",
+    "conference": "Konverents",
+    "conferences_link": "/en/conferences/",
+    "details": "Detailid",
+    "registration_link": "/registreerimine/",
+    "registration": "Registreerimine",
+    "take_part": "LIITUDA",
+    "patrons": "PATRONID JA PARTNERID",
+    "find_out_more": "KUULA ROHKEM",
+    "organizer": "Organisaator",
+    "subject": "Teema"
   }
 }

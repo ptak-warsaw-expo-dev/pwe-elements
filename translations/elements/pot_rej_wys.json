@@ -28,7 +28,8 @@
     "required_fields": "pola oznaczone gwiazdką są obowiązkowe",
     "consent": "* pola oznaczone gwiazdką są obowiązkowe",
     "from": "od",
-    "to": "do"
+    "to": "do",
+    "directUrl":"/zostan-wystawca/"
   },
   "en_US": {
     "generate_an_offer": "Generate an offer",
@@ -59,7 +60,8 @@
     "required_fields": "fields marked with an asterisk are required",
     "consent": "* fields marked with an asterisk are required",
     "from": "from",
-    "to": "to"
+    "to": "to",
+    "directUrl":"/en/become-an-exhibitor/"
   },
   "de_DE": {
     "generate_an_offer": "Ein Angebot erstellen",
@@ -90,7 +92,8 @@
     "required_fields": "Felder, die mit einem Sternchen gekennzeichnet sind, sind erforderlich",
     "consent": "* Mit einem Sternchen markierte Felder sind erforderlich.",
     "from": "von",
-    "to": "bis"
+    "to": "bis",
+    "directUrl":"/de/werden-sie-aussteller/"
   },
   "cs_CZ": {
     "generate_an_offer": "Vygenerovat nabídku",
@@ -121,7 +124,8 @@
     "required_fields": "pole označená hvězdičkou jsou povinná",
     "consent": "* pole označená hvězdičkou jsou povinná",
     "from": "od",
-    "to": "do"
+    "to": "do",
+    "directUrl":"/cs/stante-se-vystavovatelem/"
   },
   "it_IT": {
     "generate_an_offer": "Genera un preventivo",
@@ -152,7 +156,8 @@
     "required_fields": "i campi contrassegnati con un asterisco sono obbligatori",
     "consent": "* i campi contrassegnati con un asterisco sono obbligatori",
     "from": "da",
-    "to": "a"
+    "to": "a",
+    "directUrl":"/it/diventa-espositore/"
   },
   "lt_LT": {
     "generate_an_offer": "Gaukite pasiūlymą",
@@ -183,7 +188,8 @@
     "required_fields": "laukeliai pažymėti žvaigždute yra privalomi",
     "consent": "* laukai pažymėti žvaigždute yra privalomi",
     "from": "nuo",
-    "to": "iki"
+    "to": "iki",
+    "directUrl":"/lt/tapkite-eksponentu/"
   },
   "lv_LV": {
     "generate_an_offer": "Saņemiet piedāvājumu",
@@ -214,7 +220,8 @@
     "required_fields": "lauki, kas atzīmēti ar zvaigznīti, ir obligāti",
     "consent": "* lauki, kas atzīmēti ar zvaigznīti, ir obligāti",
     "from": "no",
-    "to": "līdz"
+    "to": "līdz",
+    "directUrl":"/lv/klusti-par-izstades-dalibnieku/"
   },
   "sk_SK": {
     "generate_an_offer": "Vygenerovať ponuku",
@@ -245,9 +252,10 @@
     "required_fields": "polia označené hviezdičkou sú povinné",
     "consent": "* polia označené hviezdičkou sú povinné",
     "from": "od",
-    "to": "do"
+    "to": "do",
+    "directUrl":"/sk/stante-sa-vystavovatelom/"
   },
-  "uk_UA": {
+  "uk": {
     "generate_an_offer": "Отримати пропозицію",
     "back_to_main_page": "Повернутися на головну сторінку",
     "thank_you_for_registering": "<h2 class=\"text-color-jevc-color\">Дякуємо за реєстрацію бажання вашої компанії взяти участь у виставці <span>[trade_fair_name]!</span></h2><p>Наш представник незабаром зв&#39;яжеться з вами, щоб представити нашу виставкову пропозицію та переваги участі у виставці.</p>",
@@ -276,6 +284,71 @@
     "required_fields": "поля, позначені зірочкою, є обов'язковими",
     "consent": "* поля, позначені зірочкою, є обов&#39;язковими",
     "from": "від",
-    "to": "до"
+    "to": "до",
+    "directUrl":"/uk/staty-eksponentom/"
+  },
+  "ro_RO": {
+    "generate_an_offer": "Obțineți o ofertă",
+    "back_to_main_page": "Înapoi la pagina principală",
+    "thank_you_for_registering": "<h2 class=\"text-color-jevc-color\">Vă mulțumim pentru înregistrarea dorinței companiei dumneavoastră de a participa la târgul <span>[trade_fair_name]!</span></h2><p>Un reprezentant al nostru vă va contacta în curând pentru a vă prezenta oferta noastră de expoziție și avantajele participării la târg.</p>",
+    "provide_additional_details": "<h3>Vă rugăm să furnizați detalii suplimentare</span></h3><p>Acest lucru ne va ajuta să alegem condițiile potrivite și să îmbunătățim comunicarea.</p>",
+    "dedicated_market_place": "Piață dedicată",
+    "back_link": "/",
+    "see_the_offer": "href=\"https://warsawexpo.eu/en/exhibition-stands\">Vezi oferta",
+    "exhibition_space": "Alegeți un spațiu de expoziție",
+    "name": "Nume",
+    "area": "Alegeți un spațiu de expoziție",
+    "company": "Companie",
+    "confirm_text": " Vă mulțumim pentru completarea datelor. Așteptăm cu nerăbdare să auzim de la dumneavoastră în curând. Echipa Ptak Warsaw Expo",
+    "error": "Câmpurile marcate sunt obligatorii!",
+    "tax": "CUI",
+    "company_desc": "Informații suplimentare despre companie",
+    "first_name": "Nume și prenume",
+    "tax_id": "CUI",
+    "email": "Email",
+    "phone": "Număr de telefon",
+    "additional_company_information": "Informații suplimentare despre companie",
+    "select_exhibition_space": "Alegeți un spațiu de expoziție",
+    "consent_processing_data_short": "Vă aprobă procesarea datelor PTAK WARSAW EXPO",
+    "more": "detalii",
+    "consent_processing_data_email": "Vă aprobă procesarea adresei dvs. de email cu scopuri de contact și marketing PTAK WARSAW EXPO.",
+    "consent_processing_data_phone": "Vă aprobă procesarea numărului dvs. de telefon cu scopuri de marketing PTAK WARSAW EXPO.",
+    "required_fields": "câmpurile marcate sunt obligatorii",
+    "consent": "* câmpurile marcate sunt obligatorii",
+    "from": "de la",
+    "to": "la",
+    "directUrl":"/ro/devino-expozant/"
+  },
+  "et": {
+    "generate_an_offer": "Saage pakkumine",
+    "back_to_main_page": "Tagasi pealehele",
+    "thank_you_for_registering": "<h2 class=\"text-color-jevc-color\">Aitäh, et registreerisid oma ettevõtte osalemise soovi <span>[trade_fair_name]!</span></h2><p>Meie esindaja võtab suhtega varsti ühendust, et esitada meie vystavuslik pakkumine ja esitada eelised osalemiseks.</p>",
+    "provide_additional_details": "<h3>Palun esitage täiendavad andmed</span></h3><p>See aitab meil valida sobivad tingimused ja parandada kommunikatsiooni.</p>",
+    "dedicated_market_place": "Eraldatud turumärgistus",
+    "back_link": "/",
+    "see_the_offer": "href=\"https://warsawexpo.eu/en/exhibition-stands\">Vaata pakkumist</a>",
+    "exhibition_space": "Vali näitusepind",
+    "name": "Nimi",
+    "area": "Vali näitusepind",
+    "company": "Ettevõte",
+    "confirm_text": "Aitäh, et täidetud andmed. Ootame suhtega varsti ühendust. Ptak Warsaw Expo meeskond",
+    "error": "Täidetud väljad on kohustuslikud!",
+    "tax": "MKM number",
+    "company_desc": "Täiendav teave ettevõtte kohta",
+    "first_name": "Nimi",
+    "tax_id": "MKM number",
+    "email": "E-post",
+    "phone": "Telefoninumber",
+    "additional_company_information": "Täiendav teave ettevõtte kohta",
+    "select_exhibition_space": "Vali näitusepind",
+    "consent_processing_data_short": "Nõustun, et PTAK WARSAW EXPO töötleb andmeid",
+    "more": "detalji",
+    "consent_processing_data_email": "Nõustun, et PTAK WARSAW EXPO töötleb minu e-posti aadressi z metoju kontaktimist ja turundamist.",
+    "consent_processing_data_phone": "Nõustun, et PTAK WARSAW EXPO töötleb minu telefoninumbrit turundamise eesmärkidel.",
+    "required_fields": "väljad, märgitud tärniga, on kohustuslikud",
+    "consent": "* väljad, märgitud tärniga, on kohustuslikud",
+    "from": "from",
+    "to": "to",
+    "directUrl":"/et/saada-eksponeerijaks/"
   }
 }

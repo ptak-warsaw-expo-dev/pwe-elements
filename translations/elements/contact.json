@@ -182,7 +182,7 @@
     "visitors": "Návštevníci",
     "technical_department": "Technické oddelenie",
     "marketing": "Marketing"
-  },
+  }, 
   "uk": {
     "send_message": "НАДІСЛАТИ ПОВІДОМЛЕННЯ",
     "write_to_us": "Напишіть нам",
@@ -205,5 +205,53 @@
     "visitors": "Відвідувачі",
     "technical_department": "Технічний відділ",
     "marketing": "Маркетинг"
+  }
+  ,
+  "ro_RO": {
+    "send_message": "TRIMITEȚI MESAJ",
+    "write_to_us": "Scrieți-ne",
+    "reply": "Vom răspunde sau vă vom apela înapoi,<br>dacă ne lăsați numărul de telefon.",
+    "organized_groups": "Contact pentru grupuri organizate",
+    "participation": "Pentru a garanta o participare confortabilă la activitățile noastre, accesul pentru grupurile organizate este posibil doar în ultima zi a expoziției. Înainte de a veni, vă invităm să ne contactați prin formularul disponibil pe site: <a id=\"pweGroupsLink\" href=\"https://warsawexpo.eu/en/groups\" alt=\"link to group registration\" target=\"_blank\">warsawexpo.eu/en/groups</a>. Este obligatoriu să lăsați rucsacurile și bagajele în haine. La expoziție se aplică codul de îmbrăcăminte de business.",
+    "contact_form": "Forma de contact",
+    "contact_link": "https://warsawexpo.eu/en/groups/",
+    "customer_service": "Serviciul pentru clienți",
+    "customer_service_office": "Biroul serviciului pentru clienți",
+    "technical_support": "Suport tehnic pentru expozanți<br>",
+    "media_marketing": "Media și marketing",
+    "media_marketing_service": "Servicii de marketing și media",
+    "first_name": "Nume și prenume",
+    "email": "E-mail",
+    "phone": "Număr de telefon",
+    "help_you": "Cum vă putem ajuta?",
+    "department": "Departament",
+    "exhibitors": "Eksponenți",
+    "visitors": "Vizitatori",
+    "technical_department": "Departamentul tehnic",
+    "marketing": "Marketing"
+  }
+  ,
+  "et": {
+    "send_message": "SAADA SÕNUM",
+    "write_to_us": "Kirjuta meile",
+    "reply": "Vastame teile või helistame teile tagasi,<br>kui jätate meile oma telefoninumbri.",
+    "organized_groups": "Kontakt organiseeritud gruppidele",
+    "participation": "Selleks, et tagada teie mugav osalemine meie üritustel, on organiseeritud gruppide sissepääs võimalik ainult messi viimasel päeval. Enne saabumist soovitame teil meiega ühendust võtta veebisaidil oleva vormi kaudu: <a id=\"pweGroupsLink\" href=\"https://warsawexpo.eu/en/groups\" alt=\"link to group registration\" target=\"_blank\">warsawexpo.eu/en/groups</a>. Seljakottide ja kohvrite jätmine garderoobi on kohustuslik. Messil kehtib ärirõivaste kood.",
+    "contact_form": "Kontaktvorm",
+    "contact_link": "https://warsawexpo.eu/en/groups/",
+    "customer_service": "Klienditeenindus",
+    "customer_service_office": "Klienditeeninduse büroo",
+    "technical_support": "Tehniline tugi näituse osalejatele<br>",
+    "media_marketing": "Meedia ja turundus",
+    "media_marketing_service": "Turundus- ja meediapaketid",
+    "first_name": "Nimi ja perekonnanimi",
+    "email": "E-mail",
+    "phone": "Telefoninumber",
+    "help_you": "Kuidas saame teid aidata?",
+    "department": "Osakond",
+    "exhibitors": "Näituse osalejad",
+    "visitors": "Külastajad",
+    "technical_department": "Tehniline osakond",
+    "marketing": "Turundus"
   }
 }

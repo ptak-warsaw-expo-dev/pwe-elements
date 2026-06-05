@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.4.1
+ * Version: 3.4.2
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -187,9 +187,6 @@ class PWElementsPlugin
 
             // Menu settings
             include_once plugin_dir_path(__FILE__) . 'includes/settings/nav-menu-settings.php';
-
-            // Translation settings
-            include_once plugin_dir_path(__FILE__) . 'includes/settings/translation-settings.php';
         }
 
         // Variables of styles

@@ -87,7 +87,7 @@
     "benefit_welcome_alt": "Uvítací balík",
     "benefit_welcome_text": "Príprava identifikačných štítkov a individuálnych uvítacích balíkov pre všetkých registrovaných účastníkov, ktoré budú zaslané priamo na adresu uvedenú v registračnom formulári."
   },
-  "uk_UA": {
+  "uk": {
     "benefit_networking_title": "Зона нетворкінгу",
     "benefit_networking_alt": "Зона нетворкінгу",
     "benefit_networking_text": "Під час виставки буде доступна спеціально відокремлена <strong>нетворкінг-зона</strong> – простір для обміну досвідом і зміцнення контактів. Галузеві зустрічі – чудова можливість розширити коло потенційних ділових партнерів і побудувати міцну клієнтську базу.",
@@ -97,5 +97,27 @@
     "benefit_welcome_title": "Вітальний пакет",
     "benefit_welcome_alt": "Вітальний пакет",
     "benefit_welcome_text": "Підготовка бейджів та індивідуальних вітальних пакетів для всіх зареєстрованих учасників, які будуть надіслані безпосередньо на адресу, вказану у формі реєстрації."
+  },
+  "ro_RO": {
+    "benefit_networking_title": "Zona de networking",
+    "benefit_networking_alt": "Zona de networking",
+    "benefit_networking_text": "Pe durata expoziției va fi disponibilă o zonă special dedicată <strong>networkingului</strong> – un spațiu pentru schimbul de experiență și consolidarea contactelor. Întâlnirile profesionale reprezintă o oportunitate excelentă pentru extinderea răspândirii partenerilor comerciali potențiali și construirea unei baze solide de clienți.",
+    "benefit_panel_title": "Panou educațional",
+    "benefit_panel_alt": "Panou educațional",
+    "benefit_panel_text": "Numeroase discursuri și o conferință de industrie susținută de vorbitori recunoscuți – practicieni experimentați și experți în domeniu.",
+    "benefit_welcome_title": "Pachet de bun venit",
+    "benefit_welcome_alt": "Pachet de bun venit",
+    "benefit_welcome_text": "Pregătirea badge-urilor și a pachetelor de bun venit individuale pentru toți participanții înregistrați, care vor fi trimise direct la adresa indicată în formularul de înregistrare."
+  },
+  "et": {
+    "benefit_networking_title": "Networking-zona",
+    "benefit_networking_alt": "Networking-zona",
+    "benefit_networking_text": "Näituse käigus on saadaval eraldi <strong>networking-zona</strong> – ruum kogemuste vahetamiseks ja kontaktide tugevdamiseks. Ametele sobivad kohtumised annavad võimaluse laiendada potentsiaalsete ärikülastuste ja tugeva kliendibaasi ehitamist.",
+    "benefit_panel_title": "Hariduslik paneel",
+    "benefit_panel_alt": "Hariduslik paneel",
+    "benefit_panel_text": "Palju ettekandeid ja tööstuskonverents, mida juhivad tunnustatud esinejad – kogenud praktikandid ja tööstuseksperdid.",
+    "benefit_welcome_title": "Tervituspakett",
+    "benefit_welcome_alt": "Tervituspakett",
+    "benefit_welcome_text": "Pregătirea badge-urilor și a pachetelor de bun venit individuale pentru toți participanții înregistrați, care vor fi trimise direct la adresa indicată în formularul de înregistrare."
   }
 }

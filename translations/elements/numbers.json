@@ -117,7 +117,7 @@
     "calendar": "Kalendár veľtrhov",
     "certificate": "<strong>Certifikát UFI Member</strong> je oficiálnym potvrdením, že <strong>PTAK WARSAW EXPO SP. z o.o.</strong> je členom UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) je medzinárodná priemyselná organizácia, ktorá združuje kľúčových hráčov na globálnom trhu výstav a expozícií, vrátane organizátorov výstav a výstav, ako aj správcov výstavných centier."
   },
-  "uk_UA": {
+  "uk": {
     "days": "дні конференції",
     "speakers": "доповідачі",
     "participants": "учасники",
@@ -130,5 +130,33 @@
     "events": "Виставки / Конференції / Заходи",
     "calendar": "Календар виставок",
     "certificate": "<strong>Сертифікат UFI Member</strong> є офіційним підтвердженням того, що <strong>PTAK WARSAW EXPO SP. z o.o.</strong> є членом UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) є міжнародною галузевою організацією, яка об&#39;єднує ключових гравців на глобальному ринку виставок і експозицій, включаючи організаторів виставок і центрів виставок."
+  },
+  "ro_RO": {
+    "days": "zile de conferință",
+    "speakers": "oratori",
+    "participants": "participanți",
+    "exhibitors": "Exhibitori<br>pe an",
+    "visitors": "Vizitatori<br>pe an",
+    "fair": "B2B târguri <br>pe an",
+    "surface": "Suprafață m<sup>2</sup>",
+    "footer_text": "CEL MAI MARE CENTRU DE TÂRGURI DIN EUROPA CENTRALĂ ȘI DE EST",
+    "capital": "Capitala târgurilor",
+    "events": "Târguri / Conferințe / Evenimente",
+    "calendar": "Calendarul târgurilor",
+    "certificate": "<strong>Certificatul de membru UFI</strong> este o confirmare oficială că <strong>PTAK WARSAW EXPO SP. z o.o.</strong> este membru al UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) este o organizație internațională a industriei care reunește jucătorii cheie de pe piața globală a târgurilor și expozițiilor, inclusiv organizatori de târguri și expoziții, precum și manageri de centre de expoziții."
+  },
+  "et": {
+    "days": "konverentsipäevad",
+    "speakers": "esinejad",
+    "participants": "osalejad",
+    "exhibitors": "Näitlejad<br>aastas",
+    "visitors": "Külastajad<br>aastas",
+    "fair": "B2B messid <br>aastas",
+    "surface": "Pindala m<sup>2</sup>",
+    "footer_text": "NAJBOLJŠI VYSTAVNÝ CENTR V STREDNEJ A VÝCHODNEJ EURÓPE",
+    "capital": "Hlavné mesto výstav",
+    "events": "Výstavy / Konferencie / Udalosti",
+    "calendar": "Kalendár výstav",
+    "certificate": "<strong>Certifikát UFI Member</strong> je oficiálnym potvrdením, že <strong>PTAK WARSAW EXPO SP. z o.o.</strong> je členom UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) je medzinárodná priemyselná organizácia, ktorá združuje kľúčových hráčov na globálnom trhu výstav a expozícií, vrátane organizátorov výstav a výstav, ako aj správcov výstavných centier."
   }
 }

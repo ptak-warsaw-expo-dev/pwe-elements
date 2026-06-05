@@ -71,7 +71,7 @@
     "register": "Registrovať sa",
     "free_ticket": "Získajte bezplatný lístok"
   },
-  "uk_UA": {
+  "uk": {
     "premier_edition": "Прем’єрне видання",
     "edition": " видання",
     "warsaw": "Варшава",
@@ -79,5 +79,23 @@
     "link_to_registration": "посилання на реєстрацію",
     "register": "Зареєструватися",
     "free_ticket": "Отримати безкоштовний квиток"
+  },
+  "ro_RO": {
+    "premier_edition": "Ediție Premieră",
+    "edition": " ediție",
+    "warsaw": "Varsavia",
+    "warsaw_poland": "Varsavia, Polonia",
+    "link_to_registration": "link la înregistrare",
+    "register": "Înregistrează-te",
+    "free_ticket": "Obține un bilet gratuit"
+  },
+  "et": {
+    "premier_edition": "Esimene väljaanne",
+    "edition": " väljaanne",
+    "warsaw": "Varssavi",
+    "warsaw_poland": "Varssavi, Poola",
+    "link_to_registration": "registreerimislink",
+    "register": "Registreeru",
+    "free_ticket": "Hangi tasuta pileti"
   }
 }
