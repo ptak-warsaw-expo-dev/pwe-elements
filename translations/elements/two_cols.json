@@ -15,7 +15,7 @@
     "join": "JOIN US",
     "gallery": "GALLERY",
     "galeria_link": "/en/gallery/",
-    "registration": "/registration/"
+    "registration": "/en/registration/"
   },
   "de_DE": {
     "patron_partners": "FÖRDERER UND PARTNER",
@@ -24,7 +24,7 @@
     "join": "MACH MIT",
     "gallery": "GALERIE",
     "galeria_link": "/en/gallery/",
-    "registration": "/Anmeldung/"
+    "registration": "/de/anmeldung/"
   },
   "cs_CZ": {
     "patron_partners": "PATRONI A PARTNEŘI",
@@ -33,7 +33,7 @@
     "join": "PŘIDEJTE SE K NÁM",
     "gallery": "GALERIE",
     "galeria_link": "/en/gallery/",
-    "registration": "/registrace/"
+    "registration": "/cs/registrace/"
   },
   "it_IT": {
     "patron_partners": "PATRONI E PARTNER",
@@ -42,7 +42,7 @@
     "join": "UNISCITI A NOI",
     "gallery": "GALLERIA",
     "galeria_link": "/en/gallery/",
-    "registration": "/registrazione/"
+    "registration": "/it/registrazione/"
   },
   "lt_LT": {
     "patron_partners": "RĖMĖJAI IR PARTNERIAI",
@@ -51,7 +51,7 @@
     "join": "PRISIJUNK PRIE MŪSŲ",
     "gallery": "GALERIJA",
     "galeria_link": "/en/gallery/",
-    "registration": "/registracija/"
+    "registration": "/lt/registracija/"
   },
   "lv_LV": {
     "patron_partners": "PATRONI UN PARTNERI",
@@ -60,7 +60,7 @@
     "join": "PIEVIENOJIES MUMS",
     "gallery": "GALERIJAS",
     "galeria_link": "/en/gallery/",
-    "registration": "/reģistrācija/"
+    "registration": "/lv/registracija/"
   },
   "sk_SK": {
     "patron_partners": "PATRÓNI A PARTNERI",
@@ -69,7 +69,7 @@
     "join": "PRIDAJTE SA K NÁM",
     "gallery": "GALÉRIA",
     "galeria_link": "/en/gallery/",
-    "registration": "/registrácia/"
+    "registration": "/sk/registracia/"
   },
   "uk": {
     "patron_partners": "ПАТРОНИ ТА ПАРТНЕРИ",
@@ -78,7 +78,7 @@
     "join": "ПРИЄДНУЙТЕСЯ ДО НАС",
     "gallery": "ГАЛЕРЕЯ",
     "galeria_link": "/en/gallery/",
-    "registration": "/реєстрація/"
+    "registration": "/uk/reyestraciya/"
   },
   "ro_RO": {
     "patron_partners": "PATRONI ȘI PARTENERI",
@@ -87,7 +87,7 @@
     "join": "ALĂTURAȚI-VĂ NOUĂ",
     "gallery": "GALERIE",
     "galeria_link": "/en/gallery/",
-    "registration": "/registrare/"
+    "registration": "/ro/inregistrare/"
   },
   "et": {
     "patron_partners": "PATRONID JA PARTNERID",
@@ -96,6 +96,6 @@
     "join": "LIITU MEIGA",
     "gallery": "GALERII",
     "galeria_link": "/en/gallery/",
-    "registration": "/registreerimine/"
+    "registration": "/et/registreerimine/"
   }
 }

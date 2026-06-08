@@ -2,56 +2,67 @@
   "pl_PL": {
     "catalog": "Katalog wystawców ",
     "exhibitors": "Wystawcy ",
-    "new_exhibitors": "Nowi wystawcy na targach "
+    "new_exhibitors": "Nowi wystawcy na targach ",
+    "become_exhibitor": "Zostań wystawcą"
   },
   "en_US": {
     "catalog": "Exhibitor Catalog ",
     "exhibitors": "Exhibitors ",
-    "new_exhibitors": "New exhibitors at the fair "
+    "new_exhibitors": "New exhibitors at the fair ",
+    "become_exhibitor": "Become an exhibitor"
   },
   "de_DE": {
     "catalog": "Ausstellerverzeichnis ",
     "exhibitors": "Aussteller ",
-    "new_exhibitors": "Neue Aussteller auf der Messe "
+    "new_exhibitors": "Neue Aussteller auf der Messe ",
+    "become_exhibitor": "Zu einem Aussteller werden"
   },
   "cs_CZ": {
     "catalog": "Katalog vystavovatelů ",
     "exhibitors": "Vystavovatelé ",
-    "new_exhibitors": "Noví vystavovatelé na veletrzích "
+    "new_exhibitors": "Noví vystavovatelé na veletrzích ",
+    "become_exhibitor": "Staňte se vystavovatelem"
   },
   "it_IT": {
     "catalog": "Catalogo espositori ",
     "exhibitors": "Espositori ",
-    "new_exhibitors": "Nuovi espositori alla fiera "
+    "new_exhibitors": "Nuovi espositori alla fiera ",
+    "become_exhibitor": "Diventa un espositore"
   },
   "lt_LT": {
     "catalog": "Parodų katalogas ",
     "exhibitors": "Ekspozitoriai ",
-    "new_exhibitors": "Nauji parodos dalyviai "
+    "new_exhibitors": "Nauji parodos dalyviai ",
+    "become_exhibitor": "Tapkite ekspozitoriumi"
   },
   "lv_LV": {
     "catalog": "Izstādes katalogs ",
     "exhibitors": "Izstādes dalībnieki ",
-    "new_exhibitors": "Jauni izstādes dalībnieki "
+    "new_exhibitors": "Jauni izstādes dalībnieki ",
+    "become_exhibitor": "Kļūsti par izstādes dalībnieku"
   },
   "sk_SK": {
     "catalog": "Katalóg vystavovateľov ",
     "exhibitors": "Vystavovatelia ",
-    "new_exhibitors": "Noví vystavovatelia na veľtrhu "
+    "new_exhibitors": "Noví vystavovatelia na veľtrhu ",
+    "become_exhibitor": "Staňte se vystavovatelem"
   },
   "uk": {
     "catalog": "Каталог учасників ",
     "exhibitors": "Учасники ",
-    "new_exhibitors": "Нові учасники виставки "
+    "new_exhibitors": "Нові учасники виставки ",
+    "become_exhibitor": "Стати учасником"
   },
   "ro_RO": {
     "catalog": "Catalogul expozanților ",
     "exhibitors": "Expozanți ",
-    "new_exhibitors": "Noi expozanți la târg "
+    "new_exhibitors": "Noi expozanți la târg ",
+    "become_exhibitor": "Deveniți un expozanți"
   },
   "et": {
     "catalog": "Kataloog eksponeerijatelt ",
     "exhibitors": "Eksponeerijad ",
-    "new_exhibitors": "Uued eksponeerijad messil "
+    "new_exhibitors": "Uued eksponeerijad messil ",
+    "become_exhibitor": "Saage eksponeerijaks"
   }
 }
