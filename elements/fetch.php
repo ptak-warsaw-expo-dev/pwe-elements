@@ -136,9 +136,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($direction !== "registration") {
             $entry = GFAPI::get_entry($entry_id);
 
+            $user_lang = isset($data['lang']) ? strtolower($data['lang']) : 'pl';
+
+            if ($user_lang === 'pl' || $user_lang === 'en') {
+                $target_notification_name = 'Admin Notification Potwierdzenie';
+            } else {
+                $target_notification_name = 'Admin Notification Potwierdzenie - ' . strtoupper($user_lang);
+            }
+
             $notifications = $form['notifications'];
             foreach ($form["notifications"] as $id => &$key) {
-                $key['isActive'] = in_array($key['name'], ['Admin Notification Potwierdzenie']);
+                // 3. Sprawdzamy dynamicznie wygenerowaną nazwę powiadomienia
+                $key['isActive'] = in_array($key['name'], [$target_notification_name]);
             }
             GFAPI::send_notifications($form, $entry);
         }

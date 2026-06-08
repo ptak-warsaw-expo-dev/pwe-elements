@@ -470,6 +470,7 @@ class PWElementStepTwo extends PWElements {
 
                             //         jQuery(".pwelement_'. self::$rnd_id .' .ginput_container_email").find("input").val(userEmail);
                             //         jQuery(".pwelement_'. self::$rnd_id .' .ginput_container_phone").find("input").val(userPhone);
+                            //         jQuery(".pwelement_'. self::$rnd_id .' .lang input").val(pageLang);
                             //         jQuery(".pwelement_'. self::$rnd_id .' .gfield--type-consent").find("input").click();
                             //         jQuery(".pwelement_'. self::$rnd_id .' form").submit();
 
@@ -498,6 +499,7 @@ class PWElementStepTwo extends PWElements {
                                     jQuery(".pwelement_'. self::$rnd_id .' .ginput_container_email").find("input").val(userEmail);
                                     jQuery(".pwelement_'. self::$rnd_id .' .ginput_container_phone").find("input").val(userPhone);
                                     jQuery(".pwelement_'. self::$rnd_id .' .gfield--type-consent").find("input").click();
+                                    jQuery(".pwelement_'. self::$rnd_id .' .lang input").val(pageLang);
                                     jQuery(".pwelement_'. self::$rnd_id .' form").submit();
                                 }
                             });

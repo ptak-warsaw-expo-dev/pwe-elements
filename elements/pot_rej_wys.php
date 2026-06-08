@@ -21,9 +21,11 @@ class PWElementStepTwoExhibitor extends PWElements {
      * @return array Zaktualizowany formularz
      */
     public function hideFieldsBasedOnAdminLabel($form) {
+
         if ($_SESSION["pwe_reg_entry"]["email"]) {
+
             foreach ($form['fields'] as &$field) {
-                if (in_array($field->adminLabel, ['mail', 'number'])) {
+                if (in_array($field->adminLabel, ['mail', 'email', 'number', 'phone'])) {
                     $field->visibility = 'hidden';
                 }
             }
@@ -132,7 +134,6 @@ class PWElementStepTwoExhibitor extends PWElements {
             'registration_form_step2_exhibitor_www2' => '',
         ), $atts ));
 
-
         $pwe_groups_data = PWECommonFunctions::get_database_groups_data();
         $pwe_groups_contacts_data = PWECommonFunctions::get_database_groups_contacts_data();
 
@@ -158,16 +159,22 @@ class PWElementStepTwoExhibitor extends PWElements {
         $userSessionEmail = $_SESSION["pwe_reg_entry"]["email"]  ?? null;
         $userSessionPhone = $_SESSION["pwe_reg_entry"]["phone"] ?? null;
 
-
         $directUrl = $_SESSION['pwe_exhibitor_entry']['current_url'];
+        $directUrlTranslations = self::multi_translation("directUrl");
 
-        if ($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/") {
+
+
+        if ($directUrl == $directUrlTranslations) {
             $form_to_update = $registration_form_step2_exhibitor;
         } elseif (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") !== false) {
             $form_to_update = $registration_form_step2_exhibitor;
         } else {
             $form_to_update = $registration_form_step2_exhibitor_www2;
         }
+
+        // elseif (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") !== false) {
+        //     $form_to_update = $registration_form_step2_exhibitor;
+        // }
 
         // $translations = [
         //     'pl' => [
@@ -198,8 +205,14 @@ class PWElementStepTwoExhibitor extends PWElements {
 
         $t = PWElementStepTwoExhibitor::get_translations();
 
+
+
+
         $output = '
             <style>
+                .gfield--type-honeypot {
+                    display:none !important;
+                }
                 .row-parent:has(.pwelement_'. self::$rnd_id .' #pweForm){
                     max-width: 100%;
                     padding: 0 !important;
@@ -566,7 +579,8 @@ class PWElementStepTwoExhibitor extends PWElements {
                 <div class="form">
                     <div class="display-before-submit">'. self::multi_translation("provide_additional_details") .'</div>';
 
-                    if(($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/") && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
+                    if(($directUrl == $directUrlTranslations) && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
+
                         $output .= '
                         <div class="gf_browser_chrome gform_wrapper gravity-theme gform-theme--no-framework">
                             <form id="addressUpdateForm">
@@ -598,7 +612,7 @@ class PWElementStepTwoExhibitor extends PWElements {
                     } else {
                         $output .= '[gravityform id="'. $form_to_update .'" title="false" description="false" ajax="false"]';
                     }
-                    if($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/"){
+                    if($directUrl == $directUrlTranslations){
                         $output .= '
                         <input style="margin-top:20px;" type="submit" id="pweConfirmation" class="display-before-submit" value="'. $confirmation_button_text .'" onclick="updateGravityForm()">';
                     } else {
@@ -623,89 +637,96 @@ class PWElementStepTwoExhibitor extends PWElements {
         $output .= '
 
         ';
-        if (($directUrl == "/zostan-wystawca/" || $directUrl == "/en/become-an-exhibitor/" || $directUrl == "/de/bestaetigung-der-ausstellerregistrierung/") && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
+
+
+        if (($directUrl == $directUrlTranslations) && (strpos($registration_form_step2_exhibitor, "Potwierdzenie rejestracji wystawcy") === false)){
+
             $output .= '
-            <script>
-                const formEmail = document.querySelector(".input-area");
+<script>
+    const formEmail = document.querySelector(".input-area");
 
-                function updateGravityForm() {
-                    const fields = ["name", "area", "nip"];
-                    let hasError = false;
-                    let firstErrorField = null;
+    function updateGravityForm() {
+        const fields = ["name", "area", "nip", "company"];
+        let hasError = false;
+        let firstErrorField = null;
 
-                    fields.forEach(id => {
-                        const field = document.getElementById(id);
-                        if (!field.value.trim()) {
-                            field.classList.add("error-border");
-                            if (!firstErrorField) {
-                                firstErrorField = field;
-                            }
-                            hasError = true;
-                        } else {
-                            field.classList.remove("error-border");
-                        }
-                    });
-
-                    if (hasError) {
-                        document.getElementById("statusMessage").innerText = "'.$t['error'].'";
-                        document.getElementById("statusMessage").classList.add("error");
-                        firstErrorField.focus();
-                        return;
+        fields.forEach(id => {
+            const field = document.getElementById(id);
+            if (field) {
+                if (!field.value.trim()) {
+                    field.classList.add("error-border");
+                    if (!firstErrorField) {
+                        firstErrorField = field;
                     }
-
-                    const name = document.getElementById("name").value.trim();
-                    const area = document.getElementById("area").value.trim();
-                    const company = document.getElementById("company").value.trim();
-                    const nip = document.getElementById("nip").value.trim();
-                    const statusMessage = document.getElementById("statusMessage");
-                    const formName = "'.$form_to_update.'";
-                    const direction = "exhibitor";
-
-                    if (!name || !area || !nip) {
-                        statusMessage.innerText = "' . $t['error'] . '";
-                        statusMessage.classList.add("error");
-                        return;
-                    }
-
-                    const formData = { name, area, company, nip, formName,  direction };
-
-                    fetch("'.$file_url.'", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "qg58yn58q3yn5v"
-                        },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message === "Dane zaktualizowane" || data.message === "Data has been updated!") {
-                            document.getElementById("addressUpdateForm").classList.add("hidden");
-
-                            const confirmationWrapper = document.createElement("div");
-                            confirmationWrapper.classList.add("gform_confirmation_wrapper");
-                            statusMessage.appendChild(confirmationWrapper);
-
-                            const messageContainer = document.querySelector("#pweForm .form");
-
-                            const message = document.createElement("div");
-                            message.classList.add("gform_confirmation_message");
-                            message.innerText = "' . $t['confirm_text'] . '";
-
-
-                            messageContainer.insertBefore(message, messageContainer.firstChild);
-                        } else {
-                            statusMessage.innerText = "Wystąpił błąd: " + data.message;
-                            statusMessage.classList.add("error");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Błąd:", error);
-                        statusMessage.innerText = "Wystąpił problem z aktualizacją.";
-                        statusMessage.classList.add("error");
-                    });
+                    hasError = true;
+                } else {
+                    field.classList.remove("error-border");
                 }
-            </script>';
+            }
+        });
+
+        if (hasError) {
+            document.getElementById("statusMessage").innerText = "' . $t['error'] . '";
+            document.getElementById("statusMessage").classList.add("error");
+            if (firstErrorField) firstErrorField.focus();
+            return;
+        }
+
+        const name = document.getElementById("name").value.trim();
+        const area = document.getElementById("area").value.trim();
+        const company = document.getElementById("company").value.trim();
+        const nip = document.getElementById("nip").value.trim();
+        const statusMessage = document.getElementById("statusMessage");
+
+        const formName = "' . $form_to_update . '";
+        const direction = "exhibitor";
+        const lang = "' . substr(get_locale(), 0, 2) . '";
+
+        if (!name || !area || !nip || !company) {
+            statusMessage.innerText = "' . $t['error'] . '";
+            statusMessage.classList.add("error");
+            return;
+        }
+
+        const formData = { name, area, company, nip, formName, direction, lang };
+
+        fetch("' . $file_url . '", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "qg58yn58q3yn5v"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Dane zaktualizowane" || data.message === "Data has been updated!") {
+                document.getElementById("addressUpdateForm").classList.add("hidden");
+
+                const confirmationWrapper = document.createElement("div");
+                confirmationWrapper.classList.add("gform_confirmation_wrapper");
+                statusMessage.appendChild(confirmationWrapper);
+
+                const messageContainer = document.querySelector("#pweForm .form");
+
+                if (messageContainer) {
+                    const message = document.createElement("div");
+                    message.classList.add("gform_confirmation_message");
+                    message.innerText = "' . $t['confirm_text'] . '";
+                    messageContainer.insertBefore(message, messageContainer.firstChild);
+                }
+            } else {
+                statusMessage.innerText = "Wystąpił błąd: " + data.message;
+                statusMessage.classList.add("error");
+            }
+        })
+        .catch(error => {
+            console.error("Błąd:", error);
+            statusMessage.innerText = "Wystąpił problem z aktualizacją.";
+            statusMessage.classList.add("error");
+        });
+    }
+</script>';
         } else {
             $output .= '
             <script>
@@ -754,8 +775,12 @@ class PWElementStepTwoExhibitor extends PWElements {
                             let userTel = "'. $userSessionPhone .'" || localStorage.getItem("user_tel");
                             let userDirection = localStorage.getItem("user_direction");
 
+                            let multiLang = "'. $lang .'".slice(0, 2);
+                            let multiLangContainer = $(".pwelement_'. self::$rnd_id .' .lang");
+
+
                             if (userGroup) {
-                                $(".pwelement_'. self::$rnd_id .' .ginput_container_email").find("input").val(userGroup);
+                                $(".pwelement_'. self::$rnd_id .' .patron").find("input").val(userGroup);
                             }
 
                             if (userEmail) {
@@ -768,6 +793,9 @@ class PWElementStepTwoExhibitor extends PWElements {
                                 $(".pwelement_'. self::$rnd_id .' .input-area").find("input").val(userArea);
                             }
 
+                            if (multiLangContainer){
+                                multiLangContainer.find("input").val(multiLang);
+                            }
                             buttonSubmit.click();
                         });
 
