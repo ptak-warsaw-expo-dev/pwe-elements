@@ -150,11 +150,12 @@ class PWERegistrationVisitors extends PWERegistration {
             //     return render_gr1($atts);
             case 'gr2':
                 require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php';
-                $output .= render_gr2($atts, $source_utm, $badgevipmockup, $register_show_ticket);
+                $output .= render_gr2($atts, $source_utm, $badgevipmockup );
                 return $output ;
-            // case 'gr3':
-            //     require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr3.php';
-            //     return render_gr3($atts);
+            case 'gr3':
+                require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php';
+                $output .= render_gr2($atts, $source_utm, $badgevipmockup );
+                return $output ;
         }
 
         if (get_locale() == 'pl_PL') {
@@ -184,118 +185,118 @@ class PWERegistrationVisitors extends PWERegistration {
                 </div>
             </div>';
             } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
-                $output .= '
-                    <div id="pweRegistrationTicket" class="registration-ticket">
-                      <h1 class="registration-ticket__title">'. self::multi_translation("ticket_options").'</h1>
-                      <div class="registration-ticket-container">
-                        <div class="registration-ticket__option registration-ticket__option--standard">
-                          <div class="ticket-card__label">'. self::multi_translation("common_choice").'</div>
-                          <div class="ticket-card__name">'. self::multi_translation("trade_pass").'</div>
+                // $output .= '
+                //     <div id="pweRegistrationTicket" class="registration-ticket">
+                //       <h1 class="registration-ticket__title">'. self::multi_translation("ticket_options").'</h1>
+                //       <div class="registration-ticket-container">
+                //         <div class="registration-ticket__option registration-ticket__option--standard">
+                //           <div class="ticket-card__label">'. self::multi_translation("common_choice").'</div>
+                //           <div class="ticket-card__name">'. self::multi_translation("trade_pass").'</div>
 
-                          <div class="ticket-card">
-                            <div class="ticket-card__price">
-                              <h2 class="ticket-card__price-value">'. self::multi_translation("free_after_online").'</h2>
-                              <p class="ticket-card__note">'. self::multi_translation("or").' '.$register_ticket_price_frist .' '. self::multi_translation("PLN_during_fair").'</p>
-                            </div>
+                //           <div class="ticket-card">
+                //             <div class="ticket-card__price">
+                //               <h2 class="ticket-card__price-value">'. self::multi_translation("free_after_online").'</h2>
+                //               <p class="ticket-card__note">'. self::multi_translation("or").' '.$register_ticket_price_frist .' '. self::multi_translation("PLN_during_fair").'</p>
+                //             </div>
 
-                            <div class="ticket-card__details">
-                                <p class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</p>
-                                '. $registration_benefits .'
-                              <div class="pwe-registration-form">
-                                [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                //             <div class="ticket-card__details">
+                //                 <p class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</p>
+                //                 '. $registration_benefits .'
+                //               <div class="pwe-registration-form">
+                //                 [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+                //               </div>
+                //             </div>
+                //           </div>
+                //         </div>
 
-                        <div class="registration-ticket__option registration-ticket__option--business">
-                          <img src="/wp-content/plugins/pwe-media/media/fast-track.webp">
-                          <div class="ticket-card__name">'. self::multi_translation("business_priority_pass").'</div>
-                          <div class="ticket-card">
-                            <div class="ticket-card__price">
-                              <h2 class="ticket-card__price-value">'.$register_ticket_price.' PLN</h2>
-                              <p class="ticket-card__note">'. self::multi_translation("or_request_an_invitation").'</p>
-                              <a class="exhibitor-catalog" href="'. self::multi_translation("catalog_link").'">'. self::multi_translation("catalog").'</a>
-                            </div>
+                //         <div class="registration-ticket__option registration-ticket__option--business">
+                //           <img src="/wp-content/plugins/pwe-media/media/fast-track.webp">
+                //           <div class="ticket-card__name">'. self::multi_translation("business_priority_pass").'</div>
+                //           <div class="ticket-card">
+                //             <div class="ticket-card__price">
+                //               <h2 class="ticket-card__price-value">'.$register_ticket_price.' PLN</h2>
+                //               <p class="ticket-card__note">'. self::multi_translation("or_request_an_invitation").'</p>
+                //               <a class="exhibitor-catalog" href="'. self::multi_translation("catalog_link").'">'. self::multi_translation("catalog").'</a>
+                //             </div>
 
-                            <div class="ticket-card__details">
-                              <h2 class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</h2>
-                                '. $ticket_benefits .'
-                              <div class="ticket-card__details_button">';
-                              if(empty($register_ticket_link)){
-                                $output .= '
-                                 <a href="#" class="ticket-card__cta" data-popup-trigger>
-                                  '. self::multi_translation("buy_a_ticket").'
-                                </a>';
-                              } else {
-                                $output .= '
-                                <a target="_blank" href="'.$register_ticket_link.'" class="ticket-card__cta">
-                                    '. self::multi_translation("buy_a_ticket").'
-                                </a>';
-                              }
-                              $output .= '
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    ';
-                    if(empty($register_ticket_link)){
-                        $output .= '
-                        <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            const popupTrigger = document.querySelector("[data-popup-trigger]");
-                            const popup = document.getElementById("popup");
-                            const popupClose = document.getElementById("popupClose");
+                //             <div class="ticket-card__details">
+                //               <h2 class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</h2>
+                //                 '. $ticket_benefits .'
+                //               <div class="ticket-card__details_button">';
+                //               if(empty($register_ticket_link)){
+                //                 $output .= '
+                //                  <a href="#" class="ticket-card__cta" data-popup-trigger>
+                //                   '. self::multi_translation("buy_a_ticket").'
+                //                 </a>';
+                //               } else {
+                //                 $output .= '
+                //                 <a target="_blank" href="'.$register_ticket_link.'" class="ticket-card__cta">
+                //                     '. self::multi_translation("buy_a_ticket").'
+                //                 </a>';
+                //               }
+                //               $output .= '
+                //               </div>
+                //             </div>
+                //           </div>
+                //         </div>
+                //       </div>
+                //     </div>
+                //     ';
+                //     if(empty($register_ticket_link)){
+                //         $output .= '
+                //         <script>
+                //         document.addEventListener("DOMContentLoaded", function() {
+                //             const popupTrigger = document.querySelector("[data-popup-trigger]");
+                //             const popup = document.getElementById("popup");
+                //             const popupClose = document.getElementById("popupClose");
 
-                            popupTrigger.addEventListener("click", function(e) {
-                                e.preventDefault();
-                                popup.style.display = "flex";
-                            });
+                //             popupTrigger.addEventListener("click", function(e) {
+                //                 e.preventDefault();
+                //                 popup.style.display = "flex";
+                //             });
 
-                            popupClose.addEventListener("click", function() {
-                                popup.style.display = "none";
-                            });
+                //             popupClose.addEventListener("click", function() {
+                //                 popup.style.display = "none";
+                //             });
 
-                            window.addEventListener("click", function(e) {
-                                if (e.target === popup) {
-                                popup.style.display = "none";
-                                }
-                            });
+                //             window.addEventListener("click", function(e) {
+                //                 if (e.target === popup) {
+                //                 popup.style.display = "none";
+                //                 }
+                //             });
 
-                            const popupRegisterBtn = document.querySelector(".popup_katalog:not(.popup_rej)");
+                //             const popupRegisterBtn = document.querySelector(".popup_katalog:not(.popup_rej)");
 
-                            if (popupRegisterBtn) {
-                                popupRegisterBtn.addEventListener("click", function(e) {
-                                    e.preventDefault();
-                                    popup.style.display = "none";
-                                });
-                            }
-                        });
-                        </script>
+                //             if (popupRegisterBtn) {
+                //                 popupRegisterBtn.addEventListener("click", function(e) {
+                //                     e.preventDefault();
+                //                     popup.style.display = "none";
+                //                 });
+                //             }
+                //         });
+                //         </script>
 
-                        ';
-                        $output.='<div class="popup" id="popup">
-                            <div class="popup__content">
-                                <div class="popup__content_text_container">
-                                    <div class="popup__content_text">
-                                        <p style="font-size:16px;">'. self::multi_translation("ask_your_chosen_exhibitor").'</p>
-                                        <p class="text">'. self::multi_translation("the_current_pool").'</p>
+                //         ';
+                //         $output.='<div class="popup" id="popup">
+                //             <div class="popup__content">
+                //                 <div class="popup__content_text_container">
+                //                     <div class="popup__content_text">
+                //                         <p style="font-size:16px;">'. self::multi_translation("ask_your_chosen_exhibitor").'</p>
+                //                         <p class="text">'. self::multi_translation("the_current_pool").'</p>
 
-                                    </div>
-                                    <div class="popup__content_button">
-                                        <div id="popupClose">+</div>
-                                    </div>
-                                </div>
-                                <div class="popup__content_button_container">
-                                    <a href="'. self::multi_translation("registration_link").'" class="popup_katalog ">'. self::multi_translation("registration_text").'</a>
-                                    <a href="'. self::multi_translation("catalog_link").'" class="popup_katalog popup_rej">'. self::multi_translation("catalog").'</a>
-                                </div>
-                            </div>
+                //                     </div>
+                //                     <div class="popup__content_button">
+                //                         <div id="popupClose">+</div>
+                //                     </div>
+                //                 </div>
+                //                 <div class="popup__content_button_container">
+                //                     <a href="'. self::multi_translation("registration_link").'" class="popup_katalog ">'. self::multi_translation("registration_text").'</a>
+                //                     <a href="'. self::multi_translation("catalog_link").'" class="popup_katalog popup_rej">'. self::multi_translation("catalog").'</a>
+                //                 </div>
+                //             </div>
 
-                        </div>';
-                    }
+                //         </div>';
+                //     }
         } else {
             $output .= '
             <div id="pweRegistration" class="pwe-registration for-visitors">

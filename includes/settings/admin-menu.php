@@ -25,14 +25,6 @@ function pwe_get_admin_pages()
             'option_group'  => 'pwe_menu_options_group',
             'settings_page' => 'pwe-menu-settings',
         ],
-        'translation' => [
-            'page_title'          => 'Translation Settings',
-            'menu_title'          => 'Translation Settings',
-            'tab_title'           => 'Translations',
-            'slug'                => 'pwe-elements-translation',
-            'type'                => 'action_page',
-            'after_form_callback' => 'pwe_render_translation_sync_panel',
-        ],
     ];
 }
 

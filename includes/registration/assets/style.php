@@ -4,10 +4,7 @@ $output = '';
 
 if (
     (
-        $registration_type == 'PWERegistrationVisitors' &&
-        (
-            ($domain_gr == 'gr3' && !$register_show_ticket) || $domain_gr != 'gr3'
-        ) &&
+        $registration_type == 'PWERegistrationVisitors'  &&
         strpos($source_utm, 'utm_source=platyna') === false
     )
     ||
@@ -37,7 +34,7 @@ if (
                 border: 2px solid '. $darker_btn_vip_color .' !important;
             }
         </style>';
-    } else if (strpos($source_utm, 'utm_source=premium') !== false || (strpos($source_utm, 'utm_source=platyna') !== false && $domain_gr !== "gr2") ) {
+    } else if (strpos($source_utm, 'utm_source=premium') !== false || (strpos($source_utm, 'utm_source=platyna') !== false && ($domain_gr !== "gr2" || $domain_gr !== "gr3")) ) {
         $output .= '
         <style>
             #pweRegistration input[type="submit"] {
@@ -65,7 +62,7 @@ if (
         </style>';
     }
 
-    if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false || (strpos($source_utm, 'utm_source=platyna') !== false && $domain_gr !== "gr2")) {
+    if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false || (strpos($source_utm, 'utm_source=platyna') !== false && ($domain_gr !== "gr2"|| $domain_gr !== "gr3"))) {
         $output .= '
         <style>
             .row-parent:has(#pweRegistration) .wpb_column {
@@ -617,19 +614,19 @@ if (
             }
         }
     </style>';
-    if($domain_gr == "gr3"){
-       $output = '<style>
-            #pweRegistration input[type=submit] {
-                background-color: red !important;
-                border: 2px solid '. $btn_color_premium .' !important;
-            }
-            #pweRegistration input[type=submit]:hover {
-                background-color: '. $darker_btn_premium_color.' !important;
-                border: 2px solid '. $darker_btn_premium_color .' !important;
-            }
+    // if($domain_gr == "gr3"){
+    //    $output = '<style>
+    //         #pweRegistration input[type=submit] {
+    //             background-color: red !important;
+    //             border: 2px solid '. $btn_color_premium .' !important;
+    //         }
+    //         #pweRegistration input[type=submit]:hover {
+    //             background-color: '. $darker_btn_premium_color.' !important;
+    //             border: 2px solid '. $darker_btn_premium_color .' !important;
+    //         }
 
-       </style>';
-    }
+    //    </style>';
+    // }
 } else if ($registration_type == 'PWERegistrationPotentialExhibitors') {
     $btn_color = self::findColor($atts['btn_color_manual_hidden'], $atts['btn_color'], self::$main2_color);
     $darker_btn_color = self::adjustBrightness($btn_color, -20);
@@ -1039,317 +1036,9 @@ if (
             opacity: 1 !important;
         }
     </style>';
-} else if ($register_show_ticket === "true" && $domain_gr == "gr3" && (strpos($source_utm, 'utm_source=byli') === false || strpos($source_utm, 'utm_source=premium') === false || strpos($source_utm, 'utm_source=platyna') === false )) {
-    $background_color = self::$accent_color;
-
-    $output = '
-    <style>
-        .wpb_column:has(.exhibitors-catalog) {
-            display:none !important;
-        }
-        .row-container:has(#pweRegistrationTicket) {
-            background-image: url(/doc/background.webp);
-            background-repea: no-repeat;
-            background-position: center;
-            background-size: cover;
-        }
-        #pweRegistrationTicket {
-            background: rgba(247, 247, 247, 1);
-            border-radius:18px;
-        }
-        #pweRegistrationTicket, #pweRegistrationTicket .ticket-card__price {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #pweRegistrationTicket, #pweRegistrationTicket .registration-ticket-container, #pweRegistrationTicket .ticket-card__price, #pweRegistrationTicket .ticket-card__details_button, #pweRegistrationTicket .gform_footer {
-            display:flex;
-            justify-content:center;
-        }
-
-        #pweRegistrationTicket .registration-ticket-container, #pweRegistrationTicket .ticket-card {
-            max-width:90%;
-            margin:0 auto 25px;
-            gap:30px;
-        }
-        #pweRegistrationTicket .registration-ticket__option {
-            background: rgba(255, 255, 255, 1);
-            border-radius: 18px;
-        }
-        #pweRegistrationTicket .registration-ticket__title {
-            font-size:36px;
-            margin-bottom: 36px;
-        }
-        #pweRegistrationTicket .ticket-card__label {
-            background: '. $background_color .';
-            color: rgba(255, 255, 255, 1);
-            border-radius: 18px 18px 0 0;
-            font-size:18px;
-            padding: 14px 0px;
-        }
-        #pweRegistrationTicket .registration-ticket__title, #pweRegistrationTicket .ticket-card__label, #pweRegistrationTicket .ticket-card__name, #pweRegistrationTicket .ticket-card__price-value, #pweRegistrationTicket .ticket-card__details-title {
-            font-weight: 700;
-            text-align: center;
-        }
-        #pweRegistrationTicket .ticket-card__name {
-            font-size: 32px;
-            padding: 20px 0 10px;
-            border-bottom: 4px solid black;
-        }
-        #pweRegistrationTicket .registration-ticket__option--standard {
-            flex: 0.6;
-            -webkit-box-shadow: 0px 0px 26px 0px rgba(24, 13, 35, 1);
-            -moz-box-shadow: 0px 0px 26px 0px rgba(24, 13, 35, 1);
-            box-shadow: 0px 0px 26px 0px rgba(24, 13, 35, 1);
-        }
-        #pweRegistrationTicket .registration-ticket__option--business {
-            flex: 0.4;
-            margin-top: 50px;
-            position: relative;
-        }
-        #pweRegistrationTicket .registration-ticket__option--standard .ticket-card__name {
-            border-bottom: 4px solid '. $background_color .';
-        }
-        #pweRegistrationTicket  .registration-ticket__option--business img {
-            position: absolute;
-            top: -62px;
-            right: -35px;
-            width: 90px;
-            height: 90px;
-        }
-        #pweRegistrationTicket .ticket-card__price-value {
-            font-size: 32px;
-        }
-        #pweRegistrationTicket .ticket-card__note {
-            margin-top:0px;
-        }
-        #pweRegistrationTicket .registration-ticket__option--business .ticket-card__price .ticket-card__note {
-            color: '. $background_color .';
-            font-weight: 700;
-            font-size: 18px !important;
-            max-width: 90%;
-            text-align: center;
-            line-height: 1.2;
-        }
-        #pweRegistrationTicket .registration-ticket__option--business  .exhibitor-catalog {
-            background-color: '. $background_color .';
-            border-radius: 18px;
-            color: white !important;
-            padding: 5px 10px;
-            font-weight: 500;
-            font-size: 12px;
-            margin-top: 7px;
-            transition: .3s ease;
-        }
-        #pweRegistrationTicket .registration-ticket__option--business  .exhibitor-catalog:hover {
-            opacity: .9;
-        }
-        #pweRegistrationTicket .ticket-card__details-title {
-            color:black;
-            font-size:18px;
-            text-align: left;
-        }
-        #pweRegistrationTicket .ticket-card__details ul {
-            list-style: disc;
-            padding-left: 18px;
-            margin: 15px 0 25px;
-        }
-        #pweRegistrationTicket .ticket-card__details ul::marker  {
-            margin-right:2px !important;
-        }
-        #pweRegistrationTicket input {
-            border-radius:18px;
-        }
-        #pweRegistrationTicket input[type="checkbox"] {
-            border: 2px solid black;
-            border-radius:0px;
-        }
-        #pweRegistrationTicket .ticket-card__cta, #pweRegistrationTicket input[type="submit"], .popup_katalog {
-            background-color: '. $btn_color .' !important;
-            border: 2px solid '. $btn_color .' !important;
-            border-radius: 35px !important;
-            font-size: 1em;
-            color: white;
-            align-self: center;
-            transform: scale(1) !important;
-            padding: 13px 31px;
-            font-weight: 600 !important;
-            text-transform: none;
-            min-width: 250px;
-            text-align: center;
-            margin:0 !important;
-        }
-        #pweRegistrationTicket  .registration-ticket__option--business .ticket-card__cta, .popup_katalog {
-            background-color: black !important;
-            border: 2px solid black !important;
-        }
-        #pweRegistrationTicket .ticket-card__cta:hover, #pweRegistrationTicket input[type="submit"]:hover {
-            background-color: '. $darker_btn_color .'!important;
-            border: 2px solid '. $darker_btn_color .'!important;
-            color: white;
-        }
-        #pweRegistrationTicket .gfield .iti.iti--allow-dropdown input {
-            border: 1px solid #eaeaea;
-        }
-        #pweRegistrationTicket .gfield .iti.iti--allow-dropdown input::focus {
-            border: 1px solid '. $btn_color .';
-        }
-
-        @media(max-width:1100px){
-            #pweRegistrationTicket .registration-ticket__option--standard, #pweRegistrationTicket .registration-ticket__option--business {
-                flex:1;
-            }
-        }
-        @media(max-width:960px){
-            .row-container:has(.gform_wrapper, .pwe-container-grupy) .wpb_column, .row-container:has(#pweRegistrationTicket) {
-                max-width: 100% !important;
-            }
-        }
-        @media(max-width:800px){
-            #pweRegistrationTicket .ticket-card__name {
-                font-size: 25px;
-            }
-        }
-        @media(max-width:650px){
-            #pweRegistrationTicket .registration-ticket-container {
-                flex-wrap:wrap;
-            }
-            #pweRegistrationTicket .registration-ticket__option {
-                min-width: 100%;
-            }
-        }
-    </style>'
-    ;
-    if(empty($ticket_link)){
-        $output .= '
-        <style>
-            .popup {
-                display: none; /* domyślnie ukryty */
-                position: fixed;
-                justify-content: center;
-                align-items: center;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.7);
-                z-index: 1000;
-            }
-
-            .popup__content {
-                background: #fff;
-                padding: 36px;
-                min-width: 360px;
-                position: relative;
-                border-radius: 8px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 200px;
-                max-width: 800px;
-                align-items: stretch;
-                flex-direction: column;
-            }
-            .popup__content_text_container {
-                display:flex;
-            }
-            .popup__close {
-                position: absolute;
-                top: 10px;
-                right: 15px;
-                font-size: 32px;
-                cursor: pointer;
-                transform: rotate(45deg);
-                display: inline-block;
-                user-select: none;
-            }
-            .popup__content_button {
-                flex: .1;
-                display: flex;
-                justify-content: right;
-                align-items: flex-start;
-            }
-            .popup__content_button div {
-               color:white;
-                border-radius: 50%;
-                  width: 50px;
-                height: 50px;
-                background: black;
-                color: white;
-                font-size: 50px;
-                line-height: 50px;
-                text-align: center;
-                cursor: pointer;
-                transform: rotate(45deg); /* + staje się X */
-                user-select: none;
-                transition: background 0.3s;
-            }
-            .popup__content_button div:hover {
-                background-color: '. $darker_btn_color .'!important;
-            }
-            .popup__content_text {
-                flex:.9;
-                justify-content: start;
-                display: flex;
-                flex-direction: column;
-                align-items: anchor-center;
-                min-height: auto;
-            }
-            .popup__content_button_container {
-                display: flex;
-                justify-content: space-around;
-                flex-wrap: wrap;
-            }
-            .popup__content_button_container a {
-                color: white !important;
-                display: inline-block  !important;
-                min-width: 240px !important;
-                margin-top: 16px !important;
-                background-color: '. $darker_btn_color .'!important;
-                border:2px solid '. $darker_btn_color .' !important;
-            }
-            .popup__content_button_container a:hover {
-                background-color: black !important;
-                border:2px solid black !important;
-            }
-            .popup__content_button_container  .popup_rej {
-                background-color: black !important;
-                border:2px solid black !important;
-            }
-            .popup__content_button_container  .popup_rej:hover {
-                background-color: '. $darker_btn_color .'!important;
-                border:2px solid '. $darker_btn_color .' !important;
-            }
-            .popup__content_text p {
-                margin-top:0;
-                font-weight:700;
-                font-size:16px;
-            }
-            .popup__content_text .text {
-                font-size:14px;
-                font-weight:600;
-                margin-top:12px;
-            }
-
-            @media(min-width:1200px){
-                .popup__content {
-                    min-width: 420px;
-                }
-            }
-        </style>';
-    };
-    if (glob($_SERVER['DOCUMENT_ROOT'] . '/doc/header_mobile.webp', GLOB_BRACE)) {
-        $output .= '
-        <style>
-            @media (max-width: 960px) {
-                .row-container:has(#pweRegistrationTicket) {
-                    background-image: url(/doc/header_mobile.webp);
-                }
-            }
-        </style>';
-    }
 }
-if(strpos($source_utm, 'utm_source=platyna') !== false && $domain_gr=="gr2"){
+
+if(strpos($source_utm, 'utm_source=platyna') !== false && ($domain_gr=="gr2" || $domain_gr=="gr3")){
 
     $output .= '
     <style>

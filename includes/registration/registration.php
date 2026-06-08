@@ -34,36 +34,79 @@ class PWERegistration extends PWECommonFunctions {
         add_action('gform_after_submission', array($this, 'entryToSession'), 10, 2);
     }
 
-    public function entryToSession($entry, $form) {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+public function entryToSession($entry, $form) {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Pobieramy aktualny URL i wyciągamy czystą ścieżkę (np. "it/diventa-espositore")
+    $current_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $current_path = parse_url($current_url, PHP_URL_PATH);
+    $cleaned_current_path = trim(strtolower($current_path), '/');
+
+    // Ścieżka do pliku JSON
+    $json_file_path = WP_PLUGIN_DIR . '/pwe-multilang/website-translation.json';
+
+    $is_exhibitor_page = false;
+    $is_registration_page = false;
+
+    if (file_exists($json_file_path)) {
+        $json_data = json_decode(file_get_contents($json_file_path), true);
+
+        if ($json_data) {
+            // --- DYNAMICZNE SPRAWDZANIE: STRONA WYSTAWCY I KROK 2 ---
+            $exhibitor_keys = array('zostan_wystawca', 'krok2');
+            foreach ($exhibitor_keys as $key) {
+                if (isset($json_data[$key])) {
+                    foreach ($json_data[$key] as $lang => $data) {
+                        if (!empty($data['url'])) {
+                            // Budujemy pełną ścieżkę na podstawie reguły: pl bez prefiksu, reszta z prefiksem /lang/
+                            $expected_url = ($lang === 'pl') ? $data['url'] : '/' . $lang . $data['url'];
+                            $cleaned_expected = trim(strtolower($expected_url), '/');
+
+                            // DOKŁADNE PORÓWNANIE lub SPRAWDZENIE ZAWARTOŚCI
+                            if ($cleaned_current_path === $cleaned_expected) {
+                                $is_exhibitor_page = true;
+                                break 2; // Przerywa obie pętle, bo znaleźliśmy dopasowanie
+                            }
+                        }
+                    }
+                }
+            }
+
+            // --- DYNAMICZNE SPRAWDZANIE: REJESTRACJA ---
+            if (isset($json_data['rejestracja'])) {
+                foreach ($json_data['rejestracja'] as $lang => $data) {
+                    if (!empty($data['url'])) {
+                        $expected_url = ($lang === 'pl') ? $data['url'] : '/' . $lang . $data['url'];
+                        $cleaned_expected = trim(strtolower($expected_url), '/');
+
+                        if ($cleaned_current_path === $cleaned_expected) {
+                            $is_registration_page = true;
+                            break; // Przerywa pętlę rejestracji
+                        }
+                    }
+                }
+            }
         }
+    } else {
+        error_log("PWE Error: Nie znaleziono pliku tłumaczeń: " . $json_file_path);
+    }
 
-        $current_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    // Zapis do sesji
+    if ($is_exhibitor_page) {
+        $_SESSION['pwe_exhibitor_entry'] = [
+            'entry_id' => $entry['id'],
+            'current_url' => $current_path,
+        ];
+    } elseif ($is_registration_page) {
+        $_SESSION['pwe_reg_entry'] = [
+            'entry_id' => $entry['id'],
+        ];
+    }
 
-        $current_path = parse_url($current_url, PHP_URL_PATH);
-
-        $is_exhibitor_page = strpos($current_url, '/zostan-wystawca/') !== false ||
-                            strpos($current_url, '/en/become-an-exhibitor/') !== false ||
-                            strpos($current_url, '/krok2/') !== false ||
-                            strpos($current_url, '/step2/') !== false;
-
-        $is_registration_page = strpos($current_url, '/rejestracja/') !== false ||
-                                strpos($current_url, '/en/registration/') !== false ||
-                                strpos($current_url, '/registration/') !== false;
-
-
-        if ($is_exhibitor_page) {
-            $_SESSION['pwe_exhibitor_entry'] = [
-                'entry_id' => $entry['id'],
-                'current_url' => $current_path,
-            ];
-        } elseif ($is_registration_page) {
-            $_SESSION['pwe_reg_entry'] = [
-                'entry_id' => $entry['id'],
-            ];
-        }
-
+    // Przepisanie pól formularza do sesji (email / telefon)
+    if (!empty($form['fields'])) {
         foreach ($form['fields'] as $single_field) {
             if ($single_field['type'] == 'email') {
                 if ($is_exhibitor_page) {
@@ -84,6 +127,7 @@ class PWERegistration extends PWECommonFunctions {
             }
         }
     }
+}
     /**
  * Initialize VC Map PWERegistration.
  */

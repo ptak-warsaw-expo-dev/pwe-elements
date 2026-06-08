@@ -160,7 +160,7 @@ class PWECatalogFull extends PWECatalog {
                             if (get_locale() == "pl_PL") {
                                 $output .='<a href="'. $menu_3[0]["url"] .'" class="pwe-btn">Zostań wystawcą</a>';
                             } else {
-                                $output .='<a href="'. $menu_3[0]["url"] .'" class="pwe-btn">Become an exhibitor</a>';
+                                $output .='<a href="'. $menu_3[0]["url"] .'" class="pwe-btn">' . $menu_3[0]["title"] . '</a>';
                             } $output .='
                         </span>';
 

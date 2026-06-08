@@ -2,6 +2,21 @@ const utm = data_js.source_utm;
 const htmlLang = document.documentElement.lang;
 const registrationMode = data_js.registration_modes;
 
+function setHiddenRegistrationFields() {
+    const container = document.querySelector(".pwe-registration-container");
+
+    const patronInput = document.querySelector(".patron input");
+    if (patronInput && container) {
+        patronInput.value = container.getAttribute("fair_group") || "";
+    }
+
+    const langInput = document.querySelector(".lang input");
+    if (langInput) {
+        const pageLang = (document.documentElement.lang || "").trim().toLowerCase();
+        langInput.value = pageLang ? pageLang.substring(0, 2) : "";
+    }
+}
+
 // Function that writes the title attribute to input
 function updateCountryInput() {
     const selectedFlag = document.querySelector(".iti__flag-container .iti__selected-flag");
@@ -49,10 +64,12 @@ function getGroupPatron(){
     const patronInput = document.querySelector(".patron input");
     const patronValue = document.querySelector('.pwe-registration-container').getAttribute('fair_group');
 
-    patronInput.value = patronValue;
+    if(patronInput){
+        patronInput.value = patronValue;
+    }
 }
 
-getGroupPatron();
+setHiddenRegistrationFields();
 addEventListenersToForm();
 observeFlagChanges();
 
