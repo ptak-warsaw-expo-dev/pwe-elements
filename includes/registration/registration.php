@@ -90,7 +90,14 @@ public function entryToSession($entry, $form) {
             }
         }
     } else {
-        error_log("PWE Error: Nie znaleziono pliku tłumaczeń: " . $json_file_path);
+        $is_exhibitor_page = strpos($current_url, '/zostan-wystawca/') !== false ||
+                            strpos($current_url, '/en/become-an-exhibitor/') !== false ||
+                            strpos($current_url, '/krok2/') !== false ||
+                            strpos($current_url, '/step2/') !== false;
+
+        $is_registration_page = strpos($current_url, '/rejestracja/') !== false ||
+                                strpos($current_url, '/en/registration/') !== false ||
+                                strpos($current_url, '/registration/') !== false;
     }
 
     // Zapis do sesji
