@@ -3,7 +3,7 @@
 class PWECommonFunctions {
 
     // <============================================================================================>
-    // Synchronized functions from plugin pwe-elements-auto-switch 1.4.0 (21.05.2026) <========================================================>
+    // Synchronized functions from plugin pwe-elements-auto-switch 1.4.9 (10.06.2026) <========================================================>
     // <============================================================================================>
 
     /**
@@ -35,7 +35,7 @@ class PWECommonFunctions {
         $lang = get_locale(); // np. "en_US", "pl_PL", "de_DE"
         $lang = strtolower(str_replace('-', '_', $lang));
 
-        return substr($lang, 0, 2);
+        return strtolower(substr($lang, 0, 2));
     }
 
     /**
@@ -317,6 +317,8 @@ class PWECommonFunctions {
 
         if ($cached !== false) {
             self::debug_log('get_database_fairs_data: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
+            self::$fairs_cache[$cache_key] = $cached;
+            return $cached;
         }
 
         // Connect database
