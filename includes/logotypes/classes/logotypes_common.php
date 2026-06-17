@@ -773,9 +773,9 @@ class PWElementAdditionalLogotypes {
                         }
                     }
 
-                    if (!$showLogo) {
-                        return;
-                    }
+                    // if (!$showLogo) {
+                    //     return;
+                    // }
 
                     $desc_pl = $meta["desc_pl"] ?? '';
                     $desc_en = $meta["desc_en"] ?? '';
