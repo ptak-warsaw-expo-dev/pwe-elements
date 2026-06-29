@@ -265,66 +265,161 @@ class PWELogotypes extends PWECommonFunctions {
      * @param string $catalog_id fair id for api.
      * @return array
      */
-    public static function exhibitors_catalog_checker($catalog_id, $logotypes_exhibitors_count = 21, $file_changer = null){
-        if  (!empty($catalog_id)) {
-            $today = new DateTime();
-            $formattedDate = $today->format('Y-m-d');
-            $token = md5("#22targiexpo22@@@#" . $formattedDate);
-            $exh_catalog_address = PWECommonFunctions::get_database_meta_data('exh_catalog_address');
-            $canUrl = $exh_catalog_address . $token . '&id_targow=' . $catalog_id;
+    public static function exhibitors_catalog_checker($catalog_id, $logotypes_exhibitors_count = 21, $file_changer = null) {
+        $basic_exhibitors = [];
+        $data = [];
 
-            try {
-                $json = @file_get_contents($canUrl);
-                if ($json === false) {
-                    throw new Exception('Nie można pobrać danych JSON.');
-                }
+        // Budowanie URL
+        $today = new DateTime();
+        $formatted_date = $today->format('Y-m-d');
+        $token = md5("#22targiexpo22@@@#" . $formatted_date);
+        $exh_catalog_address = PWECommonFunctions::get_database_meta_data('exh_catalog_address');
+        $catalog_ids = array_filter(array_map('trim', explode(',', (string)$catalog_id)));
 
-                $data = json_decode($json, true);
-                if ($data === null) {
-                    throw new Exception('Błąd dekodowania danych JSON.');
-                }
 
-                $basic_exhibitors = reset($data)['Wystawcy'];
-            } catch (Exception $e) {
-                if (current_user_can('administrator')) {
-                    echo '<script>console.error("Błąd w exhibitors_catalog_checker: ' . addslashes($e->getMessage()) . '")</script>';
-                }
-                $basic_exhibitors = [];
+        if (current_user_can('administrator')) {
+            if (empty($catalog_id)) {
+                echo '<script>console.error("Brak ID katalogu wystawców")</script>';
             }
-            $logotypes_array = array();
-
-            $basic_exhibitors = (!empty($file_changer)) ? CatalogFunctions::orderChanger($file_changer, $basic_exhibitors) : $basic_exhibitors;
-
-            if($basic_exhibitors != '') {
-                $basic_exhibitors = array_reduce($basic_exhibitors, function($acc, $curr) {
-                    $name = $curr['Nazwa_wystawcy'];
-                    $existingIndex = array_search($name, array_column($acc, 'Nazwa_wystawcy'));
-                    if ($existingIndex === false) {
-                        $acc[] = $curr;
-                    } else {
-                        if($acc[$existingIndex]["Data_sprzedazy"] !== null && $curr["Data_sprzedazy"] !== null && strtotime($acc[$existingIndex]["Data_sprzedazy"]) < strtotime($curr["Data_sprzedazy"])){
-                            $acc[$existingIndex] = $curr;
-                        }
-                    }
-                    return $acc;
-                }, []);
-            } else {
-                $basic_exhibitors = [];
-            }
-
-            $i = 0;
-            foreach($basic_exhibitors as $exhibitor){
-                if ($exhibitor['URL_logo_wystawcy']){
-                    $logotypes_array[] = $exhibitor;
-                    $i++;
-                    if ($i >= $logotypes_exhibitors_count) {
-                        break;
-                    }
-                }
-            }
-
-            return $logotypes_array;
         }
+
+        // Formatting $catalog_year
+        if (!empty($catalog_year)) {
+            if (preg_match('/\b(\d{4})\b/', $catalog_year, $matches)) {
+                $catalog_year = $matches[1];
+            } else {
+                $catalog_year = null;
+            }
+        }
+
+        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/wp-content/uploads/exhibitor-catalogs/';
+
+        // Default current catalog
+        $local_file = $basePath . 'old-pwe-exhibitors.json';
+
+        // If exist year and file, use it
+        if (!empty($catalog_year)) {
+            $year = (int) $catalog_year;
+            $yearFile = $basePath . "old-pwe-exhibitors-$year.json";
+
+            if (file_exists($yearFile) && filesize($yearFile) > 0) {
+                $local_file = $yearFile;
+            }
+        }
+
+        if (file_exists($local_file)) {
+            $json = file_get_contents($local_file);
+            $data = json_decode($json, true);
+
+            if (is_array($data)) {
+                $firstKey = array_key_first($data);
+
+                if (isset($data[$firstKey]['Wystawcy'])) {
+                    $basic_exhibitors = $data[$firstKey]['Wystawcy'];
+
+                    if (current_user_can('administrator')) {
+                        echo '<script>console.log("Dane pobrane z pliku: https://' . $_SERVER['HTTP_HOST'] . '/wp-content/uploads/exhibitor-catalogs/' . basename($local_file) . ' (catalog_id=' . $firstKey . ')")</script>';
+                    }
+
+                    if (!empty($catalog_ids)) {
+
+                        foreach ($catalog_ids as $single_id) {
+                            $api_url = $exh_catalog_address . $token . '&id_targow=' . $single_id;
+                            if (current_user_can('administrator')) {
+                                echo '<script>console.log("Dane zapisane do pliku z: '. $api_url .'")</script>';
+                                // echo '<script>console.log("Link do odświeżenia pliku API: '. $api_url .'&v='. time() .'")</script>';
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // If local missing/invalid → get external JSON
+        if (empty($basic_exhibitors) && !empty($catalog_ids)) {
+            try {
+                $basic_exhibitors = [];
+
+                foreach ($catalog_ids as $single_id) {
+
+                    $can_url = $exh_catalog_address . $token . '&id_targow=' . $single_id;
+
+                    $context = stream_context_create([
+                        'http' => [
+                            'method'  => 'GET',
+                            'timeout' => 2,
+                            'header'  => "User-Agent: Mozilla/5.0\r\n"
+                        ]
+                    ]);
+
+                    $json = @file_get_contents($can_url, false, $context);
+
+                    if ($json === false) {
+                        $error = error_get_last();
+
+                        if (!empty($error['message'])) {
+                            echo '<script>console.log('. json_encode($error['message']) .');</script>';
+                        }
+
+                        continue;
+                    }
+
+                    $data = json_decode($json, true);
+                    if (!is_array($data)) {
+                        continue;
+                    }
+
+                    $wystawcy = reset($data)['Wystawcy'] ?? [];
+
+                    if (is_array($wystawcy)) {
+                        $basic_exhibitors = array_merge($basic_exhibitors, $wystawcy);
+                    }
+
+                    if (current_user_can('administrator')) {
+                        echo '<script>console.log("Dane pobrane z API: '. $can_url .'")</script>';
+                    }
+                }
+
+            } catch (Exception $e) {
+                error_log("[" . date('Y-m-d H:i:s') . "] logosChecker błąd: " . $e->getMessage());
+                $basic_exhibitors = [];
+            }
+        }
+
+        $logotypes_array = array();
+
+        $basic_exhibitors = (!empty($file_changer)) ? CatalogFunctions::orderChanger($file_changer, $basic_exhibitors) : $basic_exhibitors;
+
+        if(!empty($basic_exhibitors)) {
+            $basic_exhibitors = array_reduce($basic_exhibitors, function($acc, $curr) {
+                $name = $curr['Nazwa_wystawcy'];
+                $existingIndex = array_search($name, array_column($acc, 'Nazwa_wystawcy'));
+                if ($existingIndex === false) {
+                    $acc[] = $curr;
+                } else {
+                    if($acc[$existingIndex]["Data_sprzedazy"] !== null && $curr["Data_sprzedazy"] !== null && strtotime($acc[$existingIndex]["Data_sprzedazy"]) < strtotime($curr["Data_sprzedazy"])){
+                        $acc[$existingIndex] = $curr;
+                    }
+                }
+                return $acc;
+            }, []);
+        } else {
+            $basic_exhibitors = [];
+        }
+
+        $i = 0;
+        foreach($basic_exhibitors as $exhibitor){
+            if ($exhibitor['URL_logo_wystawcy']){
+                $logotypes_array[] = $exhibitor;
+                $i++;
+                if ($i >= $logotypes_exhibitors_count) {
+                    break;
+                }
+            }
+        }
+
+        return $logotypes_array;
     }
 
 
@@ -341,6 +436,7 @@ class PWELogotypes extends PWECommonFunctions {
         extract( shortcode_atts( array(
             'pwe_replace' => '',
             'logotypes_exhibitors_count' => '',
+            'logotypes_exhibitors_on' => '',
             'logotypes_file_changer' => ''
         ), $atts ));
 
@@ -349,8 +445,11 @@ class PWELogotypes extends PWECommonFunctions {
         $el_id = self::id_rnd();
 
         // Exhibitors logotypes top 21
-        $exhibitors = self::exhibitors_catalog_checker(do_shortcode('[trade_fair_catalog]'), $logotypes_exhibitors_count, $logotypes_file_changer);
-
+        if ($logotypes_exhibitors_on) {
+            $exhibitors = self::exhibitors_catalog_checker(do_shortcode('[trade_fair_catalog]'), $logotypes_exhibitors_count, $logotypes_file_changer);
+        } else {
+            $exhibitors = [];
+        }
 
         if (!empty($exhibitors)) {
             $exhibitors_logotypes = array();

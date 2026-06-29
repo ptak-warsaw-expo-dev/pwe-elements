@@ -1,49 +1,44 @@
 <?php
-class PWEConferenceCapFunctions extends PWEConferenceCap{
+class PWEConferenceCapFunctions {
 
     public static function findConferenceMode($new_class) {
 
         switch ($new_class){
             case 'PWEConferenceCapSimpleMode' :
                 return array (
-                'php' => 'classes/conference-cap-simple-mode/conference-cap-simple-mode.php',
-                'css' => 'classes/conference-cap-simple-mode/conference-cap-simple-mode-style.css',
+                'php' => 'modes/simple_mode/simple_mode.php',
+                'css' => 'modes/simple_mode/assets/simple_mode.css',
                 );
             case 'PWEConferenceCapMedalCeremony' :
                 return array (
-                    'php' => 'classes/conference-cap-medal-ceremony/conference-cap-medal-ceremony.php',
-                    'css' => 'classes/conference-cap-medal-ceremony/conference-cap-medal-ceremony-style.css',
+                    'php' => 'modes/medal_ceremony/medal_ceremony.php',
+                    'css' => 'modes/medal_ceremony/assets/medal_ceremony.css',
                 );
             default :
                 return array (
-                    'php' => 'classes/conference-cap-full-mode/conference-cap-full-mode.php',
-                    'css' => 'classes/conference-cap-full-mode/conference-cap-full-mode-style.css',
+                    'php' => 'modes/full_mode/full_mode.php',
+                    'css' => 'modes/full_mode/assets/full_mode.css',
                 );
         };
     }
 
     public static function speakerImageMini($speaker_images) {
-        // Filtrowanie pustych wartości
         $head_images = array_filter($speaker_images);
-        // Resetowanie indeksów tablicy
         $head_images = array_values($head_images);
 
-        // Jeśli nie ma obrazów, zwracamy pusty string
         if (empty($head_images)) {
             return '';
         }
 
-        // Inicjalizacja kontenera na obrazy
+        // Initialize the image container
         $speaker_html = '<div class="pwe-box-speakers-img">';
 
-        // Pętla po obrazach i dynamiczne ustawianie ich pozycji
         foreach ($head_images as $i => $image_src) {
             if (!empty($image_src)) {
                 $z_index = (1 + $i);
                 $margin_top_index = '';
                 $max_width_index = "50%";
 
-                // Ustawienia pozycji w zależności od liczby prelegentów
                 switch (count($head_images)) {
                     case 1:
                         $top_index = "unset";
@@ -105,7 +100,6 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
                         }
                 }
 
-                // Generowanie HTML obrazów
                 $speaker_html .= '<img class="pwe-box-speaker" src="'. esc_url($image_src) .'" alt="speaker portrait"
                     style="position:relative; z-index:'.$z_index.'; top:'.$top_index.'; left:'.$left_index.'; max-width: '.$max_width_index.';'.$margin_top_index.';" />';
             }
@@ -118,7 +112,6 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
 
     public static function pwe_convert_rgb_to_hex($content) {
         return preg_replace_callback('/rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i', function ($matches) {
-            // Zabezpieczenie: ogranicz zakres wartości
             $r = max(0, min(255, (int)$matches[1]));
             $g = max(0, min(255, (int)$matches[2]));
             $b = max(0, min(255, (int)$matches[3]));
@@ -131,7 +124,7 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             return $json;
         }
 
-        /* -------- 1.   iteracja po dniach wg pozycji -------- */
+        /* -------- 1. Iterate days by position -------- */
         $plDayKeys = array_keys($json['PL']);
         $enDayKeys = array_keys($json['EN']);
         $maxDays   = min(count($plDayKeys), count($enDayKeys));
@@ -145,7 +138,6 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
                 continue;
             }
 
-            /* -------- 2.   iteracja po prelekcjach (tylko 'pre‑X') -------- */
             foreach ($plSessions as $preKey => $plPre) {
 
                 if (!is_array($plPre) || strpos($preKey, 'pre-') !== 0) {
@@ -157,7 +149,6 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
 
                 $enPre = &$enSessions[$preKey];
 
-                /* -------- 3.   legent‑Y – kopiuj url gdy w EN pusto -------- */
                 foreach ($plPre as $fieldKey => $plField) {
                     if (!is_array($plField) || strpos($fieldKey, 'legent-') !== 0) {
                         continue;
@@ -180,29 +171,27 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
     public static function getConferencePatronLogosFromList($conf_id, $conf_slug, $logo_files = []) {
         $cap_db = PWECommonFunctions::connect_database();
         if (!$cap_db) {
-            return '<!-- Brak połączenia z bazą danych CAP -->';
+            return '<!-- No CAP database connection -->';
         }
 
         if (empty($logo_files)) {
-            return '<!-- Brak logotypów -->';
+            return '<!-- No logos -->';
         }
 
-        // Pobierz dane dodatkowe z conf_adds
+        // Fetch additional data from conf_adds
         $adds_raw = $cap_db->get_results(
             $cap_db->prepare("SELECT slug, data FROM conf_adds WHERE conf_id = %d", $conf_id),
             ARRAY_A
         );
 
-        // Slugi => dane
+        // Slugs => data
         $adds = [];
         foreach ($adds_raw as $row) {
             $slug = trim($row['slug']);
             $adds[$slug] = json_decode($row['data'], true);
-            echo '<script>console.log("'.$slug.'")</script>';
-            echo '<script>console.log("'.$conf_id.'")</script>';
         }
         
-        // URL do katalogu
+        // Directory URL
         $patroni_dir_url = 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/patrons';
         $output = '';
 
@@ -239,18 +228,16 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             return null;
         }
 
-        // Kolejność preferencji wg języka:
         $preferred_slugs = ($lang === 'PL')
             ? ['org-name_pl']
             : ['org-name_en', 'org-name_pl'];
 
-        // Dodatkowy legacy fallback
+        // Additional legacy fallback
         $all_slugs = array_merge($preferred_slugs, ['org-name']);
 
-        // Zbuduj placeholdery do IN (...)
+        // Build placeholders for IN (...)
         $placeholders = implode(',', array_fill(0, count($all_slugs), '%s'));
 
-        // Pobierz potencjalne wartości jednym zapytaniem
         $sql = $cap_db->prepare(
             "SELECT slug, data
             FROM conf_adds
@@ -260,7 +247,6 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
         );
         $rows = $cap_db->get_results($sql, ARRAY_A);
 
-        // Zmapuj po slugach i oczyść
         $by_slug = [];
         if (!empty($rows)) {
             foreach ($rows as $r) {
@@ -270,7 +256,6 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             }
         }
 
-        // Wybierz wg preferencji językowych
         $organizer_name = '';
         foreach ($preferred_slugs as $slug_key) {
             if (!empty($by_slug[$slug_key])) {
@@ -279,17 +264,14 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             }
         }
 
-        // Jeśli nadal brak nazwy — nie pokazuj nic (nie ma sensu sprawdzać logo)
         if (empty($organizer_name)) {
             return null;
         }
 
-        // Sprawdź logo (2xx/3xx -> OK)
         $logo_url = 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/organizer/conf_organizer.webp';
         $response = wp_remote_head($logo_url);
         $code = is_wp_error($response) ? 0 : (int) wp_remote_retrieve_response_code($response);
         if ($code < 200 || $code >= 400) {
-            // Brak/nieosiągalne logo — zwróć tylko opis
             return [
                 'logo_url' => null,
                 'desc'     => $organizer_name,
@@ -308,13 +290,11 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             return [];
         }
 
-        $conf_slug = esc_sql($conf_slug);
-
-        $conference = $cap_db->get_row("
+        $conference = $cap_db->get_row($cap_db->prepare("
             SELECT id, organizers_img
             FROM conferences
-            WHERE conf_slug = '$conf_slug'
-        ", ARRAY_A);
+            WHERE conf_slug = %s
+        ", $conf_slug), ARRAY_A);
 
         if (!$conference || empty($conference['organizers_img'])) {
             return [];
@@ -331,12 +311,12 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
 
             $slug = 'org-' . $logo;
 
-            $conf_add = $cap_db->get_row("
+            $conf_add = $cap_db->get_row($cap_db->prepare("
                 SELECT data
                 FROM conf_adds
-                WHERE slug = '$slug'
-                AND conf_id = $conf_id
-            ", ARRAY_A);
+                WHERE slug = %s
+                AND conf_id = %d
+            ", $slug, $conf_id), ARRAY_A);
 
             $data = [];
             if (!empty($conf_add['data'])) {
@@ -355,16 +335,18 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
 
 
 
-    protected static function debugConferencesConsole( array $database_data ) {
+    public static function debugConferencesConsole( array $database_data ) {
 
-        if ( ! is_user_logged_in() || ! current_user_can( 'administrator' ) ) {
-            return;
+        if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+            return '';
         }
 
         $debug = array_map(
             static function ( $conf ) {
                 return array(
-                    'slug'       => $conf->conf_slug,
+                    'id'         => $conf->id ?? null,
+                    'slug'       => $conf->conf_slug ?? null,
+                    'site_link'  => $conf->conf_site_link ?? null,
                     'updated'    => $conf->updated ?? null,
                     'updated_at' => $conf->updated_at ?? null,
                 );
@@ -372,14 +354,11 @@ class PWEConferenceCapFunctions extends PWEConferenceCap{
             $database_data
         );
 
-        wp_register_script( 'pwe-conference-cap-debug', '' );
-        wp_add_inline_script(
-            'pwe-conference-cap-debug',
-            'console.groupCollapsed("PWEConferenceCap – recent changes");' .
-            'console.table(' . wp_json_encode( $debug ) . ');' .
-            'console.groupEnd();'
-        );
-        wp_enqueue_script( 'pwe-conference-cap-debug' );
+        return '<script>
+            console.groupCollapsed("PWEConferenceCap – conferences order");
+            console.table(' . wp_json_encode( $debug ) . ');
+            console.groupEnd();
+        </script>';
     }
 
   }

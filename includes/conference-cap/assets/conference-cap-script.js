@@ -81,12 +81,10 @@ jQuery(document).ready(function($){
     }
 
     function initializeConferenceNavigation() {
-        // Uaktualniony selektor obejmuje oba typy kontenerów
         const confTabs = $(".conference_cap__conf-slug, .konferencja");
         const confImages = $(".conference_cap__conf-slug-img");
         const tabs = $(".conference_cap__conf-slug-navigation-day");
         
-        // Przełączanie konferencji po kliknięciu obrazka
         confImages.on("click", function () {
             const parentLink = $(this).closest('a');
 
@@ -128,33 +126,25 @@ jQuery(document).ready(function($){
         });
         
         
-        // Przełączanie dni w wybranej konferencji
         tabs.on("click", function () {
             const parts = this.id.split("_");
-            // Zakładamy, że struktura id przycisku dnia to "tab_slug_dzien"
             const selectedConfSlug = parts[1];
             const selectedDay = parts[2];
             const targetId = `content_${selectedConfSlug}_${selectedDay}`;
                         
-            // Znalezienie najbliższego kontenera konferencji, który może mieć klasę .conference_cap__conf-slug lub .konferencja
             const currentConf = $(this).closest(".conference_cap__conf-slug, .konferencja");
             
-            // Usunięcie klasy active-day ze wszystkich dni w danej konferencji
             currentConf.find(".conference_cap__conf-slug-navigation-day").removeClass("active-day");
-            // Dodanie klasy active-day do klikniętego przycisku
             $(this).addClass("active-day");
             
-            // Usunięcie klasy active-content z zawartości dni
             currentConf.find(".conference_cap__conf-slug-content").removeClass("active-content");
             
-            // Dodanie klasy active-content do docelowej zawartości dnia
             const targetContent = $(`#${targetId}`);
             if (targetContent.length) {
                 targetContent.addClass("active-content");
             }
         });
         
-        // Opcjonalnie: ustawienie domyślnego stanu, np. automatyczne kliknięcie pierwszego obrazka
         // if (confImages.length > 0) {
         //     confImages.first().click();
         // }
@@ -175,7 +165,6 @@ jQuery(document).ready(function($){
 
         const allConfs = $(".conference_cap__conf-slug");
 
-        // Jeśli tryb jednej konferencji jest włączony
         if (confCapData.oneConfMode) {
             const allConfs = $(".conference_cap__conf-slug");
 

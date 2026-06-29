@@ -1,0 +1,25 @@
+/* Trends Panel */
+#PWEConferenceCapTrendsPanel {
+  margin-top: 36px;
+  border-top: 1px solid #eaeaea;
+}
+
+#PWEConferenceCapTrendsPanel .pwe-trends-panel-contact-block p,
+#PWEConferenceCapTrendsPanel .pwe-trends-panel-link {
+  margin: 0;
+}
+
+#PWEConferenceCapTrendsPanel .pwe-trends-panel-link a {
+  color: var(--accent-color) !important;
+  transition: 0.3s ease;
+}
+
+#PWEConferenceCapTrendsPanel .pwe-trends-panel-link a:hover {
+  color: var(--main2-color) !important;
+}
+
+#PWEConferenceCapTrendsPanel .pwe-trends-panel-email {
+  display: flex;
+  flex-wrap: wrap;
+}
+
