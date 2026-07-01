@@ -229,6 +229,7 @@ if (
             }
             .wpb_column:has(#top10) {
                 padding-top: 100px;
+                vertical-align: inherit !important;
             }
             #pweForm {
                 max-width: 555px;

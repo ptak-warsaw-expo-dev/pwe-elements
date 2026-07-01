@@ -70,10 +70,6 @@ function render_gr2($atts, $source_utm){
                         <img src="/wp-content/plugins/pwe-media/media/platyna/vip.webp" />
                         <p>'. PWERegistrationVisitors::multi_translation("VIP_zone").'</p>
                       </div>
-                      <div class="benefits_icon">
-                        <img src="/wp-content/plugins/pwe-media/media/platyna/aktywacja.webp" />
-                        <p>'. PWERegistrationVisitors::multi_translation("earlier_activation").'</p>
-                      </div>
                     </div>
                   </div>
                 </div>
