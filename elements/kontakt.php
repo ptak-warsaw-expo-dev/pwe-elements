@@ -46,40 +46,104 @@ class PWElementContact extends PWElements {
         $pwe_groups_contacts_data = PWECommonFunctions::get_database_groups_contacts_data();
 
         $source_utm = (isset($_SERVER['argv'][0])) ? $_SERVER['argv'][0] : '';
-        // Get domain address
+
         $current_domain = $_SERVER['HTTP_HOST'];
+        
+        $pwe_edition = trim(do_shortcode('[pwe_edition]')) === '1';
 
         foreach ($pwe_groups_data as $group) {
-            if ($current_domain == $group->fair_domain) {
-                $current_group = $group->fair_group;
-                foreach ($pwe_groups_contacts_data as $group_contact) {
-                    if ($group->fair_group == $group_contact->groups_name) {
-                        if ($group_contact->groups_slug == "biuro-ob") {
-                            $service_contact_data = json_decode($group_contact->groups_data);
-                            $service_email = trim($service_contact_data->email);
-                            $service_phone = trim($service_contact_data->tel);
-                        }
-                        if ($group_contact->groups_slug == "ob-tech-wyst") {
-                            $consultant_contact_data = json_decode($group_contact->groups_data);
-                            $consultant_email = trim($consultant_contact_data->email);
-                        }
-                        if ($group_contact->groups_slug == "ob-marketing-media") {
-                            $marketing_contact_data = json_decode($group_contact->groups_data);
-                            $marketing_email = trim($marketing_contact_data->email);
-                        }
-                        if ($group_contact->groups_slug == "osoba-kontakt") {
-                            $contact_person_data = json_decode($group_contact->groups_data);
-                            $contact_person_name = trim($contact_person_data->name);
-                            $contact_person_email = trim($contact_person_data->email);
-                            $contact_person_phone = trim($contact_person_data->tel);
-                        }
+
+            if ($current_domain != $group->fair_domain) {
+                continue;
+            }
+
+            $current_group = $group->fair_group;
+
+            foreach ($pwe_groups_contacts_data as $group_contact) {
+
+                $contact_group_name = $group_contact->groups_name;
+
+                $is_b2c_special = (
+                    ($current_group === "b2c" || $current_group === "b2c-new")
+                    && $pwe_edition
+                );
+
+                /*
+                * B2C OVERRIDE FOR PREMIERE EDITION
+                */
+                if ($is_b2c_special
+                    && $contact_group_name === "gr1"
+                    && (
+                        $group_contact->groups_slug === "biuro-ob"
+                        || $group_contact->groups_slug === "ob-marketing-media"
+                    )
+                ) {
+
+                    $data = json_decode($group_contact->groups_data);
+
+                    if ($group_contact->groups_slug === "biuro-ob") {
+
+                        $service_emails = array_map(
+                            'trim',
+                            preg_split('/[,;]+/', trim($data->email))
+                        );
+
+                        $service_phone = trim($data->tel);
+                    }
+
+                    if ($group_contact->groups_slug === "ob-marketing-media") {
+
+                        $marketing_emails = array_map(
+                            'trim',
+                            preg_split('/[,;]+/', trim($data->email))
+                        );
+                    }
+
+                    continue;
+                }
+
+                /*
+                * OTHER CONTACTS
+                */
+
+                if ($group->fair_group === $contact_group_name) {
+
+                    $data = json_decode($group_contact->groups_data);
+
+                    if ($group_contact->groups_slug === "biuro-ob") {
+
+                        $service_emails = array_map(
+                            'trim',
+                            preg_split('/[,;]+/', trim($data->email))
+                        );
+
+                        $service_phone = trim($data->tel);
+                    }
+
+                    if ($group_contact->groups_slug === "ob-marketing-media") {
+
+                        $marketing_emails = array_map(
+                            'trim',
+                            preg_split('/[,;]+/', trim($data->email))
+                        );
+                    }
+
+                    if ($group_contact->groups_slug === "ob-tech-wyst") {
+
+                        $consultant_email = trim($data->email);
+                    }
+
+                    if ($group_contact->groups_slug === "osoba-kontakt") {
+
+                        $contact_person_name  = trim($data->name);
+                        $contact_person_email = trim($data->email);
+                        $contact_person_phone = trim($data->tel);
                     }
                 }
             }
         }
 
         $service_email = !empty($service_email) ? $service_email : "zgloszenia@warsawexpo.eu";
-        // $service_email = "anton.melnychuk@warsawexpo.eu";
 
         $output = '
         <style>
@@ -178,10 +242,16 @@ class PWElementContact extends PWElements {
                             if (!empty($service_phone)) {
                                 $output .= '<a href="tel:'. $service_phone .'">'. $service_phone .'</a>';
                             }
+
+                            if (!empty($service_emails) && is_array($service_emails)) {
+                                foreach ($service_emails as $email) {
+                                    $output .= '
+                                    <a href="mailto:'. $email .'">
+                                        <span>'. str_replace("@warsawexpo.eu", "", $email) .'</span><span>@warsawexpo.eu</span>
+                                    </a>';
+                                }
+                            }
                             $output .= '
-                            <a href="mailto:'. str_replace("@warsawexpo.eu", "", $service_email) .'@warsawexpo.eu">
-                                <span>'. str_replace("@warsawexpo.eu", "", $service_email) .'</span><span>@warsawexpo.eu</span>
-                            </a>
                         </p>
                     </div>
                 </div>';
@@ -193,8 +263,8 @@ class PWElementContact extends PWElements {
                         <div class="uncode_text_column">
                             <p>
                                 <b>'.PWElementContactForm::multi_translation("technical_support").'</b>
-                                <a href="mailto:'. str_replace("@warsawexpo.eu", "", $consultant_email) .'@warsawexpo.eu">
-                                    <span>'. str_replace("@warsawexpo.eu", "", $consultant_email) .'</span><span>@warsawexpo.eu</span>
+                                <a href="mailto:'. $consultant_email .' ">
+                                    <span>'. $consultant_email .'</span>
                                 </a>
                             </p>
                         </div>
@@ -210,16 +280,24 @@ class PWElementContact extends PWElements {
 
             <div class="pwe-container-contact-items">';
 
-                if (!empty($marketing_email)) {
+                if (!empty($marketing_emails)) {
                     $output .= '
                     <div class="pwe-contact-icon-item">
                         <img src="/wp-content/plugins/pwe-media/media/Marketing.jpg" alt="grafika technicy">
                         <div class="uncode_text_column" style="overflow-wrap: anywhere;">
                             <p>
-                                <b>'.PWElementContactForm::multi_translation("media_marketing_service").'</b>
-                                <a href="mailto:'. str_replace("@warsawexpo.eu", "", $marketing_email) .'@warsawexpo.eu">
-                                    <span>'. str_replace("@warsawexpo.eu", "", $marketing_email) .'</span><span>@warsawexpo.eu</span>
-                                </a>
+                                <b>'.PWElementContactForm::multi_translation("media_marketing_service").'</b>';
+
+                                if (!empty($marketing_emails) && is_array($marketing_emails)) {
+                                    foreach ($marketing_emails as $email) {
+                                        $output .= '
+                                        <a href="mailto:'. $email .'">
+                                            <span>'. str_replace("@warsawexpo.eu", "", $email) .'</span><span>@warsawexpo.eu</span>
+                                        </a>';
+                                    }
+                                }
+
+                                $output .= '
                             </p>
                         </div>
                     </div>';
@@ -276,6 +354,6 @@ class PWElementContact extends PWElements {
             });
         </script>';
 
-    return $output;
+        return $output;
     }
 }
