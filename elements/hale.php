@@ -86,51 +86,25 @@ class PWElementHale extends PWElements {
         $hall_image_src = wp_get_attachment_url($hall_image);
 
         // Get current domain
-        $current_domain = trim(do_shortcode('[trade_fair_domainadress]'));
-        $domains_week = PWECommonFunctions::get_database_week_data();
+        $current_domain = do_shortcode('[trade_fair_domainadress]');
 
-        if (!empty($domains_week)) {
-            $current_domain = trim($domains_week[0]);
-        }
-
-        // Get JSON
-        $fairs_json = PWECommonFunctions::json_fairs();
-        $trade_fair_start = '';
-        $trade_fair_end   = '';
-
-        if (!empty($domains_week)) {
-            foreach ($fairs_json as $fair) {
-                $clean_fair_domain = trim($fair['domain'] ?? '', '[]" ');
-                $clean_current_domain = trim($current_domain, '[]" ');
-
-                if (!empty($clean_fair_domain) && $clean_fair_domain === $clean_current_domain) {
-                    $trade_fair_start = $fair['date_start'] ?? '';
-                    $trade_fair_end   = $fair['date_end']   ?? '';
-                    break;
-                }
-            }
-        } else {
-            $trade_fair_start = do_shortcode('[trade_fair_datetotimer]');
-            $trade_fair_end   = do_shortcode('[trade_fair_enddata]');
-        }
+        // Fair dates
+        $trade_fair_start = do_shortcode('[trade_fair_datetotimer]');
+        $trade_fair_end = do_shortcode('[trade_fair_enddata]');
 
         // Converting dates to timestamps
         $trade_fair_start_timestamp = strtotime($trade_fair_start);
         $trade_fair_end_timestamp = strtotime($trade_fair_end);
 
-
+        // Get JSON
+        $fairs_json = PWE_Functions::json_fairs();
 
         $fair_items_json = [];
 
         foreach ($fairs_json as $fair) {
             // Getting start and end dates
-            $date_start = !empty($fair['date_start'])
-                ? DateTime::createFromFormat('Y/m/d', $fair['date_start'])->getTimestamp()
-                : null;
-
-            $date_end = !empty($fair['date_end'])
-                ? DateTime::createFromFormat('Y/m/d', $fair['date_end'])->getTimestamp()
-                : null;
+            $date_start = isset($fair['date_start']) ? strtotime($fair['date_start']) : null;
+            $date_end = isset($fair['date_end']) ? strtotime($fair['date_end']) : null;
 
             // Checking if the date is in the range
             if ($date_start && $date_end) {
@@ -148,71 +122,43 @@ class PWElementHale extends PWElements {
         $all_halls = '';
 
         $json_data_all = [];
-        $json_data_active = [];
 
-        if(!empty($domains_week)){
-            $fair_items_json = array_filter($fair_items_json, function($item) {
-                return $item['domain'] !== 'mr.glasstec.pl';
-            });
-        }
         foreach ($fair_items_json as $item) {
             $halls = array_map('trim', explode(',', $item['halls']));
-
             foreach ($halls as $hall) {
-                if (strpos($item['domain'], "mr.glasstec.pl") === false) {
+                if (strpos($item['domain'], "mr.glasstec.pl") === false && strpos($item['domain'], "patryk.targibiurowe.com") === false) {
                     $json_data_all[] = [
                         "id" => $hall,
-                        "domain" => $item['domain']
-                    ];
-                }
-            }
-
-            $current_domain = trim($current_domain, '[]" ');
-
-            if(empty($domains_week)){
-                if ($item['domain'] === $current_domain) {
-                    foreach ($halls as $hall) {
-                        $json_data_active[] = [
-                            "id" => $hall,
-                            "color" => $item['color']
-                        ];
-
-                        // Adding halls to $all_halls without numbers
-                        $clean_hall = preg_replace('/\d/', '', $hall);
-                        if (strpos($all_halls, $clean_hall) === false) {
-                            $all_halls .= $clean_hall . ', ';
-                        }
-                    }
-                }
-            } else {
-                foreach ($halls as $hall) {
-                    $json_data_active[] = [
-                        "id" => $hall,
+                        "domain" => $item['domain'],
                         "color" => $item['color']
                     ];
-
+                } else if ($_SERVER['HTTP_HOST'] === "mr.glasstec.pl" || $_SERVER['HTTP_HOST'] === "patryk.targibiurowe.com") {
+                    $json_data_all[] = [
+                        "id" => $hall,
+                        "domain" => $item['domain'],
+                        "color" => $item['color']
+                    ];
+                }
+                
+                if ($item['domain'] === $current_domain) {
                     // Adding halls to $all_halls without numbers
                     $clean_hall = preg_replace('/\d/', '', $hall);
-                    if (strpos($all_halls, $clean_hall) === false) {
+                    if (!str_contains($all_halls, $clean_hall)) {
                         $all_halls .= $clean_hall . ', ';
                     }
                 }
             }
-
         }
 
         $all_halls = rtrim($all_halls, ', ');
 
-        if(!empty($domains_week)){
-            $halls_array = explode(', ', $all_halls);
-            sort($halls_array);
-            $all_halls = implode(', ', $halls_array);
-        }
-
         $halls_word = (count(array_filter(array_map('trim', explode(',', $all_halls)))) > 1)
-            ? self::multi_translation("halls")
-            : self::multi_translation("hall");
+            ? PWE_Functions::multi_translation("multiple_halls")
+            : PWE_Functions::multi_translation("single_hall");
 
+        if (empty($all_halls)) {
+            return;
+        }
 
         // $current_day_timestamp = time();
 
@@ -258,7 +204,9 @@ class PWElementHale extends PWElements {
 
             </style>
 
-            <div id="pweHalls" class="pwe-halls">
+            <div id="pweHalls" class="pwe-halls"
+                data-all-items='. json_encode($json_data_all) .'
+                data-active-items='. json_encode($json_data_active) .'>
                 <div class="pwe-halls__info">
                     <div class="pwe-halls__info-container">
                         <img src="'. self::multi_translation("logo_link") .'"/>
@@ -282,11 +230,11 @@ class PWElementHale extends PWElements {
                     </div>';
                 } else {
                     $output .= '
-                    <svg id="pweHallsSvg" class="pwe-halls__svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="100 200 3000 1200">
-
+                    <svg id="pweHallsSvg" class="pwe-halls__svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="100 300 3000 1100">
+    
                         <defs>
                             <style>
-                                .pwe-halls__element.active {
+                                .pwe-halls__element.active.current-fair {
                                     transform: translate(10px, -20px);
                                     filter: drop-shadow(-10px 20px 20px black);
                                     transition: .3s ease;
@@ -300,8 +248,10 @@ class PWElementHale extends PWElements {
                                     display: none;
                                 }
                                 .pwe-halls__element.active > .pwe-halls__link {
-                                    pointer-events: none;
                                     display: block;
+                                }
+                                .pwe-halls__element.active.current-fair > .pwe-halls__link {
+                                    pointer-events: none;
                                 }
                                 .pwe-halls__element.unactive > .pwe-halls__link {
                                     pointer-events: unset;
@@ -311,7 +261,6 @@ class PWElementHale extends PWElements {
                                     fill: transparent;
                                     opacity: .7;
                                 }
-
                                 .pwe-halls__element-logo image {
                                     width: 300px;
                                     height: 200px;
@@ -333,8 +282,6 @@ class PWElementHale extends PWElements {
                                 #D .pwe-halls__element-favicon {
                                     transform: rotateX(55deg) rotateZ(-30deg);
                                 }
-
-
                                 #E .pwe-halls__element-logo,
                                 #F .pwe-halls__element-logo {
                                     transform: rotateX(56deg) rotateZ(-27deg);
@@ -370,7 +317,7 @@ class PWElementHale extends PWElements {
                                 }
                                 .st8 {
                                     fill: #fff;
-                                    font-size: 24px;
+                                    font-size: 40px;
                                     font-weight: 500;
                                 }
                                 .st8, .st9 {
@@ -943,7 +890,7 @@ class PWElementHale extends PWElements {
                                     <g id="numer_hali_F" class="st9">
                                         <g class="st9">
                                             <g class="st9">
-                                                <text class="st8" transform="translate(2775.6 588.9)"><tspan x="-6" y="6">F</tspan></text>
+                                                <text class="st8" transform="translate(2775.6 588.9)"><tspan x="-16" y="14">F</tspan></text>
                                             </g>
                                         </g>
                                     </g>
@@ -1018,7 +965,7 @@ class PWElementHale extends PWElements {
                                     <g id="numer_hali_E" class="st9">
                                         <g class="st9">
                                             <g class="st9">
-                                                <text class="st8" transform="translate(2215 735.4)"><tspan x="-6" y="6">E</tspan></text>
+                                                <text class="st8" transform="translate(2215 735.4)"><tspan x="-16" y="14">E</tspan></text>
                                             </g>
                                         </g>
                                     </g>
@@ -1129,7 +1076,7 @@ class PWElementHale extends PWElements {
                                     <g id="numer_hali_D" class="st9">
                                         <g class="st9">
                                             <g class="st9">
-                                                <text class="st8" transform="translate(1619.9 823.8)"><tspan x="-6" y="6">D</tspan></text>
+                                                <text class="st8" transform="translate(1619.9 823.8)"><tspan x="-16" y="14">D</tspan></text>
                                             </g>
                                         </g>
                                     </g>
@@ -1230,7 +1177,7 @@ class PWElementHale extends PWElements {
                                     <g id="numer_hali_C" class="st9">
                                         <g class="st9">
                                             <g class="st9">
-                                                <text class="st8" transform="translate(1323.8 911.8)"><tspan x="-6" y="6">C</tspan></text>
+                                                <text class="st8" transform="translate(1323.8 911.8)"><tspan x="-16" y="14">C</tspan></text>
                                             </g>
                                         </g>
                                     </g>
@@ -1331,7 +1278,7 @@ class PWElementHale extends PWElements {
                                     <g id="numer_hali_B" class="st9">
                                         <g class="st9">
                                             <g class="st9">
-                                                <text class="st8" transform="translate(1026.8 998.9)"><tspan x="-6" y="6">B</tspan></text>
+                                                <text class="st8" transform="translate(1026.8 998.9)"><tspan x="-16" y="14">B</tspan></text>
                                             </g>
                                         </g>
                                     </g>
@@ -1484,321 +1431,110 @@ class PWElementHale extends PWElements {
             </div>
 
             <script>
-                // Data passed from PHP
-                const allItems = '. json_encode($json_data_all) .';
-                const activeItems = '. json_encode($json_data_active) .';
+                const halls = document.getElementById("pweHalls");
 
-                const allItemsObject = [];
-                const allActiveItemsObject = [];
+                if (halls) {
+                    const allItems = JSON.parse(halls.dataset.allItems || "[]")
+                        .filter(item => item.id && item.domain);
 
-                const addActiveClassToFullObject = () => {
-                    let activeItemsFull = [];
-                    activeItems.forEach(item => {
-                        if (/^[A-Z]$/.test(item.id)) {
-                            activeItemsFull.push({
-                                id: item.id,
-                                color: item.color
-                            });
-                        }
-                    });
+                    const currentDomain = window.location.hostname;
+                    const allActiveItemsObject = [];
 
-                    // Iterate over active elements (full halls)
-                    activeItemsFull.forEach(item => {
-                        const fullObject = document.querySelector(`#${item.id}`);
+                    const setElementState = (el, item, variant) => {
+                        if (!el || !item) return;
 
-                        if (fullObject) {
-                            // Adding the "active" class to the hall
-                            fullObject.classList.add("active");
+                        el.classList.add("active");
 
-                            // Find all elements with class "pwe-halls__element-color" in the active element
-                            const fullObjectColors = fullObject.querySelectorAll(".pwe-halls__element-color");
-                            fullObjectColors.forEach(colorElement => {
-                                // Set the color for the active element
-                                colorElement.style.fill = item.color;
-                            });
+                        if (item.domain === currentDomain) {
+                            el.classList.add("current-fair");
                         }
 
-                        allActiveItemsObject.push({
-                            id: fullObject.id
-                        });
-                    });
-                }
+                        const colors = el.querySelectorAll(".pwe-halls__element-color");
+                        colors.forEach(c => c.style.fill = item.color);
 
-                addActiveClassToFullObject();
+                        if (variant === "half") {
+                            const links = el.querySelectorAll(".pwe-halls__element-favicon-link.half");
+                            links.forEach(link => {
+                                const logo = link.querySelector(".pwe-halls__element-favicon");
+                                if (!logo) return;
 
+                                link.setAttribute("href", `https://${item.domain}`);
+                                logo.setAttribute("href", `https://${item.domain}/doc/favicon.webp`);
+                            });
+                        } else {
+                            const links = el.querySelectorAll(`.pwe-halls__element-logo-link.${variant}`);
+                            links.forEach(link => {
+                                const logo = link.querySelector(".pwe-halls__element-logo");
+                                if (!logo) return;
 
-                const addActiveClassToHalfObject = () => {
-                    let activeItemsQuarter = [];
-                    activeItems.forEach(item => {
-                        if (/^[A-Z]\d$/.test(item.id)) {
-                            activeItemsQuarter.push({
-                                id: item.id,
-                                color: item.color
+                                link.setAttribute("href", `https://${item.domain}`);
+                                logo.setAttribute("href", `https://${item.domain}/doc/logo.webp`);
                             });
                         }
+
+                        allActiveItemsObject.push({ id: el.id });
+                    };
+
+                    const getHalfElement = (idA, idB) => {
+                        return document.getElementById(`${idA}_${idB}`) || document.getElementById(`${idB}_${idA}`);
+                    };
+
+                    const grouped = {};
+
+                    allItems.forEach(item => {
+                        const letter = item.id.charAt(0);
+                        const key = `${letter}_${item.domain}`;
+
+                        if (!grouped[key]) grouped[key] = [];
+                        grouped[key].push(item);
                     });
 
-                    // Iterate over active elements (half halls)
-                    const combinedId = [];
-                    activeItemsQuarter.forEach((item1, index) => {
-                        activeItemsQuarter.slice(index + 1).forEach(item2 => {
+                    const activateItems = () => {
+                        Object.values(grouped).forEach(items => {
+                            const letter = items[0].id.charAt(0);
+                            const fullItem = items.find(item => item.id === letter);
+                            const subItems = items
+                                .filter(item => item.id !== letter)
+                                .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 
-                            const combinedIds = [
-                                `${item1.id}_${item2.id}`,
-                                `${item2.id}_${item1.id}`
-                            ];
-
-                            combinedIds.forEach(id => {
-                                const combinedElement = document.getElementById(id);
-                                if (combinedElement) {
-                                    // Sprawdzamy rodzica z klasą pwe-halls__element-full
-                                    const parentFullElement = combinedElement.closest(".pwe-halls__element.full");
-                                    if (parentFullElement && !parentFullElement.classList.contains("active")) {
-                                        combinedElement.classList.add("active");
-
-                                        // Znalezienie wszystkich elementów z klasą "pwe-halls__element-color" w aktywnym elemencie
-                                        const fullObjectColors = combinedElement.querySelectorAll(".pwe-halls__element-color");
-                                        fullObjectColors.forEach(colorElement => {
-                                            // Ustawienie koloru dla aktywnego elementu
-                                            colorElement.style.fill = item1.color;
-                                        });
-                                    }
-
-                                    allActiveItemsObject.push({
-                                        id: combinedElement.id
-                                    });
-                                }
-                            });
-                        });
-                    });
-                }
-
-                addActiveClassToHalfObject();
-
-                const addActiveClassToQuarterObject = () => {
-                    let activeItemsQuarter = [];
-                    activeItems.forEach(item => {
-                        if (/^[A-Z]\d$/.test(item.id)) {
-                            activeItemsQuarter.push({
-                                id: item.id,
-                                color: item.color
-                            });
-                        }
-                    });
-
-                    // Iterate over active elements (quarter halls)
-                    activeItemsQuarter.forEach(item => {
-                        const quarterObject = document.querySelector(`#${item.id}`);
-                        if (quarterObject) {
-                            // Check the parent with class pwe-halls__element-full
-                            const parentFullElement = quarterObject.closest(".pwe-halls__element.half");
-                            if (parentFullElement && !parentFullElement.classList.contains("active")) {
-                                quarterObject.classList.add("active");
-
-                                // Find all elements with class "pwe-halls__element-color" in the active element
-                                const quarterObjectColors = quarterObject.querySelectorAll(".pwe-halls__element-color");
-                                quarterObjectColors.forEach(colorElement => {
-                                    // Ustawienie koloru dla aktywnego elementu
-                                    colorElement.style.fill = item.color;
-                                });
+                            // Full hall: type "F" or all parts F1-F4.
+                            if (fullItem || subItems.length === 4) {
+                                const el = document.getElementById(letter);
+                                const sourceItem = fullItem || subItems[0];
+                                setElementState(el, sourceItem, "full");
+                                return;
                             }
 
-                            allActiveItemsObject.push({
-                                id: quarterObject.id
-                            });
-                        }
-                    });
-                }
+                            const usedIds = new Set();
 
-                addActiveClassToQuarterObject();
+                            // First, we try to join existing halves, e.g., F1+F2 or F3+F4.
+                            for (let i = 0; i < subItems.length; i++) {
+                                for (let j = i + 1; j < subItems.length; j++) {
+                                    const first = subItems[i];
+                                    const second = subItems[j];
 
-                const addLogoToFullObject = () => {
-                    let allItemsFull = [];
-                    allItems.forEach(item => {
-                        if (/^[A-Z]$/.test(item.id)) {
-                            allItemsFull.push({
-                                id: item.id,
-                                domain: item.domain
-                            });
-                        }
-                    });
+                                    if (usedIds.has(first.id) || usedIds.has(second.id)) continue;
 
-                    // Iterate over all elements (full halls)
-                    allItemsFull.forEach(item => {
-                        const fullObject = document.querySelector(`#${item.id}`);
+                                    const halfEl = getHalfElement(first.id, second.id);
+                                    if (!halfEl) continue;
 
-                        if (fullObject) {
-                            // Find all elements with class "pwe-halls__element-color"
-                            const fullObjectsLogotypes = fullObject.querySelectorAll(".pwe-halls__element-logo-link.full");
-                            fullObjectsLogotypes.forEach(logoElement => {
-                                const logo = logoElement.querySelector(".pwe-halls__element-logo");
-                                if (fullObject.classList.contains("active")) {
-                                    // Set white logo for active element
-                                    logoElement.setAttribute("href", `https://${item.domain}`);
-                                    logo.setAttribute("href", `https://${item.domain}/doc/logo.webp`);
-                                } else {
-                                    // Set a colored logo for the active element
-                                    logoElement.setAttribute("href", `https://${item.domain}`);
-                                    logo.setAttribute("href", `https://${item.domain}/doc/logo-color.webp`);
+                                    setElementState(halfEl, first, "half");
+                                    usedIds.add(first.id);
+                                    usedIds.add(second.id);
                                 }
-                            });
-
-                            allItemsObject.push({
-                                id: fullObject.id
-                            });
-                        }
-                    });
-                }
-
-                addLogoToFullObject();
-
-                const addLogoToHalfObject = () => {
-                    let allItemsQuarter = [];
-                    allItems.forEach(item => {
-                        if (/^[A-Z]\d$/.test(item.id)) {
-                            allItemsQuarter.push({
-                                id: item.id,
-                                domain: item.domain
-                            });
-                        }
-                    });
-
-                    // Iterate over all elements (half halls)
-                    const combinedId = [];
-                    allItemsQuarter.forEach((item1, index) => {
-                        allItemsQuarter.slice(index + 1).forEach(item2 => {
-                            // Check if domains are the same
-                            if (item1.domain === item2.domain) {
-                                const combinedIds = [
-                                    `${item1.id}_${item2.id}`,
-                                    `${item2.id}_${item1.id}`
-                                ];
-
-                                combinedIds.forEach(id => {
-                                    const combinedElement = document.getElementById(id);
-                                    if (combinedElement) {
-                                        const halfObjectsLogotypes = combinedElement.querySelectorAll(".pwe-halls__element-favicon-link.half");
-                                        halfObjectsLogotypes.forEach(logoElement => {
-                                            const logo = logoElement.querySelector(".pwe-halls__element-favicon");
-                                            if (combinedElement.classList.contains("active")) {
-                                                // Set white logo for active element
-                                                logoElement.setAttribute("href", `https://${item1.domain}`);
-                                                logo.setAttribute("href", `https://${item1.domain}/doc/favicon.webp`);
-                                            } else {
-                                                // Set a colored logo for the active element
-                                                logoElement.setAttribute("href", `https://${item1.domain}`);
-                                                logo.setAttribute("href", `https://${item1.domain}/doc/favicon-color.webp`);
-                                            }
-                                        });
-
-                                        allItemsObject.push({
-                                            id: combinedElement.id
-                                        });
-                                    }
-                                });
                             }
-                        });
-                    });
-                }
 
-                addLogoToHalfObject();
+                            // Rest as individual quarters, e.g., F1,F3 or the third hall from F1,F2,F3.
+                            subItems.forEach(item => {
+                                if (usedIds.has(item.id)) return;
 
-                const addLogoToQuarterObject = () => {
-                    let allItemsQuarter = [];
-                    allItems.forEach(item => {
-                        if (/^[A-Z]\d$/.test(item.id)) {
-                            allItemsQuarter.push({
-                                id: item.id,
-                                domain: item.domain
+                                const el = document.getElementById(item.id);
+                                setElementState(el, item, "quarter");
                             });
-                        }
-                    });
-
-                    // Iterate over all elements (quarter halls)
-                    allItemsQuarter.forEach(item => {
-                        const quarterObject = document.querySelector(`#${item.id}`);
-
-                        if (quarterObject) {
-                            // Find all elements with class "pwe-halls__element-color"
-                            const quarterObjectsLogotypes = quarterObject.querySelectorAll(".pwe-halls__element-logo-link.quarter");
-                            quarterObjectsLogotypes.forEach(logoElement => {
-                                const logo = logoElement.querySelector(".pwe-halls__element-logo");
-                                if (quarterObject.classList.contains("active")) {
-                                    // Set white logo for active element
-                                    logoElement.setAttribute("href", `https://${item.domain}`);
-                                    logo.setAttribute("href", `https://${item.domain}/doc/logo.webp`);
-                                } else {
-                                    // Set a colored logo for the active element
-                                    logoElement.setAttribute("href", `https://${item.domain}`);
-                                    logo.setAttribute("href", `https://${item.domain}/doc/logo-color.webp`);
-                                }
-                            });
-
-                            allItemsObject.push({
-                                id: quarterObject.id
-                            });
-                        }
-                    });
-                }
-
-                addLogoToQuarterObject();
-
-                const filterCombinedIds = (items) => {
-                    // Extract all composite ids
-                    const combinedIds = items
-                        .filter(item => item.id.includes("_")) // Filtruje elementy zawierające "_"
-                        .map(item => item.id.split("_"));    // Dzieli je na poszczególne identyfikatory
-
-                    // Convert array of composite ids into single ids
-                    const idsToRemove = new Set(combinedIds.flat());
-
-                    // Filter the array by removing objects with IDs in `idsToRemove`
-                    return items.filter(item => !idsToRemove.has(item.id));
-                };
-
-                const filteredAllItems = filterCombinedIds(allItemsObject);
-                const filteredActiveItems = filterCombinedIds(allActiveItemsObject);
-
-                // Iterate over all elements that match JSON
-                filteredAllItems.forEach(item => {
-                    const svgElement = document.querySelector(`#${item.id}`);
-                    if (svgElement) {
-                        // Check if the element is active
-                        const isActive = filteredActiveItems.some(activeItem => activeItem.id === item.id);
-                        if (!isActive) {
-                            // Dodanie klasy "unactive"
-                            svgElement.classList.add("unactive");
-                        }
-                    }
-                });
-
-                if (window.innerWidth >= 960) {
-                    const svgHale = document.querySelector("#pweHallsSvg");
-                    const zoomFactor = 2;
-
-                    if (svgHale) {
-                        // Get original viewBox
-                        const originalViewBox = svgHale.getAttribute("viewBox");
-                        const viewBoxValues = originalViewBox.split(" ").map(Number);
-
-                        svgHale.addEventListener("mousemove", (e) => {
-                            const rect = svgHale.getBoundingClientRect();
-                            const x = e.clientX - rect.left;
-                            const y = e.clientY - rect.top;
-
-                            // Calculating a new viewBox
-                            const viewBoxX = viewBoxValues[0] + (x / rect.width) * viewBoxValues[2] - (viewBoxValues[2] / zoomFactor) / 2;
-                            const viewBoxY = viewBoxValues[1] + (y / rect.height) * viewBoxValues[3] - (viewBoxValues[3] / zoomFactor) / 2;
-                            const viewBoxWidth = viewBoxValues[2] / zoomFactor;
-                            const viewBoxHeight = viewBoxValues[3] / zoomFactor;
-
-                            svgHale.setAttribute("viewBox", `${viewBoxX} ${viewBoxY} ${viewBoxWidth} ${viewBoxHeight}`);
                         });
+                    };
 
-                        svgHale.addEventListener("mouseleave", () => {
-                            svgHale.setAttribute("viewBox", originalViewBox); // Resetujemy viewBox do oryginalnego
-                        });
-                    }
+                    window.addEventListener("load", activateItems);
                 }
 
             </script>';
