@@ -255,9 +255,6 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
         $t = (strpos($lang, 'en') !== false) ? $translations['en'] : $translations['pl'];
         $trade_fair_group = do_shortcode('[trade_fair_group]');
 
-
-        var_dump($trade_fair_group);
-
         $output = '
             <style>
                 .pwelement_' . self::$rnd_id . ' #xForm{
@@ -899,7 +896,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                         <div id="pweForm">
                             <div class="pweform_container">
                                 <div class="form">
-                                    <h2 class="form-title">'. PWECommonFunctions::languageChecker('Podaj adres, na który mamy wysłać <span style="color:#616161">darmowy pakiet PLATINUM</span>', 'Enter the address to which we should send<br/>the <span style="color:#616161">free PLATINUM package</strong>') .'</h2>
+                                    <h2 class="form-title">'. PWECommonFunctions::languageChecker('Podaj adres, na który mamy wysłać <span style="color:#616161">darmowy pakiet PLATINIUM</span>', 'Enter the address to which we should send<br/>the <span style="color:#616161">free PLATINIUM package</strong>') .'</h2>
                                     <div class="pwe-registration-form">
                                         <div class="pwe-gravity-form">
                                             <div class="gf_browser_chrome gform_wrapper gravity-theme gform-theme--no-framework">
@@ -974,10 +971,6 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                     <div class="benefits_icon">
                                         <img src="/wp-content/plugins/pwe-media/media/platyna/vip.webp" />
                                         <p>'. PWECommonFunctions::languageChecker('Strefę VIP ROOM', 'VIP ROOM area') .'</p>
-                                    </div>
-                                    <div class="benefits_icon">
-                                        <img src="/wp-content/plugins/pwe-media/media/platyna/aktywacja.webp" />
-                                        <p>'. PWECommonFunctions::languageChecker('Możliwość wcześniejszej</br>aktywacji zaproszenia', 'Possibility of earlier</br> activation of the invitation') .'</p>
                                     </div>
                                 </div>
                             </div>

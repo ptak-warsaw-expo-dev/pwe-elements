@@ -68,14 +68,14 @@ jQuery(function ($) {
 
 
 /* ROZWIJANE ZGODY */
-jQuery('document').ready(function ($) {
-    $('.show-consent').on('click touch', function () {
-        // $(this).parents( "li" ).find('.gfield_consent_description').toggle( "slow" );
-        $(this).parents( "fieldset" ).find('.gfield_consent_description').toggle( "slow" );
+jQuery(document).ready(function ($) {
+    $(document).on('click touch', '.show-consent', function () {
+        $(this)
+            .closest('.gfield')
+            .find('.gfield_consent_description')
+            .toggle('slow');
     });
 });
-
-
 
 
 
