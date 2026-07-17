@@ -1121,8 +1121,11 @@ if(strpos($source_utm, 'utm_source=platyna') !== false && ($domain_gr=="gr2" || 
         }
         #pweRegistration .benefits, #pweRegistration .benefits .benefits_icon {
             display: flex;
+            justify-content: center;
+            gap: 10px;
             flex-direction: column;
             align-items: center;
+            max-width: 220px;
         }
         #pweRegistration .benefits .benefits_icon {
             max-width: 250px;

@@ -111,7 +111,6 @@ class PWERegistrationVisitors extends PWERegistration {
             ? $atts['register_ticket_benefits']
             : '
                 <ul class="ticket-card__benefits">
-                    <li>'. self::multi_translation("fast_track").'</li>
                     <li>'. self::multi_translation("personalized_fair").'</li>
                     <li>'. self::multi_translation("welcome_pack").'</li>
                     <li>'. self::multi_translation("concierge_service").'</li>
@@ -156,6 +155,10 @@ class PWERegistrationVisitors extends PWERegistration {
                 require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php';
                 $output .= render_gr2($atts, $source_utm, $badgevipmockup );
                 return $output ;
+            default:
+                require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php';
+                $output .= render_gr2($atts, $source_utm, $badgevipmockup );
+                return $output ;
         }
 
         if (get_locale() == 'pl_PL') {
@@ -184,7 +187,7 @@ class PWERegistrationVisitors extends PWERegistration {
                     </div>
                 </div>
             </div>';
-            } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
+        } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
                 // $output .= '
                 //     <div id="pweRegistrationTicket" class="registration-ticket">
                 //       <h1 class="registration-ticket__title">'. self::multi_translation("ticket_options").'</h1>

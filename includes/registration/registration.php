@@ -34,298 +34,298 @@ class PWERegistration extends PWECommonFunctions {
         add_action('gform_after_submission', array($this, 'entryToSession'), 10, 2);
     }
 
-public function entryToSession($entry, $form) {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+    public function entryToSession($entry, $form) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    // Pobieramy aktualny URL i wyciągamy czystą ścieżkę (np. "it/diventa-espositore")
-    $current_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $current_path = parse_url($current_url, PHP_URL_PATH);
-    $cleaned_current_path = trim(strtolower($current_path), '/');
+        // Pobieramy aktualny URL i wyciągamy czystą ścieżkę (np. "it/diventa-espositore")
+        $current_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $current_path = parse_url($current_url, PHP_URL_PATH);
+        $cleaned_current_path = trim(strtolower($current_path), '/');
 
-    // Ścieżka do pliku JSON
-    $json_file_path = WP_PLUGIN_DIR . '/pwe-multilang/website-translation.json';
+        // Ścieżka do pliku JSON
+        $json_file_path = WP_PLUGIN_DIR . '/pwe-multilang/website-translation.json';
 
-    $is_exhibitor_page = false;
-    $is_registration_page = false;
+        $is_exhibitor_page = false;
+        $is_registration_page = false;
 
-    if (file_exists($json_file_path)) {
-        $json_data = json_decode(file_get_contents($json_file_path), true);
+        if (file_exists($json_file_path)) {
+            $json_data = json_decode(file_get_contents($json_file_path), true);
 
-        if ($json_data) {
-            // --- DYNAMICZNE SPRAWDZANIE: STRONA WYSTAWCY I KROK 2 ---
-            $exhibitor_keys = array('zostan_wystawca', 'krok2');
-            foreach ($exhibitor_keys as $key) {
-                if (isset($json_data[$key])) {
-                    foreach ($json_data[$key] as $lang => $data) {
+            if ($json_data) {
+                // --- DYNAMICZNE SPRAWDZANIE: STRONA WYSTAWCY I KROK 2 ---
+                $exhibitor_keys = array('zostan_wystawca', 'krok2');
+                foreach ($exhibitor_keys as $key) {
+                    if (isset($json_data[$key])) {
+                        foreach ($json_data[$key] as $lang => $data) {
+                            if (!empty($data['url'])) {
+                                // Budujemy pełną ścieżkę na podstawie reguły: pl bez prefiksu, reszta z prefiksem /lang/
+                                $expected_url = ($lang === 'pl') ? $data['url'] : '/' . $lang . $data['url'];
+                                $cleaned_expected = trim(strtolower($expected_url), '/');
+
+                                // DOKŁADNE PORÓWNANIE lub SPRAWDZENIE ZAWARTOŚCI
+                                if ($cleaned_current_path === $cleaned_expected) {
+                                    $is_exhibitor_page = true;
+                                    break 2; // Przerywa obie pętle, bo znaleźliśmy dopasowanie
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // --- DYNAMICZNE SPRAWDZANIE: REJESTRACJA ---
+                if (isset($json_data['rejestracja'])) {
+                    foreach ($json_data['rejestracja'] as $lang => $data) {
                         if (!empty($data['url'])) {
-                            // Budujemy pełną ścieżkę na podstawie reguły: pl bez prefiksu, reszta z prefiksem /lang/
                             $expected_url = ($lang === 'pl') ? $data['url'] : '/' . $lang . $data['url'];
                             $cleaned_expected = trim(strtolower($expected_url), '/');
 
-                            // DOKŁADNE PORÓWNANIE lub SPRAWDZENIE ZAWARTOŚCI
                             if ($cleaned_current_path === $cleaned_expected) {
-                                $is_exhibitor_page = true;
-                                break 2; // Przerywa obie pętle, bo znaleźliśmy dopasowanie
+                                $is_registration_page = true;
+                                break; // Przerywa pętlę rejestracji
                             }
                         }
                     }
                 }
             }
+        } else {
+            $is_exhibitor_page = strpos($current_url, '/zostan-wystawca/') !== false ||
+                                strpos($current_url, '/en/become-an-exhibitor/') !== false ||
+                                strpos($current_url, '/krok2/') !== false ||
+                                strpos($current_url, '/step2/') !== false;
 
-            // --- DYNAMICZNE SPRAWDZANIE: REJESTRACJA ---
-            if (isset($json_data['rejestracja'])) {
-                foreach ($json_data['rejestracja'] as $lang => $data) {
-                    if (!empty($data['url'])) {
-                        $expected_url = ($lang === 'pl') ? $data['url'] : '/' . $lang . $data['url'];
-                        $cleaned_expected = trim(strtolower($expected_url), '/');
+            $is_registration_page = strpos($current_url, '/rejestracja/') !== false ||
+                                    strpos($current_url, '/en/registration/') !== false ||
+                                    strpos($current_url, '/registration/') !== false;
+        }
 
-                        if ($cleaned_current_path === $cleaned_expected) {
-                            $is_registration_page = true;
-                            break; // Przerywa pętlę rejestracji
-                        }
+        // Zapis do sesji
+        if ($is_exhibitor_page) {
+            $_SESSION['pwe_exhibitor_entry'] = [
+                'entry_id' => $entry['id'],
+                'current_url' => $current_path,
+            ];
+        } elseif ($is_registration_page) {
+            $_SESSION['pwe_reg_entry'] = [
+                'entry_id' => $entry['id'],
+            ];
+        }
+
+        // Przepisanie pól formularza do sesji (email / telefon)
+        if (!empty($form['fields'])) {
+            foreach ($form['fields'] as $single_field) {
+                if ($single_field['type'] == 'email') {
+                    if ($is_exhibitor_page) {
+                        $_SESSION['pwe_exhibitor_entry']['email'] = $entry[$single_field['id']];
+                    } elseif ($is_registration_page) {
+                        $_SESSION['pwe_reg_entry']['email'] = $entry[$single_field['id']];
                     }
+                    continue;
+                }
+
+                if ($single_field['type'] == 'phone') {
+                    if ($is_exhibitor_page) {
+                        $_SESSION['pwe_exhibitor_entry']['phone'] = $entry[$single_field['id']];
+                    } elseif ($is_registration_page) {
+                        $_SESSION['pwe_reg_entry']['phone'] = $entry[$single_field['id']];
+                    }
+                    continue;
                 }
             }
         }
-    } else {
-        $is_exhibitor_page = strpos($current_url, '/zostan-wystawca/') !== false ||
-                            strpos($current_url, '/en/become-an-exhibitor/') !== false ||
-                            strpos($current_url, '/krok2/') !== false ||
-                            strpos($current_url, '/step2/') !== false;
-
-        $is_registration_page = strpos($current_url, '/rejestracja/') !== false ||
-                                strpos($current_url, '/en/registration/') !== false ||
-                                strpos($current_url, '/registration/') !== false;
     }
+        /**
+     * Initialize VC Map PWERegistration.
+     */
+    public function initVCMapPWERegistration() {
 
-    // Zapis do sesji
-    if ($is_exhibitor_page) {
-        $_SESSION['pwe_exhibitor_entry'] = [
-            'entry_id' => $entry['id'],
-            'current_url' => $current_path,
-        ];
-    } elseif ($is_registration_page) {
-        $_SESSION['pwe_reg_entry'] = [
-            'entry_id' => $entry['id'],
-        ];
-    }
-
-    // Przepisanie pól formularza do sesji (email / telefon)
-    if (!empty($form['fields'])) {
-        foreach ($form['fields'] as $single_field) {
-            if ($single_field['type'] == 'email') {
-                if ($is_exhibitor_page) {
-                    $_SESSION['pwe_exhibitor_entry']['email'] = $entry[$single_field['id']];
-                } elseif ($is_registration_page) {
-                    $_SESSION['pwe_reg_entry']['email'] = $entry[$single_field['id']];
-                }
-                continue;
-            }
-
-            if ($single_field['type'] == 'phone') {
-                if ($is_exhibitor_page) {
-                    $_SESSION['pwe_exhibitor_entry']['phone'] = $entry[$single_field['id']];
-                } elseif ($is_registration_page) {
-                    $_SESSION['pwe_reg_entry']['phone'] = $entry[$single_field['id']];
-                }
-                continue;
-            }
-        }
-    }
-}
-    /**
- * Initialize VC Map PWERegistration.
- */
-public function initVCMapPWERegistration() {
-
-    require_once plugin_dir_path(__FILE__) . 'classes/registration_visitors.php';
-    require_once plugin_dir_path(__FILE__) . 'classes/registration_exhibitors.php';
-    require_once plugin_dir_path(__FILE__) . 'classes/registration_potential_exhibitors.php';
-    require_once plugin_dir_path(__FILE__) . 'classes/registration_accreditations.php';
-    // Check if Visual Composer is available
-    if (class_exists('Vc_Manager')) {
-        vc_map( array(
-            'name' => __( 'PWE Registration', 'pwe_registration'),
-            'base' => 'pwe_registration',
-            'category' => __( 'PWE Elements', 'pwe_registration'),
-            'admin_enqueue_css' => plugin_dir_url(dirname( __DIR__ )) . 'backend/backendstyle.css',
-            'params' => array_merge(
-                array(
+        require_once plugin_dir_path(__FILE__) . 'classes/registration_visitors.php';
+        require_once plugin_dir_path(__FILE__) . 'classes/registration_exhibitors.php';
+        require_once plugin_dir_path(__FILE__) . 'classes/registration_potential_exhibitors.php';
+        require_once plugin_dir_path(__FILE__) . 'classes/registration_accreditations.php';
+        // Check if Visual Composer is available
+        if (class_exists('Vc_Manager')) {
+            vc_map( array(
+                'name' => __( 'PWE Registration', 'pwe_registration'),
+                'base' => 'pwe_registration',
+                'category' => __( 'PWE Elements', 'pwe_registration'),
+                'admin_enqueue_css' => plugin_dir_url(dirname( __DIR__ )) . 'backend/backendstyle.css',
+                'params' => array_merge(
                     array(
-                        'type' => 'dropdown',
-                        'heading' => __('Select registration type', 'pwe_registration'),
-                        'param_name' => 'registration_type',
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'save_always' => true,
-                        'admin_label' => true,
-                        'value' => array(
-                            'Visitors' => 'PWERegistrationVisitors',
-                            'Exhibitors' => 'PWERegistrationExhibitors',
-                            'Potential exhibitors' => 'PWERegistrationPotentialExhibitors',
-                            'Accreditations' => 'PWERegistrationAccreditations',
-                            'Ticket' => 'PWERegistrationTicket',
-                        ),
-                        'std' => 'PWERegistrationVisitors',
-                    ),
-                    array(
-                        'type' => 'dropdown',
-                        'heading' => __('Registration Form', 'pwe_registration'),
-                        'param_name' => 'registration_form_id',
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'save_always' => true,
-                        'value' => array_merge(
-                            array('Wybierz' => ''),
-                            self::$fair_forms,
-                        ),
-                        'dependency' => array(
-                            'element' => 'pwe_registration',
-                            'value' => 'PWElementRegistration',
-                        ),
-                    ),
-                    array(
-                        'type' => 'dropdown',
-                        'heading' => __('Select button color <a href="#" onclick="yourFunction(`btn_color_manual_hidden`, `btn_color`)">Hex</a>', 'pwe_registration'),
-                        'param_name' => 'btn_color',
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'description' => __('Select button color for the element.', 'pwe_registration'),
-                        'value' => $this->findPalletColors(),
-                        'dependency' => array(
-                            'element' => 'btn_color_manual_hidden',
-                            'value' => array(''),
-                        ),
-                        'save_always' => true
-                    ),
-                    array(
-                        'type' => 'textfield',
-                        'heading' => __('Write button color <a href="#" onclick="yourFunction(`btn_color`, `btn_color_manual_hidden`)">Pallet</a>', 'pwe_registration'),
-                        'param_name' => 'btn_color_manual_hidden',
-                        'param_holder_class' => 'backend-area-one-fourth-width pwe_dependent-hidden',
-                        'description' => __('Write hex number for button color for the element.', 'pwe_registration'),
-                        'value' => '',
-                        'save_always' => true
-                    ),
-                    array(
-                        'type' => 'dropdown',
-                        'heading' => __('Select button text color <a href="#" onclick="yourFunction(`btn_text_color_manual_hidden`, `btn_text_color`)">Hex</a>', 'pwe_registration'),
-                        'param_name' => 'btn_text_color',
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'description' => __('Select button text color for the element.', 'pwe_registration'),
-                        'value' => $this->findPalletColors(),
-                        'dependency' => array(
-                            'element' => 'btn_text_color_manual_hidden',
-                            'value' => array(''),
-                        ),
-                        'save_always' => true
-                    ),
-                    array(
-                        'type' => 'textfield',
-                        'heading' => __('Write button text color <a href="#" onclick="yourFunction(`btn_text_color`, `btn_text_color_manual_hidden`)">Pallet</a>', 'pwe_registration'),
-                        'param_name' => 'btn_text_color_manual_hidden',
-                        'param_holder_class' => 'backend-area-one-fourth-width pwe_dependent-hidden',
-                        'description' => __('Write hex number for button text color for the element.', 'pwe_registration'),
-                        'value' => '',
-                        'save_always' => true
-                    ),
-                    array(
-                        'type' => 'checkbox',
-                        'heading' => __('Show ticket', 'pwe_registration'),
-                        'param_name' => 'register_show_ticket',
-                        'description' => __('Check if you want to show ticket.', 'pwe_registration'),
-                        'value' => '',
-                        'save_always' => true,
-                    ),
-                    array(
-                        'type' => 'textfield',
-                        'heading' => __('Ticket link', 'pwe_registration'),
-                        'param_name' => 'register_ticket_link',
-                        'description' => __('Enter the link for the ticket.', 'pwe_registration'),
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'save_always' => true,
-                        'dependency' => array(
-                            'element' => 'register_show_ticket',
-                            'value' => array('true'),
-                        ),
-                    ),
-                    array(
-                        'type' => 'textfield',
-                        'heading' => __('Ticket during the fair', 'pwe_registration'),
-                        'param_name' => 'register_ticket_price_frist',
-                        'description' => __('Enter the custom price for the ticket.', 'pwe_registration'),
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'save_always' => true,
-                        'dependency' => array(
-                            'element' => 'register_show_ticket',
-                            'value' => array('true'),
-                        ),
-                    ),
-                    array(
-                        'type' => 'textfield',
-                        'heading' => __('Ticket price', 'pwe_registration'),
-                        'param_name' => 'register_ticket_price',
-                        'description' => __('Enter the custom price for the ticket.', 'pwe_registration'),
-                        'param_holder_class' => 'backend-area-one-fourth-width',
-                        'save_always' => true,
-                        'dependency' => array(
-                            'element' => 'register_show_ticket',
-                            'value' => array('true'),
-                        ),
-                    ),
-                    // array(
-                    //     'type' => 'textarea',
-                    //     'heading' => __('Registration benefits', 'pwe_registration'),
-                    //     'param_name' => 'register_ticket_register_benefits',
-                    //     'description' => __('Enter custom HTML list of register benefits. If left empty, default content will be used.', 'pwe_registration'),
-                    //     'param_holder_class' => 'backend-area-one-two-width',
-                    //     'save_always' => true,
-                    //     'admin_label' => true,
-                    //     'dependency' => array(
-                    //         'element' => 'register_show_ticket',
-                    //         'value' => array('true'),
-                    //     ),
-                    // ),
-                    // array(
-                    //     'type' => 'textarea',
-                    //     'heading' => __('Ticket benefits', 'pwe_registration'),
-                    //     'param_name' => 'register_ticket_benefits',
-                    //     'description' => __('Enter custom HTML list of ticket benefits. If left empty, default content will be used.', 'pwe_registration'),
-                    //     'param_holder_class' => 'backend-area-one-two-width',
-                    //     'save_always' => true,
-                    //     'dependency' => array(
-                    //         'element' => 'register_show_ticket',
-                    //         'value' => array('true'),
-                    //     ),
-                    // ),
-                    array(
-                        'type' => 'param_group',
-                        'group' => 'Replace Strings',
-                        'param_name' => 'pwe_replace',
-                        'params' => array(
-                            array(
-                                'type' => 'textarea',
-                                'heading' => __('Input HTML', 'pwelement'),
-                                'param_name' => 'input_replace_html',
-                                'save_always' => true,
-                                'admin_label' => true
+                        array(
+                            'type' => 'dropdown',
+                            'heading' => __('Select registration type', 'pwe_registration'),
+                            'param_name' => 'registration_type',
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'save_always' => true,
+                            'admin_label' => true,
+                            'value' => array(
+                                'Visitors' => 'PWERegistrationVisitors',
+                                'Exhibitors' => 'PWERegistrationExhibitors',
+                                'Potential exhibitors' => 'PWERegistrationPotentialExhibitors',
+                                'Accreditations' => 'PWERegistrationAccreditations',
+                                'Ticket' => 'PWERegistrationTicket',
                             ),
-                            array(
-                                'type' => 'textarea',
-                                'heading' => __('Output HTML', 'pwelement'),
-                                'param_name' => 'output_replace_html',
-                                'save_always' => true,
-                                'admin_label' => true
+                            'std' => 'PWERegistrationVisitors',
+                        ),
+                        array(
+                            'type' => 'dropdown',
+                            'heading' => __('Registration Form', 'pwe_registration'),
+                            'param_name' => 'registration_form_id',
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'save_always' => true,
+                            'value' => array_merge(
+                                array('Wybierz' => ''),
+                                self::$fair_forms,
+                            ),
+                            'dependency' => array(
+                                'element' => 'pwe_registration',
+                                'value' => 'PWElementRegistration',
                             ),
                         ),
-                    ),
+                        array(
+                            'type' => 'dropdown',
+                            'heading' => __('Select button color <a href="#" onclick="yourFunction(`btn_color_manual_hidden`, `btn_color`)">Hex</a>', 'pwe_registration'),
+                            'param_name' => 'btn_color',
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'description' => __('Select button color for the element.', 'pwe_registration'),
+                            'value' => $this->findPalletColors(),
+                            'dependency' => array(
+                                'element' => 'btn_color_manual_hidden',
+                                'value' => array(''),
+                            ),
+                            'save_always' => true
+                        ),
+                        array(
+                            'type' => 'textfield',
+                            'heading' => __('Write button color <a href="#" onclick="yourFunction(`btn_color`, `btn_color_manual_hidden`)">Pallet</a>', 'pwe_registration'),
+                            'param_name' => 'btn_color_manual_hidden',
+                            'param_holder_class' => 'backend-area-one-fourth-width pwe_dependent-hidden',
+                            'description' => __('Write hex number for button color for the element.', 'pwe_registration'),
+                            'value' => '',
+                            'save_always' => true
+                        ),
+                        array(
+                            'type' => 'dropdown',
+                            'heading' => __('Select button text color <a href="#" onclick="yourFunction(`btn_text_color_manual_hidden`, `btn_text_color`)">Hex</a>', 'pwe_registration'),
+                            'param_name' => 'btn_text_color',
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'description' => __('Select button text color for the element.', 'pwe_registration'),
+                            'value' => $this->findPalletColors(),
+                            'dependency' => array(
+                                'element' => 'btn_text_color_manual_hidden',
+                                'value' => array(''),
+                            ),
+                            'save_always' => true
+                        ),
+                        array(
+                            'type' => 'textfield',
+                            'heading' => __('Write button text color <a href="#" onclick="yourFunction(`btn_text_color`, `btn_text_color_manual_hidden`)">Pallet</a>', 'pwe_registration'),
+                            'param_name' => 'btn_text_color_manual_hidden',
+                            'param_holder_class' => 'backend-area-one-fourth-width pwe_dependent-hidden',
+                            'description' => __('Write hex number for button text color for the element.', 'pwe_registration'),
+                            'value' => '',
+                            'save_always' => true
+                        ),
+                        array(
+                            'type' => 'checkbox',
+                            'heading' => __('Show ticket', 'pwe_registration'),
+                            'param_name' => 'register_show_ticket',
+                            'description' => __('Check if you want to show ticket.', 'pwe_registration'),
+                            'value' => '',
+                            'save_always' => true,
+                        ),
+                        array(
+                            'type' => 'textfield',
+                            'heading' => __('Ticket link', 'pwe_registration'),
+                            'param_name' => 'register_ticket_link',
+                            'description' => __('Enter the link for the ticket.', 'pwe_registration'),
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'save_always' => true,
+                            'dependency' => array(
+                                'element' => 'register_show_ticket',
+                                'value' => array('true'),
+                            ),
+                        ),
+                        array(
+                            'type' => 'textfield',
+                            'heading' => __('Ticket during the fair', 'pwe_registration'),
+                            'param_name' => 'register_ticket_price_frist',
+                            'description' => __('Enter the custom price for the ticket.', 'pwe_registration'),
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'save_always' => true,
+                            'dependency' => array(
+                                'element' => 'register_show_ticket',
+                                'value' => array('true'),
+                            ),
+                        ),
+                        array(
+                            'type' => 'textfield',
+                            'heading' => __('Ticket price', 'pwe_registration'),
+                            'param_name' => 'register_ticket_price',
+                            'description' => __('Enter the custom price for the ticket.', 'pwe_registration'),
+                            'param_holder_class' => 'backend-area-one-fourth-width',
+                            'save_always' => true,
+                            'dependency' => array(
+                                'element' => 'register_show_ticket',
+                                'value' => array('true'),
+                            ),
+                        ),
+                        // array(
+                        //     'type' => 'textarea',
+                        //     'heading' => __('Registration benefits', 'pwe_registration'),
+                        //     'param_name' => 'register_ticket_register_benefits',
+                        //     'description' => __('Enter custom HTML list of register benefits. If left empty, default content will be used.', 'pwe_registration'),
+                        //     'param_holder_class' => 'backend-area-one-two-width',
+                        //     'save_always' => true,
+                        //     'admin_label' => true,
+                        //     'dependency' => array(
+                        //         'element' => 'register_show_ticket',
+                        //         'value' => array('true'),
+                        //     ),
+                        // ),
+                        // array(
+                        //     'type' => 'textarea',
+                        //     'heading' => __('Ticket benefits', 'pwe_registration'),
+                        //     'param_name' => 'register_ticket_benefits',
+                        //     'description' => __('Enter custom HTML list of ticket benefits. If left empty, default content will be used.', 'pwe_registration'),
+                        //     'param_holder_class' => 'backend-area-one-two-width',
+                        //     'save_always' => true,
+                        //     'dependency' => array(
+                        //         'element' => 'register_show_ticket',
+                        //         'value' => array('true'),
+                        //     ),
+                        // ),
+                        array(
+                            'type' => 'param_group',
+                            'group' => 'Replace Strings',
+                            'param_name' => 'pwe_replace',
+                            'params' => array(
+                                array(
+                                    'type' => 'textarea',
+                                    'heading' => __('Input HTML', 'pwelement'),
+                                    'param_name' => 'input_replace_html',
+                                    'save_always' => true,
+                                    'admin_label' => true
+                                ),
+                                array(
+                                    'type' => 'textarea',
+                                    'heading' => __('Output HTML', 'pwelement'),
+                                    'param_name' => 'output_replace_html',
+                                    'save_always' => true,
+                                    'admin_label' => true
+                                ),
+                            ),
+                        ),
 
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
     }
-}
 
-/**
+    /**
      * Adding Scripts
      */
     public function addingScripts(){

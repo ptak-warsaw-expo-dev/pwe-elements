@@ -59,10 +59,6 @@ function render_gr2($atts, $source_utm){
                     <div class="benefits">
                       <h2>'. PWERegistrationVisitors::multi_translation("vip_invitation").'</h2>
                       <div class="benefits_icon">
-                        <img src="/wp-content/plugins/pwe-media/media/platyna/fasttrack.webp" />
-                        <p>'. PWERegistrationVisitors::multi_translation("Free entry").'</br>FAST TRACK</p>
-                      </div>
-                      <div class="benefits_icon">
                         <img src="/wp-content/plugins/pwe-media/media/platyna/obsluga.webp" />
                         <p>'. PWERegistrationVisitors::multi_translation("concierge_service").'</p>
                       </div>
