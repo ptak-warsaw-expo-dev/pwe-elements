@@ -243,5 +243,27 @@
     "from_abroad": "nendest välisriigist",
     "logo-x-link": "/doc/logo-x-en.webp",
     "fair_logo": "Târgu logo"
+  },
+  "hu_HU": {
+    "statistics": "Statisztika",
+    "industry_visitors_nth": "Ipari látogatók a {number}. kiadásból",
+    "estimates_1st": "Az 1. kiadás becslései",
+    "visitors": "látogatók",
+    "visitors_2": "Látogatók",
+    "countries": "országok",
+    "poland": "Lengyelország -",
+    "abroad": "Külföld -",
+    "exhibition_space": "kiállítási<br>terület",
+    "exhibition_space_1": "kiállítási terület",
+    "exhibitors": "kiállítók",
+    "exhibitors_2": "Kiállítók",
+    "logo_url": "/doc/logo-color-en.webp",
+    "surface": "Terület",
+    "numbers": "Számok, amelyek magukért beszélnek",
+    "registration_link": "/hu/regisztracio/",
+    "registration_text": "Regisztráció",
+    "from_abroad": "ebből külföldről",
+    "logo-x-link": "/doc/logo-x-en.webp",
+    "fair_logo": "Vásár logó"
   }
 }

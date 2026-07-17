@@ -53,5 +53,10 @@
     "recommendations": "REKOMENDACIOONID",
     "more": "rohkem...",
     "see_more": "VAATA ROHKEM"
+  },
+  "hu_HU": {
+    "recommendations": "AJÁNLÁSOK",
+    "more": "több...",
+    "see_more": "TOVÁBBI INFORMÁCIÓK"
   }
 }

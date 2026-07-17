@@ -75,5 +75,12 @@
     "exhibitors": "esitajad",
     "exhibition_space": "esitlusala",
     "more": "Rohkem"
+  },
+  "hu_HU": {
+    "other_events": "Egyéb események a vásár alatt",
+    "visitors": "látogatók",
+    "exhibitors": "kiállítók",
+    "exhibition_space": "kiállítási<br>terület",
+    "more": "További információk"
   }
 }

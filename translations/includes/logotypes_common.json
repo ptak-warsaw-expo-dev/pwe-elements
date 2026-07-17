@@ -163,5 +163,20 @@
       "Honorary Patronage": "Patronatul onorar",
       "Organizational partner": "Partnerii organizaționali"
     }
+  },
+  "hu_HU": {
+    "international_patrons": "nemzetközi pártfogók",
+    "foreign_patrons": "KÜLFÖLDI PÁRTFOLGÓK ÉS PARTNEREK",
+    "international": "nemzetközi",
+    "exhibitor": "Kiállító",
+    "plurals": {
+      "Speaker": "Előadók",
+      "Fair Partner": "Vásár partnerek",
+      "Content Partner": "Tartalom partnerek",
+      "Industry Partner": "Iparági partnerek",
+      "Trade and Conference Partner": "Vásár és konferencia partnerek",
+      "Honorary Patronage": "Tiszteletbeli pártfogások",
+      "Organizational partner": "Szervezeti partnerek"
+    }
   }
 }

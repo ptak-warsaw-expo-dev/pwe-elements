@@ -64,5 +64,11 @@
     "voucher_desc": "Perexiitke katalogit vystavuskohvikute kohta ja valmistuge vystavust efektiivsemalt. Selle kataloogi abil saate ligi valmisdesignidele, mis lihtsustavad valmistumist ja aitavad säästa aega ja raha. Valitsemas valmisdesigni, saate fookusesse teha teisi olulisi valmistusaspekte, nagu pakkumise koostamine, transporti korraldamine või turundusaktiivuste planeerimine.",
     "voucher_button": "Taotle kupongi",
     "voucher_link": "/et/kontakt/"
+  },
+  "hu_HU": {
+    "voucher_title": "SZEREZZEN BE ÉPÍTÉSI UTALVÁNYT",
+    "voucher_desc": "Tekintse meg a kiállítási standok katalógusát, és készüljön fel a kiállításokra hatékonyabban. Ezzel a katalógussal hozzáférhet kész standtervekhez, amelyek megkönnyítik a felkészülést, és segítenek időt és pénzt megtakarítani. Ha egy meglévő standtervet választ, más fontos kiállítási előkészületekre koncentrálhat, például az ajánlat elkészítésére, a szállítás megszervezésére vagy a marketingtevékenységek tervezésére.",
+    "voucher_button": "Kérjen utalványt",
+    "voucher_link": "/hu/kapcsolat/"
   }
 }

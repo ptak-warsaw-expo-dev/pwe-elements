@@ -1,69 +1,75 @@
 {
   "pl_PL": {
-    "hall": "Hala",
-    "halls": "Hale",
+    "single_hall": "Hala",
+    "multiple_halls": "Hale",
     "parking": "DARMOWY PARKING",
     "logo_link": "/doc/logo-color.webp"
   },
   "en_US": {
-    "hall": "Hall",
-    "halls": "Halls",
+    "single_hall": "Hall",
+    "multiple_halls": "Halls",
     "parking": "FREE PARKING",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "de_DE": {
-    "hall": "Halle",
-    "halls": "Hallen",
+    "single_hall": "Halle",
+    "multiple_halls": "Hallen",
     "parking": "KOSTENLOSE PARKPLÄTZE",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "cs_CZ": {
-    "hall": "Hala",
-    "halls": "Haly",
+    "single_hall": "Hala",
+    "multiple_halls": "Haly",
     "parking": "BEZPLATNÉ PARKOVÁNÍ",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "it_IT": {
-    "hall": "Padiglione",
-    "halls": "Padiglioni",
+    "single_hall": "Padiglione",
+    "multiple_halls": "Padiglioni",
     "parking": "PARCHEGGIO GRATUITO",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "lt_LT": {
-    "hall": "Hala",
-    "halls": "Hales",
+    "single_hall": "Hala",
+    "multiple_halls": "Hales",
     "parking": "NEMOKAMAS PARKAVIMAS",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "lv_LV": {
-    "hall": "Halle",
-    "halls": "Halles",
+    "single_hall": "Halle",
+    "multiple_halls": "Halles",
     "parking": "BEZMAKSAS STĀVVIETA",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "sk_SK": {
-    "hall": "Hala",
-    "halls": "Haly",
+    "single_hall": "Hala",
+    "multiple_halls": "Haly",
     "parking": "BEZPLATNÉ PARKOVANIE",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "uk": {
-    "hall": "Зала",
-    "halls": "Зали",
+    "single_hall": "Зала",
+    "multiple_halls": "Зали",
     "parking": "БЕЗКОШТОВНИЙ ПАРКІНГ",
     "logo_link": "/doc/logo-color-en.webp"
   }
   ,
   "ro_RO": {
-    "hall": "Hala",
-    "halls": "Hale",
+    "single_hall": "Hala",
+    "multiple_halls": "Hale",
     "parking": "PARCARE GRATUITĂ",
     "logo_link": "/doc/logo-color-en.webp"
   },
   "et": {
-    "hall": "Hala",
-    "halls": "Hale",
+    "single_hall": "Hala",
+    "multiple_halls": "Hale",
     "parking": "NEMOKAMAS PARKAVIMAS",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "hu_HU": {
+    "single_hall": "Csarnok",
+    "multiple_halls": "Csarnokok",
+    "parking": "INGYENES PARKOLÁS",
     "logo_link": "/doc/logo-color-en.webp"
   }
 }

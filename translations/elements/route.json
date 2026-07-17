@@ -152,5 +152,19 @@
     "bus_text": "Autobussid 703 ja 711 sõidavad Krakowska P+R depost peatusesse „Paszków“ ja buss 733 peatusesse „Centrum Mody“. Tähelepanu! Peatused „Paszków“ ja „Centrum Mody“ asuvad teises piletitsoonis. Pileteid saab osta enamikus automaatides ja bussides.",
     "car_title": "AUTOGA",
     "car_text": "Ptak Warsaw Expo asub otse S8 marsruudil Katowice suunas, Paszków väljasõidul. Okęcie lennujaamast jõuate siia umbes 10 minutiga. Varssavi keskusest – 15 minutiga. Parkimine ei ole probleem, meie keskuses on 15 000 parkimiskohta!"
+  },
+  "hu_HU": {
+    "title": "PTAK WARSAW EXPO A LEGJOBBAN KAPCSOLATOS VÁSÁRI KÖZPONT LENGYELORSZÁGBAN!",
+    "big_header": "A legnagyobb vásári létesítmény Lengyelországban és Közép- és Kelet-Európában",
+    "area_1": "143 000 m<sup>2</sup> kiállítási terület",
+    "area_2": "500 000 m<sup>2</sup> külső terület",
+    "plane_title": "REPÜLŐVEL",
+    "plane_text": "A Ptak Warsaw Expo a Varsói Chopin Nemzetközi Repülőtérről kevesebb mint 10 perc alatt elérhető! Központunk a Modlin és Lodz repülőterekhez is kényelmesen elérhető.",
+    "train_title": "VONATTAL",
+    "train_text": "Varsónak három vasútállomása van a távolsági vonatok számára: a Központi pályaudvar (Warszawa Centralna), a Keleti pályaudvar (Warszawa Wschodnia) és a Nyugati pályaudvar (Warszawa Zachodnia). A Nyugati pályaudvarról a Ptak Warsaw Expo autóval mindössze 13 perc alatt elérhető (a Google szerint).",
+    "bus_title": "VÁROSI AUTÓBUSSZAL",
+    "bus_text": "A 703-as és 711-es buszok a Krakowska P+R telepről a „Paszków” megállóhoz, míg a 733-as busz a „Centrum Mody” megállóhoz közlekedik. Figyelem! A „Paszków” és a „Centrum Mody” megállók a második díjsávban találhatók. A jegyeket a legtöbb automatában és buszon meg lehet vásárolni.",
+    "car_title": "AUTÓVAL",
+    "car_text": "A Ptak Warsaw Expo közvetlenül az S8 útvonalon található Katowice irányába, Paszków kijáratnál. Az Okęcie repülőtérről körülbelül 10 perc alatt ide lehet jutni. A varsói belvárosból – 15 perc. A parkolás nem jelent problémát, központunkban 15 000 parkolóhely található!"
   }
 }

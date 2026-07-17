@@ -42,5 +42,9 @@
     "et": {
         "information_for_exhibitors": "Organisatsioonilised teave esitajatele",
         "information_for_exhibitors_text": "org-information-et.html"
+    },
+    "hu_HU": {
+        "information_for_exhibitors": "Szervezeti információk a kiállítók számára",
+        "information_for_exhibitors_text": "org-information-hu.html"
     }
 }

@@ -64,5 +64,11 @@
     "exhibitor_profile": "Profilid eksponeerijale",
     "industry_scope": "Valdkond",
     "more": "rohkem..."
+  },
+  "hu_HU": {
+    "visitor_profile": "Látogatói profil",
+    "exhibitor_profile": "Kiállítói profil",
+    "industry_scope": "Iparági terület",
+    "more": "több..."
   }
 }

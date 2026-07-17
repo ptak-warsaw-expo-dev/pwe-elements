@@ -97,5 +97,14 @@
     "gallery": "GALERII",
     "galeria_link": "/en/gallery/",
     "registration": "/et/registreerimine/"
+  },
+  "hu_HU": {
+    "patron_partners": "PÁTRONUSOK ÉS PARTNEREK",
+    "exhibitors": "Kiállítók",
+    "patrons": "Pátronusok",
+    "join": "CSATLAKOZZ HOZZÁNK",
+    "gallery": "GALÉRIA",
+    "galeria_link": "/en/gallery/",
+    "registration": "/hu/regisztracio/"
   }
 }

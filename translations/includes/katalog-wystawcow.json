@@ -64,5 +64,11 @@
     "exhibitors": "Eksponeerijad ",
     "new_exhibitors": "Uued eksponeerijad messil ",
     "become_exhibitor": "Saage eksponeerijaks"
+  },
+  "hu_HU": {
+    "catalog": "Kiállítói katalógus ",
+    "exhibitors": "Kiállítók ",
+    "new_exhibitors": "Új kiállítók a vásáron ",
+    "become_exhibitor": "Legyen kiállító"
   }
 }

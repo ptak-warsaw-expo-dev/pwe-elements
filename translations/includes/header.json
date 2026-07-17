@@ -97,5 +97,14 @@
     "link_to_registration": "registreerimislink",
     "register": "Registreeru",
     "free_ticket": "Hangi tasuta pileti"
+  },
+  "hu_HU": {
+    "premier_edition": "Premier kiadás",
+    "edition": " kiadás",
+    "warsaw": "Varsó",
+    "warsaw_poland": "Varsó, Lengyelország",
+    "link_to_registration": "regisztrációs link",
+    "register": "Regisztrálj",
+    "free_ticket": "Szerezzen ingyenes jegyet"
   }
 }

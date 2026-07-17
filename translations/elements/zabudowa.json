@@ -86,5 +86,13 @@
     "stands_button": "Vaata rohkem",
     "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
     "catalog_button": "Vystavuskohvik"
+  },
+  "hu_HU": {
+    "stands": "TERVEZETT KIÁLLÍTÁSI STANDOK",
+    "catalog": "Tekintse meg a kiállítási standok katalógusát, és készüljön fel a kiállítási részvételre még hatékonyabban. Ezzel a katalógussal hozzáférhet kész standtervekhez, amelyek megkönnyítik a felkészülést a kiállításra, és értékes idő- és pénzmegtakarítást biztosítanak. Ha már kész standtervet választ, más fontos szempontokra összpontosíthat a vásári előkészületek során, például az ajánlat elkészítésére, a szállítás megszervezésére vagy a marketingtevékenységek tervezésére.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "További információ",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Kiállítási stand"
   }
 }

@@ -129,5 +129,17 @@
     "text": "Liituge parimate hulka Ptak Warsaw Expo messil ja näidake oma ettevõtet võitjana! Auhinnad annab <strong>Rahvuslik Näituste Koda</strong> ja <strong>Ptak Warsaw Expo</strong> – eristuge ja saage tunnustust!",
     "lider_text": "NÄIDAKE SVÄTUL, CÄ VI LÍDER NA PTAK WARSAW EXPO!",
     "premier_fair": "/wp-content/plugins/pwe-media/media/medals/premier-fair-en.webp"
+  },
+  "hu_HU": {
+    "award": "Szerezzen rangos díjat a Ptak Warsaw Expo-n!",
+    "text_premier": "Csatlakozzon a legjobbakhoz a Ptak Warsaw Expo-n, és mutassa be vállalatát vezetőként! Szerezze meg a rangos érmet, amelyet a Nemzeti Kiállítási Kamara és a Ptak Warsaw Expo ítél oda.",
+    "category_premier": "Két kategóriában tiszteljük a kivételes partnereket:",
+    "partner_premier": "Kamarák és szövetségek számára:<br><strong>„A vásár kulcspartnere”</strong>",
+    "cocreator_premier": "Vállalatok számára:<br><strong>„A vásár sikerének társalapítója”</strong>",
+    "book_stand": "/en/medal-ceremony/",
+    "book_stand_button": "Jelentkezés az éremátadó ünnepségre",
+    "text": "Csatlakozzon a legjobbakhoz a <strong>Ptak Warsaw Expo</strong> rendezvényen, és mutassa be vállalatát győztesként! A díjakat a <strong>Nemzeti Kiállítási Kamara</strong> és a <strong>Ptak Warsaw Expo</strong> ítéli oda – emelkedjen ki és szerezzen elismerést!",
+    "lider_text": "MUTASSA MEG A VILÁGNAK, HOGY ÖN VEZETŐ A PTAK WARSAW EXPO-N!",
+    "premier_fair": "/wp-content/plugins/pwe-media/media/medals/premier-fair-en.webp"
   }
 }

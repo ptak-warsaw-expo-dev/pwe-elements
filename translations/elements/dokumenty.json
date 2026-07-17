@@ -65,5 +65,11 @@
     "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Näituse reeglid</a><br>",
     "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Objekti reeglid</a><br>",
     "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Ehitusreeglid</a>"
+  },
+  "hu_HU": {
+    "documents": "<h3 class=\"en_US\">Dokumentumok letöltése</h3>",
+    "fair_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin-targow-en-2025.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Vásári szabályzat</a><br>",
+    "facility_regulations": "<a href=\"https://warsawexpo.eu/docs/regulamin_obiektu_en.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Létesítmény szabályzat</a><br>",
+    "building_regulations": "<a href=\"https://warsawexpo.eu/docs/building_regulations.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Építési szabályzat</a>"
   }
 }

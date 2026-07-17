@@ -141,5 +141,18 @@
     "back_link": "/",
     "become_an_exhibitor": "Saada eksponendiks",
     "visitors": "Vizitatori"
+  },
+  "hu_HU": {
+    "step": "Lépés <span class=\"text-accent-color\">2 a 2-ből",
+    "your_ticket": "A jegyed sikeresen<br>generálva lett!",
+    "receive_e-mail": "A megadott e-mail címre fogod megkapni.<br>Ez eltarthat néhány percig.",
+    "become_exhibitor": "Szeretnél <span class=\"text-accent-color\">kiállító</span> lenni a [trade_fair_name_eng] kiállításon?",
+    "i_am_interested": "Igen, érdekel",
+    "confirmation_link": "/exhibitor-registration-confirmation/",
+    "confirmation_text": "Igen, érdekel",
+    "no_thank_you": "Nem, köszönöm",
+    "back_link": "/",
+    "become_an_exhibitor": "Legyél kiállító",
+    "visitors": "Látogatók"
   }
 }

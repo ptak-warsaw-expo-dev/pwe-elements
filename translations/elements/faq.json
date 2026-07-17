@@ -283,5 +283,32 @@
     "hour": "tunnid",
     "minute": "minutid",
     "second": "sekundid"
+  },
+  "hu_HU": {
+    "questions": "A leggyakrabban feltett kérdésekre adott válaszok",
+    "q1_question": "Hol kerül megrendezésre a vásár?",
+    "q1_answer": "A vásár a <a style=\"text-decoration:underline;\" href=\"//warsawexpo.eu\" target=\"_blank\">Ptak Warsaw Expo</a> - Lengyelország legnagyobb vásárközpontjában kerül megrendezésre. Al. Katowicka 62, 05-830 Nadarzyn/Warszawa.",
+    "q2_question": "Milyen órákban zajlik a vásár?",
+    "q2_answer": "A vásár nyitvatartási ideje: 10:00 - 17:00.",
+    "q3_question": "Mennyibe kerül a belépőjegy a vásárra?",
+    "q3_answer": "Mindenki, aki online regisztrál vagy a vásári irodában regisztrál, ingyenes belépőt kap.",
+    "q4_question": "Az én meghívóm jogosít fel a vásárra való belépésre?",
+    "q4_answer": "A meghívó csak tájékoztató jellegű, és nem jogosít fel a vásárra való belépésre. Szükséges a regisztráció vagy a jegyvásárlás.",
+    "q5_question": "Beléphetek a vásárra gyermekemmel?",
+    "q5_answer": "A gyermekek belépése nem ajánlott. Ha azonban szeretné, hogy gyermeke elkísérje Önt a vásáron, vegyen neki jegyet az adott napra. A 7 év alatti gyermekek számára ingyenes a belépés.",
+    "q6_question": "Engedélyezett-e az állatok bevitele a vásárra?",
+    "q6_answer": "Nem, az állatok nem engedélyezettek a kiállítócsarnokokban.",
+    "q7_question": "Hogyan lehet eljutni a vásárra?",
+    "q7_answer": "A vásár autóval vagy a 703-as és 711-es buszokkal érhető el, amelyek P+R Al. Krakowska 15-től a Ptak Warsaw Expo-ig közlekednek.",
+    "q8_question": "Fizetős a parkolás?",
+    "q8_answer": "A vendégeink kényelme érdekében a parkolás ingyenes.",
+    "q9_question": "Lehet valamit enni a helyszínen?",
+    "q9_answer": "Igen, a vásár területén vendéglátóhelyek lesznek.",
+    "q10_question": "Van-e ruhatár? Hagyhatom a bőröndömet a ruhatárban?",
+    "q10_answer": "Igen. A csarnokokban ruhatárak találhatók, és ott hagyhatja a kis bőröndjét.",
+    "day": "nap",
+    "hour": "óra",
+    "minute": "perc",
+    "second": "másodperc"
   }
 }

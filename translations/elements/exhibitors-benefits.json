@@ -119,5 +119,16 @@
     "benefit_welcome_title": "Tervituspakett",
     "benefit_welcome_alt": "Tervituspakett",
     "benefit_welcome_text": "Pregătirea badge-urilor și a pachetelor de bun venit individuale pentru toți participanții înregistrați, care vor fi trimise direct la adresa indicată în formularul de înregistrare."
+  },
+  "hu_HU": {
+    "benefit_networking_title": "Hálózati zóna",
+    "benefit_networking_alt": "Hálózati zóna",
+    "benefit_networking_text": "A vásár ideje alatt egy külön elkülönített <strong>hálózati zóna</strong> lesz elérhető – egy hely a tapasztalatok cseréjére és a kapcsolatok erősítésére. Az iparági találkozók ideális lehetőséget kínálnak a potenciális üzleti partnerek körének bővítésére, valamint az erős ügyfélbázis kiépítésére.",
+    "benefit_panel_title": "Oktatási panel",
+    "benefit_panel_alt": "Oktatási panel",
+    "benefit_panel_text": "Számos előadás és iparági konferencia elismert előadók – tapasztalt gyakorlati szakemberek és iparági szakértők – vezetésével.",
+    "benefit_welcome_title": "Üdvözlő csomag",
+    "benefit_welcome_alt": "Üdvözlő csomag",
+    "benefit_welcome_text": "Az összes regisztrált résztvevő számára egyedi üdvözlő csomagok és jelvények előkészítése, amelyeket közvetlenül a regisztrációs űrlapon megadott címre küldenek."
   }
 }
