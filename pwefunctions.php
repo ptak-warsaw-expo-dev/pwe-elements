@@ -3,7 +3,7 @@
 class PWECommonFunctions {
 
     // <============================================================================================>
-    // Synchronized functions from plugin pwe-elements-auto-switch 1.5.4 (24.06.2026) <========================================================>
+    // Synchronized functions from plugin pwe-elements-auto-switch 1.6.0 (21.07.2026) <========================================================>
     // <============================================================================================>
 
     /**
@@ -76,7 +76,7 @@ class PWECommonFunctions {
     }
 
     /**
-     * Output console logs 
+     * Output console logs
      */
     public static function output_db_connection_logs() {
 
@@ -405,8 +405,9 @@ class PWECommonFunctions {
                 MAX(CASE WHEN fa.slug = 'fair_kw_new' THEN fa.data END) AS fair_kw_new,
                 MAX(CASE WHEN fa.slug = 'fair_kw_old_arch' THEN fa.data END) AS fair_kw_old_arch,
                 MAX(CASE WHEN fa.slug = 'fair_kw_new_arch' THEN fa.data END) AS fair_kw_new_arch,
+                MAX(CASE WHEN fa.slug = 'catalog_type' THEN fa.data END) AS catalog_type,
                 MAX(CASE WHEN fa.slug = 'fair_entrance' THEN fa.data END) AS fair_entrance
-                
+
             FROM fairs f
             LEFT JOIN fair_adds fa
                 ON fa.fair_id = f.id
@@ -419,6 +420,7 @@ class PWECommonFunctions {
                     'fair_kw_new',
                     'fair_kw_old_arch',
                     'fair_kw_new_arch',
+                    'catalog_type',
                     'fair_entrance',
                     'about_title_pl',
                     'about_title_en',
@@ -427,7 +429,7 @@ class PWECommonFunctions {
                     'konf_title_pl',
                     'konf_title_en',
                     'konf_desc_pl',
-                    'konf_desc_en' 
+                    'konf_desc_en'
                 )
         ";
 
@@ -562,14 +564,16 @@ class PWECommonFunctions {
                 MAX(CASE WHEN fa.slug = 'about_title_pl' THEN fa.data END)  AS about_title_pl,
                 MAX(CASE WHEN fa.slug = 'about_title_en' THEN fa.data END)  AS about_title_en,
                 MAX(CASE WHEN fa.slug = 'about_desc_pl' THEN fa.data END)   AS about_desc_pl,
-                MAX(CASE WHEN fa.slug = 'about_desc_en' THEN fa.data END)   AS about_desc_en
+                MAX(CASE WHEN fa.slug = 'about_desc_en' THEN fa.data END)   AS about_desc_en,
+                MAX(CASE WHEN fa.slug = 'medal-ceremony' THEN fa.data END)  AS medal_ceremony,
+                MAX(CASE WHEN fa.slug = 'videos' THEN fa.data END)   AS videos
             FROM fairs f
             LEFT JOIN fair_adds fa
                 ON fa.fair_id = f.id
                 AND fa.slug IN (
                     'konf_name','konf_title_pl','konf_title_en',
                     'konf_desc_pl','konf_desc_en','about_title_pl',
-                    'about_title_en','about_desc_pl','about_desc_en'
+                    'about_title_en','about_desc_pl','about_desc_en', 'medal-ceremony', 'videos'
                 )
             WHERE f.fair_domain = %s
             GROUP BY f.id
@@ -718,7 +722,7 @@ class PWECommonFunctions {
             if (!isset($results[$fair_id])) {
                 $results[$fair_id] = [
                     'fair_domain' => $row->fair_domain,
-                    
+
                     'fair_name_pl' => $row->fair_name_pl,
                     'fair_desc_pl' => $row->fair_desc_pl,
                     'fair_short_desc_pl' => $row->fair_short_desc_pl,
@@ -854,10 +858,20 @@ class PWECommonFunctions {
         }
 
         // SQL query
-        $query = $cap_db->prepare("SELECT * FROM associates WHERE FIND_IN_SET(%s, fair_associates)", $fair_domain);
+        $sql = "
+            SELECT main_fair_domain, slug, fair_associates, desc_pl, desc_en
+            FROM associates
+        ";
+
+        $params = [];
+
+        if ($fair_domain !== null) {
+            $sql .= " WHERE main_fair_domain = %s";
+            $params[] = $fair_domain;
+        }
 
         $start_time = microtime(true);
-        $results = $cap_db->get_results($query);
+        $results = $cap_db->get_results($cap_db->prepare($sql, $params));
         $time = round((microtime(true) - $start_time) * 1000, 2);
 
         // SQL error
@@ -1928,6 +1942,77 @@ class PWECommonFunctions {
     }
 
     /**
+     * Get fairs tickets data from CAP databases
+     */
+    private static $fairs_tickets_cache = [];
+    public static function get_database_fairs_data_tickets($fair_domain = null): array {
+
+        $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
+        $cache_key = $fair_domain;
+
+        // Check runtime cache first
+        if (isset(self::$fairs_tickets_cache[$cache_key])) {
+            self::debug_log('get_database_fairs_data_tickets: data from STATIC → key=' . $cache_key);
+            return self::$fairs_tickets_cache[$cache_key];
+        }
+
+        // Transient key
+        $transient_key = 'pwe_fairs_tickets_' . md5($cache_key);
+
+        // Try transient
+        $cached = get_transient($transient_key);
+        if ($cached !== false) {
+            $timeout = get_option('_transient_timeout_' . $transient_key);
+            $time_left_str = $timeout !== false ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
+
+            self::debug_log('get_database_fairs_data_tickets: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
+            self::$fairs_tickets_cache[$cache_key] = $cached;
+            return $cached;
+        }
+
+        // Connect to database
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            self::debug_log('get_database_fairs_data_tickets: no database connection.', 'error');
+            self::$fairs_tickets_cache[$cache_key] = [];
+            return [];
+        }
+
+        // SQL query
+        $sql = "
+            SELECT f.id, f.fair_domain, fp.slug, fp.data
+            FROM fairs f
+            LEFT JOIN fair_tickets fp ON fp.fair_id = f.id
+        ";
+        $params = [];
+        if ($fair_domain !== null) {
+            $sql .= " WHERE f.fair_domain = %s";
+            $params[] = $fair_domain;
+        }
+
+        $start_time = microtime(true);
+
+        // Execute query
+        $results = !empty($params) ? $cap_db->get_results($cap_db->prepare($sql, $params)) : $cap_db->get_results($sql);
+        $time = round((microtime(true) - $start_time) * 1000, 2);
+
+        // Handle SQL errors
+        if ($cap_db->last_error) {
+            self::debug_log('get_database_fairs_data_tickets: SQL error: ' . addslashes($cap_db->last_error), 'error');
+            $results = [];
+        }
+
+        // Save to transient for 10 minutes
+        set_transient($transient_key, $results, 600);
+
+        // Save to runtime cache
+        self::$fairs_tickets_cache[$cache_key] = $results;
+        self::debug_log('get_database_fairs_data_tickets: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
+
+        return $results;
+    }
+
+    /**
      * Get fairs speakers data from CAP databases
      */
     private static $fairs_speakers_cache = [];
@@ -2073,6 +2158,154 @@ class PWECommonFunctions {
         // Save to runtime cache
         self::$fairs_guests_cache[$cache_key] = $results;
         self::debug_log('get_database_fairs_data_guests: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
+
+        return $results;
+    }
+
+    /**
+     * Get fairs attractions data from CAP databases
+     */
+    private static $fairs_attractions_cache = [];
+    public static function get_database_fairs_data_attractions($fair_domain = null): array {
+
+        $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
+        $cache_key = $fair_domain;
+
+        // Check runtime cache first
+        if (isset(self::$fairs_attractions_cache[$cache_key])) {
+            self::debug_log('get_database_fairs_data_attractions: data from STATIC → key=' . $cache_key);
+            return self::$fairs_attractions_cache[$cache_key];
+        }
+
+        // Transient key
+        $transient_key = 'pwe_fairs_attractions_' . md5($cache_key);
+
+        // Try transient
+        $cached = get_transient($transient_key);
+        if ($cached !== false) {
+            $timeout = get_option('_transient_timeout_' . $transient_key);
+            $time_left_str = $timeout !== false ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
+
+            self::debug_log('get_database_fairs_data_attractions: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
+            self::$fairs_attractions_cache[$cache_key] = $cached;
+            return $cached;
+        }
+
+        // Connect to database
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            self::debug_log('get_database_fairs_data_attractions: no database connection.', 'error');
+            self::$fairs_attractions_cache[$cache_key] = [];
+            return [];
+        }
+
+        // SQL query
+        $sql = "
+            SELECT f.id, f.fair_domain, fp.type, fp.data
+            FROM fairs f
+            LEFT JOIN fair_attractions fp ON fp.fair_id = f.id
+        ";
+
+        $params = [];
+
+        if ($fair_domain !== null) {
+            $sql .= " WHERE f.fair_domain = %s";
+            $params[] = $fair_domain;
+        }
+
+        $start_time = microtime(true);
+
+        // Execute query
+        $results = !empty($params) ? $cap_db->get_results($cap_db->prepare($sql, $params)) : $cap_db->get_results($sql);
+
+        $time = round((microtime(true) - $start_time) * 1000, 2);
+
+        // Handle SQL errors
+        if ($cap_db->last_error) {
+            self::debug_log('get_database_fairs_data_attractions: SQL error: ' . addslashes($cap_db->last_error), 'error');
+            $results = [];
+        }
+
+        // Save to transient for 10 minutes
+        set_transient($transient_key, $results, 600);
+
+        // Save to runtime cache
+        self::$fairs_attractions_cache[$cache_key] = $results;
+        self::debug_log('get_database_fairs_data_attractions: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
+
+        return $results;
+    }
+
+        /**
+     * Get fairs files data from CAP databases
+     */
+    private static $fairs_files_cache = [];
+    public static function get_database_fairs_data_files($fair_domain = null): array {
+
+        $fair_domain = $fair_domain ?? $_SERVER['HTTP_HOST'] ?? '';
+        $cache_key = $fair_domain;
+
+        // Check runtime cache first
+        if (isset(self::$fairs_files_cache[$cache_key])) {
+            self::debug_log('get_database_fairs_data_files: data from STATIC → key=' . $cache_key);
+            return self::$fairs_files_cache[$cache_key];
+        }
+
+        // Transient key
+        $transient_key = 'pwe_fairs_files_' . md5($cache_key);
+
+        // Try transient
+        $cached = get_transient($transient_key);
+        if ($cached !== false) {
+            $timeout = get_option('_transient_timeout_' . $transient_key);
+            $time_left_str = $timeout !== false ? gmdate('H:i:s', max($timeout - time(), 0)) : 'unknown';
+
+            self::debug_log('get_database_fairs_data_files: data from TRANSIENT → key=' . $cache_key . ', expires in ' . $time_left_str);
+            self::$fairs_files_cache[$cache_key] = $cached;
+            return $cached;
+        }
+
+        // Connect to database
+        $cap_db = self::connect_database();
+        if (!$cap_db) {
+            self::debug_log('get_database_fairs_data_files: no database connection.', 'error');
+            self::$fairs_files_cache[$cache_key] = [];
+            return [];
+        }
+
+        // SQL query
+        $sql = "
+            SELECT f.id, f.fair_domain, ff.fair_id, ff.category_slug, ff.category_name, ff.year, ff.language, ff.file_name, ff.file_path, ff.file_type, ff.gallery_files, ff.redirect_slug, ff.is_active
+            FROM fairs f
+            LEFT JOIN fair_files ff ON ff.fair_id = f.id
+        ";
+
+        $params = [];
+
+        if ($fair_domain !== null) {
+            $sql .= " WHERE f.fair_domain = %s";
+            $params[] = $fair_domain;
+        }
+
+        $start_time = microtime(true);
+
+        // Execute query
+        $results = !empty($params) ? $cap_db->get_results($cap_db->prepare($sql, $params)) : $cap_db->get_results($sql);
+
+        $time = round((microtime(true) - $start_time) * 1000, 2);
+
+        // Handle SQL errors
+        if ($cap_db->last_error) {
+            self::debug_log('get_database_fairs_data_files: SQL error: ' . addslashes($cap_db->last_error), 'error');
+            $results = [];
+        }
+
+        // Save to transient for 10 minutes
+        set_transient($transient_key, $results, 600);
+
+        // Save to runtime cache
+        self::$fairs_files_cache[$cache_key] = $results;
+        self::debug_log('get_database_fairs_data_files: data from database DIRECTLY (SQL time ' . $time . 'ms) → key=' . $cache_key . ', host=' . $cap_db->dbhost . ' [' . gethostname() . '] and saved to TRANSIENT.');
 
         return $results;
     }
@@ -2373,10 +2606,10 @@ class PWECommonFunctions {
             $data["short_desc_{$code}"] = $fair["fair_short_desc_{$code}"] ?? "";
             $data["full_desc_{$code}"] = $fair["fair_full_desc_{$code}"] ?? "";
             $data["about_title_{$code}"] = $fair["about_title_{$code}"] ?? "";
-            $data["about_desc_{$code}"] = $fair["about_desc_{$code}"] ?? "";  
+            $data["about_desc_{$code}"] = $fair["about_desc_{$code}"] ?? "";
             $data["conference_title_{$code}"] = $fair["konf_title_{$code}"] ?? "";
-            $data["conference_desc_{$code}"] = $fair["konf_desc_{$code}"] ?? ""; 
-            $data["category_{$code}"] = $fair["category_{$code}"] ?? ""; 
+            $data["conference_desc_{$code}"] = $fair["konf_desc_{$code}"] ?? "";
+            $data["category_{$code}"] = $fair["category_{$code}"] ?? "";
         }
 
         return $data;
@@ -2855,10 +3088,18 @@ class PWECommonFunctions {
     }
 
     /**
-     * Get the latest Gravity Forms form ID by base title.
+     * Get the latest active Gravity Forms form ID by normalized title.
      *
-     * @param string $base_title The base title of the form.
-     * @return int|null The latest form ID or null if not found.
+     * Leading parenthetical prefixes are ignored, for example:
+     * - "(2027) Rejestracja"       => "Rejestracja"
+     * - "(2027) (PL) Rejestracja"  => "Rejestracja"
+     *
+     * Titles containing additional text are not matched:
+     * - "(2027) Rejestracja (FB)"
+     * - "(2027) Rejestracja gości wystawców"
+     *
+     * @param string $base_title Base form title without leading prefixes.
+     * @return int|null Latest matching form ID or null when not found.
      */
     private static array $gf_form_resolver_cache = [];
 
@@ -2871,7 +3112,8 @@ class PWECommonFunctions {
             return null;
         }
 
-        $cache_key = mb_strtolower($base_title);
+        $normalized_base_title = mb_strtolower($base_title, 'UTF-8');
+        $cache_key = $normalized_base_title;
 
         if (array_key_exists($cache_key, self::$gf_form_resolver_cache)) {
             return self::$gf_form_resolver_cache[$cache_key];
@@ -2882,6 +3124,7 @@ class PWECommonFunctions {
 
         if ($cached !== false) {
             self::$gf_form_resolver_cache[$cache_key] = $cached ? (int) $cached : null;
+
             return self::$gf_form_resolver_cache[$cache_key];
         }
 
@@ -2895,6 +3138,7 @@ class PWECommonFunctions {
                 WHERE is_active = 1
                 AND is_trash = 0
                 AND title LIKE %s
+                ORDER BY id DESC
                 ",
                 '%' . $wpdb->esc_like($base_title) . '%'
             ),
@@ -2904,41 +3148,103 @@ class PWECommonFunctions {
         if ($wpdb->last_error || empty($rows)) {
             set_transient($transient_key, 0, 10 * MINUTE_IN_SECONDS);
             self::$gf_form_resolver_cache[$cache_key] = null;
+
             return null;
         }
 
-        $latest_id = null;
-        $latest_year = 0;
-        $plain_id = null;
+        $resolved_id = null;
+        $resolved_year = 0;
 
         foreach ($rows as $row) {
-            $title = trim($row['title']);
+            $title = trim((string) $row['title']);
 
-            if ($title === $base_title) {
-                $plain_id = (int) $row['id'];
+            /*
+            * Pobiera wszystkie nawiasy znajdujące się na początku.
+            *
+            * Przykłady:
+            * "(2027) Rejestracja"      => prefixes: "(2027)"
+            * "(2027) (PL) Rejestracja" => prefixes: "(2027) (PL)"
+            */
+            preg_match('/^(?<prefixes>(?:\s*\([^)]*\))+)?\s*(?<title>.*)$/u', $title, $matches);
+
+            $title_without_prefixes = trim($matches['title'] ?? $title);
+
+            /*
+            * Po usunięciu początkowych nawiasów nazwa musi być identyczna.
+            * Dzięki temu "Rejestracja (FB)" oraz "Rejestracja gości..."
+            * nie zostaną dopasowane.
+            */
+            if (mb_strtolower($title_without_prefixes, 'UTF-8') !== $normalized_base_title) {
                 continue;
             }
 
-            $pattern = '/^\((\d{4})(?:\s+[^)]*)?\)\s+' . preg_quote($base_title, '/') . '$/u';
+            $year = 0;
+            $prefixes = $matches['prefixes'] ?? '';
 
-            if (!preg_match($pattern, $title, $matches)) {
-                continue;
+            /*
+            * Szukamy roku tylko w nawiasach znajdujących się na początku.
+            */
+            if (
+                $prefixes !== ''
+                && preg_match_all('/\((?:[^)]*?\b)?((?:19|20)\d{2})\b[^)]*\)/u', $prefixes, $year_matches)
+                && !empty($year_matches[1])
+            ) {
+                $year = max(array_map('intval', $year_matches[1]));
             }
 
-            $year = (int) $matches[1];
+            $row_id = (int) $row['id'];
 
-            if ($year > $latest_year) {
-                $latest_year = $year;
-                $latest_id = (int) $row['id'];
+            /*
+            * Pierwszeństwo ma najwyższy rok.
+            * Przy tym samym roku wybieramy formularz o wyższym ID.
+            */
+            if (
+                $resolved_id === null
+                || $year > $resolved_year
+                || ($year === $resolved_year && $row_id > $resolved_id)
+            ) {
+                $resolved_id = $row_id;
+                $resolved_year = $year;
             }
         }
 
-        $resolved_id = $latest_id ?? $plain_id;
+        set_transient(
+            $transient_key,
+            $resolved_id ?: 0,
+            10 * MINUTE_IN_SECONDS
+        );
 
-        set_transient($transient_key, $resolved_id ?: 0, 10 * MINUTE_IN_SECONDS);
         self::$gf_form_resolver_cache[$cache_key] = $resolved_id;
 
         return $resolved_id;
+    }
+
+    public static function render_component($slug, $group = 'all', $params = []) {
+        $components = PWE_Elements_Data::get_all_components();
+
+        if (!isset($components[$slug])) {
+            return '';
+        }
+
+        $component = $components[$slug];
+        $class     = $component['class'];
+        $file      = plugin_dir_path(__DIR__) . $component['file'];
+
+        if (!class_exists($class)) {
+            if (!file_exists($file)) {
+                return '';
+            }
+
+            require_once $file;
+        }
+
+        if (!class_exists($class) || !method_exists($class, 'render')) {
+            return '';
+        }
+
+        ob_start();
+        $class::render($group, $params);
+        return ob_get_clean();
     }
 }
 
