@@ -10,8 +10,71 @@ class PWElementMedalForm extends PWElements {
     * Calls parent constructor and adds an action for initializing the Visual Composer map.
     */
     public function __construct() {
-        parent::__construct();
+        add_filter('gform_pre_render', array($this, 'update_medal_choices'));
+        add_filter('gform_pre_validation', array($this, 'update_medal_choices'));
     }
+
+
+    public function update_medal_choices($form) {
+
+    error_log('MEDAL FILTER START');
+
+    foreach ($form['fields'] as &$field) {
+
+        error_log('FIELD: ' . $field->id . ' TYPE: ' . $field->type . ' LABEL: ' . $field->label);
+
+        if ($field->type !== 'checkbox') {
+            continue;
+        }
+
+        if ($field->label !== 'W jakiej kategorii konkursowej chcesz zgłosić swój udział?' && $field->label !== 'In which competition category would you like to submit your entry?') {
+            continue;
+        }
+
+        error_log('MEDAL FIELD FOUND');
+
+        $fair_adds = PWECommonFunctions::get_database_fairs_data_adds();
+
+        error_log(print_r($fair_adds, true));
+
+        $data = !empty($fair_adds) && isset($fair_adds[0]->medal_ceremony)
+          ? json_decode($fair_adds[0]->medal_ceremony, true)
+          : [];
+
+        error_log(print_r($data, true));
+
+        if (!$data || empty($data['selected'])) {
+            error_log('NO DATA');
+            continue;
+        }
+
+        $choices = [];
+
+        foreach ($data['selected'] as $key) {
+
+            $lang = PWECommonFunctions::lang_pl() ? 'pl' : 'en';
+
+            if (empty($data['categories'][$key][$lang])) {
+                continue;
+            }
+
+            $category = $data['categories'][$key][$lang];
+
+            $text = $category['name'] . ' - ' . $category['description'];
+
+            $choices[] = [
+                'text' => $text,
+                'value' => $text
+            ];
+        }
+
+        error_log(print_r($choices, true));
+
+        $field->choices = $choices;
+    }
+
+    return $form;
+}
 
     /**
      * Static method to initialize Visual Composer elements.
@@ -51,7 +114,6 @@ class PWElementMedalForm extends PWElements {
 
 
         $text_color = 'color:' . self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'black') . '!important;';
-
 
         $output .= '
           <style>
@@ -210,6 +272,7 @@ class PWElementMedalForm extends PWElements {
           </div>
           <script>
             document.addEventListener("DOMContentLoaded", function() {
+  
               const fileInputs = document.querySelectorAll(".ginput_container_fileupload input[type=\'file\']");
 
               const allowedExtensions = ["jpg", "jpeg", "png", "gif", "pdf", "webp"];
@@ -264,9 +327,7 @@ class PWElementMedalForm extends PWElements {
                 });
               });
             });
-          </script>
-
-        ';
+          </script>';
 
     return $output;
     }
