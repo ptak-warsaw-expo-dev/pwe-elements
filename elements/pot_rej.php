@@ -191,6 +191,22 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
         $start_date = do_shortcode('[trade_fair_datetotimer]');
         $end_date = do_shortcode('[trade_fair_enddata]');
 
+        if ( ! empty( $end_date ) ) {
+            $start_date_obj = DateTime::createFromFormat('Y/m/d H:i', $end_date);
+
+            if ( $start_date_obj ) {
+                $now = new DateTime();
+
+                $block_start = clone $start_date_obj;
+                $block_start->modify('-3 weeks');
+
+                if ( $now >= $block_start && $now < $start_date_obj ) {
+                    wp_safe_redirect( home_url( '/' ) );
+                    exit();
+                }
+            }
+        }
+
         // Function to transform the date
         function transform_dates($start_date, $end_date) {
             // Convert date strings to DateTime objects
@@ -222,7 +238,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
             $actually_date = $formatted_date;
         }
 
-                /* Update text tranform */
+        /* Update text tranform */
         $lang = get_locale();
 
         $translations = [
@@ -567,35 +583,6 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
             $output .= '
             <div id="xForm">';
             if (strpos($source_utm, 'utm_source=byli') === false) {
-                if($trade_fair_group=="gr3"){
-                    $output .= '
-                        <div class="form-3-left">
-                            <div>'.
-                                self::languageChecker(
-                                    <<<PL
-                                        <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na <br><span class="very-strong">[trade_fair_name]!</span></h2>
-                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu VIP<br><span class="very-strong">[trade_fair_name]!</span></h2>
-
-                                        <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
-
-                                        <p class="display-befor-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Was <span class="very-strong">wyjątkowy pakiet powitalny VIP</span>, który usprawni Państwa pobyt na targach.</p>
-                                        <p class="display-after-subbmit">Twój <span class="very-strong"> wyjątkowy pakiet powitalny VIP</span>  : spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingowa, otrzymasz na podany w formularzu adres za pośrednictwem poczty polskiej na około tydzień przed targami.</p>
-                                    PL,
-                                    <<<EN
-                                        <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering at <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
-                                        <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering VIP welcome package <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
-
-                                        <p class="">We are delighted that you are joining our event, full of market news and inspiration for use in your business.</p><br>
-
-                                        <p class="display-befor-subbmit"><span class="very-strong">We encourage you to fill in</span> the last form, thanks to which we will be able to prepare for you a <span class="very-strong">exclusive VIP welcome package</span> that will enhance your stay at the fair.</p>
-                                        <p class="display-after-subbmit">Your <span class="very-strong">exclusive VIP welcome package</span>  which includes a personalized badge with the trade fair plan/schedule and a parking card, will be sent to the address provided in the form via postal service approximately one week before the trade fair.</p>
-                                    EN
-                                )
-                            .'
-                            </div>
-                        </div>
-                    ';
-                } else {
                     $output .= '
                         <div class="form-3-left">
                             <div>'.
@@ -607,7 +594,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                         <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
 
                                         <p class="display-befor-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Państwa <span class="very-strong">spersonalizowany identyfikator</span> targowy, który usprawni pobyt na targach.</p>
-                                        <p class="display-after-subbmit">Twój <span class="very-strong"> >spersonalizowany identyfikator</span> : wraz z planem/harmonogramem targów oraz kartę parkingowa, otrzymasz na podany w formularzu adres za pośrednictwem poczty polskiej na około tydzień przed targami.</p>
+                                        <p class="display-after-subbmit">Twój <span class="very-strong">   spersonalizowany identyfikator</span> wraz z planem/harmonogramem targów otrzymasz przed wydarzeniem na podany w formularzu adres za pośrednictwem poczty polskiej.</p>
                                     PL,
                                     <<<EN
                                         <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering at <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
@@ -623,8 +610,6 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                             </div>
                         </div>
                     ';
-                }
-
             } else {
                 if (strpos($source_utm, 'utm_source=byli') !== false ) {
                     if (get_locale() == 'pl_PL') {
@@ -1177,7 +1162,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                 </script>';
             } else {
                 $output .= '
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD10_XMpLZxzQT_65E58g0yTq7GQBXUks4&libraries=places"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key='. PWECommonFunctions::get_database_meta_data('api_key_google_places') .'&libraries=places"></script>
                 <script>
 
                     function initAutocomplete() {
