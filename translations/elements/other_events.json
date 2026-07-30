@@ -82,5 +82,19 @@
     "exhibitors": "kiállítók",
     "exhibition_space": "kiállítási<br>terület",
     "more": "További információk"
+  },
+  "fr_FR": {
+    "other_events": "Autres événements pendant le salon",
+    "visitors": "visiteurs",
+    "exhibitors": "exposants",
+    "exhibition_space": "espace<br>d'exposition",
+    "more": "Plus"
+  },
+  "es_ES": {
+    "other_events": "Otros eventos durante la feria",
+    "visitors": "visitantes",
+    "exhibitors": "expositores",
+    "exhibition_space": "espacio<br>expositivo",
+    "more": "Más"
   }
 }

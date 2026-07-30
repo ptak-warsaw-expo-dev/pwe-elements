@@ -130,5 +130,27 @@
     "benefit_welcome_title": "Üdvözlő csomag",
     "benefit_welcome_alt": "Üdvözlő csomag",
     "benefit_welcome_text": "Az összes regisztrált résztvevő számára egyedi üdvözlő csomagok és jelvények előkészítése, amelyeket közvetlenül a regisztrációs űrlapon megadott címre küldenek."
+  },
+  "fr_FR": {
+    "benefit_networking_title": "Zone de réseautage",
+    "benefit_networking_alt": "Zone de réseautage",
+    "benefit_networking_text": "Pendant le salon, une zone de réseautage spécialement séparée sera disponible – un espace pour échanger des expériences et renforcer les contacts. Les rencontres professionnelles sont une excellente occasion d'élargir le cercle des partenaires commerciaux potentiels et de constituer une solide base de clients.",
+    "benefit_panel_title": "Panneau éducatif",
+    "benefit_panel_alt": "Panneau éducatif",
+    "benefit_panel_text": "De nombreux discours et une conférence sectorielle animée par des conférenciers reconnus – des praticiens expérimentés et des experts du secteur.",
+    "benefit_welcome_title": "Pack de bienvenue",
+    "benefit_welcome_alt": "Pack de bienvenue",
+    "benefit_welcome_text": "Préparation des badges et des packs de bienvenue individuels pour tous les participants inscrits, qui seront envoyés directement à l'adresse indiquée dans le formulaire d'inscription."
+  },
+  "es_ES": {
+    "benefit_networking_title": "Zona de networking",
+    "benefit_networking_alt": "Zona de networking",
+    "benefit_networking_text": "Durante la feria, estará disponible una zona de networking especialmente separada: un espacio para intercambiar experiencias y fortalecer contactos. Las reuniones del sector son una oportunidad ideal para ampliar el grupo de socios comerciales potenciales y construir una base sólida de clientes.",
+    "benefit_panel_title": "Panel educativo",
+    "benefit_panel_alt": "Panel educativo",
+    "benefit_panel_text": "Numerosos discursos y una conferencia del sector dirigida por ponentes reconocidos: profesionales experimentados y expertos del sector.",
+    "benefit_welcome_title": "Paquete de bienvenida",
+    "benefit_welcome_alt": "Paquete de bienvenida",
+    "benefit_welcome_text": "Preparación de credenciales y paquetes de bienvenida individuales para todos los participantes registrados, que se enviarán directamente a la dirección proporcionada en el formulario de registro."
   }
 }

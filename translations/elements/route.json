@@ -166,5 +166,33 @@
     "bus_text": "A 703-as és 711-es buszok a Krakowska P+R telepről a „Paszków” megállóhoz, míg a 733-as busz a „Centrum Mody” megállóhoz közlekedik. Figyelem! A „Paszków” és a „Centrum Mody” megállók a második díjsávban találhatók. A jegyeket a legtöbb automatában és buszon meg lehet vásárolni.",
     "car_title": "AUTÓVAL",
     "car_text": "A Ptak Warsaw Expo közvetlenül az S8 útvonalon található Katowice irányába, Paszków kijáratnál. Az Okęcie repülőtérről körülbelül 10 perc alatt ide lehet jutni. A varsói belvárosból – 15 perc. A parkolás nem jelent problémát, központunkban 15 000 parkolóhely található!"
+  },
+  "fr_FR": {
+    "title": "PTAK WARSAW EXPO LE CENTRE D'EXPOSITION LE MIEUX CONNECTÉ EN POLOGNE !",
+    "big_header": "Le plus grand centre d'exposition en Pologne et en Europe centrale et orientale",
+    "area_1": "143 000 m<sup>2</sup> d'espace d'exposition",
+    "area_2": "500 000 m<sup>2</sup> de surface extérieure",
+    "plane_title": "EN AVION",
+    "plane_text": "Depuis l'aéroport international Fryderyk Chopin de Varsovie, vous pouvez rejoindre le Ptak Warsaw Expo en moins de 10 minutes ! Notre centre est également idéalement situé par rapport aux aéroports de Modlin et de Lodz.",
+    "train_title": "EN TRAIN",
+    "train_text": "Varsovie dispose de trois gares pour les trains longue distance : la gare centrale (Warszawa Centralna), la gare de l'Est (Warszawa Wschodnia) et la gare de l'Ouest (Warszawa Zachodnia). Depuis la gare de l'Ouest, le Ptak Warsaw Expo est accessible en voiture en seulement 13 minutes (selon Google).",
+    "bus_title": "EN BUS DE VILLE",
+    "bus_text": "Les bus 703 et 711 partent du dépôt Krakowska P+R jusqu'à l'arrêt « Paszków », tandis que le bus 733 se rend à l'arrêt « Centrum Mody ». Attention ! Les arrêts « Paszków » et « Centrum Mody » se trouvent dans la deuxième zone tarifaire. Les billets peuvent être achetés dans la plupart des distributeurs automatiques et des bus.",
+    "car_title": "EN VOITURE",
+    "car_text": "Le Ptak Warsaw Expo est situé directement sur la route S8 en direction de Katowice, sortie Paszków. Depuis l'aéroport d'Okęcie, il faut environ 10 minutes pour y arriver. Depuis le centre-ville de Varsovie – 15 minutes. Le stationnement ne sera pas un problème, notre centre dispose de 15 000 places de parking !"
+  },
+  "es_ES": {
+    "title": "PTAK WARSAW EXPO EL CENTRO DE FERIAS MEJOR CONECTADO DE POLONIA!",
+    "big_header": "La mayor instalación ferial de Polonia y Europa Central y del Este",
+    "area_1": "143 000 m<sup>2</sup> de espacio de exposición",
+    "area_2": "500 000 m<sup>2</sup> de superficie exterior",
+    "plane_title": "EN AVIÓN",
+    "plane_text": "Desde el Aeropuerto Internacional Fryderyk Chopin de Varsovia, puede llegar al Ptak Warsaw Expo en menos de 10 minutos. Nuestro Centro también está convenientemente ubicado con respecto a los aeropuertos de Modlin y Lodz.",
+    "train_title": "EN TREN",
+    "train_text": "Varsovia tiene tres estaciones de tren para trenes de larga distancia: la Estación Central (Warszawa Centralna), la Estación del Este (Warszawa Wschodnia) y la Estación del Oeste (Warszawa Zachodnia). Desde la estación del Oeste, se puede llegar al Ptak Warsaw Expo en coche en solo 13 minutos (según Google).",
+    "bus_title": "EN AUTOBÚS URBANO",
+    "bus_text": "Los autobuses 703 y 711 van desde el depósito Krakowska P+R hasta la parada «Paszków», mientras que el autobús 733 va hasta la parada «Centrum Mody». ¡Atención! Las paradas «Paszków» y «Centrum Mody» se encuentran en la segunda zona tarifaria. Los billetes se pueden comprar en la mayoría de las máquinas expendedoras y autobuses.",
+    "car_title": "EN COCHE",
+    "car_text": "El Ptak Warsaw Expo está situado directamente en la ruta S8 en dirección a Katowice, salida Paszków. Desde el aeropuerto de Okęcie se tarda unos 10 minutos en llegar. Desde el centro de Varsovia – 15 minutos. ¡El estacionamiento no será un problema, nuestro centro cuenta con 15.000 plazas de aparcamiento!"
   }
 }

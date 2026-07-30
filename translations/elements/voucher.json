@@ -70,5 +70,17 @@
     "voucher_desc": "Tekintse meg a kiállítási standok katalógusát, és készüljön fel a kiállításokra hatékonyabban. Ezzel a katalógussal hozzáférhet kész standtervekhez, amelyek megkönnyítik a felkészülést, és segítenek időt és pénzt megtakarítani. Ha egy meglévő standtervet választ, más fontos kiállítási előkészületekre koncentrálhat, például az ajánlat elkészítésére, a szállítás megszervezésére vagy a marketingtevékenységek tervezésére.",
     "voucher_button": "Kérjen utalványt",
     "voucher_link": "/hu/kapcsolat/"
+  },
+  "fr_FR": {
+    "voucher_title": "OBTENEZ UN BON DE CONSTRUCTION",
+    "voucher_desc": "Consultez le catalogue des stands d'exposition et préparez-vous aux salons plus efficacement. Avec ce catalogue, vous aurez accès à des designs de stands prêts à l'emploi qui faciliteront votre préparation et vous aideront à gagner du temps et de l'argent. En choisissant un design de stand existant, vous pourrez vous concentrer sur d'autres aspects importants de la préparation du salon, tels que la création de votre offre, l'organisation du transport ou la planification des activités marketing.",
+    "voucher_button": "Demander un bon",
+    "voucher_link": "/fr/contact/"
+  },
+  "es_ES": {
+    "voucher_title": "RECIBA UN VALE DE CONSTRUCCIÓN",
+    "voucher_desc": "Vea el catálogo de stands de exposición y prepárese para las ferias comerciales de manera más eficiente. Con este catálogo, tendrá acceso a diseños de stands listos para usar que facilitarán su preparación y le ayudarán a ahorrar tiempo y dinero. Al elegir un diseño de stand existente, podrá concentrarse en otros aspectos importantes de la preparación de la feria, como crear su oferta, organizar el transporte o planificar actividades de marketing.",
+    "voucher_button": "Solicitar un vale",
+    "voucher_link": "/es/contacto/"
   }
 }

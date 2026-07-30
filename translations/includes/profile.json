@@ -70,5 +70,17 @@
     "exhibitor_profile": "Kiállítói profil",
     "industry_scope": "Iparági terület",
     "more": "több..."
-  }
+  },
+  "fr_FR": {
+    "visitor_profile": "Profil du visiteur",
+    "exhibitor_profile": "Profil de l'exposant",
+    "industry_scope": "Domaine d'activité",
+    "more": "plus..."
+  },
+    "es_ES": {
+        "visitor_profile": "Perfil del visitante",
+        "exhibitor_profile": "Perfil del expositor",
+        "industry_scope": "Ámbito de la industria",
+        "more": "más..."
+    }
 }

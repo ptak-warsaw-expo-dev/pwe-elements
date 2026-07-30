@@ -46,5 +46,13 @@
     "hu_HU": {
         "information_for_exhibitors": "Szervezeti információk a kiállítók számára",
         "information_for_exhibitors_text": "org-information-hu.html"
+    },
+    "fr_FR": {
+        "information_for_exhibitors": "Informations organisationnelles pour les exposants",
+        "information_for_exhibitors_text": "org-information-fr.html"
+    },
+    "es_ES": {
+        "information_for_exhibitors": "Información organizativa para expositores",
+        "information_for_exhibitors_text": "org-information-es.html"
     }
 }

@@ -143,6 +143,30 @@
     "download_banners": "Bannerek letöltése",
     "download_logo": "Logó letöltése",
     "help_text": "Ha többre van szüksége, írjon nekünk, és mindent megteszünk, hogy segítsünk! Csak együttműködve érhetjük el a sikert."
+  },
+  "fr_FR": {
+    "promote_yourself": "Hall",
+    "promote_yourself_html": "promote-yourself-fr.html",
+    "parking": "PARKING GRATUIT",
+    "logo_link": "/doc/logo-color-en.webp",
+    "store_button": "Découvrez l'offre",
+    "store_button_title": "[trade_fair_name] - boutique",
+    "download": "Télécharger",
+    "download_banners": "Télécharger les bannières",
+    "download_logo": "Télécharger le logo",
+    "help_text": "Si vous avez besoin de plus, écrivez-nous et nous ferons de notre mieux pour vous aider ! Ce n'est qu'en travaillant ensemble que nous pouvons réussir."
+  },
+  "es_ES": {
+    "promote_yourself": "Sala",
+    "promote_yourself_html": "promote-yourself-es.html",
+    "parking": "ESTACIONAMIENTO GRATUITO",
+    "logo_link": "/doc/logo-color-en.webp",
+    "store_button": "Descubre la oferta",
+    "store_button_title": "[trade_fair_name] - tienda",
+    "download": "Descargar",
+    "download_banners": "Descargar banners",
+    "download_logo": "Descargar logo",
+    "help_text": "Si necesita más, escríbanos y haremos todo lo posible para ayudarle. ¡Solo trabajando juntos podemos lograr el éxito!"
   }
 }
     

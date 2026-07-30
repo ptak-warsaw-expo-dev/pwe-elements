@@ -58,5 +58,15 @@
     "recommendations": "AJÁNLÁSOK",
     "more": "több...",
     "see_more": "TOVÁBBI INFORMÁCIÓK"
+  },
+  "fr_FR": {
+    "recommendations": "RECOMMANDATIONS",
+    "more": "plus...",
+    "see_more": "VOIR PLUS"
+  },
+  "es_ES": {
+    "recommendations": "RECOMENDACIONES",
+    "more": "más...",
+    "see_more": "VER MÁS"
   }
 }

@@ -178,5 +178,35 @@
       "Honorary Patronage": "Tiszteletbeli pártfogások",
       "Organizational partner": "Szervezeti partnerek"
     }
+  },
+  "fr_FR": {
+    "international_patrons": "mécènes internationaux",
+    "foreign_patrons": "MÉCÈNES ET PARTENAIRES ÉTRANGERS",
+    "international": "international",
+    "exhibitor": "Exposant",
+    "plurals": {
+      "Speaker": "Intervenants",
+      "Fair Partner": "Partenaires de la foire",
+      "Content Partner": "Partenaires de contenu",
+      "Industry Partner": "Partenaires de l'industrie",
+      "Trade and Conference Partner": "Partenaires du commerce et de la conférence",
+      "Honorary Patronage": "Patronages honorifiques",
+      "Organizational partner": "Partenaires organisationnels"
+    }
+  },
+  "es_ES": {
+    "international_patrons": "patrocinadores internacionales",
+    "foreign_patrons": "PATROCINADORES Y SOCIOS EXTRANJEROS",
+    "international": "internacional",
+    "exhibitor": "Expositor",
+    "plurals": {
+      "Speaker": "Ponentes",
+      "Fair Partner": "Socios de la feria",
+      "Content Partner": "Socios de contenido",
+      "Industry Partner": "Socios de la industria",
+      "Trade and Conference Partner": "Socios de comercio y conferencias",
+      "Honorary Patronage": "Patrocinios honorarios",
+      "Organizational partner": "Socios organizativos"
+    }
   }
 }

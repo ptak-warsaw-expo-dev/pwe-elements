@@ -34,5 +34,11 @@
   },
   "hu_HU": {
     "premieres": "Mit láthatsz a "
-  }
+  },
+  "fr_FR": {
+    "premieres": "Ce que vous verrez à "
+  },
+    "es_ES": {
+        "premieres": "Lo que verás en "
+    }
 }

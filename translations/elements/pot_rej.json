@@ -14,27 +14,27 @@
   },
   "en_US": {
     "step": "Step <span class=\"text-accent-color\">2 of 2",
-    "your_ticket": "Twój bilet został<br>wygenerowany pomyślnie!",
+    "your_ticket": "Your ticket has been<br>successfully generated!",
     "receive_e-mail": "You will receive it at the e-mail address indicated.<br>May take a few minutes.",
     "become_exhibitor": "Do you want to become a <span class=\"text-accent-color\">exhibitor</span> of [trade_fair_name_eng]?",
     "i_am_interested": "Yes, I am interested",
     "confirmation_link": "/exhibitor-registration-confirmation/",
     "confirmation_text": "Yes, I am interested",
     "no_thank_you": "No, thank you",
-    "back_link": "/",
+    "back_link": "/en/",
     "become_an_exhibitor": "Become an exhibitor",
     "visitors": "Visitors"
   },
   "de_DE": {
     "step": "Step <span class=\"text-accent-color\">2 of 2",
-    "your_ticket": "Twój bilet został<br>wygenerowany pomyślnie!",
-    "receive_e-mail": "You will receive it at the e-mail address indicated.<br>May take a few minutes.",
+    "your_ticket": "Ihr Ticket wurde<br>erfolgreich erstellt!",
+    "receive_e-mail": "Sie erhalten es an die angegebene E-Mail-Adresse.<br>Dies kann einige Minuten dauern.",
     "become_exhibitor": "Do you want to become a <span class=\"text-accent-color\">exhibitor</span> of [trade_fair_name_eng]?",
     "i_am_interested": "Yes, I am interested",
     "confirmation_link": "/Bestätigung der Ausstelleranmeldung/",
     "confirmation_text": "Yes, I am interested",
     "no_thank_you": "No, thank you",
-    "back_link": "/",
+    "back_link": "/de/",
     "become_an_exhibitor": "Become an exhibitor",
     "visitors": "Visitors"
   },
@@ -47,7 +47,7 @@
     "confirmation_link": "/potvrzení-registrace-vystavovatele/",
     "confirmation_text": "Ano, mám zájem",
     "no_thank_you": "Ne, děkuji",
-    "back_link": "/",
+    "back_link": "/cs/",
     "become_an_exhibitor": "Staňte se vystavovatelem",
     "visitors": "Návštěvníci"
   },
@@ -60,7 +60,7 @@
     "confirmation_link": "/conferma-registrazione-espositore/",
     "confirmation_text": "Sì, sono interessato",
     "no_thank_you": "No, grazie",
-    "back_link": "/",
+    "back_link": "/it/",
     "become_an_exhibitor": "Diventa un espositore",
     "visitors": "Visitatori"
   },
@@ -73,7 +73,7 @@
     "confirmation_link": "/dalyvio-registracijos-patvirtinimas/",
     "confirmation_text": "Taip, domiuosi",
     "no_thank_you": "Ne, ačiū",
-    "back_link": "/",
+    "back_link": "/lt/",
     "become_an_exhibitor": "Tapti dalyviu",
     "visitors": "Lankytojai"
   },
@@ -86,7 +86,7 @@
     "confirmation_link": "/izstādes dalībnieka reģistrācijas apstiprinājums/",
     "confirmation_text": "Jā, esmu ieinteresēts",
     "no_thank_you": "Nē, paldies",
-    "back_link": "/",
+    "back_link": "/lv/",
     "become_an_exhibitor": "Kļūt par izstādes dalībnieku",
     "visitors": "Apmeklētāji"
   },
@@ -99,7 +99,7 @@
     "confirmation_link": "/potvrdenie-registrácie-vystavovateľa/",
     "confirmation_text": "Áno, mám záujem",
     "no_thank_you": "Nie, ďakujem",
-    "back_link": "/",
+    "back_link": "/sk/",
     "become_an_exhibitor": "Staňte sa vystavovateľom",
     "visitors": "Návštevníci"
   },
@@ -112,7 +112,7 @@
     "confirmation_link": "/підтвердження-реєстрації-експонента/",
     "confirmation_text": "Так, я зацікавлений",
     "no_thank_you": "Ні, дякую",
-    "back_link": "/",
+    "back_link": "/uk/",
     "become_an_exhibitor": "Стати експонентом",
     "visitors": "Відвідувачі"
   },
@@ -125,7 +125,7 @@
     "confirmation_link": "/confirmation-registration-exhibitor/",
     "confirmation_text": "Da, sunt interesat",
     "no_thank_you": "Nu, mulțumesc",
-    "back_link": "/",
+    "back_link": "/ro/",
     "become_an_exhibitor": "Devino un exhibitor",
     "visitors": "Vizitatori"
   },
@@ -138,7 +138,7 @@
     "confirmation_link": "/confirmation-registration-exhibitor/",
     "confirmation_text": "Jah, olen huvitatud",
     "no_thank_you": "Ei, aitäh",
-    "back_link": "/",
+    "back_link": "/et/",
     "become_an_exhibitor": "Saada eksponendiks",
     "visitors": "Vizitatori"
   },
@@ -151,8 +151,33 @@
     "confirmation_link": "/exhibitor-registration-confirmation/",
     "confirmation_text": "Igen, érdekel",
     "no_thank_you": "Nem, köszönöm",
-    "back_link": "/",
+    "back_link": "/hu/",
     "become_an_exhibitor": "Legyél kiállító",
     "visitors": "Látogatók"
-  }
+  },
+  "fr_FR": {
+    "step": "Étape <span class=\"text-accent-color\">2 sur 2",
+    "your_ticket": "Votre billet a été<br>généré avec succès !",
+    "receive_e-mail": "Vous le recevrez à l'adresse e-mail indiquée.<br>Cela peut prendre quelques minutes.",
+    "become_exhibitor": "Voulez-vous devenir un <span class=\"text-accent-color\">exposant</span> de [trade_fair_name_eng] ?",
+    "i_am_interested": "Oui, je suis intéressé",
+    "confirmation_link": "/confirmation-inscription-exposant/",
+    "confirmation_text": "Oui, je suis intéressé",
+    "no_thank_you": "Non, merci",
+    "back_link": "/fr/",
+    "become_an_exhibitor": "Devenir exposant",
+    "visitors": "Visiteurs"
+  },
+  "es_ES": {
+    "step": "Paso <span class=\"text-accent-color\">2 de 2",
+    "your_ticket": "¡Tu entrada ha sido<br>generada con éxito!",
+    "receive_e-mail": "La recibirás en la dirección de correo electrónico indicada.<br>Puede tardar unos minutos.",
+    "become_exhibitor": "¿Quieres convertirte en un <span class=\"text-accent-color\">expositor</span> de [trade_fair_name_eng]?",
+    "i_am_interested": "Sí, estoy interesado",
+    "confirmation_link": "/confirmacion-registro-expositor/",
+    "confirmation_text": "Sí, estoy interesado",
+    "no_thank_you": "No, gracias",
+    "back_link": "/es/",
+    "become_an_exhibitor": "Conviértete en expositor",
+    "visitors": "Visitantes"
 }

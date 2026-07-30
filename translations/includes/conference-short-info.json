@@ -154,5 +154,31 @@
     "find_out_more": "TUDJON MEG TÖBBET",
     "organizer": "Szervező",
     "subject": "Tárgy"
+  },
+  "fr_FR": {
+    "conferences_events": "Conférences et événements accompagnants",
+    "conference": "Conférence",
+    "conferences_link": "/en/conferences/",
+    "details": "Détails",
+    "registration_link": "/fr/inscription/",
+    "registration": "Inscription",
+    "take_part": "PARTICIPEZ",
+    "patrons": "PARRAINS ET PARTENAIRES",
+    "find_out_more": "EN SAVOIR PLUS",
+    "organizer": "Organisateur",
+    "subject": "Sujet"
+  },
+  "es_ES": {
+    "conferences_events": "Conferencias y eventos acompañantes",
+    "conference": "Conferencia",
+    "conferences_link": "/en/conferences/",
+    "details": "Detalles",
+    "registration_link": "/es/registro/",
+    "registration": "Registro",
+    "take_part": "PARTICIPA",
+    "patrons": "PATROCINADORES Y SOCIOS",
+    "find_out_more": "DESCUBRE MÁS",
+    "organizer": "Organizador",
+    "subject": "Asunto"
   }
 }

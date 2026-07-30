@@ -118,5 +118,29 @@
     "ticket_text": "VÁSÁROLJON JEGYET",
     "register_link": "/hu/regisztracio/",
     "register_text": "REGISZTRÁLJON<span style='display: block; font-weight: 300;'>INGYENES BELÉPŐT KAP"
+  },
+  "fr_FR": {
+    "why_it_worth": "POURQUOI CELA EN VAUT-IL LA PEINE?",
+    "industry_trends": "VOUS DÉCOUVRIREZ LES DERNIÈRES TENDANCES DU SECTEUR",
+    "business_contacts": "VOUS ÉTABLIREZ DE NOUVEAUX CONTACTS COMMERCIAUX",
+    "valuable_knowledge": "VOUS ACQUÉREREZ DES CONNAISSANCES PRÉCIEUSES ET DÉCOUVRIREZ LES NOUVEAUTÉS DU MARCHÉ",
+    "for_visitors": "[trade_fair_name] est un événement professionnel du secteur qui se déroule à Ptak Warsaw Expo, le plus grand centre d'exposition et de congrès d'Europe centrale. Il vise à rassembler tous les secteurs de l'industrie et à créer des conditions idéales pour les contacts commerciaux professionnels. [trade_fair_desc] vous aidera à trouver des partenaires commerciaux potentiels pour votre entreprise.",
+    "for_visitors_1": "[trade_fair_name] est une excellente occasion de comparer et d'analyser attentivement toutes les offres dédiées au secteur disponibles sur le marché polonais. L'événement est également une excellente occasion de participer à des conférences, des ateliers et des congrès sectoriels qui élargissent les connaissances du marché et présentent les dernières technologies. Inscrivez-vous et recevez une invitation à la foire.",
+    "ticket_link": "/en/tickets/",
+    "ticket_text": "ACHETER UN BILLET",
+    "register_link": "/fr/inscription/",
+    "register_text": "INSCRIVEZ-VOUS<span style='display: block; font-weight: 300;'>OBTENEZ UN BILLET GRATUIT"
+  },
+  "es_ES": {
+    "why_it_worth": "¿POR QUÉ VALE LA PENA?",
+    "industry_trends": "DESCUBRIRÁS LAS ÚLTIMAS TENDENCIAS DEL SECTOR",
+    "business_contacts": "ESTABLECERÁS NUEVOS CONTACTOS COMERCIALES",
+    "valuable_knowledge": "ADQUIRIRÁS CONOCIMIENTOS VALIOSOS Y DESCUBRIRÁS LAS NOVEDADES DEL MERCADO",
+    "for_visitors": "[trade_fair_name] es un evento profesional del sector que se celebra en Ptak Warsaw Expo, el mayor centro de exposiciones y congresos de Europa Central. Su objetivo es reunir todos los sectores de la industria y crear condiciones ideales para el contacto comercial profesional. [trade_fair_desc] le ayudará a encontrar posibles socios comerciales para su empresa.",
+    "for_visitors_1": "[trade_fair_name] es una excelente oportunidad para comparar y analizar detenidamente todas las ofertas dedicadas al sector disponibles en el mercado polaco. El evento también es una excelente oportunidad para participar en conferencias, talleres y congresos del sector que amplían el conocimiento del mercado y muestran las últimas tecnologías. Regístrese y reciba una invitación a la feria.",
+    "ticket_link": "/en/tickets/",
+    "ticket_text": "COMPRAR ENTRADA",
+    "register_link": "/es/registro/",
+    "register_text": "REGÍSTRESE<span style='display: block; font-weight: 300;'>OBTENGA UNA ENTRADA GRATUITA"
   }
 }

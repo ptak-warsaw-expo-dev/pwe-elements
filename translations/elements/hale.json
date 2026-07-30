@@ -71,5 +71,17 @@
     "multiple_halls": "Csarnokok",
     "parking": "INGYENES PARKOLÁS",
     "logo_link": "/doc/logo-color-en.webp"
+  },
+  "fr_FR": {
+    "single_hall": "Salle",
+    "multiple_halls": "Salles",
+    "parking": "PARKING GRATUIT",
+    "logo_link": "/doc/logo-color-en.webp"
+  },
+  "es_ES": {
+    "single_hall": "Sala",
+    "multiple_halls": "Salas",
+    "parking": "ESTACIONAMIENTO GRATUITO",
+    "logo_link": "/doc/logo-color-en.webp"
   }
 }

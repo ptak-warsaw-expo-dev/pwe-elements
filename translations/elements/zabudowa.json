@@ -94,5 +94,21 @@
     "stands_button": "További információ",
     "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
     "catalog_button": "Kiállítási stand"
+  },
+  "fr_FR": {
+    "stands": "STANDS D'EXPOSITION CONÇUS",
+    "catalog": "Consultez le catalogue des stands d'exposition et préparez-vous à participer au salon de manière encore plus efficace. Avec ce catalogue, vous aurez accès à des designs de stands prêts à l'emploi qui faciliteront votre préparation au salon et vous permettront de réaliser des économies précieuses en temps et en argent. En choisissant un design de stand déjà prêt, vous pourrez vous concentrer sur d'autres aspects importants de la préparation du salon, tels que la préparation de votre offre, l'organisation du transport ou la planification de vos activités marketing.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Voir plus",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Stand d'exposition"
+  },
+  "es_ES": {
+    "stands": "STANDS DE EXPOSICIÓN DISEÑADOS",
+    "catalog": "Consulte el catálogo de stands de exposición y prepárese para su participación en la feria de manera aún más eficiente. Con este catálogo, tendrá acceso a diseños de stands listos para usar que facilitarán su preparación para la feria y le permitirán ahorrar tiempo y dinero. Al elegir un diseño de stand ya listo, podrá concentrarse en otros aspectos importantes de la preparación para la feria, como la preparación de su oferta, la organización del transporte o la planificación de sus actividades de marketing.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Ver más",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Stand de exposición"
   }
 }

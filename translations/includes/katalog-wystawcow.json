@@ -70,5 +70,17 @@
     "exhibitors": "Kiállítók ",
     "new_exhibitors": "Új kiállítók a vásáron ",
     "become_exhibitor": "Legyen kiállító"
+  },
+  "fr_FR": {
+    "catalog": "Catalogue des exposants ",
+    "exhibitors": "Exposants ",
+    "new_exhibitors": "Nouveaux exposants à la foire ",
+    "become_exhibitor": "Devenir un exposant"
+  },
+  "es_ES": {
+    "catalog": "Catálogo de expositores ",
+    "exhibitors": "Expositores ",
+    "new_exhibitors": "Nuevos expositores en la feria ",
+    "become_exhibitor": "Conviértete en expositor"
   }
 }

@@ -154,5 +154,31 @@
     "back_link": "/hu/",
     "become_an_exhibitor": "Legyen kiállító",
     "visitors": "Látogatók"
+  },
+  "fr_FR": {
+    "step": "Étape <span class=\"text-accent-color\">2 sur 2",
+    "your_ticket": "Le billet a été généré avec succès !",
+    "receive_e-mail": "Vous le recevrez à l'adresse e-mail indiquée.<br>Cela peut prendre quelques minutes.",
+    "become_exhibitor": "Souhaitez-vous devenir un <span class=\"text-accent-color\">exposant</span> de [trade_fair_name_eng] ?",
+    "i_am_interested": "Oui, je suis intéressé",
+    "confirmation_link": "/fr/confirmation-inscription-exposant/",
+    "confirmation_text": "Oui, je suis intéressé",
+    "no_thank_you": "Non, merci",
+    "back_link": "/fr/",
+    "become_an_exhibitor": "Devenir exposant",
+    "visitors": "Visiteurs"
+  },
+  "es_ES": {
+    "step": "Paso <span class=\"text-accent-color\">2 de 2",
+    "your_ticket": "¡El boleto se ha generado con éxito!",
+    "receive_e-mail": "Lo recibirá en la dirección de correo electrónico indicada.<br>Puede tardar unos minutos.",
+    "become_exhibitor": "¿Desea convertirse en un <span class=\"text-accent-color\">expositor</span> de [trade_fair_name_eng]?",
+    "i_am_interested": "Sí, estoy interesado",
+    "confirmation_link": "/es/confirmacion-registro-expositor/",
+    "confirmation_text": "Sí, estoy interesado",
+    "no_thank_you": "No, gracias",
+    "back_link": "/es/",
+    "become_an_exhibitor": "Convertirse en expositor",
+    "visitors": "Visitantes"
   }
 }

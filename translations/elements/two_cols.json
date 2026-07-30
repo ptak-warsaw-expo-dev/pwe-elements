@@ -106,5 +106,23 @@
     "gallery": "GALÉRIA",
     "galeria_link": "/en/gallery/",
     "registration": "/hu/regisztracio/"
+  },
+  "fr_FR": {
+    "patron_partners": "PARRAINS ET PARTENAIRES",
+    "exhibitors": "Exposants",
+    "patrons": "Parrains",
+    "join": "REJOIGNEZ-NOUS",
+    "gallery": "GALERIE",
+    "galeria_link": "/en/gallery/",
+    "registration": "/fr/inscription/"
+  },
+  "es_ES": {
+    "patron_partners": "PATRONOS Y SOCIOS",
+    "exhibitors": "Expositores",
+    "patrons": "Patronos",
+    "join": "ÚNETE A NOSOTROS",
+    "gallery": "GALERÍA",
+    "galeria_link": "/en/gallery/",
+    "registration": "/es/registro/"
   }
 }
