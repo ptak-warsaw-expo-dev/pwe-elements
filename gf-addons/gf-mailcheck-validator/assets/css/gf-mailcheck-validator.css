@@ -1,0 +1,22 @@
+.gf-mailcheck-suggestion {
+	margin-top: 6px;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #b32d2e;
+}
+
+.gf-mailcheck-suggestion__button {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-weight: 700;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.gf-mailcheck-suggestion__button:hover,
+.gf-mailcheck-suggestion__button:focus {
+	text-decoration: none;
+}

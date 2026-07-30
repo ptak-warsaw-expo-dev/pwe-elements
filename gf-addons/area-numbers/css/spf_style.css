@@ -1,0 +1,53 @@
+.wpb_column:has(#pweHeader) {
+    padding: 0 !important;  
+}
+
+.button_dispabled{
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+}
+
+.gfield .iti.iti--allow-dropdown {
+    display: block;
+    position: relative;
+}
+
+.gfield .iti.iti--allow-dropdown input {
+    padding-left: 50px !important;
+    width: 100% !important;
+    outline: none;
+    transition: 0.3s;
+    border: 1px solid #999;
+}
+
+.gfield .iti.iti--allow-dropdown input.error {
+    border-color: #f44436;
+}
+
+.gfield .hide {
+    display: none;
+}
+
+span.spf-phone {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+span.spf-phone.valid-msg {
+    color: green;
+}
+
+span.spf-phone.error-msg {
+    color: #f44436;
+}
+
+/* MOBILE */
+
+.iti-mobile .iti--container {
+    max-height: 80%;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+}

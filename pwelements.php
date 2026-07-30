@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.5.5
+ * Version: 3.5.6
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -24,6 +24,7 @@ class PWElementsPlugin
     public $PWEMediaGallery;
     // public $PWEQRActive;
     public $GFAreaNumbersField;
+    public $GFMailcheckValidator;
     public $PWECatalog1;
     public $PWEExhibitorGenerator;
     public $PWEProfile;
@@ -199,8 +200,11 @@ class PWElementsPlugin
         require_once plugin_dir_path(__FILE__) . 'elements/pwelements-options.php';
         $this->PWElements = new PWElements();
 
-        require_once plugin_dir_path(__FILE__) . 'gf-upps/area-numbers/area_numbers_gf.php';
+        require_once plugin_dir_path(__FILE__) . 'gf-addons/area-numbers/area_numbers_gf.php';
         $this->GFAreaNumbersField = new GFAreaNumbersField();
+
+        require_once plugin_dir_path(__FILE__) . 'gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php';
+        $this->GFMailcheckValidator = new GF_Mailcheck_Validator();
 
         require_once plugin_dir_path(__FILE__) . 'includes/katalog-wystawcow/main-katalog-wystawcow.php';
         $this->PWECatalog = new PWECatalog();
