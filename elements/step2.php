@@ -377,6 +377,8 @@ class PWElementStepTwo extends PWElements {
 
                             $current_domain = trim(do_shortcode('[trade_fair_domainadress]'));
 
+                            $media_wys = do_shortcode('[trade_fair_contact]');
+
                             $day_limit = in_array($pwe_groups_data, ["gr1", "gr2"]) ? 21 : 17;
 
                             $is_invalid_date = ($trade_fair_timestamp === false || empty($trade_fair_date));
@@ -425,11 +427,12 @@ class PWElementStepTwo extends PWElements {
                 <div class="numbers">
                     <div class="for-exhibitors">
                         <i class="fa fa-envelope-o fa-3x fa-fw"></i>
-                        <p>'. self::multi_translation("become_an_exhibitor") .'<br> <a href="tel:48 517 121 906">+48 517 121 906</a>
+                        <p>'. self::multi_translation("become_an_exhibitor") .'<br> <a href="mailto:'.$media_wys.'">'.$media_wys.'</a>
+
                     </div>
                     <div class="for-visitors">
                         <i class="fa fa-phone fa-3x fa-fw"></i>
-                        <p>'. self::multi_translation("visitors") .'<br> <a href="tel:48 513 903 628">+48 513 903 628</a>
+                        <p>'. self::multi_translation("visitors") .'<br> <a href="tel:48 518 739 124">+48 518 739 124</a>
                     </div>
                 </div>
             </div>
