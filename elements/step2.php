@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /**
  * Class PWElementStepTwo
@@ -379,7 +379,7 @@ class PWElementStepTwo extends PWElements {
 
                             $media_wys = do_shortcode('[trade_fair_contact]');
 
-                            $day_limit = in_array($pwe_groups_data, ["gr1", "gr2"]) ? 21 : 17;
+                            $day_limit = in_array($pwe_groups_data, ["gr1", "gr2", "gr3"]) ? 21 : 17;
 
                             $is_invalid_date = ($trade_fair_timestamp === false || empty($trade_fair_date));
                             $is_past_or_far  = ($days_difference > $day_limit || $trade_fair_timestamp < $current_timestamp);

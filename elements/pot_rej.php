@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /**
  * Class PWElementPotwierdzenieRejestracji
@@ -588,8 +588,8 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                             <div>'.
                                 self::languageChecker(
                                     <<<PL
-                                        <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na <br><span class="very-strong">[trade_fair_name]!</span></h2>
-                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu VIP<br><span class="very-strong">[trade_fair_name]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na targi <span class="very-strong">[trade_fair_name]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu na targi <span class="very-strong">[trade_fair_name]!</span></h2>
 
                                         <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
 
@@ -597,8 +597,8 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                         <p class="display-after-subbmit">Twój <span class="very-strong">   spersonalizowany identyfikator</span> wraz z planem/harmonogramem targów otrzymasz przed wydarzeniem na podany w formularzu adres za pośrednictwem poczty polskiej.</p>
                                     PL,
                                     <<<EN
-                                        <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering at <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
-                                        <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering VIP welcome package <br><span class="very-strong">[trade_fair_name_eng]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering for the trade fair <span class="very-strong">[trade_fair_name]!</span></h2>
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering your <span class="very-strong">[trade_fair_name] package!</span></h2>
 
                                         <p class="">We are delighted that you are joining our event, full of market news and inspiration for use in your business.</p><br>
 
@@ -630,19 +630,19 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
             $output .= '
                 <div class="form-3">';
                     if (strpos($source_utm, 'utm_source=byli') === false) {
-                        if($trade_fair_group=="gr3"){
-                            $output .=
-                                self::languageChecker(
-                                    <<<PL
-                                        <h3 class="display-befor-subbmit">Podaj adres, na który mamy wysłać <span class="golden-text">darmowy pakiet powitalny VIP</span></h3>
-                                        <p class="display-befor-subbmit">Otrzymasz bezpłatny spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingową.</p>
-                                    PL,
-                                    <<<EN
-                                        <h3 class="display-befor-subbmit">Enter the address where we should send the <span class="golden-text">free VIP welcome pack</span></h3>
-                                        <p class="display-befor-subbmit">You will receive a complimentary personalised badge along with the exhibition schedule/schedule and a parking pass.</p>
-                                    EN
-                                );
-                        } else {
+                        // if($trade_fair_group=="gr3"){
+                        //     $output .=
+                        //         self::languageChecker(
+                        //             <<<PL
+                        //                 <h3 class="display-befor-subbmit">Podaj adres, na który mamy wysłać <span class="golden-text">darmowy pakiet powitalny VIP</span></h3>
+                        //                 <p class="display-befor-subbmit">Otrzymasz bezpłatny spersonalizowany identyfikator wraz z planem/harmonogramem targów oraz kartę parkingową.</p>
+                        //             PL,
+                        //             <<<EN
+                        //                 <h3 class="display-befor-subbmit">Enter the address where we should send the <span class="golden-text">free VIP welcome pack</span></h3>
+                        //                 <p class="display-befor-subbmit">You will receive a complimentary personalised badge along with the exhibition schedule/schedule and a parking pass.</p>
+                        //             EN
+                        //         );
+                        // } else {
                             $output .=
                                 self::languageChecker(
                                     <<<PL
@@ -654,7 +654,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                         <p class="display-befor-submit">You will receive a free personalised badge along with the exhibition plan and schedule.</p>
                                     EN
                                 );
-                        }
+                        // }
 
                     } else {
                         if (strpos($source_utm, 'utm_source=byli') !== false) {
@@ -1730,4 +1730,4 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
 
         return $output;
     }
-}
+} 
