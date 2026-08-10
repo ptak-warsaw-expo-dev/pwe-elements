@@ -40,6 +40,16 @@
 		return input.closest('.gfield') || input.parentElement;
 	}
 
+	function usesNewValidator(input) {
+		return Boolean(
+			input &&
+			(
+				input.classList.contains('pwe-email-validate') ||
+				input.closest('.pwe-email-validate')
+			)
+		);
+	}
+
 	function removeSuggestion(input) {
 		const wrapper = getWrapper(input);
 		if (!wrapper) {
@@ -102,8 +112,10 @@
 		if (
 			!window.Mailcheck ||
 			!input ||
+			usesNewValidator(input) ||
 			!input.matches('.ginput_container_email input[type="email"], .ginput_container_email input')
 		) {
+			removeSuggestion(input);
 			return;
 		}
 
@@ -130,6 +142,11 @@
 		const scope = root || document;
 
 		scope.querySelectorAll('.ginput_container_email input').forEach(function (input) {
+			if (usesNewValidator(input)) {
+				removeSuggestion(input);
+				return;
+			}
+
 			if (input.dataset.mailcheckReady === '1') {
 				return;
 			}
@@ -153,9 +170,13 @@
 			form.dataset.mailcheckSubmitReady = '1';
 
 			form.addEventListener('submit', function (event) {
-				const invalidInput = form.querySelector(
-					'.ginput_container_email input[data-mailcheck-invalid="1"]'
-				);
+				const invalidInput = Array.from(
+					form.querySelectorAll(
+						'.ginput_container_email input[data-mailcheck-invalid="1"]'
+					)
+				).find(function (input) {
+					return !usesNewValidator(input);
+				});
 
 				if (!invalidInput) {
 					return;

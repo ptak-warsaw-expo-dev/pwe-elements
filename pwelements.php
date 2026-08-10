@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.5.7
+ * Version: 3.5.8
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -174,9 +174,9 @@ class PWElementsPlugin
         // Shortcodes from CAP
         require_once plugin_dir_path(__FILE__) . 'backend/shortcodes.php';
 
-        // GF Mailing
-        require_once plugin_dir_path(__FILE__) . 'includes/mailing/mailing.php';
-        $this->PWEMailing = new PWEMailing();
+        // // GF Mailing
+        // require_once plugin_dir_path(__FILE__) . 'includes/mailing/mailing.php';
+        // $this->PWEMailing = new PWEMailing();
 
         if (is_admin()) {
 
@@ -203,8 +203,8 @@ class PWElementsPlugin
         require_once plugin_dir_path(__FILE__) . 'gf-addons/area-numbers/area_numbers_gf.php';
         $this->GFAreaNumbersField = new GFAreaNumbersField();
 
-        require_once plugin_dir_path(__FILE__) . 'gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php';
-        $this->GFMailcheckValidator = new GF_Mailcheck_Validator();
+        // require_once plugin_dir_path(__FILE__) . 'gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php';
+        // $this->GFMailcheckValidator = new GF_Mailcheck_Validator();
 
         require_once plugin_dir_path(__FILE__) . 'includes/katalog-wystawcow/main-katalog-wystawcow.php';
         $this->PWECatalog = new PWECatalog();

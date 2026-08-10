@@ -282,6 +282,7 @@ class GF_Mailcheck_Validator {
 			'gmaol.com'       => 'gmail.com',
 			'gmailcom'        => 'gmail.com',
 			'gmail.pl'        => 'gmail.com',
+			'gmeil.com'        => 'gmail.com',
 
 			// Outlook
 			'outlok.com'      => 'outlook.com',
@@ -371,6 +372,23 @@ class GF_Mailcheck_Validator {
 		return apply_filters( 'gf_mailcheck_domain_corrections', $corrections );
 	}
 
+
+	/**
+	 * Checks whether the field is handled by the new validator.
+	 */
+	private function uses_new_email_validator( $field ): bool {
+		if ( ! $field ) {
+			return false;
+		}
+
+		$css_class = isset( $field->cssClass ) ? (string) $field->cssClass : '';
+
+		return (bool) preg_match(
+			'/(?:^|\s)pwe-email-validate(?:\s|$)/',
+			$css_class
+		);
+	}
+
 	/**
 	* Gravity Forms server validation.
 	*
@@ -379,6 +397,11 @@ class GF_Mailcheck_Validator {
 	*/
 	public function validate_email_domain( $result, $value, $form, $field ) {
 		if ( ! $field || 'email' !== $field->get_input_type() ) {
+			return $result;
+		}
+
+		// Fields marked with pwe-email-validate are handled by the new addon.
+		if ( $this->uses_new_email_validator( $field ) ) {
 			return $result;
 		}
 
