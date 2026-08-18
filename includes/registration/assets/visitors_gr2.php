@@ -22,6 +22,16 @@ function render_gr2($atts, $source_utm){
       }
   }
 
+  $industry = do_shortcode('[pwe_industry]');
+
+  if ($industry === 'medicine') {
+      $title = PWERegistrationVisitors::multi_translation('ticket_industry');
+      $statement = '<div class="pwe-registration-visitors__statement" style="font-size: 12px;color: black;line-height: 1.2;">*' . PWERegistrationVisitors::multi_translation('statement_medicine') . '</div>';
+  } else {
+      $title = PWERegistrationVisitors::multi_translation('ticket');
+      $statement = '';
+  }
+
   if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false ) {
 
     $output .= '
@@ -34,11 +44,12 @@ function render_gr2($atts, $source_utm){
                 <p>'. PWERegistrationVisitors::multi_translation("step_1_of_2").'</p>
             </div>
             <div class="pwe-registration-title">
-                <h4>'. PWERegistrationVisitors::multi_translation("your_ticket").'</h4>
+                <h4>'. $title .'</h4>
             </div>
             <div class="pwe-registration-form">
                 [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
             </div>
+            '. $statement .'
         </div>
     </div>';
     } else if(strpos($source_utm, 'utm_source=platyna') !== false){
@@ -50,11 +61,12 @@ function render_gr2($atts, $source_utm){
                   <div class="pweform_container">
                     <div class="form">
                       <h3>'. PWERegistrationVisitors::multi_translation("step_1_of_2").'</h3>
-                      <h2 class="form-title">'. PWERegistrationVisitors::multi_translation("ticket").'
+                      <h2 class="form-title">'. $title .'
                       </h2>
                       <div class="pwe-registration-form">
                         [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
                       </div>
+                      '. $statement .'
                     </div>
                     <div class="benefits">
                       <h2>'. PWERegistrationVisitors::multi_translation("vip_invitation").'</h2>
@@ -79,7 +91,7 @@ function render_gr2($atts, $source_utm){
                         <img class="form-badge-top" src="/wp-content/plugins/pwe-media/media/badge_top.png">
                         <div class="form-container pwe-registration">
                             <div class="form-badge-header">
-                                <h2 class="form-header-title">'. PWERegistrationVisitors::multi_translation("ticket").'</h2>
+                                <h2 class="form-header-title">'. $title .'</h2>
                                 <a href="https://warsawexpo.eu/" target="_blank"><img class="form-header-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp"></a>
                             </div>
                             <img class="form-badge-left" src="/wp-content/plugins/pwe-media/media/badge_left.png">
@@ -87,10 +99,11 @@ function render_gr2($atts, $source_utm){
                             <img class="form-badge-right" src="/wp-content/plugins/pwe-media/media/badge_right.png">
                             <a href="https://warsawexpo.eu/" target="_blank"><img class="form-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp"></a>
                             <div class="form">
-                                <h2 class="form-title">'. PWERegistrationVisitors::multi_translation("ticket").'</h2>
+                                <h2 class="form-title">'. $title .'</h2>
                                 <div class="pwe-registration-form">
                                     [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
                                 </div>
+                                '. $statement .'
                             </div>
                         </div>
                     </div>

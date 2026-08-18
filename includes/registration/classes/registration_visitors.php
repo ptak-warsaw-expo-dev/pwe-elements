@@ -119,6 +119,16 @@ class PWERegistrationVisitors extends PWERegistration {
                 </ul>
             ';
 
+        
+        $industry = do_shortcode('[pwe_industry]');
+
+        if ($industry === 'medicine') {
+            $title = self::multi_translation('ticket_industry');
+            $statement = '<div class="pwe-registration-visitors__statement" style="font-size: 12px;color: black;line-height: 1.2;">*' . self::multi_translation('statement_medicine') . '</div>';
+        } else {
+            $title = self::multi_translation('ticket');
+            $statement = '';
+        }
 
         if (isset($_SERVER['argv'][0])) {
             $source_utm = $_SERVER['argv'][0];
@@ -180,11 +190,12 @@ class PWERegistrationVisitors extends PWERegistration {
                         <p>'. self::multi_translation("step_1_of_2").'</p>
                     </div>
                     <div class="pwe-registration-title">
-                        <h4>'. self::multi_translation("ticket").'</h4>
+                        <h4>'. $title .'</h4>
                     </div>
                     <div class="pwe-registration-form">
                         [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
                     </div>
+                    '. $statement .'
                 </div>
             </div>';
         } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
@@ -301,6 +312,7 @@ class PWERegistrationVisitors extends PWERegistration {
                 //         </div>';
                 //     }
         } else {
+
             $output .= '
             <div id="pweRegistration" class="pwe-registration for-visitors">
                 <div class="pwe-registration-column">
@@ -308,7 +320,7 @@ class PWERegistrationVisitors extends PWERegistration {
                         <img class="form-badge-top" src="/wp-content/plugins/pwe-media/media/badge_top.png">
                         <div class="form-container pwe-registration">
                             <div class="form-badge-header">
-                                <h1 class="form-header-title">'. self::multi_translation("ticket").'</h1>
+                                <h1 class="form-header-title">'. $title .'</h1>
                                 <a href="https://warsawexpo.eu/" target="_blank"><img class="form-header-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
                             </div>
                             <img class="form-badge-left" src="/wp-content/plugins/pwe-media/media/badge_left.png">
@@ -316,10 +328,11 @@ class PWERegistrationVisitors extends PWERegistration {
                             <img class="form-badge-right" src="/wp-content/plugins/pwe-media/media/badge_right.png">
                             <a href="https://warsawexpo.eu/" target="_blank"><img class="form-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
                             <div class="form">
-                                <h2 id="main-content" class="form-title">'. self::multi_translation("ticket").'</h2>
+                                <h2 id="main-content" class="form-title">'. $title .'</h2>
                                 <div class="pwe-registration-form">
                                     [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
                                 </div>
+                                '. $statement .'
                             </div>
                         </div>
                     </div>
