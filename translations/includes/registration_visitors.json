@@ -42,7 +42,9 @@
     "exhibitor_registration_text": "Wypełnij poniższy formularz, a my skontaktujemy się z Tobą w celu przedstawienia preferencyjnych stawek* za powierzchnię wystawienniczą i zabudowę stoiska.<br>*oferta ograniczona czasowo",
     "exhibitor_ask_for_stand": "Zapytaj o stoisko",
     "exhibitor_registration_text_gr12": "Zapytaj o stoisko<br>Wypełnij poniższy formularz, a my skontaktujemy się z Tobą w celu przedstawienia preferencyjnych stawek* za powierzchnię wystawienniczą i zabudowę stoiska.<br>*oferta ograniczona czasowo",
-    "exhibitor_registration_for": "DLA WYSTAWCÓW"
+    "exhibitor_registration_for": "DLA WYSTAWCÓW",
+    "ticket_industry": "Bilet na targi<br>dla profesjonalistów*",
+    "statement_medicine": "Oświadczam, że jestem przedstawicielem branży medycznej / ochrony zdrowia (m.in. lekarzem, pielęgniarką, farmaceutą, przedstawicielem placówki medycznej, dystrybutorem lub producentem wyrobów medycznych) i rejestruję się w celach zawodowych związanych z moją działalnością."
   },
   "en_US": {
     "access": "<strong>access to the trade fair for all 3 days upon registration</strong>",
@@ -87,7 +89,9 @@
     "exhibitor_registration_text": "Fill out the form below and we will contact you to present preferential rates *  for the exhibition space and stand construction<br>* limited time offer",
     "exhibitor_ask_for_stand": "Ask for a stand",
     "exhibitor_registration_text_gr12": "Ask for a stand<br>Fill out the form below and we will contact you to present preferential rates *  for the exhibition space and stand construction<br>* limited time offer",
-    "exhibitor_registration_for": "BOOK A STAND"
+    "exhibitor_registration_for": "BOOK A STAND",
+    "ticket_industry": "Trade fair ticket<br>for professionals*",
+    "statement_medicine": "I declare that I am a representative of the medical / healthcare industry (including a doctor, nurse, pharmacist, medical facility representative, distributor or manufacturer of medical devices) and that I am registering for professional purposes related to my activity."
   },
   "de_DE": {
     "access": "<strong>Zugang zur Messe an allen drei Tagen nach Registrierung</strong>",
@@ -132,7 +136,9 @@
     "exhibitor_registration_text": "Füllen Sie das untenstehende Formular aus und wir kontaktieren Sie, um Ihnen Vorzugskonditionen vorzustellen*  für die Ausstellungsfläche und den Standbau<br> zeitlich begrenztes Angebot",
     "exhibitor_ask_for_stand": "Stand anfragen",
     "exhibitor_registration_text_gr12": "Stand anfragen<br>Füllen Sie das untenstehende Formular aus und wir kontaktieren Sie, um Ihnen Vorzugskonditionen für die Ausstellungsfläche und den Standbau vorzustellen.<br> zeitlich begrenztes Angebot",
-    "exhibitor_registration_for": "STAND BUCHEN"
+    "exhibitor_registration_for": "STAND BUCHEN",
+    "ticket_industry": "Ticket für die<br>Messe für Fachbesucher*",
+    "statement_medicine": "Ich erkläre, dass ich ein Vertreter der Medizin- / Gesundheitsbranche bin (u.a. Arzt, Krankenschwester/-pfleger, Apotheker, Vertreter einer medizinischen Einrichtung, Distributor oder Hersteller von Medizinprodukten) und mich zu beruflichen Zwecken im Zusammenhang mit meiner Tätigkeit registriere."
   },
   "cs_CZ": {
     "access": "<strong>přístup na veletrh po registraci po dobu 3 dnů</strong>",
@@ -177,7 +183,9 @@
     "exhibitor_registration_text": "Vyplňte následující formulář a my vás kontaktujeme, abychom vám představili preferenční sazby* na výstavní plochu a stavbu stánku.<br>* nabídka je časově omezená",
     "exhibitor_ask_for_stand": "Požádejte o stánek",
     "exhibitor_registration_text_gr12": "Požádejte o stánek<br>Vyplňte následující formulář a my vás kontaktujeme, abychom vám představili preferenční sazby* na výstavní plochu a stavbu stánku.<br>* nabídka je časově omezená",
-    "exhibitor_registration_for": "REZERVOVAT STÁNEK"
+    "exhibitor_registration_for": "REZERVOVAT STÁNEK",
+    "ticket_industry": "Vstupenka na veletrh<br>pro odborníky*",
+    "statement_medicine": "Prohlašuji, že jsem zástupcem zdravotnického odvětví (např. lékař, zdravotní sestra, lékárník, zástupce zdravotnického zařízení, distributor nebo výrobce zdravotnických prostředků) a registruji se za účelem výkonu své profese."
   },
   "it_IT": {
     "access": "<strong>accesso alla fiera per tutti e 3 i giorni dopo la registrazione</strong>",
@@ -222,7 +230,9 @@
     "exhibitor_registration_text": "Compila il modulo sottostante e ti contatteremo per presentarti tariffe preferenziali* per lo spazio espositivo e la realizzazione dello stand.<br>*offerta a tempo limitato",
     "exhibitor_ask_for_stand": "Richiedi uno stand",
     "exhibitor_registration_text_gr12": "Richiedi uno stand<br>Compila il modulo sottostante e ti contatteremo per presentarti tariffe preferenziali* per lo spazio espositivo e la realizzazione dello stand.<br>*offerta a tempo limitato",
-    "exhibitor_registration_for": "PRENOTA UNO STAND"
+    "exhibitor_registration_for": "PRENOTA UNO STAND",
+    "ticket_industry": "Biglietto per la fiera<br>per professionisti*",
+    "statement_medicine": "Dichiaro di essere un rappresentante del settore medico / sanitario (ad esempio medico, infermiere, farmacista, rappresentante di una struttura sanitaria, distributore o produttore di dispositivi medici) e di registrarmi per finalità professionali legate alla mia attività."
   },
   "lt_LT": {
     "access": "<strong>prieiga prie parodos po registracijos visoms 3 dienoms</strong>",
@@ -267,7 +277,9 @@
     "exhibitor_registration_text": "Užpildykite žemiau esantį formą ir mes susisieksime su jumis, kad pristatytume pageidaujamas kainas* parodų erdvei ir stendo įrengimui.<br>*laikinas pasiūlymas",
     "exhibitor_ask_for_stand": "Prašyti stendo",
     "exhibitor_registration_text_gr12": "Prašyti stendo<br>Užpildykite žemiau esantį formą ir mes susisieksime su jumis, kad pristatytume pageidaujamas kainas* parodų erdvei ir stendo įrengimui.<br>*laikinas pasiūlymas",
-    "exhibitor_registration_for": "UŽSAKYTI STENDĄ"
+    "exhibitor_registration_for": "UŽSAKYTI STENDĄ",
+    "ticket_industry": "Bilietas į parodą<br>profesionalams*",
+    "statement_medicine": "Patvirtinu, kad esu medicinos / sveikatos priežiūros sektoriaus atstovas (pvz., gydytojas, slaugytojas, vaistininkas, medicinos įstaigos atstovas, medicinos produktų platintojas ar gamintojas) ir registruojuosi profesiniais tikslais, susijusiais su mano veikla."
   },
   "lv_LV": {
     "access": "<strong>piekļuve izstādei pēc reģistrācijas visu 3 dienu laikā</strong>",
@@ -312,7 +324,9 @@
     "exhibitor_registration_text": "Aizpildiet zemāk esošo veidlapu, un mēs sazināsimies ar jums, lai piedāvātu jums priekšrocību tarifas* par izstādes platību un stenda būvniecību.<br>*ierobežots laika piedāvājums",
     "exhibitor_ask_for_stand": "Pieprasīt stendu",
     "exhibitor_registration_text_gr12": "Pieprasīt stendu<br>Aizpildiet zemāk esošo veidlapu, un mēs sazināsimies ar jums, lai piedāvātu jums priekšrocību tarifas* par izstādes platību un stenda būvniecību.<br>*ierobežots laika piedāvājums",
-    "exhibitor_registration_for": "REZERVĒT STENDU"
+    "exhibitor_registration_for": "REZERVĒT STENDU",
+    "ticket_industry": "Biļete uz izstādi<br>profesionāļiem*",
+    "statement_medicine": "Apliecinu, ka esmu medicīnas / veselības aprūpes nozares pārstāvis (piemēram, ārsts, medmāsa, farmaceits, medicīnas iestādes pārstāvis, medicīnas produktu izplatītājs vai ražotājs) un reģistrējos profesionāliem mērķiem, kas saistīti ar manu darbību."
   },
   "sk_SK": {
     "access": "<strong>prístup na veľtrh po registrácii na 3 dni</strong>",
@@ -357,7 +371,9 @@
     "exhibitor_registration_text": "Vyplňte nižšie uvedený formulár a my vás budeme kontaktovať, aby sme vám predstavili preferenčné sadzby* za výstavnú plochu a stavbu stánku.<br>*časovo obmedzená ponuka",
     "exhibitor_ask_for_stand": "Požiadajte o stánok",
     "exhibitor_registration_text_gr12": "Požiadajte o stánok<br>Vyplňte nižšie uvedený formulár a my vás budeme kontaktovať, aby sme vám predstavili preferenčné sadzby* za výstavnú plochu a stavbu stánku.<br>*časovo obmedzená ponuka",
-    "exhibitor_registration_for": "REZERVOVAŤ STÁNOK"
+    "exhibitor_registration_for": "REZERVOVAŤ STÁNOK",
+    "ticket_industry": "Lístok na veľtrh<br>pre profesionálov*",
+    "statement_medicine": "Vyhlasujem, že som zástupcom zdravotníckeho odvetvia (napr. lekár, zdravotná sestra, farmaceut, zástupca zdravotníckeho zariadenia, distribútor alebo výrobca zdravotníckych pomôcok) a registrujem sa na profesionálne účely súvisiace s mojou činnosťou."
   },
   "uk": {
     "access": "<strong>доступ до виставки після реєстрації на всі 3 дні</strong>",
@@ -402,7 +418,9 @@
     "exhibitor_registration_text": "Заповніть форму нижче, і ми зв'яжемося з вами, щоб запропонувати преференційні тарифи* за виставкову площу та будівництво стенду.<br>*обмежена пропозиція",
     "exhibitor_ask_for_stand": "Запросити стенд",
     "exhibitor_registration_text_gr12": "Запросити стенд<br>Заповніть форму нижче, і ми зв'яжемося з вами, щоб запропонувати преференційні тарифи* за виставкову площу та будівництво стенду.<br>*обмежена пропозиція",
-    "exhibitor_registration_for": "ЗАМОВИТИ СТЕНД"
+    "exhibitor_registration_for": "ЗАМОВИТИ СТЕНД",
+    "ticket_industry": "Квиток на виставку<br>для професіоналів*",
+    "statement_medicine": "Підтверджую, що я є представником медичної / медичної галузі (зокрема лікарем, медсестрою, фармацевтом, представником медичного закладу, дистриб’ютором або виробником медичних виробів) і реєструюся з професійною метою, пов’язаною з моєю діяльністю."
   }
   ,
   "ro_RO": {
@@ -447,7 +465,9 @@
     "exhibitor_registration_text": "Completați formularul de mai jos și vă vom contacta pentru a vă oferi tarife preferențiale* pentru spațiul expozițional și construcția standului.<br>*ofertă limitată",
     "exhibitor_ask_for_stand": "Cereți un stand",
     "exhibitor_registration_text_gr12": "Cereți un stand<br>Completați formularul de mai jos și vă vom contacta pentru a vă oferi tarife preferțiale* pentru spațiul expozițional și construcția standului.<br>*ofertă limitată",
-    "exhibitor_registration_for": "COMANDAȚI UN STAND"
+    "exhibitor_registration_for": "COMANDAȚI UN STAND",
+    "ticket_industry": "Bilet pentru expoziție<br>pentru profesioniști*",
+    "statement_medicine": "Declar că sunt reprezentant al domeniului medical / al sănătății (de exemplu medic, asistent medical, farmacist, reprezentant al unei unități medicale, distribuitor sau producător de dispozitive medicale) și mă înregistrez în scopuri profesionale legate de activitatea mea."
   },
   "et": {
     "access": "<strong>Pääs näitusele pärast registreerimist kõigil kolmel päeval</strong>",
@@ -492,7 +512,9 @@
     "exhibitor_registration_text": "Täidke allolev vorm ja me võtame teiega ühendust, et pakkuda teile soodushinnad* näitusepinna ja stendi ehitamiseks.<br>*aeg piiratud pakkumine",
     "exhibitor_ask_for_stand": "Paluge stendi",
     "exhibitor_registration_text_gr12": "Paluge stendi<br>Täidke allolev vorm ja me võtame teiega ühendust, et pakkuda teile soodushinnad* näitusepinna ja stendi ehitamiseks.<br>*aeg piiratud pakkumine",
-    "exhibitor_registration_for": "TELLIGE STEND"
+    "exhibitor_registration_for": "TELLIGE STEND",
+    "ticket_industry": "Pilet näitusele<br>professionaalidele*",
+    "statement_medicine": "Kinnitan, et olen meditsiini- / tervishoiusektori esindaja (nt arst, õde, apteeker, meditsiiniasutuse esindaja, meditsiiniseadmete turustaja või tootja) ning registreerin end oma tegevusega seotud professionaalsetel eesmärkidel."
   },
   "hu_HU": {
     "access": "<strong>hozzáférés a kiállításhoz a regisztráció után mindhárom napra</strong>",
@@ -537,7 +559,9 @@
     "exhibitor_registration_text": "Töltse ki az alábbi űrlapot, és felvesszük Önnel a kapcsolatot, hogy bemutassuk a kiállítási terület és a stand építésének kedvezményes díjait*.<br>*korlátozott ideig érvényes ajánlat",
     "exhibitor_ask_for_stand": "Kérjen standot",
     "exhibitor_registration_text_gr12": "Kérjen standot<br>Töltse ki az alábbi űrlapot, és felvesszük Önnel a kapcsolatot, hogy bemutassuk a kiállítási terület és a stand építésének kedvezményes díjait*.<br>*korlátozott ideig érvényes ajánlat",
-    "exhibitor_registration_for": "FOGLALJON STANDOT"
+    "exhibitor_registration_for": "FOGLALJON STANDOT",
+    "ticket_industry": "Jegy a kiállításra<br>szakmai látogatóknak*",
+    "statement_medicine": "Kijelentem, hogy az egészségügyi ágazat képviselője vagyok (pl. orvos, ápoló, gyógyszerész, egészségügyi intézmény képviselője, orvostechnikai eszközök forgalmazója vagy gyártója), és szakmai célból, a tevékenységemhez kapcsolódóan regisztrálok."
   },
   "fr_FR": {
     "access": "<strong>accès au salon après inscription pour les 3 jours</strong>",
@@ -582,7 +606,9 @@
     "exhibitor_registration_text": "Remplissez le formulaire ci-dessous et nous vous contacterons pour vous présenter les tarifs préférentiels* pour l'espace d'exposition et la construction du stand.<br>*offre limitée dans le temps",
     "exhibitor_ask_for_stand": "Demander un stand",
     "exhibitor_registration_text_gr12": "Demander un stand<br>Remplissez le formulaire ci-dessous et nous vous contacterons pour vous présenter les tarifs préférentiels* pour l'espace d'exposition et la construction du stand.<br>*offre limitée dans le temps",
-    "exhibitor_registration_for": "RÉSERVER UN STAND"
+    "exhibitor_registration_for": "RÉSERVER UN STAND",
+    "ticket_industry": "Billet pour le salon<br>pour professionnels*",
+    "statement_medicine": "Je déclare être un représentant du secteur médical / de la santé (notamment médecin, infirmier(ère), pharmacien, représentant d’un établissement de santé, distributeur ou fabricant de dispositifs médicaux) et m’inscrire à des fins professionnelles liées à mon activité."
   },
   "es_ES": {
     "access": "<strong>acceso a la feria tras el registro durante los 3 días</strong>",
@@ -627,6 +653,8 @@
     "exhibitor_registration_text": "Complete el siguiente formulario y nos pondremos en contacto con usted para ofrecerle tarifas preferenciales* para el espacio de exposición y la construcción del stand.<br>*oferta por tiempo limitado",
     "exhibitor_ask_for_stand": "Solicitar un stand",
     "exhibitor_registration_text_gr12": "Solicitar un stand<br>Complete el siguiente formulario y nos pondremos en contacto con usted para ofrecerle tarifas preferenciales* para el espacio de exposición y la construcción del stand.<br>*oferta por tiempo limitado",
-    "exhibitor_registration_for": "RESERVAR UN STAND"
+    "exhibitor_registration_for": "RESERVAR UN STAND",
+    "ticket_industry": "Entrada para la feria<br>para profesionales*",
+    "statement_medicine": "Declaro que soy representante del sector médico / sanitario (incluido médico, enfermero, farmacéutico, representante de una institución sanitaria, distribuidor o fabricante de dispositivos médicos) y me registro con fines profesionales relacionados con mi actividad."
   }
 }

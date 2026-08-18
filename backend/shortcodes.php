@@ -49,7 +49,9 @@ function get_fair_data($specific_domain = null) {
 
             // $current_user = wp_get_current_user();
             // if ($current_user && $current_user->user_login === 'Anton') {
-            //     var_dump($fairs_data);
+            //     echo '<pre>';
+            //     var_dump($fairs_data["fairs"]['mr.glasstec.pl']);
+            //     echo '</pre>';
             // }
         } else {
             // URL to JSON file
@@ -137,107 +139,9 @@ function get_fair_data($specific_domain = null) {
     return $current_domain && isset($cached_data[$current_domain]) ? $cached_data[$current_domain] : null;
 }
 
-function register_dynamic_shortcodes() {
-    // List of shortcodes and their corresponding fields
+function pwe_get_shortcode_map() {
+
     $shortcodes = [
-        'pwe_name_pl'               => 'name_pl', // [pwe_name_pl] || [pwe_name_pl domain="domain.com"]
-        'pwe_name_en'               => 'name_en',
-        'pwe_desc_pl'               => 'desc_pl',
-        'pwe_desc_en'               => 'desc_en',
-        'pwe_fair_id'               => 'id',
-        'pwe_short_desc_pl'         => 'short_desc_pl',
-        'pwe_short_desc_en'         => 'short_desc_en',
-        'pwe_full_desc_pl'          => 'full_desc_pl',
-        'pwe_full_desc_en'          => 'full_desc_en',
-        'pwe_date_start'            => 'date_start',
-        'pwe_date_start_hour'       => 'date_start_hour',
-        'pwe_date_end'              => 'date_end',
-        'pwe_date_end_hour'         => 'date_end_hour',
-        'pwe_edition'               => 'edition',
-        'pwe_visitors'              => 'fair_visitors_current',
-        'pwe_visitors_foreign'      => 'fair_foreign_current',
-        'pwe_exhibitors'            => 'fair_exhibitors_current',
-        'pwe_countries'             => 'fair_countries_current',
-        'pwe_area'                  => 'fair_area_current',
-        'pwe_statistics_year_curr'  => 'fair_year_current',
-        'pwe_visitors_prev'         => 'fair_visitors_previous',
-        'pwe_visitors_foreign_prev' => 'fair_foreign_previous',
-        'pwe_exhibitors_prev'       => 'fair_exhibitors_previous',
-        'pwe_countries_prev'        => 'fair_countries_previous',
-        'pwe_area_prev'             => 'fair_area_previous',
-        'pwe_statistics_year_prev'  => 'fair_year_previous',
-        'pwe_hall'                  => 'hall',
-        'pwe_hall_entrance'         => 'hall_entrance',
-        'pwe_color_accent'          => 'color_accent',
-        'pwe_color_main2'           => 'color_main2',
-        'pwe_badge'                 => 'badge',
-        'pwe_facebook'              => 'facebook',
-        'pwe_instagram'             => 'instagram', // [pwe_instagram domain="domena"]
-        'pwe_linkedin'              => 'linkedin',
-        'pwe_youtube'               => 'youtube',
-        'pwe_catalog'               => 'catalog',
-        'pwe_catalog_id'            => 'catalog_id',
-        'pwe_catalog_archive'       => 'catalog_archive',
-        'pwe_catalog_id_archive'    => 'catalog_id_archive',
-        'pwe_category_pl'           => 'category_pl',
-        'pwe_category_en'           => 'category_en',
-        'pwe_group'                 => 'group',
-        'pwe_conference_name'       => 'conference_name',
-        'pwe_conference_title_pl'   => 'conference_title_pl',
-        'pwe_conference_title_en'   => 'conference_title_en',
-        'pwe_name_cs'               => 'name_cs',
-        'pwe_desc_cs'               => 'desc_cs',
-        'pwe_short_desc_cs'         => 'short_desc_cs',
-        'pwe_full_desc_cs'          => 'full_desc_cs',
-        'pwe_name_de'               => 'name_de',
-        'pwe_desc_de'               => 'desc_de',
-        'pwe_short_desc_de'         => 'short_desc_de',
-        'pwe_full_desc_de'          => 'full_desc_de',
-        'pwe_name_lt'               => 'name_lt',
-        'pwe_desc_lt'               => 'desc_lt',
-        'pwe_short_desc_lt'         => 'short_desc_lt',
-        'pwe_full_desc_lt'          => 'full_desc_lt',
-        'pwe_name_lv'               => 'name_lv',
-        'pwe_desc_lv'               => 'desc_lv',
-        'pwe_short_desc_lv'         => 'short_desc_lv',
-        'pwe_full_desc_lv'          => 'full_desc_lv',
-        'pwe_name_ru'               => 'name_ru',
-        'pwe_desc_ru'               => 'desc_ru',
-        'pwe_short_desc_ru'         => 'short_desc_ru',
-        'pwe_full_desc_ru'          => 'full_desc_ru',
-        'pwe_name_sk'               => 'name_sk',
-        'pwe_desc_sk'               => 'desc_sk',
-        'pwe_short_desc_sk'         => 'short_desc_sk',
-        'pwe_full_desc_sk'          => 'full_desc_sk',
-        'pwe_name_uk'               => 'name_uk',
-        'pwe_desc_uk'               => 'desc_uk',
-        'pwe_short_desc_uk'         => 'short_desc_uk',
-        'pwe_full_desc_uk'          => 'full_desc_uk'
-    ];
-
-    // Shortcode handling function
-    function handle_fair_shortcode($atts, $field) {
-        $atts = shortcode_atts(['domain' => null], $atts);
-        $fair_data = get_fair_data($atts['domain']);
-        return esc_html($fair_data[$field] ?? '');
-    }
-
-    // Registering shortcodes in the loop
-    foreach ($shortcodes as $shortcode => $field) {
-        add_shortcode($shortcode, function($atts) use ($field) {
-            return handle_fair_shortcode($atts, $field);
-        });
-    }
-}
-
-add_action('init', 'register_dynamic_shortcodes');
-
-add_filter('gform_replace_merge_tags', 'PWE_GF_shortcodes', 10, 7);
-
-function PWE_GF_shortcodes($text, $form, $entry, $url_encode, $esc_html, $nl2br, $format) {
-
-    // Shortcode list => field in fair data
-    $shortcode_map = [
         'pwe_name_pl'               => 'name_pl',
         'pwe_name_en'               => 'name_en',
         'pwe_desc_pl'               => 'desc_pl',
@@ -277,11 +181,81 @@ function PWE_GF_shortcodes($text, $form, $entry, $url_encode, $esc_html, $nl2br,
         'pwe_catalog_id'            => 'catalog_id',
         'pwe_category_pl'           => 'category_pl',
         'pwe_category_en'           => 'category_en',
+        'pwe_industry'              => 'industry',
         'pwe_group'                 => 'group',
         'pwe_conference_name'       => 'conference_name',
         'pwe_conference_title_pl'   => 'conference_title_pl',
-        'pwe_conference_title_en'   => 'conference_title_en'
+        'pwe_conference_title_en'   => 'conference_title_en',
+        'pwe_conference_desc_pl'    => 'conference_desc_pl',
+        'pwe_conference_desc_en'    => 'conference_desc_en',
+        'pwe_about_title_pl'        => 'about_title_pl',
+        'pwe_about_title_en'        => 'about_title_en',
+        'pwe_about_desc_pl'         => 'about_desc_pl',
+        'pwe_about_desc_en'         => 'about_desc_en'
     ];
+
+    // WPML languages
+    $languages = apply_filters('wpml_active_languages', null);
+
+    $langs = [];
+
+    if (!empty($languages) && is_array($languages)) {
+        foreach ($languages as $lang) {
+            $code = $lang['language_code'];
+
+            if (in_array($code, ['pl', 'en'], true)) {
+                continue;
+            }
+
+            $langs[] = $code;
+        }
+    } else {
+        $langs = ['cs','de','it','lt','lv','ru','sk','uk'];
+    }
+
+    // Dynamic fields
+    foreach ($langs as $code) {
+        $shortcodes["pwe_name_{$code}"] = "name_{$code}";
+        $shortcodes["pwe_desc_{$code}"] = "desc_{$code}";
+        $shortcodes["pwe_short_desc_{$code}"] = "short_desc_{$code}";
+        $shortcodes["pwe_full_desc_{$code}"] = "full_desc_{$code}";
+        $shortcodes["pwe_conference_title_{$code}"] = "conference_title_{$code}";
+        $shortcodes["pwe_conference_desc_{$code}"] = "conference_desc_{$code}";
+        $shortcodes["pwe_about_title_{$code}"] = "about_title_{$code}";
+        $shortcodes["pwe_about_desc_{$code}"] = "about_desc_{$code}";
+        $shortcodes["pwe_category_{$code}"] = "category_{$code}";
+    }
+
+    return $shortcodes;
+}
+
+function register_dynamic_shortcodes() {
+    // List of shortcodes and their corresponding fields
+    $shortcodes = pwe_get_shortcode_map();
+
+    // Shortcode handler
+    function handle_fair_shortcode($atts, $field) {
+        $atts = shortcode_atts(['domain' => null], $atts);
+        $fair_data = get_fair_data($atts['domain']);
+        return $fair_data[$field] ?? '';
+    }
+
+    // Registering shortcodes
+    foreach ($shortcodes as $shortcode => $field) {
+        add_shortcode($shortcode, function($atts) use ($field) {
+            return handle_fair_shortcode($atts, $field);
+        });
+    }
+}
+
+add_action('init', 'register_dynamic_shortcodes');
+
+add_filter('gform_replace_merge_tags', 'PWE_GF_shortcodes', 10, 7);
+
+function PWE_GF_shortcodes($text, $form, $entry, $url_encode, $esc_html, $nl2br, $format) {
+
+    // Shortcode list => field in fair data
+    $shortcode_map = pwe_get_shortcode_map();
 
     // Searching for tags {pwe_xxx} and {pwe_xxx:domain=yyy}
     preg_match_all('/\{(pwe_[a-z0-9_]+)(:domain=([^}]+))?\}/i', $text, $matches, PREG_SET_ORDER);
