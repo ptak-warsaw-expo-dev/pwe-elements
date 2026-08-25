@@ -47,7 +47,7 @@ function render_gr2($atts, $source_utm){
                 <h4>'. $title .'</h4>
             </div>
             <div class="pwe-registration-form">
-                [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+                [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="true"]
             </div>
             '. $statement .'
         </div>
@@ -64,7 +64,7 @@ function render_gr2($atts, $source_utm){
                       <h2 class="form-title">'. $title .'
                       </h2>
                       <div class="pwe-registration-form">
-                        [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+                        [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="true"]
                       </div>
                       '. $statement .'
                     </div>
@@ -101,7 +101,7 @@ function render_gr2($atts, $source_utm){
                             <div class="form">
                                 <h2 class="form-title">'. $title .'</h2>
                                 <div class="pwe-registration-form">
-                                    [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+                                    [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="true"]
                                 </div>
                                 '. $statement .'
                             </div>

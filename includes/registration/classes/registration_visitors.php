@@ -76,6 +76,8 @@ class PWERegistrationVisitors extends PWERegistration {
      * @param array @atts options
      */
     public static function output($atts, $registration_type, $registration_form_id, $register_show_ticket) {
+        $output = '';
+        $badgevipmockup = '';
 
         $btn_text_color = self::findColor($atts['btn_text_color_manual_hidden'], $atts['btn_text_color'], 'white');
         $btn_color = self::findColor($atts['btn_color_manual_hidden'], $atts['btn_color'], self::$main2_color);
@@ -119,7 +121,7 @@ class PWERegistrationVisitors extends PWERegistration {
                 </ul>
             ';
 
-        
+
         $industry = do_shortcode('[pwe_industry]');
 
         if ($industry === 'medicine') {
