@@ -487,6 +487,9 @@ if (
                 #pweForm form {
                     width: 100%;
                 }
+                #pweForm .form-badge-header .form-header-title {
+                    font-size: 22px;
+                }
                 #pweForm .form h2 {
                     margin-top: 36px;
                     font-size: 24px;
