@@ -17,64 +17,51 @@ class PWElementMedalForm extends PWElements {
 
     public function update_medal_choices($form) {
 
-    error_log('MEDAL FILTER START');
+      foreach ($form['fields'] as &$field) {
 
-    foreach ($form['fields'] as &$field) {
+          if ($field->type !== 'checkbox') {
+              continue;
+          }
 
-        error_log('FIELD: ' . $field->id . ' TYPE: ' . $field->type . ' LABEL: ' . $field->label);
+          if ($field->label !== 'W jakiej kategorii konkursowej chcesz zgłosić swój udział?' && $field->label !== 'In which competition category would you like to submit your entry?') {
+              continue;
+          }
 
-        if ($field->type !== 'checkbox') {
-            continue;
-        }
+          $fair_adds = PWECommonFunctions::get_database_fairs_data_adds();
 
-        if ($field->label !== 'W jakiej kategorii konkursowej chcesz zgłosić swój udział?' && $field->label !== 'In which competition category would you like to submit your entry?') {
-            continue;
-        }
+          $data = !empty($fair_adds) && isset($fair_adds[0]->medal_ceremony)
+            ? json_decode($fair_adds[0]->medal_ceremony, true)
+            : [];
 
-        error_log('MEDAL FIELD FOUND');
+          if (!$data || empty($data['selected'])) {
+              continue;
+          }
 
-        $fair_adds = PWECommonFunctions::get_database_fairs_data_adds();
+          $choices = [];
 
-        error_log(print_r($fair_adds, true));
+          foreach ($data['selected'] as $key) {
 
-        $data = !empty($fair_adds) && isset($fair_adds[0]->medal_ceremony)
-          ? json_decode($fair_adds[0]->medal_ceremony, true)
-          : [];
+              $lang = PWECommonFunctions::lang_pl() ? 'pl' : 'en';
 
-        error_log(print_r($data, true));
+              if (empty($data['categories'][$key][$lang])) {
+                  continue;
+              }
 
-        if (!$data || empty($data['selected'])) {
-            error_log('NO DATA');
-            continue;
-        }
+              $category = $data['categories'][$key][$lang];
 
-        $choices = [];
+              $text = $category['name'] . ' - ' . $category['description'];
 
-        foreach ($data['selected'] as $key) {
+              $choices[] = [
+                  'text' => $text,
+                  'value' => $text
+              ];
+          }
 
-            $lang = PWECommonFunctions::lang_pl() ? 'pl' : 'en';
+          $field->choices = $choices;
+      }
 
-            if (empty($data['categories'][$key][$lang])) {
-                continue;
-            }
-
-            $category = $data['categories'][$key][$lang];
-
-            $text = $category['name'] . ' - ' . $category['description'];
-
-            $choices[] = [
-                'text' => $text,
-                'value' => $text
-            ];
-        }
-
-        error_log(print_r($choices, true));
-
-        $field->choices = $choices;
-    }
-
-    return $form;
-}
+      return $form;
+  }
 
     /**
      * Static method to initialize Visual Composer elements.
@@ -114,6 +101,40 @@ class PWElementMedalForm extends PWElements {
 
 
         $text_color = 'color:' . self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'black') . '!important;';
+
+        $files = PWE_Functions::get_database_fairs_data_files();
+
+        $language = PWE_Functions::lang_pl() ? 'pl' : 'en';
+
+        // Domyślny link, używany gdy w bazie nie ma odpowiedniego pliku.
+        $ceremony_rules = $language === 'pl'
+            ? 'https://warsawexpo.eu/docs/Regulamin-Konkursu-Medalowego-Ptak-Warsaw-Expo.pdf'
+            : 'https://warsawexpo.eu/docs/Rules-of-the-Medal-Competition-Ptak-Warsaw-Expo.pdf';
+
+        $ceremony_rules_files = array_filter($files, static function ($file) use ($language) {
+            return isset(
+                $file->category_slug,
+                $file->language,
+                $file->file_path,
+                $file->is_active
+            )
+                && $file->category_slug === 'medal-ceremony-rules'
+                && $file->language === $language
+                && $file->is_active === '1'
+                && $file->file_path !== '';
+        });
+
+        // Najnowszy rok jako pierwszy.
+        usort($ceremony_rules_files, static function ($a, $b) {
+            return (int) $b->year <=> (int) $a->year;
+        });
+
+        $latest_ceremony_rules = reset($ceremony_rules_files);
+
+        if ($latest_ceremony_rules) {
+            $ceremony_rules = 'https://cap.warsawexpo.eu'
+                . $latest_ceremony_rules->file_path;
+        }
 
         $output .= '
           <style>
@@ -262,7 +283,7 @@ class PWElementMedalForm extends PWElements {
             </div>
             <div class="fair-rules">
                 '.self::languageChecker('Regulamin', 'Terms and Conditions').' :<br/>
-                <a href="'.self::languageChecker('https://warsawexpo.eu/docs/Regulamin-Konkursu-Medalowego-Ptak-Warsaw-Expo.pdf', 'https://warsawexpo.eu/docs/Rules-of-the-Medal-Competition-Ptak-Warsaw-Expo.pdf').'" target="_blank">
+                <a href="'.$ceremony_rules.'" target="_blank">
                     '.self::languageChecker('Kliknij tutaj, aby przeczytać regulamin', 'Click here to read the terms and conditions').'
                 </a>
             </div>
