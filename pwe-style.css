@@ -364,3 +364,9 @@ strong {
 .site-footer .social-icon {
     display: none !important;
 }
+
+
+.show-consent {
+    cursor: pointer !important;
+    user-select: none !important;
+}

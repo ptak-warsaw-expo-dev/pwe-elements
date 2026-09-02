@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.6.3
+ * Version: 3.6.4
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -52,8 +52,13 @@ class PWElementsPlugin
 
         $this->init();
 
-        // Send CSS variables to <head>
-        add_action('wp_head', array($this->PWEStyleVar, 'pwe_enqueue_style_var'), 1);
+        // SHORTCODES
+        add_action('init', function () {
+            $this->PWEStyleVar->init_color_shortcodes();
+        });
+
+        // CSS VARIABLES
+        add_action('wp_head', [$this->PWEStyleVar, 'pwe_enqueue_style_var'], 1);
 
         // Add main CSS to wp_enqueue_scripts
         add_action('wp_enqueue_scripts', array($this, 'pwe_enqueue_styles'));
