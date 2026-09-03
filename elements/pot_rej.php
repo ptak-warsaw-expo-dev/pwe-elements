@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Class PWElementPotwierdzenieRejestracji
@@ -251,7 +251,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                 'button' => 'Aktualizuj dane',
                 'success' => 'Dane zostały zaktualizowane!',
                 'error' => 'Wszystkie pola są wymagane!',
-                'confirm_text' => 'Dziękujemy za skontaktowanie się z nami, odezwiemy się do Ciebie wkrótce.',
+                'confirm_text' => 'Dziękujemy za zamówienie pakietu na targi <strong>[trade_fair_name]</strong>!<br><br>Twój <strong>spersonalizowany identyfikator</strong> otrzymasz przed wydarzeniem na podany w formularzu adres za pośrednictwem poczty polskiej.',
                 'confirm_text_platyna' => 'Dziękujemy za rejestrację! Cieszymy się, że będziesz z nami na targach [trade_fair_name]. Do zobaczenia już wkrótce!',
             ],
             'en' => [
@@ -276,6 +276,10 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                 .pwelement_' . self::$rnd_id . ' #xForm{
                     display: flex;
                     min-height: 90vh;
+                }
+                .pwelement_' . self::$rnd_id . ' .gform_confirmation_wrapper {
+                    color: black;
+                    font-size: 18px;
                 }
                 .pwelement_' . self::$rnd_id . ' #xForm>div{
                     align-content: center;
@@ -589,21 +593,19 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                 self::languageChecker(
                                     <<<PL
                                         <h2 class="text-color-jevc-color display-befor-subbmit">Dziękujemy za rejestrację na targi <span class="very-strong">[trade_fair_name]!</span></h2>
-                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za zamówienie pakietu na targi <span class="very-strong">[trade_fair_name]!</span></h2>
+
+                                        <h2 class="text-color-jevc-color display-after-subbmit">Dziękujemy za rejestrację na targi <span class="very-strong">[trade_fair_name]!</span></h2>
 
                                         <p class="">Cieszymy się, że dołączasz do naszego wydarzenia, pełnego nowości rynkowych i inspiracji do zastosowania w Twojej firmie.</p><br>
 
                                         <p class="display-befor-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Państwa <span class="very-strong">spersonalizowany identyfikator</span> targowy, który usprawni pobyt na targach.</p>
-                                        <p class="display-after-subbmit">Twój <span class="very-strong">   spersonalizowany identyfikator</span> wraz z planem/harmonogramem targów otrzymasz przed wydarzeniem na podany w formularzu adres za pośrednictwem poczty polskiej.</p>
+                                        <p class="display-after-subbmit"><span class="very-strong">Zachęcamy do wypełnienia</span> ostatniego formularza, dzięki temu będziemy mogli przygotować dla Państwa <span class="very-strong">spersonalizowany identyfikator</span> targowy, który usprawni pobyt na targach.</p>
                                     PL,
                                     <<<EN
-                                        <h2 class="text-color-jevc-color display-befor-subbmit">Thank you for registering for the trade fair <span class="very-strong">[trade_fair_name]!</span></h2>
-                                        <h2 class="text-color-jevc-color display-after-subbmit">Thank you for ordering your <span class="very-strong">[trade_fair_name] package!</span></h2>
-
-                                        <p class="">We are delighted that you are joining our event, full of market news and inspiration for use in your business.</p><br>
-
-                                        <p class="display-before-submit"><span class="very-strong">We encourage you to fill in</span> the final form, so that we can prepare a <span class="very-strong">personalised badge</span> for you, which will make your visit to the fair more convenient.</p>
-                                        <p class="display-after-subbmit">Your <span class="very-strong"> >personalised badge</span> : together with the fair map/programme and a parking pass, will be sent to the address provided in the form via the Post Office approximately one week before the fair.</p>
+                                        <h2 class="text-color-jevc-color display-after-submit">Thank you for registering for the <span class="very-strong">[trade_fair_name] trade show!</span></h2>
+                                        <p class="">We’re delighted that you’re joining our event, which is full of market innovations and inspiration for your business.</p><br>
+                                        <p class="display-befor-subbmit"><span class="very-strong">We encourage you to fill out</span> the final form so that we can prepare a <span class="very-strong">personalized trade show badge</span> for you, which will make your visit to the trade show more convenient.</p>
+                                        <p class="display-after-subbmit"><span class="very-strong">We encourage you to fill out</span> the final form so that we can prepare a <span class="very-strong">personalized trade show badge</span> for you, which will make your time at the fair more efficient.</p>
                                     EN
                                 )
                             .'
@@ -946,10 +948,6 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                 <div class="benefits">
                                     <h2>'. PWECommonFunctions::languageChecker('Pakiet PLATINIUM upoważnia do:', 'The PLATINIUM package<br/>entitles you to:') .'</h2>
                                     <div class="benefits_icon">
-                                        <img src="/wp-content/plugins/pwe-media/media/platyna/fasttrack.webp" />
-                                        <p>'. PWECommonFunctions::languageChecker('Wejście bezpłatne', 'Free entry') .'</br>FAST TRACK</p>
-                                    </div>
-                                    <div class="benefits_icon">
                                         <img src="/wp-content/plugins/pwe-media/media/platyna/obsluga.webp" />
                                         <p>'. PWECommonFunctions::languageChecker('Obsługę concierge"a', 'Concierge service') .'</p>
                                     </div>
@@ -1012,8 +1010,8 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                         align-items: center;
                         min-height: 650px;
                     }
-                    #pweRegistration .form-title, #pweRegistration .gform_confirmation_wrapper {
-                        color:black;
+                    #pweRegistration .form-title, .pwelement .gform_confirmation_wrapper {
+                        color:black !important;
                         font-weight:500;
                         text-align: center;
                         margin-top: 0px;
@@ -1315,7 +1313,7 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
                                 ';
                                 if(strpos($source_utm, 'utm_source=platyna') === false){
                                     $output .= '
-                                    confirmationWrapper.innerText = "'.$t['confirm_text'].'";
+                                    confirmationWrapper.innerHTML = "'.$t['confirm_text'].'";
                                     document.getElementById("xForm").getElementsByClassName("form-3")[0].prepend(confirmationWrapper);';
                                 } else {
                                     $output .= '
@@ -1730,4 +1728,4 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
 
         return $output;
     }
-} 
+}
