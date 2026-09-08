@@ -124,12 +124,14 @@ class PWERegistrationVisitors extends PWERegistration {
 
         $industry = do_shortcode('[pwe_industry]');
 
+        $statement = '';
+
         if ($industry === 'medicine') {
             $title = self::multi_translation('ticket_industry');
-            $statement = '<div class="pwe-registration-visitors__statement" style="font-size: 12px;color: black;line-height: 1.2;">*' . self::multi_translation('statement_medicine') . '</div>';
+            // $statement = '<div class="pwe-registration-visitors__statement" style="font-size: 12px;color: black;line-height: 1.2;">*' . self::multi_translation('statement_medicine') . '</div>';
         } else {
             $title = self::multi_translation('ticket');
-            $statement = '';
+            // $statement = '';
         }
 
         if (isset($_SERVER['argv'][0])) {
@@ -170,222 +172,220 @@ class PWERegistrationVisitors extends PWERegistration {
             default:
                 require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php';
                 $output .= render_gr2($atts, $source_utm, $badgevipmockup );
-                return $output ;
+                return $output;
         }
 
-        if (get_locale() == 'pl_PL') {
-            $registration_benefits = do_shortcode('[trade_fair_registration_benefits_pl]');
-            $ticket_benefits = do_shortcode('[trade_fair_ticket_benefits_pl]');
-        } else {
-            $registration_benefits = do_shortcode('[trade_fair_registration_benefits_en]');
-            $ticket_benefits = do_shortcode('[trade_fair_ticket_benefits_en]');
-        }
+        // if (get_locale() == 'pl_PL') {
+        //     $registration_benefits = do_shortcode('[trade_fair_registration_benefits_pl]');
+        //     $ticket_benefits = do_shortcode('[trade_fair_ticket_benefits_pl]');
+        // } else {
+        //     $registration_benefits = do_shortcode('[trade_fair_registration_benefits_en]');
+        //     $ticket_benefits = do_shortcode('[trade_fair_ticket_benefits_en]');
+        // }
 
-        if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false || strpos($source_utm, 'utm_source=platyna') !== false) {
-            $output .= '
-            <div id="pweRegistration" class="pwe-registration vip">
-                <div class="pwe-reg-column pwe-mockup-column">
-                    <img src="'. $badgevipmockup .'">
-                </div>
-                <div class="pwe-reg-column pwe-registration-column">
-                    <div class="pwe-registration-step-text">
-                        <p>'. self::multi_translation("step_1_of_2").'</p>
-                    </div>
-                    <div class="pwe-registration-title">
-                        <h4>'. $title .'</h4>
-                    </div>
-                    <div class="pwe-registration-form">
-                        [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
-                    </div>
-                    '. $statement .'
-                </div>
-            </div>';
-        } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
-                // $output .= '
-                //     <div id="pweRegistrationTicket" class="registration-ticket">
-                //       <h1 class="registration-ticket__title">'. self::multi_translation("ticket_options").'</h1>
-                //       <div class="registration-ticket-container">
-                //         <div class="registration-ticket__option registration-ticket__option--standard">
-                //           <div class="ticket-card__label">'. self::multi_translation("common_choice").'</div>
-                //           <div class="ticket-card__name">'. self::multi_translation("trade_pass").'</div>
+        // if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false || strpos($source_utm, 'utm_source=platyna') !== false) {
+        //     $output .= '
+        //     <div id="pweRegistration" class="pwe-registration vip">
+        //         <div class="pwe-reg-column pwe-mockup-column">
+        //             <img src="'. $badgevipmockup .'">
+        //         </div>
+        //         <div class="pwe-reg-column pwe-registration-column">
+        //             <div class="pwe-registration-step-text">
+        //                 <p>'. self::multi_translation("step_1_of_2").'</p>
+        //             </div>
+        //             <div class="pwe-registration-title">
+        //                 <h4>'. $title .'</h4>
+        //             </div>
+        //             <div class="pwe-registration-form">
+        //                 [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+        //             </div>
+        //         </div>
+        //     </div>';
+        // } else if($register_show_ticket === "true" && $domain_gr == "gr3") {
+        //         // $output .= '
+        //         //     <div id="pweRegistrationTicket" class="registration-ticket">
+        //         //       <h1 class="registration-ticket__title">'. self::multi_translation("ticket_options").'</h1>
+        //         //       <div class="registration-ticket-container">
+        //         //         <div class="registration-ticket__option registration-ticket__option--standard">
+        //         //           <div class="ticket-card__label">'. self::multi_translation("common_choice").'</div>
+        //         //           <div class="ticket-card__name">'. self::multi_translation("trade_pass").'</div>
 
-                //           <div class="ticket-card">
-                //             <div class="ticket-card__price">
-                //               <h2 class="ticket-card__price-value">'. self::multi_translation("free_after_online").'</h2>
-                //               <p class="ticket-card__note">'. self::multi_translation("or").' '.$register_ticket_price_frist .' '. self::multi_translation("PLN_during_fair").'</p>
-                //             </div>
+        //         //           <div class="ticket-card">
+        //         //             <div class="ticket-card__price">
+        //         //               <h2 class="ticket-card__price-value">'. self::multi_translation("free_after_online").'</h2>
+        //         //               <p class="ticket-card__note">'. self::multi_translation("or").' '.$register_ticket_price_frist .' '. self::multi_translation("PLN_during_fair").'</p>
+        //         //             </div>
 
-                //             <div class="ticket-card__details">
-                //                 <p class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</p>
-                //                 '. $registration_benefits .'
-                //               <div class="pwe-registration-form">
-                //                 [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
-                //               </div>
-                //             </div>
-                //           </div>
-                //         </div>
+        //         //             <div class="ticket-card__details">
+        //         //                 <p class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</p>
+        //         //                 '. $registration_benefits .'
+        //         //               <div class="pwe-registration-form">
+        //         //                 [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+        //         //               </div>
+        //         //             </div>
+        //         //           </div>
+        //         //         </div>
 
-                //         <div class="registration-ticket__option registration-ticket__option--business">
-                //           <img src="/wp-content/plugins/pwe-media/media/fast-track.webp">
-                //           <div class="ticket-card__name">'. self::multi_translation("business_priority_pass").'</div>
-                //           <div class="ticket-card">
-                //             <div class="ticket-card__price">
-                //               <h2 class="ticket-card__price-value">'.$register_ticket_price.' PLN</h2>
-                //               <p class="ticket-card__note">'. self::multi_translation("or_request_an_invitation").'</p>
-                //               <a class="exhibitor-catalog" href="'. self::multi_translation("catalog_link").'">'. self::multi_translation("catalog").'</a>
-                //             </div>
+        //         //         <div class="registration-ticket__option registration-ticket__option--business">
+        //         //           <img src="/wp-content/plugins/pwe-media/media/fast-track.webp">
+        //         //           <div class="ticket-card__name">'. self::multi_translation("business_priority_pass").'</div>
+        //         //           <div class="ticket-card">
+        //         //             <div class="ticket-card__price">
+        //         //               <h2 class="ticket-card__price-value">'.$register_ticket_price.' PLN</h2>
+        //         //               <p class="ticket-card__note">'. self::multi_translation("or_request_an_invitation").'</p>
+        //         //               <a class="exhibitor-catalog" href="'. self::multi_translation("catalog_link").'">'. self::multi_translation("catalog").'</a>
+        //         //             </div>
 
-                //             <div class="ticket-card__details">
-                //               <h2 class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</h2>
-                //                 '. $ticket_benefits .'
-                //               <div class="ticket-card__details_button">';
-                //               if(empty($register_ticket_link)){
-                //                 $output .= '
-                //                  <a href="#" class="ticket-card__cta" data-popup-trigger>
-                //                   '. self::multi_translation("buy_a_ticket").'
-                //                 </a>';
-                //               } else {
-                //                 $output .= '
-                //                 <a target="_blank" href="'.$register_ticket_link.'" class="ticket-card__cta">
-                //                     '. self::multi_translation("buy_a_ticket").'
-                //                 </a>';
-                //               }
-                //               $output .= '
-                //               </div>
-                //             </div>
-                //           </div>
-                //         </div>
-                //       </div>
-                //     </div>
-                //     ';
-                //     if(empty($register_ticket_link)){
-                //         $output .= '
-                //         <script>
-                //         document.addEventListener("DOMContentLoaded", function() {
-                //             const popupTrigger = document.querySelector("[data-popup-trigger]");
-                //             const popup = document.getElementById("popup");
-                //             const popupClose = document.getElementById("popupClose");
+        //         //             <div class="ticket-card__details">
+        //         //               <h2 class="ticket-card__details-title">'. self::multi_translation("with_this_ticket").'</h2>
+        //         //                 '. $ticket_benefits .'
+        //         //               <div class="ticket-card__details_button">';
+        //         //               if(empty($register_ticket_link)){
+        //         //                 $output .= '
+        //         //                  <a href="#" class="ticket-card__cta" data-popup-trigger>
+        //         //                   '. self::multi_translation("buy_a_ticket").'
+        //         //                 </a>';
+        //         //               } else {
+        //         //                 $output .= '
+        //         //                 <a target="_blank" href="'.$register_ticket_link.'" class="ticket-card__cta">
+        //         //                     '. self::multi_translation("buy_a_ticket").'
+        //         //                 </a>';
+        //         //               }
+        //         //               $output .= '
+        //         //               </div>
+        //         //             </div>
+        //         //           </div>
+        //         //         </div>
+        //         //       </div>
+        //         //     </div>
+        //         //     ';
+        //         //     if(empty($register_ticket_link)){
+        //         //         $output .= '
+        //         //         <script>
+        //         //         document.addEventListener("DOMContentLoaded", function() {
+        //         //             const popupTrigger = document.querySelector("[data-popup-trigger]");
+        //         //             const popup = document.getElementById("popup");
+        //         //             const popupClose = document.getElementById("popupClose");
 
-                //             popupTrigger.addEventListener("click", function(e) {
-                //                 e.preventDefault();
-                //                 popup.style.display = "flex";
-                //             });
+        //         //             popupTrigger.addEventListener("click", function(e) {
+        //         //                 e.preventDefault();
+        //         //                 popup.style.display = "flex";
+        //         //             });
 
-                //             popupClose.addEventListener("click", function() {
-                //                 popup.style.display = "none";
-                //             });
+        //         //             popupClose.addEventListener("click", function() {
+        //         //                 popup.style.display = "none";
+        //         //             });
 
-                //             window.addEventListener("click", function(e) {
-                //                 if (e.target === popup) {
-                //                 popup.style.display = "none";
-                //                 }
-                //             });
+        //         //             window.addEventListener("click", function(e) {
+        //         //                 if (e.target === popup) {
+        //         //                 popup.style.display = "none";
+        //         //                 }
+        //         //             });
 
-                //             const popupRegisterBtn = document.querySelector(".popup_katalog:not(.popup_rej)");
+        //         //             const popupRegisterBtn = document.querySelector(".popup_katalog:not(.popup_rej)");
 
-                //             if (popupRegisterBtn) {
-                //                 popupRegisterBtn.addEventListener("click", function(e) {
-                //                     e.preventDefault();
-                //                     popup.style.display = "none";
-                //                 });
-                //             }
-                //         });
-                //         </script>
+        //         //             if (popupRegisterBtn) {
+        //         //                 popupRegisterBtn.addEventListener("click", function(e) {
+        //         //                     e.preventDefault();
+        //         //                     popup.style.display = "none";
+        //         //                 });
+        //         //             }
+        //         //         });
+        //         //         </script>
 
-                //         ';
-                //         $output.='<div class="popup" id="popup">
-                //             <div class="popup__content">
-                //                 <div class="popup__content_text_container">
-                //                     <div class="popup__content_text">
-                //                         <p style="font-size:16px;">'. self::multi_translation("ask_your_chosen_exhibitor").'</p>
-                //                         <p class="text">'. self::multi_translation("the_current_pool").'</p>
+        //         //         ';
+        //         //         $output.='<div class="popup" id="popup">
+        //         //             <div class="popup__content">
+        //         //                 <div class="popup__content_text_container">
+        //         //                     <div class="popup__content_text">
+        //         //                         <p style="font-size:16px;">'. self::multi_translation("ask_your_chosen_exhibitor").'</p>
+        //         //                         <p class="text">'. self::multi_translation("the_current_pool").'</p>
 
-                //                     </div>
-                //                     <div class="popup__content_button">
-                //                         <div id="popupClose">+</div>
-                //                     </div>
-                //                 </div>
-                //                 <div class="popup__content_button_container">
-                //                     <a href="'. self::multi_translation("registration_link").'" class="popup_katalog ">'. self::multi_translation("registration_text").'</a>
-                //                     <a href="'. self::multi_translation("catalog_link").'" class="popup_katalog popup_rej">'. self::multi_translation("catalog").'</a>
-                //                 </div>
-                //             </div>
+        //         //                     </div>
+        //         //                     <div class="popup__content_button">
+        //         //                         <div id="popupClose">+</div>
+        //         //                     </div>
+        //         //                 </div>
+        //         //                 <div class="popup__content_button_container">
+        //         //                     <a href="'. self::multi_translation("registration_link").'" class="popup_katalog ">'. self::multi_translation("registration_text").'</a>
+        //         //                     <a href="'. self::multi_translation("catalog_link").'" class="popup_katalog popup_rej">'. self::multi_translation("catalog").'</a>
+        //         //                 </div>
+        //         //             </div>
 
-                //         </div>';
-                //     }
-        } else {
+        //         //         </div>';
+        //         //     }
+        // } else {
 
-            $output .= '
-            <div id="pweRegistration" class="pwe-registration for-visitors">
-                <div class="pwe-registration-column">
-                    <div id="pweForm">
-                        <img class="form-badge-top" src="/wp-content/plugins/pwe-media/media/badge_top.png">
-                        <div class="form-container pwe-registration">
-                            <div class="form-badge-header">
-                                <h1 class="form-header-title">'. $title .'</h1>
-                                <a href="https://warsawexpo.eu/" target="_blank"><img class="form-header-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
-                            </div>
-                            <img class="form-badge-left" src="/wp-content/plugins/pwe-media/media/badge_left.png">
-                            <img class="form-badge-bottom" src="/wp-content/plugins/pwe-media/media/badge_bottom.png">
-                            <img class="form-badge-right" src="/wp-content/plugins/pwe-media/media/badge_right.png">
-                            <a href="https://warsawexpo.eu/" target="_blank"><img class="form-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
-                            <div class="form">
-                                <h2 id="main-content" class="form-title">'. $title .'</h2>
-                                <div class="pwe-registration-form">
-                                    [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
-                                </div>
-                                '. $statement .'
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>';
-        }
+        //     $output .= '
+        //     <div id="pweRegistration" class="pwe-registration for-visitors">
+        //         <div class="pwe-registration-column">
+        //             <div id="pweForm">
+        //                 <img class="form-badge-top" src="/wp-content/plugins/pwe-media/media/badge_top.png">
+        //                 <div class="form-container pwe-registration">
+        //                     <div class="form-badge-header">
+        //                         <h1 class="form-header-title">'. $title .'</h1>
+        //                         <a href="https://warsawexpo.eu/" target="_blank"><img class="form-header-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
+        //                     </div>
+        //                     <img class="form-badge-left" src="/wp-content/plugins/pwe-media/media/badge_left.png">
+        //                     <img class="form-badge-bottom" src="/wp-content/plugins/pwe-media/media/badge_bottom.png">
+        //                     <img class="form-badge-right" src="/wp-content/plugins/pwe-media/media/badge_right.png">
+        //                     <a href="https://warsawexpo.eu/" target="_blank"><img class="form-image-qr" src="/wp-content/plugins/pwe-media/media/logo_pwe_black.webp" alt="Logo Ptak Warsaw Expo"></a>
+        //                     <div class="form">
+        //                         <h2 id="main-content" class="form-title">'. $title .'</h2>
+        //                         <div class="pwe-registration-form">
+        //                             [gravityform id="'. $registration_form_id .'" title="false" description="false" ajax="false"]
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>';
+        // }
 
-        if (get_locale() != "pl_PL" && get_locale() != "en_US") {
+        // if (get_locale() != "pl_PL" && get_locale() != "en_US") {
 
-            $output .= '
-            <script>
-                function translateElement(element, newText) {
-                    if (!element) return;
-                    element.textContent = newText;
-                }
+        //     $output .= '
+        //     <script>
+        //         function translateElement(element, newText) {
+        //             if (!element) return;
+        //             element.textContent = newText;
+        //         }
 
-                const emailInput = document.querySelector(\'input[placeholder="Email"]\');
-                if (emailInput) {
-                    emailInput.placeholder = "' . self::multi_translation("email") . '";
-                }
+        //         const emailInput = document.querySelector(\'input[placeholder="Email"]\');
+        //         if (emailInput) {
+        //             emailInput.placeholder = "' . self::multi_translation("email") . '";
+        //         }
 
-                const emailLabel = Array.from(document.querySelectorAll("label"))
-                    .find(label => label.textContent.trim().startsWith("Email"));
+        //         const emailLabel = Array.from(document.querySelectorAll("label"))
+        //             .find(label => label.textContent.trim().startsWith("Email"));
 
-                if (emailLabel) {
-                    emailLabel.childNodes[0].textContent = "' . self::multi_translation("email") . '";
-                }
+        //         if (emailLabel) {
+        //             emailLabel.childNodes[0].textContent = "' . self::multi_translation("email") . '";
+        //         }
 
-                const phoneLabel = Array.from(document.querySelectorAll("label"))
-                    .find(label => label.textContent.trim().startsWith("Phone number"));
+        //         const phoneLabel = Array.from(document.querySelectorAll("label"))
+        //             .find(label => label.textContent.trim().startsWith("Phone number"));
 
-                if (phoneLabel) {
-                    phoneLabel.childNodes[0].textContent = "' . self::multi_translation("phone") . '";
-                }
+        //         if (phoneLabel) {
+        //             phoneLabel.childNodes[0].textContent = "' . self::multi_translation("phone") . '";
+        //         }
 
-                const consentLabel = Array.from(document.querySelectorAll(".gfield_consent_label"))
-                    .find(label => label.textContent.trim().startsWith("I agree to the processing by PTAK WARSAW EXPO"));
+        //         const consentLabel = Array.from(document.querySelectorAll(".gfield_consent_label"))
+        //             .find(label => label.textContent.trim().startsWith("I agree to the processing by PTAK WARSAW EXPO"));
 
-                if (consentLabel) {
-                    consentLabel.innerHTML = "' . self::multi_translation("consent_processing_data_short") . '<span class=\"show-consent\">(' . self::multi_translation("more") . ')</span><span class=\"gfield_required gfield_required_asterisk\">*</span>";
-                }
+        //         if (consentLabel) {
+        //             consentLabel.innerHTML = "' . self::multi_translation("consent_processing_data_short") . '<span class=\"show-consent\">(' . self::multi_translation("more") . ')</span><span class=\"gfield_required gfield_required_asterisk\">*</span>";
+        //         }
 
-                const consentDescription = Array.from(document.querySelectorAll(".gfield_consent_description"))
-                    .find(description => description.textContent.trim().includes("e-mail address"));
+        //         const consentDescription = Array.from(document.querySelectorAll(".gfield_consent_description"))
+        //             .find(description => description.textContent.trim().includes("e-mail address"));
 
-                if (consentDescription) {
-                    translateElement(consentDescription, "' . self::multi_translation("consent_processing_data_email") . '");
-                }
-            </script>';
-        }
+        //         if (consentDescription) {
+        //             translateElement(consentDescription, "' . self::multi_translation("consent_processing_data_email") . '");
+        //         }
+        //     </script>';
+        // }
 
-        return $output;
+        // return $output;
     }
 }

@@ -24,12 +24,14 @@ function render_gr2($atts, $source_utm){
 
   $industry = do_shortcode('[pwe_industry]');
 
+  $statement = '';
+
   if ($industry === 'medicine') {
       $title = PWERegistrationVisitors::multi_translation('ticket_industry');
-      $statement = '<div class="pwe-registration-visitors__statement" style="font-size: 12px;color: black;line-height: 1.2;">*' . PWERegistrationVisitors::multi_translation('statement_medicine') . '</div>';
+      // $statement = '<div class="pwe-registration-visitors__statement" style="font-size: 12px;color: black;line-height: 1.2;">*' . PWERegistrationVisitors::multi_translation('statement_medicine') . '</div>';
   } else {
       $title = PWERegistrationVisitors::multi_translation('ticket');
-      $statement = '';
+      // $statement = '';
   }
 
   if (strpos($source_utm, 'utm_source=byli') !== false || strpos($source_utm, 'utm_source=premium') !== false ) {
