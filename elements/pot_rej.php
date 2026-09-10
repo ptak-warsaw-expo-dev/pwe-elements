@@ -136,6 +136,23 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
             'reg_form_update_entries' => '',
         ), $atts ));
 
+        $trade_fair_date = do_shortcode('[trade_fair_enddata]');
+
+        if (!empty($trade_fair_date)) {
+            $trade_fair_timestamp = strtotime($trade_fair_date);
+            $current_timestamp = time();
+
+            if ($trade_fair_timestamp !== false) {
+                // Obliczenie różnicy w dniach
+                $days_difference = ($trade_fair_timestamp - $current_timestamp) / (60 * 60 * 24);
+
+                // Jeśli do targów zostało mniej niż 24 dni, przekieruj na stronę główną
+                if ($days_difference < 24) {
+                    wp_safe_redirect(home_url('/'));
+                    exit();
+                }
+            }
+        }
         self::add_field_apartment($reg_form_name_pr);
 
         if (session_status() === PHP_SESSION_NONE) {
@@ -153,9 +170,15 @@ class PWElementPotwierdzenieRejestracji extends PWElements {
 
         $file_url = plugins_url('elements/fetch.php', dirname(__FILE__));
 
-        $source_utm = $_SERVER['argv'][0];
+        $source_utm = '';
+
+        if (!empty($_SERVER['argv'][0])) {
+            $source_utm = $_SERVER['argv'][0];
+        } elseif (!empty($_SESSION['pwe_reg_entry']['full_utm'])) {
+            $source_utm = $_SESSION['pwe_reg_entry']['full_utm'];
+        }
+
         $selected_form_id = '';
-        //$selected_form = '';
 
         if (strpos($source_utm, 'utm_source=byli') === false){
             $btn_color = self::findColor($atts['btn_color_manual_hidden'], $atts['btn_color'], self::$accent_color);
