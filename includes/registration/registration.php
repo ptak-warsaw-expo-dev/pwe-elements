@@ -39,9 +39,12 @@ class PWERegistration extends PWECommonFunctions {
             session_start();
         }
 
-        // Pobieramy aktualny URL i wyciągamy czystą ścieżkę (np. "it/diventa-espositore")
+        // Pobieramy aktualny URL i wyciągamy czystą ścieżkę oraz zapytanie URL (query string)
         $current_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $current_path = parse_url($current_url, PHP_URL_PATH);
+        $parsed_url = parse_url($current_url);
+        $current_path = $parsed_url['path'] ?? '';
+        $query_string = $parsed_url['query'] ?? '';
+
         $cleaned_current_path = trim(strtolower($current_path), '/');
 
         // Ścieżka do pliku JSON
@@ -60,14 +63,12 @@ class PWERegistration extends PWECommonFunctions {
                     if (isset($json_data[$key])) {
                         foreach ($json_data[$key] as $lang => $data) {
                             if (!empty($data['url'])) {
-                                // Budujemy pełną ścieżkę na podstawie reguły: pl bez prefiksu, reszta z prefiksem /lang/
                                 $expected_url = ($lang === 'pl') ? $data['url'] : '/' . $lang . $data['url'];
                                 $cleaned_expected = trim(strtolower($expected_url), '/');
 
-                                // DOKŁADNE PORÓWNANIE lub SPRAWDZENIE ZAWARTOŚCI
                                 if ($cleaned_current_path === $cleaned_expected) {
                                     $is_exhibitor_page = true;
-                                    break 2; // Przerywa obie pętle, bo znaleźliśmy dopasowanie
+                                    break 2;
                                 }
                             }
                         }
@@ -83,7 +84,7 @@ class PWERegistration extends PWECommonFunctions {
 
                             if ($cleaned_current_path === $cleaned_expected) {
                                 $is_registration_page = true;
-                                break; // Przerywa pętlę rejestracji
+                                break;
                             }
                         }
                     }
@@ -100,6 +101,10 @@ class PWERegistration extends PWECommonFunctions {
                                     strpos($current_url, '/registration/') !== false;
         }
 
+        // Wyciąganie wartości UTM z URL (jeśli istnieją)
+        parse_str($query_string, $query_params);
+        $utm_source = $query_params['utm_source'] ?? '';
+
         // Zapis do sesji
         if ($is_exhibitor_page) {
             $_SESSION['pwe_exhibitor_entry'] = [
@@ -108,7 +113,9 @@ class PWERegistration extends PWECommonFunctions {
             ];
         } elseif ($is_registration_page) {
             $_SESSION['pwe_reg_entry'] = [
-                'entry_id' => $entry['id'],
+                'entry_id'   => $entry['id'],
+                'utm_source' => $utm_source, // <-- ZAPISUJEMY UTM SOURCE
+                'full_utm'   => (strpos($query_string, 'utm_') !== false) ? $query_string : '',
             ];
         }
 
