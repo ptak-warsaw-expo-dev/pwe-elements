@@ -15,7 +15,9 @@ class PWESliderScripts {
             wp_enqueue_style('slick-slider-theme-css', plugins_url('../assets/slick-slider/slick-theme.css', __FILE__));
             wp_enqueue_script('slick-slider-js', plugins_url('../assets/slick-slider/slick.min.js', __FILE__), array('jquery'), null, true);
 
-            include_once plugin_dir_path(__DIR__) . 'pwefunctions.php';
+            if (!class_exists('PWECommonFunctions', false)) {
+                include_once plugin_dir_path(__DIR__) . 'pwefunctions.php';
+            }
             $fair_colors = PWECommonFunctions::findPalletColorsStatic();
             $accessibility = ($id == 'posts') ? 'accessibility: false,' : '';
 

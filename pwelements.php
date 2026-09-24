@@ -4,14 +4,12 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.6.7
+ * Version: 3.6.8
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
  * Update URI: https://api.github.com/repos/ptak-warsaw-expo-dev/pwe-elements/releases/latest
  */
-
-
 
 class PWElementsPlugin
 {
@@ -170,14 +168,84 @@ class PWElementsPlugin
         wp_enqueue_script('swiper-slider-js', plugins_url('/assets/swiper-slider/swiper-bundle.min.js', __FILE__), array('jquery'), null, true);
     }
 
+    /**
+     * PWE System is optional. PWElements must remain fully standalone.
+     */
+    private function hasPweSystem()
+    {
+        $plugin = 'pwe-system/pwe-system.php';
+        $plugin_file = trailingslashit(WP_PLUGIN_DIR) . $plugin;
+        $system_functions = trailingslashit(WP_PLUGIN_DIR) . 'pwe-system/core/class-pwe-system-functions.php';
+        $system_shortcodes = trailingslashit(WP_PLUGIN_DIR) . 'pwe-system/modules/shortcodes/backend-shortcodes.php';
+
+        if (!is_file($plugin_file) || !is_file($system_functions) || !is_file($system_shortcodes)) {
+            return false;
+        }
+
+        if (defined('PWE_SYSTEM_FILE') || class_exists('PWE_System', false)) {
+            return true;
+        }
+
+        $active_plugins = (array) get_option('active_plugins', []);
+        if (in_array($plugin, $active_plugins, true)) {
+            return true;
+        }
+
+        if (is_multisite()) {
+            $network_plugins = (array) get_site_option('active_sitewide_plugins', []);
+            if (isset($network_plugins[$plugin])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Shared system layer with a hard local fallback.
+     *
+     * Order:
+     * 1. functions,
+     * 2. lower-level [pwe_*] shortcodes,
+     * 3. the rest of PWElements.
+     */
+    private function initSystemCompatibility()
+    {
+        $use_system = $this->hasPweSystem();
+        $system_path = trailingslashit(WP_PLUGIN_DIR) . 'pwe-system/';
+
+        if ($use_system) {
+            // New implementation.
+            require_once $system_path . 'core/class-pwe-system-functions.php';
+
+            // Legacy PWElements modules still use PWECommonFunctions.
+            // Point that name to the new implementation only while PWE System is active.
+            if (!class_exists('PWECommonFunctions', false)) {
+                if (class_exists('PWE_System_Functions', false)) {
+                    class_alias('PWE_System_Functions', 'PWECommonFunctions');
+                } elseif (class_exists('PWE_Functions', false)) {
+                    class_alias('PWE_Functions', 'PWECommonFunctions');
+                }
+            }
+
+            // New backend [pwe_*] shortcodes. If another compatible layer
+            // already registered the procedural API, do not redeclare it.
+            if (!function_exists('pwe_get_shortcode_map')) {
+                require_once $system_path . 'modules/shortcodes/backend-shortcodes.php';
+            }
+        } else {
+            // Full original fallback. No dependency on PWE System.
+            require_once plugin_dir_path(__FILE__) . 'pwefunctions.php';
+            require_once plugin_dir_path(__FILE__) . 'backend/shortcodes.php';
+        }
+    }
+
     private function initClasses()
     {
 
-        // Helpers functions
-        require_once plugin_dir_path(__FILE__) . 'pwefunctions.php';
-
-        // Shortcodes from CAP
-        require_once plugin_dir_path(__FILE__) . 'backend/shortcodes.php';
+        // Functions must be initialized before the [pwe_*] shortcodes, and
+        // those shortcodes before the higher-level PWE_Shortcodes class.
+        $this->initSystemCompatibility();
 
         // // GF Mailing
         // require_once plugin_dir_path(__FILE__) . 'includes/mailing/mailing.php';
