@@ -1,0 +1,7735 @@
+{
+  "backend/load-more-posts.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "get_the_ID",
+      "wp_strip_all_tags",
+      "get_permalink",
+      "has_post_thumbnail",
+      "get_the_post_thumbnail_url",
+      "get_the_title",
+      "get_the_date",
+      "get_locale",
+      "wp_die",
+      "add_action"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "backend/shortcodes.php": {
+    "shortcodes_used": [
+      "a-z0-9_"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_translations_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "generate_fair_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "generate_fair_translation_data"
+      }
+    ],
+    "wordpress_calls": [
+      "current_user_can",
+      "is_admin",
+      "home_url",
+      "apply_filters",
+      "shortcode_atts",
+      "add_shortcode",
+      "add_action",
+      "add_filter",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/about.php": {
+    "shortcodes_used": [
+      "trade_fair_name"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/active_qr.php": {
+    "shortcodes_used": [
+      "a-zA-Z",
+      "trade_fair_domainadress"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "findData"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "wp_get_current_user"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'",
+      "d>"
+    ],
+    "database_tables": []
+  },
+  "elements/api.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/badge-local.php": {
+    "shortcodes_used": [
+      "trade_fair_badge",
+      "a-zA-Z0-9_",
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "add_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_feeds"
+      },
+      {
+        "class": "self",
+        "method": "pwe_download_temp_qr"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "qrOnlyDownload"
+      },
+      {
+        "class": "self",
+        "method": "massGenerator"
+      }
+    ],
+    "wordpress_calls": [
+      "is_wp_error",
+      "do_action",
+      "wp_upload_dir",
+      "do_shortcode",
+      "wp_remote_get",
+      "wp_remote_retrieve_response_code",
+      "wp_remote_retrieve_body",
+      "add_filter"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/button.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "id_rnd"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/calendarAdd.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_desc",
+      "trade_fair_name_eng",
+      "trade_fair_desc_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "findBestLogo"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "PWGoogleCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWAppleCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWOutlookCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWOfficeCalendarElement",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'calendarApple.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarGoogle.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarOffice.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarOutlook.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/calendarApple.php": {
+    "shortcodes_used": [
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/calendarGoogle.php": {
+    "shortcodes_used": [
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/calendarOffice.php": {
+    "shortcodes_used": [
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/calendarOutlook.php": {
+    "shortcodes_used": [
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/confCalendar.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "PWGoogleCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWAppleCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWOutlookCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWOfficeCalendarElement",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'calendarApple.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarGoogle.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarOffice.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarOutlook.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/confHeader.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/confSection.php": {
+    "shortcodes_used": [
+      "trade_fair_badge",
+      "trade_fair_conferance",
+      "trade_fair_opisbranzy",
+      "trade_fair_conferance_eng",
+      "trade_fair_opisbranzy_eng",
+      "pwe-elements-auto-switch-conference-gallery"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "PWEMediaGallerySlider",
+        "method": "sliderOutput"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "plugin_dir_path",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../scripts/gallery-slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/conf_side_events.php": {
+    "shortcodes_used": [
+      "pwe-elements-auto-switch-side-events"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/conference_cap.php": {
+    "shortcodes_used": [
+      "lectureId"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "connectToDatabase"
+      },
+      {
+        "class": "self",
+        "method": "getDatabaseDataConferences"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "speakerImageMini"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "shortcode_atts",
+      "esc_html",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/contact-form.php": {
+    "shortcodes_used": [
+      "gravityform",
+      "true"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "add_filter"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/countdown.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "trade_fair_domainadress",
+      "trade_fair_hall_entrance"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "getRightData"
+      },
+      {
+        "class": "self",
+        "method": "main_timer"
+      },
+      {
+        "class": "PWECountdown",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "get_locale",
+      "do_shortcode",
+      "shortcode_atts"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'js/countdown.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/download.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/exhibitors-benefits.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/faq.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "home_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/feedback.php": {
+    "shortcodes_used": [
+      "trimmed",
+      "val"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "update_option",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/fetch.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_entry_field"
+      },
+      {
+        "class": "GFAPI",
+        "method": "send_notifications"
+      }
+    ],
+    "wordpress_calls": [
+      "is_wp_error",
+      "wp_remote_post",
+      "home_url"
+    ],
+    "includes": [
+      "_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php')"
+    ],
+    "database_tables": []
+  },
+  "elements/footer.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_domainadress",
+      "trade_fair_desc",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "trade_fair_desc_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_nav_menus",
+      "wp_nav_menu",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/for-exhibitors.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findAllImages"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/for-visitors.php": {
+    "shortcodes_used": [
+      "trade_fair_group"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findAllImages"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/gallery.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_conferance",
+      "trade_fair_conferance_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "checkForMobile"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "mainText"
+      },
+      {
+        "class": "self",
+        "method": "findAllImages"
+      },
+      {
+        "class": "PWElementMainCountdown",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "plugins_url",
+      "wp_enqueue_script",
+      "shortcode_atts",
+      "get_locale"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'countdown.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/generator-wystawcow.php": {
+    "shortcodes_used": [
+      "gravityform",
+      "firstSheetName",
+      "chosenID",
+      "emailIndex",
+      "namelIndex"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "self",
+        "method": "hide_field_by_label"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "generateToken"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "add_filter",
+      "plugins_url",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [
+      "s(fileExtension)) {",
+      "d"
+    ],
+    "database_tables": []
+  },
+  "elements/grupy.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "PWElementContactForm",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/hale.php": {
+    "shortcodes_used": [
+      "trade_fair_domainadress",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "trade_fair_date_multilang",
+      "key",
+      "i",
+      "j"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/header-new.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/js/countdown.php": {
+    "shortcodes_used": [
+      "i",
+      "elementId",
+      "j"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "countingDown"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/kontakt-info.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_get_attachment_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/kontakt.php": {
+    "shortcodes_used": [
+      "pwe_edition"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "pwe_clean_value"
+      },
+      {
+        "class": "self",
+        "method": "pwe_split_emails"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_contacts_data"
+      },
+      {
+        "class": "self",
+        "method": "pwe_data_value"
+      },
+      {
+        "class": "self",
+        "method": "pwe_first_not_empty"
+      },
+      {
+        "class": "self",
+        "method": "pwe_option_value"
+      },
+      {
+        "class": "PWElementContactForm",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "pwe_phone_href"
+      },
+      {
+        "class": "self",
+        "method": "pwe_render_email_links"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "esc_html",
+      "esc_url",
+      "shortcode_atts",
+      "sanitize_text_field",
+      "wp_unslash",
+      "do_shortcode",
+      "wp_json_encode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/mapa-test.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/mapa.php": {
+    "shortcodes_used": [
+      "trade_fair_date",
+      "trade_fair_date_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url"
+    ],
+    "includes": [
+      "s(pivot)) {"
+    ],
+    "database_tables": []
+  },
+  "elements/marketing-catalog.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/medal-form.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data_adds"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data_files"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "add_filter",
+      "shortcode_atts"
+    ],
+    "includes": [
+      "s(fileExtension)) {"
+    ],
+    "database_tables": []
+  },
+  "elements/medals.php": {
+    "shortcodes_used": [
+      "trade_fair_edition"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/news-summary.php": {
+    "shortcodes_used": [
+      "pwe_color_accent"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "id_rnd"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_image",
+      "home_url",
+      "get_the_ID",
+      "get_post_thumbnail_id",
+      "wp_get_attachment_image_url",
+      "do_shortcode",
+      "wp_get_attachment_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/niePrzegap.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWGoogleCalendarElement",
+        "method": "output"
+      },
+      {
+        "class": "PWAppleCalendarElement",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "current_user_can",
+      "wp_get_current_user"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'calendarApple.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarGoogle.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/numbers.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/opinions.php": {
+    "shortcodes_used": [
+      "trade_fair_edition"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data_opinions"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "getLangField"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      },
+      {
+        "class": "self",
+        "method": "outputOpinionsSwiper"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_week_data"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../scripts/swiper.php'",
+      "_once plugin_dir_path(__FILE__) . '/../scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/org-information.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "self",
+        "method": "findBestFile"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "get_locale"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'calendarApple.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarGoogle.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/organizator.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'calendarApple.php'",
+      "_once plugin_dir_path(__FILE__) . 'calendarGoogle.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/other_events.php": {
+    "shortcodes_used": [
+      "trade_fair_domainadress",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "pwe_visitors",
+      "pwe_exhibitors",
+      "pwe_area"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "self",
+        "method": "getLangField"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      },
+      {
+        "class": "self",
+        "method": "outputOtherEventsSwiper"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_all_week_domains"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "self",
+        "method": "is_excluded_domain"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../scripts/swiper.php'",
+      "_once plugin_dir_path(__FILE__) . '/../scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/popup.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/posts.php": {
+    "shortcodes_used": [
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      },
+      {
+        "class": "self",
+        "method": "outputSliderSyncing"
+      },
+      {
+        "class": "self",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_enqueue_style",
+      "plugins_url",
+      "wp_enqueue_script",
+      "esc_url",
+      "esc_attr",
+      "esc_html",
+      "shortcode_atts",
+      "do_shortcode",
+      "get_locale",
+      "get_permalink",
+      "has_post_thumbnail",
+      "get_the_post_thumbnail_url",
+      "get_the_title",
+      "wp_reset_postdata",
+      "plugin_dir_path",
+      "get_the_ID",
+      "wp_strip_all_tags",
+      "get_the_date",
+      "admin_url"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/pot_akt_bil.php": {
+    "shortcodes_used": [
+      "trade_fair_edition",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "trade_fair_date",
+      "trade_fair_date_eng",
+      "trade_fair_name",
+      "trade_fair_name_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GF_Fields",
+        "method": "create"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_entry_field"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "send_notifications"
+      },
+      {
+        "class": "self",
+        "method": "notification_succes"
+      },
+      {
+        "class": "self",
+        "method": "notification_sender"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "is_wp_error",
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode",
+      "plugin_dir_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/pot_rej.php": {
+    "shortcodes_used": [
+      "trade_fair_enddata",
+      "trade_fair_edition",
+      "trade_fair_datetotimer",
+      "trade_fair_date",
+      "trade_fair_date_eng",
+      "trade_fair_name",
+      "trade_fair_group",
+      "gravityform",
+      "trade_fair_name_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "findFormsID"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "self",
+        "method": "add_field_apartment"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "is_wp_error",
+      "update_option",
+      "wp_list_pluck",
+      "shortcode_atts",
+      "do_shortcode",
+      "wp_safe_redirect",
+      "home_url",
+      "current_user_can",
+      "plugins_url",
+      "get_locale"
+    ],
+    "includes": [
+      "d!',",
+      "d />",
+      "s(\"route\")) {",
+      "s(\"street_number\")) {",
+      "s(\"postal_code\")) {",
+      "s(\"locality\")) {",
+      "s(\"subpremise\")) {",
+      "s(\"-\")) {"
+    ],
+    "database_tables": []
+  },
+  "elements/pot_rej_wys.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_contacts_data"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWElementStepTwoExhibitor",
+        "method": "get_translations"
+      }
+    ],
+    "wordpress_calls": [
+      "add_filter",
+      "get_locale",
+      "shortcode_atts",
+      "plugins_url"
+    ],
+    "includes": [
+      "d/>",
+      "s(\"e-mail address\")) {",
+      "s(\"telephone number for marketing purposes\")) {",
+      "dInfo = Array.from(document.querySelectorAll(\"p\"))",
+      "s(\"campi contrassegnati\"))",
+      "dInfo) {",
+      "dInfo, \"* ' . self::multi_translation(\"required_fields\") . '\")"
+    ],
+    "database_tables": []
+  },
+  "elements/pot_vip.php": {
+    "shortcodes_used": [
+      "trade_fair_edition",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "trade_fair_date",
+      "trade_fair_date_eng",
+      "trade_fair_facebook",
+      "gravityform",
+      "true"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findFormsID"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "transform_dates"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "do_shortcode",
+      "get_locale"
+    ],
+    "includes": [
+      "s(\"' . $input_name . '\") && !labelText.includes(\"id\")) {",
+      "s(\"' . $input_email . '\") && !labelText.includes(\"id\")) {",
+      "s(\"' . $input_phone . '\") && !labelText.includes(\"id\")) {",
+      "s(\"' . $input_company . '\")) {",
+      "s(\"' . $input_channel . '\")) {",
+      "s(\"' . $input_badge . '\")) {",
+      "s(\"' . $input_id . '\") && !labelText.includes(\"name\") && !labelText.includes(\"email\") && !labelText.includes(\"phone\")) {",
+      "s(\"' . $input_idname . '\")) {",
+      "s(\"' . $input_idemail . '\")) {",
+      "s(\"' . $input_idphone . '\")) {"
+    ],
+    "database_tables": []
+  },
+  "elements/profile.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "i"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "wp_get_attachment_url"
+    ],
+    "includes": [
+      "invited by us and the Exhibitors:</p>'",
+      "companies from the following sectors:</p>'"
+    ],
+    "database_tables": []
+  },
+  "elements/promote-yourself.php": {
+    "shortcodes_used": [
+      "trade_fair_date",
+      "trade_fair_name"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "findBestLogo"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_contacts_data"
+      },
+      {
+        "class": "self",
+        "method": "findAllImages"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "render_template"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/ptakAdress.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/pwelements-options.php": {
+    "shortcodes_used": [
+      "trade_fair_date"
+    ],
+    "static_calls": [
+      {
+        "class": "PWBadgeElement",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementVideos",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementProfile",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementStickyButtons",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementForExhibitors",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementForVisitors",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementContact",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementMedalForm",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementContactInfo",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementPromot",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementConferences",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementHomeGallery",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementPosts",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementMainCountdown",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementFooter",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementGenerator",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementRegistration",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementRegContent",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementInvite",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementTicket",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementNumbers",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementConfSection",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementMapa",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementMapaTest",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementHeaderConference",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementPotwierdzenieRejestracji",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementStepTwoExhibitor",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementStepTwo",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementTicketActConf",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementOpinions",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementButton",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementAbout",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementWhyItsWorth",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementQRChekcer",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementConfirmationVip",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementContactForm",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementSingleImage",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementOtherEvents",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementTwoCols",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementHale",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementMedals",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementTimelineStats",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementPopup",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementNewsSummary",
+        "method": "initElements"
+      },
+      {
+        "class": "PWElementFeedback",
+        "method": "initElements"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "wp_localize_script",
+      "get_option",
+      "get_locale",
+      "is_admin",
+      "do_shortcode",
+      "shortcode_atts"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'badge-local.php'",
+      "_once plugin_dir_path(__FILE__) . 'for-exhibitors.php'",
+      "_once plugin_dir_path(__FILE__) . 'for-visitors.php'",
+      "_once plugin_dir_path(__FILE__) . 'kontakt.php'",
+      "_once plugin_dir_path(__FILE__) . 'kontakt-info.php'",
+      "_once plugin_dir_path(__FILE__) . 'gallery.php'",
+      "_once plugin_dir_path(__FILE__) . 'videos.php'",
+      "_once plugin_dir_path(__FILE__) . 'profile.php'",
+      "_once plugin_dir_path(__FILE__) . 'promote-yourself.php'",
+      "_once plugin_dir_path(__FILE__) . 'sticky-buttons.php'",
+      "_once plugin_dir_path(__FILE__) . 'countdown.php'",
+      "_once plugin_dir_path(__FILE__) . 'wydarzenia-ogolne.php'",
+      "_once plugin_dir_path(__FILE__) . 'posts.php'",
+      "_once plugin_dir_path(__FILE__) . 'footer.php'",
+      "_once plugin_dir_path(__FILE__) . 'generator-wystawcow.php'",
+      "_once plugin_dir_path(__FILE__) . 'registration.php'",
+      "_once plugin_dir_path(__FILE__) . 'registration-content.php'",
+      "_once plugin_dir_path(__FILE__) . 'zaproszenie.php'",
+      "_once plugin_dir_path(__FILE__) . 'ticket.php'",
+      "_once plugin_dir_path(__FILE__) . 'numbers.php'",
+      "_once plugin_dir_path(__FILE__) . 'confSection.php'",
+      "_once plugin_dir_path(__FILE__) . 'confHeader.php'",
+      "_once plugin_dir_path(__FILE__) . 'trends-panel.php'",
+      "_once plugin_dir_path(__FILE__) . 'mapa.php'",
+      "_once plugin_dir_path(__FILE__) . 'mapa-test.php'",
+      "_once plugin_dir_path(__FILE__) . 'step2.php'",
+      "_once plugin_dir_path(__FILE__) . 'pot_rej.php'",
+      "_once plugin_dir_path(__FILE__) . 'pot_rej_wys.php'",
+      "_once plugin_dir_path(__FILE__) . 'pot_akt_bil.php'",
+      "_once plugin_dir_path(__FILE__) . 'resend-ticket.php'",
+      "_once plugin_dir_path(__FILE__) . 'header-new.php'",
+      "_once plugin_dir_path(__FILE__) . 'hale.php'",
+      "_once plugin_dir_path(__FILE__) . 'opinions.php'",
+      "_once plugin_dir_path(__FILE__) . 'button.php'",
+      "_once plugin_dir_path(__FILE__) . 'about.php'",
+      "_once plugin_dir_path(__FILE__) . 'why-its-worth.php'",
+      "_once plugin_dir_path(__FILE__) . 'qr-check.php'",
+      "_once plugin_dir_path(__FILE__) . 'pot_vip.php'",
+      "_once plugin_dir_path(__FILE__) . 'contact-form.php'",
+      "_once plugin_dir_path(__FILE__) . 'single-image.php'",
+      "_once plugin_dir_path(__FILE__) . 'medals.php'",
+      "_once plugin_dir_path(__FILE__) . 'other_events.php'",
+      "_once plugin_dir_path(__FILE__) . 'two_cols.php'",
+      "_once plugin_dir_path(__FILE__) . 'timeline-stats.php'",
+      "_once plugin_dir_path(__FILE__) . 'popup.php'",
+      "_once plugin_dir_path(__FILE__) . 'news-summary.php'",
+      "_once plugin_dir_path(__FILE__) . 'medal-form.php'",
+      "_once plugin_dir_path(__FILE__) . 'feedback.php'",
+      "_once plugin_dir_path(__FILE__) . '/../backend/load-more-posts.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$pwe_element]"
+    ],
+    "database_tables": []
+  },
+  "elements/qr-check.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/registration-content.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/registration-header.php": {
+    "shortcodes_used": [
+      "trade_fair_edition",
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "header_additional_css"
+      },
+      {
+        "class": "self",
+        "method": "visitors_additional_css"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "get_locale"
+    ],
+    "includes": [
+      "d::after {",
+      "s(\"utm_source=byli\") || utmCookie.includes(\"utm_source=premium\"))) {"
+    ],
+    "database_tables": []
+  },
+  "elements/registration.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "trade_fair_date",
+      "trade_fair_date_eng",
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWElementRegHeader",
+        "method": "output"
+      },
+      {
+        "class": "self",
+        "method": "custom_css_1"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "do_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../elements/registration-header.php'",
+      "s(\"utm_source=byli\") || utmCookie.includes(\"utm_source=premium\"))) {"
+    ],
+    "database_tables": []
+  },
+  "elements/resend-ticket.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_date",
+      "trade_fair_name_eng",
+      "trade_fair_date_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "send_notifications"
+      },
+      {
+        "class": "self",
+        "method": "notification_sender"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "wp_redirect",
+      "home_url",
+      "is_wp_error"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/route.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/session_fetch.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/single-image.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_post_meta"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/socialMedia.php": {
+    "shortcodes_used": [
+      "trade_fair_facebook"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/step2.php": {
+    "shortcodes_used": [
+      "gravityform",
+      "trade_fair_enddata",
+      "pwe_group",
+      "trade_fair_domainadress",
+      "trade_fair_contact",
+      "trade_fair_date",
+      "trade_fair_date_multilang"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "plugins_url",
+      "do_shortcode",
+      "plugin_dir_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/sticky-buttons.php": {
+    "shortcodes_used": [
+      "i"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "wp_get_attachment_url",
+      "esc_url",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/test.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/test1.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/test2.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/ticket.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/timeline-stats.php": {
+    "shortcodes_used": [
+      "i"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_image_src",
+      "esc_html",
+      "esc_url",
+      "esc_attr",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/trends-panel.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/two_cols.php": {
+    "shortcodes_used": [
+      "trade_fair_group",
+      "trade_fair_catalog",
+      "trade_fair_name",
+      "index",
+      "i"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWEProfileButtons",
+        "method": "getImagesFromDirectory"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "id_rnd"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode",
+      "wp_get_attachment_image_url",
+      "esc_url",
+      "current_user_can"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/catalog_functions.php'",
+      "_once plugin_dir_path(__FILE__) . 'profile/classes/profile-buttons.php'",
+      "_once plugin_dir_path(__FILE__) . '/../scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/videos.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "PWEIframesSlider",
+        "method": "sliderOutput"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../scripts/iframes-slider.php'"
+    ],
+    "database_tables": []
+  },
+  "elements/visitors-benefits.php": {
+    "shortcodes_used": [
+      "trade_fair_main2"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/visitors_timer.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "self",
+        "method": "findAllBeneficients"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/voucher.php": {
+    "shortcodes_used": [
+      "trade_fair_group"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/why-its-worth.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/wydarzenia-ogolne.php": {
+    "shortcodes_used": [
+      "trade_fair_opisbranzy",
+      "trade_fair_opisbranzy_eng",
+      "trade_fair_name",
+      "trade_fair_name_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "output_general"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "shortcode_atts"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../logotypes/logotypes-additional.php'",
+      "expert lectures, panel discussions, workshops, and presentations by companies associated with the sector.</p>"
+    ],
+    "database_tables": []
+  },
+  "elements/x_step_registration.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_rejestracja",
+      "trade_fair_name_eng",
+      "trade_fair_date",
+      "trade_fair_date_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "form_id_exists"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "add_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "send_notifications"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_entry_field"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "recaptcha_check"
+      },
+      {
+        "class": "self",
+        "method": "x_form_register"
+      },
+      {
+        "class": "self",
+        "method": "redirectTo"
+      },
+      {
+        "class": "self",
+        "method": "add_side_entry"
+      },
+      {
+        "class": "self",
+        "method": "add_info_email"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "findFormsID"
+      },
+      {
+        "class": "self",
+        "method": "registrationHtml"
+      },
+      {
+        "class": "self",
+        "method": "step2Html"
+      },
+      {
+        "class": "self",
+        "method": "confirmYesHtml"
+      },
+      {
+        "class": "self",
+        "method": "confirmNoHtml"
+      }
+    ],
+    "wordpress_calls": [
+      "current_user_can",
+      "sanitize_text_field",
+      "do_shortcode",
+      "wp_mail",
+      "get_option",
+      "get_locale",
+      "plugin_dir_path",
+      "plugins_url",
+      "wp_enqueue_script",
+      "wp_localize_script",
+      "wp_enqueue_style",
+      "plugin_dir_url",
+      "is_admin",
+      "wp_doing_ajax"
+    ],
+    "includes": [
+      "d>"
+    ],
+    "database_tables": []
+  },
+  "elements/zabudowa.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "elements/zaproszenie.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_desc",
+      "trade_fair_date",
+      "trade_fair_1stbuildday"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "generate"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "do_shortcode",
+      "wp_upload_bits"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '../assets/tcpdf/tcpdf.php'"
+    ],
+    "database_tables": []
+  },
+  "gf-addons/area-numbers/area-backend.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAreaCodes",
+        "method": "get_countries"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_filter"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "gf-addons/area-numbers/area-codes.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "gf-addons/area-numbers/area-frontend.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_filter",
+      "plugins_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "wp_localize_script"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "gf-addons/area-numbers/area_numbers_gf.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "is_admin",
+      "add_action",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once( plugin_dir_path( __FILE__ ) . 'area-frontend.php' )",
+      "_once( plugin_dir_path( __FILE__ ) . 'area-codes.php' )",
+      "_once( plugin_dir_path( __FILE__ ) . 'area-backend.php' )"
+    ],
+    "database_tables": []
+  },
+  "gf-addons/gf-email-check/gf-email-check.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "_once($new_url)"
+    ],
+    "database_tables": []
+  },
+  "gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_filter",
+      "is_admin",
+      "wp_enqueue_script",
+      "plugin_dir_url",
+      "plugin_dir_path",
+      "wp_localize_script",
+      "wp_enqueue_style",
+      "get_locale",
+      "apply_filters",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/about-fair-info/about-fair-info.php": {
+    "shortcodes_used": [
+      "trade_fair_catalog",
+      "trade_fair_name",
+      "trade_fair_name_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "renderer_class",
+        "method": "initElements"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data_adds"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "renderer_class",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "do_shortcode",
+      "site_url",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_style",
+      "esc_attr",
+      "home_url"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/about-fair-info-home.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/about-fair-info-gr1.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/about-fair-info-gr2.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/about-fair-info-gr3.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/about-fair-info-default.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/about-fair-info/classes/about-fair-info-default.php": {
+    "shortcodes_used": [
+      "trade_fair_name"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/about-fair-info/classes/about-fair-info-gr1.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/about-fair-info/classes/about-fair-info-gr2.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/about-fair-info/classes/about-fair-info-gr3.php": {
+    "shortcodes_used": [
+      "trade_fair_name"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/about-fair-info/classes/about-fair-info-home.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/article_author/article_author.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "do_shortcode",
+      "esc_attr"
+    ],
+    "includes": [
+      "_once $file",
+      "_once $template_file"
+    ],
+    "database_tables": []
+  },
+  "includes/article_author/assets/article_author.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "sanitize_text_field",
+      "esc_url",
+      "esc_attr",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/attractions/attractions.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWEAttractionsSlider",
+        "method": "initElements"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/attractions-slider/attractions-slider.php'",
+      "_once plugin_dir_path(__FILE__) . $class_file"
+    ],
+    "database_tables": []
+  },
+  "includes/attractions/classes/attractions-slider/attractions-slider.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "ensureMinSlides"
+      },
+      {
+        "class": "self",
+        "method": "renderSlide"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_attr",
+      "esc_html",
+      "shortcode_atts",
+      "wp_enqueue_style"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/calendar/assets/svg.php": {
+    "shortcodes_used": [
+      "key"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/calendar/calendar.php": {
+    "shortcodes_used": [
+      "event_type",
+      "pwe_date_start",
+      "pwe_date_end",
+      "pwe_color_accent",
+      "pwe_color_main2",
+      "pwe_visitors",
+      "pwe_exhibitors",
+      "pwe_countries",
+      "pwe_area",
+      "pwe_edition",
+      "pwe_badge"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_translations_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "add_filter",
+      "get_post_meta",
+      "get_option",
+      "get_locale",
+      "shortcode_exists",
+      "do_shortcode",
+      "esc_attr",
+      "add_action",
+      "register_post_type",
+      "register_taxonomy",
+      "get_term_by",
+      "wp_insert_term",
+      "get_terms",
+      "esc_html",
+      "sanitize_text_field",
+      "apply_filters",
+      "wp_get_post_terms",
+      "is_wp_error",
+      "wp_safe_redirect",
+      "update_post_meta",
+      "wp_set_post_terms",
+      "wp_nonce_field",
+      "esc_url",
+      "wp_verify_nonce",
+      "delete_post_meta",
+      "wp_enqueue_media",
+      "get_the_terms",
+      "wp_list_pluck",
+      "wp_enqueue_script",
+      "wp_register_style",
+      "wp_enqueue_style",
+      "wp_add_inline_script",
+      "wp_editor"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/loop-calendar.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/calendar/classes/loop-calendar.php": {
+    "shortcodes_used": [
+      "pwe_date_start",
+      "pwe_date_end"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "get_pwe_shortcode"
+      },
+      {
+        "class": "self",
+        "method": "check_available_pwe_shortcode"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "render_calendar_event_card"
+      },
+      {
+        "class": "self",
+        "method": "format_date_range"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "shortcode_exists",
+      "do_shortcode",
+      "get_locale",
+      "shortcode_atts",
+      "get_terms",
+      "is_wp_error",
+      "get_option",
+      "get_the_ID",
+      "get_post_meta",
+      "get_the_terms",
+      "get_the_title",
+      "wp_reset_postdata",
+      "current_user_can",
+      "esc_url",
+      "get_permalink",
+      "wp_die"
+    ],
+    "includes": [
+      "s(\"'. self::multi_translation(\"premier_edition\") .'\".toLowerCase())",
+      "s(categorySlug)",
+      "s(query) ||",
+      "s(query)",
+      "s(eventItem)",
+      "s(eventId)"
+    ],
+    "database_tables": []
+  },
+  "includes/calendar/classes/single-calendar.php": {
+    "shortcodes_used": [
+      "pwe_date_start",
+      "pwe_date_end",
+      "pwe_catalog_id",
+      "pwe-elements-auto-switch-exhibitor-catalog",
+      "idx",
+      "tileIdx"
+    ],
+    "static_calls": [
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "transform_dates"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data_adds"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_translations_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [
+      "get_header",
+      "add_filter",
+      "get_the_ID",
+      "get_post_meta",
+      "get_locale",
+      "get_option",
+      "shortcode_exists",
+      "do_shortcode",
+      "esc_attr",
+      "get_the_title",
+      "plugin_dir_path",
+      "get_footer"
+    ],
+    "includes": [
+      "s/calendar/assets/view-icon.png\">",
+      "s/calendar/assets/globus-icon.png\">",
+      "s/calendar/assets/area-icon.png\">",
+      "_once plugin_dir_path(dirname(__FILE__)) . 'assets/svg.php'",
+      "s/calendar/assets/calendar-icon.png\"><span>'. $days .' '. ($lang_pl ? \"dni\" : \"days\") .'</span>",
+      "s/calendar/assets/right-arrow-icon.png\"><span>'. count($all_events_json) .' '. $events_word_declination .'</span>",
+      "s(\"catalog\")) {",
+      "s(\"?\") ? `${currentUrl}&catalog` : `${currentUrl}?catalog`",
+      "s(query)"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-calendar/conference-calendar.php": {
+    "shortcodes_used": [
+      "pwe_name_pl",
+      "monthNum"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "connect_database"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "self",
+        "method": "get_database_conferences_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "current_user_can",
+      "is_admin",
+      "do_shortcode",
+      "esc_url"
+    ],
+    "includes": [
+      "s(selectedCategory))",
+      "s(query) || fairDesc.includes(query) || confName.includes(query)",
+      "s(selectedCategory)) show = false"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-cap/classes/conference-cap-functions.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conference_adds_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conferences_data"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_attr",
+      "wp_remote_head",
+      "is_wp_error",
+      "wp_remote_retrieve_response_code",
+      "current_user_can",
+      "wp_json_encode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/conference_cap.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "plugin_dir_url"
+    ],
+    "includes": [
+      "_once PWE_CONFERENCE_CAP_PATH . $pwe_conference_cap_file"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/assets.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "enqueue_style"
+      },
+      {
+        "class": "self",
+        "method": "enqueue_script"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_localize_script",
+      "wp_enqueue_style",
+      "wp_enqueue_script"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/attributes.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/legacy-shortcode-renderer.php": {
+    "shortcodes_used": [
+      "trade_fair_enddata",
+      "trade_fair_catalog_year"
+    ],
+    "static_calls": [
+      {
+        "class": "PWE_Conference_Cap_Assets",
+        "method": "enqueue_runtime"
+      },
+      {
+        "class": "PWE_Conference_Cap_Attributes",
+        "method": "from_shortcode"
+      },
+      {
+        "class": "PWEConferenceCapWarsawExpo",
+        "method": "output"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conferences_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_week_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_week_all"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "copySpeakerImgByStructure"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "debugConferencesConsole"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "findConferenceMode"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "getConferenceOrganizer"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "getConferenceOrganizersAll"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "getConferencePatronLogosFromList"
+      },
+      {
+        "class": "mode_class",
+        "method": "output"
+      },
+      {
+        "class": "PWEConferenceCapFunctions",
+        "method": "pwe_convert_rgb_to_hex"
+      },
+      {
+        "class": "self",
+        "method": "addingScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "wp_enqueue_style",
+      "esc_attr",
+      "do_shortcode",
+      "esc_url",
+      "wp_get_attachment_url",
+      "esc_html",
+      "sanitize_title",
+      "wp_kses_post",
+      "wp_kses_allowed_html",
+      "wp_kses"
+    ],
+    "includes": [
+      "_once PWE_CONFERENCE_CAP_PATH . 'classes/conference-cap-functions.php'",
+      "_once PWE_CONFERENCE_CAP_PATH . 'modes/warsawexpo/warsawexpo.php'",
+      "_once PWE_CONFERENCE_CAP_PATH . $conference_modes['php']",
+      "_once PWE_CONFERENCE_CAP_PATH . '/../../scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/mode-resolver.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/plugin.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWE_Conference_Cap_VC_Map",
+        "method": "register"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/shortcode.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWE_Conference_Cap_Attributes",
+        "method": "from_shortcode"
+      },
+      {
+        "class": "PWE_Conference_Cap_Mode_Resolver",
+        "method": "resolve_mode"
+      },
+      {
+        "class": "PWE_Conference_Cap_Assets",
+        "method": "enqueue_common"
+      },
+      {
+        "class": "PWE_Conference_Cap_Assets",
+        "method": "enqueue_mode"
+      },
+      {
+        "class": "PWE_Conference_Cap_Legacy_Renderer",
+        "method": "PWEConferenceCapOutput"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/core/vc-map.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "params"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/helpers/date-parser.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/helpers/sanitizer.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "wp_kses_post",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/helpers/template.php": {
+    "shortcodes_used": [
+      "A-Za-z_",
+      "A-Za-z0-9_"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [
+      "$template_path"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-cap/helpers/time-parser.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/modes/full_mode/full_mode.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "conf_function",
+        "method": "speakerImageMini"
+      },
+      {
+        "class": "PWEConferenceCapFullMode",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_attr",
+      "esc_html",
+      "wp_kses_post"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/modes/medal_ceremony/medal_ceremony.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWEConferenceCapMedalCeremony",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_kses_post"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/modes/simple_mode/simple_mode.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWEConferenceCapSimpleMode",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_attr",
+      "esc_html",
+      "wp_kses_post"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/modes/trends_panel/templates/wrapper.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "wp_kses_post"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/modes/trends_panel/trends_panel.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWE_Conference_Cap_Template",
+        "method": "render_template"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/modes/warsawexpo/warsawexpo.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWE_Conference_Cap_Date_Parser",
+        "method": "parse_date_to_standard"
+      },
+      {
+        "class": "PWE_Conference_Cap_Time_Parser",
+        "method": "normalize_hour_string"
+      },
+      {
+        "class": "PWE_Conference_Cap_Assets",
+        "method": "enqueue_mode"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conferences_data"
+      },
+      {
+        "class": "self",
+        "method": "parse_date_to_standard"
+      },
+      {
+        "class": "self",
+        "method": "normalize_hour_string"
+      },
+      {
+        "class": "PWEConferenceCapWarsawExpo",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_html",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/conference-filter.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/conference-normalizer.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/conference-repository.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conferences_data"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/html-injection-service.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/organizer-logo-service.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "connect_database"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/patron-logo-service.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "connect_database"
+      }
+    ],
+    "wordpress_calls": [
+      "esc_url",
+      "esc_attr",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/session-normalizer.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "sanitize_title"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-cap/services/speaker-normalizer.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "esc_html",
+      "wp_strip_all_tags"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-default-schedule.php": {
+    "shortcodes_used": [
+      "trade_fair_conferance"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "getFairDaysFromShortcodes"
+      },
+      {
+        "class": "self",
+        "method": "getConferenceOrganizer"
+      },
+      {
+        "class": "self",
+        "method": "parse_conference_key_to_date"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "is_mobile_device"
+      },
+      {
+        "class": "PWEConferenceShortInfo",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "current_user_can",
+      "do_shortcode",
+      "esc_attr",
+      "esc_url",
+      "esc_html",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../../../scripts/swiper.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-default.php": {
+    "shortcodes_used": [
+      "trade_fair_group"
+    ],
+    "static_calls": [
+      {
+        "class": "PWEConferenceShortInfo",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../../../scripts/swiper.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-functions.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "self",
+        "method": "getFairEndYear"
+      },
+      {
+        "class": "self",
+        "method": "getYearFromSlug"
+      },
+      {
+        "class": "self",
+        "method": "parse_conference_key_to_date"
+      },
+      {
+        "class": "DateTime",
+        "method": "getLastErrors"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "connect_database"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "do_shortcode",
+      "wp_remote_head",
+      "is_wp_error",
+      "wp_remote_retrieve_response_code"
+    ],
+    "includes": [
+      "_once $base . '/' . $domainMap[$domain][0]",
+      "_once plugin_dir_path(__FILE__) . '/conference-short-info-gr1.php'",
+      "_once plugin_dir_path(__FILE__) . '/conference-short-info-default.php'",
+      "_once plugin_dir_path(__FILE__) . '/conference-short-info-gr3-schedule.php'",
+      "_once plugin_dir_path(__FILE__) . '/conference-short-info-default-schedule.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-gr1.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWEConferenceShortInfo",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-gr3-schedule.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "getConferenceOrganizer"
+      },
+      {
+        "class": "self",
+        "method": "getFairDaysFromShortcodes"
+      },
+      {
+        "class": "self",
+        "method": "parse_conference_key_to_date"
+      },
+      {
+        "class": "self",
+        "method": "confLang"
+      },
+      {
+        "class": "PWEConferenceShortInfo",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "current_user_can",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../../../scripts/swiper.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-home.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-hvac.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-pack.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../../../scripts/swiper.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-rema.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-short-info/classes/conference-short-info-solar.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/conference-short-info/conference-short-info.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "renderer_class",
+        "method": "initElements"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conferences_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_week_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_week_all"
+      },
+      {
+        "class": "self",
+        "method": "getFairDaysFromShortcodes"
+      },
+      {
+        "class": "self",
+        "method": "getConferenceOrganizer"
+      },
+      {
+        "class": "self",
+        "method": "hasValidConferences"
+      },
+      {
+        "class": "self",
+        "method": "filterCurrentConferencesByEndYear"
+      },
+      {
+        "class": "self",
+        "method": "sortConferencesCustom"
+      },
+      {
+        "class": "self",
+        "method": "normalizeConferenceNames"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data_adds"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "renderer_class",
+        "method": "output"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "get_locale",
+      "add_action",
+      "add_shortcode",
+      "site_url",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_style",
+      "esc_attr",
+      "esc_html"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/conference-short-info-functions.php'",
+      "s/conference-short-info.json'"
+    ],
+    "database_tables": []
+  },
+  "includes/display-info/classes/display-info_box.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "speakerImageMini"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_get_attachment_image_src",
+      "esc_url",
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/display-info/classes/display-info_speakers.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "PWESpeakersSlider",
+        "method": "sliderOutput"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "s/display-info/media/white_square.jpg\">'",
+      "_once plugin_dir_path(dirname(dirname(__DIR__))) . 'scripts/speakers-slider.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/display-info/display-info.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWEDisplayInfoBox",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEDisplayInfoSpeakers",
+        "method": "initElements"
+      },
+      {
+        "class": "self",
+        "method": "id_rnd"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_script",
+      "get_locale",
+      "wp_localize_script",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/display-info_box.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/display-info_speakers.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$display_info_format]"
+    ],
+    "database_tables": []
+  },
+  "includes/exhibitor-generator/assets/mass_vip.php": {
+    "shortcodes_used": [
+      "trade_fair_domainadress"
+    ],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "add_entry"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_remote_post",
+      "home_url",
+      "wp_upload_dir",
+      "wp_mkdir_p",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once($new_url)",
+      "s/exhibitor-generator/assets/media/logotyp_wystawcy.png',",
+      "s/exhibitor-generator/assets/media/logotyp_wystawcy.png'",
+      "_once(ABSPATH . 'wp-admin/includes/upgrade.php')"
+    ],
+    "database_tables": [
+      "mass_exhibitors_invite_query",
+      "prefix",
+      "get_var",
+      "get_charset_collate",
+      "insert"
+    ]
+  },
+  "includes/exhibitor-generator/assets/visitors_gr1.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWEExhibitorVisitorGenerator",
+        "method": "fairStartDateCheck"
+      },
+      {
+        "class": "PWEExhibitorVisitorGenerator",
+        "method": "senderFlowChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "home_url",
+      "get_locale",
+      "current_user_can"
+    ],
+    "includes": [
+      "s/exhibitor-generator/assets/media/ico3.png\" alt=\"icon3\">",
+      "s/exhibitor-generator/assets/media/ico4.png\" alt=\"icon4\">",
+      "s/exhibitor-generator/assets/media/ico1.png\" alt=\"icon1\">",
+      "s/exhibitor-generator/assets/media/ico2.png\" alt=\"icon2\">",
+      "s/exhibitor-generator/assets/media/ico6.png\" alt=\"icon6\">",
+      "s/exhibitor-generator/assets/media/genrator-example.xlsx\">"
+    ],
+    "database_tables": []
+  },
+  "includes/exhibitor-generator/assets/visitors_gr2.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWEExhibitorVisitorGenerator",
+        "method": "senderFlowChecker"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_feeds"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "is_wp_error",
+      "update_option",
+      "wp_list_pluck",
+      "shortcode_atts",
+      "add_filter",
+      "wp_safe_redirect",
+      "current_user_can"
+    ],
+    "includes": [
+      "s/exhibitor-generator/assets/media/parking.webp\" alt=\"icon4\">",
+      "s/exhibitor-generator/assets/media/ico6.png\" alt=\"icon6\">",
+      "s(\"<strong>\") || decoded.includes(\"<em>\") || decoded.includes(\"<span\")) {",
+      "d.\"",
+      "s/exhibitor-generator/assets/media/genrator-example.xlsx\">"
+    ],
+    "database_tables": []
+  },
+  "includes/exhibitor-generator/assets/visitors_gr2_old.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWEExhibitorVisitorGenerator",
+        "method": "senderFlowChecker"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_feeds"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "is_wp_error",
+      "update_option",
+      "wp_list_pluck",
+      "shortcode_atts",
+      "wp_safe_redirect",
+      "current_user_can",
+      "add_filter"
+    ],
+    "includes": [
+      "d />'",
+      "s/exhibitor-generator/assets/media/ico6.png\" alt=\"icon6\">",
+      "d.\"",
+      "s/exhibitor-generator/assets/media/genrator-example.xlsx\">"
+    ],
+    "database_tables": []
+  },
+  "includes/exhibitor-generator/assets/visitors_gr3.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWEExhibitorVisitorGenerator",
+        "method": "fairStartDateCheck"
+      },
+      {
+        "class": "PWEExhibitorVisitorGenerator",
+        "method": "senderFlowChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "home_url",
+      "current_user_can"
+    ],
+    "includes": [
+      "s/exhibitor-generator/assets/media/ico3.png\" alt=\"icon3\">",
+      "s/exhibitor-generator/assets/media/ico4.png\" alt=\"icon4\">",
+      "s/exhibitor-generator/assets/media/ico8.png\" alt=\"icon1\">",
+      "s/exhibitor-generator/assets/media/ico2.png\" alt=\"icon2\">",
+      "s/exhibitor-generator/assets/media/ico9.png\" alt=\"icon1\">",
+      "s/exhibitor-generator/assets/media/ico6.png\" alt=\"icon6\">",
+      "s/exhibitor-generator/assets/media/genrator-example.xlsx\">"
+    ],
+    "database_tables": []
+  },
+  "includes/exhibitor-generator/classes/exhibitor-visitor-generator.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_domainadress"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_gf_form_id"
+      },
+      {
+        "class": "self",
+        "method": "catalog_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_conferences_data"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_filter",
+      "do_shortcode",
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "plugins_url",
+      "site_url",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "s/exhibitor-generator/assets/media/logotyp_wystawcy.png'",
+      "_once plugin_dir_path(__DIR__) . 'assets/visitors_gr1.php'",
+      "_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php'",
+      "_once plugin_dir_path(__DIR__) . 'assets/visitors_gr3.php'"
+    ],
+    "database_tables": [
+      "mass_exhibitors_invite_query",
+      "prefix",
+      "get_var",
+      "prepare"
+    ]
+  },
+  "includes/exhibitor-generator/classes/exhibitor-worker-generator.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/exhibitor-generator/classes/mass-vip-sender.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "catalog_data"
+      },
+      {
+        "class": "self",
+        "method": "senderFlowChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "shortcode_atts",
+      "current_user_can"
+    ],
+    "includes": [
+      "s/exhibitor-generator/assets/media/genrator-example.xlsx\">"
+    ],
+    "database_tables": [
+      "mass_exhibitors_invite_query",
+      "prefix",
+      "get_var",
+      "prepare"
+    ]
+  },
+  "includes/exhibitor-generator/exhibitor-generator.php": {
+    "shortcodes_used": [
+      "trade_fair_catalog"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "wp_localize_script",
+      "do_shortcode",
+      "shortcode_atts"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/exhibitor-visitor-generator.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/exhibitor-worker-generator.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/mass-vip-sender.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$exhibitor_generator_mode]"
+    ],
+    "database_tables": []
+  },
+  "includes/header/classes/header_badge.php": {
+    "shortcodes_used": [
+      "trade_fair_desc_short",
+      "trade_fair_desc_short_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWElementRegHeader",
+        "method": "output"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "get_the_title",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname(__FILE__)))) . 'elements/registration-header.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/header/classes/header_default.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWElementAdditionalLogotypes",
+        "method": "additionalOutput"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname(__FILE__)))) . 'widgets/parking-widget.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/header/classes/header_functions.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWElementAdditionalLogotypes",
+        "method": "additionalArray"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_url",
+      "add_action"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/header/classes/header_glass.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "data-trade-fair",
+      "current",
+      "prev"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname(__FILE__)))) . 'widgets/partners-widget.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/header/classes/header_glass_v2.php": {
+    "shortcodes_used": [
+      "trade_fair_date_custom_format",
+      "current",
+      "prev"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname(__FILE__)))) . 'widgets/partners-widget.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/header/classes/header_simple.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/header/classes/header_squares.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/header/classes/header_video.php": {
+    "shortcodes_used": [
+      "trade_fair_date_multilang"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "PWEHeader",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_get_attachment_image_src",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname(__FILE__)))) . 'widgets/counter-to-fair.php'",
+      "_once plugin_dir_path(dirname(dirname(dirname(__FILE__)))) . 'widgets/partners-widget.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/header/header.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_date",
+      "trade_fair_date_eng",
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_edition",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "id_rnd"
+      },
+      {
+        "class": "self",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "transform_dates"
+      },
+      {
+        "class": "self",
+        "method": "isTradeDateExist"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "add_action",
+      "add_shortcode",
+      "get_locale",
+      "get_option",
+      "update_option",
+      "shortcode_atts",
+      "get_the_title",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__DIR__) . 'logotypes/classes/logotypes_common.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_functions.php'",
+      "s/header.json'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_default.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_simple.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_badge.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_squares.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_video.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_glass.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/header_glass_v2.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/industry-evening/industry-evening.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_filter",
+      "add_shortcode",
+      "wp_upload_dir",
+      "site_url",
+      "shortcode_atts",
+      "do_shortcode",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/katalog-wystawcow/classes/catalog_10.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "checkTitle"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "checkForMobile"
+      },
+      {
+        "class": "PWELogotypesSlider",
+        "method": "sliderOutput"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname( __FILE__ )))) . 'scripts/logotypes-slider.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/katalog-wystawcow/classes/catalog_21.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "checkTitle"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "checkForMobile"
+      },
+      {
+        "class": "PWELogotypesSlider",
+        "method": "sliderOutput"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname( __FILE__ )))) . 'scripts/logotypes-slider.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/katalog-wystawcow/classes/catalog_7.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "checkTitle"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "checkForMobile"
+      },
+      {
+        "class": "PWELogotypesSlider",
+        "method": "sliderOutput"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname(dirname(dirname( __FILE__ )))) . 'scripts/logotypes-slider.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/katalog-wystawcow/classes/catalog_combined.php": {
+    "shortcodes_used": [
+      "idx",
+      "tileIdx"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/katalog-wystawcow/classes/catalog_full.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "findColor"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "checkTitle"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_get_nav_menus",
+      "get_locale",
+      "wp_get_nav_menu_items"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/katalog-wystawcow/classes/catalog_functions.php": {
+    "shortcodes_used": [
+      "OLD",
+      "CatalogFunctions",
+      "trade_fair_catalog_year"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      },
+      {
+        "class": "self",
+        "method": "orderChanger"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "add_log"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "findPalletColorsStatic"
+      }
+    ],
+    "wordpress_calls": [
+      "current_user_can",
+      "wp_localize_script",
+      "wp_mkdir_p",
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [
+      "s/katalog-wystawcow.json'"
+    ],
+    "database_tables": [
+      "last_error",
+      "get_var",
+      "prepare",
+      "query"
+    ]
+  },
+  "includes/katalog-wystawcow/main-katalog-wystawcow.php": {
+    "shortcodes_used": [
+      "trade_fair_domainadress",
+      "trade_fair_catalog"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "findPalletColorsStatic"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "initVCMapPWECatalog"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "vcMapPWECatalogCustom"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "findColor"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "findClassElements"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "logosChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "current_user_can",
+      "do_shortcode",
+      "shortcode_atts"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/catalog_functions.php'",
+      "_once $slider_path",
+      "_once plugin_dir_path(__FILE__) . $catalog_format"
+    ],
+    "database_tables": []
+  },
+  "includes/logotypes/classes/logotypes_common.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "plugins_url",
+      "wp_enqueue_script"
+    ],
+    "includes": [
+      "s/logotypes_common.json'",
+      "_once plugin_dir_path(dirname(dirname(__DIR__))) . 'scripts/slider.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/logotypes/logotypes.php": {
+    "shortcodes_used": [
+      "trade_fair_catalog"
+    ],
+    "static_calls": [
+      {
+        "class": "PWElementAdditionalLogotypes",
+        "method": "additionalArray"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      },
+      {
+        "class": "CatalogFunctions",
+        "method": "orderChanger"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "id_rnd"
+      },
+      {
+        "class": "self",
+        "method": "exhibitors_catalog_checker"
+      },
+      {
+        "class": "PWElementAdditionalLogotypes",
+        "method": "additionalOutput"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "current_user_can",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/logotypes_common.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/mailing/config/FormPresets.php": {
+    "shortcodes_used": [
+      "catalog",
+      "shop"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [
+      "d' => true,",
+      "d' => false,"
+    ],
+    "database_tables": []
+  },
+  "includes/mailing/config/NotificationPresets.php": {
+    "shortcodes_used": [
+      "platyna",
+      "Platyna"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/mailing/core/FormGenerator.php": {
+    "shortcodes_used": [
+      "trade_fair_rejestracja",
+      "trade_fair_name"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "log"
+      },
+      {
+        "class": "self",
+        "method": "processOneLang"
+      },
+      {
+        "class": "self",
+        "method": "findFormByTitle"
+      },
+      {
+        "class": "self",
+        "method": "updateForm"
+      },
+      {
+        "class": "self",
+        "method": "createForm"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "self",
+        "method": "buildFields"
+      },
+      {
+        "class": "GFAPI",
+        "method": "add_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "GF_Fields",
+        "method": "create"
+      },
+      {
+        "class": "PWE_NotificationProcessor",
+        "method": "mailing_log"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "is_wp_error"
+    ],
+    "includes": [
+      "d'] ?? false),"
+    ],
+    "database_tables": []
+  },
+  "includes/mailing/core/NotificationProcessor.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "mailing_log"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "self",
+        "method": "period_seconds"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "self",
+        "method": "resolveEmailFieldId"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_feeds"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "self",
+        "method": "pickCandidatesByTitleMap"
+      },
+      {
+        "class": "self",
+        "method": "processOne"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_upload_dir",
+      "get_option",
+      "is_wp_error",
+      "update_option"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/mailing/mailing.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "gatePrecheck"
+      },
+      {
+        "class": "PWE_NotificationProcessor",
+        "method": "setVersionChanged"
+      },
+      {
+        "class": "self",
+        "method": "gateCommit"
+      },
+      {
+        "class": "PWE_FormPresets",
+        "method": "catalog_feedback_form"
+      },
+      {
+        "class": "PWE_FormGenerator",
+        "method": "apply"
+      },
+      {
+        "class": "PWE_FormPresets",
+        "method": "catalog_exhibitors_details"
+      },
+      {
+        "class": "PWE_NotificationPresets",
+        "method": "resend"
+      },
+      {
+        "class": "PWE_NotificationProcessor",
+        "method": "apply"
+      },
+      {
+        "class": "PWE_NotificationPresets",
+        "method": "resend_platyna"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_form"
+      },
+      {
+        "class": "PWE_NotificationProcessor",
+        "method": "mailing_log"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "GFAPI",
+        "method": "update_entry_property"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "add_action",
+      "is_wp_error",
+      "get_option",
+      "update_option"
+    ],
+    "includes": [
+      "_once __DIR__ . '/core/FormGenerator.php'",
+      "_once __DIR__ . '/config/FormPresets.php'",
+      "_once __DIR__ . '/core/NotificationProcessor.php'",
+      "_once __DIR__ . '/config/NotificationPresets.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/map/assets/style.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/map/classes/map_3d.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "plugin_dir_path",
+      "wp_get_attachment_url"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/map/classes/map_dynamic.php": {
+    "shortcodes_used": [
+      "pwe_visitors",
+      "pwe_visitors_foreign",
+      "pwe_exhibitors",
+      "pwe_countries",
+      "pwe_area",
+      "pwe_visitors_prev",
+      "pwe_visitors_foreign_prev",
+      "pwe_exhibitors_prev",
+      "pwe_countries_prev",
+      "pwe_area_prev",
+      "pwe_statistics_year_curr",
+      "pwe_statistics_year_prev",
+      "trade_fair_edition"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "ordinal_suffix"
+      },
+      {
+        "class": "self",
+        "method": "get_custom_title"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "s/map.json'",
+      "_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php'",
+      "_once plugin_dir_path(__FILE__) . 'presets/map_dynamic_preset_1.php'",
+      "_once plugin_dir_path(__FILE__) . 'presets/map_dynamic_preset_2.php'",
+      "_once plugin_dir_path(__FILE__) . 'presets/map_dynamic_preset_3.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/map/classes/presets/map_dynamic_preset_1.php": {
+    "shortcodes_used": [
+      "trade_fair_date_multilang"
+    ],
+    "static_calls": [
+      {
+        "class": "PWEMapDynamic",
+        "method": "multi_translation"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/map/classes/presets/map_dynamic_preset_2.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/map/classes/presets/map_dynamic_preset_3.php": {
+    "shortcodes_used": [
+      "trade_fair_date_multilang"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/map/map.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "wp_enqueue_script",
+      "plugins_url",
+      "wp_localize_script",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/map_dynamic.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/map_3d.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$map_type]"
+    ],
+    "database_tables": []
+  },
+  "includes/media-gallery/media-gallery.php": {
+    "shortcodes_used": [
+      "currentIndex"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWESliderScripts",
+        "method": "sliderScripts"
+      },
+      {
+        "class": "PWESwiperScripts",
+        "method": "swiperScripts"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "plugins_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "shortcode_atts",
+      "esc_url",
+      "esc_attr",
+      "esc_html",
+      "do_shortcode"
+    ],
+    "includes": [
+      "s/media-gallery/assets/justified-gallery/justifiedGallery.css\" rel=\"stylesheet\">",
+      "s/media-gallery/assets/justified-gallery/jquery.justifiedGallery.js\"></script>",
+      "_once plugin_dir_path(dirname(__DIR__)) . 'scripts/slider.php'",
+      "s/media-gallery/assets/fotorama/fotorama.css\" rel=\"stylesheet\">",
+      "s/media-gallery/assets/fotorama/fotorama.js\"></script>",
+      "s/media-gallery/assets/coverflow-gallery/coverflow-gallery.css\" rel=\"stylesheet\">'",
+      "_once plugin_dir_path(dirname(__DIR__)) . 'scripts/swiper.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/nav-menu/nav-menu.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "trade_fair_enddata",
+      "pwe_facebook",
+      "pwe_instagram",
+      "pwe_linkedin",
+      "pwe_youtube"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "self",
+        "method": "lang_pl"
+      },
+      {
+        "class": "Collapse_Adminbar",
+        "method": "init"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "add_action",
+      "apply_filters",
+      "plugins_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "do_shortcode",
+      "wp_enqueue_script",
+      "wp_localize_script",
+      "wp_get_nav_menu_items",
+      "esc_url",
+      "wp_kses_post",
+      "esc_attr",
+      "is_admin",
+      "is_multisite"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/news/classes/medal_ceremony/medal-ceremony.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_the_ID",
+      "get_post_thumbnail_id",
+      "wp_get_attachment_image_url",
+      "esc_url",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/news/classes/news-say-about-us/news-say-about-us.php": {
+    "shortcodes_used": [
+      "pwe_color_accent",
+      "pwe_color_main2"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_kses_post",
+      "sanitize_text_field",
+      "esc_url_raw",
+      "wp_parse_url",
+      "home_url",
+      "esc_url",
+      "do_shortcode",
+      "get_the_ID",
+      "get_post_thumbnail_id",
+      "wp_get_attachment_image_url",
+      "esc_attr",
+      "wp_get_attachment_image",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/news/classes/news-summary/news-summary.php": {
+    "shortcodes_used": [
+      "pwe_color_accent"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "id_rnd"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      },
+      {
+        "class": "PWENews",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_image",
+      "home_url",
+      "get_the_ID",
+      "get_post_thumbnail_id",
+      "wp_get_attachment_image_url",
+      "wp_get_attachment_url",
+      "do_shortcode",
+      "esc_url",
+      "esc_attr",
+      "esc_html"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/news/classes/news-upcoming/news-upcoming.php": {
+    "shortcodes_used": [
+      "pwe_color_accent",
+      "pwe_color_main2",
+      "pwe_conference_name"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "do_shortcode",
+      "esc_html",
+      "esc_url",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/news/news.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "do_shortcode",
+      "esc_attr"
+    ],
+    "includes": [
+      "_once $file",
+      "_once $template_file"
+    ],
+    "database_tables": []
+  },
+  "includes/posts/assets/ajax.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "sanitize_text_field",
+      "wp_send_json",
+      "add_filter",
+      "get_the_ID",
+      "wp_strip_all_tags",
+      "get_permalink",
+      "has_post_thumbnail",
+      "get_the_post_thumbnail_url",
+      "get_the_title",
+      "get_the_date",
+      "get_locale",
+      "wp_reset_postdata",
+      "wp_die"
+    ],
+    "includes": [],
+    "database_tables": [
+      "esc_like",
+      "prepare",
+      "posts"
+    ]
+  },
+  "includes/posts/classes/posts-full/posts_full.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_enqueue_style",
+      "plugin_dir_url",
+      "plugin_dir_path",
+      "shortcode_atts",
+      "get_term_by",
+      "get_the_ID",
+      "wp_strip_all_tags",
+      "get_permalink",
+      "has_post_thumbnail",
+      "get_the_post_thumbnail_url",
+      "get_the_title",
+      "get_the_date",
+      "get_locale",
+      "wp_reset_postdata",
+      "wp_count_posts",
+      "admin_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/posts/posts.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'assets/ajax.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/posts-full/posts_full.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$posts_modes]"
+    ],
+    "database_tables": []
+  },
+  "includes/premieres/premieres.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "oldLargeIdx",
+      "largeCardIndex",
+      "heroIndex"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_premieres_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [
+      "s/premieres.json'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-all-in-one.php": {
+    "shortcodes_used": [
+      "trade_fair_name"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [
+      "s/profile/media/visitor_profile_icon.webp'",
+      "s/profile/media/exhibitor_profile_icon.webp'",
+      "s/profile/media/industry_scope_icon.webp'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-buttons.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "getImagesFromDirectory"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "wp_get_attachment_url",
+      "site_url",
+      "esc_url"
+    ],
+    "includes": [
+      "s/profile/media/visitor_profile_icon_white.webp'",
+      "s/profile/media/exhibitor_profile_icon_white.webp'",
+      "s/profile/media/industry_scope_icon_white.webp'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-cards.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_decode"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url"
+    ],
+    "includes": [
+      "'profile-icons-svg.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-expanding.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_decode"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-icons-svg.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-single.php": {
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "i"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "wp_get_attachment_url"
+    ],
+    "includes": [
+      "invited by us and the Exhibitors:</p>'",
+      "companies from the following sectors:</p>'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-sitetabs.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [
+      "s/profile/media/visitor_profile_icon_white.webp'",
+      "s/profile/media/exhibitor_profile_icon_white.webp'",
+      "s/profile/media/industry_scope_icon_white.webp'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-tabs.php": {
+    "shortcodes_used": [
+      "i"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      },
+      {
+        "class": "self",
+        "method": "id_rnd"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [
+      "s/profile/media/visitor_profile_icon_white.webp'",
+      "s/profile/media/exhibitor_profile_icon_white.webp'",
+      "s/profile/media/industry_scope_icon_white.webp'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/classes/profile-three-cols.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "decode_clean_content"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "wp_get_attachment_url",
+      "get_locale"
+    ],
+    "includes": [
+      "s/profile/media/visitor_profile_icon_white.webp'",
+      "s/profile/media/exhibitor_profile_icon_white.webp'",
+      "s/profile/media/industry_scope_icon_white.webp'"
+    ],
+    "database_tables": []
+  },
+  "includes/profile/profile.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWEProfileTabs",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileSiteTabs",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileAllInOne",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileSingle",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileThreeCols",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileButtons",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileCards",
+        "method": "initElements"
+      },
+      {
+        "class": "PWEProfileExpanding",
+        "method": "initElements"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "get_locale",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-tabs.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-sitetabs.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-all-in-one.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-single.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-three-cols.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-buttons.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-cards.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/profile-expanding.php'",
+      "s/profile.json'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$profile_type]"
+    ],
+    "database_tables": []
+  },
+  "includes/registration/assets/style.php": {
+    "shortcodes_used": [
+      "data-gform-loader"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "d::after {"
+    ],
+    "database_tables": []
+  },
+  "includes/registration/assets/visitors_gr1.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/registration/assets/visitors_gr2.php": {
+    "shortcodes_used": [
+      "pwe_industry",
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "PWERegistrationVisitors",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "shortcode_atts",
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/registration/assets/visitors_gr3.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/registration/classes/registration_accreditations.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/registration/classes/registration_exhibitors.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "PWERegistrationVisitors",
+        "method": "multi_translation"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/registration/classes/registration_potential_exhibitors.php": {
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "json_fairs"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/registration/classes/registration_visitors.php": {
+    "shortcodes_used": [
+      "pwe_industry"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "self",
+        "method": "adjustBrightness"
+      },
+      {
+        "class": "self",
+        "method": "multi_translation"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      }
+    ],
+    "wordpress_calls": [
+      "add_filter",
+      "get_locale",
+      "do_shortcode",
+      "site_url",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "s/registration_visitors.json'",
+      "_once plugin_dir_path(dirname( __FILE__ )) . 'assets/style.php'",
+      "_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/registration/registration.php": {
+    "shortcodes_used": [
+      "trade_fair_group"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_script",
+      "wp_localize_script",
+      "shortcode_atts",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'classes/registration_visitors.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/registration_exhibitors.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/registration_potential_exhibitors.php'",
+      "_once plugin_dir_path(__FILE__) . 'classes/registration_accreditations.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$registration_type]"
+    ],
+    "database_tables": []
+  },
+  "includes/reviews/reviews.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/settings/admin-menu.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "esc_url",
+      "admin_url",
+      "esc_attr",
+      "esc_html",
+      "current_user_can"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/settings/general-settings.php": {
+    "shortcodes_used": [
+      "pwe_dp_shortcodes_unactive"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "get_option"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/settings/nav-menu-settings.php": {
+    "shortcodes_used": [
+      "pwe_menu_active",
+      "pwe_menu_transparent"
+    ],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "get_option"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/parts/store_cat_filter.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/parts/store_fairs.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "fairs_array"
+      }
+    ],
+    "wordpress_calls": [
+      "current_user_can"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/parts/store_feedback.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "self",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [
+      "get_option",
+      "update_option"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/parts/store_header.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/parts/store_modals.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "d"
+    ],
+    "database_tables": []
+  },
+  "includes/store/parts/store_product_card.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "image_exists"
+      },
+      {
+        "class": "self",
+        "method": "price"
+      },
+      {
+        "class": "self",
+        "method": "round_price"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/parts/store_product_details.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "image_exists"
+      },
+      {
+        "class": "self",
+        "method": "price"
+      },
+      {
+        "class": "self",
+        "method": "round_price"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "includes/store/store.php": {
+    "shortcodes_used": [
+      "pwe_name_pl",
+      "pwe_desc_pl",
+      "pwe_date_start",
+      "trade_fair_group",
+      "trade_fair_domainadress"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "get_database_groups_data"
+      },
+      {
+        "class": "self",
+        "method": "lang_pl"
+      },
+      {
+        "class": "self",
+        "method": "round_price"
+      },
+      {
+        "class": "self",
+        "method": "get_database_store_data"
+      },
+      {
+        "class": "self",
+        "method": "get_database_store_packages_data"
+      },
+      {
+        "class": "self",
+        "method": "get_database_meta_data"
+      },
+      {
+        "class": "self",
+        "method": "json_fairs"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url",
+      "do_shortcode",
+      "plugins_url",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "wp_enqueue_script",
+      "wp_localize_script"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'parts/store_header.php'",
+      "_once plugin_dir_path(__FILE__) . 'parts/store_product_details.php'",
+      "_once plugin_dir_path(__FILE__) . 'parts/store_cat_filter.php'",
+      "_once plugin_dir_path(__FILE__) . 'parts/store_product_card.php'",
+      "_once plugin_dir_path(__FILE__) . 'parts/store_fairs.php'",
+      "_once plugin_dir_path(__FILE__) . 'parts/store_modals.php'"
+    ],
+    "database_tables": []
+  },
+  "includes/top10/pwelogofetcher.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "site_url",
+      "esc_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "other/drop_generator.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_form"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_feeds"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "GFAPI",
+        "method": "add_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "send_notifications"
+      }
+    ],
+    "wordpress_calls": [
+      "is_wp_error",
+      "do_action"
+    ],
+    "includes": [
+      "_once($new_url)"
+    ],
+    "database_tables": []
+  },
+  "other/exhibitor_send.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "wp_mail",
+      "add_action"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "other/exhibitors_count.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "_once($new_url)"
+    ],
+    "database_tables": []
+  },
+  "other/give_badge/fpdf.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [
+      "$path)",
+      "font definition file: '.$path)",
+      "d for GIF support')"
+    ],
+    "database_tables": []
+  },
+  "other/give_badge/fpdi.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "other/give_badge/rec.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [
+      "'vendor/fpdf/fpdf.php')",
+      "'vendor/fpdi/src/autoload.php')",
+      "'vendor/fpdi/src/Fpdi.php')"
+    ],
+    "database_tables": []
+  },
+  "other/give_badge/rec2.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [
+      "_once 'vendor/autoload.php'"
+    ],
+    "database_tables": []
+  },
+  "other/invitation.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "other/mass_vip.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "add_entry"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "_once($new_url)",
+      "_once(ABSPATH . 'wp-admin/includes/upgrade.php')"
+    ],
+    "database_tables": [
+      "mass_exhibitors_invite_query",
+      "prefix",
+      "get_var",
+      "get_charset_collate",
+      "insert"
+    ]
+  },
+  "other/save_fairs_json.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_translations_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "generate_fair_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "generate_fair_translation_data"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "_once('/home/glasstec/domains/mr.glasstec.pl/public_html/wp-config.php')",
+      "_once($wp_load_url)"
+    ],
+    "database_tables": []
+  },
+  "other/test.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "plugin-update-checker.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "Puc_v4_Factory",
+        "method": "addVersion"
+      },
+      {
+        "class": "Puc_v4p6_Factory",
+        "method": "addVersion"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [
+      "dirname(__FILE__) . '/Puc/v4p6/Factory.php'",
+      "dirname(__FILE__) . '/Puc/v4/Factory.php'",
+      "dirname(__FILE__) . '/Puc/v4p6/Autoloader.php'"
+    ],
+    "database_tables": []
+  },
+  "pwe-style-var.php": {
+    "shortcodes_used": [
+      "color_mix",
+      "trade_fair_accent",
+      "trade_fair_main2"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "pwe_color"
+      }
+    ],
+    "wordpress_calls": [
+      "add_shortcode",
+      "shortcode_exists",
+      "do_shortcode",
+      "shortcode_atts"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "pwefunctions.php": {
+    "shortcodes_used": [
+      "PWE_Functions",
+      "trade_fair_date"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "resolve_server_addr_fallback"
+      },
+      {
+        "class": "self",
+        "method": "get_database_servers"
+      },
+      {
+        "class": "self",
+        "method": "add_log"
+      },
+      {
+        "class": "self",
+        "method": "debug_log"
+      },
+      {
+        "class": "self",
+        "method": "get_database_json_cache_dir"
+      },
+      {
+        "class": "self",
+        "method": "pack_database_json_value"
+      },
+      {
+        "class": "self",
+        "method": "unpack_database_json_value"
+      },
+      {
+        "class": "self",
+        "method": "get_database_json_cache_path"
+      },
+      {
+        "class": "self",
+        "method": "read_database_json_cache"
+      },
+      {
+        "class": "self",
+        "method": "connect_database"
+      },
+      {
+        "class": "self",
+        "method": "write_database_json_cache"
+      },
+      {
+        "class": "self",
+        "method": "remove_logo_duplicates"
+      },
+      {
+        "class": "self",
+        "method": "findPalletColorsStatic"
+      },
+      {
+        "class": "self",
+        "method": "get_database_fairs_data"
+      },
+      {
+        "class": "self",
+        "method": "get_database_translations_data"
+      },
+      {
+        "class": "self",
+        "method": "generate_fair_data"
+      },
+      {
+        "class": "self",
+        "method": "generate_fair_translation_data"
+      },
+      {
+        "class": "DateTime",
+        "method": "createFromFormat"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      }
+    ],
+    "wordpress_calls": [
+      "apply_filters",
+      "get_locale",
+      "wp_upload_dir",
+      "current_user_can",
+      "is_admin",
+      "add_filter",
+      "wp_mkdir_p",
+      "wp_json_encode",
+      "get_option",
+      "wp_die",
+      "do_shortcode",
+      "esc_attr",
+      "add_action"
+    ],
+    "includes": [
+      "_hours = true) {",
+      "_hours ? \"Y/m/d H:i\" : \"Y/m/d\""
+    ],
+    "database_tables": [
+      "dbh",
+      "get_var"
+    ]
+  },
+  "pwelements.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      },
+      {
+        "class": "Puc_v4_Factory",
+        "method": "buildUpdateChecker"
+      },
+      {
+        "class": "self",
+        "method": "getGithubKey"
+      }
+    ],
+    "wordpress_calls": [
+      "add_action",
+      "add_filter",
+      "is_admin",
+      "is_single",
+      "get_queried_object_id",
+      "get_post_meta",
+      "update_post_meta",
+      "is_ssl",
+      "is_singular",
+      "in_the_loop",
+      "is_main_query",
+      "get_the_ID",
+      "get_the_date",
+      "get_locale",
+      "esc_html",
+      "plugin_dir_path",
+      "wp_enqueue_style",
+      "plugin_dir_url",
+      "plugins_url",
+      "wp_enqueue_script",
+      "get_option",
+      "is_multisite",
+      "get_site_option"
+    ],
+    "includes": [
+      "s/nav-menu/assets/script.js',",
+      "_once $system_path . 'core/class-pwe-system-functions.php'",
+      "_once $system_path . 'modules/shortcodes/backend-shortcodes.php'",
+      "_once plugin_dir_path(__FILE__) . 'pwefunctions.php'",
+      "_once plugin_dir_path(__FILE__) . 'backend/shortcodes.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/settings/admin-menu.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/settings/general-settings.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/settings/nav-menu-settings.php'",
+      "_once plugin_dir_path(__FILE__) . 'pwe-style-var.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/nav-menu/nav-menu.php'",
+      "_once plugin_dir_path(__FILE__) . 'elements/pwelements-options.php'",
+      "_once plugin_dir_path(__FILE__) . 'gf-addons/area-numbers/area_numbers_gf.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/katalog-wystawcow/main-katalog-wystawcow.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/exhibitor-generator/exhibitor-generator.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/profile/profile.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/header/header.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/logotypes/logotypes.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/display-info/display-info.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/media-gallery/media-gallery.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/registration/registration.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/map/map.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/store/store.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/conference-cap/conference_cap.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/calendar/calendar.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/conference-calendar/conference-calendar.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/industry-evening/industry-evening.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/reviews/reviews.php'",
+      "_once plugin_dir_path(__FILE__) . 'other/test.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/conference-short-info/conference-short-info.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/about-fair-info/about-fair-info.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/premieres/premieres.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/attractions/attractions.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/news/news.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/posts/posts.php'",
+      "_once plugin_dir_path(__FILE__) . 'includes/article_author/article_author.php'",
+      "plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php')"
+    ],
+    "database_tables": [
+      "custom_klavio_setup",
+      "prefix",
+      "get_var",
+      "prepare",
+      "get_results"
+    ]
+  },
+  "qr-active/main-qr-active.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "add_action",
+      "add_shortcode",
+      "plugin_dir_path",
+      "plugin_dir_url",
+      "get_locale",
+      "do_shortcode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . 'qr-active-start.php'",
+      "_once plugin_dir_path(__FILE__) . $this->findClassElements()[$pwe_qr_active]"
+    ],
+    "database_tables": []
+  },
+  "qr-active/qr-active-a.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'"
+    ],
+    "database_tables": []
+  },
+  "qr-active/qr-active-b.php": {
+    "shortcodes_used": [
+      "a-zA-Z",
+      "trade_fair_domainadress"
+    ],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_forms"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entry"
+      },
+      {
+        "class": "GFAPI",
+        "method": "get_entries"
+      },
+      {
+        "class": "self",
+        "method": "findColor"
+      },
+      {
+        "class": "self",
+        "method": "findData"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path",
+      "wp_get_current_user"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'",
+      "d>"
+    ],
+    "database_tables": []
+  },
+  "qr-active/qr-active-c.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'"
+    ],
+    "database_tables": []
+  },
+  "qr-active/qr-active-start.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "parent",
+        "method": "__construct"
+      },
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__FILE__) . '/../widgets/flags.php'"
+    ],
+    "database_tables": []
+  },
+  "scripts/gallery-slider.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "createDOM"
+      },
+      {
+        "class": "self",
+        "method": "generateScript"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "scripts/iframes-slider.php": {
+    "shortcodes_used": [
+      "trade_fair_accent",
+      "index",
+      "currentSlide"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "createDOM"
+      },
+      {
+        "class": "self",
+        "method": "generateScript"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "scripts/logotypes-slider.php": {
+    "shortcodes_used": [
+      "trade_fair_accent",
+      "currentSlide"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "createDOM"
+      },
+      {
+        "class": "self",
+        "method": "generateScript"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "scripts/posts-slider.php": {
+    "shortcodes_used": [
+      "trade_fair_accent",
+      "currentSlide"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "createDOM"
+      },
+      {
+        "class": "self",
+        "method": "generateScript"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode",
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "scripts/slider.php": {
+    "shortcodes_used": [],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "findPalletColorsStatic"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_enqueue_style",
+      "plugins_url",
+      "wp_enqueue_script",
+      "plugin_dir_path"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__DIR__) . 'pwefunctions.php'"
+    ],
+    "database_tables": []
+  },
+  "scripts/speakers-slider.php": {
+    "shortcodes_used": [
+      "trade_fair_accent",
+      "currentSlide"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "createDOM"
+      },
+      {
+        "class": "self",
+        "method": "generateScript"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "scripts/swiper.php": {
+    "shortcodes_used": [
+      "bpInt"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "findPalletColorsStatic"
+      }
+    ],
+    "wordpress_calls": [
+      "wp_enqueue_style",
+      "plugins_url",
+      "wp_enqueue_script",
+      "plugin_dir_path",
+      "wp_json_encode"
+    ],
+    "includes": [
+      "_once plugin_dir_path(__DIR__) . 'pwefunctions.php'"
+    ],
+    "database_tables": []
+  },
+  "widgets/congress-widget.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "get_locale",
+      "wp_get_attachment_url"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "widgets/counter-to-fair.php": {
+    "shortcodes_used": [
+      "trade_fair_datetotimer",
+      "data-trade-fair"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [
+      "do_shortcode"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "widgets/flags.php": {
+    "shortcodes_used": [],
+    "static_calls": [],
+    "wordpress_calls": [
+      "apply_filters",
+      "esc_url",
+      "esc_attr"
+    ],
+    "includes": [],
+    "database_tables": []
+  },
+  "widgets/parking-widget.php": {
+    "shortcodes_used": [
+      "trade_fair_date",
+      "trade_fair_date_eng"
+    ],
+    "static_calls": [
+      {
+        "class": "self",
+        "method": "languageChecker"
+      }
+    ],
+    "wordpress_calls": [],
+    "includes": [],
+    "database_tables": []
+  },
+  "widgets/partners-widget.php": {
+    "shortcodes_used": [
+      "a-z",
+      "A-Z"
+    ],
+    "static_calls": [
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_logotypes_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "get_database_meta_data"
+      },
+      {
+        "class": "PWECommonFunctions",
+        "method": "lang_pl"
+      }
+    ],
+    "wordpress_calls": [
+      "get_locale"
+    ],
+    "includes": [],
+    "database_tables": []
+  }
+}

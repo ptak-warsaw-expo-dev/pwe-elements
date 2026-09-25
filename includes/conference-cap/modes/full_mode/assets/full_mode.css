@@ -31,7 +31,7 @@
   background: white;
   border: 2px solid gray;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
+  object-fit: cover;
 }
 .conference_cap__lecture-speaker-btn {
   margin: 10px auto !important;

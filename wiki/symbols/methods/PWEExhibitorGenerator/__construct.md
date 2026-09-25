@@ -1,0 +1,19 @@
+# `PWEExhibitorGenerator::__construct()`
+
+**Źródło:** `includes/exhibitor-generator/exhibitor-generator.php:28`  
+**Sygnatura:** `public __construct()`
+
+## Kontekst
+
+- Klasa: [`PWEExhibitorGenerator`](../../classes/PWEExhibitorGenerator.md)
+- Plik: [dokument pliku](../../../files/includes/exhibitor-generator/exhibitor-generator.php.md)
+
+## Wykryte zależności pliku
+
+- `PWECommonFunctions::get_database_meta_data()`
+- `PWECommonFunctions::get_database_groups_data()`
+- `PWECommonFunctions::languageChecker()`
+
+## Uwagi
+
+Lista zależności jest statycznym kontekstem pliku. Dokładny graf wywołań jest budowany przez osobny Code Indexer z AST.

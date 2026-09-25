@@ -490,10 +490,6 @@ class PWECalendar extends PWECommonFunctions {
                     font-weight: 700;
                     text-transform: uppercase;
                 }
-                .week .pwe-calendar_info p {
-                    color: black;
-                    margin: 0;
-                }
                 .week .pwe-calendar_info-list {
                     text-align: left;
                     padding: 0px 12px 12px !important;
@@ -525,8 +521,13 @@ class PWECalendar extends PWECommonFunctions {
                     $host = parse_url($website, PHP_URL_HOST);
                     $domain = preg_replace('/^www\./', '', $host);
                     $categories = get_the_terms($post_id, 'event_category');
+
+                    if (is_wp_error($categories) || $categories === false) {
+                        $categories = [];
+                    }
                 } else {
                     $domain = '';
+                    $categories = [];
                 }
 
                 $current_time = strtotime("now");
@@ -568,33 +569,9 @@ class PWECalendar extends PWECommonFunctions {
 
             $event_posts_full = $event_posts;
 
-            // Sorting by date first, then category, then week before event
-            usort($event_posts, function ($a, $b) {
-
-                // 1. SORT BY DATE
-                $dateA = DateTime::createFromFormat('d-m-Y', $a['start_date']);
-                $dateB = DateTime::createFromFormat('d-m-Y', $b['start_date']);
-
-                $cmpDate = $dateA <=> $dateB;
-                if ($cmpDate !== 0) {
-                    return $cmpDate;
-                }
-
-                // 2. WEEK FIRST (within same date)
-                $isWeekA = ($a['event_type'] === 'week') ? 0 : 1;
-                $isWeekB = ($b['event_type'] === 'week') ? 0 : 1;
-
-                $cmpWeek = $isWeekA <=> $isWeekB;
-                if ($cmpWeek !== 0) {
-                    return $cmpWeek;
-                }
-
-                // 3. SORT BY EDITION NUMBER (DESC)
-                $editionA = !empty($a['edition_num']) ? (int) $a['edition_num'] : 0;
-                $editionB = !empty($b['edition_num']) ? (int) $b['edition_num'] : 0;
-
-                return $editionB <=> $editionA;
-            });
+            // Group events around WEEK cards:
+            // WEEK -> included fairs -> excluded fairs.
+            $event_posts = $this->sort_calendar_events_with_weeks($event_posts);
 
 
             if (!empty($pwe_calendar_posts_num) && $pwe_calendar_posts_num > 0) {
@@ -1207,6 +1184,173 @@ class PWECalendar extends PWECommonFunctions {
         return '<div id="pweCalendar" class="pwe-calendar">' . $output . '</div>';
     }
 
+    private function normalize_calendar_domain($domain) {
+        $domain = strtolower(trim((string) $domain));
+        $domain = preg_replace('#^https?://#', '', $domain);
+        $domain = preg_replace('#^www\.#', '', $domain);
+        return rtrim($domain, '/');
+    }
+
+    private function is_calendar_week_event($event) {
+        $event_type = $event['event_type'] ?? get_post_meta($event['post_id'], 'pwe_event_type', true);
+
+        if ($event_type === 'week') {
+            return true;
+        }
+
+        $categories = is_array($event['categories'] ?? null) ? $event['categories'] : [];
+
+        foreach ($categories as $category) {
+            $slug = is_object($category) ? ($category->slug ?? '') : ($category['slug'] ?? '');
+
+            if ($slug === 'week' || strpos($slug, 'week-') === 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function sort_calendar_events_with_weeks($event_posts) {
+        $weeks = [];
+        $week_order_by_date = [];
+
+        // Build WEEK groups from event type "week" or category slug "week-*".
+        // Keep their original order for WEEKs that start on the same date.
+        foreach ($event_posts as $event) {
+            if (!$this->is_calendar_week_event($event)) {
+                continue;
+            }
+
+            $week_start = strtotime($event['start_date']);
+            $week_end   = strtotime($event['end_date']);
+            if (!$week_start || !$week_end) {
+                continue;
+            }
+
+            $excluded_raw = get_post_meta($event['post_id'], 'events_week_fairs_excluded', true);
+            $excluded = !empty($excluded_raw)
+                ? array_values(array_filter(array_map([$this, 'normalize_calendar_domain'], preg_split('/\s*,\s*/', $excluded_raw))))
+                : [];
+
+            if (!isset($week_order_by_date[$week_start])) {
+                $week_order_by_date[$week_start] = 0;
+            }
+
+            $group_order = $week_order_by_date[$week_start]++;
+
+            $weeks[] = [
+                'post_id'     => $event['post_id'],
+                'start'       => $week_start,
+                'end'         => $week_end,
+                'excluded'    => $excluded,
+                'group_order' => $group_order,
+            ];
+        }
+
+        foreach ($event_posts as &$event) {
+            $event_type = $event['event_type'] ?? get_post_meta($event['post_id'], 'pwe_event_type', true);
+            $event['event_type'] = $event_type ?: 'event';
+            $is_week_event = $this->is_calendar_week_event($event);
+
+            $event_start = strtotime($event['start_date']);
+            $event_end   = strtotime($event['end_date']);
+
+            $event['_calendar_group_date']  = $event_start ?: PHP_INT_MAX;
+            $event['_calendar_group_order'] = PHP_INT_MAX;
+            $event['_calendar_sort_rank']   = $is_week_event ? 0 : 1;
+
+            if ($is_week_event) {
+                foreach ($weeks as $week) {
+                    if ((int) $week['post_id'] === (int) $event['post_id']) {
+                        $event['_calendar_group_date']  = $week['start'];
+                        $event['_calendar_group_order'] = $week['group_order'];
+                        break;
+                    }
+                }
+                continue;
+            }
+
+            $event_domain = $this->normalize_calendar_domain($event['domain'] ?? '');
+            $matched_week = null;
+
+            foreach ($weeks as $week) {
+                // Event can belong to WEEK only when its whole date range is inside the WEEK.
+                $belongs_to_week = $event_start && $event_end
+                    && $event_start >= $week['start']
+                    && $event_end <= $week['end'];
+
+                if (!$belongs_to_week) {
+                    continue;
+                }
+
+                // Excluded from this WEEK means: skip this WEEK and keep looking.
+                // Another WEEK with the same dates can still accept the event.
+                if (in_array($event_domain, $week['excluded'], true)) {
+                    continue;
+                }
+
+                $matched_week = $week;
+                break;
+            }
+
+            if ($matched_week !== null) {
+                $event['_calendar_group_date']  = $matched_week['start'];
+                $event['_calendar_group_order'] = $matched_week['group_order'];
+                $event['_calendar_sort_rank']   = 1;
+                continue;
+            }
+
+            // If no WEEK accepts this event, keep it after all WEEK groups
+            // that start on the same date.
+            if ($event_start && isset($week_order_by_date[$event_start])) {
+                $event['_calendar_group_order'] = $week_order_by_date[$event_start];
+                $event['_calendar_sort_rank']   = 2;
+            }
+        }
+        unset($event);
+
+        usort($event_posts, function ($a, $b) {
+            // 1. Main chronological order.
+            $cmp = ($a['_calendar_group_date'] ?? PHP_INT_MAX) <=> ($b['_calendar_group_date'] ?? PHP_INT_MAX);
+            if ($cmp !== 0) {
+                return $cmp;
+            }
+
+            // 2. WEEK 1 + its events, WEEK 2 + its events, then unmatched events.
+            $cmp = ($a['_calendar_group_order'] ?? PHP_INT_MAX) <=> ($b['_calendar_group_order'] ?? PHP_INT_MAX);
+            if ($cmp !== 0) {
+                return $cmp;
+            }
+
+            // 3. WEEK anchor first, then its events, unmatched last.
+            $cmp = ($a['_calendar_sort_rank'] ?? 1) <=> ($b['_calendar_sort_rank'] ?? 1);
+            if ($cmp !== 0) {
+                return $cmp;
+            }
+
+            // 4. Inside the same group keep chronological order.
+            $date_a = strtotime($a['start_date'] ?? '') ?: PHP_INT_MAX;
+            $date_b = strtotime($b['start_date'] ?? '') ?: PHP_INT_MAX;
+            $cmp = $date_a <=> $date_b;
+            if ($cmp !== 0) {
+                return $cmp;
+            }
+
+            // 5. For equal dates keep higher edition first.
+            $edition_a = !empty($a['edition_num']) ? (int) $a['edition_num'] : 0;
+            $edition_b = !empty($b['edition_num']) ? (int) $b['edition_num'] : 0;
+            return $edition_b <=> $edition_a;
+        });
+
+        foreach ($event_posts as &$event) {
+            unset($event['_calendar_group_date'], $event['_calendar_group_order'], $event['_calendar_sort_rank']);
+        }
+        unset($event);
+
+        return $event_posts;
+    }
+
     public function render_calendar_event_card($event, $shortcodes_active, $lang_pl = true) {
         $locale = get_locale();
 
@@ -1270,7 +1414,7 @@ class PWECalendar extends PWECommonFunctions {
         // [pwe_short_desc_{lang}]
         $shortcode_short_desc = self::get_pwe_shortcode("pwe_short_desc_$lang", $domain);
         $shortcode_short_desc_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_short_desc);
-        $short_desc = $shortcode_short_desc_available ? $shortcode_short_desc : $post_meta['short_desc'][0];
+        $short_desc = $post_meta['short_desc'][0] ? $post_meta['short_desc'][0] : ($shortcode_short_desc_available ? $shortcode_short_desc : '');
 
         // [pwe_fair_id]
         $shortcode_fair_id = self::get_pwe_shortcode("pwe_fair_id", $domain);
@@ -1278,22 +1422,22 @@ class PWECalendar extends PWECommonFunctions {
         // [pwe_visitors]
         $shortcode_visitors = self::get_pwe_shortcode("pwe_visitors", $domain);
         $shortcode_visitors_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_visitors);
-        $visitors_num = $shortcode_visitors_available ? $shortcode_visitors : $post_meta['visitors'][0];
+        $visitors_num = $post_meta['visitors'][0] ? $post_meta['visitors'][0] : ($shortcode_visitors_available ? $shortcode_visitors : '');
 
         // [pwe_exhibitors]
         $shortcode_exhibitors = self::get_pwe_shortcode("pwe_exhibitors", $domain);
         $shortcode_exhibitors_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_exhibitors);
-        $exhibitors_num = $shortcode_exhibitors_available ? $shortcode_exhibitors : $post_meta['exhibitors'][0];
+        $exhibitors_num = $post_meta['exhibitors'][0] ? $post_meta['exhibitors'][0] : ($shortcode_exhibitors_available ? $shortcode_exhibitors : '');
 
         // [pwe_countries]
         $shortcode_area = self::get_pwe_shortcode("pwe_area", $domain);
         $shortcode_area_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_area);
-        $area_num = $shortcode_area_available ? $shortcode_area : $post_meta['area'][0];
+        $area_num = $post_meta['area'][0] ? $post_meta['area'][0] : ($shortcode_area_available ? $shortcode_area : '');
 
         // [pwe_edition]
         $shortcode_edition = self::get_pwe_shortcode("pwe_edition", $domain);
         $shortcode_edition_available = self::check_available_pwe_shortcode($shortcodes_active, $shortcode_edition);
-        $edition_num = $shortcode_edition_available ? $shortcode_edition : $post_meta['edition'][0];
+        $edition_num = $post_meta['edition'][0] ? $post_meta['edition'][0] : ($shortcode_edition_available ? $shortcode_edition : '');
         $edition = '';
         if($edition_num == '1'){
             $edition .= self::multi_translation("premier_edition");
@@ -1301,8 +1445,14 @@ class PWECalendar extends PWECommonFunctions {
             $edition .= $edition_num . self::multi_translation("edition");
         }
 
-        $categories = $event['categories'];
-        $category_names = implode(', ', array_map(fn($c) => $c->name, $categories));
+        $categories = is_array($event['categories'] ?? null)
+            ? $event['categories']
+            : [];
+
+        $category_names = implode(', ', array_map(
+            fn($c) => $c->name,
+            $categories
+        ));
 
         $featured_image_url = $post_meta['_featured_image_url'][0];
         $secondary_image_url = $post_meta['_secondary_image_url'][0];
@@ -1402,7 +1552,7 @@ class PWECalendar extends PWECommonFunctions {
                 $trade_fair_end_timestamp   = strtotime($week_date_end);
 
                 $fairs_json = PWECommonFunctions::json_fairs();
-
+                
                 foreach ($fairs_json as $fair) {
                     $event_date_start = isset($fair['date_start']) ? strtotime($fair['date_start']) : null;
                     $event_date_end   = isset($fair['date_end']) ? strtotime($fair['date_end']) : null;
@@ -1421,9 +1571,9 @@ class PWECalendar extends PWECommonFunctions {
                             $events_map[] = [
                                 "domain"     => $event_domain,
                                 "name"     => $event_name,
-                                "visitors"   => isset($fair["visitors"]) ? $fair["visitors"] : null,
-                                "exhibitors" => isset($fair["exhibitors"]) ? $fair["exhibitors"] : null,
-                                "area"       => isset($fair["area"]) ? $fair["area"] : null
+                                "visitors"   => isset($fair['fair_visitors_current']) ? $fair['fair_visitors_current'] : null,
+                                "exhibitors" => isset($fair['fair_exhibitors_current']) ? $fair['fair_exhibitors_current'] : null,
+                                "area"       => isset($fair['fair_area_current']) ? $fair['fair_area_current'] : null,
                             ];
                         }
                     }
@@ -1435,15 +1585,29 @@ class PWECalendar extends PWECommonFunctions {
                 return !in_array(trim($event['domain']), $excluded_events_array, true);
             }));
 
-            $cap_visitors = 0;
-            $cap_exhibitors = 0;
-            $cap_area = 0;
+            $unique_visitors = [];
+            $unique_exhibitors = [];
+            $unique_area = [];
 
             foreach ($filtered_events as $event) {
-                $cap_visitors += $event['visitors'];
-                $cap_exhibitors += $event['exhibitors'];
-                $cap_area += $event['area'];
+                $visitors = preg_replace('/[^\d]/', '', (string) ($event['visitors'] ?? ''));
+                $exhibitors = preg_replace('/[^\d]/', '', (string) ($event['exhibitors'] ?? ''));
+                $area = preg_replace('/[^\d]/', '', (string) ($event['area'] ?? ''));
+
+                if ($visitors !== '') {
+                    $unique_visitors[(int) $visitors] = (int) $visitors;
+                }
+                if ($exhibitors !== '') {
+                    $unique_exhibitors[(int) $exhibitors] = (int) $exhibitors;
+                }
+                if ($area !== '') {
+                    $unique_area[(int) $area] = (int) $area;
+                }
             }
+
+            $cap_visitors = array_sum($unique_visitors);
+            $cap_exhibitors = array_sum($unique_exhibitors);
+            $cap_area = array_sum($unique_area);
 
             $meta_visitors = get_post_meta($post_id, 'events_week_visitors', true);
             $meta_exhibitors = get_post_meta($post_id, 'events_week_exhibitors', true);
@@ -1452,6 +1616,7 @@ class PWECalendar extends PWECommonFunctions {
             $week_visitors   = !empty($meta_visitors) ? $meta_visitors  : ceil($cap_visitors / 1000) * 1000;
             $week_exhibitors = !empty($meta_exhibitors) ? $meta_exhibitors  : ceil($cap_exhibitors / 10) * 10;
             $week_area       = !empty($meta_area) ? $meta_area : ceil($cap_area / 10) * 10;
+            $week_area       = min((int) preg_replace('/[^\d]/', '', (string) $week_area), 153000);
 
             if (count($filtered_events) == 1) {
                 $events_word_declination = ($lang_pl ? "wydarzenie" : "event");
@@ -1481,13 +1646,49 @@ class PWECalendar extends PWECommonFunctions {
                     <div class="pwe-calendar_info">
                         <div class="pwe-calendar__date">
                             <h5>' . $fair_date . '</h5>
-                        </div>
-                        <ul class="pwe-calendar_info-list">';
-                            foreach ($filtered_events as $event) {
-                                $output .= '<li>&#8226; '. $event['name'] .'</li>';
-                            }
-                        $output .= '
-                        </ul>
+                        </div>';
+                        if (!empty($week_visitors) && !empty($week_exhibitors) && !empty($week_area)) {
+                            $output .= '<div class="pwe-calendar__statistics-word">' . self::multi_translation("statistics") . '</div>
+                            <div class="pwe-calendar_statistics">
+                                <div class="pwe-calendar__statistics-item">
+                                    <div class="pwe-calendar__statistics-icon">
+                                        <img
+                                            src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_odwiedzajacy.svg"
+                                            alt="' . ($lang_pl ? "Ikona odwiedzający" : "Icon visitors") . '"
+                                        >
+                                    </div>
+                                    <div class="pwe-calendar__statistics-name">
+                                        <p class="pwe-calendar__statistics-label">' . self::multi_translation("visitors") . '</p>
+                                        <p class="pwe-calendar__statistics-value">' . $week_visitors . '</p>
+                                    </div>
+                                </div>
+                                <div class="pwe-calendar__statistics-item">
+                                    <div class="pwe-calendar__statistics-icon">
+                                        <img
+                                            src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_wystawcy.svg"
+                                            alt="' . ($lang_pl ? "Ikona wystawcy" : "Icon exhibitors") . '"
+                                        >
+                                    </div>
+                                    <div class="pwe-calendar__statistics-name">
+                                        <p class="pwe-calendar__statistics-label">' . self::multi_translation("exhibitors") . '</p>
+                                        <p class="pwe-calendar__statistics-value">' . $week_exhibitors . '</p>
+                                    </div>
+                                </div>
+                                <div class="pwe-calendar__statistics-item">
+                                    <div class="pwe-calendar__statistics-icon">
+                                        <img
+                                            src="https://warsawexpo.eu/wp-content/uploads/2024/09/ikonka_powierzchnia.svg"
+                                            alt="' . ($lang_pl ? "Ikona powierzchnia wystawiennicza" : "Icon exhibition area") . '"
+                                        >
+                                    </div>
+                                    <div class="pwe-calendar__statistics-name">
+                                        <p class="pwe-calendar__statistics-label">' . self::multi_translation("exhibition_area") . '</p>
+                                        <p class="pwe-calendar__statistics-value">' . $week_area . ' m<sup>2</sup></p>
+                                    </div>
+                                </div>
+                            </div>';
+                        }
+                    $output .= '
                     </div>
                 </a>
             </div>';
@@ -1537,11 +1738,7 @@ class PWECalendar extends PWECommonFunctions {
 
             wp_reset_postdata();
 
-            usort($event_posts, function ($a, $b) {
-                $a_date = DateTime::createFromFormat('d-m-Y', $a['start_date']);
-                $b_date = DateTime::createFromFormat('d-m-Y', $b['start_date']);
-                return $a_date <=> $b_date;
-            });
+            $event_posts = $this->sort_calendar_events_with_weeks($event_posts);
 
             $offset = ($page - 1) * $posts_per_page;
             $paged_posts = array_slice($event_posts, $offset, $posts_per_page);

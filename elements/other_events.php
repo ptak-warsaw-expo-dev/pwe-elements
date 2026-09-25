@@ -814,24 +814,25 @@ class PWElementOtherEvents extends PWElements {
             $other_events_items_json = [];
 
             foreach ($fairs_json as $fair) {
-                // Getting start and end dates
-                $date_start = !empty($fair['date_start'])
-                    ? DateTime::createFromFormat('Y/m/d', $fair['date_start'])->getTimestamp()
-                    : null;
 
-                $date_end = !empty($fair['date_end'])
-                    ? DateTime::createFromFormat('Y/m/d', $fair['date_end'])->getTimestamp()
-                    : null;
+                $dt_start = !empty($fair['date_start']) ? DateTime::createFromFormat('Y/m/d', $fair['date_start']) : false;
+                $dt_end   = !empty($fair['date_end']) ? DateTime::createFromFormat('Y/m/d', $fair['date_end']) : false;
 
-                // Checking if the date is in the range
+                $date_start = ($dt_start !== false) ? $dt_start->getTimestamp() : null;
+                $date_end   = ($dt_end !== false) ? $dt_end->getTimestamp() : null;
+
                 if ($date_start && $date_end) {
-                    if ((($date_start >= $trade_fair_start_timestamp && $date_start <= $trade_fair_end_timestamp) ||
-                        ($date_end >= $trade_fair_start_timestamp && $date_end <= $trade_fair_end_timestamp)) &&
-                        strpos($fair['domain'], $current_domain) === false &&
-                        !self::is_excluded_domain($fair['domain'], $all_excluded)) {
+                    $is_in_range = ($date_start >= $trade_fair_start_timestamp && $date_start <= $trade_fair_end_timestamp) ||
+                                ($date_end >= $trade_fair_start_timestamp && $date_end <= $trade_fair_end_timestamp);
+
+                    $domain = $fair['domain'] ?? '';
+
+                    if ($is_in_range &&
+                        strpos($domain, $current_domain) === false &&
+                        !self::is_excluded_domain($domain, $all_excluded)) {
 
                         $other_events_items_json[] = [
-                            "other_events_domain" => $fair["domain"],
+                            "other_events_domain" => $domain,
                             "other_events_text"   => self::getLangField($fair, "desc")
                         ];
                     }

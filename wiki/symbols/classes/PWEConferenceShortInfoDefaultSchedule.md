@@ -1,0 +1,18 @@
+# Klasa `PWEConferenceShortInfoDefaultSchedule`
+
+**Źródło:** `includes/conference-short-info/classes/conference-short-info-default-schedule.php:3`  
+**Metody:** 3
+
+## Rola
+
+Klasa jest zdefiniowana w `includes/conference-short-info/classes/conference-short-info-default-schedule.php`. Jej aktywność runtime zależy od sposobu ładowania pliku; dla najważniejszych modułów status jest opisany w `inventory/load-graph.json`.
+
+## Metody
+
+- [`public static initElements()`](../methods/PWEConferenceShortInfoDefaultSchedule/initelements.md) — linia 5
+- [`private static is_mobile_device()`](../methods/PWEConferenceShortInfoDefaultSchedule/is_mobile_device.md) — linia 9
+- [`public static output($atts, $all_conferences, $rnd_class, $name, $title, $desc)`](../methods/PWEConferenceShortInfoDefaultSchedule/output.md) — linia 22
+
+## Dokument pliku
+
+- [Otwórz dokumentację `includes/conference-short-info/classes/conference-short-info-default-schedule.php`](../../files/includes/conference-short-info/classes/conference-short-info-default-schedule.php.md)

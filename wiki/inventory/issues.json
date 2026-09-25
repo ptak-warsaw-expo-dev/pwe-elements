@@ -1,0 +1,63 @@
+[
+  {
+    "id": "calendar-ajax-required-argument",
+    "severity": "review",
+    "status": "needs-runtime-verification",
+    "summary": "Callback AJAX load_more_calendar jest rejestrowany bez accepted_args, ale metoda deklaruje wymagany parametr.",
+    "source": "includes/calendar/classes/loop-calendar.php",
+    "lines": [
+      8,
+      9,
+      1700
+    ],
+    "reason": "WordPress wp_ajax_* wywołuje callback bez argumentów; sygnatura load_more_calendar($pwe_calendar_pagination) nie ma wartości domyślnej."
+  },
+  {
+    "id": "fetch-undefined-result",
+    "severity": "review",
+    "status": "likely-bug",
+    "summary": "elements/fetch.php sprawdza is_wp_error($result), ale w widocznym przepływie zmienna $result nie jest wcześniej przypisana.",
+    "source": "elements/fetch.php",
+    "lines": [
+      127
+    ]
+  },
+  {
+    "id": "hardcoded-auth-secrets",
+    "severity": "security",
+    "status": "review-and-rotate",
+    "summary": "Legacy direct HTTP handlery zawierają sekrety/tokeny autoryzacyjne zapisane bezpośrednio w kodzie.",
+    "sources": [
+      "elements/fetch.php",
+      "other/mass_vip.php",
+      "other/drop_generator.php",
+      "other/exhibitors_count.php"
+    ],
+    "note": "Wartości sekretów celowo nie są kopiowane do Wiki."
+  },
+  {
+    "id": "session-fetch-no-explicit-auth",
+    "severity": "security",
+    "status": "review",
+    "summary": "elements/session_fetch.php zwraca email i telefon z bieżącej sesji bez jawnego nonce/uprawnienia.",
+    "source": "elements/session_fetch.php",
+    "lines": [
+      2,
+      7,
+      8
+    ]
+  },
+  {
+    "id": "resend-ticket-base64-identifier",
+    "severity": "security",
+    "status": "review",
+    "summary": "Resend ticket identyfikuje form/entry przez base64 w query stringu; base64 nie jest kontrolą dostępu.",
+    "source": "elements/resend-ticket.php",
+    "lines": [
+      15,
+      22,
+      23,
+      68
+    ]
+  }
+]

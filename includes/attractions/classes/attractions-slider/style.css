@@ -85,7 +85,7 @@
 }
 .pwe-attractions-slider__card{position:relative;background:#000;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .pwe-attractions-slider__media{position:relative;aspect-ratio:1/1;overflow:hidden}
-.pwe-attractions-slider__media img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.pwe-attractions-slider__media img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;object-position:top;display:block}
 .pwe-attractions-slider__badge{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .pwe-attractions-slider__body{padding:14px 16px 18px}
 .pwe-attractions-slider__name{font-weight:800;font-size:18px;letter-spacing:.02em;color:#fff}

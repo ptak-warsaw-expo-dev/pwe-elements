@@ -1,0 +1,102 @@
+[
+  {
+    "id": "ajax-load-more-posts",
+    "kind": "wp-ajax",
+    "route": "admin-ajax.php?action=load_more_posts",
+    "methods": [
+      "POST"
+    ],
+    "auth": "wp_ajax oraz wp_ajax_nopriv; brak jawnego nonce w handlerze",
+    "source": "backend/load-more-posts.php"
+  },
+  {
+    "id": "ajax-pwe-load-posts",
+    "kind": "wp-ajax",
+    "route": "admin-ajax.php?action=pwe_ajax_load_posts",
+    "methods": [
+      "POST"
+    ],
+    "auth": "wp_ajax oraz wp_ajax_nopriv; brak jawnego nonce w rejestracji",
+    "source": "includes/posts/assets/ajax.php"
+  },
+  {
+    "id": "ajax-load-more-calendar",
+    "kind": "wp-ajax",
+    "route": "admin-ajax.php?action=load_more_calendar",
+    "methods": [
+      "POST"
+    ],
+    "auth": "wp_ajax oraz wp_ajax_nopriv; handler służy do paginacji kalendarza",
+    "source": "includes/calendar/classes/loop-calendar.php"
+  },
+  {
+    "id": "mass-vip-generator",
+    "kind": "direct-http",
+    "route": "/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/mass_vip.php",
+    "methods": [
+      "POST"
+    ],
+    "auth": "HMAC domeny wyliczany z AUTH_KEY; endpoint tworzy wpisy Gravity Forms i kolejkę mass_exhibitors_invite_query",
+    "source": "includes/exhibitor-generator/assets/mass_vip.php"
+  },
+  {
+    "id": "legacy-mass-vip",
+    "kind": "direct-http",
+    "route": "/wp-content/plugins/PWElements/other/mass_vip.php",
+    "methods": [
+      "POST"
+    ],
+    "auth": "legacy HMAC domeny z sekretem zapisanym w kodzie; ścieżka nadal jest referencjonowana przez starsze elementy",
+    "source": "other/mass_vip.php"
+  },
+  {
+    "id": "lead-drop-generator",
+    "kind": "direct-http",
+    "route": "/wp-content/plugins/PWElements/other/drop_generator.php",
+    "methods": [
+      "POST"
+    ],
+    "auth": "nagłówek Authorization weryfikowany przez token HMAC domeny",
+    "source": "other/drop_generator.php"
+  },
+  {
+    "id": "exhibitors-count",
+    "kind": "direct-http",
+    "route": "/wp-content/plugins/PWElements/other/exhibitors_count.php",
+    "methods": [
+      "POST"
+    ],
+    "auth": "nagłówek Authorization weryfikowany przez token HMAC domeny",
+    "source": "other/exhibitors_count.php"
+  },
+  {
+    "id": "session-entry-update",
+    "kind": "direct-http",
+    "route": "/wp-content/plugins/PWElements/elements/fetch.php",
+    "methods": [
+      "POST"
+    ],
+    "auth": "stała wartość nagłówka Authorization zapisana w kodzie; endpoint korzysta z sesji rejestracji",
+    "source": "elements/fetch.php"
+  },
+  {
+    "id": "session-fetch",
+    "kind": "direct-http",
+    "route": "/wp-content/plugins/PWElements/elements/session_fetch.php",
+    "methods": [
+      "GET"
+    ],
+    "auth": "brak jawnej kontroli dostępu; zwraca email/telefon z bieżącej sesji PWE, jeśli istnieją",
+    "source": "elements/session_fetch.php"
+  },
+  {
+    "id": "save-fairs-json",
+    "kind": "cli-cron",
+    "route": "php other/save_fairs_json.php <token>",
+    "methods": [
+      "CLI"
+    ],
+    "auth": "pierwszy argument CLI porównywany z PWE_API_KEY_2",
+    "source": "other/save_fairs_json.php"
+  }
+]

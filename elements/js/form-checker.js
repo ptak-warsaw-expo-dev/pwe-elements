@@ -50,7 +50,7 @@ function captchaTrue() {
             var baseUrl = window.location.origin
             $.ajax({
                 type: 'POST',
-                url: baseUrl + '/wp-content/plugins/PWElements/gf-upps/gf-email-check/gf-email-check.php',
+                url: baseUrl + '/wp-content/plugins/PWElements/gf-addons/gf-email-check/gf-email-check.php',
                 data: { email_id: email_id, phone_id: phone_id, email_value: email_value, phone_value: phone_value, form_id: form_id },
                 dataType: 'json',
                 success: function (response) {
@@ -160,7 +160,7 @@ jQuery(document).ready(function ($) {
     const succesCountryIp = (countryCode) => {
         let options = {
             initialCountry: countryCode,
-            utilsScript: "https://cleanexpo.pl/wp-content/plugins/PWElements/gf-upps/area-numbers/js/utils.js",
+            utilsScript: "https://cleanexpo.pl/wp-content/plugins/PWElements/gf-addons/area-numbers/js/utils.js",
             autoPlaceholder: "aggressive",
         }
 

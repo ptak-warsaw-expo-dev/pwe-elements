@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Class PWEProfileSingle
@@ -13,7 +13,7 @@ class PWEProfileSingle extends PWEProfile {
     public function __construct() {
         parent::__construct();
     }
- 
+
     /**
      * Static method to initialize Visual Composer elements.
      * Returns an array of parameters for the Visual Composer element.
@@ -177,7 +177,7 @@ class PWEProfileSingle extends PWEProfile {
                     'element' => 'profile_type',
                     'value' => 'PWEProfileSingle',
                 ),
-            ), 
+            ),
             array(
                 'type' => 'textfield',
                 'heading' => __('Tickets button link', 'pwe_profile'),
@@ -251,7 +251,7 @@ class PWEProfileSingle extends PWEProfile {
     /**
      * Static method to generate the HTML output for the PWE Element.
      * Returns the HTML output as a string.
-     * 
+     *
      * @param array @atts options
      */
     public static function output($atts, $content = null) {
@@ -307,10 +307,10 @@ class PWEProfileSingle extends PWEProfile {
         $element_unique_id = 'profile-' . $unique_id;
 
         $custom_profile_class_title = "";
-        
+
         if (in_array('profile_title_visitors', explode(',', $profile_title_checkbox))) {
             $profile_id = "visitor-profile";
-            $custom_profile_title = (get_locale() == 'pl_PL') ? "Profil odwiedzającego" : "Visitor profile"; 
+            $custom_profile_title = (get_locale() == 'pl_PL') ? "Profil odwiedzającego" : "Visitor profile";
             $profile_img_aspect_ratio = ($profile_img_aspect_ratio == '') ? "auto" : $profile_img_aspect_ratio;
             if (get_locale() == "pl_PL") {
                 $profile_header_text = '<p class="profile-header-text" style="color: '. $text_color .';">Wśród odwiedzających targi [trade_fair_name] znajdą się zaproszeni przez nas i Wystawców:</p>';
@@ -362,12 +362,12 @@ class PWEProfileSingle extends PWEProfile {
                 }
                 .row-parent:has(.profile-single-'. self::$rnd_id .' .pwe-container-profile) {
                     max-width: 100%;
-                    padding: 0 !important;  
+                    padding: 0 !important;
                 }
                 .profile-single-'. self::$rnd_id .' .pwe-profile-wrapper {
                     max-width: 1200px;
                     margin: 0 auto;
-                    padding: ' . $profile_padding_element . ';   
+                    padding: ' . $profile_padding_element . ';
                 }
                 .profile-single-'. self::$rnd_id .' .pwe-profile-content {
                     display: flex;
@@ -376,7 +376,7 @@ class PWEProfileSingle extends PWEProfile {
                 .profile-single-'. self::$rnd_id .' .pwe-profile-text-block {
                     display: flex;
                     flex-direction: column;
-                    
+
                 }
                 .profile-single-'. self::$rnd_id .' .pwe-profile-text-block h4 {
                     font-size: 20px !important;
@@ -480,7 +480,7 @@ class PWEProfileSingle extends PWEProfile {
         $output .= '
         <div id="'. $profile_id .'" class="pwe-container-profile" style="background-color:'. $profile_background .';">
             <div class="pwe-profile-wrapper">';
-                if (in_array('border_top', explode(',', $profile_border))) {  
+                if (in_array('border_top', explode(',', $profile_border))) {
                     $output .= '<p class="profile-box-shadow-left">&nbsp;</p>';
                 }
                 $output .= '<div class="pwe-profile-main-section">
@@ -509,22 +509,14 @@ class PWEProfileSingle extends PWEProfile {
                                         <p class="pwe-see-more" style="cursor: pointer; color: '. $text_color .';">'. $showMore .'</p>';
                                 }
                             }
-                            
+
                         $output .= '
                         </div>
                         <div class="pwe-profile-images-block pwe-profile-block">
                             <div class="pwe-profile-images-wrapper">';
 
-                                if (session_status() === PHP_SESSION_NONE) {
-                                    session_start();
-                                }
-
                                 $profile_images_urldecode = urldecode($profile_images);
                                 $profile_images_json = json_decode($profile_images_urldecode, true);
-
-                                if (!isset($_SESSION['last_displayed_image_index'])) {
-                                    $_SESSION['last_displayed_image_index'] = -1;
-                                }
 
                                 foreach ($profile_images_json as $index => $profile_image) {
                                     $profile_image_media = $profile_image["catalog_media"];
@@ -547,14 +539,15 @@ class PWEProfileSingle extends PWEProfile {
                                             $profile_image_gallery_path = $profile_gallery_images;
                                         }
                                         $all_images = glob($profile_image_gallery_path . '/*.{'. $file_extensions .'}', GLOB_BRACE);
-                                        sort($all_images); 
 
-                                        $next_image_index = ($_SESSION['last_displayed_image_index'] + 1) % count($all_images);
-                                        $next_image_path = $all_images[$next_image_index];
-                                        $_SESSION['last_displayed_image_index'] = $next_image_index;
-                                        
-                                        $profile_image_gallery_short_path = substr($next_image_path, strpos($next_image_path, '/doc/'));
-                                        $output .= '<img class="pwe-profile-image t-entry-visual" src="'. $profile_image_gallery_short_path.'" alt="'. $profile_title .'">';
+                                        if (!empty($all_images)) {
+                                            // Bezpieczne losowanie obrazka zamiast rotacji sesyjnej
+                                            $random_image_index = array_rand($all_images);
+                                            $next_image_path = $all_images[$random_image_index];
+
+                                            $profile_image_gallery_short_path = substr($next_image_path, strpos($next_image_path, '/doc/'));
+                                            $output .= '<img class="pwe-profile-image t-entry-visual" src="'. $profile_image_gallery_short_path.'" alt="'. $profile_title .'">';
+                                        }
                                     }
                                 }
 
@@ -576,35 +569,35 @@ class PWEProfileSingle extends PWEProfile {
                         $output .= '  <div class="pwe-profile-buttons">';
                         if (in_array('profile_btn_tick', explode(',', $profile_buttons))) {
                             $output .= '<div class="pwe-btn-container">
-                                            <a class="pwe-link btn pwe-btn" href="'. $profile_tickets_button_link .'"'. 
+                                            <a class="pwe-link btn pwe-btn" href="'. $profile_tickets_button_link .'"'.
                                                 self::languageChecker('alt="link do biletów">Kup bilet</a>', 'alt="link to tickets">Buy a ticket')
-                                            .'</a>  
+                                            .'</a>
                                         </div>';
                         }
                         if (in_array('profile_btn_rej', explode(',', $profile_buttons))) {
                             $output .= '<div class="pwe-btn-container">
-                                            <a class="pwe-link btn pwe-btn" href="'. $profile_register_button_link .'"'. 
+                                            <a class="pwe-link btn pwe-btn" href="'. $profile_register_button_link .'"'.
                                                 self::languageChecker('alt="link do rejestracji">Weź udział', 'alt="link to registration">Take a part')
-                                            .'</a>  
+                                            .'</a>
                                         </div>';
                         }
                         if (in_array('profile_btn_exhib', explode(',', $profile_buttons))) {
                             $output .= '<div class="pwe-btn-container">
-                                            <a class="pwe-link btn pwe-btn" href="'. $profile_exhibitors_button_link .'"'. 
+                                            <a class="pwe-link btn pwe-btn" href="'. $profile_exhibitors_button_link .'"'.
                                                 self::languageChecker('alt="link do rejestracji wystawców">Zostań wystawcą', 'alt="link to exhibitor registration">Book a stand')
-                                            .'</a>  
+                                            .'</a>
                                         </div>';
                         }
                         $output .= '</div>';
                     }
-                    
+
                 $output .= '</div>';
                 if (in_array('border_bottom', explode(',', $profile_border))) {
                     $output .= '<p class="profile-box-shadow-right">&nbsp;</p>';
                 }
             $output .= '</div>
         </div>';
-        
+
         if ($mobile == 1) {
             $output .= '<script>
                 {
@@ -617,8 +610,8 @@ class PWEProfileSingle extends PWEProfile {
                 }
             </script>';
         }
-       
-        
+
+
 
         return $output;
     }

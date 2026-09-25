@@ -1,0 +1,1374 @@
+[
+  {
+    "kind": "dynamic-color",
+    "tag": "accent_color",
+    "callback": "PWEStyleVar::get_color(\"accent\", \"base\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 37,
+    "description": "Dynamiczny wariant koloru `accent` (`base`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "accent_dark_color",
+    "callback": "PWEStyleVar::get_color(\"accent\", \"dark\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 49,
+    "description": "Dynamiczny wariant koloru `accent` (`dark`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "accent_darker_color",
+    "callback": "PWEStyleVar::get_color(\"accent\", \"darker\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 53,
+    "description": "Dynamiczny wariant koloru `accent` (`darker`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "accent_light_color",
+    "callback": "PWEStyleVar::get_color(\"accent\", \"light\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 41,
+    "description": "Dynamiczny wariant koloru `accent` (`light`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "accent_lighter_color",
+    "callback": "PWEStyleVar::get_color(\"accent\", \"lighter\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 45,
+    "description": "Dynamiczny wariant koloru `accent` (`lighter`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "color_mix",
+    "callback": "PWEStyleVar::handle_color_mix",
+    "category": "Rejestracja bezpośrednia",
+    "source": "pwe-style-var.php",
+    "line": 59,
+    "description": "Shortcode `color_mix` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "color_mix",
+      "trade_fair_accent",
+      "trade_fair_main2"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "main2_color",
+    "callback": "PWEStyleVar::get_color(\"main2\", \"base\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 37,
+    "description": "Dynamiczny wariant koloru `main2` (`base`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "main2_dark_color",
+    "callback": "PWEStyleVar::get_color(\"main2\", \"dark\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 49,
+    "description": "Dynamiczny wariant koloru `main2` (`dark`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "main2_darker_color",
+    "callback": "PWEStyleVar::get_color(\"main2\", \"darker\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 53,
+    "description": "Dynamiczny wariant koloru `main2` (`darker`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "main2_light_color",
+    "callback": "PWEStyleVar::get_color(\"main2\", \"light\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 41,
+    "description": "Dynamiczny wariant koloru `main2` (`light`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-color",
+    "tag": "main2_lighter_color",
+    "callback": "PWEStyleVar::get_color(\"main2\", \"lighter\")",
+    "category": "Kolory",
+    "source": "pwe-style-var.php",
+    "line": 45,
+    "description": "Dynamiczny wariant koloru `main2` (`lighter`), rejestrowany w `init_color_shortcodes()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_about_desc_en",
+    "callback": "handle_fair_shortcode($atts, \"about_desc_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 194,
+    "description": "Zwraca pole `about_desc_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_about_desc_pl",
+    "callback": "handle_fair_shortcode($atts, \"about_desc_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 193,
+    "description": "Zwraca pole `about_desc_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_about_fair_info",
+    "callback": "PWEAboutFairInfo::PWEAboutFairInfoOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/about-fair-info/about-fair-info.php",
+    "line": 34,
+    "description": "Shortcode `pwe_about_fair_info` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_catalog",
+      "trade_fair_name",
+      "trade_fair_name_eng"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_about_title_en",
+    "callback": "handle_fair_shortcode($atts, \"about_title_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 192,
+    "description": "Zwraca pole `about_title_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_about_title_pl",
+    "callback": "handle_fair_shortcode($atts, \"about_title_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 191,
+    "description": "Zwraca pole `about_title_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_area",
+    "callback": "handle_fair_shortcode($atts, \"fair_area_current\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 163,
+    "description": "Zwraca pole `fair_area_current` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_area_prev",
+    "callback": "handle_fair_shortcode($atts, \"fair_area_previous\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 169,
+    "description": "Zwraca pole `fair_area_previous` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_article_author",
+    "callback": "PWEArticleAuthorManager::PWEArticleAuthorOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/article_author/article_author.php",
+    "line": 15,
+    "description": "Shortcode `pwe_article_author` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_attractions",
+    "callback": "PWEAttractions::PWEAttractionsOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/attractions/attractions.php",
+    "line": 13,
+    "description": "Shortcode `pwe_attractions` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_badge",
+    "callback": "handle_fair_shortcode($atts, \"badge\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 175,
+    "description": "Zwraca pole `badge` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_calendar",
+    "callback": "PWECalendar::pwe_calendar_loop_output",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/calendar/classes/loop-calendar.php",
+    "line": 11,
+    "description": "Shortcode `pwe_calendar` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "pwe_date_start",
+      "pwe_date_end"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_catalog",
+    "callback": "handle_fair_shortcode($atts, \"catalog\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 180,
+    "description": "Zwraca pole `catalog` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_catalog_id",
+    "callback": "handle_fair_shortcode($atts, \"catalog_id\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 181,
+    "description": "Zwraca pole `catalog_id` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_category_en",
+    "callback": "handle_fair_shortcode($atts, \"category_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 183,
+    "description": "Zwraca pole `category_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_category_pl",
+    "callback": "handle_fair_shortcode($atts, \"category_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 182,
+    "description": "Zwraca pole `category_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_color_accent",
+    "callback": "handle_fair_shortcode($atts, \"color_accent\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 173,
+    "description": "Zwraca pole `color_accent` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_color_main2",
+    "callback": "handle_fair_shortcode($atts, \"color_main2\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 174,
+    "description": "Zwraca pole `color_main2` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_conference_calendar",
+    "callback": "PWEConferenceCalendar::pwe_conference_calendar_loop_output",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/conference-calendar/conference-calendar.php",
+    "line": 9,
+    "description": "Shortcode `pwe_conference_calendar` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "pwe_name_pl",
+      "monthNum"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_conference_cap",
+    "callback": "PWE_Conference_Cap_Legacy_Renderer::PWEConferenceCapOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/conference-cap/core/legacy-shortcode-renderer.php",
+    "line": 24,
+    "description": "Shortcode `pwe_conference_cap` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_enddata",
+      "trade_fair_catalog_year"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_conference_desc_en",
+    "callback": "handle_fair_shortcode($atts, \"conference_desc_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 190,
+    "description": "Zwraca pole `conference_desc_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_conference_desc_pl",
+    "callback": "handle_fair_shortcode($atts, \"conference_desc_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 189,
+    "description": "Zwraca pole `conference_desc_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_conference_name",
+    "callback": "handle_fair_shortcode($atts, \"conference_name\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 186,
+    "description": "Zwraca pole `conference_name` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_conference_short_info",
+    "callback": "PWEConferenceShortInfo::PWEConferenceShortInfoOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/conference-short-info/conference-short-info.php",
+    "line": 36,
+    "description": "Shortcode `pwe_conference_short_info` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_conference_title_en",
+    "callback": "handle_fair_shortcode($atts, \"conference_title_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 188,
+    "description": "Zwraca pole `conference_title_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_conference_title_pl",
+    "callback": "handle_fair_shortcode($atts, \"conference_title_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 187,
+    "description": "Zwraca pole `conference_title_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_countries",
+    "callback": "handle_fair_shortcode($atts, \"fair_countries_current\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 162,
+    "description": "Zwraca pole `fair_countries_current` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_countries_prev",
+    "callback": "handle_fair_shortcode($atts, \"fair_countries_previous\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 168,
+    "description": "Zwraca pole `fair_countries_previous` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_date_end",
+    "callback": "handle_fair_shortcode($atts, \"date_end\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 156,
+    "description": "Zwraca pole `date_end` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_date_end_hour",
+    "callback": "handle_fair_shortcode($atts, \"date_end_hour\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 157,
+    "description": "Zwraca pole `date_end_hour` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_date_start",
+    "callback": "handle_fair_shortcode($atts, \"date_start\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 154,
+    "description": "Zwraca pole `date_start` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_date_start_hour",
+    "callback": "handle_fair_shortcode($atts, \"date_start_hour\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 155,
+    "description": "Zwraca pole `date_start_hour` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_desc_en",
+    "callback": "handle_fair_shortcode($atts, \"desc_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 148,
+    "description": "Zwraca pole `desc_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_desc_pl",
+    "callback": "handle_fair_shortcode($atts, \"desc_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 147,
+    "description": "Zwraca pole `desc_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_display_info",
+    "callback": "PWEDisplayInfo::PWEDisplayInfoOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/display-info/display-info.php",
+    "line": 26,
+    "description": "Shortcode `pwe_display_info` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_edition",
+    "callback": "handle_fair_shortcode($atts, \"edition\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 158,
+    "description": "Zwraca pole `edition` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_exhibitor_generator",
+    "callback": "PWEExhibitorGenerator::PWEExhibitorGeneratorOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/exhibitor-generator/exhibitor-generator.php",
+    "line": 42,
+    "description": "Shortcode `pwe_exhibitor_generator` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_catalog"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_exhibitors",
+    "callback": "handle_fair_shortcode($atts, \"fair_exhibitors_current\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 161,
+    "description": "Zwraca pole `fair_exhibitors_current` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_exhibitors_prev",
+    "callback": "handle_fair_shortcode($atts, \"fair_exhibitors_previous\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 167,
+    "description": "Zwraca pole `fair_exhibitors_previous` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_facebook",
+    "callback": "handle_fair_shortcode($atts, \"facebook\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 176,
+    "description": "Zwraca pole `facebook` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_fair_id",
+    "callback": "handle_fair_shortcode($atts, \"id\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 149,
+    "description": "Zwraca pole `id` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_full_desc_en",
+    "callback": "handle_fair_shortcode($atts, \"full_desc_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 153,
+    "description": "Zwraca pole `full_desc_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_full_desc_pl",
+    "callback": "handle_fair_shortcode($atts, \"full_desc_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 152,
+    "description": "Zwraca pole `full_desc_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_group",
+    "callback": "handle_fair_shortcode($atts, \"group\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 185,
+    "description": "Zwraca pole `group` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_hall",
+    "callback": "handle_fair_shortcode($atts, \"hall\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 171,
+    "description": "Zwraca pole `hall` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_hall_entrance",
+    "callback": "handle_fair_shortcode($atts, \"hall_entrance\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 172,
+    "description": "Zwraca pole `hall_entrance` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_header",
+    "callback": "PWEHeader::PWEHeaderOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/header/header.php",
+    "line": 29,
+    "description": "Shortcode `pwe_header` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "trade_fair_date",
+      "trade_fair_date_eng",
+      "trade_fair_desc",
+      "trade_fair_desc_eng",
+      "trade_fair_edition",
+      "trade_fair_datetotimer",
+      "trade_fair_enddata"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_industry",
+    "callback": "handle_fair_shortcode($atts, \"industry\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 184,
+    "description": "Zwraca pole `industry` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_industryevening",
+    "callback": "PWEIndustryEvening::PWEIndustryEveningOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/industry-evening/industry-evening.php",
+    "line": 13,
+    "description": "Shortcode `pwe_industryevening` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "gravityform"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_instagram",
+    "callback": "handle_fair_shortcode($atts, \"instagram\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 177,
+    "description": "Zwraca pole `instagram` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_katalog",
+    "callback": "PWECatalog::PWECatalogOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/katalog-wystawcow/main-katalog-wystawcow.php",
+    "line": 29,
+    "description": "Shortcode `pwe_katalog` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_domainadress",
+      "trade_fair_catalog"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_linkedin",
+    "callback": "handle_fair_shortcode($atts, \"linkedin\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 178,
+    "description": "Zwraca pole `linkedin` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_logotypes",
+    "callback": "PWELogotypes::PWELogotypesOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/logotypes/logotypes.php",
+    "line": 26,
+    "description": "Shortcode `pwe_logotypes` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_catalog"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_map",
+    "callback": "PWEMap::PWEMapOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/map/map.php",
+    "line": 32,
+    "description": "Shortcode `pwe_map` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_media_gallery",
+    "callback": "PWEMediaGallery::PWEMediaGalleryOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/media-gallery/media-gallery.php",
+    "line": 18,
+    "description": "Shortcode `pwe_media_gallery` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "currentIndex"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_name_en",
+    "callback": "handle_fair_shortcode($atts, \"name_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 146,
+    "description": "Zwraca pole `name_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_name_pl",
+    "callback": "handle_fair_shortcode($atts, \"name_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 145,
+    "description": "Zwraca pole `name_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_news",
+    "callback": "PWENews::PWENewsOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/news/news.php",
+    "line": 15,
+    "description": "Shortcode `pwe_news` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_posts",
+    "callback": "PWEPosts::pwePostsOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/posts/posts.php",
+    "line": 18,
+    "description": "Shortcode `pwe_posts` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_premieres",
+    "callback": "PWEPremieres::PWEPremieresOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/premieres/premieres.php",
+    "line": 14,
+    "description": "Shortcode `pwe_premieres` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_name",
+      "trade_fair_name_eng",
+      "oldLargeIdx",
+      "largeCardIndex",
+      "heroIndex"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_profile",
+    "callback": "PWEProfile::PWEProfileOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/profile/profile.php",
+    "line": 30,
+    "description": "Shortcode `pwe_profile` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_qr_active",
+    "callback": "PWEQRActive::PWEQRActiveOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "qr-active/main-qr-active.php",
+    "line": 13,
+    "description": "Shortcode `pwe_qr_active` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_registration",
+    "callback": "PWERegistration::PWERegistrationOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/registration/registration.php",
+    "line": 33,
+    "description": "Shortcode `pwe_registration` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_group"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_reviews",
+    "callback": "PWEReviews::PWEReviewsOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/reviews/reviews.php",
+    "line": 15,
+    "description": "Shortcode `pwe_reviews` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_short_desc_en",
+    "callback": "handle_fair_shortcode($atts, \"short_desc_en\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 151,
+    "description": "Zwraca pole `short_desc_en` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_short_desc_pl",
+    "callback": "handle_fair_shortcode($atts, \"short_desc_pl\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 150,
+    "description": "Zwraca pole `short_desc_pl` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_statistics_year_curr",
+    "callback": "handle_fair_shortcode($atts, \"fair_year_current\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 164,
+    "description": "Zwraca pole `fair_year_current` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_statistics_year_prev",
+    "callback": "handle_fair_shortcode($atts, \"fair_year_previous\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 170,
+    "description": "Zwraca pole `fair_year_previous` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_store",
+    "callback": "PWEStore::PWEStoreOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "includes/store/store.php",
+    "line": 14,
+    "description": "Shortcode `pwe_store` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "pwe_name_pl",
+      "pwe_desc_pl",
+      "pwe_date_start",
+      "trade_fair_group",
+      "trade_fair_domainadress"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "static",
+    "tag": "pwe_test",
+    "callback": "PWETest::PWETestOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "other/test.php",
+    "line": 14,
+    "description": "Shortcode `pwe_test` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_visitors",
+    "callback": "handle_fair_shortcode($atts, \"fair_visitors_current\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 159,
+    "description": "Zwraca pole `fair_visitors_current` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_visitors_foreign",
+    "callback": "handle_fair_shortcode($atts, \"fair_foreign_current\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 160,
+    "description": "Zwraca pole `fair_foreign_current` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_visitors_foreign_prev",
+    "callback": "handle_fair_shortcode($atts, \"fair_foreign_previous\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 166,
+    "description": "Zwraca pole `fair_foreign_previous` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_visitors_prev",
+    "callback": "handle_fair_shortcode($atts, \"fair_visitors_previous\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 165,
+    "description": "Zwraca pole `fair_visitors_previous` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "dynamic-map",
+    "tag": "pwe_youtube",
+    "callback": "handle_fair_shortcode($atts, \"youtube\")",
+    "category": "Dane targów — lokalny fallback PWE System",
+    "source": "backend/shortcodes.php",
+    "line": 179,
+    "description": "Zwraca pole `youtube` dla bieżącej lub wskazanej domeny. Rejestracja wykonywana przez mapę `pwe_get_shortcode_map()`.",
+    "options": [],
+    "shortcodes_used": [],
+    "pwe_functions": [
+      "PWECommonFunctions::get_database_fairs_data",
+      "PWECommonFunctions::get_database_translations_data"
+    ],
+    "load_status": "fallback",
+    "callback_mode": "closure-dispatch"
+  },
+  {
+    "kind": "static",
+    "tag": "pwelement",
+    "callback": "PWElements::PWElementsOutput",
+    "category": "Rejestracja bezpośrednia",
+    "source": "elements/pwelements-options.php",
+    "line": 33,
+    "description": "Shortcode `pwelement` rejestrowany bezpośrednio w kodzie.",
+    "options": [],
+    "shortcodes_used": [
+      "trade_fair_date"
+    ],
+    "pwe_functions": [],
+    "callback_mode": "direct"
+  }
+]

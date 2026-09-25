@@ -1,0 +1,83 @@
+[
+  {
+    "pattern": "pwe_name_{lang}",
+    "field_pattern": "name_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_desc_{lang}",
+    "field_pattern": "desc_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_short_desc_{lang}",
+    "field_pattern": "short_desc_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_full_desc_{lang}",
+    "field_pattern": "full_desc_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_conference_title_{lang}",
+    "field_pattern": "conference_title_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_conference_desc_{lang}",
+    "field_pattern": "conference_desc_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_about_title_{lang}",
+    "field_pattern": "about_title_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_about_desc_{lang}",
+    "field_pattern": "about_desc_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  },
+  {
+    "pattern": "pwe_category_{lang}",
+    "field_pattern": "category_{lang}",
+    "source": "backend/shortcodes.php",
+    "registration": "runtime-map",
+    "callback": "handle_fair_shortcode",
+    "condition": "Dla aktywnych języków WPML innych niż pl/en; gdy WPML nie zwróci listy, kod używa fallbacku cs,de,it,lt,lv,ru,sk,uk.",
+    "load_status": "fallback-when-pwe-system-inactive"
+  }
+]

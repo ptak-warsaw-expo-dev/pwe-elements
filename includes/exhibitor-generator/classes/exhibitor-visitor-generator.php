@@ -96,6 +96,8 @@ class PWEExhibitorVisitorGenerator extends PWEExhibitorGenerator {
             'generator_patron' => '',
         ), $atts ));
 
+        $generator_form_id_auto = PWECommonFunctions::lang_pl() ? PWECommonFunctions::get_gf_form_id('Rejestracja gości wystawców PL') : PWECommonFunctions::get_gf_form_id('Rejestracja gości wystawców EN');
+
         $all_exhibitors = array();
         $company_array = array();
 
@@ -157,10 +159,10 @@ class PWEExhibitorVisitorGenerator extends PWEExhibitorGenerator {
         switch (strtolower($fair_data[0]->fair_group)) {
             case 'gr1':
                 require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr1.php';
-                return render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite);
+                return render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite, $generator_form_id_auto);
 
             case 'gr2':
-            case 'b2c': // 👈 dodany case b2c
+            case 'b2c':
                 $all_partners = PWECommonFunctions::get_database_logotypes_data();
                 $all_conferences = PWECommonFunctions::get_database_conferences_data();
                 require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr2.php';
@@ -170,12 +172,14 @@ class PWEExhibitorVisitorGenerator extends PWEExhibitorGenerator {
                     $all_partners,
                     $all_conferences,
                     $pweGeneratorWebsite,
-                    $domain
+                    $domain,
+                    $generator_form_id_auto
                 );
 
             case 'gr3':
+            case 'b2c-new':
                 require_once plugin_dir_path(__DIR__) . 'assets/visitors_gr3.php';
-                return render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite);
+                return render_gr3($atts, $all_exhibitors, $pweGeneratorWebsite, $generator_form_id_auto);
         }
     }
 }

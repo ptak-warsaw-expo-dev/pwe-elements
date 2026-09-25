@@ -57,6 +57,7 @@ class PWEConferenceCap {
      * @param array|string $atts Shortcode attributes.
      */
     public static function PWEConferenceCapOutput($atts): string {
+        
         $shortcode = new PWE_Conference_Cap_Shortcode();
 
         return $shortcode->render(is_array($atts) ? $atts : array());

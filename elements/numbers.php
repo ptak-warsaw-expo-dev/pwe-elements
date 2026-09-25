@@ -285,7 +285,7 @@ class PWElementNumbers extends PWElements {
                 }
                 .pwe-numbers__img {
                     flex: .5;
-                    background-image: url(/wp-content/plugins/pwe-media/media/bg-object.jpg);
+                    background-image: url(/wp-content/plugins/pwe-media/media/bg-object.webp);
                     background-repeat: no-repeat;
                     background-size: cover;
                     background-position: center;

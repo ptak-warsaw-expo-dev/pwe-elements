@@ -1,0 +1,48 @@
+[
+  {
+    "name": "PWE System",
+    "kind": "optional-plugin",
+    "relationship": "preferred shared implementation when active",
+    "fallback": "pwefunctions.php + backend/shortcodes.php"
+  },
+  {
+    "name": "Gravity Forms",
+    "kind": "runtime-plugin",
+    "relationship": "forms, entries, notifications, feeds and registration processes"
+  },
+  {
+    "name": "WPBakery / Visual Composer",
+    "kind": "runtime-plugin",
+    "relationship": "registration of visual elements via vc_map"
+  },
+  {
+    "name": "WPML",
+    "kind": "optional-plugin",
+    "relationship": "language discovery and translation relations"
+  },
+  {
+    "name": "WP Rocket",
+    "kind": "optional-plugin",
+    "relationship": "JS exclusions and cache integration"
+  },
+  {
+    "name": "custom-element",
+    "kind": "external-pwe-plugin",
+    "relationship": "legacy/process HTTP callbacks and mailing/after-submission integration"
+  },
+  {
+    "name": "Plugin Update Checker",
+    "kind": "bundled-third-party",
+    "path": "plugin-update-checker/"
+  },
+  {
+    "name": "TCPDF",
+    "kind": "bundled-third-party",
+    "path": "assets/tcpdf/"
+  },
+  {
+    "name": "FPDI",
+    "kind": "bundled-third-party",
+    "path": "other/FPDI/"
+  }
+]

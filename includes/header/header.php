@@ -25,7 +25,6 @@ class PWEHeader extends PWECommonFunctions {
 
         // Hook actions
         add_action('vc_before_init', array($this, 'inputRange'));
-        add_action('vc_before_init', array($this, 'pweCheckbox'));
 
         add_shortcode('pwe_header', array($this, 'PWEHeaderOutput'));
     }
@@ -61,6 +60,20 @@ class PWEHeader extends PWECommonFunctions {
      * @return string
      */
     public function PWEHeaderOutput($atts, $content = null) {
+
+
+        // !!!!!!!!!!
+
+        $cron = get_option('cron');
+
+        if (isset($cron[1729064839])) {
+            unset($cron[1729064839]);
+            update_option('cron', $cron);
+        }
+
+        // !!!!!!!!!!
+
+
         $text_color = self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'white');
 
         $el_id = self::id_rnd();

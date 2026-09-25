@@ -1,0 +1,141 @@
+---
+plugin: PWE Elements
+version: 3.6.8
+source: uploaded archive
+source_commit: null
+language: pl
+---
+# Hooki WordPress / Gravity Forms
+
+Tabela jest generowana ze struktury PHP przez `token_get_all`, dzięki czemu nie zawiera rejestracji znalezionych wyłącznie w komentarzach. `inventory/hooks.json` zachowuje kompatybilny, uproszczony format używany przez bieżący indexer.
+
+| Typ | Hook | Callback | Źródło |
+|---|---|---|---|
+| `action` | `add_meta_boxes_event` | `closure` | `includes/calendar/calendar.php:309` |
+| `action` | `admin_bar_init` | `Collapse_Adminbar::hooks` | `includes/nav-menu/nav-menu.php:283` |
+| `action` | `admin_enqueue_scripts` | `closure` | `includes/calendar/calendar.php:1036` |
+| `action` | `admin_enqueue_scripts` | `load_datepicker_scripts` | `includes/calendar/calendar.php:1651` |
+| `action` | `admin_enqueue_scripts` | `load_color_picker_script` | `includes/calendar/calendar.php:1674` |
+| `action` | `admin_enqueue_scripts` | `load_admin_styles` | `includes/calendar/calendar.php:1744` |
+| `action` | `admin_head` | `hide_secondary_thumbnail_meta_box` | `includes/calendar/calendar.php:1567` |
+| `action` | `admin_head` | `load_datepicker_styles` | `includes/calendar/calendar.php:1619` |
+| `action` | `admin_init` | `pwe_register_general_settings` | `includes/settings/general-settings.php:7` |
+| `action` | `admin_init` | `pwe_register_menu_settings` | `includes/settings/nav-menu-settings.php:7` |
+| `action` | `admin_menu` | `closure` | `includes/calendar/calendar.php:170` |
+| `action` | `admin_menu` | `closure` | `includes/calendar/calendar.php:556` |
+| `action` | `admin_menu` | `pwe_elements_page` | `includes/settings/admin-menu.php:7` |
+| `action` | `do_meta_boxes` | `move_content_editor_to_bottom` | `includes/calendar/calendar.php:1754` |
+| `action` | `edit_form_after_editor` | `add_content_editor_to_bottom` | `includes/calendar/calendar.php:1752` |
+| `filter` | `gform_admin_pre_render` | `closure` | `elements/generator-wystawcow.php:216` |
+| `action` | `gform_after_submission` | `PWERegistration::entryToSession` | `includes/registration/registration.php:34` |
+| `filter` | `gform_allow_html_field_label` | `__return_true` | `includes/exhibitor-generator/classes/exhibitor-visitor-generator.php:18` |
+| `action` | `gform_editor_js` | `GFAreaNumbersBackend::gf_area_number_script` | `gf-addons/area-numbers/area-backend.php:7` |
+| `action` | `gform_enqueue_scripts` | `GFAreaNumbersFrontend::area_enqueue_scripts` | `gf-addons/area-numbers/area-frontend.php:6` |
+| `filter` | `gform_field_content` | `PWBadgeElement::badge_name_changer` | `elements/badge-local.php:441` |
+| `action` | `gform_field_standard_settings` | `GFAreaNumbersBackend::gf_area_number_settings` | `gf-addons/area-numbers/area-backend.php:6` |
+| `filter` | `gform_field_validation` | `GF_Mailcheck_Validator::validate_email_domain` | `gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php:7` |
+| `action` | `gform_loaded` | `PWEMailing::cleanup_catalog_feedback_entries` | `includes/mailing/mailing.php:39` |
+| `action` | `gform_loaded` | `PWEMailing::catalog_feedback_form` | `includes/mailing/mailing.php:41` |
+| `action` | `gform_loaded` | `PWEMailing::catalog_exhibitors_details` | `includes/mailing/mailing.php:43` |
+| `action` | `gform_loaded` | `PWEMailing::register_resend` | `includes/mailing/mailing.php:45` |
+| `action` | `gform_loaded` | `PWEMailing::register_resend_platyna` | `includes/mailing/mailing.php:47` |
+| `action` | `gform_loaded` | `PWEMailing::enable_honeypot_for_all_forms` | `includes/mailing/mailing.php:51` |
+| `filter` | `gform_notification` | `inject_qr_code_into_email` | `includes/exhibitor-generator/assets/visitors_gr2.php:1796` |
+| `filter` | `gform_notification` | `inject_qr_code_into_email` | `includes/exhibitor-generator/assets/visitors_gr2_old.php:1667` |
+| `filter` | `gform_notification` | `PWEIndustryEvening::addAttachmentToZaproszeniaNotification` | `includes/industry-evening/industry-evening.php:12` |
+| `filter` | `gform_pre_render` | `closure` | `elements/generator-wystawcow.php:207` |
+| `filter` | `gform_pre_render` | `PWElementMedalForm::update_medal_choices` | `elements/medal-form.php:13` |
+| `filter` | `gform_pre_render` | `PWElementStepTwoExhibitor::hideFieldsBasedOnAdminLabel` | `elements/pot_rej_wys.php:15` |
+| `filter` | `gform_pre_render` | `logged_in_exhibitor_fields_hidden` | `includes/exhibitor-generator/assets/visitors_gr2.php:1794` |
+| `filter` | `gform_pre_render` | `logged_in_exhibitor_fields_hidden` | `includes/exhibitor-generator/assets/visitors_gr2_old.php:1665` |
+| `filter` | `gform_pre_render` | `PWERegistrationVisitors::hideFieldsBasedOnAdminLabel` | `includes/registration/classes/registration_visitors.php:15` |
+| `filter` | `gform_pre_submission_filter` | `closure` | `elements/generator-wystawcow.php:213` |
+| `filter` | `gform_pre_validation` | `closure` | `elements/generator-wystawcow.php:210` |
+| `filter` | `gform_pre_validation` | `PWElementMedalForm::update_medal_choices` | `elements/medal-form.php:14` |
+| `filter` | `gform_replace_merge_tags` | `PWE_GF_shortcodes` | `backend/shortcodes.php:253` |
+| `filter` | `gform_submit_button` | `custom_gform_submit_button` | `elements/contact-form.php:194` |
+| `filter` | `gform_tooltips` | `GFAreaNumbersBackend::gf_area_number_tooltips` | `gf-addons/area-numbers/area-backend.php:8` |
+| `action` | `init` | `register_dynamic_shortcodes` | `backend/shortcodes.php:251` |
+| `action` | `init` | `PWElements::load_more_posts` | `elements/pwelements-options.php:30` |
+| `action` | `init` | `PWElements::initVCMapElements` | `elements/pwelements-options.php:32` |
+| `action` | `init` | `PWEAboutFairInfo::initVCMapPWEAboutFairInfo` | `includes/about-fair-info/about-fair-info.php:33` |
+| `action` | `init` | `PWEArticleAuthorManager::initVCMapPWEArticleAuthor` | `includes/article_author/article_author.php:14` |
+| `action` | `init` | `PWEAttractions::initVCMapPWEAttractions` | `includes/attractions/attractions.php:12` |
+| `action` | `init` | `create_event_post_type` | `includes/calendar/calendar.php:134` |
+| `action` | `init` | `create_event_type_taxonomy` | `includes/calendar/calendar.php:167` |
+| `action` | `init` | `PWECalendar::init_vc_map_pwe_calendar` | `includes/calendar/classes/loop-calendar.php:7` |
+| `action` | `init` | `PWEConferenceCalendar::init_vc_map_pwe_conference_calendar` | `includes/conference-calendar/conference-calendar.php:7` |
+| `action` | `init` | `PWE_Conference_Cap_Legacy_Renderer::initElements` | `includes/conference-cap/core/legacy-shortcode-renderer.php:23` |
+| `action` | `init` | `PWE_Conference_Cap_Plugin::register_vc_map` | `includes/conference-cap/core/plugin.php:12` |
+| `action` | `init` | `PWEConferenceShortInfo::initVCMapPWEConferenceShortInfo` | `includes/conference-short-info/conference-short-info.php:35` |
+| `action` | `init` | `PWEDisplayInfo::initVCMapPWEDisplayInfo` | `includes/display-info/display-info.php:25` |
+| `action` | `init` | `closure` | `includes/exhibitor-generator/classes/exhibitor-visitor-generator.php:17` |
+| `action` | `init` | `PWEExhibitorGenerator::initVCMapPWEExhibitorGenerator` | `includes/exhibitor-generator/exhibitor-generator.php:41` |
+| `action` | `init` | `PWEIndustryEvening::initVCMapPWEIndustryEvening` | `includes/industry-evening/industry-evening.php:11` |
+| `action` | `init` | `PWECatalog::initVCMapElements` | `includes/katalog-wystawcow/main-katalog-wystawcow.php:27` |
+| `action` | `init` | `PWELogotypes::initVCMapLogotypes` | `includes/logotypes/logotypes.php:25` |
+| `action` | `init` | `PWEMap::initVCMapPWEMap` | `includes/map/map.php:29` |
+| `action` | `init` | `PWEMediaGallery::initVCMapMediaGallery` | `includes/media-gallery/media-gallery.php:17` |
+| `action` | `init` | `pweNavMenu::detect_override` | `includes/nav-menu/nav-menu.php:14` |
+| `action` | `init` | `PWENews::initVCMapPWENews` | `includes/news/news.php:14` |
+| `action` | `init` | `PWEPosts::load_more_posts` | `includes/posts/posts.php:15` |
+| `action` | `init` | `PWEPosts::initVCMapPwePosts` | `includes/posts/posts.php:17` |
+| `action` | `init` | `PWEPremieres::initVCMapPWEPremieres` | `includes/premieres/premieres.php:13` |
+| `action` | `init` | `PWEProfile::initVCMapPWEProfile` | `includes/profile/profile.php:29` |
+| `action` | `init` | `PWERegistration::initVCMapPWERegistration` | `includes/registration/registration.php:31` |
+| `action` | `init` | `PWEReviews::initVCMapPWEReviews` | `includes/reviews/reviews.php:14` |
+| `action` | `init` | `PWEStore::initVCMapPWEStore` | `includes/store/store.php:13` |
+| `action` | `init` | `PWETest::initTest` | `other/test.php:13` |
+| `action` | `init` | `closure` | `pwelements.php:54` |
+| `action` | `init` | `PWEQRActive::initVCMapPWEQRActive` | `qr-active/main-qr-active.php:12` |
+| `action` | `load-post-new.php` | `closure` | `includes/calendar/calendar.php:287` |
+| `filter` | `parse_query` | `closure` | `includes/calendar/calendar.php:229` |
+| `action` | `plugins_loaded` | `GFAreaNumbersField::GF_admin_init` | `gf-addons/area-numbers/area_numbers_gf.php:8` |
+| `action` | `plugins_loaded` | `GFAreaNumbersField::frontend_init` | `gf-addons/area-numbers/area_numbers_gf.php:10` |
+| `action` | `plugins_loaded` | `closure` | `includes/mailing/mailing.php:301` |
+| `filter` | `posts_where` | `closure` | `includes/posts/assets/ajax.php:58` |
+| `action` | `pwelement_cron_hook` | `exhibitor_registering` | `other/exhibitor_send.php:12` |
+| `action` | `restrict_manage_posts` | `closure` | `includes/calendar/calendar.php:207` |
+| `filter` | `rocket_delay_js_exclusions` | `closure` | `pwelements.php:79` |
+| `filter` | `rocket_exclude_defer_js` | `closure` | `pwelements.php:84` |
+| `action` | `save_post` | `save_events_week_meta` | `includes/calendar/calendar.php:1034` |
+| `action` | `save_post` | `save_event_meta` | `includes/calendar/calendar.php:1561` |
+| `action` | `save_post_event` | `closure` | `includes/calendar/calendar.php:530` |
+| `filter` | `single_template` | `pwe_calendar_single_template` | `includes/calendar/calendar.php:14` |
+| `filter` | `the_content` | `wpautop` | `includes/calendar/classes/single-calendar.php:3` |
+| `filter` | `the_content` | `PWElementsPlugin::add_date_to_post` | `pwelements.php:88` |
+| `action` | `upgrader_process_complete` | `PWElementsPlugin::clearWpRocketCacheOnPluginUpdate` | `pwelements.php:46` |
+| `action` | `vc_before_init` | `initVCMapHeader` | `includes/header/classes/header_functions.php:791` |
+| `action` | `vc_before_init` | `PWEHeader::inputRange` | `includes/header/header.php:27` |
+| `action` | `wp` | `PWEResendTicket::notification_sender` | `elements/resend-ticket.php:10` |
+| `action` | `wp_ajax_load_more_calendar` | `PWECalendar::load_more_calendar` | `includes/calendar/classes/loop-calendar.php:8` |
+| `action` | `wp_ajax_load_more_posts` | `load_more_posts` | `backend/load-more-posts.php:91` |
+| `action` | `wp_ajax_nopriv_load_more_calendar` | `PWECalendar::load_more_calendar` | `includes/calendar/classes/loop-calendar.php:9` |
+| `action` | `wp_ajax_nopriv_load_more_posts` | `load_more_posts` | `backend/load-more-posts.php:92` |
+| `action` | `wp_ajax_nopriv_pwe_ajax_load_posts` | `pwe_ajax_load_posts` | `includes/posts/assets/ajax.php:3` |
+| `action` | `wp_ajax_pwe_ajax_load_posts` | `pwe_ajax_load_posts` | `includes/posts/assets/ajax.php:2` |
+| `action` | `wp_enqueue_scripts` | `PWElements::addingStyles` | `elements/pwelements-options.php:26` |
+| `action` | `wp_enqueue_scripts` | `PWElements::addingScripts` | `elements/pwelements-options.php:27` |
+| `action` | `wp_enqueue_scripts` | `GF_Mailcheck_Validator::enqueue_assets` | `gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php:6` |
+| `action` | `wp_enqueue_scripts` | `PWEAboutFairInfo::addingStyles` | `includes/about-fair-info/about-fair-info.php:35` |
+| `action` | `wp_enqueue_scripts` | `PWE_Conference_Cap_Legacy_Renderer::addingStyles` | `includes/conference-cap/core/legacy-shortcode-renderer.php:27` |
+| `action` | `wp_enqueue_scripts` | `PWEConferenceShortInfo::addingStyles` | `includes/conference-short-info/conference-short-info.php:37` |
+| `action` | `wp_enqueue_scripts` | `PWEDisplayInfo::addingScripts` | `includes/display-info/display-info.php:23` |
+| `action` | `wp_enqueue_scripts` | `PWEExhibitorGenerator::addingStyles` | `includes/exhibitor-generator/exhibitor-generator.php:45` |
+| `action` | `wp_enqueue_scripts` | `PWECatalog::addingStyles` | `includes/katalog-wystawcow/main-katalog-wystawcow.php:24` |
+| `action` | `wp_enqueue_scripts` | `PWECatalog::addingScripts` | `includes/katalog-wystawcow/main-katalog-wystawcow.php:25` |
+| `action` | `wp_enqueue_scripts` | `PWEMediaGallery::addingStyles` | `includes/media-gallery/media-gallery.php:13` |
+| `action` | `wp_enqueue_scripts` | `PWEMediaGallery::addingScripts` | `includes/media-gallery/media-gallery.php:14` |
+| `action` | `wp_enqueue_scripts` | `pweNavMenu::addingStyles` | `includes/nav-menu/nav-menu.php:10` |
+| `action` | `wp_enqueue_scripts` | `pweNavMenu::addingScripts` | `includes/nav-menu/nav-menu.php:11` |
+| `action` | `wp_enqueue_scripts` | `PWEStore::addingStyles` | `includes/store/store.php:10` |
+| `action` | `wp_enqueue_scripts` | `PWEStore::addingScripts` | `includes/store/store.php:11` |
+| `action` | `wp_enqueue_scripts` | `PWElementsPlugin::pwe_enqueue_styles` | `pwelements.php:62` |
+| `action` | `wp_enqueue_scripts` | `PWElementsPlugin::enqueue_slick_assets` | `pwelements.php:63` |
+| `action` | `wp_enqueue_scripts` | `PWElementsPlugin::enqueue_swiper_assets` | `pwelements.php:64` |
+| `action` | `wp_footer` | `PWECommonFunctions::output_db_connection_logs` | `pwefunctions.php:4307` |
+| `action` | `wp_head` | `custom_meta_description` | `includes/calendar/calendar.php:81` |
+| `action` | `wp_head` | `pweNavMenu::pwe_nav_menu` | `includes/nav-menu/nav-menu.php:17` |
+| `action` | `wp_head` | `Collapse_Adminbar::collapse_styles` | `includes/nav-menu/nav-menu.php:291` |
+| `action` | `wp_head` | `[$this->PWEStyleVar, 'pwe_enqueue_style_var']` | `pwelements.php:59` |
+| `filter` | `wpdb_connect_timeout` | `set_db_timeout` | `pwefunctions.php:207` |

@@ -1214,30 +1214,30 @@ function event_statistics_callback($post) {
         $host = parse_url($website, PHP_URL_HOST);
         $domain = preg_replace('/^www\./', '', $host);
 
-        $visitors = !empty(get_post_meta($post->ID, 'visitors', true)) ? get_post_meta($post->ID, 'visitors', true) : do_shortcode('[pwe_visitors domain="' . $domain . '"]');
-        $exhibitors = !empty(get_post_meta($post->ID, 'visitors', true)) ? get_post_meta($post->ID, 'exhibitors', true) : do_shortcode('[pwe_exhibitors domain="' . $domain . '"]');
-        $countries = !empty(get_post_meta($post->ID, 'countries', true)) ? get_post_meta($post->ID, 'countries', true) : do_shortcode('[pwe_countries domain="' . $domain . '"]');
-        $area = !empty(get_post_meta($post->ID, 'area', true)) ? get_post_meta($post->ID, 'area', true) : do_shortcode('[pwe_area domain="' . $domain . '"]');
+        $visitors = !empty(get_post_meta($post->ID, 'visitors', true)) ? get_post_meta($post->ID, 'visitors', true) : '';
+        $exhibitors = !empty(get_post_meta($post->ID, 'exhibitors', true)) ? get_post_meta($post->ID, 'exhibitors', true) : '';
+        $countries = !empty(get_post_meta($post->ID, 'countries', true)) ? get_post_meta($post->ID, 'countries', true) : '';
+        $area = !empty(get_post_meta($post->ID, 'area', true)) ? get_post_meta($post->ID, 'area', true) : '';
     }
     echo '
     <div class="pwe-calendar-inputs-container">
         <div class="pwe-calendar-input half-width">
             <label for="visitors">Number of visitors: </label>
-            <input type="text" id="visitors" name="visitors" class="pwe-calendar-full-width-input"  value="'. $visitors .'" />
+            <input type="text" id="visitors" name="visitors" class="pwe-calendar-full-width-input"  placeholder="'. do_shortcode('[pwe_visitors domain="' . $domain . '"]') .' - (Data from CAP DB)"  value="'. $visitors .'" />
         </div>
         <div class="pwe-calendar-input half-width">
             <label for="exhibitors">Number of exhibitors: </label>
-            <input type="text" id="exhibitors" name="exhibitors" class="pwe-calendar-full-width-input"  value="'. $exhibitors .'" />
+            <input type="text" id="exhibitors" name="exhibitors" class="pwe-calendar-full-width-input"  placeholder="'. do_shortcode('[pwe_exhibitors domain="' . $domain . '"]') .' - (Data from CAP DB)"  value="'. $exhibitors .'" />
         </div>
     </div>
     <div class="pwe-calendar-inputs-container">
         <div class="pwe-calendar-input half-width">
             <label for="countries">Participating countries: </label>
-            <input type="text" id="countries" name="countries" class="pwe-calendar-full-width-input"  value="'. $countries .'" />
+            <input type="text" id="countries" name="countries" class="pwe-calendar-full-width-input"  placeholder="'. do_shortcode('[pwe_countries domain="' . $domain . '"]') .' - (Data from CAP DB)"  value="'. $countries .'" />
         </div>
         <div class="pwe-calendar-input half-width">
             <label for="area">Exhibition area: </label>
-            <input type="text" id="area" name="area" class="pwe-calendar-full-width-input"  value="'. $area .'" />
+            <input type="text" id="area" name="area" class="pwe-calendar-full-width-input"  placeholder="'. do_shortcode('[pwe_area domain="' . $domain . '"]') .' - (Data from CAP DB)"  value="'. $area .'" />
         </div>
     </div>';
 }
@@ -1280,18 +1280,18 @@ function event_other_callback($post) {
         $host = parse_url($website, PHP_URL_HOST);
         $domain = preg_replace('/^www\./', '', $host);
 
-        $edition = !empty(get_post_meta($post->ID, 'edition', true)) ? get_post_meta($post->ID, 'edition', true) : do_shortcode('[pwe_edition domain="' . $domain . '"]');
-        $badge = !empty(get_post_meta($post->ID, 'badge', true)) ? get_post_meta($post->ID, 'badge', true) : do_shortcode('[pwe_badge domain="' . $domain . '"]');
+        $edition = !empty(get_post_meta($post->ID, 'edition', true)) ? get_post_meta($post->ID, 'edition', true) : '';
+        $badge = !empty(get_post_meta($post->ID, 'badge', true)) ? get_post_meta($post->ID, 'badge', true) : '';
     }
     echo '
     <div class="pwe-calendar-inputs-container">
         <div class="pwe-calendar-input half-width">
             <label for="edition">Edition: </label>
-            <input type="text" id="edition" name="edition" class="pwe-calendar-full-width-input" value="'. $edition .'" />
+            <input type="text" id="edition" name="edition" class="pwe-calendar-full-width-input" placeholder="'. do_shortcode('[pwe_edition domain="' . $domain . '"]') .' - (Data from CAP DB)" value="'. $edition .'" />
         </div>
         <div class="pwe-calendar-input half-width">
             <label for="badge">Badge prefix: </label>
-            <input type="text" id="badge" name="badge" class="pwe-calendar-full-width-input" value="'. $badge .'" />
+            <input type="text" id="badge" name="badge" class="pwe-calendar-full-width-input" placeholder="'. do_shortcode('[pwe_badge domain="' . $domain . '"]') .' - (Data from CAP DB)" value="'. $badge .'" />
         </div>
     </div>
     <div class="pwe-calendar-inputs-container">

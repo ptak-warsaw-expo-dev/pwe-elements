@@ -300,251 +300,251 @@ function add_field_phone_number($generator_form_id) {
     update_option( $done_option_key, 1 );
 };
 
-function add_notification_conf_to_form($generator_form_id) {
-    global $local_lang_pl;
+// function add_notification_conf_to_form($generator_form_id) {
+//     global $local_lang_pl;
 
-    $done_option_key = "gf_notification_conf_added_$generator_form_id";
+//     $done_option_key = "gf_notification_conf_added_$generator_form_id";
 
-    // delete_option( $done_option_key );
+//     // delete_option( $done_option_key );
 
-    if (get_option($done_option_key)) {
-        return;
-    }
+//     if (get_option($done_option_key)) {
+//         return;
+//     }
 
-    $form = GFAPI::get_form($generator_form_id);
-    if (!$form || is_wp_error($form)) {
-        echo "<script>console.log('GF: nie udało się pobrać formularza');</script>";
-        return;
-    }
+//     $form = GFAPI::get_form($generator_form_id);
+//     if (!$form || is_wp_error($form)) {
+//         echo "<script>console.log('GF: nie udało się pobrać formularza');</script>";
+//         return;
+//     }
 
-    // foreach ($form['notifications'] as $key => $notification) {
-    //     if (
-    //         isset($notification['name']) &&
-    //         in_array($notification['name'], [
-    //             'Dziękujemy za rejestrację na Targi Konferencja',
-    //             'Dziękujemy za rejestrację na Targi Konferencja - ENG',
-    //         ])
-    //     ) {
-    //         unset($form['notifications'][$key]);
-    //     }
-    // }
+//     // foreach ($form['notifications'] as $key => $notification) {
+//     //     if (
+//     //         isset($notification['name']) &&
+//     //         in_array($notification['name'], [
+//     //             'Dziękujemy za rejestrację na Targi Konferencja',
+//     //             'Dziękujemy za rejestrację na Targi Konferencja - ENG',
+//     //         ])
+//     //     ) {
+//     //         unset($form['notifications'][$key]);
+//     //     }
+//     // }
 
-    $admin_label_to_id = [];
-    foreach ($form['fields'] as $field) {
-        if (!empty($field->adminLabel)) {
-            $admin_label_to_id[$field->adminLabel] = $field->id;
-        }
-    }
+//     $admin_label_to_id = [];
+//     foreach ($form['fields'] as $field) {
+//         if (!empty($field->adminLabel)) {
+//             $admin_label_to_id[$field->adminLabel] = $field->id;
+//         }
+//     }
 
-    // Dodaj lub zmodyfikuj logikę pola telefonu (po adminLabel lub CSS class)
-    foreach ($form['fields'] as $index => $field) {
-        if (isset($field->cssClass) && strpos($field->cssClass, 'pwe-phone-number') !== false) {
+//     // Dodaj lub zmodyfikuj logikę pola telefonu (po adminLabel lub CSS class)
+//     foreach ($form['fields'] as $index => $field) {
+//         if (isset($field->cssClass) && strpos($field->cssClass, 'pwe-phone-number') !== false) {
 
-            $patron_id = isset($admin_label_to_id['patron']) ? (string) $admin_label_to_id['patron'] : null;
+//             $patron_id = isset($admin_label_to_id['patron']) ? (string) $admin_label_to_id['patron'] : null;
 
-            if ($patron_id !== null) {
-                $form['fields'][$index]->conditionalLogic = [
-                    'actionType' => 'show',
-                    'logicType' => 'any',
-                    'rules' => [
-                        [
-                            'fieldId' => $patron_id,
-                            'operator' => 'is',
-                            'value' => 'conf',
-                        ],
-                        [
-                            'fieldId' => $patron_id,
-                            'operator' => 'is',
-                            'value' => 'gr2',
-                        ],
-                        [
-                            'fieldId' => $patron_id,
-                            'operator' => 'is',
-                            'value' => 'patron',
-                        ],
-                    ],
-                ];
-            }
+//             if ($patron_id !== null) {
+//                 $form['fields'][$index]->conditionalLogic = [
+//                     'actionType' => 'show',
+//                     'logicType' => 'any',
+//                     'rules' => [
+//                         [
+//                             'fieldId' => $patron_id,
+//                             'operator' => 'is',
+//                             'value' => 'conf',
+//                         ],
+//                         [
+//                             'fieldId' => $patron_id,
+//                             'operator' => 'is',
+//                             'value' => 'gr2',
+//                         ],
+//                         [
+//                             'fieldId' => $patron_id,
+//                             'operator' => 'is',
+//                             'value' => 'patron',
+//                         ],
+//                     ],
+//                 ];
+//             }
 
-            // Nie przetwarzaj dalej — zakładamy, że tylko jedno pole telefonu
-            break;
-        }
-    }
+//             // Nie przetwarzaj dalej — zakładamy, że tylko jedno pole telefonu
+//             break;
+//         }
+//     }
 
-    // Dodaj logikę do pola zgody marketingowej
-    foreach ($form['fields'] as $index => $field) {
-        if (isset($field->inputName) && $field->inputName === 'zgoda_marketingowa') {
-            $patron_id = isset($admin_label_to_id['patron']) ? (string) $admin_label_to_id['patron'] : null;
+//     // Dodaj logikę do pola zgody marketingowej
+//     foreach ($form['fields'] as $index => $field) {
+//         if (isset($field->inputName) && $field->inputName === 'zgoda_marketingowa') {
+//             $patron_id = isset($admin_label_to_id['patron']) ? (string) $admin_label_to_id['patron'] : null;
 
-            if ($patron_id !== null) {
-                $form['fields'][$index]->conditionalLogic = [
-                    'actionType' => 'show',
-                    'logicType' => 'any',
-                    'rules' => [
-                        [
-                            'fieldId' => $patron_id,
-                            'operator' => 'is',
-                            'value' => 'gr2',
-                        ],
-                        [
-                            'fieldId' => $patron_id,
-                            'operator' => 'is',
-                            'value' => 'conf',
-                        ],
-                        [
-                            'fieldId' => $patron_id,
-                            'operator' => 'is',
-                            'value' => 'patron',
-                        ],
-                    ],
-                ];
-            }
+//             if ($patron_id !== null) {
+//                 $form['fields'][$index]->conditionalLogic = [
+//                     'actionType' => 'show',
+//                     'logicType' => 'any',
+//                     'rules' => [
+//                         [
+//                             'fieldId' => $patron_id,
+//                             'operator' => 'is',
+//                             'value' => 'gr2',
+//                         ],
+//                         [
+//                             'fieldId' => $patron_id,
+//                             'operator' => 'is',
+//                             'value' => 'conf',
+//                         ],
+//                         [
+//                             'fieldId' => $patron_id,
+//                             'operator' => 'is',
+//                             'value' => 'patron',
+//                         ],
+//                     ],
+//                 ];
+//             }
 
-            break; // zakładamy jedno pole zgody
-        }
-    }
+//             break; // zakładamy jedno pole zgody
+//         }
+//     }
 
-    $lang = $local_lang_pl ? 'pl' : 'en';
+//     $lang = $local_lang_pl ? 'pl' : 'en';
 
-    // Wybierz nazwę i temat
-    $notification_data = [
-        'name' => [
-            'pl' => 'Dziękujemy za rejestrację na Targi Konferencja',
-            'en' => 'Dziękujemy za rejestrację na Targi Konferencja - ENG',
-        ],
-        'subject' => [
-            'pl' => 'Dziękujemy za rejestrację na {trade_fair_name}',
-            'en' => 'Thank you for registering at {trade_fair_name}',
-        ],
-        'file' => [
-            'pl' => 'generator_gosci_conf_notification_pl.html',
-            'en' => 'generator_gosci_conf_notification_en.html',
-        ],
-        'file_pwe_qr' => [
-            'pl' => 'generator_gosci_conf_notification_pl_pwe_qr.html',
-            'en' => 'generator_gosci_conf_notification_en_pwe_qr.html',
-        ],
-    ];
+//     // Wybierz nazwę i temat
+//     $notification_data = [
+//         'name' => [
+//             'pl' => 'Dziękujemy za rejestrację na Targi Konferencja',
+//             'en' => 'Dziękujemy za rejestrację na Targi Konferencja - ENG',
+//         ],
+//         'subject' => [
+//             'pl' => 'Dziękujemy za rejestrację na {trade_fair_name}',
+//             'en' => 'Thank you for registering at {trade_fair_name}',
+//         ],
+//         'file' => [
+//             'pl' => 'generator_gosci_conf_notification_pl.html',
+//             'en' => 'generator_gosci_conf_notification_en.html',
+//         ],
+//         'file_pwe_qr' => [
+//             'pl' => 'generator_gosci_conf_notification_pl_pwe_qr.html',
+//             'en' => 'generator_gosci_conf_notification_en_pwe_qr.html',
+//         ],
+//     ];
 
-    $message = '';
+//     $message = '';
 
-    $feeds = GFAPI::get_feeds(null, $generator_form_id);
+//     $feeds = GFAPI::get_feeds(null, $generator_form_id);
 
-    $qr_feed_id = null;
-    $qr_feed_name = null;
-    $qr_type = null;
+//     $qr_feed_id = null;
+//     $qr_feed_name = null;
+//     $qr_type = null;
 
-    // priority: pwe_qr
-    foreach ($feeds as $feed) {
-        if (($feed['addon_slug'] ?? '') === 'pwe_qr') {
-            $qr_feed_name = $feed['meta']['feedName'] ?? null;
-            $qr_feed_id = $feed['id'];
-            $qr_type = 'pwe_qr';
-            break;
-        }
-    }
+//     // priority: pwe_qr
+//     foreach ($feeds as $feed) {
+//         if (($feed['addon_slug'] ?? '') === 'pwe_qr') {
+//             $qr_feed_name = $feed['meta']['feedName'] ?? null;
+//             $qr_feed_id = $feed['id'];
+//             $qr_type = 'pwe_qr';
+//             break;
+//         }
+//     }
 
-    // fallback: qr-code
-    if (!$qr_feed_id) {
-        foreach ($feeds as $feed) {
-            if (($feed['addon_slug'] ?? '') === 'qr-code') {
-                $qr_feed_id = $feed['id'];
-                $qr_type = 'qr-code';
-                break;
-            }
-        }
-    }
+//     // fallback: qr-code
+//     if (!$qr_feed_id) {
+//         foreach ($feeds as $feed) {
+//             if (($feed['addon_slug'] ?? '') === 'qr-code') {
+//                 $qr_feed_id = $feed['id'];
+//                 $qr_type = 'qr-code';
+//                 break;
+//             }
+//         }
+//     }
 
-    $template_file = plugin_dir_path(__FILE__) . 'notifications/' . $notification_data['file'][$lang];
+//     $template_file = plugin_dir_path(__FILE__) . 'notifications/' . $notification_data['file'][$lang];
 
-    if ($qr_type === 'pwe_qr') {
+//     if ($qr_type === 'pwe_qr') {
 
-        if (file_exists($template_file)) {
-            $message = file_get_contents($template_file);
-            $message = str_replace('{notfc-qrcode-url}', '{pwe_qr_url name=' . $qr_feed_name . '}', $message);
-            $message = str_replace('{notfc-qrcode-url-param}', '{pwe_qr_url_encoded name=' . $qr_feed_name . '}', $message);
+//         if (file_exists($template_file)) {
+//             $message = file_get_contents($template_file);
+//             $message = str_replace('{notfc-qrcode-url}', '{pwe_qr_url name=' . $qr_feed_name . '}', $message);
+//             $message = str_replace('{notfc-qrcode-url-param}', '{pwe_qr_url_encoded name=' . $qr_feed_name . '}', $message);
             
-        }
+//         }
 
-    } else {
+//     } else {
 
-        if (file_exists($template_file)) {
-            $message = file_get_contents($template_file);
-            $message = str_replace('{notfc-qrcode-url}', '{qrcode-url-' . $qr_feed_id . '}', $message);
-            $message = str_replace('{notfc-qrcode-url-param}', '{qrcode-url-' . $qr_feed_id . '}', $message);
-        }
-    }
+//         if (file_exists($template_file)) {
+//             $message = file_get_contents($template_file);
+//             $message = str_replace('{notfc-qrcode-url}', '{qrcode-url-' . $qr_feed_id . '}', $message);
+//             $message = str_replace('{notfc-qrcode-url-param}', '{qrcode-url-' . $qr_feed_id . '}', $message);
+//         }
+//     }
 
-    // fallback final
-    if (empty($message)) {
-        $message = 'Dziękujemy za udział w wydarzeniu.';
-    }
+//     // fallback final
+//     if (empty($message)) {
+//         $message = 'Dziękujemy za udział w wydarzeniu.';
+//     }
 
-    $email_input_ref = ''; // np. inputName lub ID
+//     $email_input_ref = ''; // np. inputName lub ID
 
-    foreach ($form['fields'] as $field) {
-        if ($field->type === 'email') {
-            $email_input_ref = $field->inputName ?: $field->id;
-            break;
-        }
-    }
+//     foreach ($form['fields'] as $field) {
+//         if ($field->type === 'email') {
+//             $email_input_ref = $field->inputName ?: $field->id;
+//             break;
+//         }
+//     }
 
-    $new_notification = [
-        'id' => uniqid(),
-        'isActive' => true,
-        'name' => $notification_data['name'][$lang],
-        'event' => 'form_submission',
-        'toType' => 'field',
-        'toField' => $email_input_ref,
-        'to' => $email_input_ref,
-        'subject' => $notification_data['subject'][$lang],
-        'message' => $message,
-        'messageFormat' => 'html',
-        'from' => '{trade_fair_rejestracja}',
-        'fromName' => '{trade_fair_name}',
-        'disableAutoformat' => true,
-        'enableAttachments' => false,
-        'enableQrAttachment' => true,
-        'conditionalLogic' => [
-            'actionType' => 'show',
-            'logicType' => 'any',
-            'rules' => [
-                [
-                    'fieldId' => 'patron',
-                    'operator' => 'is',
-                    'value' => 'conf'
-                ],
-            ]
-        ],
-    ];
+//     $new_notification = [
+//         'id' => uniqid(),
+//         'isActive' => true,
+//         'name' => $notification_data['name'][$lang],
+//         'event' => 'form_submission',
+//         'toType' => 'field',
+//         'toField' => $email_input_ref,
+//         'to' => $email_input_ref,
+//         'subject' => $notification_data['subject'][$lang],
+//         'message' => $message,
+//         'messageFormat' => 'html',
+//         'from' => '{trade_fair_rejestracja}',
+//         'fromName' => '{trade_fair_name}',
+//         'disableAutoformat' => true,
+//         'enableAttachments' => false,
+//         'enableQrAttachment' => true,
+//         'conditionalLogic' => [
+//             'actionType' => 'show',
+//             'logicType' => 'any',
+//             'rules' => [
+//                 [
+//                     'fieldId' => 'patron',
+//                     'operator' => 'is',
+//                     'value' => 'conf'
+//                 ],
+//             ]
+//         ],
+//     ];
 
-    if ($qr_feed_id !== null) {
-        $new_notification['spgfqrcode_notification_feed_' . $qr_feed_id] = '1';
-        $new_notification['spgfqrcode_embed_image_feed_' . $qr_feed_id] = '1';
-    }
+//     if ($qr_feed_id !== null) {
+//         $new_notification['spgfqrcode_notification_feed_' . $qr_feed_id] = '1';
+//         $new_notification['spgfqrcode_embed_image_feed_' . $qr_feed_id] = '1';
+//     }
 
-    foreach (['confirmation_conditional_logic_object', 'conditionalLogic'] as $logic_key) {
-        if (isset($new_notification[$logic_key]['rules'])) {
-            foreach ($new_notification[$logic_key]['rules'] as &$rule) {
-                $admin_label = $rule['fieldId'];
-                if (!is_numeric($admin_label) && isset($admin_label_to_id[$admin_label])) {
-                    $rule['fieldId'] = (string) $admin_label_to_id[$admin_label];
-                }
-            }
-        }
-    }
+//     foreach (['confirmation_conditional_logic_object', 'conditionalLogic'] as $logic_key) {
+//         if (isset($new_notification[$logic_key]['rules'])) {
+//             foreach ($new_notification[$logic_key]['rules'] as &$rule) {
+//                 $admin_label = $rule['fieldId'];
+//                 if (!is_numeric($admin_label) && isset($admin_label_to_id[$admin_label])) {
+//                     $rule['fieldId'] = (string) $admin_label_to_id[$admin_label];
+//                 }
+//             }
+//         }
+//     }
 
-    // Dodaj notyfikację do formularza
-    $form['notifications'][] = $new_notification;
+//     // Dodaj notyfikację do formularza
+//     $form['notifications'][] = $new_notification;
 
-    $result = GFAPI::update_form($form);
-    if (is_wp_error($result)) {
-        error_log('GF: Błąd zapisu formularza przy dodawaniu powiadomienia – ' . $result->get_error_message());
-        return;
-    }
+//     $result = GFAPI::update_form($form);
+//     if (is_wp_error($result)) {
+//         error_log('GF: Błąd zapisu formularza przy dodawaniu powiadomienia – ' . $result->get_error_message());
+//         return;
+//     }
 
-    update_option($done_option_key, 1);
-}
+//     update_option($done_option_key, 1);
+// }
 
 function logged_in_exhibitor_fields_hidden($form) {
     if (session_status() === PHP_SESSION_NONE) {
@@ -578,7 +578,7 @@ function logged_in_exhibitor_fields_hidden($form) {
     return $form;
 }
 
-function render_gr2($atts, $all_exhibitors, $all_partners, $all_conferences, $pweGeneratorWebsite, $domain){
+function render_gr2($atts, $all_exhibitors, $all_partners, $all_conferences, $pweGeneratorWebsite, $domain, $generator_form_id_auto){
     extract( shortcode_atts( array(
         'generator_form_id' => '',
         'exhibitor_generator_html_text' => '',
@@ -590,7 +590,7 @@ function render_gr2($atts, $all_exhibitors, $all_partners, $all_conferences, $pw
 
     add_field_marketing_consent( $generator_form_id );
     add_field_phone_number( $generator_form_id );
-    add_notification_conf_to_form( $generator_form_id );
+    // add_notification_conf_to_form( $generator_form_id );
 
     add_filter( 'gform_pre_render_' . $generator_form_id, 'pwe_disable_marketing_consent' );
     add_filter( 'gform_pre_validation_' . $generator_form_id, 'pwe_disable_marketing_consent' );
@@ -1223,7 +1223,7 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
 
 
                     $output .='
-                    [gravityform id="'. $generator_form_id .'" title="false" description="false" ajax="false"]
+                    [gravityform id="'. $generator_form_id_auto .'" title="false" description="false" ajax="false"]
                     <div class="exhibitor-generator__left-footer-badge">
                         <img class="exhibitor-generator__badge-logo-pwe" src="/wp-content/plugins/pwe-media/media/ptak_black.png" alt="Logo PTAK WARSAW EXPO">
                     </div>
@@ -1497,7 +1497,7 @@ echo '<script>console.log("'.$generator_form_id.'")</script>';
 
 
                 $(event.target)
-                    .closest("form").find(".gfield_visibility_visible").not(`[data-conditional-logic="hidden"]`).not(".gfield--type-honeypot").find("input").each(function() {
+                    .closest("form").find(".gfield_visibility_visible").not(".gfield_visibility_hidden").not(`[data-conditional-logic="hidden"]`).not(".gfield--type-honeypot").find("input").each(function() {
                         const $input = $(this);
                         const getLocal = $("html").attr("lang");
 

@@ -1,0 +1,85 @@
+[
+  {
+    "id": "wordpress",
+    "name": "WordPress",
+    "type": "platform",
+    "evidence": [
+      "hooks",
+      "shortcodes",
+      "WP_Query",
+      "post meta",
+      "enqueue API"
+    ]
+  },
+  {
+    "id": "gravity-forms",
+    "name": "Gravity Forms",
+    "type": "plugin",
+    "evidence": [
+      "GFAPI::get_forms",
+      "GFAPI::get_form",
+      "GFAPI::add_entry",
+      "GFAPI::send_notifications",
+      "gform_after_submission"
+    ]
+  },
+  {
+    "id": "wpbakery",
+    "name": "WPBakery / Visual Composer",
+    "type": "plugin",
+    "evidence": [
+      "vc_map",
+      "Vc_Manager",
+      "VC element definitions"
+    ]
+  },
+  {
+    "id": "wpml",
+    "name": "WPML",
+    "type": "plugin",
+    "evidence": [
+      "wpml_active_languages",
+      "wpml_get_element_translations",
+      "language-aware shortcodes"
+    ]
+  },
+  {
+    "id": "wp-rocket",
+    "name": "WP Rocket",
+    "type": "plugin",
+    "evidence": [
+      "rocket_delay_js_exclusions",
+      "rocket_exclude_defer_js",
+      "cache clear on update"
+    ]
+  },
+  {
+    "id": "pwe-system",
+    "name": "PWE System",
+    "type": "pwe-plugin",
+    "mode": "optional delegation with local fallback",
+    "evidence": [
+      "PWE_SYSTEM_FILE",
+      "PWE_System",
+      "PWE_System_Functions",
+      "modules/shortcodes/backend-shortcodes.php"
+    ]
+  },
+  {
+    "id": "custom-element",
+    "name": "custom-element",
+    "type": "pwe-plugin",
+    "mode": "HTTP integration",
+    "evidence": [
+      "action_handler.php",
+      "salesmanago_send_mass.php",
+      "cron_catalog.php"
+    ]
+  },
+  {
+    "id": "cap-data",
+    "name": "CAP / PWE data layer",
+    "type": "database/external-data",
+    "mode": "through PWECommonFunctions or PWE System compatibility layer"
+  }
+]

@@ -1,198 +1,61 @@
 {
-  "pl_PL": {
-    "for_ex_1_title": "BĘDZIESZ CZĘŚCIĄ NAJSZYBCIEJ ROZWIJAJĄCYCH SIĘ TARGÓW",
-    "for_ex_1_text": "Targi w PTAK WARSAW EXPO to innowacyjne wydarzenia, w których udział biorą wystawcy z Polski i z zagranicy. Targi wyróżnia dostępność ogromnej, największej w Polsce powierzchni wystawienniczej, dającej wystawcom najlepsze, bo wręcz nieograniczone możliwości prezentacji swojej oferty.",
-    "for_ex_2_title": "ZAPREZENTUJESZ SWOJE PRODUKTY I USŁUGI TYSIĄCOM KONSUMENTÓW",
-    "for_ex_2_text": "To tysiące Twoich potencjalnych klientów! Biorąc udział w targach, w charakterze wystawcy, masz aż trzy targowe dni na pokazanie im swoich produktów i usług. A to nie wszystko. Dzięki szerokiej kampanii promocyjnej oraz dużemu zainteresowaniu mediów Twój brand dotrze także do setek tysięcy ludzi w Polsce i za granicą.",
-    "for_ex_3_title": "ZDOBĘDZIESZ CENNĄ WIEDZĘ I POZNASZ NOWOŚCI RYNKU",
-    "for_ex_3_text": "W biznesie nie możesz pozwolić sobie na stanie w miejscu. Podczas szkoleń, seminariów i konferencji branżowych zdobędziesz cenną wiedzę, którą będziesz mógł wykorzystać w praktyce, a odwiedzając nasze targi odkryjesz najnowsze rozwiązania sprzętowe i produktowe.",
-    "for_ex_4_title": "NAWIĄŻESZ CENNE KONTAKTY BIZNESOWE",
-    "for_ex_4_text": "Podczas targów przeprowadzisz rozmowy i zbudujesz cenne relacje biznesowe, które zaowocują nowymi kontraktami. Targi to jedyna taka okazja by nie tylko zbudować bazę nowych klientów, ale także by usłyszeć o ich potrzebach, co pozwoli na jeszcze lepsze dopasowanie oferty do oczekiwań odbiorców, co w efekcie wpłynie na zwiększenie zysków firmy.",
-    "for_ex_5_title": "NAJWIĘKSZY OŚRODEK TARGOWY W POLSCE",
-    "for_ex_5_text": "Ptak Warsaw Expo to największy i najnowocześniejszy kompleks targowy w Polsce, dedykowany wydarzeniom biznesowym, komercyjnym i rozrywkowym. Ideą jego powstania była organizacja targów, kongresów, szkoleń, imprez masowych i innych wydarzeń w oparciu o innowacyjny system wystawienniczy. Doskonała lokalizacja Ptak Warsaw Expo, usytuowanie obiektów 10 minut od największego w kraju portu lotniczego Lotnisko Chopina i 15 minut od ścisłego centrum Warszawy, sprawia, że PWE wypracowało sobie miano europejskiej stolicy biznesu.",
-    "for_ex_6_title": "O ORGANIZATORZE",
-    "for_ex_6_text": "Nasza silna sieć kontaktów branżowych pozwala nam przyciągać na targi wystawców i sponsorów, zapewniając Państwu dostęp do najnowszych i najbardziej innowacyjnych produktów i usług w swojej branży. Zawsze szukamy nowych i ekscytujących sposobów na zwiększenie wrażeń z targów, zapewniając, że są one świeże i ekscytujące dla uczestników. Nasz zespół jest elastyczny, potrafi dostosować się do zmieniających się okoliczności i nieprzewidzianych wyzwań, które mogą pojawić się podczas imprezy. Szybko podejmujemy decyzje i podejmujemy działania, aby targi przebiegły sprawnie i wszyscy mieli pozytywne doświadczenia."
-  },
-  "en_US": {
-    "for_ex_1_title": "YOU WILL BE PART OF THE FASTEST GROWING TRADE SHOW",
-    "for_ex_1_text": "The fair at PTAK WARSAW EXPO is an innovative event featuring exhibitors from Poland and abroad. The fair is distinguished by the availability of a huge, the largest exhibition area in Poland, giving exhibitors the best and almost unlimited opportunities to present their offer.",
-    "for_ex_2_title": "YOU WILL PRESENT YOUR PRODUCTS AND SERVICES TO THOUSANDS OF CONSUMERS",
-    "for_ex_2_text": "That’s thousands of your potential customers! By participating as an exhibitor, you have up to three trade fair days to show them your products and services. And that’s not all. Thanks to an extensive promotional campaign and significant media interest, your brand will reach hundreds of thousands of people in Poland and abroad.",
-    "for_ex_3_title": "YOU WILL GAIN VALUABLE KNOWLEDGE AND LEARN ABOUT THE NOVELTIES OF THE MARKET",
-    "for_ex_3_text": "In business, you can't afford to stand still. During training, seminars and industry conferences, you'll gain valuable knowledge that you can put into practice, and by visiting our trade shows you will discover the latest equipment and product solutions.",
-    "for_ex_4_title": "MAKE VALUABLE BUSINESS CONTACTS",
-    "for_ex_4_text": "During the fair you will hold discussions and build valuable business relationships that will result in new contracts. Trade fairs are a unique opportunity not only to build a base of new customers, but also to hear about their needs, allowing you to better tailor your offer and ultimately increase your company's profits.",
-    "for_ex_5_title": "THE LARGEST TRADE FAIR CENTER IN POLAND",
-    "for_ex_5_text": "Ptak Warsaw Expo is the largest and most modern trade fair complex in Poland, dedicated to business, commercial and entertainment events. The idea behind its creation was to organize trade fairs, congresses, training courses, mass events and other gatherings based on an innovative exhibition system. Its excellent location — 10 minutes from Chopin Airport and 15 minutes from the center of Warsaw — has earned PWE the status of the European capital of business.",
-    "for_ex_6_title": "ABOUT THE ORGANISER",
-    "for_ex_6_text": "Our strong network of industry contacts allows us to attract exhibitors and sponsors to the show, providing you with access to the latest and most innovative products and services in your industry. We are always searching for new and exciting ways to enhance the trade show experience, ensuring it remains fresh and engaging for attendees. Our team is flexible and able to adapt to changing circumstances and unforeseen challenges that may arise during an event. We react quickly and take action to ensure the trade show runs smoothly and everyone has a positive experience."
-  },
-  "de_DE": {
-    "for_ex_1_title": "SIE WERDEN TEIL DER AM SCHNELLSTEN WACHSENDEN MESSE SEIN",
-    "for_ex_1_text": "Die Messe im PTAK WARSAW EXPO ist eine innovative Veranstaltung mit Ausstellern aus Polen und dem Ausland. Die Messe zeichnet sich durch die größte verfügbare Ausstellungsfläche in Polen aus, die den Ausstellern nahezu unbegrenzte Möglichkeiten bietet, ihr Angebot zu präsentieren.",
-    "for_ex_2_title": "SIE PRÄSENTIEREN IHRE PRODUKTE UND DIENSTLEISTUNGEN TAUSENDEN VON KONSUMENTEN",
-    "for_ex_2_text": "Das sind Tausende Ihrer potenziellen Kunden! Als Aussteller haben Sie drei Messetage Zeit, Ihre Produkte und Dienstleistungen zu präsentieren. Und das ist noch nicht alles. Dank einer umfangreichen Werbekampagne und großem Medieninteresse wird Ihre Marke Hunderttausende Menschen in Polen und im Ausland erreichen.",
-    "for_ex_3_title": "SIE ERWERBEN WERTVOLLES WISSEN UND LERNEN MARKTNEUHEITEN KENNEN",
-    "for_ex_3_text": "Im Geschäftsleben können Sie es sich nicht leisten, stehen zu bleiben. In Schulungen, Seminaren und Branchenkonferenzen erwerben Sie wertvolles Wissen, das Sie praktisch anwenden können, und auf unseren Messen entdecken Sie die neuesten Geräte- und Produktlösungen.",
-    "for_ex_4_title": "KNÜPFEN SIE WERTVOLLE GESCHÄFTSKONTAKTE",
-    "for_ex_4_text": "Während der Messe führen Sie Gespräche und knüpfen wertvolle Geschäftsbeziehungen, die zu neuen Verträgen führen können. Messen bieten eine einzigartige Gelegenheit, nicht nur neue Kunden zu gewinnen, sondern auch deren Bedürfnisse kennenzulernen, was es ermöglicht, Ihr Angebot besser anzupassen und letztendlich den Unternehmensgewinn zu steigern.",
-    "for_ex_5_title": "DAS GRÖSSTE MESSEZENTRUM IN POLEN",
-    "for_ex_5_text": "Ptak Warsaw Expo ist das größte und modernste Messegelände in Polen, das für Geschäfts-, Handels- und Unterhaltungsveranstaltungen konzipiert wurde. Die Idee seiner Gründung war es, Messen, Kongresse, Schulungen, Großveranstaltungen und andere Events auf der Grundlage eines innovativen Ausstellungssystems zu organisieren. Die hervorragende Lage – nur 10 Minuten vom Chopin-Flughafen und 15 Minuten vom Zentrum Warschaus entfernt – hat PWE den Ruf als europäische Hauptstadt des Geschäfts eingebracht.",
-    "for_ex_6_title": "ÜBER DEN VERANSTALTER",
-    "for_ex_6_text": "Unser starkes Netzwerk von Branchenkontakten ermöglicht es uns, Aussteller und Sponsoren für die Messe zu gewinnen und Ihnen Zugang zu den neuesten und innovativsten Produkten und Dienstleistungen Ihrer Branche zu bieten. Wir suchen stets nach neuen und spannenden Möglichkeiten, das Messeerlebnis zu verbessern und es für die Teilnehmer frisch und attraktiv zu gestalten. Unser Team ist flexibel und kann sich an wechselnde Umstände und unvorhergesehene Herausforderungen während einer Veranstaltung anpassen. Wir handeln schnell und effizient, damit die Messe reibungslos verläuft und alle Teilnehmer eine positive Erfahrung machen."
-  },
-  "cs_CZ": {
-    "for_ex_1_title": "BUDETE SOUČÁSTÍ NEJRYCHLEJI ROSTOUCÍHO VELETRHU",
-    "for_ex_1_text": "Veletrh v PTAK WARSAW EXPO je inovativní akce s vystavovateli z Polska i ze zahraničí. Veletrh se vyznačuje dostupností obrovské, největší výstavní plochy v Polsku, která vystavovatelům poskytuje ty nejlepší a téměř neomezené možnosti prezentovat svou nabídku.",
-    "for_ex_2_title": "PŘEDSTAVÍTE SVÉ PRODUKTY A SLUŽBY TISÍCŮM ZÁKAZNÍKŮ",
-    "for_ex_2_text": "To jsou tisíce vašich potenciálních zákazníků! Jako vystavovatel máte až tři veletržní dny na představení svých produktů a služeb. A to není všechno. Díky rozsáhlé propagační kampani a velkému zájmu médií se vaše značka dostane k stovkám tisíc lidí v Polsku i v zahraničí.",
-    "for_ex_3_title": "ZÍSKÁTE CENNÉ ZNALOSTI A SEZNÁMÍTE SE S NOVINKAMI NA TRHU",
-    "for_ex_3_text": "V podnikání si nemůžete dovolit zůstat stát na místě. Během školení, seminářů a oborových konferencí získáte cenné znalosti, které budete moci využít v praxi, a návštěvou našich veletrhů objevíte nejnovější řešení v oblasti zařízení a produktů.",
-    "for_ex_4_title": "NAVÁŽETE CENNÉ OBCHODNÍ KONTAKTY",
-    "for_ex_4_text": "Během veletrhu povedete diskuse a navážete cenné obchodní vztahy, které povedou k novým smlouvám. Veletrhy jsou jedinečnou příležitostí nejen k vytvoření báze nových zákazníků, ale také k poznání jejich potřeb, což vám umožní lépe přizpůsobit nabídku a nakonec zvýšit zisk vaší společnosti.",
-    "for_ex_5_title": "NEJVĚTŠÍ VÝSTAVNÍ CENTRUM V POLSKU",
-    "for_ex_5_text": "Ptak Warsaw Expo je největší a nejmodernější výstavní komplex v Polsku, věnovaný obchodním, komerčním a zábavním akcím. Myšlenkou jeho vzniku bylo organizovat veletrhy, kongresy, školení, hromadné akce a další setkání na základě inovativního výstavního systému. Jeho výborná poloha — 10 minut od letiště Chopin a 15 minut od centra Varšavy — udělala z PWE evropské hlavní město byznysu.",
-    "for_ex_6_title": "O ORGANIZÁTOROVI",
-    "for_ex_6_text": "Naše silná síť oborových kontaktů nám umožňuje přitahovat na veletrh vystavovatele a sponzory a poskytovat vám přístup k nejnovějším a nejinovativnějším produktům a službám ve vašem odvětví. Vždy hledáme nové a vzrušující způsoby, jak vylepšit veletržní zážitek, aby byl pro návštěvníky svěží a poutavý. Náš tým je flexibilní a dokáže se přizpůsobit měnícím se okolnostem a nepředvídaným výzvám, které mohou nastat během akce. Reagujeme rychle a konáme, aby veletrh proběhl hladce a všichni měli pozitivní zkušenost."
-  },
-  "it_IT": {
-    "for_ex_1_title": "FARAI PARTE DELLA FIERA IN PIÙ RAPIDA CRESCITA",
-    "for_ex_1_text": "La fiera al PTAK WARSAW EXPO è un evento innovativo con espositori dalla Polonia e dall'estero. La fiera si distingue per la disponibilità di un'enorme area espositiva, la più grande della Polonia, che offre agli espositori le migliori e quasi illimitate possibilità di presentare la propria offerta.",
-    "for_ex_2_title": "PRESENTERAI I TUOI PRODOTTI E SERVIZI A MIGLIAIA DI CONSUMATORI",
-    "for_ex_2_text": "Sono migliaia i tuoi clienti potenziali! Partecipando come espositore hai fino a tre giorni di fiera per mostrare i tuoi prodotti e servizi. E non è tutto. Grazie a un'ampia campagna promozionale e al grande interesse dei media, il tuo brand raggiungerà centinaia di migliaia di persone in Polonia e all'estero.",
-    "for_ex_3_title": "OTTERAI CONOSCENZE PREZIOSE E SCOPRIRAI LE NOVITÀ DEL MERCATO",
-    "for_ex_3_text": "Nel business non puoi permetterti di restare fermo. Durante corsi di formazione, seminari e conferenze di settore acquisirai conoscenze preziose da mettere in pratica, e visitando le nostre fiere scoprirai le ultime soluzioni in termini di attrezzature e prodotti.",
-    "for_ex_4_title": "STABILIRAI CONTATTI COMMERCIALI DI VALORE",
-    "for_ex_4_text": "Durante la fiera discuterai e costruirai preziosi rapporti commerciali che si tradurranno in nuovi contratti. Le fiere sono un'opportunità unica non solo per creare una base di nuovi clienti, ma anche per ascoltare le loro esigenze, consentendoti di adattare meglio la tua offerta e aumentare infine i profitti della tua azienda.",
-    "for_ex_5_title": "IL PIÙ GRANDE CENTRO FIERE IN POLONIA",
-    "for_ex_5_text": "Ptak Warsaw Expo è il più grande e moderno complesso fieristico in Polonia, dedicato ad eventi aziendali, commerciali e di intrattenimento. L'idea della sua creazione era organizzare fiere, congressi, corsi di formazione, eventi di massa e altri incontri basati su un innovativo sistema espositivo. La sua eccellente posizione — a 10 minuti dall'aeroporto Chopin e a 15 minuti dal centro di Varsavia — ha fatto guadagnare a PWE lo status di capitale europea degli affari.",
-    "for_ex_6_title": "SULL'ORGANIZZATORE",
-    "for_ex_6_text": "La nostra solida rete di contatti nel settore ci consente di attrarre espositori e sponsor alla fiera, offrendoti accesso ai prodotti e servizi più recenti e innovativi del tuo settore. Cerchiamo sempre nuovi e coinvolgenti modi per migliorare l'esperienza della fiera, garantendo che rimanga fresca e interessante per i partecipanti. Il nostro team è flessibile e in grado di adattarsi a circostanze mutevoli e sfide impreviste che possono sorgere durante un evento. Reagiamo rapidamente e agiamo per garantire che la fiera si svolga senza intoppi e che tutti abbiano un'esperienza positiva."
-  },
-  "lt_LT": {
-    "for_ex_1_title": "TAPSITE DALIS SPACIAUSIAI AUGANČIŲ PARODŲ",
-    "for_ex_1_text": "Paroda PTAK WARSAW EXPO yra novatoriškas renginys, kuriame dalyvauja parodos dalyviai iš Lenkijos ir užsienio. Paroda išsiskiria didžiule, didžiausia Lenkijoje, parodų erdve, suteikiančia dalyviams geriausias ir beveik neribotas galimybes pristatyti savo pasiūlymą.",
-    "for_ex_2_title": "PATEIKSITE SAVO PRODUKTUS IR PASLAUGAS TŪKSTANTIEMS VARTOTOJŲ",
-    "for_ex_2_text": "Tai tūkstančiai jūsų potencialių klientų! Dalyvaudami kaip parodos dalyviai turite iki trijų parodos dienų parodyti jiems savo produktus ir paslaugas. Ir tai dar ne viskas. Dėl plataus reklaminės kampanijos ir didelio žiniasklaidos susidomėjimo jūsų prekės ženklas pasieks šimtus tūkstančių žmonių Lenkijoje ir užsienyje.",
-    "for_ex_3_title": "ĮGYSITE VERTINGŲ ŽINIŲ IR SUPAŽINSITE SU RINKOS NAUJOVĖMIS",
-    "for_ex_3_text": "Versle negalite sau leisti stovėti vietoje. Per mokymus, seminarus ir pramonės konferencijas įgysite vertingų žinių, kurias galėsite pritaikyti praktiškai, o lankydamiesi mūsų parodose atrasite naujausius įrangos ir produktų sprendimus.",
-    "for_ex_4_title": "SUKURSITE VERTINGUS VERSLO RYŠIUS",
-    "for_ex_4_text": "Per parodą vesite diskusijas ir kursite vertingus verslo ryšius, kurie virstų naujais susitarimais. Parodos yra unikali galimybė ne tik sukurti naują klientų bazę, bet ir sužinoti apie jų poreikius, leidžiant geriau pritaikyti savo pasiūlymą ir galiausiai padidinti įmonės pelną.",
-    "for_ex_5_title": "DIDŽIAUSIAS PARODŲ CENTRAS LENKIJOJE",
-    "for_ex_5_text": "Ptak Warsaw Expo yra didžiausias ir moderniausias parodų kompleksas Lenkijoje, skirtas verslo, komerciniams ir pramoginiams renginiams. Jį įkuriant buvo siekiama organizuoti parodas, kongresus, mokymus, masinius renginius ir kitus susitikimus, remiantis novatoriška parodų sistema. Puiki vieta — 10 minučių nuo Šopeno oro uosto ir 15 minučių nuo Varšuvos centro — suteikė PWE Europos verslo sostinės statusą.",
-    "for_ex_6_title": "APIE ORGANIZATORIŲ",
-    "for_ex_6_text": "Mūsų stiprus pramoninių kontaktų tinklas leidžia pritraukti parodos dalyvius ir rėmėjus į renginį, suteikiant jums prieigą prie naujausių ir labiausiai novatoriškų produktų ir paslaugų jūsų sektoriuje. Mes visada ieškome naujų ir įdomių būdų pagerinti parodų patirtį, užtikrindami, kad ji išliktų šviežia ir patraukli dalyviams. Mūsų komanda yra lanksti ir gali prisitaikyti prie besikeičiančių aplinkybių ir netikėtų iššūkių, kylančių renginio metu. Greitai reaguojame ir imamės veiksmų, kad renginys vyktų sklandžiai ir visi turėtų teigiamą patirtį."
-  },
-  "lv_LV": {
-    "for_ex_1_title": "JŪS BŪSIT DAĻA NO ĀTRĀK AUGOŠĀS IZSTĀDES",
-    "for_ex_1_text": "Izstāde PTAK WARSAW EXPO ir inovatīvs notikums ar izstādes dalībniekiem no Polijas un ārzemēm. Izstāde izceļas ar milzīgu, lielāko izstāžu platību Polijā, kas izstādes dalībniekiem sniedz labākas un gandrīz neierobežotas iespējas prezentēt savu piedāvājumu.",
-    "for_ex_2_title": "JŪS PREZENTĒSIT SAVUS PRODUKTUS UN PAKALPOJUMUS TŪKSTOŠIEM PATĒRĒTĀJU",
-    "for_ex_2_text": "Tie ir tūkstoši jūsu potenciālo klientu! Piedaloties kā izstādes dalībnieks, jums ir līdz trim izstādes dienām, lai parādītu savus produktus un pakalpojumus. Un tas vēl nav viss. Pateicoties plašai reklāmas kampaņai un lielam mediju interešu, jūsu zīmols sasniegs simtiem tūkstošu cilvēku Polijā un ārzemēs.",
-    "for_ex_3_title": "JŪS IEGŪSIT VĒRTĪGAS ZINĀŠANAS UN IZZINĀSIET TIRGUS JAUNUMUS",
-    "for_ex_3_text": "Biznesā jūs nevarat atļauties stāvēt uz vietas. Apmācībās, semināros un nozares konferencēs jūs iegūsiet vērtīgas zināšanas, kuras varēsiet izmantot praksē, un apmeklējot mūsu izstādes atklāsiet jaunākos aprīkojuma un produktu risinājumus.",
-    "for_ex_4_title": "NODIBINĀSIET VĒRTĪGUS BIZNESA KONTAKTUS",
-    "for_ex_4_text": "Izstādes laikā jūs rīkosit diskusijas un veidosiet vērtīgas biznesa attiecības, kas novedīs pie jauniem līgumiem. Izstādes ir unikāla iespēja ne tikai izveidot jaunu klientu bāzi, bet arī uzzināt par viņu vajadzībām, ļaujot labāk pielāgot savu piedāvājumu un galu galā palielināt jūsu uzņēmuma peļņu.",
-    "for_ex_5_title": "LIELĀKAIS IZSTĀŽU CENTRS POLIJĀ",
-    "for_ex_5_text": "Ptak Warsaw Expo ir lielākais un modernākais izstāžu komplekss Polijā, kas veltīts biznesa, komerciāliem un izklaides pasākumiem. Tās dibināšanas ideja bija organizēt izstādes, kongresus, apmācības, masu pasākumus un citus pasākumus, balstoties uz inovatīvu izstāžu sistēmu. Tā lieliskā atrašanās vieta — 10 minūtes no Šopena lidostas un 15 minūtes no Varšavas centra — ir piešķīrusi PWE Eiropas biznesa galvaspilsētas statusu.",
-    "for_ex_6_title": "PAR ORGANIZATORU",
-    "for_ex_6_text": "Mūsu spēcīgā nozaru kontaktu tīkla dēļ mēs varam piesaistīt izstādes dalībniekus un sponsorus pasākumam, sniedzot jums piekļuvi jaunākajiem un visinovatīvākajiem produktiem un pakalpojumiem jūsu nozarē. Mēs vienmēr meklējam jaunus un aizraujošus veidus, kā uzlabot izstāžu pieredzi, nodrošinot, ka tā paliek svaiga un saistoša apmeklētājiem. Mūsu komanda ir elastīga un spēj pielāgoties mainīgajiem apstākļiem un neparedzētiem izaicinājumiem, kas var rasties pasākuma laikā. Mēs reaģējam ātri un rīkojamies, lai pasākums noritētu gludi un visi gūtu pozitīvu pieredzi."
-  },
-  "sk_SK": {
-    "for_ex_1_title": "BUDETE ČASŤOU NAJRÝCHLEJŠIE RASTÚCEHO VEĽTRHU",
-    "for_ex_1_text": "Veľtrh v PTAK WARSAW EXPO je inovatívna udalosť s vystavovateľmi z Poľska a zo zahraničia. Veľtrh sa vyznačuje dostupnosťou obrovskej, najväčšej výstavnej plochy v Poľsku, ktorá vystavovateľom poskytuje najlepšie a takmer neobmedzené možnosti prezentovať svoju ponuku.",
-    "for_ex_2_title": "PREDSTAVÍTE SVOJE PRODUKTY A SLUŽBY TISÍCKAM SPOTREBITEĽOV",
-    "for_ex_2_text": "To sú tisíce vašich potenciálnych zákazníkov! Ako vystavovateľ máte až tri veľtržné dni na ukázanie im svojich produktov a služieb. A to nie je všetko. Vďaka rozsiahlej propagačnej kampani a veľkému záujmu médií sa vaša značka dostane k stám tisíc ľuďom v Poľsku aj v zahraničí.",
-    "for_ex_3_title": "ZÍSKATE CENNÉ VEDOMOSTI A SPOZNÁTE NOVINKY TRHU",
-    "for_ex_3_text": "V podnikaní si nemôžete dovoliť stáť na mieste. Počas školení, seminárov a odvetvových konferencií získate cenné vedomosti, ktoré môžete využiť v praxi, a návštevou našich veľtrhov objavíte najnovšie riešenia v oblasti zariadení a produktov.",
-    "for_ex_4_title": "NADVIAŽETE CENNÉ OBCHODNÉ KONTAKTY",
-    "for_ex_4_text": "Počas veľtrhu budete viesť diskusie a budovať cenné obchodné vzťahy, ktoré povedú k novým zmluvám. Veľtrhy sú jedinečnou príležitosťou nielen na vybudovanie databázy nových zákazníkov, ale aj na spoznanie ich potrieb, čo vám umožní lepšie prispôsobiť ponuku a nakoniec zvýšiť zisky vašej spoločnosti.",
-    "for_ex_5_title": "NAJVÄČŠIE VÝSTAVNÉ CENTRUM V POĽSKU",
-    "for_ex_5_text": "Ptak Warsaw Expo je najväčší a najmodernejší veľtržný komplex v Poľsku, venovaný obchodným, komerčným a zábavným podujatiam. Myšlienkou jeho založenia bolo organizovať veľtrhy, kongresy, školenia, hromadné akcie a ďalšie podujatia na základe inovatívneho výstavného systému. Jeho výborná poloha — 10 minút od letiska Chopin a 15 minút od centra Varšavy — urobila z PWE európske hlavné mesto podnikania.",
-    "for_ex_6_title": "O ORGANIZÁTOROVI",
-    "for_ex_6_text": "Naša silná sieť odvetvových kontaktov nám umožňuje prilákať na veľtrh vystavovateľov a sponzorov, poskytujúc vám prístup k najnovším a najinovatívnejším produktom a službám vo vašom odvetví. Stále hľadáme nové a vzrušujúce spôsoby, ako zlepšiť veľtržný zážitok, aby bol pre účastníkov svieži a pútavý. Náš tím je flexibilný a dokáže sa prispôsobiť meniacim sa okolnostiam a nepredvídaným výzvam, ktoré môžu vzniknúť počas podujatia. Reagujeme rýchlo a konáme, aby veľtrh prebehol hladko a všetci mali pozitívnu skúsenosť."
-  },
-  "uk": {
-    "for_ex_1_title": "ВИ БУДЕТЕ ЧАСТИНОЮ НАЙШВИДШЕ ЗРОСТАЮЧОЇ ВИСТАВКИ",
-    "for_ex_1_text": "Виставка в PTAK WARSAW EXPO — це інноваційна подія за участі експонентів з Польщі та закордону. Виставка відрізняється доступністю величезної, найбільшої в Польщі виставкової площі, що надає експонентам найкращі та майже необмежені можливості для презентації своєї пропозиції.",
-    "for_ex_2_title": "ВИ ПРЕЗЕНТУВАТИМЕТЕ СВОЇ ПРОДУКТИ ТА ПОСЛУГИ ТИСЯЧАМ СПОЖИВАЧІВ",
-    "for_ex_2_text": "Це тисячі ваших потенційних клієнтів! Бравши участь як експонент, ви маєте до трьох виставкових днів, щоб показати їм свої продукти та послуги. І це ще не все. Завдяки широкій рекламній кампанії та значному інтересу медіа ваш бренд дістанеться до сотень тисяч людей у Польщі та за кордоном.",
-    "for_ex_3_title": "ВИ ОТРИМАЄТЕ ЦІННІ ЗНАННЯ ТА ДІЗНАЄТЕСЯ ПРО НОВИНКИ РИНКУ",
-    "for_ex_3_text": "У бізнесі ви не можете дозволити собі стояти на місці. Під час тренінгів, семінарів та галузевих конференцій ви здобудете цінні знання, які зможете застосувати на практиці, а відвідавши наші виставки, ви відкриєте для себе найновіші обладнання та продуктові рішення.",
-    "for_ex_4_title": "ВСТАНОВІТЕ ЦІННІ ДІЛОВІ КОНТАКТИ",
-    "for_ex_4_text": "Під час виставки ви проведете дискусії і налагодите цінні ділові відносини, які призведуть до нових контрактів. Виставки — це унікальна можливість не лише створити базу нових клієнтів, а й дізнатися про їхні потреби, що дозволить краще адаптувати вашу пропозицію і врешті-решт збільшити прибуток вашої компанії.",
-    "for_ex_5_title": "НАЙБІЛЬШИЙ ВИСТАВКОВИЙ ЦЕНТР У ПОЛЬЩІ",
-    "for_ex_5_text": "Ptak Warsaw Expo — найбільший і найсучасніший виставковий комплекс у Польщі, присвячений бізнесовим, комерційним та розважальним подіям. Ідея його створення полягала в організації виставок, конгресів, тренінгів, масових заходів та інших зустрічей на основі інноваційної виставкової системи. Його відмінне розташування — 10 хвилин від аеропорту Шопена і 15 хвилин від центру Варшави — принесло PWE статус європейської столиці бізнесу.",
-    "for_ex_6_title": "ПРО ОРГАНІЗАТОРА",
-    "for_ex_6_text": "Наша сильна мережа галузевих контактів дозволяє нам залучати на виставку експонентів та спонсорів, надаючи вам доступ до найновіших і найінноваційніших продуктів та послуг у вашій галузі. Ми завжди шукаємо нові та захопливі способи покращити виставковий досвід, забезпечуючи, щоб він залишався свіжим і привабливим для учасників. Наша команда гнучка і здатна адаптуватися до змінних обставин та непередбачуваних викликів під час заходу. Ми реагуємо швидко і діємо, щоб виставка пройшла гладко і всі мали позитивний досвід."
-  },
-  "ro_RO": {
-    "for_ex_1_title": "VEȚI FI PARTE DIN CEL MAI RAPID CREȘTE TÂRG",
-    "for_ex_1_text": "Târgul de la PTAK WARSAW EXPO este un eveniment inovator cu expozanți din Polonia și din străinătate. Târgul se remarcă prin disponibilitatea unei suprafețe de expunere enorme, cea mai mare din Polonia, care oferă expozanților cele mai bune și aproape nelimitate posibilități de a-și prezenta oferta.",
-    "for_ex_2_title": "VEȚI PREZENTA SĂU PRODUSE ȘI SERVICII MIEI DE CUMĂRĂTORI",
-    "for_ex_2_text": "Acești sunt mii de clienți potențiali! Participând ca expozanți, veți avea până la trei zile de expoziție pentru a-și prezentarea produselor și serviciilor. Și acest lucru nu este tot. Datorită campaniei publicitare ampliate și interesului semnificativ al mass-media, brandul dumneavoastră va ajunge la sute de mii de persoane în Polonia și în străinătate.",
-    "for_ex_3_title": "VEȚI OBTINE CUNOȘTINȚE VALOROASE ȘI VĂ VA SCOPȚI NOVITĂȚILE DE PE MERCAT",
-    "for_ex_3_text": "În afaceri, nu vă puteți permite să stați pe loc. În timpul cursurilor, seminariilor și conferințelor industriale, veți obține cunoștințe valoroase pe care le veți putea aplica în practică, iar vizitând expozițiile noastre, veți descoperi echipamentele și soluțiile de produs cele mai noi.",
-    "for_ex_4_title": "STABILIȚI CONTACTE BUSINESS VALOROASE",
-    "for_ex_4_text": "În timpul târgului, veți purta discuții și veți construi relații de afaceri valoroase care vor duce la noi contracte. Târgurile sunt o oportunitate unică nu doar pentru a crea o bază de noi clienți, ci și pentru a afla despre nevoile acestora, permițându-vă să vă adaptați mai bine oferta și, în cele din urmă, să creșteți profitul companiei dumneavoastră.",
-    "for_ex_5_title": "CEL MAI MARE CENTRU DE EXPOZIȚII DIN POLONIA",
-    "for_ex_5_text": "Ptak Warsaw Expo este cel mai mare și mai modern complex de expoziții din Polonia, dedicat evenimentelor de afaceri, comerciale și de divertisment. Ideea creării sale a fost organizarea de târguri, congrese, cursuri de formare, evenimente de masă și alte întâlniri pe baza unui sistem inovator de expoziții. Locația sa excelentă — la 10 minute de Aeroportul Chopin și la 15 minute de centrul Varșoviei — a conferit PWE statutul de capitală europeană a afacerilor.",
-    "for_ex_6_title": "DESPRE ORGANIZATOR",
-    "for_ex_6_text": "Rețeaua noastră puternică de contacte din industrie ne permite să atragem expozanți și sponsori la târg, oferindu-vă acces la cele mai noi și mai inovatoare produse și servicii din domeniul dumneavoastră. Căutăm întotdeauna noi și interesante moduri de a îmbunătăți experiența târgului, asigurându-ne că rămâne proaspătă și atractivă pentru participanți. Echipa noastră este flexibilă și capabilă să se adapteze la circumstanțe în schimbare și provocări neprevăzute care pot apărea în timpul unui eveniment. Răspundem rapid și acționăm pentru a asigura că târgul se desfășoară fără probleme și că toată lumea are o experiență pozitivă."
-  },
-  "et": {
-    "for_ex_1_title": "TE OLETE OSA KIIREIMALT KASVAVAST MESSIST",
-    "for_ex_1_text": "PTAK WARSAW EXPO mess on innovatiivne üritus, kus osalevad näitusepaviljonid Poolast ja välismaalt. Mess eristub tohutu, Poola suurima, näitusepinnaga, mis annab näitusepaviljonidele parimad ja peaaegu piiramatud võimalused oma pakkumise esitamiseks.",
-    "for_ex_2_title": "TE PREZENTUVEȚI SĂU PRODUSE ȘI SERVICII MIEI DE CUMĂRĂTORI",
-    "for_ex_2_text": "Need on tuhanded teie potentsiaalsed kliendid! Osaledes näitusepaviljonina, on teil kuni kolm messipäeva, et näidata neile oma tooteid ja teenuseid. Ja see pole veel kõik. Tänu laiale reklaamikampaaniale ja meedia suurele huvile jõuab teie bränd sadade tuhandete inimesteni Poolas ja välismaal.",
-    "for_ex_3_title": "TE SAATE HINDAKAT TEADMISEID JA TUTVUTE TURU UUDISTEGA",
-    "for_ex_3_text": "Äris ei saa endale lubada paigal seismist. Koolituste, seminaride ja tööstuskonverentside ajal saate väärtuslikke teadmisi, mida saate praktikas rakendada, ja külastades meie messidel avastate uusimad seadmete ja toodete lahendused.",
-    "for_ex_4_title": "TE LOOTE VÄÄRTUSLIKUD ÄRIKONTAKTID",
-    "for_ex_4_text": "Messil viibite aruteludes ja loote väärtuslikke ärisuhteid, mis viivad uute lepinguteni. Messid on ainulaadne võimalus mitte ainult luua uus klientide baas, vaid ka teada saada nende vajadustest, võimaldades teil oma pakkumist paremini kohandada ja lõpuks suurendada oma ettevõtte kasumit.",
-    "for_ex_5_title": "SUURIM MESSIKESKUS POOLAS",
-    "for_ex_5_text": "Ptak Warsaw Expo on suurim ja moodsaim messikompleks Poolas, mis on pühendatud ärilistele, kaubanduslikele ja meelelahutuslikele üritustele. Selle loomise idee oli korraldada messid, kongressid, koolitused, massiüritused ja muud kohtumised innovatiivse näitusesüsteemi alusel. Selle suurepärane asukoht — 10 minutit Chopini lennujaamast ja 15 minutit Varssavi kesklinnast — on andnud PWE-le Euroopa ärilinna staatuse.",
-    "for_ex_6_title": "ORGANISAATORI KOHTA",
-    "for_ex_6_text": "Meie tugev tööstuslike kontaktide võrgustik võimaldab meil meelitada messile näitusepaviljone ja sponsoreid, pakkudes teile juurdepääsu oma valdkonna uusimatele ja kõige uuenduslikumatele toodetele ja teenustele. Otsime alati uusi ja põnevaid viise, kuidas parandada messikogemust, tagades, et see jääks osalejatele värskeks ja atraktiivseks. Meie meeskond on paindlik ja suudab kohaneda muutuvate olude ja ettenägematute väljakutsetega, mis võivad ürituse ajal tekkida. Reageerime kiiresti ja tegutseme, et tagada messi sujuv kulg ja kõigil oleks positiivne kogemus."
-  },
-  "hu_HU": {
-    "for_ex_1_title": "ÖN LESZ A LEGGYORSABBAN NÖVEKVŐ KIÁLLÍTÁS RÉSZE",
-    "for_ex_1_text": "A PTAK WARSAW EXPO kiállítás innovatív esemény, amelyen lengyel és külföldi kiállítók vesznek részt. A kiállítás hatalmas, Lengyelország legnagyobb kiállítási területének elérhetőségével tűnik ki, amely a kiállítóknak a legjobb és szinte korlátlan lehetőségeket kínálja ajánlatuk bemutatására.",
-    "for_ex_2_title": "TERMÉKEIT ÉS SZOLGÁLTATÁSAIT EZREKNEK MUTATJA BE",
-    "for_ex_2_text": "Ezrek a potenciális ügyfelei! Kiállítóként akár három kiállítási nap áll rendelkezésére termékei és szolgáltatásai bemutatására. És ez még nem minden. A széles körű promóciós kampánynak és a média nagy érdeklődésének köszönhetően márkája Lengyelországban és külföldön is több százezer emberhez jut el.",
-    "for_ex_3_title": "ÉRTÉKES ISMERETEKET SZEREZ ÉS MEGISMERI A PIACI ÚJDONSÁGOKAT",
-    "for_ex_3_text": "Az üzleti életben nem engedheti meg magának, hogy helyben maradjon. Képzések, szemináriumok és iparági konferenciák során értékes ismereteket szerezhet, amelyeket gyakorlatban is alkalmazhat, és kiállításaink látogatása során felfedezheti a legújabb berendezési és termékmegoldásokat.",
-    "for_ex_4_title": "ÉRTÉKES ÜZLETI KAPCSOLATOKAT ÉPÍT",
-    "for_ex_4_text": "A kiállítás során vitákat folytat és értékes üzleti kapcsolatokat épít, amelyek új szerződésekhez vezethetnek. A kiállítások egyedülálló lehetőséget kínálnak nemcsak új ügyfélbázis létrehozására, hanem arra is, hogy megismerje az ügyfelek igényeit, lehetővé téve, hogy jobban testre szabja ajánlatát, és végül növelje vállalata nyereségét.",
-    "for_ex_5_title": "A LEGNAGYOBB KIÁLLÍTÓKÖZPONT LENGYELORSZÁGBAN",
-    "for_ex_5_text": "A Ptak Warsaw Expo Lengyelország legnagyobb és legmodernebb kiállítási komplexuma, amely üzleti, kereskedelmi és szórakoztató rendezvényeknek ad otthont. Létrehozásának ötlete az volt, hogy innovatív kiállítási rendszer alapján szervezzen kiállításokat, kongresszusokat, képzéseket, tömegrendezvényeket és egyéb találkozókat. Kiváló elhelyezkedése — 10 perc a Chopin repülőtértől és 15 perc Varsó központjától — PWE-nek az európai üzleti főváros státuszát adta.",
-    "for_ex_6_title": "A SZERVEZŐRŐL",
-    "for_ex_6_text": "Erős iparági kapcsolati hálónk lehetővé teszi számunkra, hogy kiállítókat és szponzorokat vonzzunk a kiállításra, hozzáférést biztosítva a legújabb és leginnovatívabb termékekhez és szolgáltatásokhoz az Ön iparágában. Mindig új és izgalmas módokat keresünk a kiállítási élmény javítására, biztosítva, hogy az friss és vonzó maradjon a résvevők számára. Csapatunk rugalmas, és képes alkalmazkodni a változó körülményekhez és az esemény során felmerülő előre nem látható kihívásokhoz. Gyorsan reagálunk és cselekszünk annak érdekében, hogy a kiállítás zökkenőmentesen menjen, és mindenki pozitív élményben részesüljön."
-  },
-  "fr_FR": {
-    "for_ex_1_title": "VOUS FEREZ PARTIE DU SALON À LA CROISSANCE LA PLUS RAPIDE",
-    "for_ex_1_text": "Le salon du PTAK WARSAW EXPO est un événement innovant avec des exposants de Pologne et de l'étranger. Le salon se distingue par la disponibilité d'une immense surface d'exposition, la plus grande de Pologne, offrant aux exposants les meilleures et presque illimitées possibilités de présenter leur offre.",
-    "for_ex_2_title": "VOUS PRÉSENTEREZ VOS PRODUITS ET SERVICES À DES MILLIERS DE CONSOMMATEURS",
-    "for_ex_2_text": "Ce sont des milliers de vos clients potentiels ! En participant en tant qu'exposant, vous disposez de jusqu'à trois jours de salon pour leur montrer vos produits et services. Et ce n'est pas tout. Grâce à une vaste campagne promotionnelle et à l'intérêt considérable des médias, votre marque atteindra des centaines de milliers de personnes en Pologne et à l'étranger.",
-    "for_ex_3_title": "VOUS ACQUÉREREZ DES CONNAISSANCES PRÉCIEUSES ET DÉCOUVRIREZ LES NOUVEAUTÉS DU MARCHÉ",
-    "for_ex_3_text": "Dans les affaires, vous ne pouvez pas vous permettre de rester immobile. Lors des formations, séminaires et conférences sectorielles, vous acquerrez des connaissances précieuses que vous pourrez mettre en pratique, et en visitant nos salons, vous découvrirez les dernières solutions en matière d'équipements et de produits.",
-    "for_ex_4_title": "VOUS ÉTABLIREZ DES CONTACTS COMMERCIAUX PRÉCIEUX",
-    "for_ex_4_text": "Lors du salon, vous participerez à des discussions et établirez des relations commerciales précieuses qui se traduiront par de nouveaux contrats. Les salons sont une occasion unique non seulement de créer une base de nouveaux clients, mais aussi d'écouter leurs besoins, ce qui vous permettra d'adapter davantage votre offre et d'augmenter finalement les bénéfices de votre entreprise.",
-    "for_ex_5_title": "LE PLUS GRAND CENTRE D'EXPOSITION DE POLOGNE",
-    "for_ex_5_text": "Ptak Warsaw Expo est le plus grand et le plus moderne complexe d'exposition de Pologne, dédié aux événements commerciaux, commerciaux et de divertissement. L'idée de sa création était d'organiser des salons, des congrès, des formations, des événements de masse et d'autres rencontres basés sur un système d'exposition innovant. Son emplacement excellent — à 10 minutes de l'aéroport Chopin et à 15 minutes du centre de Varsovie — a valu à PWE le statut de capitale européenne des affaires.",
-    "for_ex_6_title": "À PROPOS DE L'ORGANISATEUR",
-    "for_ex_6_text": "Notre solide réseau de contacts dans l'industrie nous permet d'attirer des exposants et des sponsors au salon, vous offrant un accès aux produits et services les plus récents et les plus innovants de votre secteur. Nous recherchons toujours de nouvelles façons intéressantes d'améliorer l'expérience du salon, en veillant à ce qu'elle reste fraîche et intéressante pour les participants. Notre équipe est flexible et capable de s'adapter aux circonstances changeantes et aux défis imprévus qui peuvent survenir lors d'un événement. Nous réagissons rapidement et agissons pour garantir que le salon se déroule sans heurts et que tout le monde ait une expérience positive."
-  },
-  "es_ES": {
-    "for_ex_1_title": "SERÁ PARTE DE LA FERIA DE MAYOR CRECIMIENTO",
-    "for_ex_1_text": "La feria en PTAK WARSAW EXPO es un evento innovador con expositores de Polonia y del extranjero. La feria se distingue por la disponibilidad de una enorme superficie de exposición, la más grande de Polonia, que ofrece a los expositores las mejores y casi ilimitadas posibilidades de presentar su oferta.",
-    "for_ex_2_title": "PRESENTARÁ SUS PRODUCTOS Y SERVICIOS A MILES DE CONSUMIDORES",
-    "for_ex_2_text": "¡Son miles de sus clientes potenciales! Al participar como expositor, tiene hasta tres días de feria para mostrarles sus productos y servicios. Y eso no es todo. Gracias a una amplia campaña publicitaria y al considerable interés de los medios, su marca llegará a cientos de miles de personas en Polonia y en el extranjero.",
-    "for_ex_3_title": "ADQUIRIRÁ CONOCIMIENTOS VALIOSOS Y DESCUBRIRÁ LAS NOVEDADES DEL MERCADO",
-    "for_ex_3_text": "En los negocios, no puede permitirse quedarse quieto. Durante las formaciones, seminarios y conferencias del sector, adquirirá conocimientos valiosos que podrá aplicar en la práctica, y al visitar nuestras ferias descubrirá las últimas soluciones en equipos y productos.",
-    "for_ex_4_title": "ESTABLECERÁ CONTACTOS COMERCIALES VALIOSOS",
-    "for_ex_4_text": "Durante la feria participará en discusiones y establecerá relaciones comerciales valiosas que se traducirán en nuevos contratos. Las ferias son una oportunidad única no solo para crear una base de nuevos clientes, sino también para conocer sus necesidades, lo que le permitirá adaptar mejor su oferta y aumentar finalmente los beneficios de su empresa.",
-    "for_ex_5_title": "EL MAYOR CENTRO DE EXPOSICIONES DE POLONIA",
-    "for_ex_5_text": "Ptak Warsaw Expo es el mayor y más moderno complejo de exposiciones de Polonia, dedicado a eventos empresariales, comerciales y de entretenimiento. La idea de su creación era organizar ferias, congresos, cursos de formación, eventos masivos y otros encuentros basados en un sistema innovador de exposiciones.",
-    "for_ex_6_title": "SOBRE EL ORGANIZADOR",
-    "for_ex_6_text": "Nuestra sólida red de contactos en la industria nos permite atraer expositores y patrocinadores a la feria, brindándole acceso a los productos y servicios más recientes e innovadores de su sector. Siempre estamos buscando nuevas y emocionantes formas de mejorar la experiencia de la feria, asegurándonos de que siga siendo fresca y atractiva para los participantes. Nuestro equipo es flexible y capaz de adaptarse a las circunstancias cambiantes y a los desafíos imprevistos que puedan surgir durante un evento. Respondemos rápidamente y actuamos para garantizar que la feria se desarrolle sin problemas y que todos tengan una experiencia positiva."
-  }
+    "pl_PL": {
+        "for_ex_1_title": "BĘDZIESZ CZĘŚCIĄ NAJSZYBCIEJ ROZWIJAJĄCYCH SIĘ TARGÓW",
+        "for_ex_1_text": "Targi w PTAK WARSAW EXPO to innowacyjne wydarzenia, w których udział biorą wystawcy z Polski i z zagranicy. Targi wyróżnia dostępność ogromnej, największej w Polsce powierzchni wystawienniczej, dającej wystawcom najlepsze, bo wręcz nieograniczone możliwości prezentacji swojej oferty.",
+
+        "for_ex_2_title": "ZAPREZENTUJESZ SWOJĄ OFERTĘ KLUCZOWYM ODBIORCOM Z BRANŻY",
+        "for_ex_2_text": "To tysiące Twoich potencjalnych klientów! Biorąc udział w targach, w charakterze wystawcy, masz aż trzy targowe dni na pokazanie im swoich produktów i usług. A to nie wszystko. Dzięki szerokiej kampanii promocyjnej oraz dużemu zainteresowaniu mediów Twój brand dotrze także do setek tysięcy ludzi w Polsce i za granicą.",
+
+        "for_ex_3_title": "ZDOBĘDZIESZ CENNĄ WIEDZĘ I POZNASZ NOWOŚCI RYNKU",
+        "for_ex_3_text": "W biznesie nie możesz pozwolić sobie na stanie w miejscu. Podczas szkoleń, seminariów i konferencji branżowych zdobędziesz cenną wiedzę, którą będziesz mógł wykorzystać w praktyce, a odwiedzając nasze targi odkryjesz najnowsze rozwiązania sprzętowe i produktowe.",
+
+        "for_ex_4_title": "NAWIĄŻESZ CENNE KONTAKTY BIZNESOWE",
+        "for_ex_4_text": "Podczas targów przeprowadzisz rozmowy i zbudujesz cenne relacje biznesowe, które zaowocują nowymi kontraktami. Targi to jedyna taka okazja by nie tylko zbudować bazę nowych klientów, ale także by usłyszeć o ich potrzebach, co pozwoli na jeszcze lepsze dopasowanie oferty do oczekiwań odbiorców, co w efekcie wpłynie na zwiększenie zysków firmy.",
+
+        "for_ex_5_title": "NAJWIĘKSZY OŚRODEK TARGOWY W POLSCE",
+        "for_ex_5_text": "Ptak Warsaw Expo to największy i najnowocześniejszy kompleks targowy w Polsce, dedykowany wydarzeniom biznesowym, komercyjnym i rozrywkowym. Ideą jego powstania była organizacja targów, kongresów, szkoleń, imprez masowych i innych wydarzeń w oparciu o innowacyjny system wystawienniczy. Doskonała lokalizacja Ptak Warsaw Expo, usytuowanie obiektów 10 minut od największego w kraju portu lotniczego Lotnisko Chopina i 15 minut od ścisłego centrum Warszawy, sprawia, że PWE wypracowało sobie miano europejskiej stolicy biznesu.",
+
+        "for_ex_6_title": "O ORGANIZATORZE",
+        "for_ex_6_text": "Nasza silna sieć kontaktów branżowych pozwala nam przyciągać na targi wystawców i sponsorów, zapewniając Państwu dostęp do najnowszych i najbardziej innowacyjnych produktów i usług w swojej branży. Zawsze szukamy nowych i ekscytujących sposobów na zwiększenie wrażeń z targów, zapewniając, że są one świeże i ekscytujące dla uczestników. Nasz zespół jest elastyczny, potrafi dostosować się do zmieniających się okoliczności i nieprzewidzianych wyzwań, które mogą pojawić się podczas imprezy. Szybko podejmujemy decyzje i podejmujemy działania, aby targi przebiegły sprawnie i wszyscy mieli pozytywne doświadczenia."
+    },
+
+    "en_US": {
+        "for_ex_1_title": "YOU WILL BE PART OF THE FASTEST GROWING TRADE SHOW",
+        "for_ex_1_text": "The fair at PTAK WARSAW EXPO is an innovative event featuring exhibitors from Poland and abroad. The fair is distinguished by the availability of a huge, the largest exhibition area in Poland, giving exhibitors the best and almost unlimited opportunities to present their offer.",
+
+        "for_ex_2_title": "PRESENT YOUR OFFER TO KEY INDUSTRY PROFESSIONALS",
+        "for_ex_2_text": "That’s thousands of your potential customers! By participating as an exhibitor, you have up to three trade fair days to show them your products and services. And that’s not all. Thanks to an extensive promotional campaign and significant media interest, your brand will reach hundreds of thousands of people in Poland and abroad.",
+
+        "for_ex_3_title": "YOU WILL GAIN VALUABLE KNOWLEDGE AND LEARN ABOUT THE NOVELTIES OF THE MARKET",
+        "for_ex_3_text": "In business, you can't afford to stand still. During training, seminars and industry conferences, you'll gain valuable knowledge that you can put into practice, and by visiting our trade shows you will discover the latest equipment and product solutions.",
+
+        "for_ex_4_title": "MAKE VALUABLE BUSINESS CONTACTS",
+        "for_ex_4_text": "During the fair you will hold discussions and build valuable business relationships that will result in new contracts. Trade fairs are a unique opportunity not only to build a base of new customers, but also to hear about their needs, allowing you to better tailor your offer and ultimately increase your company's profits.",
+
+        "for_ex_5_title": "THE LARGEST TRADE FAIR CENTER IN POLAND",
+        "for_ex_5_text": "Ptak Warsaw Expo is the largest and most modern trade fair complex in Poland, dedicated to business, commercial and entertainment events. The idea behind its creation was to organize trade fairs, congresses, training courses, mass events and other gatherings based on an innovative exhibition system. Its excellent location — 10 minutes from Chopin Airport and 15 minutes from the center of Warsaw — has earned PWE the status of the European capital of business.",
+
+        "for_ex_6_title": "ABOUT THE ORGANISER",
+        "for_ex_6_text": "Our strong network of industry contacts allows us to attract exhibitors and sponsors to the show, providing you with access to the latest and most innovative products and services in your industry. We are always searching for new and exciting ways to enhance the trade show experience, ensuring it remains fresh and engaging for attendees. Our team is flexible and able to adapt to changing circumstances and unforeseen challenges that may arise during an event. We react quickly and take action to ensure the trade show runs smoothly and everyone has a positive experience."
+    },
+
+    "de_DE": {
+        "for_ex_1_title": "SIE WERDEN TEIL DER AM SCHNELLSTEN WACHSENDEN MESSE SEIN",
+        "for_ex_1_text": "Die Messe im PTAK WARSAW EXPO ist eine innovative Veranstaltung mit Ausstellern aus Polen und dem Ausland. Die Messe zeichnet sich durch die größte verfügbare Ausstellungsfläche in Polen aus, die den Ausstellern nahezu unbegrenzte Möglichkeiten bietet, ihr Angebot zu präsentieren.",
+
+        "for_ex_2_title": "PRÄSENTIEREN SIE IHR ANGEBOT DEN WICHTIGSTEN BRANCHENKUNDEN",
+        "for_ex_2_text": "Das sind Tausende Ihrer potenziellen Kunden! Als Aussteller haben Sie drei Messetage Zeit, Ihre Produkte und Dienstleistungen zu präsentieren. Und das ist noch nicht alles. Dank einer umfangreichen Werbekampagne und großem Medieninteresse wird Ihre Marke Hunderttausende Menschen in Polen und im Ausland erreichen.",
+
+        "for_ex_3_title": "SIE ERWERBEN WERTVOLLES WISSEN UND LERNEN MARKTNEUHEITEN KENNEN",
+        "for_ex_3_text": "Im Geschäftsleben können Sie es sich nicht leisten, stehen zu bleiben. In Schulungen, Seminaren und Branchenkonferenzen erwerben Sie wertvolles Wissen, das Sie praktisch anwenden können, und auf unseren Messen entdecken Sie die neuesten Geräte- und Produktlösungen.",
+
+        "for_ex_4_title": "KNÜPFEN SIE WERTVOLLE GESCHÄFTSKONTAKTE",
+        "for_ex_4_text": "Während der Messe führen Sie Gespräche und knüpfen wertvolle Geschäftsbeziehungen, die zu neuen Verträgen führen können. Messen bieten eine einzigartige Gelegenheit, nicht nur neue Kunden zu gewinnen, sondern auch deren Bedürfnisse kennenzulernen, was es ermöglicht, Ihr Angebot besser anzupassen und letztendlich den Unternehmensgewinn zu steigern.",
+
+        "for_ex_5_title": "DAS GRÖSSTE MESSEZENTRUM IN POLEN",
+        "for_ex_5_text": "Ptak Warsaw Expo ist das größte und modernste Messegelände in Polen, das für Geschäfts-, Handels- und Unterhaltungsveranstaltungen konzipiert wurde. Die Idee seiner Gründung war es, Messen, Kongresse, Schulungen, Großveranstaltungen und andere Events auf der Grundlage eines innovativen Ausstellungssystems zu organisieren. Die hervorragende Lage – nur 10 Minuten vom Chopin-Flughafen und 15 Minuten vom Zentrum Warschaus entfernt – hat PWE den Ruf als europäische Hauptstadt des Geschäfts eingebracht.",
+
+        "for_ex_6_title": "ÜBER DEN VERANSTALTER",
+        "for_ex_6_text": "Unser starkes Netzwerk von Branchenkontakten ermöglicht es uns, Aussteller und Sponsoren für die Messe zu gewinnen und Ihnen Zugang zu den neuesten und innovativsten Produkten und Dienstleistungen Ihrer Branche zu bieten. Wir suchen stets nach neuen und spannenden Möglichkeiten, das Messeerlebnis zu verbessern und es für die Teilnehmer frisch und attraktiv zu gestalten. Unser Team ist flexibel und kann sich an wechselnde Umstände und unvorhergesehene Herausforderungen während einer Veranstaltung anpassen. Wir handeln schnell und effizient, damit die Messe reibungslos verläuft und alle Teilnehmer eine positive Erfahrung machen."
+    }
 }

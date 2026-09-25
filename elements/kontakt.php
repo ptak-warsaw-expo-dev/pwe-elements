@@ -217,6 +217,15 @@ class PWElementContact extends PWElements {
         $contact_person_email = '';
         $contact_person_phone = '';
 
+        $contact_person_name_2 = '';
+        $contact_person_email_2 = '';
+        $contact_person_phone_2 = '';
+
+        $contact_person_name_3 = '';
+        $contact_person_email_3 = '';
+        $contact_person_phone_3 = '';
+
+
         if (is_iterable($pwe_groups_data) && is_iterable($pwe_groups_contacts_data)) {
             foreach ($pwe_groups_data as $group) {
                 if (empty($group->fair_domain) || $current_domain !== $group->fair_domain) {
@@ -290,6 +299,18 @@ class PWElementContact extends PWElements {
                         $contact_person_email = self::pwe_data_value($data, 'email');
                         $contact_person_phone = self::pwe_data_value($data, 'phone');
                     }
+
+                    if ($slug === 'osoba-kontakt-2') {
+                        $contact_person_name_2 = self::pwe_data_value($data, 'name');
+                        $contact_person_email_2 = self::pwe_data_value($data, 'email');
+                        $contact_person_phone_2 = self::pwe_data_value($data, 'phone');
+                    }
+
+                    if ($slug === 'osoba-kontakt-3') {
+                        $contact_person_name_3 = self::pwe_data_value($data, 'name');
+                        $contact_person_email_3 = self::pwe_data_value($data, 'email');
+                        $contact_person_phone_3 = self::pwe_data_value($data, 'phone');
+                    }
                 }
             }
         }
@@ -317,9 +338,13 @@ class PWElementContact extends PWElements {
             )
         );
 
+        // -------------
+
         if (empty($service_emails)) {
             $service_emails = ['zgloszenia@warsawexpo.eu'];
         }
+
+        // -------------
 
         $marketing_media_name = self::pwe_first_not_empty(
             self::pwe_option_value('trade_fair_contact_media_name'),
@@ -338,10 +363,14 @@ class PWElementContact extends PWElements {
             )
         );
 
+        // -------------
+
         $consultant_email = self::pwe_first_not_empty(
             self::pwe_option_value('trade_fair_contact_tech'),
             $consultant_email
         );
+
+        // -------------
 
         $contact_person_name = self::pwe_first_not_empty(
             self::pwe_option_value('trade_fair_contact_media_person_name'),
@@ -356,6 +385,40 @@ class PWElementContact extends PWElements {
         $contact_person_phone = self::pwe_first_not_empty(
             self::pwe_option_value('trade_fair_contact_media_person_phone'),
             $contact_person_phone
+        );
+
+        // -------------
+
+        $contact_person_name_2 = self::pwe_first_not_empty(
+            self::pwe_option_value('trade_fair_contact_media_person_name_2'),
+            $contact_person_name_2
+        );
+
+        $contact_person_email_2 = self::pwe_first_not_empty(
+            self::pwe_option_value('trade_fair_contact_media_person_email_2'),
+            $contact_person_email_2
+        );
+
+        $contact_person_phone_2 = self::pwe_first_not_empty(
+            self::pwe_option_value('trade_fair_contact_media_person_phone_2'),
+            $contact_person_phone_2
+        );
+
+        // -------------
+
+        $contact_person_name_3 = self::pwe_first_not_empty(
+            self::pwe_option_value('trade_fair_contact_media_person_name_3'),
+            $contact_person_name_3
+        );
+
+        $contact_person_email_3 = self::pwe_first_not_empty(
+            self::pwe_option_value('trade_fair_contact_media_person_email_3'),
+            $contact_person_email_3
+        );
+
+        $contact_person_phone_3 = self::pwe_first_not_empty(
+            self::pwe_option_value('trade_fair_contact_media_person_phone_3'),
+            $contact_person_phone_3
         );
 
         $output = '
@@ -420,22 +483,22 @@ class PWElementContact extends PWElements {
                 }
             }';
 
-        if (isset($atts['horizontal']) && $atts['horizontal'] === 'true') {
-            $output .= '
-            .pwelement_' . self::$rnd_id . ' .pwe-container-contact-items {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-evenly;
+            if (isset($atts['horizontal']) && $atts['horizontal'] === 'true') {
+                $output .= '
+                .pwelement_' . self::$rnd_id . ' .pwe-container-contact-items {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-evenly;
+                }
+                .pwelement_' . self::$rnd_id . ' .pwe-contact-icon-item {
+                    flex-direction: column;
+                    text-align: center;
+                    flex: 1;
+                }
+                .pwelement_' . self::$rnd_id . ' {
+                    padding: 9px 0;
+                }';
             }
-            .pwelement_' . self::$rnd_id . ' .pwe-contact-icon-item {
-                flex-direction: column;
-                text-align: center;
-                flex: 1;
-            }
-            .pwelement_' . self::$rnd_id . ' {
-                padding: 9px 0;
-            }';
-        }
 
         $output .= '
         </style>
@@ -447,49 +510,49 @@ class PWElementContact extends PWElements {
 
             <div class="pwe-container-contact-items">';
 
-        $service_label = !empty($service_name)
-            ? $service_name
-            : PWElementContactForm::multi_translation('customer_service_office');
+                $service_label = !empty($service_name)
+                    ? $service_name
+                    : PWElementContactForm::multi_translation('customer_service_office');
 
-        $output .= '
+                $output .= '
                 <div class="pwe-contact-icon-item">
                     <img src="/wp-content/plugins/pwe-media/media/Phone.jpg" alt="grafika słuchawka">
                     <div class="uncode_text_column">
                         <p>
                             <b>' . esc_html($service_label) . '</b>';
 
-        if (!empty($service_phone)) {
+                            if (!empty($service_phone)) {
+                                $output .= '
+                                <a href="' . esc_url('tel:' . self::pwe_phone_href($service_phone)) . '">' . esc_html($service_phone) . '</a>';
+                            }
+
+                            $output .= self::pwe_render_email_links($service_emails);
+
+                        $output .= '
+                        </p>
+                    </div>
+                </div>';
+
+                if (!empty($consultant_email)) {
+                    $consultant_email = sanitize_email($consultant_email);
+
+                    if (!empty($consultant_email)) {
+                        $output .= '
+                        <div class="pwe-contact-icon-item">
+                            <img src="/wp-content/plugins/pwe-media/media/WystawcyZ.jpg" alt="grafika wystawcy">
+                            <div class="uncode_text_column">
+                                <p>
+                                    <b>' . esc_html(PWElementContactForm::multi_translation('technical_support')) . '</b>
+                                    <a href="' . esc_url('mailto:' . $consultant_email) . '">
+                                        <span>' . esc_html($consultant_email) . '</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>';
+                    }
+                }
+
             $output .= '
-                            <a href="' . esc_url('tel:' . self::pwe_phone_href($service_phone)) . '">' . esc_html($service_phone) . '</a>';
-        }
-
-        $output .= self::pwe_render_email_links($service_emails);
-
-        $output .= '
-                        </p>
-                    </div>
-                </div>';
-
-        if (!empty($consultant_email)) {
-            $consultant_email = sanitize_email($consultant_email);
-
-            if (!empty($consultant_email)) {
-                $output .= '
-                <div class="pwe-contact-icon-item">
-                    <img src="/wp-content/plugins/pwe-media/media/WystawcyZ.jpg" alt="grafika wystawcy">
-                    <div class="uncode_text_column">
-                        <p>
-                            <b>' . esc_html(PWElementContactForm::multi_translation('technical_support')) . '</b>
-                            <a href="' . esc_url('mailto:' . $consultant_email) . '">
-                                <span>' . esc_html($consultant_email) . '</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>';
-            }
-        }
-
-        $output .= '
             </div>
 
             <div class="pwe-heading-text main-pwe-heading-text" style="margin-top: 36px;">
@@ -498,60 +561,116 @@ class PWElementContact extends PWElements {
 
             <div class="pwe-container-contact-items">';
 
-        if (!empty($marketing_emails) || !empty($marketing_media_phone)) {
-            $marketing_label = !empty($marketing_media_name)
-                ? $marketing_media_name
-                : PWElementContactForm::multi_translation('media_marketing_service');
+                if (!empty($marketing_emails) || !empty($marketing_media_phone)) {
+                    $marketing_label = !empty($marketing_media_name)
+                        ? $marketing_media_name
+                        : PWElementContactForm::multi_translation('media_marketing_service');
 
-            $output .= '
-                <div class="pwe-contact-icon-item">
-                    <img src="/wp-content/plugins/pwe-media/media/Marketing.jpg" alt="grafika technicy">
-                    <div class="uncode_text_column" style="overflow-wrap: anywhere;">
-                        <p>
-                            <b>' . esc_html($marketing_label) . '</b>';
-
-            if (!empty($marketing_media_phone)) {
-                $output .= '
-                            <a href="' . esc_url('tel:' . self::pwe_phone_href($marketing_media_phone)) . '">' . esc_html($marketing_media_phone) . '</a>';
-            }
-
-            $output .= self::pwe_render_email_links($marketing_emails);
-
-            $output .= '
-                        </p>
-                    </div>
-                </div>';
-        }
-
-        if (!empty($contact_person_name) && (!empty($contact_person_email) || !empty($contact_person_phone))) {
-            $output .= '
-                <div class="pwe-contact-icon-item">
-                    <img src="/wp-content/plugins/pwe-media/media/Person.jpg" alt="grafika osoby">
-                    <div class="uncode_text_column" style="overflow-wrap: anywhere;">
-                        <p>
-                            <b>' . esc_html($contact_person_name) . '</b>';
-
-            if (!empty($contact_person_phone)) {
-                $output .= '
-                            <a href="' . esc_url('tel:' . self::pwe_phone_href($contact_person_phone)) . '">' . esc_html($contact_person_phone) . '</a>';
-            }
-
-            if (!empty($contact_person_email)) {
-                $contact_person_email = sanitize_email($contact_person_email);
-
-                if (!empty($contact_person_email)) {
                     $output .= '
-                            <a href="' . esc_url('mailto:' . $contact_person_email) . '">' . esc_html($contact_person_email) . '</a>';
+                        <div class="pwe-contact-icon-item">
+                            <img src="/wp-content/plugins/pwe-media/media/Marketing.jpg" alt="grafika technicy">
+                            <div class="uncode_text_column" style="overflow-wrap: anywhere;">
+                                <p>
+                                    <b>' . esc_html($marketing_label) . '</b>';
+
+                                    if (!empty($marketing_media_phone)) {
+                                        $output .= '
+                                        <a href="' . esc_url('tel:' . self::pwe_phone_href($marketing_media_phone)) . '">' . esc_html($marketing_media_phone) . '</a>';
+                                    }
+
+                                    $output .= self::pwe_render_email_links($marketing_emails);
+
+                                    $output .= '
+                                </p>
+                            </div>
+                        </div>';
                 }
-            }
+
+                if (!empty($contact_person_name) && (!empty($contact_person_email) || !empty($contact_person_phone))) {
+                    $output .= '
+                    <div class="pwe-contact-icon-item contact-person-name">
+                        <img src="/wp-content/plugins/pwe-media/media/Person.jpg" alt="grafika osoby">
+                        <div class="uncode_text_column" style="overflow-wrap: anywhere;">
+                            <p>
+                                <b>' . esc_html($contact_person_name) . '</b>';
+
+                                if (!empty($contact_person_phone)) {
+                                    $output .= '
+                                    <a href="' . esc_url('tel:' . self::pwe_phone_href($contact_person_phone)) . '">' . esc_html($contact_person_phone) . '</a>';
+                                }
+
+                                if (!empty($contact_person_email)) {
+                                    $contact_person_email = sanitize_email($contact_person_email);
+
+                                    if (!empty($contact_person_email)) {
+                                        $output .= '
+                                        <a href="' . esc_url('mailto:' . $contact_person_email) . '">' . esc_html($contact_person_email) . '</a>';
+                                    }
+                                }
+
+                                $output .= '
+                            </p>
+                        </div>
+                    </div>';
+                }
+
+                if (!empty($contact_person_name_2) && (!empty($contact_person_email_2) || !empty($contact_person_phone_2))) {
+                    $output .= '
+                    <div class="pwe-contact-icon-item contact-person-name-2">
+                        <img src="/wp-content/plugins/pwe-media/media/Person.jpg" alt="grafika osoby">
+                        <div class="uncode_text_column" style="overflow-wrap: anywhere;">
+                            <p>
+                                <b>' . esc_html($contact_person_name_2) . '</b>';
+
+                                if (!empty($contact_person_phone_2)) {
+                                    $output .= '
+                                                <a href="' . esc_url('tel:' . self::pwe_phone_href($contact_person_phone_2)) . '">' . esc_html($contact_person_phone_2) . '</a>';
+                                }
+
+                                if (!empty($contact_person_email_2)) {
+                                    $contact_person_email_2 = sanitize_email($contact_person_email_2);
+
+                                    if (!empty($contact_person_email_2)) {
+                                        $output .= '
+                                        <a href="' . esc_url('mailto:' . $contact_person_email_2) . '">' . esc_html($contact_person_email_2) . '</a>';
+                                    }
+                                }
+
+                            $output .= '
+                            </p>
+                        </div>
+                    </div>';
+                }
+
+                if (!empty($contact_person_name_3) && (!empty($contact_person_email_3) || !empty($contact_person_phone_3))) {
+                    $output .= '
+                    <div class="pwe-contact-icon-item contact-person-name-3">
+                        <img src="/wp-content/plugins/pwe-media/media/Person.jpg" alt="grafika osoby">
+                        <div class="uncode_text_column" style="overflow-wrap: anywhere;">
+                            <p>
+                                <b>' . esc_html($contact_person_name_3) . '</b>';
+
+                                if (!empty($contact_person_phone_3)) {
+                                    $output .= '
+                                                <a href="' . esc_url('tel:' . self::pwe_phone_href($contact_person_phone_3)) . '">' . esc_html($contact_person_phone_3) . '</a>';
+                                }
+
+                                if (!empty($contact_person_email_3)) {
+                                    $contact_person_email_3 = sanitize_email($contact_person_email_3);
+
+                                    if (!empty($contact_person_email_3)) {
+                                        $output .= '
+                                        <a href="' . esc_url('mailto:' . $contact_person_email_3) . '">' . esc_html($contact_person_email_3) . '</a>';
+                                    }
+                                }
+
+                            $output .= '
+                            </p>
+                        </div>
+                    </div>';
+                }
 
             $output .= '
-                        </p>
-                    </div>
-                </div>';
-        }
-
-        $output .= '
             </div>
         </div>';
 

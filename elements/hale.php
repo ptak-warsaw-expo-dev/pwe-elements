@@ -97,7 +97,7 @@ class PWElementHale extends PWElements {
         $trade_fair_end_timestamp = strtotime($trade_fair_end);
 
         // Get JSON
-        $fairs_json = PWE_Functions::json_fairs();
+        $fairs_json = PWECommonFunctions::json_fairs();
 
         $fair_items_json = [];
 
@@ -153,8 +153,8 @@ class PWElementHale extends PWElements {
         $all_halls = rtrim($all_halls, ', ');
 
         $halls_word = (count(array_filter(array_map('trim', explode(',', $all_halls)))) > 1)
-            ? PWE_Functions::multi_translation("multiple_halls")
-            : PWE_Functions::multi_translation("single_hall");
+            ? self::multi_translation("multiple_halls")
+            : self::multi_translation("single_hall"); 
 
         if (empty($all_halls)) {
             return;

@@ -1,0 +1,209 @@
+[
+  {
+    "id": "system-compatibility",
+    "name": "Wybór PWE System vs lokalny fallback",
+    "status": "active",
+    "document": "system-compatibility.md",
+    "entrypoints": [
+      "plugin-bootstrap"
+    ],
+    "symbols": [
+      "PWElementsPlugin::hasPweSystem",
+      "PWElementsPlugin::initSystemCompatibility"
+    ],
+    "side_effects": [
+      "require cross-plugin or local fallback"
+    ],
+    "integrations": [
+      "pwe-system"
+    ]
+  },
+  {
+    "id": "mass-exhibitor-invitations",
+    "name": "Masowe generowanie zaproszeń/rejestracji wystawcy",
+    "status": "active",
+    "document": "mass-exhibitor-invitations.md",
+    "entrypoints": [
+      "pwe_exhibitor_generator",
+      "mass-vip-generator"
+    ],
+    "symbols": [
+      "PWEExhibitorGenerator::PWEExhibitorGeneratorOutput",
+      "PWEMassVipSender::output"
+    ],
+    "side_effects": [
+      "GF entries",
+      "upload logo",
+      "mass_exhibitors_invite_query",
+      "HTTP to custom-element"
+    ],
+    "integrations": [
+      "gravity-forms",
+      "custom-element"
+    ]
+  },
+  {
+    "id": "registration-session",
+    "name": "Rejestracja → sesja → kolejny krok",
+    "status": "active",
+    "document": "registration-session.md",
+    "entrypoints": [
+      "pwe_registration",
+      "registration-after-submission",
+      "session-entry-update",
+      "session-fetch"
+    ],
+    "symbols": [
+      "PWERegistration::entryToSession",
+      "PWERegistration::PWERegistrationOutput"
+    ],
+    "side_effects": [
+      "PHP session",
+      "GF entry updates"
+    ],
+    "integrations": [
+      "gravity-forms"
+    ]
+  },
+  {
+    "id": "resend-ticket",
+    "name": "Ponowne wysłanie biletu",
+    "status": "active",
+    "document": "resend-ticket.md",
+    "entrypoints": [
+      "resend-ticket-query"
+    ],
+    "symbols": [
+      "PWEResendTicket::notification_sender"
+    ],
+    "side_effects": [
+      "GF notifications"
+    ],
+    "integrations": [
+      "gravity-forms"
+    ]
+  },
+  {
+    "id": "badge-qr",
+    "name": "Masowe badge / QR",
+    "status": "active",
+    "document": "badge-and-qr.md",
+    "entrypoints": [
+      "PWElements element"
+    ],
+    "symbols": [
+      "PWBadgeElement::massGenerator",
+      "PWBadgeElement::qrOnlyDownload"
+    ],
+    "side_effects": [
+      "GF entries",
+      "gform_after_submission",
+      "QR feed lookup",
+      "remote QR download"
+    ],
+    "integrations": [
+      "gravity-forms"
+    ]
+  },
+  {
+    "id": "lead-drop-generator",
+    "name": "Import/drop leadów do Gravity Forms",
+    "status": "direct-entrypoint",
+    "document": "lead-drop-generator.md",
+    "entrypoints": [
+      "lead-drop-generator"
+    ],
+    "symbols": [
+      "generateToken",
+      "validateToken"
+    ],
+    "side_effects": [
+      "GF entries",
+      "gform_after_submission",
+      "GF notifications"
+    ],
+    "integrations": [
+      "gravity-forms"
+    ]
+  },
+  {
+    "id": "exhibitor-catalog",
+    "name": "Renderowanie katalogu wystawców",
+    "status": "active",
+    "document": "exhibitor-catalog.md",
+    "entrypoints": [
+      "pwe_katalog"
+    ],
+    "symbols": [
+      "PWECatalog::PWECatalogOutput"
+    ],
+    "side_effects": [
+      "dynamic class include",
+      "frontend assets"
+    ],
+    "integrations": [
+      "custom-element",
+      "cap-data"
+    ]
+  },
+  {
+    "id": "calendar",
+    "name": "Kalendarz wydarzeń i AJAX paginacji",
+    "status": "conditional",
+    "document": "calendar.md",
+    "entrypoints": [
+      "ajax-load-more-calendar"
+    ],
+    "symbols": [
+      "LoopCalendar::load_more_calendar"
+    ],
+    "side_effects": [
+      "event CPT queries",
+      "AJAX HTML"
+    ],
+    "integrations": [
+      "wordpress",
+      "wpml"
+    ]
+  },
+  {
+    "id": "mailing-module",
+    "name": "Moduł mailingowy Gravity Forms",
+    "status": "dormant",
+    "document": "mailing-dormant.md",
+    "entrypoints": [],
+    "symbols": [
+      "PWEMailing"
+    ],
+    "side_effects": [
+      "GF form updates",
+      "entry cleanup",
+      "resend config"
+    ],
+    "integrations": [
+      "gravity-forms"
+    ]
+  },
+  {
+    "id": "dynamic-shortcodes",
+    "name": "Dane targowe przez [pwe_*]",
+    "status": "fallback/delegated",
+    "document": "dynamic-shortcodes.md",
+    "entrypoints": [
+      "dynamic-pwe-shortcodes"
+    ],
+    "symbols": [
+      "pwe_get_shortcode_map",
+      "register_dynamic_shortcodes",
+      "handle_fair_shortcode"
+    ],
+    "side_effects": [
+      "data cache"
+    ],
+    "integrations": [
+      "pwe-system",
+      "cap-data",
+      "wpml"
+    ]
+  }
+]

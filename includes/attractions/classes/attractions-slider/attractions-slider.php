@@ -348,17 +348,28 @@ class PWEAttractionsSlider extends PWEAttractions {
 
         // Zakładki
         if ($has_tabs) {
-            $output .= '<div class="pwe-attractions-slider__tabs" role="tablist" aria-label="Przełącz sekcję">';
+            $category_labels = [
+                'nowi' => PWECommonFunctions::languageChecker('Nowi', 'New'),
+                'poprzedni' => PWECommonFunctions::languageChecker('Poprzedni', 'Previous'),
+            ];
+
+            $tabs_label = PWECommonFunctions::languageChecker('Przełącz sekcję', 'Switch section');
+
+            $output .= '<div class="pwe-attractions-slider__tabs" role="tablist" aria-label="'.esc_attr($tabs_label).'">';
+
             foreach ($categories as $i => $cat) {
+                $tab_label = $category_labels[$cat] ?? ucfirst($cat);
+
                 $output .= '<button class="pwe-attractions-slider__tab" role="tab" '
                         . 'aria-selected="'.($i === 0 ? 'true' : 'false').'" '
-                        . 'aria-controls="panel-'.$cat.'" '
-                        . 'id="tab-'.$cat.'" '
+                        . 'aria-controls="panel-'.esc_attr($cat).'" '
+                        . 'id="tab-'.esc_attr($cat).'" '
                         . ($i === 0 ? 'tabindex="0"' : 'tabindex="-1"')
                         . '>'
-                        . ucfirst($cat)
+                        . esc_html($tab_label)
                         . '</button>';
             }
+
             $output .= '</div>';
         }
 
@@ -379,7 +390,13 @@ class PWEAttractionsSlider extends PWEAttractions {
             $output .= '      <div class="swiper" id="'.esc_attr($swiper_id).'"><div class="swiper-wrapper">';
 
             $loopAdditionalSlides = 8;
+            $originalCount = count($slides_by_category[$cat]);
+
             $minSlides = max(8, 2 * $loopAdditionalSlides + 1);
+
+            if ($originalCount > 0 && $originalCount % 2 === 0 && $minSlides % 2 !== 0) {
+                $minSlides++;
+            }
             $catSlides = self::ensureMinSlides($slides_by_category[$cat], $minSlides);
 
             foreach ($catSlides as $item) {

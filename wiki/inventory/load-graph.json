@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status_definitions": {
+    "bootstrap": "główny plik aktywacji wtyczki",
+    "active": "ładowany z bootstrapu przy normalnym działaniu",
+    "conditional": "ładowany tylko po spełnieniu warunku",
+    "fallback": "lokalna implementacja ładowana tylko gdy PWE System nie jest aktywny",
+    "delegated": "implementacja dostarczana przez PWE System",
+    "dormant": "kod obecny, ale jego require/instancjowanie jest zakomentowane w bieżącym bootstrapie",
+    "direct-entrypoint": "plik wykonywany bezpośrednio przez HTTP/CLI",
+    "third-party": "bundlowana biblioteka zewnętrzna"
+  },
+  "nodes": [
+    {
+      "path": "pwelements.php",
+      "status": "bootstrap"
+    },
+    {
+      "path": "pwefunctions.php",
+      "status": "fallback",
+      "condition": "PWE System nieaktywny"
+    },
+    {
+      "path": "backend/shortcodes.php",
+      "status": "fallback",
+      "condition": "PWE System nieaktywny"
+    },
+    {
+      "path": "pwe-style-var.php",
+      "status": "active"
+    },
+    {
+      "path": "elements/pwelements-options.php",
+      "status": "active"
+    },
+    {
+      "path": "includes/katalog-wystawcow/main-katalog-wystawcow.php",
+      "status": "active"
+    },
+    {
+      "path": "includes/exhibitor-generator/exhibitor-generator.php",
+      "status": "active"
+    },
+    {
+      "path": "includes/registration/registration.php",
+      "status": "active"
+    },
+    {
+      "path": "includes/calendar/calendar.php",
+      "status": "conditional",
+      "condition": "PWECommonFunctions::checkForMobile() zwraca false"
+    },
+    {
+      "path": "includes/conference-calendar/conference-calendar.php",
+      "status": "conditional",
+      "condition": "PWECommonFunctions::checkForMobile() zwraca false"
+    },
+    {
+      "path": "includes/mailing/mailing.php",
+      "status": "dormant",
+      "reason": "require i instancja są zakomentowane w initClasses()"
+    },
+    {
+      "path": "gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php",
+      "status": "dormant",
+      "reason": "require i instancja są zakomentowane w initClasses()"
+    },
+    {
+      "path": "includes/top10/pwelogofetcher.php",
+      "status": "dormant",
+      "reason": "require i instancja są zakomentowane w initClasses()"
+    },
+    {
+      "path": "qr-active/main-qr-active.php",
+      "status": "dormant",
+      "reason": "require i instancja są zakomentowane w initClasses()"
+    },
+    {
+      "path": "plugin-update-checker/",
+      "status": "third-party"
+    },
+    {
+      "path": "assets/tcpdf/",
+      "status": "third-party"
+    },
+    {
+      "path": "other/FPDI/",
+      "status": "third-party"
+    },
+    {
+      "external": "pwe-system/core/class-pwe-system-functions.php",
+      "status": "delegated",
+      "condition": "PWE System aktywny"
+    },
+    {
+      "external": "pwe-system/modules/shortcodes/backend-shortcodes.php",
+      "status": "delegated",
+      "condition": "PWE System aktywny"
+    },
+    {
+      "path": "includes/exhibitor-generator/assets/mass_vip.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "mass-vip-generator"
+    },
+    {
+      "path": "other/mass_vip.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "legacy-mass-vip"
+    },
+    {
+      "path": "other/drop_generator.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "lead-drop-generator"
+    },
+    {
+      "path": "other/exhibitors_count.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "exhibitors-count"
+    },
+    {
+      "path": "elements/fetch.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "session-entry-update"
+    },
+    {
+      "path": "elements/session_fetch.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "session-fetch"
+    },
+    {
+      "path": "other/save_fairs_json.php",
+      "status": "direct-entrypoint",
+      "entrypoint_id": "save-fairs-json"
+    }
+  ]
+}

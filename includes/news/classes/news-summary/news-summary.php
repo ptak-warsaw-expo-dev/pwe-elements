@@ -534,9 +534,6 @@ public static function output($atts) {
         $author_position = '';
         $author_desc = '';
         $author_image = '';
-        error_log('AUTHOR NAME: ' . print_r($author_name, true));
-error_log('AUTHOR POSITION: ' . print_r($author_position, true));
-error_log('AUTHOR DESC: ' . print_r($author_desc, true));
 
         if (!empty($author_name) && isset($authors[$author_name])) {
             $author_position = $authors[$author_name]['position'];

@@ -99,12 +99,11 @@ class PWElementMedalForm extends PWElements {
             'medale_form_id' => '',
         ), $atts ));
 
-
         $text_color = 'color:' . self::findColor($atts['text_color_manual_hidden'], $atts['text_color'], 'black') . '!important;';
 
-        $files = PWE_Functions::get_database_fairs_data_files();
+        $files = PWECommonFunctions::get_database_fairs_data_files();
 
-        $language = PWE_Functions::lang_pl() ? 'pl' : 'en';
+        $language = PWECommonFunctions::lang_pl() ? 'pl' : 'en';
 
         // Domyślny link, używany gdy w bazie nie ma odpowiedniego pliku.
         $ceremony_rules = $language === 'pl'

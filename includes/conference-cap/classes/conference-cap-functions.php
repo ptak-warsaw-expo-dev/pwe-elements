@@ -33,6 +33,9 @@ class PWEConferenceCapFunctions {
         // Initialize the image container
         $speaker_html = '<div class="pwe-box-speakers-img">';
 
+        $top_index = '';
+        $left_index = '';
+
         foreach ($head_images as $i => $image_src) {
             if (!empty($image_src)) {
                 $z_index = (1 + $i);
@@ -111,7 +114,7 @@ class PWEConferenceCapFunctions {
     }
 
     public static function pwe_convert_rgb_to_hex($content) {
-        return preg_replace_callback('/rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i', function ($matches) {
+        return preg_replace_callback('/rgb\s\*\\(\s\*(\d{1,3})\s\*,\s\*(\d{1,3})\s\*,\s\*(\d{1,3})\s\*\\)/i', function ($matches) {
             $r = max(0, min(255, (int)$matches[1]));
             $g = max(0, min(255, (int)$matches[2]));
             $b = max(0, min(255, (int)$matches[3]));
@@ -169,34 +172,36 @@ class PWEConferenceCapFunctions {
     }
 
     public static function getConferencePatronLogosFromList($conf_id, $conf_slug, $logo_files = []) {
-        $cap_db = PWECommonFunctions::connect_database();
-        if (!$cap_db) {
-            return '<!-- No CAP database connection -->';
-        }
-
         if (empty($logo_files)) {
             return '<!-- No logos -->';
         }
 
-        // Fetch additional data from conf_adds
-        $adds_raw = $cap_db->get_results(
-            $cap_db->prepare("SELECT slug, data FROM conf_adds WHERE conf_id = %d", $conf_id),
-            ARRAY_A
-        );
+        // Get conf_adds
+        $adds_raw = PWECommonFunctions::get_database_conference_adds_data($conf_id);
 
         // Slugs => data
         $adds = [];
         foreach ($adds_raw as $row) {
+            if (empty($row['slug'])) {
+                continue;
+            }
+
             $slug = trim($row['slug']);
-            $adds[$slug] = json_decode($row['data'], true);
+            $decoded = !empty($row['data']) ? json_decode($row['data'], true) : [];
+            $adds[$slug] = is_array($decoded) ? $decoded : [];
         }
-        
+
         // Directory URL
         $patroni_dir_url = 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/patrons';
         $output = '';
 
         foreach ($logo_files as $slug) {
             $slug = trim($slug);
+
+            if ($slug === '') {
+                continue;
+            }
+
             $data = $adds[$slug] ?? [];
 
             $logo_url = $patroni_dir_url . '/' . $slug;
@@ -223,11 +228,6 @@ class PWEConferenceCapFunctions {
     }
 
     public static function getConferenceOrganizer($conf_id, $conf_slug, $lang) {
-        $cap_db = PWECommonFunctions::connect_database();
-        if (!$cap_db) {
-            return null;
-        }
-
         $preferred_slugs = ($lang === 'PL')
             ? ['org-name_pl']
             : ['org-name_en', 'org-name_pl'];
@@ -235,28 +235,26 @@ class PWEConferenceCapFunctions {
         // Additional legacy fallback
         $all_slugs = array_merge($preferred_slugs, ['org-name']);
 
-        // Build placeholders for IN (...)
-        $placeholders = implode(',', array_fill(0, count($all_slugs), '%s'));
-
-        $sql = $cap_db->prepare(
-            "SELECT slug, data
-            FROM conf_adds
-            WHERE conf_id = %d
-            AND slug IN ($placeholders)",
-            array_merge([$conf_id], $all_slugs)
-        );
-        $rows = $cap_db->get_results($sql, ARRAY_A);
+        // Get all conf_adds
+        $rows = PWECommonFunctions::get_database_conference_adds_data($conf_id);
 
         $by_slug = [];
-        if (!empty($rows)) {
-            foreach ($rows as $r) {
-                if (!empty($r['data']) && $r['data'] !== 'null') {
-                    $by_slug[$r['slug']] = trim($r['data'], "\"");
-                }
+
+        foreach ($rows as $r) {
+            if (
+                empty($r['slug']) ||
+                !in_array($r['slug'], $all_slugs, true) ||
+                empty($r['data']) ||
+                $r['data'] === 'null'
+            ) {
+                continue;
             }
+
+            $by_slug[$r['slug']] = trim($r['data'], '"');
         }
 
         $organizer_name = '';
+
         foreach ($preferred_slugs as $slug_key) {
             if (!empty($by_slug[$slug_key])) {
                 $organizer_name = $by_slug[$slug_key];
@@ -264,76 +262,104 @@ class PWEConferenceCapFunctions {
             }
         }
 
-        if (empty($organizer_name)) {
+        // Legacy fallback.
+        if ($organizer_name === '' && !empty($by_slug['org-name'])) {
+            $organizer_name = $by_slug['org-name'];
+        }
+
+        if ($organizer_name === '') {
             return null;
         }
 
         $logo_url = 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/organizer/conf_organizer.webp';
+
         $response = wp_remote_head($logo_url);
-        $code = is_wp_error($response) ? 0 : (int) wp_remote_retrieve_response_code($response);
+        $code = is_wp_error($response)
+            ? 0
+            : (int) wp_remote_retrieve_response_code($response);
+
         if ($code < 200 || $code >= 400) {
             return [
                 'logo_url' => null,
-                'desc'     => $organizer_name,
+                'desc' => $organizer_name,
             ];
         }
 
         return [
             'logo_url' => $logo_url,
-            'desc'     => $organizer_name,
+            'desc' => $organizer_name,
         ];
     }
 
     public static function getConferenceOrganizersAll($conf_slug) {
-        $cap_db = PWECommonFunctions::connect_database();
-        if (!$cap_db) {
+        $domain = $_SERVER['HTTP_HOST'] ?? '';
+        $domain = preg_replace('/:\\d+$/', '', strtolower(trim($domain)));
+
+        if ($domain === '') {
             return [];
         }
 
-        $conference = $cap_db->get_row($cap_db->prepare("
-            SELECT id, organizers_img
-            FROM conferences
-            WHERE conf_slug = %s
-        ", $conf_slug), ARRAY_A);
+        // Get all conferences for the domain
+        $conferences = PWECommonFunctions::get_database_conferences_data($domain);
 
-        if (!$conference || empty($conference['organizers_img'])) {
+        $conference = null;
+
+        foreach ($conferences as $conf) {
+            if (($conf->conf_slug ?? '') === $conf_slug) {
+                $conference = $conf;
+                break;
+            }
+        }
+
+        if (
+            !$conference ||
+            empty($conference->id) ||
+            empty($conference->organizers_img)
+        ) {
             return [];
         }
 
-        $conf_id = intval($conference['id']);
+        $conf_id = (int) $conference->id;
+        $logos = array_map('trim', explode(',', $conference->organizers_img));
 
-        $logos = array_map('trim', explode(",", $conference['organizers_img']));
+        // Get conf_adds 
+        $adds_raw = PWECommonFunctions::get_database_conference_adds_data($conf_id);
+        $adds = [];
+
+        foreach ($adds_raw as $row) {
+            if (empty($row['slug'])) {
+                continue;
+            }
+
+            $adds[trim($row['slug'])] = $row['data'] ?? null;
+        }
 
         $results = [];
 
         foreach ($logos as $logo) {
-            if ($logo === "") continue;
+            if ($logo === '') {
+                continue;
+            }
 
             $slug = 'org-' . $logo;
-
-            $conf_add = $cap_db->get_row($cap_db->prepare("
-                SELECT data
-                FROM conf_adds
-                WHERE slug = %s
-                AND conf_id = %d
-            ", $slug, $conf_id), ARRAY_A);
-
             $data = [];
-            if (!empty($conf_add['data'])) {
-                $data = json_decode($conf_add['data'], true);
+
+            if (!empty($adds[$slug])) {
+                $decoded = json_decode($adds[$slug], true);
+
+                if (is_array($decoded)) {
+                    $data = $decoded;
+                }
             }
 
             $results[] = [
-                "src" => 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/organizer/' . $logo,
-                "data" => $data
+                'src' => 'https://cap.warsawexpo.eu/public/uploads/conf/' . $conf_slug . '/organizer/' . $logo,
+                'data' => $data,
             ];
         }
 
         return $results;
     }
-
-
-
 
     public static function debugConferencesConsole( array $database_data ) {
 

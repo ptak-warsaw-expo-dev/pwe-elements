@@ -1,0 +1,138 @@
+[
+  {
+    "id": "ajax-load-more-posts",
+    "type": "wp_ajax",
+    "trigger": "admin-ajax.php?action=load_more_posts",
+    "methods": [
+      "POST"
+    ],
+    "source": "backend/load-more-posts.php",
+    "auth": "wp_ajax oraz wp_ajax_nopriv; brak jawnego nonce w handlerze"
+  },
+  {
+    "id": "ajax-pwe-load-posts",
+    "type": "wp_ajax",
+    "trigger": "admin-ajax.php?action=pwe_ajax_load_posts",
+    "methods": [
+      "POST"
+    ],
+    "source": "includes/posts/assets/ajax.php",
+    "auth": "wp_ajax oraz wp_ajax_nopriv; brak jawnego nonce w rejestracji"
+  },
+  {
+    "id": "ajax-load-more-calendar",
+    "type": "wp_ajax",
+    "trigger": "admin-ajax.php?action=load_more_calendar",
+    "methods": [
+      "POST"
+    ],
+    "source": "includes/calendar/classes/loop-calendar.php",
+    "auth": "wp_ajax oraz wp_ajax_nopriv; handler służy do paginacji kalendarza"
+  },
+  {
+    "id": "mass-vip-generator",
+    "type": "file_http",
+    "trigger": "/wp-content/plugins/PWElements/includes/exhibitor-generator/assets/mass_vip.php",
+    "methods": [
+      "POST"
+    ],
+    "source": "includes/exhibitor-generator/assets/mass_vip.php",
+    "auth": "HMAC domeny wyliczany z AUTH_KEY; endpoint tworzy wpisy Gravity Forms i kolejkę mass_exhibitors_invite_query"
+  },
+  {
+    "id": "legacy-mass-vip",
+    "type": "file_http",
+    "trigger": "/wp-content/plugins/PWElements/other/mass_vip.php",
+    "methods": [
+      "POST"
+    ],
+    "source": "other/mass_vip.php",
+    "auth": "legacy HMAC domeny z sekretem zapisanym w kodzie; ścieżka nadal jest referencjonowana przez starsze elementy"
+  },
+  {
+    "id": "lead-drop-generator",
+    "type": "file_http",
+    "trigger": "/wp-content/plugins/PWElements/other/drop_generator.php",
+    "methods": [
+      "POST"
+    ],
+    "source": "other/drop_generator.php",
+    "auth": "nagłówek Authorization weryfikowany przez token HMAC domeny"
+  },
+  {
+    "id": "exhibitors-count",
+    "type": "file_http",
+    "trigger": "/wp-content/plugins/PWElements/other/exhibitors_count.php",
+    "methods": [
+      "POST"
+    ],
+    "source": "other/exhibitors_count.php",
+    "auth": "nagłówek Authorization weryfikowany przez token HMAC domeny"
+  },
+  {
+    "id": "session-entry-update",
+    "type": "file_http",
+    "trigger": "/wp-content/plugins/PWElements/elements/fetch.php",
+    "methods": [
+      "POST"
+    ],
+    "source": "elements/fetch.php",
+    "auth": "stała wartość nagłówka Authorization zapisana w kodzie; endpoint korzysta z sesji rejestracji"
+  },
+  {
+    "id": "session-fetch",
+    "type": "file_http",
+    "trigger": "/wp-content/plugins/PWElements/elements/session_fetch.php",
+    "methods": [
+      "GET"
+    ],
+    "source": "elements/session_fetch.php",
+    "auth": "brak jawnej kontroli dostępu; zwraca email/telefon z bieżącej sesji PWE, jeśli istnieją"
+  },
+  {
+    "id": "save-fairs-json",
+    "type": "cli",
+    "trigger": "php other/save_fairs_json.php <token>",
+    "methods": [
+      "CLI"
+    ],
+    "source": "other/save_fairs_json.php",
+    "auth": "pierwszy argument CLI porównywany z PWE_API_KEY_2"
+  },
+  {
+    "id": "plugin-bootstrap",
+    "type": "plugin_bootstrap",
+    "trigger": "WordPress loads active plugin",
+    "source": "pwelements.php",
+    "symbol": "PWElementsPlugin::__construct"
+  },
+  {
+    "id": "registration-after-submission",
+    "type": "hook",
+    "trigger": "gform_after_submission",
+    "source": "includes/registration/registration.php",
+    "symbol": "PWERegistration::entryToSession"
+  },
+  {
+    "id": "resend-ticket-query",
+    "type": "query_handler",
+    "trigger": "wp + ?data=<base64(form_id,entry_id)>",
+    "source": "elements/resend-ticket.php",
+    "symbol": "PWEResendTicket::notification_sender"
+  },
+  {
+    "id": "dynamic-pwe-shortcodes",
+    "type": "shortcode_family",
+    "trigger": "init → register_dynamic_shortcodes",
+    "source": "backend/shortcodes.php",
+    "symbol": "register_dynamic_shortcodes",
+    "load_status": "fallback"
+  },
+  {
+    "id": "color-shortcodes",
+    "type": "shortcode_family",
+    "trigger": "init → PWEStyleVar::init_color_shortcodes",
+    "source": "pwe-style-var.php",
+    "symbol": "PWEStyleVar::init_color_shortcodes"
+  }
+]

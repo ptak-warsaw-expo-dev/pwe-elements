@@ -82,9 +82,9 @@ class PWEStore extends PWECommonFunctions {
         $css_version = filemtime(plugin_dir_path(__FILE__) . 'assets/style.css');
         wp_enqueue_style('pwe-store-css', $css_file, array(), $css_version);
 
-        $css_file_feedback = plugins_url('assets/feedback.css', __FILE__);
-        $css_version_feedback = filemtime(plugin_dir_path(__FILE__) . 'assets/feedback.css');
-        wp_enqueue_style('pwe-store-feedback-css', $css_file_feedback, array(), $css_version_feedback);
+        // $css_file_feedback = plugins_url('assets/feedback.css', __FILE__);
+        // $css_version_feedback = filemtime(plugin_dir_path(__FILE__) . 'assets/feedback.css');
+        // wp_enqueue_style('pwe-store-feedback-css', $css_file_feedback, array(), $css_version_feedback);
     }
 
     public function addingScripts(){
@@ -106,9 +106,9 @@ class PWEStore extends PWECommonFunctions {
         wp_enqueue_script('pwe-store-js', $js_file, array('jquery'), $js_version, true);
         wp_localize_script( 'pwe-store-js', 'store_js', $store_js_array );
 
-        $js_file_feedback = plugins_url('assets/feedback.js', __FILE__);
-        $js_version_feedback = filemtime(plugin_dir_path(__FILE__) . 'assets/feedback.js');
-        wp_enqueue_script('pwe-store-feedback-js', $js_file_feedback, array('jquery'), $js_version_feedback, true);
+        // $js_file_feedback = plugins_url('assets/feedback.js', __FILE__);
+        // $js_version_feedback = filemtime(plugin_dir_path(__FILE__) . 'assets/feedback.js');
+        // wp_enqueue_script('pwe-store-feedback-js', $js_file_feedback, array('jquery'), $js_version_feedback, true);
     }
 
     public function price($product, $store_options, $pwe_meta_data, $category, $current_domain, $num_only = false) {
@@ -259,7 +259,7 @@ class PWEStore extends PWECommonFunctions {
 
             require_once plugin_dir_path(__FILE__) . 'parts/store_fairs.php';
 
-            require_once plugin_dir_path(__FILE__) . 'parts/store_feedback.php';
+            // require_once plugin_dir_path(__FILE__) . 'parts/store_feedback.php';
 
         $output .= '
         </div>';

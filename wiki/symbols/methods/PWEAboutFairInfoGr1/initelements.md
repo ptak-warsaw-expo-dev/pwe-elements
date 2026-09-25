@@ -1,0 +1,17 @@
+# `PWEAboutFairInfoGr1::initElements()`
+
+**Źródło:** `includes/about-fair-info/classes/about-fair-info-gr1.php:5`  
+**Sygnatura:** `public static initElements()`
+
+## Kontekst
+
+- Klasa: [`PWEAboutFairInfoGr1`](../../classes/PWEAboutFairInfoGr1.md)
+- Plik: [dokument pliku](../../../files/includes/about-fair-info/classes/about-fair-info-gr1.php.md)
+
+## Wykryte zależności pliku
+
+- `PWECommonFunctions::languageChecker()`
+
+## Uwagi
+
+Lista zależności jest statycznym kontekstem pliku. Dokładny graf wywołań jest budowany przez osobny Code Indexer z AST.

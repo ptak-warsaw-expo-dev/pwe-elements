@@ -1,0 +1,770 @@
+[
+  {
+    "type": "action",
+    "hook": "add_meta_boxes_event",
+    "source": "includes/calendar/calendar.php",
+    "line": 309
+  },
+  {
+    "type": "action",
+    "hook": "admin_bar_init",
+    "source": "includes/nav-menu/nav-menu.php",
+    "line": 283
+  },
+  {
+    "type": "action",
+    "hook": "admin_enqueue_scripts",
+    "source": "includes/calendar/calendar.php",
+    "line": 1036
+  },
+  {
+    "type": "action",
+    "hook": "admin_enqueue_scripts",
+    "source": "includes/calendar/calendar.php",
+    "line": 1651
+  },
+  {
+    "type": "action",
+    "hook": "admin_enqueue_scripts",
+    "source": "includes/calendar/calendar.php",
+    "line": 1674
+  },
+  {
+    "type": "action",
+    "hook": "admin_enqueue_scripts",
+    "source": "includes/calendar/calendar.php",
+    "line": 1744
+  },
+  {
+    "type": "action",
+    "hook": "admin_head",
+    "source": "includes/calendar/calendar.php",
+    "line": 1567
+  },
+  {
+    "type": "action",
+    "hook": "admin_head",
+    "source": "includes/calendar/calendar.php",
+    "line": 1619
+  },
+  {
+    "type": "action",
+    "hook": "admin_init",
+    "source": "includes/settings/general-settings.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "admin_init",
+    "source": "includes/settings/nav-menu-settings.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "admin_menu",
+    "source": "includes/calendar/calendar.php",
+    "line": 170
+  },
+  {
+    "type": "action",
+    "hook": "admin_menu",
+    "source": "includes/calendar/calendar.php",
+    "line": 556
+  },
+  {
+    "type": "action",
+    "hook": "admin_menu",
+    "source": "includes/settings/admin-menu.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "do_meta_boxes",
+    "source": "includes/calendar/calendar.php",
+    "line": 1754
+  },
+  {
+    "type": "action",
+    "hook": "edit_form_after_editor",
+    "source": "includes/calendar/calendar.php",
+    "line": 1752
+  },
+  {
+    "type": "filter",
+    "hook": "gform_admin_pre_render",
+    "source": "elements/generator-wystawcow.php",
+    "line": 216
+  },
+  {
+    "type": "action",
+    "hook": "gform_after_submission",
+    "source": "includes/registration/registration.php",
+    "line": 34
+  },
+  {
+    "type": "filter",
+    "hook": "gform_allow_html_field_label",
+    "source": "includes/exhibitor-generator/classes/exhibitor-visitor-generator.php",
+    "line": 18
+  },
+  {
+    "type": "action",
+    "hook": "gform_editor_js",
+    "source": "gf-addons/area-numbers/area-backend.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "gform_enqueue_scripts",
+    "source": "gf-addons/area-numbers/area-frontend.php",
+    "line": 6
+  },
+  {
+    "type": "filter",
+    "hook": "gform_field_content",
+    "source": "elements/badge-local.php",
+    "line": 441
+  },
+  {
+    "type": "action",
+    "hook": "gform_field_standard_settings",
+    "source": "gf-addons/area-numbers/area-backend.php",
+    "line": 6
+  },
+  {
+    "type": "filter",
+    "hook": "gform_field_validation",
+    "source": "gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "gform_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 39
+  },
+  {
+    "type": "action",
+    "hook": "gform_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 41
+  },
+  {
+    "type": "action",
+    "hook": "gform_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 43
+  },
+  {
+    "type": "action",
+    "hook": "gform_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 45
+  },
+  {
+    "type": "action",
+    "hook": "gform_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 47
+  },
+  {
+    "type": "action",
+    "hook": "gform_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 51
+  },
+  {
+    "type": "filter",
+    "hook": "gform_notification",
+    "source": "includes/exhibitor-generator/assets/visitors_gr2.php",
+    "line": 1796
+  },
+  {
+    "type": "filter",
+    "hook": "gform_notification",
+    "source": "includes/exhibitor-generator/assets/visitors_gr2_old.php",
+    "line": 1667
+  },
+  {
+    "type": "filter",
+    "hook": "gform_notification",
+    "source": "includes/industry-evening/industry-evening.php",
+    "line": 12
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_render",
+    "source": "elements/generator-wystawcow.php",
+    "line": 207
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_render",
+    "source": "elements/medal-form.php",
+    "line": 13
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_render",
+    "source": "elements/pot_rej_wys.php",
+    "line": 15
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_render",
+    "source": "includes/exhibitor-generator/assets/visitors_gr2.php",
+    "line": 1794
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_render",
+    "source": "includes/exhibitor-generator/assets/visitors_gr2_old.php",
+    "line": 1665
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_render",
+    "source": "includes/registration/classes/registration_visitors.php",
+    "line": 15
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_submission_filter",
+    "source": "elements/generator-wystawcow.php",
+    "line": 213
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_validation",
+    "source": "elements/generator-wystawcow.php",
+    "line": 210
+  },
+  {
+    "type": "filter",
+    "hook": "gform_pre_validation",
+    "source": "elements/medal-form.php",
+    "line": 14
+  },
+  {
+    "type": "filter",
+    "hook": "gform_replace_merge_tags",
+    "source": "backend/shortcodes.php",
+    "line": 253
+  },
+  {
+    "type": "filter",
+    "hook": "gform_submit_button",
+    "source": "elements/contact-form.php",
+    "line": 194
+  },
+  {
+    "type": "filter",
+    "hook": "gform_tooltips",
+    "source": "gf-addons/area-numbers/area-backend.php",
+    "line": 8
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "backend/shortcodes.php",
+    "line": 251
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "elements/pwelements-options.php",
+    "line": 30
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "elements/pwelements-options.php",
+    "line": 32
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/about-fair-info/about-fair-info.php",
+    "line": 33
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/article_author/article_author.php",
+    "line": 14
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/attractions/attractions.php",
+    "line": 12
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/calendar/calendar.php",
+    "line": 134
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/calendar/calendar.php",
+    "line": 167
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/calendar/classes/loop-calendar.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/conference-calendar/conference-calendar.php",
+    "line": 7
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/conference-cap/core/legacy-shortcode-renderer.php",
+    "line": 23
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/conference-cap/core/plugin.php",
+    "line": 12
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/conference-short-info/conference-short-info.php",
+    "line": 35
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/display-info/display-info.php",
+    "line": 25
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/exhibitor-generator/classes/exhibitor-visitor-generator.php",
+    "line": 17
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/exhibitor-generator/exhibitor-generator.php",
+    "line": 41
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/industry-evening/industry-evening.php",
+    "line": 11
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/katalog-wystawcow/main-katalog-wystawcow.php",
+    "line": 27
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/logotypes/logotypes.php",
+    "line": 25
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/map/map.php",
+    "line": 29
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/media-gallery/media-gallery.php",
+    "line": 17
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/nav-menu/nav-menu.php",
+    "line": 14
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/news/news.php",
+    "line": 14
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/posts/posts.php",
+    "line": 15
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/posts/posts.php",
+    "line": 17
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/premieres/premieres.php",
+    "line": 13
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/profile/profile.php",
+    "line": 29
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/registration/registration.php",
+    "line": 31
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/reviews/reviews.php",
+    "line": 14
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "includes/store/store.php",
+    "line": 13
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "other/test.php",
+    "line": 13
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "pwelements.php",
+    "line": 54
+  },
+  {
+    "type": "action",
+    "hook": "init",
+    "source": "qr-active/main-qr-active.php",
+    "line": 12
+  },
+  {
+    "type": "action",
+    "hook": "load-post-new.php",
+    "source": "includes/calendar/calendar.php",
+    "line": 287
+  },
+  {
+    "type": "filter",
+    "hook": "parse_query",
+    "source": "includes/calendar/calendar.php",
+    "line": 229
+  },
+  {
+    "type": "action",
+    "hook": "plugins_loaded",
+    "source": "gf-addons/area-numbers/area_numbers_gf.php",
+    "line": 8
+  },
+  {
+    "type": "action",
+    "hook": "plugins_loaded",
+    "source": "gf-addons/area-numbers/area_numbers_gf.php",
+    "line": 10
+  },
+  {
+    "type": "action",
+    "hook": "plugins_loaded",
+    "source": "includes/mailing/mailing.php",
+    "line": 301
+  },
+  {
+    "type": "filter",
+    "hook": "posts_where",
+    "source": "includes/posts/assets/ajax.php",
+    "line": 58
+  },
+  {
+    "type": "action",
+    "hook": "pwelement_cron_hook",
+    "source": "other/exhibitor_send.php",
+    "line": 12
+  },
+  {
+    "type": "action",
+    "hook": "restrict_manage_posts",
+    "source": "includes/calendar/calendar.php",
+    "line": 207
+  },
+  {
+    "type": "filter",
+    "hook": "rocket_delay_js_exclusions",
+    "source": "pwelements.php",
+    "line": 79
+  },
+  {
+    "type": "filter",
+    "hook": "rocket_exclude_defer_js",
+    "source": "pwelements.php",
+    "line": 84
+  },
+  {
+    "type": "action",
+    "hook": "save_post",
+    "source": "includes/calendar/calendar.php",
+    "line": 1034
+  },
+  {
+    "type": "action",
+    "hook": "save_post",
+    "source": "includes/calendar/calendar.php",
+    "line": 1561
+  },
+  {
+    "type": "action",
+    "hook": "save_post_event",
+    "source": "includes/calendar/calendar.php",
+    "line": 530
+  },
+  {
+    "type": "filter",
+    "hook": "single_template",
+    "source": "includes/calendar/calendar.php",
+    "line": 14
+  },
+  {
+    "type": "filter",
+    "hook": "the_content",
+    "source": "includes/calendar/classes/single-calendar.php",
+    "line": 3
+  },
+  {
+    "type": "filter",
+    "hook": "the_content",
+    "source": "pwelements.php",
+    "line": 88
+  },
+  {
+    "type": "action",
+    "hook": "upgrader_process_complete",
+    "source": "pwelements.php",
+    "line": 46
+  },
+  {
+    "type": "action",
+    "hook": "vc_before_init",
+    "source": "includes/header/classes/header_functions.php",
+    "line": 791
+  },
+  {
+    "type": "action",
+    "hook": "vc_before_init",
+    "source": "includes/header/header.php",
+    "line": 27
+  },
+  {
+    "type": "action",
+    "hook": "wp",
+    "source": "elements/resend-ticket.php",
+    "line": 10
+  },
+  {
+    "type": "action",
+    "hook": "wp_ajax_load_more_calendar",
+    "source": "includes/calendar/classes/loop-calendar.php",
+    "line": 8
+  },
+  {
+    "type": "action",
+    "hook": "wp_ajax_load_more_posts",
+    "source": "backend/load-more-posts.php",
+    "line": 91
+  },
+  {
+    "type": "action",
+    "hook": "wp_ajax_nopriv_load_more_calendar",
+    "source": "includes/calendar/classes/loop-calendar.php",
+    "line": 9
+  },
+  {
+    "type": "action",
+    "hook": "wp_ajax_nopriv_load_more_posts",
+    "source": "backend/load-more-posts.php",
+    "line": 92
+  },
+  {
+    "type": "action",
+    "hook": "wp_ajax_nopriv_pwe_ajax_load_posts",
+    "source": "includes/posts/assets/ajax.php",
+    "line": 3
+  },
+  {
+    "type": "action",
+    "hook": "wp_ajax_pwe_ajax_load_posts",
+    "source": "includes/posts/assets/ajax.php",
+    "line": 2
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "elements/pwelements-options.php",
+    "line": 26
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "elements/pwelements-options.php",
+    "line": 27
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "gf-addons/gf-mailcheck-validator/gf-mailcheck-validator.php",
+    "line": 6
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/about-fair-info/about-fair-info.php",
+    "line": 35
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/conference-cap/core/legacy-shortcode-renderer.php",
+    "line": 27
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/conference-short-info/conference-short-info.php",
+    "line": 37
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/display-info/display-info.php",
+    "line": 23
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/exhibitor-generator/exhibitor-generator.php",
+    "line": 45
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/katalog-wystawcow/main-katalog-wystawcow.php",
+    "line": 24
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/katalog-wystawcow/main-katalog-wystawcow.php",
+    "line": 25
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/media-gallery/media-gallery.php",
+    "line": 13
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/media-gallery/media-gallery.php",
+    "line": 14
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/nav-menu/nav-menu.php",
+    "line": 10
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/nav-menu/nav-menu.php",
+    "line": 11
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/store/store.php",
+    "line": 10
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "includes/store/store.php",
+    "line": 11
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "pwelements.php",
+    "line": 62
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "pwelements.php",
+    "line": 63
+  },
+  {
+    "type": "action",
+    "hook": "wp_enqueue_scripts",
+    "source": "pwelements.php",
+    "line": 64
+  },
+  {
+    "type": "action",
+    "hook": "wp_footer",
+    "source": "pwefunctions.php",
+    "line": 4307
+  },
+  {
+    "type": "action",
+    "hook": "wp_head",
+    "source": "includes/calendar/calendar.php",
+    "line": 81
+  },
+  {
+    "type": "action",
+    "hook": "wp_head",
+    "source": "includes/nav-menu/nav-menu.php",
+    "line": 17
+  },
+  {
+    "type": "action",
+    "hook": "wp_head",
+    "source": "includes/nav-menu/nav-menu.php",
+    "line": 291
+  },
+  {
+    "type": "action",
+    "hook": "wp_head",
+    "source": "pwelements.php",
+    "line": 59
+  },
+  {
+    "type": "filter",
+    "hook": "wpdb_connect_timeout",
+    "source": "pwefunctions.php",
+    "line": 207
+  }
+]

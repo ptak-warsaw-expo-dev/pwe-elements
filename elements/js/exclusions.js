@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // }
 
 
-    // // Links for menu logotype <---------------------------------------------------------------------< 
+    // // Links for menu logotype <---------------------------------------------------------------------<
     // // Configuration for domains
     // const domainSettings = {
     //     'wiretechpoland.com': { leftWidth: '20%', rightWidth: '80%' },
@@ -210,3 +210,13 @@ document.addEventListener('DOMContentLoaded', function () {
 //         field.value = utmParams;
 //     });
 // }
+document.addEventListener('DOMContentLoaded', function () {
+    const searchParams = window.location.search;
+
+    const utmIndex = searchParams.indexOf('utm_');
+
+if (utmIndex !== -1 && !searchParams.includes('utm_source=platyna')) {
+        const fullUtmQuery = searchParams.substring(utmIndex);
+        sessionStorage.setItem('user_utm_data', fullUtmQuery);
+    }
+});

@@ -459,6 +459,6 @@ class PWElementConfSection extends PWElements {
         
         
 
-        return $output;
+        return do_shortcode('[pwe-elements-auto-switch-conference-gallery]');
     }
 }

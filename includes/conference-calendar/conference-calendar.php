@@ -133,7 +133,7 @@ class PWEConferenceCalendar {
         $domains = [];
         
         foreach ($pwe_groups_data as $group) {
-            if ($group->fair_group == "gr1" || $group->fair_group == "gr2" || $group->fair_group == "gr3" || $group->fair_group == "b2c") {
+            if ($group->fair_group == "gr1" || $group->fair_group == "gr2" || $group->fair_group == "gr3" || $group->fair_group == "b2c" || $group->fair_group == "b2c-new") {
                 $domains[] = $group->fair_domain;
             }
         }
@@ -559,6 +559,7 @@ class PWEConferenceCalendar {
                               strpos(strtolower($conference->conf_name_pl), 'scena główna') === false &&
                               strpos(strtolower($conference->conf_name_en), 'main stage') === false &&
                               strpos(strtolower($conference->conf_name_pl), 'ceremonia wręczenia') === false &&
+                              strpos(strtolower($conference->conf_name_pl), 'wręczenie medali') === false &&
                               strpos(strtolower($conference->conf_name_en), 'medal ceremony') === false;
 
                               

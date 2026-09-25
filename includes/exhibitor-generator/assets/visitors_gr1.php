@@ -1,6 +1,6 @@
 <?php
 
-function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
+function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite, $generator_form_id_auto){
     extract( shortcode_atts( array(
         'generator_form_id' => '',
         'exhibitor_generator_html_text' => '',
@@ -64,7 +64,7 @@ function render_gr1($atts, $all_exhibitors, $pweGeneratorWebsite){
                             </div>
                         </div>
                         <div class="exhibitor-generator__right-form">
-                            [gravityform id="'. $generator_form_id .'" title="false" description="false" ajax="false"]
+                            [gravityform id="'. $generator_form_id_auto .'" title="false" description="false" ajax="false"]
                         </div>';
 
                         // Add a mass invite send button if not on a personal exhibitor page

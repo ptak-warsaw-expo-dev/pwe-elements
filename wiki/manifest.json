@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "wiki_profile": "pwe-wiki-v2",
+  "extensions_version": 2,
+  "plugin": {
+    "name": "PWE Elements",
+    "slug": "pwe-elements",
+    "version": "3.6.8",
+    "entrypoint": "pwelements.php"
+  },
+  "documentation": {
+    "generated_at": "2026-09-24",
+    "language": "pl",
+    "source": "uploaded archive",
+    "source_commit": null,
+    "scope": "first-party source plus dependency inventory",
+    "notes": [
+      "Documentation is based on uploaded PWE Elements 3.6.8 archive.",
+      "source_commit is unknown because the archive does not contain trusted repository commit metadata.",
+      "plugin-update-checker, TCPDF and FPDI are treated as third-party and excluded from first-party symbol indexing.",
+      "Wiki v2 extensions preserve schema_version 1 compatibility while adding entrypoints/load graph/integrations/dependencies/processes inventories.",
+      "issues.json contains review flags; it does not assert that every flagged item is exploitable or currently reachable in production."
+    ]
+  },
+  "counts": {
+    "files_total": 1060,
+    "php_files_first_party": 261,
+    "classes_detected": 211,
+    "methods_detected": 810,
+    "global_functions_detected": 202,
+    "shortcodes_documented": 86,
+    "shortcode_families": 9,
+    "hooks_detected": 128,
+    "endpoints_documented": 10
+  },
+  "entry_documents": [
+    "README.md",
+    "architecture/overview.md",
+    "architecture/bootstrap-lifecycle.md",
+    "architecture/system-compatibility.md",
+    "architecture/elements-and-wpbakery.md",
+    "architecture/gravity-forms-and-sessions.md",
+    "architecture/data-and-integrations.md",
+    "architecture/load-status.md",
+    "shortcodes/index.md",
+    "endpoints/index.md",
+    "hooks/index.md",
+    "processes/index.md",
+    "symbols/index.md",
+    "files/index.md",
+    "security/review.md",
+    "reference/issues.md",
+    "reference/database-tables.md"
+  ]
+}

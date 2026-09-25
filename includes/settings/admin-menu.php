@@ -39,7 +39,7 @@ function pwe_elements_page()
         'pwe-elements',
         'pwe_render_admin_page',
         'dashicons-layout',
-        3
+        4
     );
 
     foreach ($pages as $page) {
