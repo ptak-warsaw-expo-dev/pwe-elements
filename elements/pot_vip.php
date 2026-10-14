@@ -51,6 +51,11 @@ class PWElementConfirmationVip extends PWElements {
 
         $form_id = self::findFormsID($conf_vip_form);
 
+        // Disable Gravity Forms scrolling to the confirmation anchor for this form.
+        if ($form_id) {
+            add_filter('gform_confirmation_anchor_' . (int) $form_id, '__return_false');
+        }
+
         // Processing edition shortcode
         $trade_fair_edition_shortcode = do_shortcode('[trade_fair_edition]');
         if (strpos($trade_fair_edition_shortcode, '.') !== false) {
@@ -83,6 +88,28 @@ class PWElementConfirmationVip extends PWElements {
             }
             .wpb_column:has(#pweConfVip) {
                 max-width: 100%;
+            }
+            .pwe-conf-vip__activate-button {
+                background: #111;
+                border: 0;
+                border-radius: 8px;
+                color: #fff;
+                cursor: pointer;
+                font-size: 17px;
+                font-weight: 600;
+                padding: 14px 24px;
+                margin-top: 22px;
+            }
+            .pwe-conf-vip__activate-button:disabled {
+                cursor: not-allowed;
+                opacity: .6;
+            }
+            .pwe-conf-vip__activation-status {
+                margin-top: 12px;
+            }
+            .pwe-conf-vip__success[hidden],
+            .pwe-conf-vip__activation[hidden] {
+                display: none !important;
             }
             .pwe-conf-vip__wrapper {
             }
@@ -242,9 +269,17 @@ class PWElementConfirmationVip extends PWElements {
                 <div class="pwe-conf-vip__columns">
                     <div class="pwe-conf-vip__column">
                         <div class="pwe-conf-vip__column-content">
-                            <h2>'. self::languageChecker('Dziękujemy za aktywację zaproszenia VIP', 'Thank you for activating your VIP invitation') .'</h2>
-                            <p>'. self::languageChecker('Na państwa mail wysłaliśmy potwierdzenie wraz z kodem QR upoważniającym do wejścia na targi', 'We have sent a confirmation to your email along with a QR code authorizing entry to the fair.') .'</p>
-                            <div class="pwe-conf-vip__column-content-btn-container">'. self::languageChecker('<a href="/">Strona główna</a>', '<a href="/en/">Home page</a>') .'</div>
+                            <div class="pwe-conf-vip__activation" id="pweVipActivation">
+                                <h2>'. self::languageChecker('Aktywuj zaproszenie VIP', 'Activate your VIP invitation') .'</h2>
+                                <p>'. self::languageChecker('Aby otrzymać kod QR upoważniający do wejścia na targi, potwierdź aktywację zaproszenia.', 'To receive your QR code for entry to the trade fair, confirm your invitation activation.') .'</p>
+                                <button type="button" id="pweVipActivateButton" class="pwe-conf-vip__activate-button" disabled>'. self::languageChecker('Aktywuj zaproszenie', 'Activate invitation') .'</button>
+                                <p id="pweVipActivationStatus" class="pwe-conf-vip__activation-status" role="status" aria-live="polite"></p>
+                            </div>
+                            <div class="pwe-conf-vip__success" id="pweVipSuccess" hidden>
+                                <h2>'. self::languageChecker('Dziękujemy za aktywację zaproszenia VIP', 'Thank you for activating your VIP invitation') .'</h2>
+                                <p>'. self::languageChecker('Na państwa mail wysłaliśmy potwierdzenie wraz z kodem QR upoważniającym do wejścia na targi', 'We have sent a confirmation to your email along with a QR code authorizing entry to the fair.') .'</p>
+                                <div class="pwe-conf-vip__column-content-btn-container">'. self::languageChecker('<a href="/">Strona główna</a>', '<a href="/en/">Home page</a>') .'</div>
+                            </div>
                         </div>
                     </div>
                     <div class="pwe-conf-vip__column bg">
@@ -344,10 +379,10 @@ class PWElementConfirmationVip extends PWElements {
                 var firma = urlParams.get("firma");
                 var kanal = urlParams.get("kanal");
 
-                if (!getid && !getname) {
-                    console.log("Brak parametrów w URL - formularz nie zostanie wypełniony ani wysłany.");
-                    return;
-                }
+                // Name and a valid email address are required for invitation activation.
+                const validName = typeof getname === "string" && getname.trim().length > 0;
+                const validEmail = typeof getemail === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(getemail.trim());
+                const validInvitation = validName && validEmail;
 
                 let idmail = [];
                 if (getid) idmail = getid.split(",");
@@ -419,12 +454,70 @@ class PWElementConfirmationVip extends PWElements {
                 if (inputVipIDphone && idmail.length > 3) inputVipIDphone.value = idmail[3].trim();
 
                 const form = document.getElementById("gform_' . (int) $form_id . '");
-                if (form && window.jQuery) {
-                    window["gf_submitting_' . (int) $form_id . '"] = false;
-                    setTimeout(function() {
-                        jQuery(form).trigger("submit", [true]);
-                    }, 500);
+                const activateButton = document.getElementById("pweVipActivateButton");
+                const activationStatus = document.getElementById("pweVipActivationStatus");
+                const activationPanel = document.getElementById("pweVipActivation");
+                const successPanel = document.getElementById("pweVipSuccess");
+                const vipFormId = ' . (int) $form_id . ';
+                const loadingText = ' . wp_json_encode(self::languageChecker('Trwa aktywacja zaproszenia...', 'Activating your invitation...')) . ';
+                const errorText = ' . wp_json_encode(self::languageChecker('Nie udało się wysłać formularza. Spróbuj ponownie.', 'The form could not be submitted. Please try again.')) . ';
+                const unavailableText = ' . wp_json_encode(self::languageChecker('Formularz jest niedostępny. Odśwież stronę.', 'The form is unavailable. Refresh the page.')) . ';
+                const missingDataText = ' . wp_json_encode(self::languageChecker('Link zaproszenia nie zawiera imienia i nazwiska lub poprawnego adresu e-mail. Skontaktuj się z organizatorem.', 'The invitation link is missing a name or a valid email address. Please contact the organizer.')) . ';
+                let submitting = false;
+                let completed = false;
+
+                // Opening the URL only fills in the fields. A deliberate click is required to submit.
+                if (!form || !activateButton || !window.jQuery) {
+                    if (activationStatus) activationStatus.textContent = unavailableText;
+                    return;
                 }
+                if (!validInvitation) {
+                    activateButton.disabled = true;
+                    activationStatus.textContent = missingDataText;
+                } else {
+                    activateButton.disabled = false;
+                }
+
+                // Also reject submissions triggered without the activation button if the URL is invalid.
+                form.addEventListener("submit", function(event) {
+                    if (!validInvitation) {
+                        event.preventDefault();
+                        event.stopImmediatePropagation();
+                        activationStatus.textContent = missingDataText;
+                    }
+                }, true);
+
+                // Gravity Forms AJAX completion is the only signal that activates the success message.
+                jQuery(document).on("gform_confirmation_loaded.pweVip", function(event, confirmedFormId) {
+                    if (Number(confirmedFormId) !== vipFormId || !validInvitation || !submitting) return;
+                    completed = true;
+                    submitting = false;
+                    activationPanel.hidden = true;
+                    successPanel.hidden = false;
+                });
+
+                activateButton.addEventListener("click", function(event) {
+                    if (!event.isTrusted || submitting || completed) return;
+                    if (!validInvitation) {
+                        activateButton.disabled = true;
+                        activationStatus.textContent = missingDataText;
+                        return;
+                    }
+                    submitting = true;
+                    activateButton.disabled = true;
+                    activationStatus.textContent = loadingText;
+                    window["gf_submitting_' . (int) $form_id . '"] = false;
+                    jQuery(form).trigger("submit", [true]);
+
+                    // Allow a retry if the AJAX confirmation never arrives (e.g. validation error).
+                    setTimeout(function() {
+                        if (!completed) {
+                            submitting = false;
+                            activateButton.disabled = !validInvitation;
+                            activationStatus.textContent = errorText;
+                        }
+                    }, 15000);
+                });
             });
         </script>';
 
