@@ -2,6 +2,8 @@
 
 class pweNavMenu extends PWECommonFunctions { 
 
+    public $menu_overridden = false;
+
     public function __construct() {
         
         $pwe_menu_options = get_option('pwe_menu_options', []);
@@ -331,4 +333,3 @@ final class Collapse_Adminbar {
 }
 
 Collapse_Adminbar::init();
-
