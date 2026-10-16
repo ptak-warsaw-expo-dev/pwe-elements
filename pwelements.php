@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.7.2
+ * Version: 3.7.3
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -13,6 +13,7 @@
 
 class PWElementsPlugin
 {
+    // Properties initialized in initClasses() (PHP 8.2+ compatibility).
     public $PWEStyleVar;
     public $PWElements;
     public $PWELogotypes;
@@ -36,6 +37,15 @@ class PWElementsPlugin
     public $PWEPosts;
     public $PWEArticleAuthor;
     // public $PWELogoFetcher;
+    public $pweNavMenu;
+    public $PWERegistration;
+    public $PWEMap;
+    public $PWEReviews;
+    public $PWETest;
+    public $PWEPremieres;
+    public $PWEArticleAuthorManager;
+    public $PWECalendar;
+    public $PWEConferenceCalendar;
 
     public function __construct()
     {
