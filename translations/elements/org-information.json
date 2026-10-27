@@ -54,5 +54,9 @@
     "es_ES": {
         "information_for_exhibitors": "Información organizativa para expositores",
         "information_for_exhibitors_text": "org-information-es.html"
+    },
+    "nl_NL": {
+        "information_for_exhibitors": "Organisatorische informatie voor exposanten",
+        "information_for_exhibitors_text": "org-information-nl.html"
     }
 }

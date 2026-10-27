@@ -124,5 +124,14 @@
     "gallery": "GALERÍA",
     "galeria_link": "/en/gallery/",
     "registration": "/es/registro/"
+  },
+  "nl_NL": {
+    "patron_partners": "PATRONEN EN PARTNERS",
+    "exhibitors": "Exposanten",
+    "patrons": "Patronen",
+    "join": "DOE MEE",
+    "gallery": "GALERIJ",
+    "galeria_link": "/en/gallery/",
+    "registration": "/nl/registratie/"
   }
 }

@@ -124,5 +124,14 @@
     "link_to_registration": "enlace de registro",
     "register": "Registrarse",
     "free_ticket": "Obtén un boleto gratis"
+  },
+  "nl_NL": {
+    "premier_edition": "Premier Editie",
+    "edition": " editie",
+    "warsaw": "Warschau",
+    "warsaw_poland": "Warschau, Polen",
+    "link_to_registration": "link naar registratie",
+    "register": "Registreren",
+    "free_ticket": "Krijg een gratis ticket"
   }
 }

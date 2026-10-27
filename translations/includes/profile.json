@@ -77,10 +77,16 @@
     "industry_scope": "Domaine d'activité",
     "more": "plus..."
   },
-    "es_ES": {
-        "visitor_profile": "Perfil del visitante",
-        "exhibitor_profile": "Perfil del expositor",
-        "industry_scope": "Ámbito de la industria",
-        "more": "más..."
-    }
+  "es_ES": {
+    "visitor_profile": "Perfil del visitante",
+    "exhibitor_profile": "Perfil del expositor",
+    "industry_scope": "Ámbito de la industria",
+    "more": "más..."
+  },
+  "nl_NL": {
+    "visitor_profile": "Bezoekersprofiel",
+    "exhibitor_profile": "Exposantenprofiel",
+    "industry_scope": "Industriegebied",
+    "more": "meer..."
+  }
 }

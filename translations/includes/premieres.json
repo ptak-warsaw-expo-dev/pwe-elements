@@ -38,7 +38,10 @@
   "fr_FR": {
     "premieres": "Ce que vous verrez à "
   },
-    "es_ES": {
-        "premieres": "Lo que verás en "
-    }
+  "es_ES": {
+      "premieres": "Lo que verás en "
+  },
+  "nl_NL": {
+    "premieres": "Wat je zult zien op "
+  }
 }

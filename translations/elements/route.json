@@ -194,5 +194,19 @@
     "bus_text": "Los autobuses 703 y 711 van desde el depósito Krakowska P+R hasta la parada «Paszków», mientras que el autobús 733 va hasta la parada «Centrum Mody». ¡Atención! Las paradas «Paszków» y «Centrum Mody» se encuentran en la segunda zona tarifaria. Los billetes se pueden comprar en la mayoría de las máquinas expendedoras y autobuses.",
     "car_title": "EN COCHE",
     "car_text": "El Ptak Warsaw Expo está situado directamente en la ruta S8 en dirección a Katowice, salida Paszków. Desde el aeropuerto de Okęcie se tarda unos 10 minutos en llegar. Desde el centro de Varsovia – 15 minutos. ¡El estacionamiento no será un problema, nuestro centro cuenta con 15.000 plazas de aparcamiento!"
+  },
+  "nl_NL": {
+    "title": "PTAK WARSAW EXPO HET BEST VERBONDEN BEURSCENTRUM IN POLEN!",
+    "big_header": "Het grootste beurscomplex in Polen en Midden- en Oost-Europa",
+    "area_1": "143 000 m<sup>2</sup> tentoonstellingsruimte",
+    "area_2": "500 000 m<sup>2</sup> buitenoppervlak",
+    "plane_title": "MET HET VLIEGTUIG",
+    "plane_text": "Vanaf de internationale luchthaven Fryderyk Chopin in Warschau kunt u in minder dan 10 minuten bij Ptak Warsaw Expo zijn! Ons centrum is ook gunstig gelegen ten opzichte van de luchthavens in Modlin en Lodz.",
+    "train_title": "MET DE TREIN",
+    "train_text": "Warschau heeft drie treinstations voor langeafstandstreinen: het Centraal Station (Warszawa Centralna), het Ooststation (Warszawa Wschodnia) en het Weststation (Warszawa Zachodnia). Vanaf het Weststation kunt u met de auto in slechts 13 minuten bij Ptak Warsaw Expo zijn (volgens Google).",
+    "bus_title": "MET DE STADSBUS",
+    "bus_text": "Bussen 703 en 711 rijden vanaf het depot Krakowska P+R naar de halte 'Paszków', terwijl bus 733 naar de halte 'Centrum Mody' gaat. Let op! De haltes 'Paszków' en 'Centrum Mody' bevinden zich in de tweede tariefzone. Tickets kunnen worden gekocht bij de meeste automaten en bussen.",
+    "car_title": "MET DE AUTO",
+    "car_text": "Ptak Warsaw Expo ligt direct aan de S8-route richting Katowice, afslag Paszków. Vanaf de luchthaven Okęcie duurt het ongeveer 10 minuten om hier te komen. Vanuit het centrum van Warschau – 15 minuten. Parkeren zal geen probleem zijn, ons centrum beschikt over 15.000 parkeerplaatsen!"
   }
 }

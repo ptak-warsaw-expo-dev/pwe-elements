@@ -208,5 +208,20 @@
       "Honorary Patronage": "Patrocinios honorarios",
       "Organizational partner": "Socios organizativos"
     }
+  },
+  "nl_NL": {
+    "international_patrons": "internationale beschermheren",
+    "foreign_patrons": "BUITENLANDSE BESCHERMHEREN EN PARTNERS",
+    "international": "internationaal",
+    "exhibitor": "Exposant",
+    "plurals": {
+      "Speaker": "Sprekers",
+      "Fair Partner": "Beurs partners",
+      "Content Partner": "Inhoud partners",
+      "Industry Partner": "Industrie partners",
+      "Trade and Conference Partner": "Handels- en conferentiepartners",
+      "Honorary Patronage": "Ere beschermheren",
+      "Organizational partner": "Organisatorische partners"
+    }
   }
 }

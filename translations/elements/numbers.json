@@ -222,5 +222,21 @@
     "calendar_link": "https://warsawexpo.eu/en/fair-calendar/",
     "calendar": "Calendario de ferias",
     "certificate": "<strong>Certificado de miembro UFI</strong> es una confirmación oficial de que <strong>PTAK WARSAW EXPO SP. z o.o.</strong> es miembro de UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) es una organización internacional de la industria que reúne a los principales actores del mercado global de ferias y exposiciones, incluidos los organizadores de ferias y exposiciones, así como los gerentes de centros de exposiciones."
+  },
+  "nl_NL": {
+    "days": "conferentiedagen",
+    "speakers": "sprekers",
+    "participants": "deelnemers",
+    "exhibitors": "Exposanten<br>per jaar",
+    "visitors": "Bezoekers<br>per jaar",
+    "fair": "B2B beurzen <br>per jaar",
+    "surface": "Oppervlakte m<sup>2</sup>",
+    "title": "Ptak Warsaw Expo - we verbinden de zakenwereld",
+    "footer_text": "HET GROOTSTE BEURSCENTRUM IN CENTRAAL- EN OOST-EUROPA",
+    "capital": "De hoofdstad van beurzen",
+    "events": "Beurzen / Conferenties / Evenementen",
+    "calendar_link": "https://warsawexpo.eu/en/fair-calendar/",
+    "calendar": "Beurskalender",
+    "certificate": "<strong>UFI Member Certificate</strong> is een officiële bevestiging dat <strong>PTAK WARSAW EXPO SP. z o.o.</strong> lid is van UFI – The Global Association of the Exhibition Industry. UFI (Union des Foires Internationales) is een internationale brancheorganisatie die de belangrijkste spelers op de wereldwijde markt voor beurzen en tentoonstellingen samenbrengt, waaronder organisatoren van beurzen en tentoonstellingen, evenals beheerders van tentoonstellingscentra."
   }
 }

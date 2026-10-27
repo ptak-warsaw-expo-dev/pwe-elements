@@ -96,5 +96,12 @@
     "exhibitors": "expositores",
     "exhibition_space": "espacio<br>expositivo",
     "more": "Más"
+  },
+  "nl_NL": {
+    "other_events": "Andere evenementen tijdens de beurs",
+    "visitors": "bezoekers",
+    "exhibitors": "exposanten",
+    "exhibition_space": "tentoonstellingsruimte",
+    "more": "Meer"
   }
 }

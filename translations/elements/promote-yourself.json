@@ -167,6 +167,18 @@
     "download_banners": "Descargar banners",
     "download_logo": "Descargar logo",
     "help_text": "Si necesita más, escríbanos y haremos todo lo posible para ayudarle. ¡Solo trabajando juntos podemos lograr el éxito!"
+  },
+  "nl_NL": {
+    "promote_yourself": "Hal",
+    "promote_yourself_html": "promote-yourself-nl.html",
+    "parking": "GRATIS PARKEREN",
+    "logo_link": "/doc/logo-color-en.webp",
+    "store_button": "Ontdek het aanbod",
+    "store_button_title": "[trade_fair_name] - winkel",
+    "download": "Downloaden",
+    "download_banners": "Download banners",
+    "download_logo": "Download logo",
+    "help_text": "Als u meer nodig heeft, schrijf ons dan en we zullen ons best doen om te helpen! Alleen door samen te werken kunnen we succes behalen."
   }
 }
     

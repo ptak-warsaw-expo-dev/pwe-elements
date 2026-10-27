@@ -309,5 +309,27 @@
     "from_abroad": "de los cuales del extranjero",
     "logo-x-link": "/doc/logo-x-en.webp",
     "fair_logo": "Logo de la feria"
+  },
+  "nl_NL": {
+    "statistics": "Statistieken",
+    "industry_visitors_nth": "Vakbezoekers van de {number}e editie",
+    "estimates_1st": "Schattingen van de 1e editie",
+    "visitors": "bezoekers",
+    "visitors_2": "Bezoekers",
+    "countries": "landen",
+    "poland": "Polen -",
+    "abroad": "In het buitenland -",
+    "exhibition_space": "expositie<br>ruimte",
+    "exhibition_space_1": "expositie ruimte",
+    "exhibitors": "exposanten",
+    "exhibitors_2": "Exposanten",
+    "logo_url": "/doc/logo-color-en.webp",
+    "surface": "Oppervlakte",
+    "numbers": "Getallen die voor zich spreken",
+    "registration_link": "/nl/registratie/",
+    "registration_text": "Registratie",
+    "from_abroad": "waarvan uit het buitenland",
+    "logo-x-link": "/doc/logo-x-en.webp",
+    "fair_logo": "Beurs logo"
   }
 }

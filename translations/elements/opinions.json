@@ -68,5 +68,10 @@
     "recommendations": "RECOMENDACIONES",
     "more": "más...",
     "see_more": "VER MÁS"
+  },
+  "nl_NL": {
+    "recommendations": "AANBEVELINGEN",
+    "more": "meer...",
+    "see_more": "MEER ZIEN"
   }
 }

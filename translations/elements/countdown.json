@@ -308,5 +308,26 @@
     "hour": "hora",
     "minute": "minuto",
     "second": "segundo"
+  },
+  "nl_NL": {
+    "until_the_fair": "Tot de start van de beurs:",
+    "until_the_fair_end": "Tot het einde van de beurs:",
+    "countdown_btn_text": "Boek een stand",
+    "countdown_btn_url": "/nl/word-een-exposant/",
+    "entrance": "Ingang",
+    "entrances": "Ingangen",
+    "hall": "Hal",
+    "halls": "Hallen",
+    "hours": "OPENINGSTIJDEN:",
+    "days": " dagen ",
+    "hours_1": " uren ",
+    "minutes": " minuten ",
+    "seconds": " seconden ",
+    "register_text": "<span>REGISTREER<br/>Ontvang een gratis ticket</span>",
+    "register_link": "/nl/registratie/",
+    "day": "dag",
+    "hour": "uur",
+    "minute": "minuut",
+    "second": "seconde"
   }
 }

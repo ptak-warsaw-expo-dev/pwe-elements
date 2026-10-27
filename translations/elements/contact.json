@@ -322,5 +322,28 @@
     "visitors": "Visitantes",
     "technical_department": "Departamento técnico",
     "marketing": "Marketing"
+  },
+  "nl_NL": {
+    "send_message": "BERICHT VERZENDEN",
+    "write_to_us": "Schrijf ons",
+    "reply": "we zullen u antwoorden of terugbellen,<br>als u ons uw telefoonnummer achterlaat.",
+    "organized_groups": "Contact voor georganiseerde groepen",
+    "participation": "Om uw comfortabele deelname aan onze evenementen te garanderen, is toegang voor georganiseerde groepen alleen mogelijk op de laatste dag van de beurs. Voor uw aankomst raden wij u aan om contact met ons op te nemen via het formulier dat beschikbaar is op de website: <a id=\"pweGroupsLink\" href=\"https://warsawexpo.eu/en/groups\" alt=\"link to group registration\" target=\"_blank\">warsawexpo.eu/en/groups</a>. Het achterlaten van rugzakken en koffers in de garderobe is verplicht. Op de beurs geldt een zakelijke dresscode.",
+    "contact_form": "Contactformulier",
+    "contact_link": "https://warsawexpo.eu/en/groups/",
+    "customer_service": "Klantenservice",
+    "customer_service_office": "Kantoor klantenservice",
+    "technical_support": "Technische ondersteuning voor exposanten",
+    "media_marketing": "Media en marketing",
+    "media_marketing_service": "Marketing- en mediaservices",
+    "first_name": "Voor- en achternaam",
+    "email": "E-mail",
+    "phone": "Telefoonnummer",
+    "help_you": "Hoe kunnen we u helpen?",
+    "department": "Afdeling",
+    "exhibitors": "Exposanten",
+    "visitors": "Bezoekers",
+    "technical_department": "Technische afdeling",
+    "marketing": "Marketing"
   }
 }

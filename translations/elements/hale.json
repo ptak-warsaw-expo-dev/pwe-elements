@@ -83,5 +83,11 @@
     "multiple_halls": "Salas",
     "parking": "ESTACIONAMIENTO GRATUITO",
     "logo_link": "/doc/logo-color-en.webp"
+  },
+  "nl_NL": {
+    "single_hall": "Hal",
+    "multiple_halls": "Hallen",
+    "parking": "GRATIS PARKEREN",
+    "logo_link": "/doc/logo-color-en.webp"
   }
 }

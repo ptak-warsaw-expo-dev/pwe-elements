@@ -82,5 +82,11 @@
     "voucher_desc": "Vea el catálogo de stands de exposición y prepárese para las ferias comerciales de manera más eficiente. Con este catálogo, tendrá acceso a diseños de stands listos para usar que facilitarán su preparación y le ayudarán a ahorrar tiempo y dinero. Al elegir un diseño de stand existente, podrá concentrarse en otros aspectos importantes de la preparación de la feria, como crear su oferta, organizar el transporte o planificar actividades de marketing.",
     "voucher_button": "Solicitar un vale",
     "voucher_link": "/es/contacto/"
+  },
+  "nl_NL": {
+    "voucher_title": "ONTVANG EEN BOUW VOUCHER",
+    "voucher_desc": "Bekijk de catalogus van tentoonstellingsstands en bereid u efficiënter voor op beurzen. Met deze catalogus heeft u toegang tot kant-en-klare standontwerpen die uw voorbereiding vergemakkelijken en u helpen tijd en geld te besparen. Door te kiezen voor een bestaand standontwerp kunt u zich concentreren op andere belangrijke aspecten van de beursvoorbereiding, zoals het maken van uw aanbod, het organiseren van transport of het plannen van marketingactiviteiten.",
+    "voucher_button": "Vraag een voucher aan",
+    "voucher_link": "/nl/contact/"
   }
 }

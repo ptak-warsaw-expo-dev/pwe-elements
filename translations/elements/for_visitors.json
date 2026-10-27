@@ -142,5 +142,17 @@
     "ticket_text": "COMPRAR ENTRADA",
     "register_link": "/es/registro/",
     "register_text": "REGÍSTRESE<span style='display: block; font-weight: 300;'>OBTENGA UNA ENTRADA GRATUITA"
+  },
+  "nl_NL": {
+    "why_it_worth": "WAAROM IS HET DE MOEITE WAARD?",
+    "industry_trends": "U ZULT DE LAATSTE TRENDS IN DE INDUSTRIE ONTDEKKEN",
+    "business_contacts": "U ZULT NIEUWE ZAKELIJKE CONTACTEN LEGGEN",
+    "valuable_knowledge": "U ZULT WAARDEVOLLE KENNIS VERWERVEN EN MEER TE WETEN KOMEN OVER NIEUWS UIT DE MARKT",
+    "for_visitors": "[trade_fair_name] is een professioneel branche-evenement dat plaatsvindt in Ptak Warsaw Expo, het grootste beurs- en congrescentrum in Midden-Europa. Het doel is om alle sectoren van de industrie samen te brengen en ideale omstandigheden te creëren voor professionele zakelijke netwerken. [trade_fair_desc] helpt u potentiële zakenpartners voor uw bedrijf te vinden.",
+    "for_visitors_1": "[trade_fair_name] is een geweldige gelegenheid om alle op de Poolse markt beschikbare aanbiedingen voor de branche te vergelijken en zorgvuldig te analyseren. Het evenement is ook een uitstekende gelegenheid om deel te nemen aan conferenties, workshops en branchecongressen die marktkennis vergroten en de nieuwste technologieën laten zien. Registreer u en ontvang een uitnodiging voor de beurs.",
+    "ticket_link": "/en/tickets/",
+    "ticket_text": "KOOP EEN TICKET",
+    "register_link": "/nl/registratie/",
+    "register_text": "REGISTREER<span style='display: block; font-weight: 300;'>KRIJG EEN GRATIS TICKET"
   }
 }

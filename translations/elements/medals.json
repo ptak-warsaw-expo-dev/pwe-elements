@@ -165,5 +165,17 @@
     "text": "¡Únase a los mejores en <strong>Ptak Warsaw Expo</strong> y muestre su empresa como ganadora! Los premios son otorgados por la <strong>Cámara Nacional de Exposiciones</strong> y <strong>Ptak Warsaw Expo</strong> – ¡destáquese y obtenga reconocimiento!",
     "lider_text": "¡MUESTRE AL MUNDO QUE ES UN LÍDER EN PTAK WARSAW EXPO!",
     "premier_fair": "/wp-content/plugins/pwe-media/media/medals/premier-fair-en.webp"
+  },
+  "nl_NL": {
+    "award": "Win een prestigieuze prijs op Ptak Warsaw Expo!",
+    "text_premier": "Sluit je aan bij de besten op Ptak Warsaw Expo en laat je bedrijf zien als leider! Verdien de prestigieuze medaille die wordt toegekend door de Nationale Kamer van Tentoonstellingen en Ptak Warsaw Expo.",
+    "category_premier": "We eren uitzonderlijke partners in twee categorieën:",
+    "partner_premier": "Voor Kamers en Verenigingen:<br><strong>“Belangrijke Partner van de Beurs”</strong>",
+    "cocreator_premier": "Voor Bedrijven:<br><strong>“Co-Creator van het Succes van de Beurs”</strong>",
+    "book_stand": "/en/medal-ceremony/",
+    "book_stand_button": "Aanvraag voor medaille ceremonie",
+    "text": "Sluit je aan bij de besten op <strong>Ptak Warsaw Expo</strong> en laat je bedrijf zien als winnaar! De prijzen worden toegekend door de <strong>Nationale Kamer van Tentoonstellingen</strong> en <strong>Ptak Warsaw Expo</strong> – onderscheid jezelf en krijg erkenning!",
+    "lider_text": "LAAT DE WERELD ZIEN DAT JE EEN LEIDER BENT OP PTAK WARSAW EXPO!",
+    "premier_fair": "/wp-content/plugins/pwe-media/media/medals/premier-fair-en.webp"
   }
 }

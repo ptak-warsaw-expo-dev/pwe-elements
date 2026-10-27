@@ -180,5 +180,18 @@
     "back_link": "/es/",
     "become_an_exhibitor": "Convertirse en expositor",
     "visitors": "Visitantes"
+  },
+  "nl_NL": {
+    "step": "Stap <span class=\"text-accent-color\">2 van 2",
+    "your_ticket": "Het ticket is succesvol gegenereerd!",
+    "receive_e-mail": "U ontvangt het op het opgegeven e-mailadres.<br>Het kan een paar minuten duren.",
+    "become_exhibitor": "Wilt u een <span class=\"text-accent-color\">exposant</span> worden van [trade_fair_name_eng]?",
+    "i_am_interested": "Ja, ik ben geïnteresseerd",
+    "confirmation_link": "/nl/bevestiging-van-exposantenregistratie/",
+    "confirmation_text": "Ja, ik ben geïnteresseerd",
+    "no_thank_you": "Nee, bedankt",
+    "back_link": "/nl/",
+    "become_an_exhibitor": "Word een exposant",
+    "visitors": "Bezoekers"
   }
 }

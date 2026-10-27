@@ -82,5 +82,11 @@
     "exhibitors": "Expositores ",
     "new_exhibitors": "Nuevos expositores en la feria ",
     "become_exhibitor": "Conviértete en expositor"
+  },
+  "nl_NL": {
+    "catalog": "Exposanten Catalogus ",
+    "exhibitors": "Exposanten ",
+    "new_exhibitors": "Nieuwe exposanten op de beurs ",
+    "become_exhibitor": "Word een exposant"
   }
 }

@@ -152,5 +152,16 @@
     "benefit_welcome_title": "Paquete de bienvenida",
     "benefit_welcome_alt": "Paquete de bienvenida",
     "benefit_welcome_text": "Preparación de credenciales y paquetes de bienvenida individuales para todos los participantes registrados, que se enviarán directamente a la dirección proporcionada en el formulario de registro."
+  },
+  "nl_NL": {
+    "benefit_networking_title": "Netwerkzone",
+    "benefit_networking_alt": "Netwerkzone",
+    "benefit_networking_text": "Tijdens de beurs is er een speciaal afgescheiden <strong>netwerkzone</strong> beschikbaar – een ruimte voor het uitwisselen van ervaringen en het versterken van contacten. Branchebijeenkomsten zijn een ideale gelegenheid om de groep potentiële zakenpartners uit te breiden en een sterke klantenbasis op te bouwen.",
+    "benefit_panel_title": "Educatief panel",
+    "benefit_panel_alt": "Educatief panel",
+    "benefit_panel_text": "Talrijke toespraken en een brancheconferentie geleid door erkende sprekers – ervaren praktijkmensen en branche-experts.",
+    "benefit_welcome_title": "Welkomstpakket",
+    "benefit_welcome_alt": "Welkomstpakket",
+    "benefit_welcome_text": "Voorbereiding van badges en individuele welkomstpakketten voor alle geregistreerde deelnemers, die rechtstreeks naar het adres worden gestuurd dat in het registratieformulier is opgegeven."
   }
 }

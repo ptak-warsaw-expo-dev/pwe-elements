@@ -180,5 +180,18 @@
     "find_out_more": "DESCUBRE MÁS",
     "organizer": "Organizador",
     "subject": "Asunto"
+  },
+  "nl_NL": {
+    "conferences_events": "Conferenties en bijbehorende evenementen",
+    "conference": "Conferentie",
+    "conferences_link": "/en/conferences/",
+    "details": "Details",
+    "registration_link": "/nl/registratie/",
+    "registration": "Registratie",
+    "take_part": "DOE MEE",
+    "patrons": "PATRONEN EN PARTNERS",
+    "find_out_more": "ONTDEK MEER",
+    "organizer": "Organisator",
+    "subject": "Onderwerp"
   }
 }

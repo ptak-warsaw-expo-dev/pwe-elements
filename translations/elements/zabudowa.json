@@ -110,5 +110,13 @@
     "stands_button": "Ver más",
     "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
     "catalog_button": "Stand de exposición"
+  },
+  "nl_NL": {
+    "stands": "ONTWORPEN BEURSSTANDS",
+    "catalog": "Bekijk de catalogus van tentoonstellingsstands en bereid u nog efficiënter voor op uw deelname aan de beurs. Met deze catalogus heeft u toegang tot kant-en-klare standontwerpen die het u gemakkelijker maken om u voor te bereiden op de beurs en waardevolle tijd- en geldbesparingen opleveren. Door te kiezen voor een kant-en-klaar standontwerp, kunt u zich concentreren op andere belangrijke aspecten van de voorbereiding op de beurs, zoals het voorbereiden van uw aanbod, het regelen van transport of het plannen van uw marketingactiviteiten.",
+    "stands_link": "https://warsawexpo.eu/en/exhibition-stands",
+    "stands_button": "Meer zien",
+    "catalog_link": "https://warsawexpo.eu/en/katalog-zabudowy",
+    "catalog_button": "Tentoonstellingsstand"
   }
 }
