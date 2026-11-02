@@ -1082,10 +1082,6 @@ class PWElementAdditionalLogotypes {
                         );
                     }
 
-                    // echo '<pre>';
-                    // var_dump($updated_images_url);
-                    // echo '</pre>';
-
                     // List of translations
                     $translations = array(
                         "Partner Targów" => "Fair<br>Partner",
@@ -1607,28 +1603,9 @@ class PWElementAdditionalLogotypes {
             }
         }
 
-        $get_database_fairs_data_encode = json_encode(PWECommonFunctions::get_database_fairs_data());
-        $get_database_logotypes_data_encode = json_encode(PWECommonFunctions::get_database_logotypes_data());
-        $get_database_meta_data_encode = json_encode(PWECommonFunctions::get_database_meta_data());
-        $updated_images_url = json_encode($updated_images_url);
-
         $output .= '
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const get_database_fairs_data = ' . $get_database_fairs_data_encode . ';
-                const get_database_logotypes_data = ' . $get_database_logotypes_data_encode . ';
-                const get_database_meta_data = ' . $get_database_meta_data_encode . ';
-                const updated_images_url = '. $updated_images_url .';
-
-                // console.log(get_database_logotypes_data);
-
-                // if (updated_images_url != null) {
-                //     updated_images_url.forEach(logo => {
-                //         if (logo.site !== "" && logo.site != null) {
-                //             console.log("url:" + logo.img + " " + "link:" + logo.site);
-                //         }
-                //     });
-                // }
 
                 // Funkcja do sprawdzania statusu obrazu
                 function checkImage(url, callback) {
