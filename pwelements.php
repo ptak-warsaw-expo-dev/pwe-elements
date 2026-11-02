@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.7.7
+ * Version: 3.7.8
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -382,25 +382,6 @@ class PWElementsPlugin
         }
     }
 
-    private function getGithubKey()
-    {
-        global $wpdb;
-
-        $table_name = $wpdb->prefix . 'custom_klavio_setup';
-        if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name)) != $table_name) {
-            return null;
-        }
-
-        $github_pre = $wpdb->prepare("SELECT klavio_list_id FROM $table_name WHERE klavio_list_name = %s", 'github_secret_2');
-        $github_result = $wpdb->get_results($github_pre);
-
-        if (!empty($github_result)) {
-            return $github_result[0]->klavio_list_id;
-        } else {
-            return null;
-        }
-    }
-
     private function init()
     {
 
@@ -413,9 +394,12 @@ class PWElementsPlugin
             'pwe-elements'
         );
 
-        if (self::getGithubKey()) {
-            $myUpdateChecker->setAuthentication(self::getGithubKey());
+        $github_key = PWE_System_Functions::get_database_meta_data('github_personal_access_token');
+        
+        if (is_string($github_key) && trim($github_key) !== '') {
+            $myUpdateChecker->setAuthentication(trim($github_key));
         }
+
         $myUpdateChecker->getVcsApi()->enableReleaseAssets();
     }
 }
