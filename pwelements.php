@@ -4,7 +4,7 @@
  * Plugin Name: PWE Elements
  * Plugin URI: https://github.com/ptak-warsaw-expo-dev/pwe-elements
  * Description: Adding a PWE elements to the website.
- * Version: 3.7.8
+ * Version: 3.7.9
  * Author: Marek Rumianek
  * Co-authors: Anton Melnychuk, Piotr Krupniewski, Jakub Choła
  * Author URI: github.com/RumianekMarek
@@ -394,7 +394,7 @@ class PWElementsPlugin
             'pwe-elements'
         );
 
-        $github_key = PWE_System_Functions::get_database_meta_data('github_personal_access_token');
+        $github_key = PWECommonFunctions::get_database_meta_data('github_personal_access_token'); 
         
         if (is_string($github_key) && trim($github_key) !== '') {
             $myUpdateChecker->setAuthentication(trim($github_key));
