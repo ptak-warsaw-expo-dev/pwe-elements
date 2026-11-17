@@ -383,11 +383,23 @@ class PWE_Conference_Cap_Legacy_Renderer {
                     }
                 }
 
-                $currentYear  = (int) date('Y', strtotime(do_shortcode('[trade_fair_enddata]')));
-                if ($currentYear < 2000) $currentYear = do_shortcode('[trade_fair_catalog_year]');
-                $previousYear = $currentYear - 1;
+                $currentYear = (int) date('Y', strtotime(do_shortcode('[trade_fair_enddata]')));
+
+                if ($currentYear < 2000) {
+                    $catalogYear = trim((string) do_shortcode('[trade_fair_catalog_year]'));
+
+                    // 0 oznacza brak poprawnego roku.
+                    $currentYear = (
+                        preg_match('/^[0-9]{4}$/D', $catalogYear) === 1
+                        && (int) $catalogYear >= 2000
+                    ) ? (int) $catalogYear : 0;
+                }
+
+                // Odejmowanie wykonujemy tylko dla poprawnego roku.
+                $previousYear = $currentYear >= 2000 ? $currentYear - 1 : 0;
 
                 $archiveYear = trim($atts['conference_cap_conference_arichive'] ?? '');
+
                 if ($archiveYear !== '' && $archiveYear !== 'all') {
                     $yearToShow = (int) $archiveYear;
                 } else {
@@ -668,16 +680,13 @@ class PWE_Conference_Cap_Legacy_Renderer {
                                 $organizer = PWEConferenceCapFunctions::getConferenceOrganizer((int)$conf->id, $conf->conf_slug, $lang);
                                 // Conference organizers (new format)
                                 $organizers_all = PWEConferenceCapFunctions::getConferenceOrganizersAll($conf->conf_slug);
+                                $organizer_heading = esc_html(PWEConferenceCapFunctions::getConferenceOrganizerHeading((int)$conf->id, $lang));
 
                                 if (!empty($organizers_all)) {
                                     $output .= '
                                     <div class="conference_cap__conf-organizer-wrapper">
                                         <h2 class="conference_cap__conf-organizer-title">';
-                                            if (count($organizers_all) > 1) {
-                                                $output .= PWECommonFunctions::languageChecker('Organizatorzy Konferencji', 'Conference Organizers');
-                                            } else {
-                                                $output .= PWECommonFunctions::languageChecker('Organizator Konferencji', 'Conference Organizer');
-                                            }
+                                            $output .= $organizer_heading;
                                             $output .= '
                                         </h2>
                                         <div class="conference_cap__conf-organizer-logotypes">';
@@ -710,7 +719,7 @@ class PWE_Conference_Cap_Legacy_Renderer {
                                     $output .= '
                                     <div class="conference_cap__conf-organizer-wrapper old">
                                         <h2 class="conference_cap__conf-organizer-title">' .
-                                            PWECommonFunctions::languageChecker('Organizator Konferencji', 'Conference Organizer') .
+                                            $organizer_heading .
                                         '</h2>
                                         <div class="conference_cap__conf-organizer-logo">';
                                             $output .= '
@@ -752,7 +761,7 @@ class PWE_Conference_Cap_Legacy_Renderer {
                                 <h2 class="conference_cap__conf-slug-location">' . $conf_location . '</h2>
                                 <div class="conference_cap__after-location-html">' . ($inf_conf['after_location_' . $conf_slug] ?? '') . '</div>
                                 <h2 class="conference_cap__conf-slug-title">' . $conf_name . '</h2>';
-                                
+
                                 // Add the main conference picture
                                 $pic_pl = !empty($conf->main_pic_pl) ? trim($conf->main_pic_pl) : null;
                                 $pic_en = !empty($conf->main_pic_en) ? trim($conf->main_pic_en) : null;

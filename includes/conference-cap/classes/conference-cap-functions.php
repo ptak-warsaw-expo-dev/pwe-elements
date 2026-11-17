@@ -1,6 +1,18 @@
 <?php
 class PWEConferenceCapFunctions {
 
+    // Reuse CAP addon rows within one request instead of querying for each component.
+    private static $conference_adds_cache = [];
+
+    private static function getConferenceAddsRows($conf_id): array {
+        $conf_id = (int) $conf_id;
+        if (!array_key_exists($conf_id, self::$conference_adds_cache)) {
+            $rows = PWECommonFunctions::get_database_conference_adds_data($conf_id);
+            self::$conference_adds_cache[$conf_id] = is_array($rows) ? $rows : [];
+        }
+        return self::$conference_adds_cache[$conf_id];
+    }
+
     public static function findConferenceMode($new_class) {
 
         switch ($new_class){
@@ -177,7 +189,7 @@ class PWEConferenceCapFunctions {
         }
 
         // Get conf_adds
-        $adds_raw = PWECommonFunctions::get_database_conference_adds_data($conf_id);
+        $adds_raw = self::getConferenceAddsRows($conf_id);
 
         // Slugs => data
         $adds = [];
@@ -236,7 +248,7 @@ class PWEConferenceCapFunctions {
         $all_slugs = array_merge($preferred_slugs, ['org-name']);
 
         // Get all conf_adds
-        $rows = PWECommonFunctions::get_database_conference_adds_data($conf_id);
+        $rows = self::getConferenceAddsRows($conf_id);
 
         $by_slug = [];
 
@@ -291,6 +303,31 @@ class PWEConferenceCapFunctions {
         ];
     }
 
+    /** Read the editable PL/EN organizer heading saved by CAP in conf_adds. */
+    public static function getConferenceOrganizerHeading($conf_id, $lang): string {
+        $is_en = strtoupper((string) $lang) === 'EN';
+        $slug = $is_en ? 'conf_organizer_heading_en' : 'conf_organizer_heading_pl';
+        $default = $is_en ? 'Conference Organizer' : 'Organizator Konferencji';
+
+        foreach (self::getConferenceAddsRows($conf_id) as $row) {
+            if (!is_array($row) || trim((string) ($row['slug'] ?? '')) !== $slug) {
+                continue;
+            }
+            $raw = $row['data'] ?? '';
+            if (!is_string($raw) || trim($raw) === '') {
+                return $default;
+            }
+            // The CAP main() action stores this field as a JSON string.
+            $decoded = json_decode($raw, true);
+            $heading = json_last_error() === JSON_ERROR_NONE
+                ? (is_string($decoded) ? $decoded : '')
+                : $raw;
+            $heading = trim($heading);
+            return $heading !== '' ? $heading : $default;
+        }
+        return $default;
+    }
+
     public static function getConferenceOrganizersAll($conf_slug) {
         $domain = $_SERVER['HTTP_HOST'] ?? '';
         $domain = preg_replace('/:\\d+$/', '', strtolower(trim($domain)));
@@ -322,8 +359,8 @@ class PWEConferenceCapFunctions {
         $conf_id = (int) $conference->id;
         $logos = array_map('trim', explode(',', $conference->organizers_img));
 
-        // Get conf_adds 
-        $adds_raw = PWECommonFunctions::get_database_conference_adds_data($conf_id);
+        // Get conf_adds
+        $adds_raw = self::getConferenceAddsRows($conf_id);
         $adds = [];
 
         foreach ($adds_raw as $row) {
