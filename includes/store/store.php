@@ -37,6 +37,8 @@ class PWEStore extends PWECommonFunctions {
         $edition_2 = [];
         $edition_3 = [];
         $edition_b2c = [];
+        $edition_b2c_new = [];
+        $edition_week = [];
 
         foreach ($pwe_groups_data as $group) {
             if ($group->fair_group == "gr1") {
@@ -51,13 +53,21 @@ class PWEStore extends PWECommonFunctions {
             if ($group->fair_group == "b2c") {
                 $edition_b2c[] = $group->fair_domain;
             }
+            if ($group->fair_group == "b2c-new") {
+                $edition_b2c_new[] = $group->fair_domain;
+            }
+            if ($group->fair_group == "week") {
+                $edition_week[] = $group->fair_domain;
+            }
         }
         
         $editions = [
             "1"   => $edition_1,
             "2"   => $edition_2,
             "3"   => $edition_3,
-            "b2c" => $edition_b2c
+            "b2c" => $edition_b2c,
+            "b2c-new" => $edition_b2c_new,
+            "week" => $edition_week
         ];
         
         $formatted_editions = [];
@@ -113,6 +123,8 @@ class PWEStore extends PWECommonFunctions {
 
     public function price($product, $store_options, $pwe_meta_data, $category, $current_domain, $num_only = false) {
         if ($category == $product->prod_category && (self::lang_pl() ? !empty($product->prod_title_short_pl) : !empty($product->prod_title_short_en))) {
+            $new_price_pl = $new_price_en = $new_price_desc_pl = $new_price_desc_en = null;
+            $price_margin = 0;
             foreach ($store_options as $domain_options) {
                 if ($domain_options['domain'] === $current_domain) {
                     if (!empty($domain_options['options'])) {
@@ -122,12 +134,12 @@ class PWEStore extends PWECommonFunctions {
                             foreach ($options['products'] as $key => $option) {
                                 if ($product->prod_slug == $key) {
                                     // Prices
-                                    $new_price_pl = $option['prod_price_pl'] ? $option['prod_price_pl'] : "";
-                                    $new_price_en = $option['prod_price_en'] ? $option['prod_price_en'] : "";
+                                    $new_price_pl = $option['prod_price_pl'] ?? null;
+                                    $new_price_en = $option['prod_price_en'] ?? null;
             
                                     // Prices descriptions
-                                    $new_price_desc_pl = $option['prod_price_desc_pl'] ? $option['prod_price_desc_pl'] : "";
-                                    $new_price_desc_en = $option['prod_price_desc_en'] ? $option['prod_price_desc_en'] : "";
+                                    $new_price_desc_pl = $option['prod_price_desc_pl'] ?? null;
+                                    $new_price_desc_en = $option['prod_price_desc_en'] ?? null;
                                 }
                             }
                         }
@@ -141,24 +153,32 @@ class PWEStore extends PWECommonFunctions {
                 }
             }
             
-            $updated_price_pl = !empty($new_price_pl) ? $new_price_pl : $product->prod_price_pl;
-            if (!empty($new_price_en)) {
-                $updated_price_en = $new_price_en;
-            } elseif (!empty($new_price_pl)) {
-                $updated_price_en = $new_price_pl / $pwe_meta_data[0]->meta_data;
-            } elseif (!empty($product->prod_price_en)) {
-                $updated_price_en = $product->prod_price_en;
-            } else {
-                $updated_price_en = $product->prod_price_pl / $pwe_meta_data[0]->meta_data;
-            }
-            $updated_price_en = self::round_price($updated_price_en);
-
             $updated_price_desc_pl = !empty($new_price_desc_pl) ? $new_price_desc_pl : $product->prod_price_desc_pl;
             $updated_price_desc_en = !empty($new_price_desc_en) ? $new_price_desc_en : $product->prod_price_desc_en;
 
             $final_price_desc = self::lang_pl() ? $updated_price_desc_pl : $updated_price_desc_en;
 
-            if ($price_margin && empty($new_price_pl)) {
+            // Keep individually quoted products visible without showing a zero amount.
+            $individual_price = preg_match('/indywidual|individual|on request|upon request|on application|price on enquiry|price on inquiry|custom quot/i', strip_tags((string) $final_price_desc));
+            $zero_price = $num_only ? 0 : ($individual_price ? $final_price_desc : '');
+
+            $has_price_pl = is_numeric($new_price_pl);
+            $has_price_en = is_numeric($new_price_en);
+            $updated_price_pl = $has_price_pl ? (float) $new_price_pl : (float) $product->prod_price_pl;
+            $exchange_rate = (float) ($pwe_meta_data[0]->meta_data ?? 0);
+            if ($updated_price_pl <= 0 || (!self::lang_pl() && $has_price_en && (float) $new_price_en <= 0)) return $zero_price;
+            if ($has_price_en) {
+                $updated_price_en = $new_price_en;
+            } elseif ($has_price_pl) {
+                $updated_price_en = $exchange_rate > 0 ? $new_price_pl / $exchange_rate : 0;
+            } elseif (!empty($product->prod_price_en)) {
+                $updated_price_en = $product->prod_price_en;
+            } else {
+                $updated_price_en = $exchange_rate > 0 ? $product->prod_price_pl / $exchange_rate : 0;
+            }
+            $updated_price_en = self::round_price($updated_price_en);
+
+            if ($price_margin && !$has_price_pl) {
                 $updated_price_pl = $updated_price_pl + ($updated_price_pl * ($price_margin / 100));
                 $updated_price_en = $updated_price_en + ($updated_price_en * ($price_margin / 100));
 
@@ -166,19 +186,11 @@ class PWEStore extends PWECommonFunctions {
                 $updated_price_en = self::round_price($updated_price_en);
             }
 
-            $final_price = "";
-
-            if (!empty($updated_price_pl)) {
-                $eur_price = $updated_price_pl / $pwe_meta_data[0]->meta_data;
-                $eur_price = self::round_price($eur_price);
-
-                $final_price = number_format((self::lang_pl() ? $updated_price_pl : (!empty($updated_price_en) ? $updated_price_en : $eur_price)), 0, ',', ' ') . ( self::lang_pl() ? ' zł ' : ' € ' );
-            }
-            
-            $product_price = $final_price . ($num_only == true ? '' : $final_price_desc); 
-            $product_price = $num_only == true ? preg_replace('/[^0-9\.]/', '', $product_price) : $product_price;
-            
-            return $product_price;
+            $final_price = self::lang_pl() ? $updated_price_pl : $updated_price_en;
+            $final_price = round($final_price);
+            if ($final_price <= 0) return $zero_price;
+            if ($num_only) return $final_price;
+            return number_format($final_price, 0, ',', ' ') . (self::lang_pl() ? ' zł ' : ' € ') . $final_price_desc;
         }
     }
 
@@ -214,6 +226,40 @@ class PWEStore extends PWECommonFunctions {
         }
         $pwe_store_data = $pwe_store_data_filtered;
 
+        $fairs_json = self::json_fairs();
+        $store_options = [];
+        foreach ($fairs_json as $fair) {
+            $store_options[] = array(
+                "domain" => $fair["domain"],
+                "options" => $fair["shop"]
+            );
+        }
+
+        // Get current domain
+        $current_domain = do_shortcode('[trade_fair_domainadress]');
+
+        // Hide products without a positive effective price in the current language.
+        $pwe_store_data = array_values(array_filter($pwe_store_data, function ($product) use ($store_options, $pwe_meta_data, $current_domain) {
+            return trim((string) self::price($product, $store_options, $pwe_meta_data, $product->prod_category, $current_domain)) !== '';
+        }));
+
+        // Hide incomplete packages and packages with a zero final price.
+        $products_by_slug = [];
+        foreach ($pwe_store_data as $product) $products_by_slug[$product->prod_slug] = $product;
+        $pwe_store_packages_data = array_values(array_filter($pwe_store_packages_data, function ($package) use ($products_by_slug, $store_options, $pwe_meta_data, $current_domain) {
+            $total = 0;
+            foreach (preg_split('/\s+/', trim((string) $package->packs_data), -1, PREG_SPLIT_NO_EMPTY) as $entry) {
+                $parts = explode('*', $entry);
+                $product = $products_by_slug[$parts[0]] ?? null;
+                $quantity = isset($parts[1]) ? (int) $parts[1] : 1;
+                if (!$product || $quantity <= 0) continue;
+                $price = self::price($product, $store_options, $pwe_meta_data, $package->packs_category, $current_domain, true);
+                if ($price <= 0) continue;
+                $total += $price * $quantity;
+            }
+            return self::round_price($total * (1 - (float) $package->packs_discount / 100)) > 0;
+        }));
+
         $categories = [];
         foreach ($pwe_store_data as $item) {
             $category = $item->prod_category;
@@ -234,17 +280,7 @@ class PWEStore extends PWECommonFunctions {
             }
         }
 
-        $fairs_json = self::json_fairs();
-        $store_options = [];
-        foreach ($fairs_json as $fair) {
-            $store_options[] = array(
-                "domain" => $fair["domain"],
-                "options" => $fair["shop"]
-            );
-        }
 
-        // Get current domain
-        $current_domain = do_shortcode('[trade_fair_domainadress]');
 
         $output = '
         <div id="pweStore" class="pwe-store '. explode('.', $current_domain)[0] .'">';

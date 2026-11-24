@@ -252,7 +252,8 @@ $output .= '
 
                                         $package_products_slug = $package->packs_data;
                                         $total_price = 0;
-                                        $products = explode(' ', $package_products_slug);
+                                            $discount_price = null;
+                                        $products = preg_split('/\s+/', trim((string) $package_products_slug), -1, PREG_SPLIT_NO_EMPTY);
                                     
                                         foreach ($products as $product_slug_with_quantity) {
                                             // Separating the product into slug and quantity
